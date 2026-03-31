@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
+import '../../widgets/expandable_category_screen.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class NeurologicasScreen extends StatelessWidget {
   const NeurologicasScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Escalas Neurológicas")),
-      body: Center(
-        child: Hero(
-          tag: "neurologicas",
-          child: Material(
-            color: Colors.transparent,
-            child: Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
-        ),
-      ),
+    return const ExpandableCategoryScreen(
+      heroTag: "neurologicas",
+      title: "Escalas Neurológicas",
+      icon: PhosphorIconsFill.brain,
+
+      child: Center(child: Text("Aquí aparecerán Glasgow, Ramsay y NIHSS")),
     );
   }
 }

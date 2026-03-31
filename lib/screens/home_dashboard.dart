@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/home_nav_button.dart';
 
 class HomeDashboard extends StatelessWidget {
@@ -13,11 +14,23 @@ class HomeDashboard extends StatelessWidget {
         children: [
           Row(
             children: const [
-              Expanded(child: HomeNavButton(title: "Escalas", tabIndex: 0)),
+              Expanded(
+                child: HomeNavButton(
+                  title: "Escalas",
+                  tabIndex: 0,
+                  icon: PhosphorIconsRegular.clipboardText,
+                ),
+              ),
 
               SizedBox(width: 16),
 
-              Expanded(child: HomeNavButton(title: "Placeholder", tabIndex: 4)),
+              Expanded(
+                child: HomeNavButton(
+                  title: "Placeholder",
+                  tabIndex: 4,
+                  icon: PhosphorIconsRegular.dotsThreeCircle,
+                ),
+              ),
             ],
           ),
 
@@ -25,12 +38,22 @@ class HomeDashboard extends StatelessWidget {
 
           Row(
             children: const [
-              Expanded(child: HomeNavButton(title: "Fármacos", tabIndex: 1)),
+              Expanded(
+                child: HomeNavButton(
+                  title: "Fármacos",
+                  tabIndex: 1,
+                  icon: PhosphorIconsRegular.pill,
+                ),
+              ),
 
               SizedBox(width: 16),
 
               Expanded(
-                child: HomeNavButton(title: "Calculadoras", tabIndex: 3),
+                child: HomeNavButton(
+                  title: "Calculadoras",
+                  tabIndex: 3,
+                  icon: PhosphorIconsRegular.calculator,
+                ),
               ),
             ],
           ),

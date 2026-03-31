@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nursia_app/theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'home_dashboard.dart';
 import 'placeholder_screen.dart';
@@ -18,13 +19,16 @@ class HomeScreen extends StatelessWidget {
         extendBody:
             true, // Importante: permite que el body se vea detrás de la barra
         appBar: AppBar(
-          title: const Text('Nursia', style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.blue,
+          title: Text(
+            'Nursia',
+            style: AppTextStyles.appBarTitle.copyWith(fontSize: 25),
+          ),
+          backgroundColor: AppColors.darkPrimaryColor,
           elevation: 0,
           leading: IconButton(
             icon: const PhosphorIcon(
               PhosphorIconsBold.list,
-              color: Colors.white,
+              color: AppColors.secondaryColor,
             ),
             onPressed: () {},
           ),
@@ -50,7 +54,7 @@ class HomeScreen extends StatelessWidget {
               child: Container(
                 height: 55,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.darkPrimaryColor,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -68,9 +72,9 @@ class HomeScreen extends StatelessWidget {
                     horizontal: 20,
                   ), // <--- DALE AIRE AL TEXTO AQUÍ
                   dividerColor: Colors.transparent,
-                  indicatorColor: Colors.blue,
-                  labelColor: Colors.blue,
-                  unselectedLabelColor: Colors.grey[600],
+                  indicatorColor: AppColors.secondaryColor,
+                  labelColor: AppColors.secondaryColor,
+                  unselectedLabelColor: AppColors.accentLightColor,
                   tabs: const [
                     Tab(text: "Escalas"),
                     Tab(text: "Farmacología"),

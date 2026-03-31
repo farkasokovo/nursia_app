@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nursia_app/screens/escalas/seguridad_screen.dart';
+import 'package:nursia_app/screens/escalas/valoracion_screen.dart';
 import '../widgets/category_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../screens/escalas/neurologicas_screen.dart';
@@ -30,23 +32,39 @@ class EscalasScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              const Expanded(
+              Expanded(
                 child: CategoryButton(
                   title: "Seguridad\ndel paciente",
                   icon: PhosphorIconsRegular.shieldCheck,
                   heroTag: "seguridad",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SeguridadScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
           ),
           SizedBox(height: 16),
           Row(
-            children: const [
+            children: [
               Expanded(
                 child: CategoryButton(
                   title: "Valoración clínica",
                   icon: PhosphorIconsRegular.stethoscope,
                   heroTag: "valoracion",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ValoracionScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

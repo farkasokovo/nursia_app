@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nursia_app/screens/calculadoras/calculadora_dosis.dart';
+import 'package:nursia_app/screens/calculadoras/calculadora_soluciones.dart';
 import '../widgets/category_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -20,6 +22,14 @@ class CalculadoraScreen extends StatelessWidget {
                   heroTag: "dosis",
                   title: "Calculadora de dosis",
                   icon: PhosphorIconsRegular.syringe,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const CalculadoraDosis(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
@@ -28,12 +38,20 @@ class CalculadoraScreen extends StatelessWidget {
           SizedBox(height: 16),
 
           Row(
-            children: const [
+            children: [
               Expanded(
                 child: CategoryButton(
                   heroTag: "soluciones",
                   title: "Calculadora de Soluciones",
                   icon: PhosphorIconsRegular.drop,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const CalculadoraSoluciones(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
