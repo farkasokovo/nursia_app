@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// ==========================================================
-/// NURSIA APP THEME CONFIGURATION
-/// ==========================================================
-/// Archivo central de identidad visual de la app.
-/// Cambiando valores aquí se actualiza TODO el estilo global.
-/// ==========================================================
+// COLORES
 
 class AppColors {
   static const Color primaryColor = Color(0xff96775b);
@@ -25,9 +20,7 @@ class AppColors {
   static const Color redAlertv4 = Color(0xff6F4346);
 }
 
-/// ==========================================================
-/// TIPOGRAFÍA GLOBAL
-/// ==========================================================
+// FUENTES
 
 class AppTextStyles {
   static const String fontFamily = "Poppins";
@@ -82,9 +75,7 @@ class AppTextStyles {
   );
 }
 
-/// ==========================================================
-/// BORDER RADIUS GLOBAL
-/// ==========================================================
+// BORDER RADIUS
 
 class AppRadius {
   static const BorderRadius defaultRadius = BorderRadius.all(
@@ -92,9 +83,7 @@ class AppRadius {
   );
 }
 
-/// ==========================================================
-/// THEME GLOBAL DE LA APP
-/// ==========================================================
+/// TEMA GLOBAL
 
 class AppTheme {
   static ThemeData lightTheme() {

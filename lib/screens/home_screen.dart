@@ -7,7 +7,6 @@ import 'calculadora_screen.dart';
 import 'escalas_screen.dart';
 import 'farmacologia_screen.dart';
 
-// Constantes fuera de la clase para mejor rendimiento
 const List<Widget> _tabs = [
   Tab(text: "Escalas"),
   Tab(text: "Farmacología"),
