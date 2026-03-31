@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../widgets/expandable_category_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../theme/app_theme.dart';
@@ -12,107 +13,96 @@ class CalculadoraDosis extends StatelessWidget {
       heroTag: "dosis",
       title: "Calculadora de dosis",
       icon: PhosphorIconsFill.syringe,
+      child: const _CalculadoraDosisLayout(),
+    );
+  }
+}
 
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 10,
-          left: 20,
-          right: 20,
-          bottom: 20,
-        ),
+class _CalculadoraDosisLayout extends StatefulWidget {
+  const _CalculadoraDosisLayout();
 
+  @override
+  State<_CalculadoraDosisLayout> createState() =>
+      _CalculadoraDosisLayoutState();
+}
+
+class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout> {
+  final dosisController = TextEditingController();
+  final dilucionController = TextEditingController();
+  final presentacionController = TextEditingController();
+
+  double? resultado;
+
+  void calcular() {
+    final dosis = double.tryParse(dosisController.text);
+    final dilucion = double.tryParse(dilucionController.text);
+    final presentacion = double.tryParse(presentacionController.text);
+
+    if (dosis == null ||
+        dilucion == null ||
+        presentacion == null ||
+        presentacion == 0) {
+      setState(() => resultado = null);
+      return;
+    }
+
+    setState(() {
+      resultado = (dosis * dilucion) / presentacion;
+    });
+  }
+
+  void limpiar() {
+    dosisController.clear();
+    dilucionController.clear();
+    presentacionController.clear();
+
+    setState(() => resultado = null);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+
+      child: SingleChildScrollView(
         child: Column(
           children: [
-            /// DOSIS INDICADA (mg)
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.secondaryColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  style: AppTextStyles.titleBrownText.copyWith(fontSize: 25),
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Dosis indicada (mg)",
-                    labelStyle: AppTextStyles.bodyBrownText.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-                    fillColor: AppColors.secondaryColor,
-                  ),
-                ),
-              ),
+            _DoseInputField(
+              label: "Dosis indicada (mg)",
+              controller: dosisController,
+              maxLength: 4,
             ),
 
             const SizedBox(height: 20),
 
-            /// DILUYENTE (ml)
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.secondaryColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  style: AppTextStyles.titleBrownText.copyWith(fontSize: 25),
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Diluyente (ml)",
-                    labelStyle: AppTextStyles.bodyBrownText.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-                    fillColor: AppColors.secondaryColor,
-                  ),
-                ),
-              ),
+            _DoseInputField(
+              label: "Diluyente (ml)",
+              controller: dilucionController,
+              maxLength: 3,
             ),
 
             const SizedBox(height: 20),
 
-            /// PRESENTACIÓN (mg)
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.secondaryColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  style: AppTextStyles.titleBrownText.copyWith(fontSize: 25),
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Presentación del fármaco (mg)",
-                    labelStyle: AppTextStyles.bodyBrownText.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-                    fillColor: AppColors.secondaryColor,
-                  ),
-                ),
-              ),
+            _DoseInputField(
+              label: "Presentación del fármaco (mg)",
+              controller: presentacionController,
+              maxLength: 4,
             ),
 
             const SizedBox(height: 20),
+
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          20,
-                        ), // Cambia el 20 por el valor que quieras
+                      overlayColor: AppColors.darkPrimaryColor,
+                      minimumSize: const Size(double.infinity, 60),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadius.defaultRadius,
                       ),
-                      minimumSize: const Size(
-                        double.infinity,
-                        60,
-                      ), // 👈 4. Ancho y alto infinitos
                     ),
+                    onPressed: calcular,
                     child: Text(
                       "Calcular",
                       style: AppTextStyles.titleWhiteText.copyWith(
@@ -121,26 +111,25 @@ class CalculadoraDosis extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 const SizedBox(width: 20),
+
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
                     style: OutlinedButton.styleFrom(
+                      overlayColor: AppColors.darkPrimaryColor,
+                      minimumSize: const Size(double.infinity, 60),
+
                       side: const BorderSide(
-                        color:
-                            AppColors.darkPrimaryColor, // El color que desees
-                        width: 2.0, // El grosor de la línea
+                        color: AppColors.darkPrimaryColor,
+                        width: 2,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          20,
-                        ), // Cambia el 20 por el valor que quieras
+
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadius.defaultRadius,
                       ),
-                      minimumSize: const Size(
-                        double.infinity,
-                        60,
-                      ), // 👈 4. Ancho y alto infinitos
                     ),
+                    onPressed: limpiar,
                     child: Text(
                       "Limpiar",
                       style: AppTextStyles.titleBrownText.copyWith(
@@ -151,11 +140,12 @@ class CalculadoraDosis extends StatelessWidget {
                 ),
               ],
             ),
+
             const SizedBox(height: 20),
 
-            /// RESULTADO
-            Flexible(
-              flex: 2,
+            ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 180),
+
               child: Container(
                 width: double.infinity,
 
@@ -164,19 +154,170 @@ class CalculadoraDosis extends StatelessWidget {
                   borderRadius: AppRadius.defaultRadius,
                 ),
 
-                child: const Column(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-
                   children: [
-                    Text("Resultado:", style: AppTextStyles.titleBrownText),
+                    const Text(
+                      "Cantidad a administrar:",
+                      style: AppTextStyles.titleBrownTextv0,
+                    ),
 
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
 
-                    Text("-- ml", style: AppTextStyles.titleBrownTextv2),
+                    Text(
+                      resultado == null
+                          ? "0 ml"
+                          : "${resultado!.toStringAsFixed(2)} ml",
+
+                      style: AppTextStyles.titleBrownTextv3,
+                    ),
                   ],
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DoseInputField extends StatelessWidget {
+  final String label;
+  final TextEditingController controller;
+  final int maxLength;
+
+  const _DoseInputField({
+    required this.label,
+    required this.controller,
+    required this.maxLength,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment:
+            CrossAxisAlignment.start, // Alinea la leyenda a la izquierda
+        children: [
+          // LEYENDA SUPERIOR
+          Padding(
+            padding: const EdgeInsets.only(left: 8, bottom: 8),
+            child: Text(label, style: AppTextStyles.titleBrownTextv0),
+          ),
+          // CAMPO DE TEXTO
+          SizedBox(
+            height: 50,
+            child: TextField(
+              controller: controller,
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.center,
+              style: AppTextStyles.titleBrownText.copyWith(fontSize: 25),
+              enableInteractiveSelection: false,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                LengthLimitingTextInputFormatter(maxLength),
+              ],
+              decoration: InputDecoration(
+                hintText: label,
+                hintStyle: AppTextStyles.bodyBrownText,
+                filled: true,
+                fillColor: AppColors.secondaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: AppRadius.defaultRadius,
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ActionButtons extends StatelessWidget {
+  const _ActionButtons();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(double.infinity, 60),
+              shape: const RoundedRectangleBorder(
+                borderRadius: AppRadius.defaultRadius,
+              ),
+            ),
+
+            child: Text(
+              "Calcular",
+              style: AppTextStyles.titleWhiteText.copyWith(fontSize: 20),
+            ),
+          ),
+        ),
+
+        const SizedBox(width: 20),
+
+        Expanded(
+          child: OutlinedButton(
+            onPressed: () {},
+
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(double.infinity, 60),
+
+              side: const BorderSide(
+                color: AppColors.darkPrimaryColor,
+                width: 2,
+              ),
+
+              shape: const RoundedRectangleBorder(
+                borderRadius: AppRadius.defaultRadius,
+              ),
+            ),
+
+            child: Text(
+              "Limpiar",
+              style: AppTextStyles.titleBrownText.copyWith(fontSize: 20),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ResultadoCard extends StatelessWidget {
+  const _ResultadoCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 2,
+      child: Container(
+        width: double.infinity,
+
+        decoration: const BoxDecoration(
+          color: AppColors.secondaryColor,
+          borderRadius: AppRadius.defaultRadius,
+        ),
+
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Resultado:", style: AppTextStyles.titleBrownText),
+
+            SizedBox(height: 8),
+
+            Text("-- ml", style: AppTextStyles.titleBrownTextv2),
           ],
         ),
       ),

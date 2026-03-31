@@ -16,26 +16,31 @@ class CategoryButton extends StatelessWidget {
     required this.heroTag,
     this.onTap,
     this.color = AppColors.widgetLightBrown,
+
+    // CLASE DELL DISEÑO DE LOS BOTONES CON PANTALLA DESPLEGABLE (HEROTAG)
   });
   @override
   Widget build(BuildContext context) {
     return Hero(
+      // HeroTag
       tag: heroTag,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
+          overlayColor: WidgetStateProperty.all(AppColors.accentLightColor),
           borderRadius: BorderRadius.circular(18),
           onTap: onTap,
           child: Ink(
             decoration: BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(20),
               boxShadow: const [
                 BoxShadow(color: Colors.black12, blurRadius: 6),
               ],
             ),
             height: 150,
             child: Column(
+              // Estructura del botón: Icono + Texto
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PhosphorIcon(icon, size: 40, color: AppColors.darkPrimaryColor),

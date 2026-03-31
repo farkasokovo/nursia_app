@@ -42,7 +42,7 @@ class CalculadoraScreen extends StatelessWidget {
               Expanded(
                 child: CategoryButton(
                   heroTag: "soluciones",
-                  title: "Calculadora de Soluciones",
+                  title: "Calculadora de Soluciones glucosadas (%)",
                   icon: PhosphorIconsRegular.drop,
                   onTap: () {
                     Navigator.push(

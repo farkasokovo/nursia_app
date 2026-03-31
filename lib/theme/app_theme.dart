@@ -46,6 +46,13 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
+  static const TextStyle titleBrownTextv0 = TextStyle(
+    color: AppColors.darkPrimaryColor,
+    fontSize: 20,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle titleBrownText = TextStyle(
     color: AppColors.darkPrimaryColor,
     fontSize: 25,
@@ -56,6 +63,13 @@ class AppTextStyles {
   static const TextStyle titleBrownTextv2 = TextStyle(
     color: AppColors.darkPrimaryColor,
     fontSize: 30,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle titleBrownTextv3 = TextStyle(
+    color: AppColors.darkPrimaryColor,
+    fontSize: 60,
     fontFamily: fontFamily,
     fontWeight: FontWeight.bold,
   );

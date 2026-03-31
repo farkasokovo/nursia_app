@@ -1,0 +1,15 @@
+[
+  {
+    "nombre": "Paracetamol",
+    "presentacion": "500 mg / 5 ml",
+    "via": "Oral",
+    "dosisAdulto": "500-1000 mg cada 6-8 horas",
+    "dosisPediatrica": "10-15 mg/kg cada 6-8 horas",
+    "maximoDiario": "4000 mg",
+    "contraindicaciones": "Insuficiencia hepática grave, hipersensibilidad",
+    "interacciones": "Alcohol, warfarina, fenitoína",
+    "indicaciones": "Dolor leve a moderado, fiebre"
+  },
+  {}
+
+]
