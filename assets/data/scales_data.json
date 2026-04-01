@@ -1,0 +1,46 @@
+{
+  "glasgow": {
+    "name": "Escala de Coma de Glasgow",
+
+    "description":
+      "La Escala de Coma de Glasgow es una herramienta clínica estandarizada utilizada para evaluar el nivel de conciencia mediante la observación de la respuesta ocular, verbal y motora del paciente.",
+
+    "when_to_use": [
+      "Valoración inicial del paciente con traumatismo craneoencefálico",
+      "Evaluación del estado de conciencia en urgencias",
+      "Seguimiento neurológico hospitalario",
+      "Monitorización en unidades de cuidados intensivos"
+    ],
+
+    "components": [
+      "Respuesta ocular (1–4 puntos)",
+      "Respuesta verbal (1–5 puntos)",
+      "Respuesta motora (1–6 puntos)"
+    ],
+
+    "interpretation": [
+      "13–15 puntos: lesión cerebral leve",
+      "9–12 puntos: lesión cerebral moderada",
+      "3–8 puntos: lesión cerebral grave"
+    ],
+
+    "limitations": [
+      "Paciente intubado (respuesta verbal no valorable)",
+      "Sedación farmacológica",
+      "Bloqueo neuromuscular",
+      "Edema facial severo"
+    ],
+
+    "clinical_notes": [
+      "Cada componente debe reportarse individualmente (ejemplo: E3V4M5)",
+      "Evitar interpretar el puntaje total si un componente no es valorable",
+      "Un puntaje ≤8 se asocia con mayor riesgo de compromiso de la vía aérea"
+    ],
+
+    "references": [
+      "Teasdale, G., & Jennett, B. (1974). Assessment of coma and impaired consciousness. The Lancet.",
+      "National Institute for Health and Care Excellence (NICE). Head injury: assessment and early management.",
+      "Munakomi, S., Margetis, K., & Iverson, L. (2025). Glasgow Coma Scale. StatPearls Publishing."
+    ]
+  }
+}

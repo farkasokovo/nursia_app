@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nursia_app/repositories/scale_info_repository.dart';
+import 'package:nursia_app/widgets/scale_info_view.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import '../../../widgets/scale_parameter_selector.dart';
 import '../../../theme/app_theme.dart';
@@ -131,66 +133,6 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
   }
 }
 
-class _ResultFooter extends StatelessWidget {
-  final String resultado;
-
-  const _ResultFooter({required this.resultado});
-
-  @override
-  Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.2,
-      minChildSize: 0.2,
-      maxChildSize: 0.5,
-      snap: true,
-      snapSizes: const [0.2, 0.5],
-      builder: (context, scrollController) {
-        return Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            color: AppColors.secondaryColor,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 12, bottom: 8),
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: AppColors.darkPrimaryColor.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Resultado:",
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.titleBrownTextv0,
-                      ),
-                      Text(
-                        resultado,
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.titleBrownTextv2,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
 class _GlasgowInfo extends StatelessWidget {
   const _GlasgowInfo();
 
@@ -206,14 +148,16 @@ class _GlasgowInfo extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           padding: const EdgeInsets.all(20),
-          child: const Text(
-            "Aquí podrás colocar información clínica "
-            "sobre la escala Glasgow:\n\n"
-            "• Interpretación\n"
-            "• Indicaciones\n"
-            "• Limitaciones\n"
-            "• Uso en paciente intubado\n"
-            "• Valores críticos",
+          child: FutureBuilder(
+            future: ScaleInfoRepository.getScale("glasgow"),
+
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              return ScaleInfoView(info: snapshot.data!);
+            },
           ),
         ),
       ),
