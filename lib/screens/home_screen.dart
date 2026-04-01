@@ -84,7 +84,11 @@ class HomeScreen extends StatelessWidget {
         indicatorColor: AppColors.secondaryColor,
         labelColor: AppColors.secondaryColor,
         unselectedLabelColor: AppColors.accentLightColor,
-        labelStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        labelStyle: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: AppColors.lightSecondaryColor,
+        ),
         unselectedLabelStyle: const TextStyle(fontSize: 15),
         tabs: _tabs,
       ),

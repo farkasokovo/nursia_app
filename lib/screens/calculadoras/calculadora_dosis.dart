@@ -167,7 +167,7 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout> {
                     Text(
                       resultado == null
                           ? "0 ml"
-                          : "${resultado!.toStringAsFixed(2)} ml",
+                          : "${resultado!.toStringAsFixed(1)} ml",
 
                       style: AppTextStyles.titleBrownTextv3,
                     ),

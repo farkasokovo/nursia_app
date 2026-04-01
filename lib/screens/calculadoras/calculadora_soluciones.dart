@@ -18,8 +18,89 @@ class CalculadoraSoluciones extends StatelessWidget {
   }
 }
 
-class _CalculadoraSolucionesLayout extends StatelessWidget {
+class _CalculadoraSolucionesLayout extends StatefulWidget {
   const _CalculadoraSolucionesLayout();
+
+  @override
+  State<_CalculadoraSolucionesLayout> createState() =>
+      _CalculadoraSolucionesLayoutState();
+}
+
+class _CalculadoraSolucionesLayoutState
+    extends State<_CalculadoraSolucionesLayout> {
+  final volumenController = TextEditingController();
+  final porcentajeIndicadoController = TextEditingController();
+  final porcentajeDisponibleController = TextEditingController();
+
+  String resultadoLinea1 = "";
+  String resultadoLinea2 = "";
+
+  void calcular() {
+    final volumen = double.tryParse(volumenController.text);
+
+    final porcentajeIndicado = double.tryParse(
+      porcentajeIndicadoController.text,
+    );
+
+    final porcentajeDisponible = double.tryParse(
+      porcentajeDisponibleController.text,
+    );
+
+    if (volumen == null ||
+        porcentajeIndicado == null ||
+        porcentajeDisponible == null) {
+      setState(() {
+        resultadoLinea1 = "";
+        resultadoLinea2 = "";
+      });
+
+      return;
+    }
+
+    if (porcentajeDisponible > porcentajeIndicado) {
+      final mlSolucionDisponible =
+          ((volumen * porcentajeIndicado) / porcentajeDisponible).round();
+
+      final mlAgua = volumen.round() - mlSolucionDisponible;
+
+      setState(() {
+        resultadoLinea1 =
+            "${mlSolucionDisponible.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%";
+
+        resultadoLinea2 = "${mlAgua.toStringAsFixed(0)} ml de agua estéril";
+      });
+    } else if (porcentajeDisponible < porcentajeIndicado) {
+      final diferencia = porcentajeIndicado - porcentajeDisponible;
+
+      final mlGlucosa50 = (volumen * diferencia) / 50;
+
+      final mlOtraSolucion = volumen - mlGlucosa50;
+
+      setState(() {
+        resultadoLinea1 = "${mlGlucosa50.toStringAsFixed(0)} ml de SG 50%";
+
+        resultadoLinea2 =
+            "${mlOtraSolucion.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%";
+      });
+    } else {
+      setState(() {
+        resultadoLinea1 = "$volumen ml de SG ${porcentajeIndicado.toInt()}%";
+
+        resultadoLinea2 = "No requiere ajuste";
+      });
+    }
+  }
+
+  void limpiar() {
+    volumenController.clear();
+    porcentajeIndicadoController.clear();
+    porcentajeDisponibleController.clear();
+
+    setState(() {
+      resultadoLinea1 = "";
+      resultadoLinea2 = "";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +110,26 @@ class _CalculadoraSolucionesLayout extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const _SolutionInputField(
-              label: "Glucosada indicada (ml)",
+            _SolutionInputField(
+              label: "Cantidad indicada (ml)",
               maxLength: 4,
+              controller: volumenController,
             ),
 
             const SizedBox(height: 20),
 
-            const _SolutionInputField(
+            _SolutionInputField(
               label: "Glucosada indicada (%)",
               maxLength: 2,
+              controller: porcentajeIndicadoController,
             ),
 
             const SizedBox(height: 20),
 
-            const _SolutionInputField(
+            _SolutionInputField(
               label: "Glucosada disponible (%)",
               maxLength: 2,
+              controller: porcentajeDisponibleController,
             ),
 
             const SizedBox(height: 20),
@@ -54,15 +138,14 @@ class _CalculadoraSolucionesLayout extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
-
                     style: ElevatedButton.styleFrom(
+                      overlayColor: AppColors.darkPrimaryColor,
                       minimumSize: const Size(double.infinity, 60),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
                       ),
                     ),
-
+                    onPressed: calcular,
                     child: Text(
                       "Calcular",
                       style: AppTextStyles.titleWhiteText.copyWith(
@@ -76,9 +159,8 @@ class _CalculadoraSolucionesLayout extends StatelessWidget {
 
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
-
                     style: OutlinedButton.styleFrom(
+                      overlayColor: AppColors.darkPrimaryColor,
                       minimumSize: const Size(double.infinity, 60),
 
                       side: const BorderSide(
@@ -90,7 +172,7 @@ class _CalculadoraSolucionesLayout extends StatelessWidget {
                         borderRadius: AppRadius.defaultRadius,
                       ),
                     ),
-
+                    onPressed: limpiar,
                     child: Text(
                       "Limpiar",
                       style: AppTextStyles.titleBrownText.copyWith(
@@ -118,12 +200,25 @@ class _CalculadoraSolucionesLayout extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
 
-                  children: const [
-                    Text("Resultado:", style: AppTextStyles.titleBrownTextv0),
+                  children: [
+                    const Text(
+                      "Preparación:",
+                      style: AppTextStyles.titleBrownTextv0,
+                    ),
 
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
 
-                    Text("0", style: AppTextStyles.titleBrownTextv3),
+                    Text(
+                      resultadoLinea1.isEmpty ? "0 ml" : resultadoLinea1,
+                      style: AppTextStyles.titleBrownText,
+                    ),
+
+                    const SizedBox(height: 6),
+
+                    Text(
+                      resultadoLinea2.isEmpty ? "0 ml" : resultadoLinea2,
+                      style: AppTextStyles.titleBrownText,
+                    ),
                   ],
                 ),
               ),
@@ -138,8 +233,13 @@ class _CalculadoraSolucionesLayout extends StatelessWidget {
 class _SolutionInputField extends StatelessWidget {
   final String label;
   final int maxLength;
+  final TextEditingController controller;
 
-  const _SolutionInputField({required this.label, required this.maxLength});
+  const _SolutionInputField({
+    required this.label,
+    required this.maxLength,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +257,7 @@ class _SolutionInputField extends StatelessWidget {
           height: 50, //! DICTAMINA LA SEPARACIÓN ENTRE TEXTFIELDS
 
           child: TextField(
+            controller: controller,
             keyboardType: const TextInputType.numberWithOptions(decimal: false),
 
             textAlign: TextAlign.center,
@@ -185,7 +286,7 @@ class _SolutionInputField extends StatelessWidget {
                 borderSide: BorderSide.none,
               ),
 
-              contentPadding: const EdgeInsets.symmetric(vertical: 10),
+              contentPadding: const EdgeInsets.symmetric(vertical: 0),
             ),
           ),
         ),

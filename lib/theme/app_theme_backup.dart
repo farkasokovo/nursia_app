@@ -10,11 +10,8 @@ class AppColors {
   static const Color accentDarkColor = Color(0xffcba786);
 
   static const Color darkPrimaryColor = Color(0xff624933);
-  static const Color lightSecondaryColor = Color(0xffF6F3F0);
-
   static const Color widgetLightBrown = Color(0xffDFD3C9);
 
-  static const Color greenAlert = Color(0xff9C965C);
   static const Color withoutAlert = Color(0xff9C785C);
 
   static const Color redAlertv1 = Color(0xff9C5C61);
@@ -29,22 +26,15 @@ class AppTextStyles {
   static const String fontFamily = "Poppins";
 
   static const TextStyle appBarTitle = TextStyle(
-    color: AppColors.lightSecondaryColor,
+    color: AppColors.secondaryColor,
     fontSize: 22,
     fontFamily: fontFamily,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle titleWhiteText = TextStyle(
-    color: AppColors.lightSecondaryColor,
+    color: AppColors.secondaryColor,
     fontSize: 20,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const TextStyle bodyLightWhiteText = TextStyle(
-    color: AppColors.lightSecondaryColor,
-    fontSize: 18,
     fontFamily: fontFamily,
     fontWeight: FontWeight.bold,
   );
@@ -77,15 +67,8 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
-  static const TextStyle bodyDarkBrownText = TextStyle(
-    color: AppColors.darkPrimaryColor,
-    fontSize: 18,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w600,
-  );
-
   static const TextStyle bodyBrownText = TextStyle(
-    color: AppColors.withoutAlert,
+    color: AppColors.primaryColor,
     fontSize: 16,
     fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
@@ -151,8 +134,8 @@ class AppTheme {
 
       textTheme: const TextTheme(
         titleLarge: AppTextStyles.titleBrownText,
-        bodyLarge: AppTextStyles.bodyDarkBrownText,
-        bodyMedium: AppTextStyles.bodyDarkBrownText,
+        bodyLarge: AppTextStyles.bodyBrownText,
+        bodyMedium: AppTextStyles.bodyBrownText,
       ),
     );
   }
