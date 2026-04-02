@@ -1,0 +1,42 @@
+{
+  "calculadoras": [
+    {
+      "id": "dosis",
+      "titulo": "Calculadora de dosis",
+      "descripcion": "Permite determinar la cantidad exacta de medicamento en mililitros a administrar.",
+      "formula": "Volumen a administrar (X ml) = (Dosis indicada mg × Diluyente ml) / Presentación mg",
+      "notas": [
+        "Alinear unidades: mg con mg, ml con ml en la proporción cruzada.",
+        "Verificar cambios físicos en la dilución (color, consistencia).",
+        "Siempre verificar unidades antes de administrar.",
+        "Aplicar los 4 'yo': yo preparo, administro, registro, respondo."
+      ],
+      "referencias": [
+        {
+          "text": "OMS: Administración segura de medicamentos",
+          "url": "https://www.who.int/es/news-room/fact-sheets/detail/patient-safety"
+        },
+        {
+          "text": "Liceo Carlos Condell. (2020). Cálculo y dilución de medicamentos.",
+          "url": "http://www.liceocarloscondell.cl/wp-content/uploads/2020/03/4.-C%C3%A1lculo-y-diluci%C3%B3n-de-medicamentos.pdf"
+        }
+      ]
+    },
+    {
+      "id": "soluciones",
+      "titulo": "Calculadora de soluciones glucosadas",
+      "descripcion": "Ajusta concentraciones de soluciones glucosadas por dilución o enriquecimiento.",
+      "formula": "Para dilución: (Volumen necesario × Concentración indicada) / Concentración disponible. Para enriquecimiento: usar glucosa al 50%.",
+      "notas": [
+        "Verificar osmolaridad final.",
+        "No usar en pacientes con hiperglucemia no controlada."
+      ],
+      "referencias": [
+        {
+          "text": "Guía de nutrición parenteral, ASEN 2023",
+          "url": "https://www.nutricionparenteral.com/guias"
+        }
+      ]
+    }
+  ]
+}

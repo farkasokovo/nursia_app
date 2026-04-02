@@ -1,6 +1,6 @@
-// lib/screens/calculadoras/calculadora_soluciones.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nursia_app/widgets/info_tab.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/tabbed_content.dart';
@@ -20,77 +20,67 @@ class CalculadoraSoluciones extends StatelessWidget {
           Tab(text: "Cálculo"),
           Tab(text: "Información"),
         ],
-        tabViews: [const _CalculadoraSolucionesLayout(), const _InfoTab()],
+        tabViews: [
+          const _CalculoSolucionesLayout(),
+          const InfoTab(calculadoraId: "soluciones"),
+        ],
       ),
     );
   }
 }
 
-class _InfoTab extends StatelessWidget {
-  const _InfoTab();
+// ================== RESULTADO (clase auxiliar) ==================
+class _ResultadoSolucion {
+  final String linea1;
+  final String linea2;
+  const _ResultadoSolucion(this.linea1, this.linea2);
+}
+
+// ================== PESTAÑA DE CÁLCULO ==================
+class _CalculoSolucionesLayout extends StatefulWidget {
+  const _CalculoSolucionesLayout();
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
+  State<_CalculoSolucionesLayout> createState() =>
+      _CalculoSolucionesLayoutState();
+}
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: colorScheme.secondary,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        padding: const EdgeInsets.all(20),
-        child: Text(
-          "Esta calculadora permite ajustar concentraciones de soluciones glucosadas.\n\n"
-          "• Si la solución disponible tiene mayor concentración que la indicada, se diluye con agua estéril.\n"
-          "• Si la concentración disponible es menor, se enriquece con glucosa al 50%.\n\n"
-          "Siempre verificar la compatibilidad y la osmolaridad final antes de administrar.",
-          style: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSecondaryContainer,
-          ),
-        ),
-      ),
-    );
+class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
+    with AutomaticKeepAliveClientMixin {
+  final _volumenController = TextEditingController();
+  final _porcentajeIndicadoController = TextEditingController();
+  final _porcentajeDisponibleController = TextEditingController();
+
+  // FIX: ValueNotifier evita reconstruir todo el árbol al cambiar el resultado
+  final _resultado = ValueNotifier<_ResultadoSolucion?>(null);
+
+  // FIX: Mantiene el estado del tab al cambiar entre "Cálculo" e "Información"
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    // FIX: Libera controllers y notifier para evitar memory leaks
+    _volumenController.dispose();
+    _porcentajeIndicadoController.dispose();
+    _porcentajeDisponibleController.dispose();
+    _resultado.dispose();
+    super.dispose();
   }
-}
 
-class _CalculadoraSolucionesLayout extends StatefulWidget {
-  const _CalculadoraSolucionesLayout();
-
-  @override
-  State<_CalculadoraSolucionesLayout> createState() =>
-      _CalculadoraSolucionesLayoutState();
-}
-
-class _CalculadoraSolucionesLayoutState
-    extends State<_CalculadoraSolucionesLayout> {
-  final volumenController = TextEditingController();
-  final porcentajeIndicadoController = TextEditingController();
-  final porcentajeDisponibleController = TextEditingController();
-
-  String resultadoLinea1 = "";
-  String resultadoLinea2 = "";
-
-  void calcular() {
-    final volumen = double.tryParse(volumenController.text);
+  void _calcular() {
+    final volumen = double.tryParse(_volumenController.text);
     final porcentajeIndicado = double.tryParse(
-      porcentajeIndicadoController.text,
+      _porcentajeIndicadoController.text,
     );
     final porcentajeDisponible = double.tryParse(
-      porcentajeDisponibleController.text,
+      _porcentajeDisponibleController.text,
     );
 
     if (volumen == null ||
         porcentajeIndicado == null ||
         porcentajeDisponible == null) {
-      setState(() {
-        resultadoLinea1 = "";
-        resultadoLinea2 = "";
-      });
+      _resultado.value = null;
       return;
     }
 
@@ -98,40 +88,36 @@ class _CalculadoraSolucionesLayoutState
       final mlSolucionDisponible =
           ((volumen * porcentajeIndicado) / porcentajeDisponible).round();
       final mlAgua = volumen.round() - mlSolucionDisponible;
-      setState(() {
-        resultadoLinea1 =
-            "${mlSolucionDisponible.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%";
-        resultadoLinea2 = "${mlAgua.toStringAsFixed(0)} ml de agua estéril";
-      });
+      _resultado.value = _ResultadoSolucion(
+        "${mlSolucionDisponible.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%",
+        "${mlAgua.toStringAsFixed(0)} ml de agua estéril",
+      );
     } else if (porcentajeDisponible < porcentajeIndicado) {
       final diferencia = porcentajeIndicado - porcentajeDisponible;
       final mlGlucosa50 = (volumen * diferencia) / 50;
       final mlOtraSolucion = volumen - mlGlucosa50;
-      setState(() {
-        resultadoLinea1 = "${mlGlucosa50.toStringAsFixed(0)} ml de SG 50%";
-        resultadoLinea2 =
-            "${mlOtraSolucion.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%";
-      });
+      _resultado.value = _ResultadoSolucion(
+        "${mlGlucosa50.toStringAsFixed(0)} ml de SG 50%",
+        "${mlOtraSolucion.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%",
+      );
     } else {
-      setState(() {
-        resultadoLinea1 = "$volumen ml de SG ${porcentajeIndicado.toInt()}%";
-        resultadoLinea2 = "No requiere ajuste";
-      });
+      _resultado.value = _ResultadoSolucion(
+        "$volumen ml de SG ${porcentajeIndicado.toInt()}%",
+        "No requiere ajuste",
+      );
     }
   }
 
-  void limpiar() {
-    volumenController.clear();
-    porcentajeIndicadoController.clear();
-    porcentajeDisponibleController.clear();
-    setState(() {
-      resultadoLinea1 = "";
-      resultadoLinea2 = "";
-    });
+  void _limpiar() {
+    _volumenController.clear();
+    _porcentajeIndicadoController.clear();
+    _porcentajeDisponibleController.clear();
+    _resultado.value = null;
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // requerido por AutomaticKeepAliveClientMixin
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -144,19 +130,19 @@ class _CalculadoraSolucionesLayoutState
             _SolutionInputField(
               label: "Cantidad indicada (ml)",
               maxLength: 4,
-              controller: volumenController,
+              controller: _volumenController,
             ),
             const SizedBox(height: 20),
             _SolutionInputField(
               label: "Glucosada indicada (%)",
               maxLength: 2,
-              controller: porcentajeIndicadoController,
+              controller: _porcentajeIndicadoController,
             ),
             const SizedBox(height: 20),
             _SolutionInputField(
               label: "Glucosada disponible (%)",
               maxLength: 2,
-              controller: porcentajeDisponibleController,
+              controller: _porcentajeDisponibleController,
             ),
             const SizedBox(height: 20),
             Row(
@@ -170,7 +156,7 @@ class _CalculadoraSolucionesLayoutState
                         borderRadius: AppRadius.defaultRadius,
                       ),
                     ),
-                    onPressed: calcular,
+                    onPressed: _calcular,
                     child: Text(
                       "Calcular",
                       style: textTheme.titleSmall?.copyWith(
@@ -195,7 +181,7 @@ class _CalculadoraSolucionesLayoutState
                         borderRadius: AppRadius.defaultRadius,
                       ),
                     ),
-                    onPressed: limpiar,
+                    onPressed: _limpiar,
                     child: Text(
                       "Limpiar",
                       style: textTheme.titleSmall?.copyWith(
@@ -209,46 +195,51 @@ class _CalculadoraSolucionesLayoutState
               ],
             ),
             const SizedBox(height: 20),
-            ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: 180),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: colorScheme.secondary,
-                  borderRadius: AppRadius.defaultRadius,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Preparación:",
-                      style: textTheme.titleMedium?.copyWith(
-                        color: colorScheme.primaryContainer,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            // FIX: Solo reconstruye el Container del resultado, no toda la pantalla
+            ValueListenableBuilder<_ResultadoSolucion?>(
+              valueListenable: _resultado,
+              builder: (_, valor, __) {
+                return Container(
+                  width: double.infinity,
+                  // FIX: ConstrainedBox colapsado en un solo Container
+                  constraints: const BoxConstraints(minHeight: 180),
+                  decoration: BoxDecoration(
+                    color: colorScheme.secondary,
+                    borderRadius: AppRadius.defaultRadius,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Preparación:",
+                        style: textTheme.titleMedium?.copyWith(
+                          color: colorScheme.primaryContainer,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      resultadoLinea1.isEmpty ? "0 ml" : resultadoLinea1,
-                      style: textTheme.headlineMedium?.copyWith(
-                        color: colorScheme.primaryContainer,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(height: 8),
+                      Text(
+                        valor?.linea1 ?? "0 ml",
+                        style: textTheme.headlineMedium?.copyWith(
+                          color: colorScheme.primaryContainer,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      resultadoLinea2.isEmpty ? "0 ml" : resultadoLinea2,
-                      style: textTheme.headlineMedium?.copyWith(
-                        color: colorScheme.primaryContainer,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(height: 6),
+                      Text(
+                        valor?.linea2 ?? "0 ml",
+                        style: textTheme.headlineMedium?.copyWith(
+                          color: colorScheme.primaryContainer,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                    ],
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -257,6 +248,7 @@ class _CalculadoraSolucionesLayoutState
   }
 }
 
+// ================== CAMPO DE ENTRADA REUTILIZABLE ==================
 class _SolutionInputField extends StatelessWidget {
   final String label;
   final int maxLength;
@@ -313,7 +305,7 @@ class _SolutionInputField extends StatelessWidget {
               ),
               filled: true,
               fillColor: colorScheme.secondary,
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(
                 borderRadius: AppRadius.defaultRadius,
                 borderSide: BorderSide.none,
               ),

@@ -29,9 +29,9 @@ class ExpandableCategoryScreen extends StatelessWidget {
           color: colorScheme.primaryContainer,
           child: SafeArea(
             child: Column(
-              spacing: 8,
               children: [
                 // AppBar personalizada
+                // FIX: spacing en Column no existe en Flutter estable — usar SizedBox
                 Row(
                   children: [
                     IconButton(
@@ -59,9 +59,11 @@ class ExpandableCategoryScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 8),
                 // Resto del contenido
+                // FIX: ColoredBox es más ligero que Container cuando solo se necesita color
                 Expanded(
-                  child: Container(
+                  child: ColoredBox(
                     color: colorScheme.secondaryContainer,
                     child: child,
                   ),

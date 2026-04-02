@@ -1,6 +1,5 @@
 // lib/widgets/tabbed_content.dart
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
 
 class TabbedContent extends StatefulWidget {
   final List<Tab> tabs;
@@ -57,10 +56,7 @@ class _TabbedContentState extends State<TabbedContent>
             indicatorColor: colorScheme.onPrimaryContainer,
             labelColor: colorScheme.onPrimaryContainer,
             unselectedLabelColor: colorScheme.tertiaryContainer,
-            labelStyle: textTheme.titleMedium?.copyWith(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
+            labelStyle: textTheme.titleMedium,
             unselectedLabelStyle: textTheme.titleSmall?.copyWith(
               fontSize: 15,
               fontWeight: FontWeight.w600,

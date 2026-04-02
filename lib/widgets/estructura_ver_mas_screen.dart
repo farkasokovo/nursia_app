@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import '../models/ver_mas_screen.dart';
+import '../utils/url_launcher_helper.dart';
 
 class EstructuraVerMasScreen extends StatelessWidget {
   final VerMasScreen info;
@@ -89,14 +88,13 @@ class EstructuraVerMasScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
-    final messenger = ScaffoldMessenger.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 12),
         Text(
-          "Referencias",
+          "Material de apoyo",
           style: textTheme.titleMedium?.copyWith(
             color: colorScheme.primaryContainer,
             fontSize: 20,
@@ -108,29 +106,8 @@ class EstructuraVerMasScreen extends StatelessWidget {
           (ref) => Padding(
             padding: const EdgeInsets.only(bottom: 6),
             child: GestureDetector(
-              onTap: () async {
-                final urlString = ref["url"].toString().trim();
-                try {
-                  final uri = Uri.parse(urlString);
-                  final success = await launchUrl(
-                    uri,
-                    mode: LaunchMode.externalApplication,
-                  );
-                  if (!success) {
-                    messenger.showSnackBar(
-                      const SnackBar(
-                        content: Text("No se pudo abrir la referencia"),
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  messenger.showSnackBar(
-                    const SnackBar(
-                      content: Text("URL inválida en referencias"),
-                    ),
-                  );
-                }
-              },
+              // FIX: Usa helper compartido — elimina código duplicado
+              onTap: () => abrirUrl(context, ref["url"].toString()),
               child: Text(
                 ref["text"],
                 style: textTheme.bodyLarge?.copyWith(

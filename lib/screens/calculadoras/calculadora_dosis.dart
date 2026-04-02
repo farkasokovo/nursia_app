@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nursia_app/widgets/info_tab.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../widgets/expandable_category_screen.dart';
-import '../../widgets/tabbed_content.dart'; // 👈 IMPORTANTE: importa el nuevo widget
-import '../../theme/app_theme.dart'; // solo para AppRadius
+import '../../widgets/tabbed_content.dart';
+import '../../theme/app_theme.dart';
 
 class CalculadoraDosis extends StatelessWidget {
   const CalculadoraDosis({super.key});
@@ -21,8 +22,8 @@ class CalculadoraDosis extends StatelessWidget {
           Tab(text: "Información"),
         ],
         tabViews: [
-          const _CalculoDosisLayout(), // contenido del cálculo
-          const _InfoDosisTab(), // contenido de información
+          const _CalculoDosisLayout(),
+          const InfoTab(calculadoraId: "dosis"),
         ],
       ),
     );
@@ -37,39 +38,58 @@ class _CalculoDosisLayout extends StatefulWidget {
   State<_CalculoDosisLayout> createState() => _CalculoDosisLayoutState();
 }
 
-class _CalculoDosisLayoutState extends State<_CalculoDosisLayout> {
-  final dosisController = TextEditingController();
-  final dilucionController = TextEditingController();
-  final presentacionController = TextEditingController();
-  double? resultado;
+class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
+    with AutomaticKeepAliveClientMixin {
+  // FIX: RegExp estático — se compila una sola vez, no en cada keystroke
+  static final _decimalRegex = RegExp(r'^\d*\.?\d*');
 
-  void calcular() {
-    final dosis = double.tryParse(dosisController.text);
-    final dilucion = double.tryParse(dilucionController.text);
-    final presentacion = double.tryParse(presentacionController.text);
+  final _dosisController = TextEditingController();
+  final _dilucionController = TextEditingController();
+  final _presentacionController = TextEditingController();
+
+  // FIX: ValueNotifier evita reconstruir todo el árbol al cambiar el resultado
+  final _resultado = ValueNotifier<double?>(null);
+
+  // FIX: Mantiene el estado del tab al cambiar entre "Cálculo" e "Información"
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    // FIX: Libera controllers y notifier para evitar memory leaks
+    _dosisController.dispose();
+    _dilucionController.dispose();
+    _presentacionController.dispose();
+    _resultado.dispose();
+    super.dispose();
+  }
+
+  void _calcular() {
+    final dosis = double.tryParse(_dosisController.text);
+    final dilucion = double.tryParse(_dilucionController.text);
+    final presentacion = double.tryParse(_presentacionController.text);
 
     if (dosis == null ||
         dilucion == null ||
         presentacion == null ||
         presentacion == 0) {
-      setState(() => resultado = null);
+      _resultado.value = null;
       return;
     }
 
-    setState(() {
-      resultado = (dosis * dilucion) / presentacion;
-    });
+    _resultado.value = (dosis * dilucion) / presentacion;
   }
 
-  void limpiar() {
-    dosisController.clear();
-    dilucionController.clear();
-    presentacionController.clear();
-    setState(() => resultado = null);
+  void _limpiar() {
+    _dosisController.clear();
+    _dilucionController.clear();
+    _presentacionController.clear();
+    _resultado.value = null;
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // requerido por AutomaticKeepAliveClientMixin
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -81,27 +101,30 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout> {
           children: [
             _DoseInputField(
               label: "Dosis indicada (mg)",
-              controller: dosisController,
+              controller: _dosisController,
               maxLength: 4,
+              decimalRegex: _decimalRegex,
             ),
             const SizedBox(height: 20),
             _DoseInputField(
               label: "Diluyente (ml)",
-              controller: dilucionController,
+              controller: _dilucionController,
               maxLength: 3,
+              decimalRegex: _decimalRegex,
             ),
             const SizedBox(height: 20),
             _DoseInputField(
               label: "Presentación del fármaco (mg)",
-              controller: presentacionController,
+              controller: _presentacionController,
               maxLength: 4,
+              decimalRegex: _decimalRegex,
             ),
             const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: calcular,
+                    onPressed: _calcular,
                     style: ElevatedButton.styleFrom(
                       overlayColor: colorScheme.primaryContainer,
                       minimumSize: const Size(double.infinity, 60),
@@ -122,7 +145,7 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout> {
                 const SizedBox(width: 20),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: limpiar,
+                    onPressed: _limpiar,
                     style: OutlinedButton.styleFrom(
                       overlayColor: colorScheme.primaryContainer,
                       minimumSize: const Size(double.infinity, 60),
@@ -147,78 +170,46 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout> {
               ],
             ),
             const SizedBox(height: 20),
-            ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: 180),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: colorScheme.secondary,
-                  borderRadius: AppRadius.defaultRadius,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Cantidad a administrar:",
-                      style: textTheme.titleMedium?.copyWith(
-                        color: colorScheme.primaryContainer,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            // FIX: Solo reconstruye el Container del resultado, no toda la pantalla
+            ValueListenableBuilder<double?>(
+              valueListenable: _resultado,
+              builder: (_, valor, _) {
+                return Container(
+                  width: double.infinity,
+                  // FIX: ConstrainedBox colapsado en un solo Container
+                  constraints: const BoxConstraints(minHeight: 180),
+                  decoration: BoxDecoration(
+                    color: colorScheme.secondary,
+                    borderRadius: AppRadius.defaultRadius,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Cantidad a administrar:",
+                        style: textTheme.titleMedium?.copyWith(
+                          color: colorScheme.primaryContainer,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      resultado == null
-                          ? "0 ml"
-                          : "${resultado!.toStringAsFixed(1)} ml",
-                      style: textTheme.displayLarge?.copyWith(
-                        color: colorScheme.primaryContainer,
-                        fontSize: 60,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(height: 8),
+                      Text(
+                        valor == null
+                            ? "0 ml"
+                            : "${valor.toStringAsFixed(1)} ml",
+                        style: textTheme.displayLarge?.copyWith(
+                          color: colorScheme.primaryContainer,
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                    ],
+                  ),
+                );
+              },
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// ================== PESTAÑA DE INFORMACIÓN ==================
-class _InfoDosisTab extends StatelessWidget {
-  const _InfoDosisTab();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: colorScheme.secondary,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        padding: const EdgeInsets.all(20),
-        child: Text(
-          "Esta calculadora permite determinar la cantidad "
-          "exacta de medicamento en mililitros que debe "
-          "administrarse al paciente con base en la dosis "
-          "indicada, el volumen del diluyente y la "
-          "presentación disponible del fármaco.\n\n"
-          "Fórmula aplicada:\n"
-          "(Dosis indicada × Diluyente) ÷ Presentación.\n\n"
-          "Siempre verificar unidades antes de administrar.",
-          style: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSecondaryContainer,
-          ),
         ),
       ),
     );
@@ -230,11 +221,13 @@ class _DoseInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final int maxLength;
+  final RegExp decimalRegex;
 
   const _DoseInputField({
     required this.label,
     required this.controller,
     required this.maxLength,
+    required this.decimalRegex,
   });
 
   @override
@@ -261,7 +254,8 @@ class _DoseInputField extends StatelessWidget {
           height: 50,
           child: TextField(
             controller: controller,
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            // FIX: const en el keyboardType
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             textAlign: TextAlign.center,
             style: textTheme.titleMedium?.copyWith(
               color: colorScheme.primaryContainer,
@@ -269,7 +263,8 @@ class _DoseInputField extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
             inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+              // FIX: Usa el regex pre-compilado recibido como parámetro
+              FilteringTextInputFormatter.allow(decimalRegex),
               LengthLimitingTextInputFormatter(maxLength),
             ],
             decoration: InputDecoration(
@@ -281,7 +276,7 @@ class _DoseInputField extends StatelessWidget {
               ),
               filled: true,
               fillColor: colorScheme.secondary,
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(
                 borderRadius: AppRadius.defaultRadius,
                 borderSide: BorderSide.none,
               ),
