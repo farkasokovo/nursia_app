@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../widgets/expandable_category_screen.dart';
-import '../../theme/app_theme.dart';
+import '../../theme/app_theme.dart'; // solo para AppRadius (constante)
 
 class CalculadoraDosis extends StatelessWidget {
   const CalculadoraDosis({super.key});
@@ -40,18 +40,15 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
   @override
   void initState() {
     super.initState();
-
     _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   void dispose() {
     _tabController.dispose();
-
     dosisController.dispose();
     dilucionController.dispose();
     presentacionController.dispose();
-
     super.dispose();
   }
 
@@ -77,41 +74,41 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
     dosisController.clear();
     dilucionController.clear();
     presentacionController.clear();
-
     setState(() => resultado = null);
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return Column(
       children: [
         Container(
-          color: AppColors.darkPrimaryColor,
+          color: colorScheme.primaryContainer, // darkPrimaryColor
           child: TabBar(
+            controller: _tabController,
             tabAlignment: TabAlignment.fill,
-            labelPadding: EdgeInsets.symmetric(horizontal: 20),
+            labelPadding: const EdgeInsets.symmetric(horizontal: 20),
             dividerColor: Colors.transparent,
-            indicatorColor: AppColors.secondaryColor,
-            labelColor: AppColors.secondaryColor,
-            unselectedLabelColor: AppColors.accentLightColor,
-            labelStyle: TextStyle(
+            indicatorColor: colorScheme.onPrimaryContainer,
+            labelColor: colorScheme.onPrimaryContainer,
+            unselectedLabelColor: colorScheme.tertiaryContainer,
+            labelStyle: textTheme.titleMedium?.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.w600,
-              color: AppColors.lightSecondaryColor,
             ),
-            unselectedLabelStyle: TextStyle(
+            unselectedLabelStyle: textTheme.titleSmall?.copyWith(
               fontSize: 15,
               fontWeight: FontWeight.w600,
             ),
-            controller: _tabController,
-
             tabs: const [
               Tab(text: "Cálculo"),
               Tab(text: "Información"),
             ],
           ),
         ),
-
         Expanded(
           child: TabBarView(
             controller: _tabController,
@@ -123,9 +120,12 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
   }
 
   Widget _buildCalculadora() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -134,31 +134,25 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
               controller: dosisController,
               maxLength: 4,
             ),
-
             const SizedBox(height: 20),
-
             _DoseInputField(
               label: "Diluyente (ml)",
               controller: dilucionController,
               maxLength: 3,
             ),
-
             const SizedBox(height: 20),
-
             _DoseInputField(
               label: "Presentación del fármaco (mg)",
               controller: presentacionController,
               maxLength: 4,
             ),
-
             const SizedBox(height: 20),
-
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      overlayColor: AppColors.darkPrimaryColor,
+                      overlayColor: colorScheme.primaryContainer,
                       minimumSize: const Size(double.infinity, 60),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
@@ -167,22 +161,22 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
                     onPressed: calcular,
                     child: Text(
                       "Calcular",
-                      style: AppTextStyles.titleWhiteText.copyWith(
+                      style: textTheme.titleSmall?.copyWith(
                         fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onPrimaryContainer,
                       ),
                     ),
                   ),
                 ),
-
                 const SizedBox(width: 20),
-
                 Expanded(
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      overlayColor: AppColors.darkPrimaryColor,
+                      overlayColor: colorScheme.primaryContainer,
                       minimumSize: const Size(double.infinity, 60),
-                      side: const BorderSide(
-                        color: AppColors.darkPrimaryColor,
+                      side: BorderSide(
+                        color: colorScheme.primaryContainer,
                         width: 2,
                       ),
                       shape: const RoundedRectangleBorder(
@@ -192,44 +186,46 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
                     onPressed: limpiar,
                     child: Text(
                       "Limpiar",
-                      style: AppTextStyles.titleBrownText.copyWith(
+                      style: textTheme.titleSmall?.copyWith(
                         fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.primaryContainer,
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-
             const SizedBox(height: 20),
-
             ConstrainedBox(
               constraints: const BoxConstraints(minHeight: 180),
-
               child: Container(
                 width: double.infinity,
-
-                decoration: const BoxDecoration(
-                  color: AppColors.secondaryColor,
+                decoration: BoxDecoration(
+                  color: colorScheme.secondary,
                   borderRadius: AppRadius.defaultRadius,
                 ),
-
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Cantidad a administrar:",
-                      style: AppTextStyles.titleBrownTextv0,
+                      style: textTheme.titleMedium?.copyWith(
+                        color: colorScheme.primaryContainer,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-
                     const SizedBox(height: 8),
-
                     Text(
                       resultado == null
                           ? "0 ml"
                           : "${resultado!.toStringAsFixed(1)} ml",
-
-                      style: AppTextStyles.titleBrownTextv3,
+                      style: textTheme.displayLarge?.copyWith(
+                        color: colorScheme.primaryContainer,
+                        fontSize: 60,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -242,9 +238,12 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
   }
 
   Widget _buildInfo() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return Padding(
       padding: const EdgeInsets.all(20),
-
       child: Text(
         "Esta calculadora permite determinar la cantidad "
         "exacta de medicamento en mililitros que debe "
@@ -254,8 +253,7 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
         "Fórmula aplicada:\n"
         "(Dosis indicada × Diluyente) ÷ Presentación.\n\n"
         "Siempre verificar unidades antes de administrar.",
-
-        style: AppTextStyles.bodyBrownText,
+        style: textTheme.bodySmall,
       ),
     );
   }
@@ -274,49 +272,53 @@ class _DoseInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 8, bottom: 8),
-
-          child: Text(label, style: AppTextStyles.titleBrownTextv0),
+          child: Text(
+            label,
+            style: textTheme.titleMedium?.copyWith(
+              color: colorScheme.primaryContainer,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-
         SizedBox(
           height: 50,
-
           child: TextField(
             controller: controller,
-
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-
             textAlign: TextAlign.center,
-
-            style: AppTextStyles.titleBrownText.copyWith(fontSize: 25),
-
+            style: textTheme.titleMedium?.copyWith(
+              color: colorScheme.primaryContainer,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
             enableInteractiveSelection: false,
-
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-
               LengthLimitingTextInputFormatter(maxLength),
             ],
-
             decoration: InputDecoration(
               hintText: label,
-
-              hintStyle: AppTextStyles.bodyBrownText,
-
+              hintStyle: textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSecondaryContainer,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
               filled: true,
-
-              fillColor: AppColors.secondaryColor,
-
+              fillColor: colorScheme.secondary,
               border: OutlineInputBorder(
                 borderRadius: AppRadius.defaultRadius,
                 borderSide: BorderSide.none,
               ),
-
               contentPadding: const EdgeInsets.symmetric(vertical: 0),
             ),
           ),

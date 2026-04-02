@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class MoldeEscalasScreen extends StatelessWidget {
   final String heroTag;
   final String title;
   final IconData icon;
-
   final Widget scaleTab;
   final Widget infoTab;
 
@@ -21,48 +19,42 @@ class MoldeEscalasScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return DefaultTabController(
       length: 2,
-
       child: Scaffold(
         backgroundColor: Colors.transparent,
-
         body: Column(
           children: [
             Hero(
               tag: heroTag,
-
               child: Material(
-                color: AppColors.darkPrimaryColor,
-
+                color: colorScheme.primaryContainer,
                 child: SafeArea(
                   child: Row(
                     children: [
                       IconButton(
                         icon: PhosphorIcon(
                           PhosphorIconsBold.caretLeft,
-                          color: AppColors.secondaryColor,
+                          color: colorScheme.onPrimaryContainer,
                           size: 32,
                         ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                        onPressed: () => Navigator.pop(context),
                       ),
-
                       const SizedBox(width: 8),
-
                       PhosphorIcon(
                         icon,
                         size: 28,
-                        color: AppColors.secondaryColor,
+                        color: colorScheme.onPrimaryContainer,
                       ),
-
                       const SizedBox(width: 10),
-
                       Text(
                         title,
-                        style: const TextStyle(
-                          color: AppColors.secondaryColor,
+                        style: textTheme.titleLarge?.copyWith(
+                          color: colorScheme.onPrimaryContainer,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -72,38 +64,33 @@ class MoldeEscalasScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             Container(
               width: double.infinity,
-
-              decoration: BoxDecoration(color: AppColors.darkPrimaryColor),
-              child: const TabBar(
+              decoration: BoxDecoration(color: colorScheme.primaryContainer),
+              child: TabBar(
                 tabAlignment: TabAlignment.fill,
-                labelPadding: EdgeInsets.symmetric(horizontal: 20),
+                labelPadding: const EdgeInsets.symmetric(horizontal: 20),
                 dividerColor: Colors.transparent,
-                indicatorColor: AppColors.secondaryColor,
-                labelColor: AppColors.secondaryColor,
-                unselectedLabelColor: AppColors.accentLightColor,
-                labelStyle: TextStyle(
+                indicatorColor: colorScheme.onPrimaryContainer,
+                labelColor: colorScheme.onPrimaryContainer,
+                unselectedLabelColor: colorScheme.tertiaryContainer,
+                labelStyle: textTheme.titleMedium?.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.lightSecondaryColor,
                 ),
-                unselectedLabelStyle: TextStyle(
+                unselectedLabelStyle: textTheme.titleSmall?.copyWith(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
-                tabs: [
+                tabs: const [
                   Tab(text: "Escala"),
-
                   Tab(text: "Ver más"),
                 ],
               ),
             ),
-
             Expanded(
               child: Container(
-                color: AppColors.widgetLightBrown,
+                color: colorScheme.secondaryContainer,
                 child: TabBarView(children: [scaleTab, infoTab]),
               ),
             ),

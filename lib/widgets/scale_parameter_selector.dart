@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import '../theme/app_theme.dart';
+import '../theme/app_theme.dart'; // Solo para AppRadius (constante)
 
 class ScaleOption {
   final String label;
@@ -30,26 +30,29 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return Container(
       width: double.infinity,
-
       padding: const EdgeInsets.all(20),
-
-      decoration: const BoxDecoration(
-        color: AppColors.secondaryColor,
+      decoration: BoxDecoration(
+        color: colorScheme.secondary,
         borderRadius: AppRadius.defaultRadius,
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-
         children: [
           Text(
             widget.title,
-            style: AppTextStyles.titleBrownText,
+            style: textTheme.headlineMedium?.copyWith(
+              color: colorScheme.primaryContainer,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
-
           const SizedBox(height: 20),
           Column(
             children: widget.options.map((option) {
@@ -64,7 +67,6 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                       widget.onChanged(option.score);
                     });
                   },
-                  // ANIMACIÓN DEL BOTÓN
                   borderRadius: AppRadius.defaultRadius,
                   child: Container(
                     width: double.infinity,
@@ -74,23 +76,22 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                     ),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? AppColors.darkPrimaryColor
-                          : AppColors.lightSecondaryColor,
+                          ? colorScheme.primaryContainer
+                          : colorScheme.onPrimaryContainer,
                       borderRadius: AppRadius.defaultRadius,
                       border: Border.all(
-                        color: AppColors.darkPrimaryColor,
+                        color: colorScheme.primaryContainer,
                         width: isSelected ? 2 : 1,
                       ),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Checkmark cuando está seleccionado
                         if (isSelected) ...[
                           PhosphorIcon(
                             PhosphorIconsBold.check,
                             size: 25,
-                            color: AppColors.secondaryColor,
+                            color: colorScheme.onPrimaryContainer,
                           ),
                           const SizedBox(width: 8),
                         ],
@@ -99,8 +100,16 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                             "${option.score ?? "NV"} — ${option.label}",
                             softWrap: true,
                             style: isSelected
-                                ? AppTextStyles.bodyLightWhiteText
-                                : AppTextStyles.bodyDarkBrownText,
+                                ? textTheme.bodyLarge?.copyWith(
+                                    color: colorScheme.onPrimaryContainer,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  )
+                                : textTheme.bodyMedium?.copyWith(
+                                    color: colorScheme.onSecondaryContainer,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                           ),
                         ),
                       ],

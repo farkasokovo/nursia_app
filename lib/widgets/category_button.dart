@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class CategoryButton extends StatelessWidget {
@@ -7,7 +6,6 @@ class CategoryButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onTap;
   final String heroTag;
-  final Color color;
 
   const CategoryButton({
     super.key,
@@ -15,24 +13,25 @@ class CategoryButton extends StatelessWidget {
     required this.icon,
     required this.heroTag,
     this.onTap,
-    this.color = AppColors.widgetLightBrown,
-
-    // CLASE DELL DISEÑO DE LOS BOTONES CON PANTALLA DESPLEGABLE (HEROTAG)
   });
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return Hero(
-      // HeroTag
       tag: heroTag,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          overlayColor: WidgetStateProperty.all(AppColors.accentLightColor),
+          overlayColor: WidgetStateProperty.all(colorScheme.tertiaryContainer),
           borderRadius: BorderRadius.circular(18),
           onTap: onTap,
           child: Ink(
             decoration: BoxDecoration(
-              color: color,
+              color: colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(20),
               boxShadow: const [
                 BoxShadow(color: Colors.black12, blurRadius: 6),
@@ -40,15 +39,22 @@ class CategoryButton extends StatelessWidget {
             ),
             height: 150,
             child: Column(
-              // Estructura del botón: Icono + Texto
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PhosphorIcon(icon, size: 40, color: AppColors.darkPrimaryColor),
+                PhosphorIcon(
+                  icon,
+                  size: 40,
+                  color: colorScheme.primaryContainer,
+                ),
                 const SizedBox(height: 10),
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.titleBrownText.copyWith(fontSize: 20),
+                  style: textTheme.titleMedium?.copyWith(
+                    color: colorScheme.primaryContainer,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),

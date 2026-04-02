@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
-import '../../widgets/expandable_category_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import '../../widgets/expandable_category_screen.dart';
 
 class SeguridadScreen extends StatelessWidget {
   const SeguridadScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const ExpandableCategoryScreen(
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    return ExpandableCategoryScreen(
       heroTag: "seguridad",
       title: "Escalas de Seguridad",
       icon: PhosphorIconsFill.shieldCheck,
-
-      child: Center(child: Text("Aquí aparecerán Dowton, Morse, etc.")),
+      child: Center(
+        child: Text(
+          "Aquí aparecerán Dowton, Morse, etc.",
+          style: textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onSecondaryContainer,
+          ),
+        ),
+      ),
     );
   }
 }

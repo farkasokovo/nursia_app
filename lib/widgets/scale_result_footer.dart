@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
 
 class ScaleResultFooter extends StatelessWidget {
   final bool visible;
   final String resultado;
-  final Color Function(String resultado)?
-  colorResolver; // 👈 Opcional, por si alguna escala no necesita colores
+  final Color Function(String resultado)? colorResolver;
 
   const ScaleResultFooter({
     super.key,
@@ -16,8 +14,11 @@ class ScaleResultFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!visible)
-      return const SizedBox.shrink(); // 👈 Si no es visible, no ocupa espacio
+    if (!visible) return const SizedBox.shrink();
+
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
 
     final esNumero = RegExp(r'^\d+').hasMatch(resultado);
     final colorResultado = colorResolver?.call(resultado);
@@ -27,14 +28,13 @@ class ScaleResultFooter extends StatelessWidget {
       curve: Curves.easeInOut,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.secondaryColor,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        color: colorScheme.secondary,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
-          // 👈 Esto es todo lo nuevo
           BoxShadow(
-            color: AppColors.darkPrimaryColor.withValues(alpha: 0.15),
+            color: colorScheme.primaryContainer.withValues(alpha: 0.15),
             blurRadius: 10,
-            offset: const Offset(0, -4), // 👈 Negativo = sombra hacia arriba
+            offset: const Offset(0, -4),
           ),
         ],
       ),
@@ -45,18 +45,19 @@ class ScaleResultFooter extends StatelessWidget {
           Text(
             "Resultado:",
             textAlign: TextAlign.center,
-            style: AppTextStyles.titleBrownTextv2,
+            style: textTheme.headlineLarge?.copyWith(
+              color: colorScheme.primaryContainer,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-
           AnimatedContainer(
             duration: const Duration(milliseconds: 400),
             curve: Curves.easeInOut,
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             decoration: BoxDecoration(
-              color:
-                  colorResultado ??
-                  Colors.transparent, // 👈 Sin color si no hay resolver
+              color: colorResultado ?? Colors.transparent,
               borderRadius: BorderRadius.circular(40),
             ),
             child: Text(
@@ -64,12 +65,16 @@ class ScaleResultFooter extends StatelessWidget {
               textAlign: TextAlign.center,
               softWrap: true,
               style: esNumero
-                  ? AppTextStyles.titleWhiteText.copyWith(
+                  ? textTheme.displayLarge?.copyWith(
+                      color: colorScheme.onPrimaryContainer,
                       fontSize: 60,
-                    ) // 👈 Número grande y llamativo
-                  : AppTextStyles.titleWhiteText.copyWith(
+                      fontWeight: FontWeight.bold,
+                    )
+                  : textTheme.titleLarge?.copyWith(
+                      color: colorScheme.onPrimaryContainer,
                       fontSize: 22,
-                    ), // 👈 Texto más pequeño para la respuesta larga
+                      fontWeight: FontWeight.bold,
+                    ),
             ),
           ),
         ],

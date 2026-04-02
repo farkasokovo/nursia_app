@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-// COLORES
+// ============================================================
+// COLORES (valores estáticos, solo para referencia)
+// ============================================================
 
 class AppColors {
   static const Color primaryColor = Color(0xff96775b);
@@ -25,7 +27,9 @@ class AppColors {
   static const Color semiDarkPrimaryColor = Color(0xff7E6754);
 }
 
-// FUENTES
+// ============================================================
+// ESTILOS DE TEXTO (se mantienen igual, se usan en textTheme)
+// ============================================================
 
 class AppTextStyles {
   static const String fontFamily = "Poppins";
@@ -101,7 +105,9 @@ class AppTextStyles {
   );
 }
 
-// BORDER RADIUS
+// ============================================================
+// RADIOS COMUNES
+// ============================================================
 
 class AppRadius {
   static const BorderRadius defaultRadius = BorderRadius.all(
@@ -109,59 +115,101 @@ class AppRadius {
   );
 }
 
-/// TEMA GLOBAL
+// ============================================================
+// TEMA GLOBAL
+// ============================================================
 
 class AppTheme {
   static ThemeData lightTheme() {
+    // Construimos el colorScheme usando los valores de AppColors
+    const ColorScheme colorScheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: AppColors.primaryColor,
+      onPrimary: AppColors.secondaryColor,
+      primaryContainer: AppColors.darkPrimaryColor,
+      onPrimaryContainer: AppColors.lightSecondaryColor,
+      secondary: AppColors.secondaryColor,
+      onSecondary: AppColors.darkPrimaryColor,
+      secondaryContainer: AppColors.widgetLightBrown,
+      onSecondaryContainer: AppColors.semiDarkPrimaryColor,
+      tertiary: AppColors.widgetLightBrown,
+      onTertiary: AppColors.darkPrimaryColor,
+      tertiaryContainer: AppColors.accentLightColor,
+      onTertiaryContainer: AppColors.darkPrimaryColor,
+      error: AppColors.redAlertv1,
+      onError: Colors.white,
+      errorContainer: AppColors.redAlertv4,
+      onErrorContainer: Colors.white,
+      surface: AppColors.secondaryColor,
+      onSurface: AppColors.darkPrimaryColor,
+    );
+
     return ThemeData(
       useMaterial3: true,
-
       fontFamily: AppTextStyles.fontFamily,
+      scaffoldBackgroundColor: colorScheme.surface,
+      colorScheme: colorScheme,
 
-      scaffoldBackgroundColor: AppColors.secondaryColor,
-
-      colorScheme: const ColorScheme.light(
-        primary: AppColors.primaryColor,
-        secondary: AppColors.accentDarkColor,
-        surface: Colors.white,
+      // ===== BOTONES =====
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          shape: RoundedRectangleBorder(borderRadius: AppRadius.defaultRadius),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        ),
       ),
 
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.secondaryColor,
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primary, width: 2),
+          shape: RoundedRectangleBorder(borderRadius: AppRadius.defaultRadius),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        ),
+      ),
+
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: colorScheme.primary),
+      ),
+
+      // ===== APPBAR =====
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.primaryContainer,
+        foregroundColor: colorScheme.onPrimaryContainer,
         elevation: 0,
         centerTitle: false,
         titleTextStyle: AppTextStyles.appBarTitle,
       ),
 
+      // ===== TARJETAS =====
       cardTheme: CardThemeData(
         elevation: 4,
         color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: AppRadius.defaultRadius),
       ),
 
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          foregroundColor: AppColors.secondaryColor,
-          shape: RoundedRectangleBorder(borderRadius: AppRadius.defaultRadius),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-        ),
-      ),
-
+      // ===== INPUTS =====
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: colorScheme.surface,
         border: OutlineInputBorder(
           borderRadius: AppRadius.defaultRadius,
           borderSide: BorderSide.none,
         ),
       ),
 
+      // ===== TEXTOS =====
       textTheme: const TextTheme(
-        titleLarge: AppTextStyles.titleBrownText,
+        displayLarge: AppTextStyles.titleBrownTextv3,
+        headlineLarge: AppTextStyles.titleBrownTextv2,
+        headlineMedium: AppTextStyles.titleBrownText,
+        titleLarge: AppTextStyles.appBarTitle,
+        titleMedium: AppTextStyles.titleBrownTextv0,
+        titleSmall: AppTextStyles.titleWhiteText,
         bodyLarge: AppTextStyles.bodyDarkBrownText,
-        bodyMedium: AppTextStyles.bodyDarkBrownText,
+        bodyMedium: AppTextStyles.bodyBrownText,
+        bodySmall: AppTextStyles.verMasBodyText,
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../widgets/expandable_category_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import '../../theme/app_theme.dart';
+import '../../widgets/expandable_category_screen.dart';
+import '../../theme/app_theme.dart'; // Solo para AppRadius (constante)
 import 'package:nursia_app/screens/escalas/neurologicas/glasgow_screen.dart';
 
 class NeurologicasScreen extends StatelessWidget {
@@ -28,7 +28,6 @@ class _NeurologicasLayout extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            // 👇 AHORA PASAMOS EL TÍTULO Y EL ÍCONO
             _ScaleButton(
               onPressed: () {
                 Navigator.push(
@@ -39,22 +38,17 @@ class _NeurologicasLayout extends StatelessWidget {
               title: "Escala de Glasgow",
               icon: PhosphorIconsRegular.brain,
             ),
-
             const SizedBox(height: 20),
-
             _ScaleButton(
               onPressed: () {},
               title: "Escala de Ramsay",
-              icon: PhosphorIconsRegular.moon, // Ícono de luna para sedación
+              icon: PhosphorIconsRegular.moon,
             ),
-
             const SizedBox(height: 20),
-
             _ScaleButton(
               onPressed: () {},
               title: "Escala RASS",
-              icon: PhosphorIconsRegular
-                  .gauge, // Ícono de actividad para valoración
+              icon: PhosphorIconsRegular.gauge,
             ),
           ],
         ),
@@ -65,7 +59,7 @@ class _NeurologicasLayout extends StatelessWidget {
 
 class _ScaleButton extends StatelessWidget {
   final String title;
-  final IconData icon; // 👈 Nuevo parámetro para el ícono
+  final IconData icon;
   final VoidCallback onPressed;
 
   const _ScaleButton({
@@ -76,37 +70,39 @@ class _ScaleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return SizedBox(
       width: double.infinity,
       height: 60,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          // Añadimos padding interno para que el ícono no pegue al borde
           padding: const EdgeInsets.symmetric(horizontal: 20),
           shape: const RoundedRectangleBorder(
             borderRadius: AppRadius.defaultRadius,
           ),
         ),
         child: Row(
-          // 👈 Usamos Row para alinear Ícono + Espacio + Texto
           children: [
             Icon(
               icon,
-              size: 35, // Tamaño para que resalte
-              color: AppColors.secondaryColor, // Color crema/blanco de tu app
+              size: 35,
+              color: colorScheme.onPrimary, // antes AppColors.secondaryColor
             ),
-
-            const SizedBox(width: 20), // Espacio entre ícono y texto
-
+            const SizedBox(width: 20),
             Expanded(
               child: Text(
                 title,
-                style: AppTextStyles.titleWhiteText.copyWith(fontSize: 20),
+                style: textTheme.titleSmall?.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onPrimary,
+                ),
               ),
             ),
-
-            // Opcional: Una flechita al final hace que parezca un menú navegable
             const Icon(
               PhosphorIconsBold.caretRight,
               color: Colors.white54,

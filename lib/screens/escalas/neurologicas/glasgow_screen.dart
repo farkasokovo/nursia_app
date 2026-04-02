@@ -3,12 +3,11 @@ import 'package:nursia_app/repositories/repositorio_escalas.dart';
 import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/app_theme.dart'; // Solo para colores de resultado (greenAlert, etc.)
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
 
-// 👇 Wrapper para distinguir "sin selección" de "No valorable"
 class ScaleValue {
   final int? score;
   const ScaleValue(this.score);
@@ -56,17 +55,14 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // 👈 Column en lugar de Stack
       children: [
         Expanded(
-          // 👈 El scroll ocupa todo el espacio disponible
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-
                   ScaleParameterSelector(
                     title: "Respuesta ocular",
                     onChanged: (int? value) =>
@@ -79,9 +75,7 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
                       ScaleOption(score: null, label: "No valorable"),
                     ],
                   ),
-
                   const SizedBox(height: 20),
-
                   ScaleParameterSelector(
                     title: "Respuesta verbal",
                     onChanged: (int? value) =>
@@ -95,9 +89,7 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
                       ScaleOption(score: null, label: "No valorable"),
                     ],
                   ),
-
                   const SizedBox(height: 20),
-
                   ScaleParameterSelector(
                     title: "Respuesta motora",
                     onChanged: (int? value) =>
@@ -115,14 +107,12 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
                       ScaleOption(score: null, label: "No valorable"),
                     ],
                   ),
-
                   const SizedBox(height: 20),
                 ],
               ),
             ),
           ),
         ),
-
         ScaleResultFooter(
           visible: _todoCompleto,
           resultado: resultado,
@@ -138,24 +128,25 @@ class _GlasgowInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: AppColors.secondaryColor,
+            color: colorScheme.secondary, // antes AppColors.secondaryColor
             borderRadius: BorderRadius.circular(20),
           ),
           padding: const EdgeInsets.all(20),
           child: FutureBuilder(
             future: RepositorioEscalas.getScale("glasgow"),
-
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               }
-
               return EstructuraVerMasScreen(info: snapshot.data!);
             },
           ),
@@ -165,15 +156,12 @@ class _GlasgowInfo extends StatelessWidget {
   }
 }
 
-// COLORES DEPENDIENDO DE LOS RESULTADOS OBTENIDOS EN LA ESCALA
-
+// Colores específicos de la escala (no dependen del tema)
 Color _glasgowColor(String resultado) {
   final match = RegExp(r'^\d+').firstMatch(resultado);
-
   if (match == null) {
-    return AppColors.withoutAlert; // NV u otro texto
+    return AppColors.withoutAlert;
   }
-
   final score = int.parse(match.group(0)!);
   if (score == 15) return AppColors.greenAlert;
   if (score >= 13) return AppColors.withoutAlert;

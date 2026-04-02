@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'home_dashboard.dart';
 import 'placeholder_screen.dart';
@@ -28,45 +27,65 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return DefaultTabController(
       length: 5,
       initialIndex: 2,
       child: Scaffold(
         extendBody: true,
-        appBar: _buildAppBar(),
+        appBar: _buildAppBar(theme, colorScheme, textTheme),
         body: Stack(
           children: [
             const TabBarView(children: _tabViews),
-            Positioned(top: 15, left: 15, right: 15, child: _buildTabBar()),
+            Positioned(
+              top: 15,
+              left: 15,
+              right: 15,
+              child: _buildTabBar(theme, colorScheme, textTheme),
+            ),
           ],
         ),
       ),
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(
+    ThemeData theme,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
     return AppBar(
       title: Text(
         'Nursia',
-        style: AppTextStyles.appBarTitle.copyWith(fontSize: 25),
+        style: textTheme.titleLarge?.copyWith(
+          fontSize: 25,
+          color: colorScheme.onPrimaryContainer,
+        ),
       ),
-      backgroundColor: AppColors.darkPrimaryColor,
+      backgroundColor: colorScheme.primaryContainer,
       elevation: 0,
       leading: IconButton(
-        icon: const PhosphorIcon(
+        icon: PhosphorIcon(
           PhosphorIconsBold.list,
-          color: AppColors.secondaryColor,
+          color: colorScheme.onPrimaryContainer,
         ),
         onPressed: () {},
       ),
     );
   }
 
-  Widget _buildTabBar() {
+  Widget _buildTabBar(
+    ThemeData theme,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
     return Container(
       height: 65,
       decoration: BoxDecoration(
-        color: AppColors.darkPrimaryColor,
+        color: colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -81,15 +100,14 @@ class HomeScreen extends StatelessWidget {
         tabAlignment: TabAlignment.center,
         labelPadding: const EdgeInsets.symmetric(horizontal: 20),
         dividerColor: Colors.transparent,
-        indicatorColor: AppColors.secondaryColor,
-        labelColor: AppColors.secondaryColor,
-        unselectedLabelColor: AppColors.accentLightColor,
-        labelStyle: const TextStyle(
+        indicatorColor: colorScheme.onPrimaryContainer,
+        labelColor: colorScheme.onPrimaryContainer,
+        unselectedLabelColor: colorScheme.tertiaryContainer,
+        labelStyle: textTheme.titleMedium?.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: AppColors.lightSecondaryColor,
         ),
-        unselectedLabelStyle: const TextStyle(
+        unselectedLabelStyle: textTheme.titleSmall?.copyWith(
           fontSize: 15,
           fontWeight: FontWeight.w600,
         ),
