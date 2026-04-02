@@ -175,12 +175,8 @@ Color _glasgowColor(String resultado) {
   }
 
   final score = int.parse(match.group(0)!);
-
   if (score == 15) return AppColors.greenAlert;
-
   if (score >= 13) return AppColors.withoutAlert;
-
   if (score >= 9) return AppColors.redAlertv1;
-
   return AppColors.redAlertv3;
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../widgets/expandable_category_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+
+import '../../widgets/expandable_category_screen.dart';
 import '../../theme/app_theme.dart';
 
 class CalculadoraDosis extends StatelessWidget {
@@ -26,12 +27,33 @@ class _CalculadoraDosisLayout extends StatefulWidget {
       _CalculadoraDosisLayoutState();
 }
 
-class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout> {
+class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
   final dosisController = TextEditingController();
   final dilucionController = TextEditingController();
   final presentacionController = TextEditingController();
 
   double? resultado;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+
+    dosisController.dispose();
+    dilucionController.dispose();
+    presentacionController.dispose();
+
+    super.dispose();
+  }
 
   void calcular() {
     final dosis = double.tryParse(dosisController.text);
@@ -61,6 +83,46 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: AppColors.darkPrimaryColor,
+          child: TabBar(
+            tabAlignment: TabAlignment.fill,
+            labelPadding: EdgeInsets.symmetric(horizontal: 20),
+            dividerColor: Colors.transparent,
+            indicatorColor: AppColors.secondaryColor,
+            labelColor: AppColors.secondaryColor,
+            unselectedLabelColor: AppColors.accentLightColor,
+            labelStyle: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightSecondaryColor,
+            ),
+            unselectedLabelStyle: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+            controller: _tabController,
+
+            tabs: const [
+              Tab(text: "Cálculo"),
+              Tab(text: "Información"),
+            ],
+          ),
+        ),
+
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [_buildCalculadora(), _buildInfo()],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCalculadora() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
 
@@ -119,12 +181,10 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout> {
                     style: OutlinedButton.styleFrom(
                       overlayColor: AppColors.darkPrimaryColor,
                       minimumSize: const Size(double.infinity, 60),
-
                       side: const BorderSide(
                         color: AppColors.darkPrimaryColor,
                         width: 2,
                       ),
-
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
                       ),
@@ -180,6 +240,25 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout> {
       ),
     );
   }
+
+  Widget _buildInfo() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+
+      child: Text(
+        "Esta calculadora permite determinar la cantidad "
+        "exacta de medicamento en mililitros que debe "
+        "administrarse al paciente con base en la dosis "
+        "indicada, el volumen del diluyente y la "
+        "presentación disponible del fármaco.\n\n"
+        "Fórmula aplicada:\n"
+        "(Dosis indicada × Diluyente) ÷ Presentación.\n\n"
+        "Siempre verificar unidades antes de administrar.",
+
+        style: AppTextStyles.bodyBrownText,
+      ),
+    );
+  }
 }
 
 class _DoseInputField extends StatelessWidget {
@@ -195,47 +274,54 @@ class _DoseInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start, // Alinea la leyenda a la izquierda
-        children: [
-          // LEYENDA SUPERIOR
-          Padding(
-            padding: const EdgeInsets.only(left: 8, bottom: 8),
-            child: Text(label, style: AppTextStyles.titleBrownTextv0),
-          ),
-          // CAMPO DE TEXTO
-          SizedBox(
-            height: 50,
-            child: TextField(
-              controller: controller,
-              keyboardType: const TextInputType.numberWithOptions(
-                decimal: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8, bottom: 8),
+
+          child: Text(label, style: AppTextStyles.titleBrownTextv0),
+        ),
+
+        SizedBox(
+          height: 50,
+
+          child: TextField(
+            controller: controller,
+
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+
+            textAlign: TextAlign.center,
+
+            style: AppTextStyles.titleBrownText.copyWith(fontSize: 25),
+
+            enableInteractiveSelection: false,
+
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+
+              LengthLimitingTextInputFormatter(maxLength),
+            ],
+
+            decoration: InputDecoration(
+              hintText: label,
+
+              hintStyle: AppTextStyles.bodyBrownText,
+
+              filled: true,
+
+              fillColor: AppColors.secondaryColor,
+
+              border: OutlineInputBorder(
+                borderRadius: AppRadius.defaultRadius,
+                borderSide: BorderSide.none,
               ),
-              textAlign: TextAlign.center,
-              textAlignVertical: TextAlignVertical.center,
-              style: AppTextStyles.titleBrownText.copyWith(fontSize: 25),
-              enableInteractiveSelection: false,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                LengthLimitingTextInputFormatter(maxLength),
-              ],
-              decoration: InputDecoration(
-                hintText: label,
-                hintStyle: AppTextStyles.bodyBrownText,
-                filled: true,
-                fillColor: AppColors.secondaryColor,
-                border: OutlineInputBorder(
-                  borderRadius: AppRadius.defaultRadius,
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
-              ),
+
+              contentPadding: const EdgeInsets.symmetric(vertical: 0),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

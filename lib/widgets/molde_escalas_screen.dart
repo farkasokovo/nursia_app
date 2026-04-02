@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class MoldeEscalasScreen extends StatelessWidget {
   final String heroTag;
@@ -24,26 +25,53 @@ class MoldeEscalasScreen extends StatelessWidget {
       length: 2,
 
       child: Scaffold(
-        backgroundColor: AppColors.widgetLightBrown,
+        backgroundColor: Colors.transparent,
 
         body: Column(
           children: [
-            const SizedBox(height: 40),
-
             Hero(
               tag: heroTag,
 
-              child: Row(
-                children: [
-                  const SizedBox(width: 20),
-                  Icon(icon, size: 40, color: AppColors.darkPrimaryColor),
-                  const SizedBox(width: 20),
+              child: Material(
+                color: AppColors.darkPrimaryColor,
 
-                  Text(title, style: AppTextStyles.titleBrownText),
-                ],
+                child: SafeArea(
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: PhosphorIcon(
+                          PhosphorIconsBold.caretLeft,
+                          color: AppColors.secondaryColor,
+                          size: 32,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+
+                      const SizedBox(width: 8),
+
+                      PhosphorIcon(
+                        icon,
+                        size: 28,
+                        color: AppColors.secondaryColor,
+                      ),
+
+                      const SizedBox(width: 10),
+
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          color: AppColors.secondaryColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-            const SizedBox(height: 10),
 
             Container(
               width: double.infinity,
@@ -73,7 +101,12 @@ class MoldeEscalasScreen extends StatelessWidget {
               ),
             ),
 
-            Expanded(child: TabBarView(children: [scaleTab, infoTab])),
+            Expanded(
+              child: Container(
+                color: AppColors.widgetLightBrown,
+                child: TabBarView(children: [scaleTab, infoTab]),
+              ),
+            ),
           ],
         ),
       ),
