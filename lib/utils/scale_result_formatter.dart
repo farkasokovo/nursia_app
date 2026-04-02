@@ -5,7 +5,7 @@ class ScaleResultFormatter {
     if (!hayNV) {
       final total = parameters.values.whereType<int>().reduce((a, b) => a + b);
 
-      return total.toString();
+      return "$total pts";
     }
 
     return parameters.entries

@@ -21,6 +21,8 @@ class AppColors {
   static const Color redAlertv2 = Color(0xff8D5458);
   static const Color redAlertv3 = Color(0xff7E4B4F);
   static const Color redAlertv4 = Color(0xff6F4346);
+
+  static const Color semiDarkPrimaryColor = Color(0xff7E6754);
 }
 
 // FUENTES
@@ -78,10 +80,17 @@ class AppTextStyles {
   );
 
   static const TextStyle bodyDarkBrownText = TextStyle(
-    color: AppColors.darkPrimaryColor,
+    color: AppColors.semiDarkPrimaryColor,
     fontSize: 18,
     fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle verMasBodyText = TextStyle(
+    color: AppColors.semiDarkPrimaryColor,
+    fontSize: 15,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w400,
   );
 
   static const TextStyle bodyBrownText = TextStyle(

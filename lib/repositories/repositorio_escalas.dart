@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import '../models/scale_info_model.dart';
+import '../models/ver_mas_screen.dart';
 
-class ScaleInfoRepository {
+class RepositorioEscalas {
   static Map<String, dynamic>? _cache;
 
   static Future<void> loadData() async {
@@ -17,11 +17,11 @@ class ScaleInfoRepository {
     _cache = json.decode(jsonString);
   }
 
-  static Future<ScaleInfoModel> getScale(String scaleId) async {
+  static Future<VerMasScreen> getScale(String scaleId) async {
     await loadData();
 
     final scaleJson = _cache![scaleId];
 
-    return ScaleInfoModel.fromJson(scaleJson);
+    return VerMasScreen.fromJson(scaleJson);
   }
 }

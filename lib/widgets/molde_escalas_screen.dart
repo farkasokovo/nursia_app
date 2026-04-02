@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
-class ScaleScreenTemplate extends StatelessWidget {
+class MoldeEscalasScreen extends StatelessWidget {
   final String heroTag;
   final String title;
   final IconData icon;
@@ -9,7 +9,7 @@ class ScaleScreenTemplate extends StatelessWidget {
   final Widget scaleTab;
   final Widget infoTab;
 
-  const ScaleScreenTemplate({
+  const MoldeEscalasScreen({
     super.key,
     required this.heroTag,
     required this.title,
@@ -61,7 +61,10 @@ class ScaleScreenTemplate extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: AppColors.lightSecondaryColor,
                 ),
-                unselectedLabelStyle: TextStyle(fontSize: 15),
+                unselectedLabelStyle: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
                 tabs: [
                   Tab(text: "Escala"),
 

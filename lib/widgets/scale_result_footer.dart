@@ -19,16 +19,24 @@ class ScaleResultFooter extends StatelessWidget {
     if (!visible)
       return const SizedBox.shrink(); // 👈 Si no es visible, no ocupa espacio
 
-    final esNumero = int.tryParse(resultado) != null; // 👈
+    final esNumero = RegExp(r'^\d+').hasMatch(resultado);
     final colorResultado = colorResolver?.call(resultado);
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.secondaryColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        boxShadow: [
+          // 👈 Esto es todo lo nuevo
+          BoxShadow(
+            color: AppColors.darkPrimaryColor.withValues(alpha: 0.15),
+            blurRadius: 10,
+            offset: const Offset(0, -4), // 👈 Negativo = sombra hacia arriba
+          ),
+        ],
       ),
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
       child: Column(

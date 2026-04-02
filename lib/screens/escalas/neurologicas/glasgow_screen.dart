@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/repositories/scale_info_repository.dart';
-import 'package:nursia_app/widgets/scale_info_view.dart';
+import 'package:nursia_app/repositories/repositorio_escalas.dart';
+import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import '../../../widgets/scale_parameter_selector.dart';
 import '../../../theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import '../../../widgets/scale_screen_template.dart';
+import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
 
 // 👇 Wrapper para distinguir "sin selección" de "No valorable"
@@ -19,7 +19,7 @@ class GlasgowScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaleScreenTemplate(
+    return MoldeEscalasScreen(
       heroTag: "glasgow",
       title: "Escala de Glasgow",
       icon: PhosphorIconsFill.brain,
@@ -149,14 +149,14 @@ class _GlasgowInfo extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(20),
           child: FutureBuilder(
-            future: ScaleInfoRepository.getScale("glasgow"),
+            future: RepositorioEscalas.getScale("glasgow"),
 
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              return ScaleInfoView(info: snapshot.data!);
+              return EstructuraVerMasScreen(info: snapshot.data!);
             },
           ),
         ),
@@ -168,11 +168,19 @@ class _GlasgowInfo extends StatelessWidget {
 // COLORES DEPENDIENDO DE LOS RESULTADOS OBTENIDOS EN LA ESCALA
 
 Color _glasgowColor(String resultado) {
-  final score = int.tryParse(resultado);
-  if (score == null) return AppColors.withoutAlert; // NV — gris neutro
-  if (score == 15) return AppColors.greenAlert; // Leve — verde
-  if (score >= 13) return AppColors.withoutAlert; // Leve — verde
-  if (score >= 9) return AppColors.redAlertv1; // Moderado — amarillo
-  if (score >= 3) return AppColors.redAlertv3;
-  return AppColors.redAlertv3; // Grave — rojo
+  final match = RegExp(r'^\d+').firstMatch(resultado);
+
+  if (match == null) {
+    return AppColors.withoutAlert; // NV u otro texto
+  }
+
+  final score = int.parse(match.group(0)!);
+
+  if (score == 15) return AppColors.greenAlert;
+
+  if (score >= 13) return AppColors.withoutAlert;
+
+  if (score >= 9) return AppColors.redAlertv1;
+
+  return AppColors.redAlertv3;
 }

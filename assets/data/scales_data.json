@@ -3,44 +3,46 @@
     "name": "Escala de Coma de Glasgow",
 
     "description":
-      "La Escala de Coma de Glasgow es una herramienta clínica estandarizada utilizada para evaluar el nivel de conciencia mediante la observación de la respuesta ocular, verbal y motora del paciente.",
+      "La Escala de Coma de Glasgow es un instrumento neurológico validado que valora el estado de conciencia mediante la observación de tres criterios clínicos: apertura ocular, respuesta verbal y respuesta motora.\nCada subescala se puntúa independientemente y se suma para obtener un puntaje total de 3 a 15, donde 15 indica conciencia normal.",
 
     "when_to_use": [
-      "Valoración inicial del paciente con traumatismo craneoencefálico",
-      "Evaluación del estado de conciencia en urgencias",
-      "Seguimiento neurológico hospitalario",
-      "Monitorización en unidades de cuidados intensivos"
+      "En pacientes con traumatismo craneoencefálico o daño cerebral para clasificación inicial y monitoreo continuo.",
+      "Durante emergencias prehospitalarias, en UCI neurológica o postquirúrgica para detectar cambios en la conciencia."
     ],
 
     "components": [
-      "Respuesta ocular (1–4 puntos)",
-      "Respuesta verbal (1–5 puntos)",
-      "Respuesta motora (1–6 puntos)"
+      "Respuesta ocular (1-4 puntos):",
+      "Respuesta verbal (1-5 puntos):",
+      "Respuesta motora (1-6 puntos):"
     ],
 
     "interpretation": [
-      "13–15 puntos: lesión cerebral leve",
-      "9–12 puntos: lesión cerebral moderada",
-      "3–8 puntos: lesión cerebral grave"
+      "13-15: Lesión leve, conciencia preservada.",
+      "9-12: Lesión moderada, requiere vigilancia estrecha.",
+      "<9: Lesión grave, indica coma y urgencia de intervención; <9 puntúa gravedad, 3 coma profundo."
     ],
 
     "limitations": [
-      "Paciente intubado (respuesta verbal no valorable)",
-      "Sedación farmacológica",
-      "Bloqueo neuromuscular",
-      "Edema facial severo"
+      "Edema palpebral impide evaluar ojos; intubación o afasia afecta verbal; sedantes/relajantes alteran respuestas.",
+      "Inconsistencias interobservador si no hay entrenamiento; puede sobrestimar o subestimar gravedad sin práctica continua.",
+      "No evalúa reflejos del tronco encefálico ni respiración; menos precisa en niños o intubados."
     ],
 
     "clinical_notes": [
-      "Cada componente debe reportarse individualmente (ejemplo: E3V4M5)",
-      "Evitar interpretar el puntaje total si un componente no es valorable",
-      "Un puntaje ≤8 se asocia con mayor riesgo de compromiso de la vía aérea"
+      "Aplicar en ambiente tranquilo, con higiene de manos y estímulos dolorosos centralizados (esternón, uñas); usar órdenes simples.",
+      "Entrenamiento continuo mejora fiabilidad; comunicar cambios al médico y registrar en plan de cuidados.",
+      "Mejor respuesta por subescala; evita supraorbitaria para dolor."
     ],
 
     "references": [
-      "Teasdale, G., & Jennett, B. (1974). Assessment of coma and impaired consciousness. The Lancet.",
-      "National Institute for Health and Care Excellence (NICE). Head injury: assessment and early management.",
-      "Munakomi, S., Margetis, K., & Iverson, L. (2025). Glasgow Coma Scale. StatPearls Publishing."
-    ]
+  {
+    "text": "Muñana-Rodríguez, J. E., & Ramírez-Elías, A. (2014). Escala de coma de Glasgow: origen, análisis y uso apropiado. Enfermería Universitaria",
+    "url": "https://revista-enfermeria.unam.mx/ojs/index.php/enfermeriauniversitaria/article/view/188"
+  },
+  {
+    "text": "Asociación de Gestión de Atención Personalizada de la Comunidad Papps. (2011). Medición de signos neurológicos (Escala de Glasgow)",
+    "url": "http://www.agapap.org/druagapap/system/files/EscalaGlasgow.pdf"
+  }
+]
   }
 }
