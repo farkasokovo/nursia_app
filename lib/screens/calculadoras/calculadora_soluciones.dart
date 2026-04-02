@@ -1,20 +1,59 @@
+// lib/screens/calculadoras/calculadora_soluciones.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-
 import '../../widgets/expandable_category_screen.dart';
-import '../../theme/app_theme.dart'; // solo para AppRadius (constante)
+import '../../widgets/tabbed_content.dart';
+import '../../theme/app_theme.dart';
 
 class CalculadoraSoluciones extends StatelessWidget {
   const CalculadoraSoluciones({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const ExpandableCategoryScreen(
+    return ExpandableCategoryScreen(
       heroTag: "soluciones",
       title: "Soluciones glucosadas",
       icon: PhosphorIconsFill.drop,
-      child: _CalculadoraSolucionesLayout(),
+      child: TabbedContent(
+        tabs: const [
+          Tab(text: "Cálculo"),
+          Tab(text: "Información"),
+        ],
+        tabViews: [const _CalculadoraSolucionesLayout(), const _InfoTab()],
+      ),
+    );
+  }
+}
+
+class _InfoTab extends StatelessWidget {
+  const _InfoTab();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: colorScheme.secondary,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Text(
+          "Esta calculadora permite ajustar concentraciones de soluciones glucosadas.\n\n"
+          "• Si la solución disponible tiene mayor concentración que la indicada, se diluye con agua estéril.\n"
+          "• Si la concentración disponible es menor, se enriquece con glucosa al 50%.\n\n"
+          "Siempre verificar la compatibilidad y la osmolaridad final antes de administrar.",
+          style: textTheme.bodyMedium?.copyWith(
+            color: colorScheme.onSecondaryContainer,
+          ),
+        ),
+      ),
     );
   }
 }

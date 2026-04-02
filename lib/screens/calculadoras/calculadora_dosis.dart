@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../widgets/expandable_category_screen.dart';
-import '../../theme/app_theme.dart'; // solo para AppRadius (constante)
+import '../../widgets/tabbed_content.dart'; // 👈 IMPORTANTE: importa el nuevo widget
+import '../../theme/app_theme.dart'; // solo para AppRadius
 
 class CalculadoraDosis extends StatelessWidget {
   const CalculadoraDosis({super.key});
@@ -14,43 +15,33 @@ class CalculadoraDosis extends StatelessWidget {
       heroTag: "dosis",
       title: "Calculadora de dosis",
       icon: PhosphorIconsFill.syringe,
-      child: const _CalculadoraDosisLayout(),
+      child: TabbedContent(
+        tabs: const [
+          Tab(text: "Cálculo"),
+          Tab(text: "Información"),
+        ],
+        tabViews: [
+          const _CalculoDosisLayout(), // contenido del cálculo
+          const _InfoDosisTab(), // contenido de información
+        ],
+      ),
     );
   }
 }
 
-class _CalculadoraDosisLayout extends StatefulWidget {
-  const _CalculadoraDosisLayout();
+// ================== PESTAÑA DE CÁLCULO ==================
+class _CalculoDosisLayout extends StatefulWidget {
+  const _CalculoDosisLayout();
 
   @override
-  State<_CalculadoraDosisLayout> createState() =>
-      _CalculadoraDosisLayoutState();
+  State<_CalculoDosisLayout> createState() => _CalculoDosisLayoutState();
 }
 
-class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
+class _CalculoDosisLayoutState extends State<_CalculoDosisLayout> {
   final dosisController = TextEditingController();
   final dilucionController = TextEditingController();
   final presentacionController = TextEditingController();
-
   double? resultado;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    dosisController.dispose();
-    dilucionController.dispose();
-    presentacionController.dispose();
-    super.dispose();
-  }
 
   void calcular() {
     final dosis = double.tryParse(dosisController.text);
@@ -83,47 +74,6 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Column(
-      children: [
-        Container(
-          color: colorScheme.primaryContainer, // darkPrimaryColor
-          child: TabBar(
-            controller: _tabController,
-            tabAlignment: TabAlignment.fill,
-            labelPadding: const EdgeInsets.symmetric(horizontal: 20),
-            dividerColor: Colors.transparent,
-            indicatorColor: colorScheme.onPrimaryContainer,
-            labelColor: colorScheme.onPrimaryContainer,
-            unselectedLabelColor: colorScheme.tertiaryContainer,
-            labelStyle: textTheme.titleMedium?.copyWith(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-            unselectedLabelStyle: textTheme.titleSmall?.copyWith(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-            ),
-            tabs: const [
-              Tab(text: "Cálculo"),
-              Tab(text: "Información"),
-            ],
-          ),
-        ),
-        Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [_buildCalculadora(), _buildInfo()],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCalculadora() {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
       child: SingleChildScrollView(
@@ -151,6 +101,7 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
               children: [
                 Expanded(
                   child: ElevatedButton(
+                    onPressed: calcular,
                     style: ElevatedButton.styleFrom(
                       overlayColor: colorScheme.primaryContainer,
                       minimumSize: const Size(double.infinity, 60),
@@ -158,7 +109,6 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
                         borderRadius: AppRadius.defaultRadius,
                       ),
                     ),
-                    onPressed: calcular,
                     child: Text(
                       "Calcular",
                       style: textTheme.titleSmall?.copyWith(
@@ -172,6 +122,7 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
                 const SizedBox(width: 20),
                 Expanded(
                   child: OutlinedButton(
+                    onPressed: limpiar,
                     style: OutlinedButton.styleFrom(
                       overlayColor: colorScheme.primaryContainer,
                       minimumSize: const Size(double.infinity, 60),
@@ -183,7 +134,6 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
                         borderRadius: AppRadius.defaultRadius,
                       ),
                     ),
-                    onPressed: limpiar,
                     child: Text(
                       "Limpiar",
                       style: textTheme.titleSmall?.copyWith(
@@ -236,29 +186,46 @@ class _CalculadoraDosisLayoutState extends State<_CalculadoraDosisLayout>
       ),
     );
   }
+}
 
-  Widget _buildInfo() {
+// ================== PESTAÑA DE INFORMACIÓN ==================
+class _InfoDosisTab extends StatelessWidget {
+  const _InfoDosisTab();
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
-      child: Text(
-        "Esta calculadora permite determinar la cantidad "
-        "exacta de medicamento en mililitros que debe "
-        "administrarse al paciente con base en la dosis "
-        "indicada, el volumen del diluyente y la "
-        "presentación disponible del fármaco.\n\n"
-        "Fórmula aplicada:\n"
-        "(Dosis indicada × Diluyente) ÷ Presentación.\n\n"
-        "Siempre verificar unidades antes de administrar.",
-        style: textTheme.bodySmall,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: colorScheme.secondary,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Text(
+          "Esta calculadora permite determinar la cantidad "
+          "exacta de medicamento en mililitros que debe "
+          "administrarse al paciente con base en la dosis "
+          "indicada, el volumen del diluyente y la "
+          "presentación disponible del fármaco.\n\n"
+          "Fórmula aplicada:\n"
+          "(Dosis indicada × Diluyente) ÷ Presentación.\n\n"
+          "Siempre verificar unidades antes de administrar.",
+          style: textTheme.bodyMedium?.copyWith(
+            color: colorScheme.onSecondaryContainer,
+          ),
+        ),
       ),
     );
   }
 }
 
+// ================== CAMPO DE ENTRADA REUTILIZABLE ==================
 class _DoseInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
@@ -294,14 +261,13 @@ class _DoseInputField extends StatelessWidget {
           height: 50,
           child: TextField(
             controller: controller,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
             textAlign: TextAlign.center,
             style: textTheme.titleMedium?.copyWith(
               color: colorScheme.primaryContainer,
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
-            enableInteractiveSelection: false,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
               LengthLimitingTextInputFormatter(maxLength),
