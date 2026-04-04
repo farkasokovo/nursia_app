@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
       length: 5,
       initialIndex: 2,
       child: Scaffold(
+        backgroundColor: colorScheme.secondary,
         extendBody: true,
         appBar: _buildAppBar(theme, colorScheme, textTheme),
         body: Stack(

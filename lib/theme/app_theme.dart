@@ -205,7 +205,7 @@ class AppTheme {
         headlineLarge: AppTextStyles.titleBrownTextv2,
         headlineMedium: AppTextStyles.titleBrownText,
         titleLarge: AppTextStyles.appBarTitle,
-        titleMedium: AppTextStyles.titleBrownTextv0,
+        titleMedium: AppTextStyles.titleBrownText,
         titleSmall: AppTextStyles.titleWhiteText,
         bodyLarge: AppTextStyles.bodyDarkBrownText,
         bodyMedium: AppTextStyles.bodyBrownText,

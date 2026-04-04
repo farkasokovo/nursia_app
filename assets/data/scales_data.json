@@ -11,9 +11,9 @@
     ],
 
     "components": [
-      "Respuesta ocular (1-4 puntos):",
-      "Respuesta verbal (1-5 puntos):",
-      "Respuesta motora (1-6 puntos):"
+      "Respuesta ocular (1-4 puntos)",
+      "Respuesta verbal (1-5 puntos)",
+      "Respuesta motora (1-6 puntos)"
     ],
 
     "interpretation": [

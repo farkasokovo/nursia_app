@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nursia_app/widgets/info_tab.dart';
+import 'package:nursia_app/widgets/numeric_input_field.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../widgets/expandable_category_screen.dart';
@@ -40,31 +40,38 @@ class _CalculoDosisLayout extends StatefulWidget {
 
 class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
     with AutomaticKeepAliveClientMixin {
-  // FIX: RegExp estático — se compila una sola vez, no en cada keystroke
-  static final _decimalRegex = RegExp(r'^\d*\.?\d*');
-
   final _dosisController = TextEditingController();
   final _dilucionController = TextEditingController();
   final _presentacionController = TextEditingController();
 
-  // FIX: ValueNotifier evita reconstruir todo el árbol al cambiar el resultado
+  // FIX: FocusNodes para soltar el teclado al navegar o calcular
+  final _dosisFocus = FocusNode();
+  final _dilucionFocus = FocusNode();
+  final _presentacionFocus = FocusNode();
+
   final _resultado = ValueNotifier<double?>(null);
 
-  // FIX: Mantiene el estado del tab al cambiar entre "Cálculo" e "Información"
   @override
   bool get wantKeepAlive => true;
 
   @override
   void dispose() {
-    // FIX: Libera controllers y notifier para evitar memory leaks
     _dosisController.dispose();
     _dilucionController.dispose();
     _presentacionController.dispose();
+    _dosisFocus.dispose();
+    _dilucionFocus.dispose();
+    _presentacionFocus.dispose();
     _resultado.dispose();
     super.dispose();
   }
 
   void _calcular() {
+    // Quita el foco de todos los campos al calcular
+    _dosisFocus.unfocus();
+    _dilucionFocus.unfocus();
+    _presentacionFocus.unfocus();
+
     final dosis = double.tryParse(_dosisController.text);
     final dilucion = double.tryParse(_dilucionController.text);
     final presentacion = double.tryParse(_presentacionController.text);
@@ -77,6 +84,22 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
       return;
     }
 
+    final calculo = (dosis * dilucion) / presentacion;
+
+    final parteEntera = calculo.toInt();
+    if (parteEntera >= 10000) {
+      _resultado.value = null;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'El resultado es demasiado grande. Revisa los valores ingresados.',
+          ),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+    _resultado.value = calculo;
     _resultado.value = (dosis * dilucion) / presentacion;
   }
 
@@ -89,35 +112,38 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // requerido por AutomaticKeepAliveClientMixin
+    super.build(context);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+      padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            _DoseInputField(
+            NumericInputField(
               label: "Dosis indicada (mg)",
               controller: _dosisController,
+              focusNode: _dosisFocus,
               maxLength: 4,
-              decimalRegex: _decimalRegex,
+              allowDecimal: true,
             ),
             const SizedBox(height: 20),
-            _DoseInputField(
+            NumericInputField(
               label: "Diluyente (ml)",
               controller: _dilucionController,
+              focusNode: _dilucionFocus,
               maxLength: 3,
-              decimalRegex: _decimalRegex,
+              allowDecimal: true,
             ),
             const SizedBox(height: 20),
-            _DoseInputField(
+            NumericInputField(
               label: "Presentación del fármaco (mg)",
               controller: _presentacionController,
+              focusNode: _presentacionFocus,
               maxLength: 4,
-              decimalRegex: _decimalRegex,
+              allowDecimal: true,
             ),
             const SizedBox(height: 20),
             Row(
@@ -170,13 +196,11 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
               ],
             ),
             const SizedBox(height: 20),
-            // FIX: Solo reconstruye el Container del resultado, no toda la pantalla
             ValueListenableBuilder<double?>(
               valueListenable: _resultado,
-              builder: (_, valor, _) {
+              builder: (_, valor, __) {
                 return Container(
                   width: double.infinity,
-                  // FIX: ConstrainedBox colapsado en un solo Container
                   constraints: const BoxConstraints(minHeight: 180),
                   decoration: BoxDecoration(
                     color: colorScheme.secondary,
@@ -212,79 +236,6 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
           ],
         ),
       ),
-    );
-  }
-}
-
-// ================== CAMPO DE ENTRADA REUTILIZABLE ==================
-class _DoseInputField extends StatelessWidget {
-  final String label;
-  final TextEditingController controller;
-  final int maxLength;
-  final RegExp decimalRegex;
-
-  const _DoseInputField({
-    required this.label,
-    required this.controller,
-    required this.maxLength,
-    required this.decimalRegex,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8, bottom: 8),
-          child: Text(
-            label,
-            style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primaryContainer,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 50,
-          child: TextField(
-            controller: controller,
-            // FIX: const en el keyboardType
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            textAlign: TextAlign.center,
-            style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primaryContainer,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-            inputFormatters: [
-              // FIX: Usa el regex pre-compilado recibido como parámetro
-              FilteringTextInputFormatter.allow(decimalRegex),
-              LengthLimitingTextInputFormatter(maxLength),
-            ],
-            decoration: InputDecoration(
-              hintText: label,
-              hintStyle: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSecondaryContainer,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-              filled: true,
-              fillColor: colorScheme.secondary,
-              border: const OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 0),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

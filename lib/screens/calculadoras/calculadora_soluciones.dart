@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nursia_app/widgets/info_tab.dart';
+import 'package:nursia_app/widgets/numeric_input_field.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/tabbed_content.dart';
@@ -51,24 +51,34 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
   final _porcentajeIndicadoController = TextEditingController();
   final _porcentajeDisponibleController = TextEditingController();
 
-  // FIX: ValueNotifier evita reconstruir todo el árbol al cambiar el resultado
+  // FIX: FocusNodes para soltar el teclado al navegar o calcular
+  final _volumenFocus = FocusNode();
+  final _indicadoFocus = FocusNode();
+  final _disponibleFocus = FocusNode();
+
   final _resultado = ValueNotifier<_ResultadoSolucion?>(null);
 
-  // FIX: Mantiene el estado del tab al cambiar entre "Cálculo" e "Información"
   @override
   bool get wantKeepAlive => true;
 
   @override
   void dispose() {
-    // FIX: Libera controllers y notifier para evitar memory leaks
     _volumenController.dispose();
     _porcentajeIndicadoController.dispose();
     _porcentajeDisponibleController.dispose();
+    _volumenFocus.dispose();
+    _indicadoFocus.dispose();
+    _disponibleFocus.dispose();
     _resultado.dispose();
     super.dispose();
   }
 
   void _calcular() {
+    // Quita el foco de todos los campos al calcular
+    _volumenFocus.unfocus();
+    _indicadoFocus.unfocus();
+    _disponibleFocus.unfocus();
+
     final volumen = double.tryParse(_volumenController.text);
     final porcentajeIndicado = double.tryParse(
       _porcentajeIndicadoController.text,
@@ -81,6 +91,16 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
         porcentajeIndicado == null ||
         porcentajeDisponible == null) {
       _resultado.value = null;
+      return;
+    }
+
+    if (porcentajeIndicado > 50) {
+      _resultado.value = null;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("La concentración indicada no puede ser mayor a 50%"),
+        ),
+      );
       return;
     }
 
@@ -117,32 +137,38 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // requerido por AutomaticKeepAliveClientMixin
+    super.build(context);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+      padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            _SolutionInputField(
+            NumericInputField(
               label: "Cantidad indicada (ml)",
-              maxLength: 4,
               controller: _volumenController,
+              focusNode: _volumenFocus,
+              maxLength: 4,
+              allowDecimal: false,
             ),
             const SizedBox(height: 20),
-            _SolutionInputField(
-              label: "Glucosada indicada (%)",
-              maxLength: 2,
+            NumericInputField(
+              label: "Concentración indicada (%)",
               controller: _porcentajeIndicadoController,
+              focusNode: _indicadoFocus,
+              maxLength: 2,
+              allowDecimal: false,
             ),
             const SizedBox(height: 20),
-            _SolutionInputField(
-              label: "Glucosada disponible (%)",
-              maxLength: 2,
+            NumericInputField(
+              label: "Concentración disponible (%)",
               controller: _porcentajeDisponibleController,
+              focusNode: _disponibleFocus,
+              maxLength: 2,
+              allowDecimal: false,
             ),
             const SizedBox(height: 20),
             Row(
@@ -195,13 +221,11 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
               ],
             ),
             const SizedBox(height: 20),
-            // FIX: Solo reconstruye el Container del resultado, no toda la pantalla
             ValueListenableBuilder<_ResultadoSolucion?>(
               valueListenable: _resultado,
               builder: (_, valor, __) {
                 return Container(
                   width: double.infinity,
-                  // FIX: ConstrainedBox colapsado en un solo Container
                   constraints: const BoxConstraints(minHeight: 180),
                   decoration: BoxDecoration(
                     color: colorScheme.secondary,
@@ -244,76 +268,6 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
           ],
         ),
       ),
-    );
-  }
-}
-
-// ================== CAMPO DE ENTRADA REUTILIZABLE ==================
-class _SolutionInputField extends StatelessWidget {
-  final String label;
-  final int maxLength;
-  final TextEditingController controller;
-
-  const _SolutionInputField({
-    required this.label,
-    required this.maxLength,
-    required this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8, bottom: 8),
-          child: Text(
-            label,
-            style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primaryContainer,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 50,
-          child: TextField(
-            controller: controller,
-            keyboardType: const TextInputType.numberWithOptions(decimal: false),
-            textAlign: TextAlign.center,
-            style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primaryContainer,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-            enableInteractiveSelection: false,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(maxLength),
-            ],
-            decoration: InputDecoration(
-              hintText: label,
-              hintStyle: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSecondaryContainer,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-              filled: true,
-              fillColor: colorScheme.secondary,
-              border: const OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 0),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

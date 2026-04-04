@@ -1,0 +1,10 @@
+{
+  "escalas": [
+    {
+      "id": "glasgow",
+      "nombre": "Escala de Glasgow",
+      "categoria": "neurologicas",
+      "ruta": "glasgow_screen"
+    }
+  ]
+}

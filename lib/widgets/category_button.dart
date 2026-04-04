@@ -28,7 +28,11 @@ class CategoryButton extends StatelessWidget {
         child: InkWell(
           overlayColor: WidgetStateProperty.all(colorScheme.tertiaryContainer),
           borderRadius: BorderRadius.circular(18),
-          onTap: onTap,
+          onTap: () {
+            // 👇 Cerrar teclado antes de ejecutar la acción
+            FocusManager.instance.primaryFocus?.unfocus();
+            onTap?.call();
+          },
           child: Ink(
             decoration: BoxDecoration(
               color: colorScheme.secondaryContainer,

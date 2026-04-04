@@ -77,6 +77,22 @@ class ScaleResultFooter extends StatelessWidget {
                     ),
             ),
           ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                // Cambia el valor '20' por la redondez deseada
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Finalizar", style: textTheme.titleLarge),
+            ),
+          ),
         ],
       ),
     );

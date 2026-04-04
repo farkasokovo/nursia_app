@@ -52,15 +52,7 @@ class EstructuraVerMasScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 12),
-        Text(
-          titulo,
-          style: textTheme.titleMedium?.copyWith(
-            color: colorScheme.primaryContainer,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text(titulo, style: textTheme.titleMedium),
         const SizedBox(height: 6),
         ...contenido.map(
           (item) => Padding(
@@ -93,14 +85,7 @@ class EstructuraVerMasScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 12),
-        Text(
-          "Material de apoyo",
-          style: textTheme.titleMedium?.copyWith(
-            color: colorScheme.primaryContainer,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text("Material de apoyo", style: textTheme.titleMedium),
         const SizedBox(height: 6),
         ...refs.map(
           (ref) => Padding(

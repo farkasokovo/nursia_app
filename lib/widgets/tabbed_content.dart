@@ -56,7 +56,10 @@ class _TabbedContentState extends State<TabbedContent>
             indicatorColor: colorScheme.onPrimaryContainer,
             labelColor: colorScheme.onPrimaryContainer,
             unselectedLabelColor: colorScheme.tertiaryContainer,
-            labelStyle: textTheme.titleMedium,
+            labelStyle: textTheme.titleMedium?.copyWith(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
             unselectedLabelStyle: textTheme.titleSmall?.copyWith(
               fontSize: 15,
               fontWeight: FontWeight.w600,
