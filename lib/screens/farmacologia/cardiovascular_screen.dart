@@ -56,6 +56,20 @@ class _CardiovascularLayout extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(height: 20),
+            FarmaButton(
+              title: "Losartán",
+              icon: PhosphorIconsRegular.heartbeat,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Losartán"),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

@@ -1,8 +1,8 @@
 // lib/screens/escalas_screen.dart
 import 'package:flutter/material.dart';
 import 'package:nursia_app/screens/escalas/neurologicas_screen.dart';
-import 'package:nursia_app/screens/escalas/seguridad_screen.dart';
-import 'package:nursia_app/screens/escalas/valoracion_screen.dart';
+import 'package:nursia_app/screens/escalas/riesgos_screen.dart';
+import 'package:nursia_app/screens/escalas/valoracion_general_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/category_button.dart';
 import '../widgets/searchable_screen.dart';
@@ -79,60 +79,107 @@ class _EscalasScreenState extends State<EscalasScreen> {
         ],
       ),
       categoriesBuilder: (_) => SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: CategoryButton(
-                    title: "Neurológicas",
-                    icon: PhosphorIconsRegular.brain,
-                    heroTag: "neurologicas",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const NeurologicasScreen(),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: CategoryButton(
-                    title: "Seguridad\ndel paciente",
-                    icon: PhosphorIconsRegular.shieldCheck,
-                    heroTag: "seguridad",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const SeguridadScreen(),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: CategoryButton(
-                    title: "Valoración clínica",
-                    icon: PhosphorIconsRegular.stethoscope,
-                    heroTag: "valoracion",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ValoracionScreen(),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+        // Agregamos un efecto de rebote muy estético para iOS/Android
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          // Un padding abajo para que el último botón respire al hacer scroll
+          padding: const EdgeInsets.only(bottom: 32),
+          child: Column(
+            children: [
+              _buildRow(
+                leftTitle: "Consciencia\ny sedación",
+                leftIcon: PhosphorIconsRegular.brain,
+                leftHero: "neurologicas",
+                leftTarget: const NeurologicasScreen(),
+
+                rightTitle: "Valoración\nde riesgos",
+                rightIcon: PhosphorIconsRegular.shieldCheck,
+                rightHero: "riesgos",
+                rightTarget: const RiesgosScreen(),
+              ),
+              const SizedBox(height: 16),
+              _buildRow(
+                leftTitle: "Valoración\ngeneral",
+                leftIcon: PhosphorIconsRegular.stethoscope,
+                leftHero: "clinica",
+                leftTarget: const ValoracionGeneralScreen(),
+
+                rightTitle: "TRIAGE y\nEmergencias",
+                rightIcon: PhosphorIconsRegular.siren,
+                rightHero: "triage",
+                // Dejamos en null las pantallas que aún no creas
+                rightTarget: null,
+              ),
+              const SizedBox(height: 16),
+              _buildRow(
+                leftTitle: "Valoración\ndel dolor",
+                leftIcon: PhosphorIconsRegular.smileyNervous,
+                leftHero: "dolor",
+                leftTarget: null,
+
+                rightTitle: "Pediátricas\n/ Neonatales",
+                rightIcon: PhosphorIconsRegular.baby,
+                rightHero: "neonatales",
+                rightTarget: null,
+              ),
+              // 👇 AQUÍ ABAJO PUEDES SEGUIR AGREGANDO FILAS CUANDO QUIERAS
+              // const SizedBox(height: 16),
+              // _buildRow(...),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  /// Helper para construir filas de dos botones rápidamente
+  Widget _buildRow({
+    required String leftTitle,
+    required IconData leftIcon,
+    required String leftHero,
+    required Widget? leftTarget,
+    required String rightTitle,
+    required IconData rightIcon,
+    required String rightHero,
+    required Widget? rightTarget,
+  }) {
+    return Row(
+      children: [
+        Expanded(
+          child: CategoryButton(
+            title: leftTitle,
+            icon: leftIcon,
+            heroTag: leftHero,
+            onTap: leftTarget == null
+                ? () => _mostrarNoImplementado(leftTitle)
+                : () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => leftTarget),
+                  ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: CategoryButton(
+            title: rightTitle,
+            icon: rightIcon,
+            heroTag: rightHero,
+            onTap: rightTarget == null
+                ? () => _mostrarNoImplementado(rightTitle)
+                : () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => rightTarget),
+                  ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Función para avisar que una pantalla aún no está terminada
+  void _mostrarNoImplementado(String nombre) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('La sección de $nombre aún está en desarrollo')),
     );
   }
 }

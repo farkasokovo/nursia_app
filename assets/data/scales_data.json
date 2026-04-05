@@ -1,48 +1,188 @@
 {
   "glasgow": {
-    "name": "Escala de Coma de Glasgow",
-
-    "description":
-      "La Escala de Coma de Glasgow es un instrumento neurológico validado que valora el estado de conciencia mediante la observación de tres criterios clínicos: apertura ocular, respuesta verbal y respuesta motora.\nCada subescala se puntúa independientemente y se suma para obtener un puntaje total de 3 a 15, donde 15 indica conciencia normal.",
-
+    "name": "Escala de Coma de Glasgow (GCS)",
+    "description": "La Escala de Coma de Glasgow es una herramienta de valoración neurológica diseñada en 1974 por los neurocirujanos Graham Teasdale y Bryan Jennett en la Universidad de Glasgow.\nSu objetivo es proporcionar un método simple, objetivo y reproducible para evaluar el nivel de conciencia en pacientes que han sufrido un traumatismo craneoencefálico (TCE) u otras alteraciones neurológicas agudas.\nLa escala evalúa el estado de alerta a través de tres dimensiones de la conducta humana: la apertura ocular, la respuesta verbal y la respuesta motora, asignando un puntaje numérico a cada una.",
     "when_to_use": [
-      "En pacientes con traumatismo craneoencefálico o daño cerebral para clasificación inicial y monitoreo continuo.",
-      "Durante emergencias prehospitalarias, en UCI neurológica o postquirúrgica para detectar cambios en la conciencia."
+      "Durante la valoración inicial y el triaje de pacientes con traumatismo craneoencefálico (TCE).",
+      "En el monitoreo continuo de pacientes con daño cerebral adquirido (como accidentes cerebrovasculares o hemorragias).",
+      "En unidades de urgencias y cuidados intensivos para detectar de manera temprana el deterioro neurológico.",
+      "Como criterio clínico para decidir intervenciones invasivas, como el manejo avanzado de la vía aérea o la monitorización de la presión intracraneal.",
+      "Como lenguaje estandarizado para la entrega de turnos y comunicación interprofesional sobre el estado de conciencia de un paciente."
     ],
-
     "components": [
-      "Respuesta ocular (1-4 puntos)",
-      "Respuesta verbal (1-5 puntos)",
-      "Respuesta motora (1-6 puntos)"
+      "Apertura ocular (1 a 4 puntos): Evalúa la integridad de los mecanismos de activación del tronco encefálico.",
+      "Respuesta verbal (1 a 5 puntos): Evalúa la integración de la corteza cerebral y el grado de orientación espaciotemporal del paciente.",
+      "Respuesta motora (1 a 6 puntos): Evalúa la integridad funcional del sistema nervioso central y es el predictor más potente del pronóstico clínico."
     ],
-
     "interpretation": [
-      "13-15: Lesión leve, conciencia preservada.",
-      "9-12: Lesión moderada, requiere vigilancia estrecha.",
-      "<9: Lesión grave, indica coma y urgencia de intervención; <9 puntúa gravedad, 3 coma profundo."
+      "La puntuación total oscila entre un mínimo de 3 puntos (coma profundo) y un máximo de 15 puntos (paciente despierto y orientado).",
+      "Apertura Ocular: Espontánea (4), a la orden verbal (3), a la presión/dolor (2), ninguna (1).",
+      "Respuesta Verbal: Orientado (5), desorientado (4), palabras inapropiadas (3), sonidos incomprensibles (2), ninguna (1).",
+      "Respuesta Motora: Obedece órdenes (6), localiza el dolor (5), flexión normal/retirada (4), flexión anormal/decorticación (3), extensión/descerebración (2), ninguna (1).",
+      "TCE Leve: 14 a 15 puntos.",
+      "TCE Moderado: 9 a 13 puntos.",
+      "TCE Grave / Severo: 3 a 8 puntos (un puntaje menor o igual a 8 suele ser indicativo de intubación endotraqueal)."
     ],
-
     "limitations": [
-      "Edema palpebral impide evaluar ojos; intubación o afasia afecta verbal; sedantes/relajantes alteran respuestas.",
-      "Inconsistencias interobservador si no hay entrenamiento; puede sobrestimar o subestimar gravedad sin práctica continua.",
-      "No evalúa reflejos del tronco encefálico ni respiración; menos precisa en niños o intubados."
+      "No puede evaluarse la respuesta verbal en pacientes intubados, con traqueostomía, afasia o barreras severas del lenguaje.",
+      "Es imposible medir la respuesta ocular en presencia de edema bipalpebral masivo o trauma facial grave.",
+      "El puntaje se ve influenciado y sesgado por el uso de fármacos sedantes, relajantes musculares, intoxicaciones por alcohol o drogas.",
+      "No evalúa otras funciones neurológicas críticas como el tamaño y reactividad pupilar, ni los reflejos del tallo encefálico."
     ],
-
     "clinical_notes": [
-      "Aplicar en ambiente tranquilo, con higiene de manos y estímulos dolorosos centralizados (esternón, uñas); usar órdenes simples.",
-      "Entrenamiento continuo mejora fiabilidad; comunicar cambios al médico y registrar en plan de cuidados.",
-      "Mejor respuesta por subescala; evita supraorbitaria para dolor."
+      "En la actualización de la escala liderada por sus propios autores en 2014, se recomienda reportar siempre el desglose por componentes (ej. Ocular 4, Verbal 5, Motor 6) en lugar de reportar únicamente el número total (15), para evitar pérdidas de información clínica.",
+      "El estímulo para provocar respuesta debe ser aplicado en orden progresivo: verbal, táctil y finalmente por presión (en el trapecio, arco supraorbitario o lecho ungueal)."
     ],
-
     "references": [
-  {
-    "text": "Muñana-Rodríguez, J. E., & Ramírez-Elías, A. (2014). Escala de coma de Glasgow: origen, análisis y uso apropiado. Enfermería Universitaria",
-    "url": "https://revista-enfermeria.unam.mx/ojs/index.php/enfermeriauniversitaria/article/view/188"
+      {
+        "text": "Muñana-Rodríguez, J. E., & Ramírez-Elías, A. (2014). Escala de coma de Glasgow: origen, análisis y uso apropiado. Enfermería universitaria, 11(1), 24-35.",
+        "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1665-70632014000100005"
+      },
+      {
+        "text": "Hernández-Martínez, M., et al. (2019). Aplicabilidad de la escala de Glasgow en pacientes neurocríticos. Dialnet.",
+        "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=7158320"
+      }
+    ]
   },
-  {
-    "text": "Asociación de Gestión de Atención Personalizada de la Comunidad Papps. (2011). Medición de signos neurológicos (Escala de Glasgow)",
-    "url": "http://www.agapap.org/druagapap/system/files/EscalaGlasgow.pdf"
-  }
-]
+  
+  "ramsay": {
+    "name": "Escala de Sedación de Ramsay",
+    "description": "La Escala de Ramsay es una herramienta subjetiva de evaluación clínica diseñada en 1974 por el médico Michael Ramsay.\nSu propósito principal es cuantificar el nivel de sedación y el grado de conciencia en los pacientes para evitar tanto la sobre como la infrasedación.\nLa escala evalúa la tranquilidad y la respuesta a los estímulos mediante seis niveles discretos que van desde la agitación despierta hasta el coma o sueño profundo sin respuesta, basándose únicamente en la observación directa a la cabecera del paciente.",
+    "when_to_use": [
+      "En la monitorización de pacientes críticos ingresados en unidades de cuidados intensivos (UCI).",
+      "En el seguimiento de pacientes sometidos a ventilación mecánica invasiva.",
+      "Durante la aplicación de sedación consciente para procedimientos diagnósticos (como endoscopías) u odontológicos.",
+      "Para medir la profundidad de la sedación en el contexto de los cuidados paliativos.",
+      "Para el ajuste dinámico y la titulación de dosis de infusiones sedantes y analgésicas."
+    ],
+    "components": [
+      "Evaluación del estado de vigilia: Valora los comportamientos del paciente despierto como la orientación, la tranquilidad o la agitación.",
+      "Respuesta a órdenes verbales: Mide la capacidad del paciente somnoliento para acatar instrucciones directas simples.",
+      "Respuesta a estímulos auditivos: Valora la reacción ante ruidos fuertes o el llamado directo por su nombre.",
+      "Respuesta a estímulos físicos: Mide la reactividad ante estímulos táctiles leves como la percusión glabelar (golpecitos en el entrecejo) o sacudidas suaves.",
+      "Respuesta a estímulos nociceptivos: Evalúa si existe alguna reacción motora ante un estímulo doloroso en estados profundos de inconsciencia."
+    ],
+    "interpretation": [
+      "Nivel 1: El paciente se encuentra despierto, ansioso, agitado o inquieto.",
+      "Nivel 2: El paciente está despierto, cooperador, orientado y tranquilo.",
+      "Nivel 3: El paciente está dormido pero responde exclusivamente a órdenes verbales.",
+      "Nivel 4: El paciente está dormido y muestra una respuesta rápida a la percusión glabelar o a un estímulo auditivo fuerte.",
+      "Nivel 5: El paciente está dormido y muestra una respuesta lenta a la percusión glabelar o a un estímulo auditivo fuerte.",
+      "Nivel 6: El paciente está profundamente dormido y no presenta ninguna respuesta a estímulos físicos o auditivos."
+    ],
+    "limitations": [
+      "Al ser una herramienta puramente observacional y subjetiva, cuenta con variabilidad en la interpretación entre diferentes observadores.",
+      "Carece de la capacidad de describir detalladamente diversos estados de agitación o delirio, a diferencia de escalas más modernas como la escala RASS.",
+      "No fue diseñada originalmente bajo procesos estrictos de validación psicométrica formal.",
+      "No permite disociar ni evaluar de forma independiente el nivel de dolor o analgesia del paciente."
+    ],
+    "clinical_notes": [
+      "En el paciente crítico intubado, el objetivo estándar suele oscilar entre los niveles 2 y 4 para asegurar su adaptación al ventilador y su confort general.",
+      "En el ámbito de los cuidados paliativos para el control de síntomas refractarios, los niveles deseados típicamente son el 5 o 6.",
+      "Su implementación protocolizada por el personal de enfermería reduce los días totales de ventilación mecánica y de estancia hospitalaria.",
+      "Siempre debe complementarse con la vigilancia de los parámetros fisiológicos y las constantes vitales del paciente."
+    ],
+    "references": [
+      {
+        "text": "García-Álvarez, J., et al. (2006). Análisis de 4 escalas de valoración de la sedación en el paciente crítico. Dialnet.",
+        "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=3064712"
+      },
+      {
+        "text": "SciELO España. (2021). Sedación paliativa. Revista Clínica de Medicina de Familia, 14(2), 93-97.",
+        "url": "https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1699-695X2021000200009"
+      }
+    ]
+  },
+  "rass": {
+    "name": "Escala de Agitación-Sedación de Ricshmond (RASS)",
+    "description": "La Escala de Sedación y Agitación de Richmond (RASS) es una herramienta de 10 puntos diseñada por un equipo multidisciplinario en la Universidad de Richmond (Virginia) para evaluar la profundidad de la sedación y el grado de agitación en pacientes críticos.\nSu estructura es simétrica y sumamente intuitiva: cuenta con un punto neutral (el 0 para el paciente alerta y tranquilo), puntuaciones positivas del +1 al +4 para medir la intensidad de la agitación, y puntuaciones negativas del -1 al -5 para medir la profundidad de la sedación.\nEs considerada una de las escalas más válidas y reproducibles en el paciente crítico.",
+    "when_to_use": [
+      "En la monitorización continua y horaria de pacientes críticos en unidades de cuidados intensivos (UCI).",
+      "Para el ajuste dinámico y la titulación de fármacos sedantes o analgésicos en infusión continua.",
+      "En pacientes sometidos a ventilación mecánica invasiva para garantizar su adaptación al ventilador.",
+      "Como paso previo e indispensable para aplicar herramientas de cribado de delirium (como el CAM-ICU), ya que no se puede evaluar el delirium en pacientes profundamente sedados (RASS -4 o -5).",
+      "Para la ejecución de protocolos de despertar diario y pruebas de respiración espontánea."
+    ],
+    "components": [
+      "Observación Visual: El evaluador analiza el comportamiento físico espontáneo del paciente, determinando si está inquieto o combativo.",
+      "Estímulo Auditivo: Si el paciente no está alerta espontáneamente, el evaluador lo llama por su nombre y le pide que abra los ojos. Se mide la duración del contacto visual.",
+      "Estímulo Físico: Si el paciente no reacciona al llamado, se aplica un estímulo táctil (frotar el esternón o sacudir suavemente el hombro)."
+    ],
+    "interpretation": [
+      "+4 Combativo: Francamente combativo o violento; representa un peligro inmediato para el personal de salud.",
+      "+3 Muy agitado: Intenta arrancarse tubos, catéteres o sondas; muestra un comportamiento agresivo.",
+      "+2 Agitado: Presenta movimientos frecuentes sin propósito y lucha contra el ventilador mecánico.",
+      "+1 Inquieto: Ansioso o aprensivo, pero sus movimientos no son agresivos ni vigorosos.",
+      "0 Alerta y tranquilo: Paciente despierto y calmado con su entorno.",
+      "-1 Somnoliento: No está plenamente alerta, pero se mantiene despierto con contacto visual a la voz por más de 10 segundos.",
+      "-2 Sedación leve: Despierta brevemente con contacto visual a la voz por menos de 10 segundos.",
+      "-3 Sedación moderada: Presenta cualquier movimiento o apertura ocular a la voz, pero no logra realizar contacto visual.",
+      "-4 Sedación profunda: No responde a la voz, pero presenta algún movimiento o apertura ocular ante el estímulo físico.",
+      "-5 Sin respuesta: No presenta ninguna respuesta a la voz ni al estímulo físico."
+    ],
+    "limitations": [
+      "No es evaluable de manera directa en pacientes bajo el efecto de bloqueadores neuromusculares (paralizados).",
+      "Al igual que la escala de Ramsay, evalúa el nivel de agitación y sedación, mas no evalúa el dolor de forma aislada.",
+      "Exige que el personal esté entrenado en el protocolo exacto de 3 pasos (observar, hablar, tocar) para evitar lecturas erróneas.",
+      "Evaluadores fatigados o sin entrenamiento pueden confundir fácilmente los sutiles límites entre los niveles -1, -2 y -3."
+    ],
+    "clinical_notes": [
+      "En la mayoría de las guías de práctica clínica internacionales sobre el manejo del dolor, agitación y delirium (PADIS), el objetivo estándar para un paciente crítico es mantener un RASS entre 0 y -2.",
+      "La escala reduce los sesgos subjetivos al condicionar los niveles de sedación a una duración en segundos (los famosos 10 segundos para separar el -1 del -2).",
+      "El contacto visual se define estrictamente como el momento en que el paciente logra fijar su mirada en el examinador de manera consciente.",
+      "Su uso sistemático por parte de enfermería impacta directamente en la disminución de los días de ventilación mecánica y de estancia hospitalaria."
+    ],
+    "references": [
+      {
+        "text": "Goldberg, M. A. (2022). Evaluación del nivel de sedación en pacientes críticos adultos utilizando la escala Richmond Agitation Sedation Scale. Argentinian Journal of Respiratory & Physical Therapy, 4(2), 60-62.",
+        "url": "https://www.scielo.org.ar/scielo.php?script=sci_arttext&pid=S2618-40952022000200060"
+      },
+      {
+        "text": "García-Álvarez, J., et al. (2006). Análisis de 4 escalas de valoración de la sedación en el paciente crítico. Dialnet.",
+        "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=3064712"
+      }
+    ]
+  },
+  "downton": {
+    "name": "Escala de Riesgo de Caídas de Downton",
+    "description": "La Escala de Downton (también conocida como Fall Risk Score) fue estructurada por el médico J.H. Downton para evaluar de manera rápida y protocolizada la probabilidad de que un paciente (especialmente de la tercera edad) sufra una caída.\nLa escala se basa en la suma de diversos factores de riesgo médicos y funcionales, otorgando un puntaje directo para identificar si el paciente requiere de un plan de cuidados preventivo por parte de enfermería.",
+    "when_to_use": [
+      "Durante la valoración inicial al ingreso de pacientes en unidades de hospitalización general o geriátrica.",
+      "En evaluaciones periódicas en la atención primaria de salud para adultos mayores que viven en sus hogares.",
+      "Tras una modificación significativa en la pauta farmacológica del paciente (por ejemplo, al introducir sedantes o diuréticos).",
+      "Inmediatamente después de que un paciente sufra una caída dentro o fuera del entorno clínico.",
+      "En cada cambio de turno o evolución clínica para actualizar las medidas preventivas dinámicas."
+    ],
+    "components": [
+      "Caídas previas: Se registra si el paciente ha sufrido caídas en los meses previos (Sí: 1 punto / No: 0 puntos).",
+      "Medicamentos: Se evalúa si el paciente consume fármacos de riesgo como tranquilizantes, sedantes, diuréticos, antidepresivos o antiparkinsonianos (Presencia de alguno: 1 punto / Ausencia: 0 puntos).",
+      "Déficits sensoriales: Presencia comprobada de alteraciones visuales, auditivas o déficits motores en extremidades (Presencia de alguno: 1 punto / Ninguno: 0 puntos).",
+      "Estado mental: Valoración rápida de la esfera cognitiva del paciente (Confuso: 1 punto / Orientado: 0 puntos).",
+      "Deambulación: Clasificación del tipo de marcha del paciente (Insegura con o sin ayuda / Imposible: 1 punto; Normal / Segura con ayuda: 0 puntos)."
+    ],
+    "interpretation": [
+      "Riesgo bajo o nulo: De 0 a 2 puntos.",
+      "Riesgo alto de caídas: 3 o más puntos (Activa automáticamente los protocolos institucionales de prevención de caídas)."
+    ],
+    "limitations": [
+      "Al simplificar las categorías de medicamentos, no logra profundizar en la polifarmacia ni en las dosis que toma el paciente.",
+      "Estudios clínicos recientes en hospitales de agudos han señalado que posee una sensibilidad y especificidad discretas en comparación con escalas como la de Morse.",
+      "Ignora variables fisiológicas agudas como la deshidratación o la hiponatremia, que influyen directamente en la estabilidad del paciente.",
+      "Conceptos como \"marcha insegura\" pueden sufrir de variabilidad en la interpretación subjetiva del personal evaluador."
+    ],
+    "clinical_notes": [
+      "Los factores de \"caídas previas\" y \"deambulación insegura\" suelen ser estadísticamente los proyectores más fiables de un nuevo incidente.",
+      "Un puntaje bajo no exime al personal de aplicar el sentido común clínico ni de vigilar factores ambientales peligrosos (suelos mojados, iluminación deficiente)."
+    ],
+    "references": [
+      {
+        "text": "Gutiérrez Pérez, E. T., Meneses Foyo, A. L., Andrés Bermúdez, P., Gutiérrez Díaz, A., & Padilla Moreira, A. (2022). Utilidad de las escalas de Downton y de Tinetti en la clasificación del riesgo de caída de adultos mayores en la atención primaria de salud. Acta Médica del Centro, 16(1), 127-140.",
+        "url": "http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S2709-79272022000100127"
+      },
+      {
+        "text": "Bueno García, M. J., Roldán Chicano, M. T., Rodríguez Tello, J., Meroño Rivera, M. D., Dávila Martínez, R., & Berenguer García, N. (2017). Características de la escala Downton en la valoración del riesgo de caídas en pacientes hospitalizados. Enfermería clínica, 27(4), 227-234.",
+        "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=6046097"
+      }
+    ]
   }
 }

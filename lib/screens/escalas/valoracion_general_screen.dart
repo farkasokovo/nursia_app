@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 
-class SeguridadScreen extends StatelessWidget {
-  const SeguridadScreen({super.key});
+class ValoracionGeneralScreen extends StatelessWidget {
+  const ValoracionGeneralScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +11,12 @@ class SeguridadScreen extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return ExpandableCategoryScreen(
-      heroTag: "seguridad",
-      title: "Escalas de Seguridad",
-      icon: PhosphorIconsFill.shieldCheck,
+      heroTag: "clinica",
+      title: "Valoración general",
+      icon: PhosphorIconsFill.stethoscope,
       child: Center(
         child: Text(
-          "Aquí aparecerán Dowton, Morse, etc.",
+          "Aquí aparecerán otras escalas.",
           style: textTheme.bodyMedium?.copyWith(
             color: theme.colorScheme.onSecondaryContainer,
           ),

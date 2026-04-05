@@ -14,6 +14,9 @@ class IconMapper {
       // Cardiovasculares
       case 'heartbeat':
         return PhosphorIconsFill.heartbeat;
+      // Diuréticos
+      case 'drop':
+        return PhosphorIconsFill.drop;
       // Escalas / otros
       default:
         return PhosphorIconsFill.pill;

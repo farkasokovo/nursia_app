@@ -1,119 +1,681 @@
 [
   {
     "nombre": "Amoxicilina",
-    "presentacion": "500 mg cápsula / 250 mg/5 ml suspensión",
-    "via": "Oral",
-    "dosisAdulto": "500 mg cada 8 horas",
-    "dosisPediatrica": "20-40 mg/kg/día cada 8 horas",
-    "maximoDiario": "3000 mg/día",
-    "contraindicaciones": "Hipersensibilidad a penicilinas, mononucleosis infecciosa",
-    "interacciones": "Metotrexato, warfarina, alopurinol",
-    "indicaciones": "Infecciones respiratorias, otitis media, sinusitis, infecciones urinarias",
     "icono": "shieldPlus",
-    "categoria": "antibiotico"
+    "categoria": "antibiotico",
+    "farmacodinamia": "Es un antibiótico bactericida de amplio espectro. Pertenece al grupo de las aminopenicilinas (betalactámicos). Actúa inhibiendo la síntesis de la pared celular bacteriana al unirse a las proteínas fijadoras de penicilina (PBP), lo que produce la lisis y muerte celular.",
+    "farmacocinetica": "Absorción: Rápida y buena absorción por vía oral, alcanzando picos plasmáticos en 1 a 2 horas. La presencia de alimentos no interfiere significativamente.\nDistribución: Difunde bien a la mayoría de los tejidos y líquidos corporales; su unión a proteínas plasmáticas es baja (aproximadamente del 18%).\nMetabolismo: Se metaboliza mínimamente en el hígado.\nEliminación: Se excreta principalmente por vía renal (50% a 70%) en forma inalterada a través de la orina. Su semivida es de aproximadamente 1 hora.",
+    "indicaciones": "Infecciones de garganta, nariz y oídos (amigdalitis, otitis media, sinusitis).\nInfecciones del tracto respiratorio inferior (bronquitis aguda y crónica, neumonías bacterianas).\nInfecciones del tracto genitourinario sin complicaciones urológicas.\nInfecciones de la piel y tejidos blandos.\nErradicación de Helicobacter pylori (en terapia combinada).",
+    "viaAdministracion": "Oral, IV",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad demostrada al principio activo o a otros antibióticos del grupo de las penicilinas.", "Antecedentes de reacciones alérgicas graves inmediatas (como anafilaxia) a otros agentes betalactámicos (p. ej., cefalosporinas o carbapenémicos)."],
+      "relativas": ["Mononucleosis infecciosa (alto riesgo de sufrir exantema eritematoso).", "Insuficiencia renal (requiere ajuste de dosis según el aclaramiento de creatinina)."]
+    },
+    "efectosSecundarios": ["Diarrea.", "Náuseas y vómitos.", "Erupciones cutáneas leves."],
+    "efectosAdversos": ["Reacciones anafilácticas graves.", "Candidiasis mucocutánea por sobrecrecimiento.", "Colitis asociada a antibióticos (colitis pseudomembranosa).", "Hepatitis e ictericia colestásica.", "Síndrome de Stevens-Johnson o necrólisis epidérmica tóxica."],
+    "interacciones": [
+      {
+        "medicamento": "Alopurinol",
+        "efecto": "Incrementa el riesgo de reacciones alérgicas cutáneas.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Probenecid",
+        "efecto": "Disminuye la secreción tubular renal de amoxicilina, aumentando sus niveles en sangre.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Anticoagulantes orales",
+        "efecto": "Puede potenciar el efecto de fármacos como la warfarina o el acenocumarol.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticonceptivos orales",
+        "efecto": "Puede reducir la efectividad de estos, aunque la evidencia es debatida.",
+        "severidad": "baja"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2022). Ficha técnica Amoxicilina Normon 500 mg comprimidos EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/64388/FichaTecnica_64388.htm"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Amoxicilina. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-amoxicilina-j01ca04"
+      }
+    ]
   },
   {
     "nombre": "Ciprofloxacino",
-    "presentacion": "250 mg, 500 mg, 750 mg comprimidos",
-    "via": "Oral, EV",
-    "dosisAdulto": "250-750 mg cada 12 horas",
-    "dosisPediatrica": "10-20 mg/kg cada 12 horas (uso restringido)",
-    "maximoDiario": "1500 mg/día",
-    "contraindicaciones": "Hipersensibilidad a quinolonas, epilepsia, tendinitis previa",
-    "interacciones": "Antiácidos, teofilina, warfarina, AINEs",
-    "indicaciones": "Infecciones urinarias, gastrointestinales, respiratorias, osteomielitis",
     "icono": "shieldPlus",
-    "categoria": "antibiotico"
+    "categoria": "antibiotico",
+    "farmacodinamia": "Es un agente antibacteriano sintético de amplio espectro perteneciente a las fluoroquinolonas. Su acción bactericida se debe a la inhibición de las enzimas topoisomerasa II (ADN-girasa) y topoisomerasa IV. Estas enzimas son necesarias para la replicación, transcripción, reparación y recombinación del ADN bacteriano.",
+    "farmacocinetica": "Absorción: Buena absorción en el tracto gastrointestinal. Su biodisponibilidad absoluta es del 70% al 80%.\nDistribución: Posee una gran distribución tisular; alcanza concentraciones elevadas en bilis, pulmones, riñones, próstata y huesos. Su unión a proteínas es baja (20% a 40%).\nMetabolismo: Se metaboliza parcialmente en el hígado dando lugar a metabolitos con menor actividad antimicrobiana.\nEliminación: Se excreta principalmente inalterado por la orina (40% a 50%) y en menor medida por las heces. Su semivida de eliminación es de 3 a 5 horas.",
+    "indicaciones": "Infecciones de las vías respiratorias bajas causadas por bacterias Gram-negativas.\nInfecciones complicadas y no complicadas del tracto urinario (incluyendo pielonefritis).\nInfecciones del tracto genital (prostatitis bacteriana, uretritis gonocócica).\nInfecciones gastrointestinales (como la diarrea del viajero y fiebre tifoidea).\nInfecciones osteoarticulares y de la piel.\nProfilaxis y tratamiento del carbunco por inhalación.",
+    "viaAdministracion": "Oral, IV",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al ciprofloxacino o a otras quinolonas.", "Administración concomitante con tizanidina (por riesgo de hipotensión grave y somnolencia)."],
+      "relativas": ["Pacientes con antecedentes de trastornos de los tendones relacionados con la administración de fluoroquinolonas.", "Embarazo y lactancia.", "Niños y adolescentes en fase de crecimiento (excepto en indicaciones muy específicas como fibrosis quística o infecciones urinarias complicadas).", "Epilepsia o trastornos del sistema nervioso central que predispongan a convulsiones.", "Miastenia gravis (puede exacerbar la debilidad muscular)."]
+    },
+    "efectosSecundarios": ["Náuseas y diarrea.", "Mareos o dolor de cabeza.", "Dolor abdominal o dispepsia.", "Erupciones cutáneas."],
+    "efectosAdversos": ["Tendinitis y rotura de tendones (especialmente el tendón de Aquiles).", "Prolongación del intervalo QT (riesgo de arritmias).", "Convulsiones.", "Colitis pseudomembranosa.", "Reacciones de fotosensibilidad graves.", "Hepatotoxicidad."],
+    "interacciones": [
+      {
+        "medicamento": "Antiácidos, hierro y calcio",
+        "efecto": "Reducen significativamente la absorción oral de ciprofloxacino si se toman al mismo tiempo.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Teofilina",
+        "efecto": "Ciprofloxacino eleva los niveles plasmáticos de teofilina, pudiendo causar toxicidad.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes orales",
+        "efecto": "Puede potenciar el efecto del acenocumarol o la warfarina.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "AINEs",
+        "efecto": "La combinación de dosis muy altas de quinolonas con ciertos antiinflamatorios puede provocar convulsiones.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2022). Ficha técnica Ciprofloxacino Normon 500 mg comprimidos recubiertos con película EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/62300/FichaTecnica_62300.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Ciprofloxacino. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-ciprofloxacino-j01ma02"
+      }
+    ]
   },
   {
-    "nombre": "Azitromicina",
-    "presentacion": "250 mg, 500 mg comprimidos / 200 mg/5 ml suspensión",
-    "via": "Oral, EV",
-    "dosisAdulto": "500 mg el día 1, luego 250 mg días 2-5",
-    "dosisPediatrica": "10 mg/kg el día 1, luego 5 mg/kg días 2-5",
-    "maximoDiario": "500 mg/día",
-    "contraindicaciones": "Hipersensibilidad a macrólidos, hepatopatía grave",
-    "interacciones": "Anticoagulantes, digoxina, colchicina, estatinas",
-    "indicaciones": "Infecciones respiratorias, faringitis, amigdalitis, infecciones de piel",
+    "nombre": "Ceftriaxona",
     "icono": "shieldPlus",
-    "categoria": "antibiotico"
-  },
-  {
+    "categoria": "antibiotico",
+    "farmacodinamia": "Es una cefalosporina de tercera generación de amplio espectro y acción prolongada. Tiene una potente actividad bactericida. Actúa inhibiendo la síntesis de la pared celular bacteriana tras su unión a las proteínas fijadoras de penicilina (PBP), causando la lisis de la bacteria.",
+    "farmacocinetica": "Absorción: La biodisponibilidad tras una inyección intramuscular es del 100%.\nDistribución: Se distribuye de manera excelente en la mayoría de los órganos, tejidos y fluidos, incluyendo el líquido cefalorraquídeo. Se une de forma masiva y reversible a la albúmina plasmática (85% al 95%).\nMetabolismo: No sufre metabolización sistémica. Es convertida en metabolitos inactivos únicamente por la flora intestinal.\nEliminación: Entre el 50% y 60% se excreta de forma inalterada por la orina, y el resto por la bilis. Tiene una semivida prolongada de unas 8 horas.",
+    "indicaciones": "Sepsis y bacteriemia.\nMeningitis bacteriana.\nInfecciones abdominales (peritonitis, infecciones de las vías biliares).\nInfecciones de los huesos, articulaciones, piel y tejidos blandos.\nInfecciones respiratorias graves (neumonías).\nInfecciones del tracto urinario complicadas.\nInfecciones genitales (incluyendo gonorrea).\nProfilaxis perioperatoria de infecciones.",
+    "viaAdministracion": "IM, IV",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad a las cefalosporinas o antecedentes de hipersensibilidad grave a otros betalactámicos.", "Neonatos prematuros hasta una edad postmenstrual de 41 semanas.", "Neonatos a término con ictericia o hiperbilirrubinemia (riesgo de encefalopatía por desplazamiento de bilirrubina).", "Tratamiento concomitante con soluciones que contengan calcio en neonatos (por riesgo de precipitación fatal en pulmones y riñones)."],
+      "relativas": ["Antecedentes de alergia leve a penicilinas (posible hipersensibilidad cruzada).", "Presencia de cálculos biliares o disfunción hepática y renal combinada (requiere estricta monitorización)."]
+    },
+    "efectosSecundarios": ["Diarrea y deposiciones blandas.", "Náuseas y vómitos.", "Eosinofilia y leucopenia transitorias.", "Dolor o induración en el sitio de la inyección."],
+    "efectosAdversos": ["Anemia hemolítica inmunitaria.", "Colitis pseudomembranosa por sobrecrecimiento de Clostridioides difficile.", "Precipitación de ceftriaxona cálcica en la vesícula biliar (barro biliar reversible).", "Reacciones cutáneas graves (como eritema multiforme).", "Pancreatitis."],
+    "interacciones": [
+      {
+        "medicamento": "Soluciones con calcio (como Ringer o Hartmann)",
+        "efecto": "No deben mezclarse ni administrarse simultáneamente por la misma vía con ceftriaxona (especialmente en neonatos).",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes orales",
+        "efecto": "Puede potenciar los efectos de los antagonistas de la vitamina K.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Pruebas de laboratorio",
+        "efecto": "Puede dar falsos positivos en la prueba de Coombs y en pruebas de glucosuria mediante métodos reductores.",
+        "severidad": "baja"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Ceftriaxona Normon 1000 mg polvo y disolvente para solución inyectable y para perfusión EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/62635/FichaTecnica_62635.html"
+      },
+      {
+        "text": "Asociación Española de Pediatría (AEP). (2020). Ceftriaxona. Pediamécum.",
+        "url": "https://www.aeped.es/comites/cm/pediamecum/principios-activos/ceftriaxona"
+      }
+    ]
+  }, 
+{
     "nombre": "Paracetamol",
-    "presentacion": "500 mg comprimido / 120 mg/5 ml suspensión",
-    "via": "Oral, EV",
-    "dosisAdulto": "500-1000 mg cada 6-8h",
-    "dosisPediatrica": "10-15 mg/kg cada 6-8h",
-    "maximoDiario": "4000 mg/día",
-    "contraindicaciones": "Insuficiencia hepática grave, hipersensibilidad",
-    "interacciones": "Alcohol, warfarina, fenitoína",
-    "indicaciones": "Dolor leve a moderado, fiebre",
     "icono": "bandaids",
-    "categoria": "analgesico"
+    "categoria": "analgesico",
+    "farmacodinamia": "Produce analgesia por la inhibición de la síntesis de prostaglandinas en el sistema nervioso central.\nEjerce su acción antipirética al actuar sobre el centro regulador de la temperatura en el hipotálamo.\nNo posee efectos antiinflamatorios periféricos significativos ni afecta a la agregación plaquetaria.",
+    "farmacocinetica": "Absorción: Rápida y completa por vía oral, con una biodisponibilidad del 75% al 85%. Los picos plasmáticos se alcanzan entre los 30 y 90 minutos.\nDistribución: Se distribuye de manera uniforme en la mayoría de los fluidos corporales. Su unión a proteínas plasmáticas es baja (menor al 20%).\nMetabolismo: Se metaboliza extensamente en el hígado, principalmente por conjugación. Una pequeña fracción se metaboliza por el citocromo P-450 dando lugar a un metabolito intermedio reactivo (NAPQI), el cual se inactiva por el glutatión.\nEliminación: Se excreta por la orina en más del 95% en forma de metabolitos conjugados. Su semivida de eliminación es de aproximadamente 2 horas.",
+    "indicaciones": "Tratamiento sintomático del dolor de intensidad leve o moderada.\nAlivio de estados febriles.",
+    "viaAdministracion": "Oral, Rectal, IV",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad conocida al paracetamol o al clorhidrato de propacetamol."],
+      "relativas": ["Insuficiencia hepatocelular grave o enfermedad hepática activa.", "Alcoholismo crónico.", "Malnutrición crónica y deshidratación.", "Insuficiencia renal grave (se requiere espaciar las dosis)."]
+    },
+    "efectosSecundarios": ["Náuseas y vómitos leves.", "Malestar general.", "Ligero aumento de transaminasas."],
+    "efectosAdversos": ["Hepatotoxicidad grave (generalmente asociada a sobredosis).", "Reacciones cutáneas graves (como pustulosis exantemática generalizada aguda o necrólisis epidérmica tóxica).", "Alteraciones hematológicas como trombocitopenia o agranulocitosis.", "Hipotensión al administrarse por vía intravenosa rápida."],
+    "interacciones": [
+      {
+        "medicamento": "Alcohol",
+        "efecto": "Potencia la toxicidad hepática del paracetamol.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes orales",
+        "efecto": "Dosis altas y prolongadas de paracetamol pueden potenciar el efecto de la warfarina.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Anticonvulsivantes (fenitoína, fenobarbital)",
+        "efecto": "Pueden disminuir la biodisponibilidad y aumentar el riesgo de hepatotoxicidad.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Probenecid",
+        "efecto": "Puede disminuir la depuración del paracetamol.",
+        "severidad": "baja"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2021). Ficha técnica Paracetamol Kern Pharma 1 g comprimidos EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/64704/FichaTecnica_64704.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Paracetamol. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-paracetamol-n02be01"
+      }
+    ]
   },
   {
     "nombre": "Ibuprofeno",
-    "presentacion": "400 mg, 600 mg comprimidos / 100 mg/5 ml suspensión",
-    "via": "Oral",
-    "dosisAdulto": "400-600 mg cada 6-8h",
-    "dosisPediatrica": "5-10 mg/kg cada 6-8h",
-    "maximoDiario": "2400 mg/día",
-    "contraindicaciones": "Úlcera péptica activa, insuficiencia renal grave",
-    "interacciones": "AAS, anticoagulantes, litio",
-    "indicaciones": "Dolor, inflamación, fiebre",
     "icono": "bandaids",
-    "categoria": "analgesico"
+    "categoria": "analgesico",
+    "farmacodinamia": "Es un compuesto no esteroideo derivado del ácido propiónico con marcadas propiedades analgésicas, antipiréticas y antiinflamatorias.\nSu mecanismo de acción se basa en la inhibición de la síntesis de prostaglandinas mediante la inhibición no selectiva de las enzimas ciclooxigenasa-1 (COX-1) y ciclooxigenasa-2 (COX-2).",
+    "farmacocinetica": "Absorción: Se absorbe rápidamente en el tracto gastrointestinal. Los niveles plasmáticos máximos se alcanzan en 1 a 2 horas tras la administración oral.\nDistribución: Se une fuertemente a las proteínas plasmáticas (aproximadamente un 99%).\nMetabolismo: Se metaboliza ampliamente en el hígado a través de procesos de oxidación.\nEliminación: Se excreta casi por completo a través de los riñones en forma de metabolitos inactivos. Su semivida de eliminación es de unas 2 horas.",
+    "indicaciones": "Tratamiento de procesos inflamatorios (como artritis reumatoide o espondilitis anquilosante).\nAlivio del dolor de intensidad leve a moderada (cefaleas, dismenorrea, dolor dental).\nTratamiento sintomático de la fiebre.",
+    "viaAdministracion": "Oral, IV",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al principio activo o a otros AINEs.", "Pacientes que hayan desarrollado asma, rinitis o urticaria tras tomar ácido acetilsalicílico u otros AINEs.", "Antecedentes de hemorragia gastrointestinal o perforación relacionados con tratamientos anteriores con AINEs.", "Úlcera péptica activa o recurrente.", "Insuficiencia cardiaca grave, insuficiencia renal grave o insuficiencia hepática grave.", "Tercer trimestre de la gestación."],
+      "relativas": ["Antecedentes de hipertensión arterial y/o insuficiencia cardiaca leve o moderada.", "Pacientes con defectos de la coagulación o en tratamiento con anticoagulantes.", "Primer y segundo trimestre del embarazo."]
+    },
+    "efectosSecundarios": ["Dispepsia y pirosis.", "Diarrea o estreñimiento.", "Dolor abdominal o náuseas.", "Mareos y cefaleas leves."],
+    "efectosAdversos": ["Hemorragias, úlceras o perforaciones gastrointestinales.", "Retención de líquidos y edemas.", "Mayor riesgo de eventos trombóticos arteriales (como infarto de miocardio o ictus), especialmente en dosis altas y tratamientos prolongados.", "Insuficiencia renal aguda o nefritis intersticial."],
+    "interacciones": [
+      {
+        "medicamento": "Otros AINEs y glucocorticoides",
+        "efecto": "Pueden aumentar el riesgo de úlceras y hemorragias gastrointestinales.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes (como warfarina)",
+        "efecto": "Los AINEs pueden potenciar los efectos de los anticoagulantes.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antihipertensivos y diuréticos",
+        "efecto": "El ibuprofeno puede disminuir su eficacia y aumentar el riesgo de nefrotoxicidad.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Litio",
+        "efecto": "Reduce la excreción de litio, aumentando sus niveles plasmáticos.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Ibuprofeno Normon 600 mg comprimidos recubiertos con película EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/64716/FichaTecnica_64716.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Ibuprofeno. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-ibuprofeno-m01ae01"
+      }
+    ]
   },
   {
     "nombre": "Ketorolaco",
-    "presentacion": "10 mg comprimidos / 30 mg/ml ampolla",
-    "via": "Oral, IM, EV",
-    "dosisAdulto": "10 mg cada 6-8h (oral), 30 mg IM/EV",
-    "dosisPediatrica": "No recomendado en niños",
-    "maximoDiario": "40 mg/día (oral), 120 mg/día (IM/EV)",
-    "contraindicaciones": "Hipersensibilidad a AINEs, hemorragia activa",
-    "interacciones": "AAS, anticoagulantes, metotrexato",
-    "indicaciones": "Dolor agudo moderado a severo",
     "icono": "bandaids",
-    "categoria": "analgesico"
-  },
-  {
+    "categoria": "analgesico",
+    "farmacodinamia": "Es un fármaco antiinflamatorio no esteroideo (AINE) con una potente actividad analgésica y una moderada actividad antiinflamatoria y antipirética.\nInhibe la síntesis de prostaglandinas mediante el bloqueo de las enzimas ciclooxigenasas (COX-1 y COX-2).",
+    "farmacocinetica": "Absorción: Rápida y completa tras la administración oral e intramuscular. Los picos plasmáticos se obtienen a los 30-45 minutos tras la vía oral y a los 45-50 minutos por vía intramuscular.\nDistribución: Presenta una elevada unión a proteínas plasmáticas (99%). Atraviesa mal la barrera hematoencefálica.\nMetabolismo: Se metaboliza principalmente en el hígado mediante hidroxilación y conjugación.\nEliminación: Más del 90% de la dosis se elimina por vía urinaria (como fármaco inalterado o metabolitos) y el resto en heces. Su semivida de eliminación oscila entre las 4 y 6 horas.",
+    "indicaciones": "Tratamiento a corto plazo del dolor moderado o severo en el postoperatorio.",
+    "viaAdministracion": "Oral, IV, IM",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al ketorolaco u otros AINEs.", "Antecedentes de alergia al ácido acetilsalicílico u otros inhibidores de la síntesis de prostaglandinas.", "Úlcera péptica activa, perforación o hemorragia gastrointestinal.", "Insuficiencia renal moderada o grave.", "Pacientes con hemorragia cerebrovascular confirmada o sospechada, o con diátesis hemorrágica.", "No debe utilizarse para analgesia profiláctica antes de la intervención quirúrgica o durante la misma debido al riesgo de hemorragia.", "Embarazo, parto y lactancia."],
+      "relativas": ["Pacientes de edad avanzada (mayor riesgo de efectos adversos).", "Antecedentes de enfermedad inflamatoria intestinal (colitis ulcerosa o enfermedad de Crohn).", "Pacientes con hipovolemia o deshidratación."]
+    },
+    "efectosSecundarios": ["Somnolencia o mareos.", "Náuseas y dispepsia.", "Dolor en el punto de inyección.", "Edema o sudoración."],
+    "efectosAdversos": ["Hemorragia gastrointestinal severa, ulceración y perforación.", "Fallo renal agudo.", "Reacciones anafilactoides graves.", "Inhibición de la agregación plaquetaria y prolongación del tiempo de sangrado."],
+    "interacciones": [
+      {
+        "medicamento": "Otros AINEs y ácido acetilsalicílico",
+        "efecto": "Está contraindicado su uso conjunto por aumento exponencial del riesgo gastrointestinal.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes y trombolíticos",
+        "efecto": "Elevado riesgo de sangrado.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Pentoxifilina",
+        "efecto": "Aumenta considerablemente el riesgo de hemorragia.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Litio y metotrexato",
+        "efecto": "Ketorolaco disminuye su aclaramiento, pudiendo provocar toxicidad de estos fármacos.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Ketorolaco Trometamol premed 30 mg/ml solución inyectable. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/61821/FichaTecnica_61821.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Ketorolaco trometamol. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-ketorolaco+trometamol-m01ab15"
+      }
+    ]
+  }, {
     "nombre": "Metoprolol",
-    "presentacion": "50 mg, 100 mg comprimidos",
-    "via": "Oral, EV",
-    "dosisAdulto": "50-100 mg cada 12-24h",
-    "dosisPediatrica": "1-2 mg/kg/día",
-    "maximoDiario": "400 mg/día",
-    "contraindicaciones": "Bradicardia severa, bloqueo AV, asma",
-    "interacciones": "Verapamilo, digoxina, clonidina",
-    "indicaciones": "Hipertensión, angina, insuficiencia cardíaca",
     "icono": "heartbeat",
-    "categoria": "antihipertensivo"
+    "categoria": "antihipertensivo",
+    "farmacodinamia": "Betabloqueante cardioselectivo que actúa de manera preferente sobre los receptores beta-1 adrenérgicos localizados en el corazón.\nReduce la frecuencia cardiaca, el gasto cardiaco y la presión arterial elevada.\nCarece de actividad simpaticomimética intrínseca y de efecto estabilizador de membrana.",
+    "farmacocinetica": "Absorción: Se absorbe casi por completo tras la vía oral, pero tiene una biodisponibilidad reducida del 40% al 50% por el metabolismo de primer paso hepático.\nDistribución: Su unión a proteínas plasmáticas es baja (aproximadamente del 12%) y atraviesa de forma activa la barrera hematoencefálica.\nMetabolismo: Se metaboliza intensamente en el hígado, principalmente a través de la vía enzimática del CYP2D6.\nEliminación: Se excreta de manera casi exclusiva por vía renal en forma de metabolitos inactivos, con una semivida de eliminación corta de 3 a 5 horas.",
+    "indicaciones": "Hipertensión arterial sistémica.\nAngina de pecho crónica.\nArritmias cardiacas (especialmente taquicardias supraventriculares).\nTratamiento de mantenimiento después de un infarto agudo de miocardio.\nProfilaxis de la migraña.",
+    "viaAdministracion": "Oral, IV",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al metoprolol o a otros betabloqueantes.", "Bloqueo auriculoventricular de segundo o tercer grado.", "Insuficiencia cardiaca descompensada o presencia de shock cardiogénico.", "Bradicardia sinusal intensa (frecuencia menor de 45 latidos por minuto).", "Síndrome del seno enfermo.", "Enfermedad arterial periférica grave con amenaza de gangrena."],
+      "relativas": ["Antecedentes de asma bronquial o enfermedad pulmonar obstructiva crónica (EPOC).", "Diabetes mellitus (puede enmascarar signos clave de hipoglucemia como la taquicardia).", "Feocromocitoma no tratado previamente con alfa-bloqueantes.", "Insuficiencia hepática grave."]
+    },
+    "efectosSecundarios": ["Cansancio o fatiga generalizada.", "Mareos y dolor de cabeza.", "Sensación de extremidades frías.", "Náuseas y estreñimiento leve."],
+    "efectosAdversos": ["Bradicardia extrema.", "Bloqueos de la conducción auriculoventricular.", "Broncoespasmo en pacientes predispuestos.", "Hipotensión postural o síncope.", "Depresión o pesadillas intensas."],
+    "interacciones": [
+      {
+        "medicamento": "Inhibidores del CYP2D6 (como fluoxetina o paroxetina)",
+        "efecto": "Pueden disparar los niveles plasmáticos de metoprolol y potenciar sus efectos.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antagonistas del calcio (verapamilo o diltiazem)",
+        "efecto": "Riesgo de bradicardia severa e hipotensión si se combinan por la misma vía o en cortos intervalos de tiempo.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Glucósidos digitálicos",
+        "efecto": "Aumentan exponencialmente el riesgo de bradicardia extrema y bloqueos de conducción.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "AINEs",
+        "efecto": "Pueden disminuir la efectividad del metoprolol para controlar la presión arterial.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2019). Ficha técnica Lopresor 100 mg comprimidos recubiertos con película. CIMA.",
+        "url": "https://cima.aemps.es/cima/pdfs/es/ft/54503/P_54503.pdf"
+      },
+      {
+        "text": "Asociación Española de Pediatría (AEP). (2020). Metoprolol. Pediamécum.",
+        "url": "https://www.aeped.es/comites/cm/pediamecum/principios-activos/metoprolol"
+      }
+    ]
   },
   {
     "nombre": "Enalapril",
-    "presentacion": "5 mg, 10 mg, 20 mg comprimidos",
-    "via": "Oral",
-    "dosisAdulto": "5-20 mg/día en 1-2 dosis",
-    "dosisPediatrica": "0.1-0.5 mg/kg/día",
-    "maximoDiario": "40 mg/día",
-    "contraindicaciones": "Estenosis de arteria renal, embarazo",
-    "interacciones": "AINEs, diuréticos ahorradores de potasio",
-    "indicaciones": "Hipertensión, insuficiencia cardíaca",
     "icono": "heartbeat",
-    "categoria": "antihipertensivo"
+    "categoria": "antihipertensivo",
+    "farmacodinamia": "Es un inhibidor de la enzima convertidora de angiotensina (IECA).\nImpide la conversión de angiotensina I en angiotensina II, disminuyendo de forma secundaria la vasoconstricción y la secreción de aldosterona.\nInhibe también la degradación de la bradicinina, un potente péptido vasodilatador.",
+    "farmacocinetica": "Absorción: Se absorbe rápidamente por vía oral (aproximadamente un 60%). La absorción no se ve afectada por la presencia de alimentos en el tubo digestivo.\nDistribución: Pasa libremente a la mayoría de los tejidos, pero no atraviesa significativamente la barrera hematoencefálica.\nMetabolismo: Es un profármaco que se hidroliza de manera extensa en el hígado para convertirse en su metabolito activo, el enalaprilato.\nEliminación: El enalaprilato se excreta principalmente por vía renal. La semivida eficaz de acumulación tras varias dosis es de unas 11 horas.",
+    "indicaciones": "Tratamiento de la hipertensión arterial sistémica.\nTratamiento de la insuficiencia cardíaca sintomática.\nPrevención de la insuficiencia cardíaca sintomática en pacientes con disfunción ventricular izquierda asintomática.",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al enalapril o a cualquier otro fármaco de la familia de los IECAs.", "Antecedentes de angioedema asociado a un tratamiento previo con medicamentos de la misma familia.", "Segundo y tercer trimestres del embarazo.", "Uso concomitante con medicamentos que contienen aliskiren en pacientes diabéticos o con insuficiencia renal."],
+      "relativas": ["Primer trimestre del embarazo.", "Estenosis bilateral de la arteria renal o estenosis de la arteria renal de un riñón único.", "Pacientes con depleción grave de volumen o de sodio por riesgo de hipotensión súbita.", "Insuficiencia renal moderada (se requiere monitorización y ajuste de dosis)."]
+    },
+    "efectosSecundarios": ["Tos seca persistente y de carácter irritativo.", "Mareos o vértigo leve.", "Náuseas y diarrea ocasional.", "Cefalea o astenia."],
+    "efectosAdversos": ["Angioedema (puede ser fatal si compromete las vías aéreas).", "Hipotensión sintomática grave en el inicio de la terapia.", "Insuficiencia renal aguda.", "Hiperpotasemia (elevación de los niveles de potasio en sangre).", "Neutropenia o agranulocitosis (raras)."],
+    "interacciones": [
+      {
+        "medicamento": "Diuréticos ahorradores de potasio y suplementos de potasio",
+        "efecto": "Pueden causar una hiperpotasemia severa.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Diuréticos de asa o tiazidas",
+        "efecto": "Su combinación inicial puede potenciar drásticamente el riesgo de hipotensión.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Litio",
+        "efecto": "Los IECAs pueden aumentar las concentraciones séricas de litio y acelerar su toxicidad.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "AINEs",
+        "efecto": "Pueden mermar el efecto antihipertensivo y deteriorar aún más la función renal.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2022). Ficha técnica Enalapril Stada 20 mg comprimidos EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/62645/FichaTecnica_62645.html"
+      },
+      {
+        "text": "Asociación Española de Pediatría (AEP). (2022). Enalapril. Pediamécum.",
+        "url": "https://www.aeped.es/comites/cm/pediamecum/principios-activos/enalapril"
+      }
+    ]
   },
   {
-    "nombre": "Digoxina",
-    "presentacion": "0.25 mg comprimidos / 0.5 mg/2 ml ampolla",
-    "via": "Oral, EV",
-    "dosisAdulto": "0.125-0.25 mg/día",
-    "dosisPediatrica": "10-15 µg/kg/día",
-    "maximoDiario": "0.5 mg/día",
-    "contraindicaciones": "Intoxicación digitálica, miocardiopatía hipertrófica",
-    "interacciones": "Amiodarona, verapamilo, diuréticos",
-    "indicaciones": "Insuficiencia cardíaca, fibrilación auricular",
+    "nombre": "Losartán",
     "icono": "heartbeat",
-    "categoria": "antihipertrensivo"
+    "categoria": "antihipertensivo",
+    "farmacodinamia": "Es un antagonista sintético de los receptores de la angiotensina II (tipo AT1), englobado en el grupo de los ARA-II.\nBloquea de forma altamente selectiva la unión de la angiotensina II a los receptores AT1 celulares.\nReduce la vasoconstricción y la liberación de aldosterona sin inhibir la degradación de la bradicinina, por lo que rara vez causa tos.",
+    "farmacocinetica": "Absorción: Buena absorción oral, pero sufre un intenso metabolismo de primer paso que deja una biodisponibilidad del 33%.\nDistribución: Se une en un porcentaje mayor o igual al 99% a las proteínas plasmáticas (principalmente albúmina).\nMetabolismo: Se convierte en el hígado en un metabolito activo de ácido carboxílico que es de 10 a 40 veces más potente que el propio losartán.\nEliminación: Se excreta tanto por vía urinaria como por la bilis y las heces. Su semivida terminal es de unas 2 horas para el losartán y de 6 a 9 horas para su metabolito activo.",
+    "indicaciones": "Tratamiento de la hipertensión esencial.\nTratamiento de la enfermedad renal en pacientes hipertensos con diabetes tipo 2 y proteinuria significativa.\nTratamiento de la insuficiencia cardiaca crónica (cuando el tratamiento con IECAs no se considera adecuado por intolerancia).\nReducción del riesgo de accidente cerebrovascular en pacientes hipertensos con hipertrofia ventricular izquierda.",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al losartán o a cualquiera de sus componentes.", "Segundo y tercer trimestres del embarazo.", "Insuficiencia hepática grave.", "Uso concomitante con aliskiren en pacientes diabéticos o con insuficiencia renal de moderada a grave."],
+      "relativas": ["Antecedentes de angioedema.", "Estenosis bilateral de la arteria renal o estenosis en riñón único.", "Pacientes con hipovolemia extrema o depleción de sodio.", "Primer trimestre de embarazo y periodo de lactancia."]
+    },
+    "efectosSecundarios": ["Mareos o vértigo.", "Fatiga y astenia leve.", "Hipotensión ortostática.", "Náuseas y diarrea de baja intensidad."],
+    "efectosAdversos": ["Hiperpotasemia.", "Deterioro de la función renal o insuficiencia renal aguda en pacientes de riesgo preexistente.", "Angioedema (mucho menos frecuente que con el uso de IECAs).", "Anemia."],
+    "interacciones": [
+      {
+        "medicamento": "Medicamentos que aumentan el potasio (suplementos, diuréticos ahorradores de potasio)",
+        "efecto": "Riesgo elevado de hiperpotasemia.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Litio",
+        "efecto": "Los ARA-II pueden elevar los niveles de litio y su toxicidad, requiriendo estricto control.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "AINEs",
+        "efecto": "Pueden atenuar el efecto reductor de la presión arterial y afectar el riñón.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Rifampicina y fluconazol",
+        "efecto": "Se ha notificado que pueden reducir la concentración del metabolito activo.",
+        "severidad": "baja"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2024). Ficha técnica Losartán Pensa 50 mg comprimidos recubiertos con película EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/68156/FT_68156.html"
+      },
+      {
+        "text": "Asociación Española de Pediatría (AEP). (2020). Losartán. Pediamécum.",
+        "url": "https://www.aeped.es/comites/cm/pediamecum/principios-activos/losartan"
+      }
+    ]
+  },
+  {
+    "nombre": "Metamizol",
+    "icono": "thermometer",
+    "categoria": "antiinflamatorios",
+    "farmacodinamia": "Fármaco analgésico, antipirético y espasmolítico del grupo de las pirazolonas.\nSu mecanismo es complejo y combina la inhibición de la síntesis de prostaglandinas a nivel central y periférico con interacciones en los sistemas cannabinoide y opioide.",
+    "farmacocinetica": "Absorción: Rápida y casi completa por vía oral. Es un profármaco que se hidroliza en el intestino a su metabolito activo principal, la 4-metilaminoantipirina (MAA).\nDistribución: La unión del metabolito MAA a las proteínas plasmáticas es de aproximadamente el 58%.\nMetabolismo: Se metaboliza de forma intensa en el hígado.\nEliminación: Se excreta mayoritariamente por la orina (en un 90%). Su semivida de eliminación en sangre oscila entre 2.5 y 4 horas.",
+    "indicaciones": "Dolor agudo intenso postoperatorio o postraumático.\nDolor de tipo cólico (por ejemplo, cólico renal).\nFiebre alta que no responde a otros antitérmicos.",
+    "viaAdministracion": "Oral, Rectal, IM, IV",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al metamizol o a otras pirazolonas.", "Antecedentes de agranulocitosis por medicamentos.", "Deficiencia de glucosa-6-fosfato deshidrogenasa (riesgo de hemólisis).", "Porfiria aguda intermitente.", "Tercer trimestre del embarazo."],
+      "relativas": ["Hipotensión arterial preexistente o inestabilidad hemodinámica.", "Insuficiencia renal o hepática severa (se requiere reducir la dosis).", "Asma por analgésicos."]
+    },
+    "efectosSecundarios": ["Náuseas y sequedad de boca.", "Mareos.", "Hipotensión (especialmente si la inyección intravenosa es muy rápida)."],
+    "efectosAdversos": ["Agranulocitosis (efecto secundario muy raro pero grave y potencialmente mortal).", "Shock anafiláctico.", "Reacciones cutáneas severas (como el Síndrome de Stevens-Johnson)."],
+    "interacciones": [
+      {
+        "medicamento": "Ciclosporina",
+        "efecto": "Puede disminuir sus niveles en sangre.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Alcohol",
+        "efecto": "Puede potenciar los efectos sedantes o tóxicos de ambos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Metotrexato",
+        "efecto": "Aumenta el riesgo de toxicidad hematológica de este último.",
+        "severidad": "alta"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2021). Ficha técnica Metamizol Normon 500 mg cápsulas duras. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/59345/FichaTecnica_59345.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Metamizol sódico. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-metamizol+sodico-n02bb02"
+      }
+    ]
+  },
+  {
+    "nombre": "Dexametasona",
+    "icono": "thermometer",
+    "categoria": "antiinflamatorios",
+    "farmacodinamia": "Corticoide sintético de acción prolongada.\nMuy potente efecto antiinflamatorio (unas 25 a 30 veces más potente que la hidrocortisona) e inmunosupresor.\nCasi nula actividad mineralocorticoide (no retiene tanto sodio).",
+    "farmacocinetica": "Absorción: Buena absorción por vía oral, con una biodisponibilidad del 70% al 80%.\nDistribución: Se une principalmente a la albúmina plasmática. Atraviesa la barrera hematoencefálica y placentaria.\nMetabolismo: Metabolismo hepático a través del sistema CYP3A4.\nEliminación: Se elimina de forma mayoritaria por la orina. Su semivida biológica es larga, durando de 36 a 54 horas.",
+    "indicaciones": "Tratamiento del edema cerebral secundario a tumores.\nProcesos inflamatorios y alérgicos graves (como estatus asmático).\nEnfermedades autoinmunes (p. ej., brotes de lupus eritematoso sistémico).\nPrevención y tratamiento de las náuseas inducidas por quimioterapia.\nTratamiento de COVID-19 grave en pacientes que requieren oxígeno suplementario.",
+    "viaAdministracion": "Oral, IV, IM, Tópica/Oftálmica",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad a la dexametasona.", "Infecciones fúngicas sistémicas.", "Administración de vacunas de virus vivos atenuados en pacientes con dosis inmunosupresoras."],
+      "relativas": ["Úlcera péptica activa.", "Hipertensión arterial grave.", "Diabetes mellitus descontrolada (por aumento de la glucemia).", "Osteoporosis severa.", "Tuberculosis activa."]
+    },
+    "efectosSecundarios": ["Aumento del apetito y ganancia de peso.", "Insomnio y labilidad emocional.", "Pirosis o malestar gástrico."],
+    "efectosAdversos": ["Síndrome de Cushing (en tratamientos prolongados).", "Supresión del eje hipotálamo-hipofisario-suprarrenal.", "Osteoporosis y fracturas óseas.", "Glaucoma o cataratas.", "Retraso en la cicatrización de heridas.", "Mayor susceptibilidad a infecciones."],
+    "interacciones": [
+      {
+        "medicamento": "AINEs",
+        "efecto": "Aumentan el riesgo de úlceras y hemorragias gastrointestinales.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antidiabéticos",
+        "efecto": "Disminuyen su efecto por la hiperglucemia provocada por el corticoide.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Inductores enzimáticos (como fenitoína o rifampicina)",
+        "efecto": "Disminuyen los niveles y el efecto de la dexametasona.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Dexametasona Qualigen 4 mg comprimidos EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/81729/FichaTecnica_81729.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Dexametasona. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-dexametasona-h02ab02"
+      }
+    ]
+  },
+  {
+    "nombre": "Naproxeno",
+    "icono": "thermometer",
+    "categoria": "antiinflamatorios",
+    "farmacodinamia": "Fármaco antiinflamatorio no esteroideo (AINE) con propiedades analgésicas y antipiréticas derivadas del ácido propiónico.\nActúa mediante la inhibición no selectiva de las enzimas ciclooxigenasas COX-1 y COX-2, reduciendo la síntesis de prostaglandinas.",
+    "farmacocinetica": "Absorción: Rápida y completa tras la administración oral.\nDistribución: Se une intensamente a la albúmina plasmática (en más del 99%).\nMetabolismo: Metabolismo hepático hacia metabolitos inactivos.\nEliminación: Prácticamente toda la dosis se excreta en la orina. Presenta una semivida de eliminación prolongada de 12 a 17 horas.",
+    "indicaciones": "Tratamiento del dolor leve a moderado.\nAlivio sintomático de la artritis reumatoide, osteoartritis y espondilitis anquilosante.\nTratamiento de ataques agudos de gota.\nAlivio de la dismenorrea primaria.",
+    "viaAdministracion": "Oral, Rectal",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad al naproxeno o reactividad cruzada con el ácido acetilsalicílico u otros AINEs.", "Úlcera péptica activa o antecedentes de hemorragia o perforación gastrointestinal asociada a AINEs.", "Insuficiencia cardiaca grave.", "Insuficiencia renal o hepática graves.", "Tercer trimestre de embarazo."],
+      "relativas": ["Hipertensión arterial o insuficiencia cardiaca leve a moderada.", "Enfermedad renal o hepática leve a moderada.", "Primer y segundo trimestre de embarazo."]
+    },
+    "efectosSecundarios": ["Dispepsia, náuseas y pirosis.", "Dolor abdominal leve o estreñimiento.", "Mareos y cefaleas."],
+    "efectosAdversos": ["Úlceras gastrointestinales y hemorragia digestiva.", "Daño renal o nefritis intersticial.", "Elevación del riesgo trombótico cardiovascular (aunque menor en comparación con otros AINEs).", "Reacciones cutáneas graves."],
+    "interacciones": [
+      {
+        "medicamento": "Anticoagulantes orales",
+        "efecto": "Elevado riesgo de sangrado.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Litio",
+        "efecto": "Eleva los niveles de litio en sangre al disminuir su excreción.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Diuréticos y antihipertensivos",
+        "efecto": "Naproxeno puede disminuir su efecto terapéutico y potenciar el daño renal.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Naproxeno Normon 500 mg comprimidos EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/56230/FichaTecnica_56230.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Naproxeno. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-naproxeno-m01ae02"
+      }
+    ]
+  },
+    {
+    "nombre": "Furosemida",
+    "icono": "drop",
+    "categoria": "diureticos",
+    "farmacodinamia": "Diurético de asa de gran potencia.\nBloquea el sistema de cotransporte de Na+/K+/2Cl- en la rama ascendente del asa de Henle, aumentando la excreción de sodio, potasio, calcio y magnesio.\nReduce la presión de llenado ventricular izquierdo antes de que se produzca el efecto diurético propiamente dicho.",
+    "farmacocinetica": "Absorción: Por vía oral su biodisponibilidad oscila entre el 50% y el 70%. La presencia de alimentos puede retrasar su absorción.\nDistribución: Se une intensamente a las proteínas plasmáticas (más del 95%), principalmente a la albúmina.\nMetabolismo: Se metaboliza mínimamente en el hígado a glucurónido de furosemida.\nEliminación: Se excreta de forma mayoritaria en la orina como fármaco inalterado. Su semivida de eliminación es de aproximadamente 1 a 1.5 horas.",
+    "indicaciones": "Tratamiento de edemas asociados a insuficiencia cardiaca congestiva, cirrosis hepática y enfermedad renal.\nEdema pulmonar agudo.\nCrisis hipertensivas (junto con otras medidas médicas).",
+    "viaAdministracion": "Oral, IV, IM",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad a la furosemida o a las sulfonamidas.", "Hipovolemia o deshidratación severa.", "Insuficiencia renal con anuria que no responde a la furosemida.", "Hipopotasemia o hiponatremia graves.", "Estado comatoso o precomatoso asociado a encefalopatía hepática."],
+      "relativas": ["Pacientes con hipotensión.", "Diabetes mellitus (puede alterar el control de la glucosa).", "Gota o hiperuricemia."]
+    },
+    "efectosSecundarios": ["Mareos o sensación de desmayo (por hipotensión).", "Sequedad de boca y aumento de la sed.", "Calambres musculares.", "Trastornos gastrointestinales leves como náuseas."],
+    "efectosAdversos": ["Desequilibrios electrolíticos (hipopotasemia, hiponatremia, alcalosis hipoclorémica).", "Ototoxicidad (pérdida de audición reversible o irreversible, especialmente con infusión rápida o dosis muy altas).", "Insuficiencia renal aguda por deshidratación.", "Hemoconcentración y riesgo de trombosis."],
+    "interacciones": [
+      {
+        "medicamento": "Antibióticos aminoglucósidos",
+        "efecto": "Aumentan el riesgo de ototoxicidad y nefrotoxicidad.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "AINEs",
+        "efecto": "Reducen el efecto diurético y antihipertensivo de la furosemida.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Litio",
+        "efecto": "Reduce la excreción de litio, aumentando exponencialmente su toxicidad.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Digoxina",
+        "efecto": "La hipopotasemia provocada por la furosemida aumenta la toxicidad de los digitálicos.",
+        "severidad": "alta"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2021). Ficha técnica Furosemida Teva 40 mg comprimidos. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/61756/FichaTecnica_61756.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Furosemida. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-furosemida-c03ca01"
+      }
+    ]
+  },
+  {
+    "nombre": "Espironolactona",
+    "icono": "drop",
+    "categoria": "diureticos",
+    "farmacodinamia": "Diurético ahorrador de potasio que actúa como antagonista específico de la aldosterona por unión competitiva a los receptores del túbulo contorneado distal.\nAumenta la excreción de agua y sodio mientras retiene potasio y magnesio.",
+    "farmacocinetica": "Absorción: Se absorbe bien por vía oral y su biodisponibilidad aumenta sustancialmente cuando se toma con alimentos.\nDistribución: Se une a proteínas plasmáticas en más del 90%.\nMetabolismo: Se metaboliza rápida y extensamente en el hígado a múltiples metabolitos activos, siendo el principal la canrenona.\nEliminación: Los metabolitos se eliminan principalmente por la orina y en menor medida por vía biliar. Su semivida biológica es de aproximadamente 1.3 a 2 horas, pero la de sus metabolitos activos es mucho más prolongada (hasta 10-22 horas).",
+    "indicaciones": "Hiperaldosteronismo primario y secundario.\nEdema asociado a insuficiencia cardiaca congestiva crónica.\nAscitis y edema por cirrosis hepática.\nHipertensión arterial esencial (generalmente en combinación con otros fármacos).",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad a la espironolactona.", "Insuficiencia renal grave o aguda, o anuria.", "Hiperpotasemia (niveles elevados de potasio en sangre).", "Enfermedad de Addison.", "Uso concomitante con eplerenona u otros diuréticos ahorradores de potasio."],
+      "relativas": ["Pacientes con predisposición a la acidosis metabólica.", "Diabetes mellitus."]
+    },
+    "efectosSecundarios": ["Malestar general o fatiga.", "Náuseas y vómitos.", "Somnolencia o cefaleas."],
+    "efectosAdversos": ["Hiperpotasemia grave (puede ser fatal).", "Ginecomastia (crecimiento de las mamas en varones), impotencia y disminución de la libido.", "Irregularidades menstruales o amenorrea en mujeres.", "Acidosis metabólica hiperclorémica."],
+    "interacciones": [
+      {
+        "medicamento": "IECAs, ARA-II o suplementos de potasio",
+        "efecto": "Elevan críticamente el riesgo de hiperpotasemia severa.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "AINEs",
+        "efecto": "Disminuyen el efecto diurético y aumentan el riesgo de nefrotoxicidad.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Digoxina",
+        "efecto": "Espironolactona puede aumentar la semivida de la digoxina, elevando el riesgo de toxicidad.",
+        "severidad": "alta"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Aldactone 25 mg comprimidos. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/34947/FichaTecnica_34947.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Espironolactona. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-espironolactona-c03da01"
+      }
+    ]
+  },
+  {
+    "nombre": "Hidroclorotiazida",
+    "icono": "drop",
+    "categoria": "diureticos",
+    "farmacodinamia": "Diurético tiazídico de potencia moderada.\nInhibe el cotransporte de Na+/Cl- en el túbulo contorneado distal, aumentando la excreción de agua, sodio y cloro, así como la de potasio y magnesio, pero disminuye la excreción de calcio.",
+    "farmacocinetica": "Absorción: Rápida tras su administración oral, con una biodisponibilidad de entre el 60% y el 80%.\nDistribución: Se acumula en los eritrocitos y atraviesa la barrera placentaria. No se une fuertemente a proteínas plasmáticas.\nMetabolismo: No se metaboliza en el organismo.\nEliminación: Se elimina de forma inalterada por vía renal en más del 95%. Su semivida de eliminación oscila entre las 6 y 15 horas.",
+    "indicaciones": "Hipertensión arterial sistémica (como monoterapia o combinada).\nEdemas debidos a insuficiencia cardiaca, renal o hepática.\nDiabetes insípida renal (paradójicamente reduce el volumen de orina).\nPrevención de cálculos renales de calcio (hipercalciuria idiopática).",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": ["Hipersensibilidad a la hidroclorotiazida o a otras tiazidas o sulfonamidas.", "Insuficiencia renal grave o anuria.", "Insuficiencia hepática grave.", "Hipopotasemia o hiponatremia refractarias.", "Hipercalcemia."],
+      "relativas": ["Diabetes mellitus (puede elevar los niveles de glucosa).", "Gota (disminuye la excreción de ácido úrico).", "Lupus eritematoso sistémico."]
+    },
+    "efectosSecundarios": ["Pérdida de apetito y náuseas.", "Hipotensión ortostática.", "Cefaleas y mareos leves."],
+    "efectosAdversos": ["Hipopotasemia e hiponatremia.", "Hiperuricemia (puede desencadenar crisis agudas de gota).", "Hiperglucemia.", "Reacciones de fotosensibilidad o cáncer de piel no melanoma (asociado a su uso continuo y prolongado).", "Glaucoma agudo de ángulo cerrado secundario o miopía transitoria."],
+    "interacciones": [
+      {
+        "medicamento": "Litio",
+        "efecto": "Al igual que otros diuréticos, aumenta el riesgo de toxicidad por litio.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antidiabéticos (orales e insulina)",
+        "efecto": "Puede requerirse un ajuste de dosis debido al efecto hiperglucemiante de la tiazida.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Fármacos que prolongan el intervalo QT",
+        "efecto": "El riesgo de arritmias graves aumenta por la hipopotasemia que produce la hidroclorotiazida.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Alcohol y barbitúricos",
+        "efecto": "Potencian la caída de presión al ponerse de pie.",
+        "severidad": "media"
+      }
+    ],
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Hidroclorotiazida Teva 25 mg comprimidos. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/74880/FichaTecnica_74880.html"
+      },
+      {
+        "text": "Vidal Vademecum. (s.f.). Hidroclorotiazida. Vademecum.es.",
+        "url": "https://www.vademecum.es/principios-activos-hidroclorotiazida-c03aa03"
+      }
+    ]
   }
 ]

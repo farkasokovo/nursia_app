@@ -1,5 +1,7 @@
 // lib/screens/farmacologia_screen.dart
 import 'package:flutter/material.dart';
+import 'package:nursia_app/screens/farmacologia/antiinflamatorios.dart';
+import 'package:nursia_app/screens/farmacologia/diureticos_screen.dart';
 import 'package:nursia_app/screens/ficha_medicamento.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/category_button.dart';
@@ -40,9 +42,7 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => FichaMedicamento(
-          nombreMedicamento: farmaco.nombre, // 👈 Solo el nombre
-        ),
+        builder: (_) => FichaMedicamento(nombreMedicamento: farmaco.nombre),
       ),
     );
   }
@@ -81,69 +81,126 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
         ],
       ),
       categoriesBuilder: (_) => SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: CategoryButton(
-                    title: "Analgésicos",
-                    icon: PhosphorIconsRegular.bandaids,
-                    heroTag: "analgesicos",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AnalgesicosScreen(),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: CategoryButton(
-                    title: "Antibióticos",
-                    icon: PhosphorIconsRegular.shieldPlus,
-                    heroTag: "antibioticos",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AntibioticosScreen(),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: CategoryButton(
-                    title: "Anti-\nhipertensivos",
-                    icon: PhosphorIconsRegular.heartbeat,
-                    heroTag: "antihipertensivos",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const CardiovascularScreen(),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: CategoryButton(
-                    title: "Anti-\ninflamatorios",
-                    icon: PhosphorIconsRegular.thermometer,
-                    heroTag: "antiinflamatorios",
-                    onTap: () {},
-                  ),
-                ),
-              ],
-            ),
-          ],
+        // Efecto de rebote estético
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          // Espacio al final para un scroll cómodo
+          padding: const EdgeInsets.only(bottom: 32),
+          child: Column(
+            children: [
+              _buildRow(
+                leftTitle: "Analgésicos",
+                leftIcon: PhosphorIconsRegular.bandaids,
+                leftHero: "analgesicos",
+                leftTarget: const AnalgesicosScreen(),
+
+                rightTitle: "Antibióticos",
+                rightIcon: PhosphorIconsRegular.shieldPlus,
+                rightHero: "antibioticos",
+                rightTarget: const AntibioticosScreen(),
+              ),
+              const SizedBox(height: 16),
+              _buildRow(
+                leftTitle: "Anti-\nhipertensivos",
+                leftIcon: PhosphorIconsRegular.heartbeat,
+                leftHero: "antihipertensivos",
+                leftTarget: const CardiovascularScreen(),
+
+                rightTitle: "Anti-\ninflamatorios",
+                rightIcon: PhosphorIconsRegular.thermometer,
+                rightHero: "antiinflamatorios",
+                rightTarget: const AntiinflamatoriosScreen(),
+              ),
+              const SizedBox(height: 16),
+              _buildSingleRow(
+                title: "Diuréticos",
+                icon: PhosphorIconsRegular.drop,
+                hero: "diureticos",
+                target: const DiureticosScreen(),
+              ),
+              // 👇 Cuando crees nuevas categorías de fármacos, solo agrégalas aquí:
+              // const SizedBox(height: 16),
+              // _buildRow(...),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  /// Helper para construir filas de dos botones rápidamente
+  Widget _buildRow({
+    required String leftTitle,
+    required IconData leftIcon,
+    required String leftHero,
+    required Widget? leftTarget,
+    required String rightTitle,
+    required IconData rightIcon,
+    required String rightHero,
+    required Widget? rightTarget,
+  }) {
+    return Row(
+      children: [
+        Expanded(
+          child: CategoryButton(
+            title: leftTitle,
+            icon: leftIcon,
+            heroTag: leftHero,
+            onTap: leftTarget == null
+                ? () => _mostrarNoImplementado(leftTitle)
+                : () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => leftTarget),
+                  ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: CategoryButton(
+            title: rightTitle,
+            icon: rightIcon,
+            heroTag: rightHero,
+            onTap: rightTarget == null
+                ? () => _mostrarNoImplementado(rightTitle)
+                : () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => rightTarget),
+                  ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSingleRow({
+    required String title,
+    required IconData icon,
+    required String hero,
+    required Widget? target,
+  }) {
+    return Row(
+      children: [
+        Expanded(
+          child: CategoryButton(
+            title: title,
+            icon: icon,
+            heroTag: hero,
+            onTap: target == null
+                ? () => _mostrarNoImplementado(title)
+                : () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => target),
+                  ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Función para avisar que una pantalla aún no está terminada
+  void _mostrarNoImplementado(String nombre) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('La sección de $nombre aún está en desarrollo')),
     );
   }
 }

@@ -5,6 +5,24 @@
       "nombre": "Escala de Glasgow",
       "categoria": "neurologicas",
       "ruta": "glasgow_screen"
+    },
+    {
+      "id": "ramsay",
+      "nombre": "Escala de Ramsay",
+      "categoria": "neurologicas",
+      "ruta": "ramsay_screen"
+    },
+    {
+      "id": "rass",
+      "nombre": "Escala RASS",
+      "categoria": "neurologicas",
+      "ruta": "rass_screen"
+    },
+    {
+      "id": "downton",
+      "nombre": "Escala de Downton",
+      "categoria": "riesgos",
+      "ruta": "downton_screen"
     }
   ]
 }

@@ -3,7 +3,7 @@ import 'package:nursia_app/repositories/repositorio_escalas.dart';
 import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart'; // Solo para colores de resultado (greenAlert, etc.)
+import '../../../theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -63,48 +63,133 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
+                  // ================== RESPUESTA OCULAR ==================
                   ScaleParameterSelector(
                     title: "Respuesta ocular",
                     onChanged: (int? value) =>
                         setState(() => ocular = ScaleValue(value)),
                     options: const [
-                      ScaleOption(score: 4, label: "Espontánea"),
-                      ScaleOption(score: 3, label: "Al orden verbal"),
-                      ScaleOption(score: 2, label: "Al dolor"),
-                      ScaleOption(score: 1, label: "Sin respuesta"),
-                      ScaleOption(score: null, label: "No valorable"),
+                      ScaleOption(
+                        score: 4,
+                        label: "Espontánea",
+                        description: "Abre los ojos sin estimulación.",
+                      ),
+                      ScaleOption(
+                        score: 3,
+                        label: "Al orden verbal",
+                        description: "Abre los ojos al llamado verbal.",
+                      ),
+                      ScaleOption(
+                        score: 2,
+                        label: "Al dolor",
+                        description: "Abre los ojos ante estímulo doloroso.",
+                      ),
+                      ScaleOption(
+                        score: 1,
+                        label: "Sin respuesta",
+                        description: "No abre los ojos ante ningún estímulo.",
+                      ),
+                      ScaleOption(
+                        score: null,
+                        label: "No valorable",
+                        description:
+                            "No se puede evaluar (ej. edema palpebral).",
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
+
+                  // ================== RESPUESTA VERBAL ==================
                   ScaleParameterSelector(
                     title: "Respuesta verbal",
                     onChanged: (int? value) =>
                         setState(() => verbal = ScaleValue(value)),
                     options: const [
-                      ScaleOption(score: 5, label: "Orientado"),
-                      ScaleOption(score: 4, label: "Confuso"),
-                      ScaleOption(score: 3, label: "Palabras inapropiadas"),
-                      ScaleOption(score: 2, label: "Sonidos incomprensibles"),
-                      ScaleOption(score: 1, label: "Sin respuesta"),
-                      ScaleOption(score: null, label: "No valorable"),
+                      ScaleOption(
+                        score: 5,
+                        label: "Orientado",
+                        description:
+                            "Responde coherentemente: sabe quién es, dónde está, fecha.",
+                      ),
+                      ScaleOption(
+                        score: 4,
+                        label: "Confuso",
+                        description:
+                            "Responde frases coherentes pero desorientado.",
+                      ),
+                      ScaleOption(
+                        score: 3,
+                        label: "Palabras inapropiadas",
+                        description:
+                            "Palabras sueltas, sin formar frases coherentes.",
+                      ),
+                      ScaleOption(
+                        score: 2,
+                        label: "Sonidos incomprensibles",
+                        description: "Emite gemidos o quejidos sin palabras.",
+                      ),
+                      ScaleOption(
+                        score: 1,
+                        label: "Sin respuesta",
+                        description: "No emite ningún sonido.",
+                      ),
+                      ScaleOption(
+                        score: null,
+                        label: "No valorable",
+                        description:
+                            "No se puede evaluar (ej. paciente intubado, afasia).",
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
+
+                  // ================== RESPUESTA MOTORA ==================
                   ScaleParameterSelector(
                     title: "Respuesta motora",
                     onChanged: (int? value) =>
                         setState(() => motora = ScaleValue(value)),
                     options: const [
-                      ScaleOption(score: 6, label: "Obedece órdenes"),
+                      ScaleOption(
+                        score: 6,
+                        label: "Obedece órdenes",
+                        description:
+                            "Realiza acciones como 'abra los ojos' o 'apriete mi mano'.",
+                      ),
                       ScaleOption(
                         score: 5,
                         label: "Localiza estímulo doloroso",
+                        description:
+                            "Lleva la mano al punto de estímulo doloroso.",
                       ),
-                      ScaleOption(score: 4, label: "Retirada al dolor"),
-                      ScaleOption(score: 3, label: "Flexión anormal"),
-                      ScaleOption(score: 2, label: "Extensión anormal"),
-                      ScaleOption(score: 1, label: "Sin respuesta"),
-                      ScaleOption(score: null, label: "No valorable"),
+                      ScaleOption(
+                        score: 4,
+                        label: "Retirada al dolor",
+                        description:
+                            "Retira la extremidad ante el dolor (sin localizar).",
+                      ),
+                      ScaleOption(
+                        score: 3,
+                        label: "Flexión anormal",
+                        description:
+                            "Flexión del brazo con rotación interna (decorticación).",
+                      ),
+                      ScaleOption(
+                        score: 2,
+                        label: "Extensión anormal",
+                        description:
+                            "Extensión del brazo con rotación externa (descerebración).",
+                      ),
+                      ScaleOption(
+                        score: 1,
+                        label: "Sin respuesta",
+                        description: "No responde a ningún estímulo doloroso.",
+                      ),
+                      ScaleOption(
+                        score: null,
+                        label: "No valorable",
+                        description:
+                            "No se puede evaluar (ej. sedación, parálisis).",
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -137,7 +222,7 @@ class _GlasgowInfo extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: colorScheme.secondary, // antes AppColors.secondaryColor
+            color: colorScheme.secondary,
             borderRadius: BorderRadius.circular(20),
           ),
           padding: const EdgeInsets.all(20),

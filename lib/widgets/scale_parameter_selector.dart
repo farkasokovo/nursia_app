@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import '../theme/app_theme.dart'; // Solo para AppRadius (constante)
+import '../theme/app_theme.dart';
 
 class ScaleOption {
   final String label;
   final int? score;
+  final String? description; // 👈 NUEVO: descripción clínica opcional
 
-  const ScaleOption({required this.label, required this.score});
+  const ScaleOption({
+    required this.label,
+    required this.score,
+    this.description,
+  });
 }
 
 class ScaleParameterSelector extends StatefulWidget {
@@ -84,34 +89,61 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                         width: isSelected ? 2 : 1,
                       ),
                     ),
-                    child: Row(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (isSelected) ...[
-                          PhosphorIcon(
-                            PhosphorIconsBold.check,
-                            size: 25,
-                            color: colorScheme.onPrimaryContainer,
-                          ),
-                          const SizedBox(width: 8),
-                        ],
-                        Expanded(
-                          child: Text(
-                            "${option.score ?? "NV"} — ${option.label}",
-                            softWrap: true,
-                            style: isSelected
-                                ? textTheme.bodyLarge?.copyWith(
-                                    color: colorScheme.onPrimaryContainer,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  )
-                                : textTheme.bodyMedium?.copyWith(
-                                    color: colorScheme.onSecondaryContainer,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Checkmark cuando está seleccionado
+                            if (isSelected) ...[
+                              PhosphorIcon(
+                                PhosphorIconsBold.check,
+                                size: 25,
+                                color: colorScheme.onPrimaryContainer,
+                              ),
+                              const SizedBox(width: 8),
+                            ],
+                            Expanded(
+                              child: Text(
+                                "${option.score ?? "NV"} — ${option.label}",
+                                softWrap: true,
+                                style: isSelected
+                                    ? textTheme.bodyLarge?.copyWith(
+                                        color: colorScheme.onPrimaryContainer,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      )
+                                    : textTheme.bodyMedium?.copyWith(
+                                        color: colorScheme.onSecondaryContainer,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                              ),
+                            ),
+                          ],
                         ),
+                        // 👇 NUEVO: Mostrar descripción si existe
+                        if (option.description != null) ...[
+                          const SizedBox(height: 6),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Text(
+                              option.description!,
+                              style: isSelected
+                                  ? textTheme.bodySmall?.copyWith(
+                                      color: colorScheme.onPrimaryContainer,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                    )
+                                  : textTheme.bodySmall?.copyWith(
+                                      color: colorScheme.onSecondaryContainer,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),

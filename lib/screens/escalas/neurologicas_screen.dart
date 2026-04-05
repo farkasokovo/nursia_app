@@ -1,5 +1,7 @@
 // lib/screens/escalas/neurologicas_screen.dart
 import 'package:flutter/material.dart';
+import 'package:nursia_app/screens/escalas/neurologicas/ramsay_screen.dart';
+import 'package:nursia_app/screens/escalas/neurologicas/rass_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/farma_button.dart'; // ← reemplaza a _ScaleButton
@@ -41,13 +43,19 @@ class _NeurologicasLayout extends StatelessWidget {
             FarmaButton(
               title: "Escala de Ramsay",
               icon: PhosphorIconsRegular.moon,
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const RamsayScreen()),
+              ),
             ),
             const SizedBox(height: 20),
             FarmaButton(
               title: "Escala RASS",
               icon: PhosphorIconsRegular.gauge,
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const RassScreen()),
+              ),
             ),
           ],
         ),

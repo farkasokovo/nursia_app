@@ -20,7 +20,7 @@ class ScaleResultFooter extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    final esNumero = RegExp(r'^\d+').hasMatch(resultado);
+    final esNumero = RegExp(r'^-?\d+').hasMatch(resultado);
     final colorResultado = colorResolver?.call(resultado);
 
     return AnimatedContainer(
