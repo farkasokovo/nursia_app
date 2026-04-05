@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/farma_button.dart';
+import '../ficha_medicamento.dart';
 
 class CardiovascularScreen extends StatelessWidget {
   const CardiovascularScreen({super.key});
@@ -31,19 +32,29 @@ class _CardiovascularLayout extends StatelessWidget {
             FarmaButton(
               title: "Metoprolol",
               icon: PhosphorIconsRegular.heartbeat,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Metoprolol"),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20),
             FarmaButton(
               title: "Enalapril",
               icon: PhosphorIconsRegular.heartbeat,
-              onPressed: () {},
-            ),
-            const SizedBox(height: 20),
-            FarmaButton(
-              title: "Digoxina",
-              icon: PhosphorIconsRegular.heartbeat,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Enalapril"),
+                  ),
+                );
+              },
             ),
           ],
         ),

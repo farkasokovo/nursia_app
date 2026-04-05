@@ -36,7 +36,7 @@ class FarmaButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 35, color: colorScheme.onPrimary),
+            Icon(icon, size: 30, color: colorScheme.onPrimary),
             const SizedBox(width: 20),
             Expanded(child: Text(title, style: textTheme.titleSmall)),
             const Icon(

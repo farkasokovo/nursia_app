@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/farma_button.dart';
+import '../ficha_medicamento.dart';
 
 class AnalgesicosScreen extends StatelessWidget {
   const AnalgesicosScreen({super.key});
@@ -12,7 +13,7 @@ class AnalgesicosScreen extends StatelessWidget {
     return const ExpandableCategoryScreen(
       heroTag: "analgesicos",
       title: "Analgésicos",
-      icon: PhosphorIconsFill.pill,
+      icon: PhosphorIconsFill.bandaids,
       child: _AnalgesicosLayout(),
     );
   }
@@ -30,20 +31,44 @@ class _AnalgesicosLayout extends StatelessWidget {
           children: [
             FarmaButton(
               title: "Paracetamol",
-              icon: PhosphorIconsRegular.pill,
-              onPressed: () {},
+              icon: PhosphorIconsRegular.bandaids,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Paracetamol"),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20),
             FarmaButton(
               title: "Ibuprofeno",
-              icon: PhosphorIconsRegular.pill,
-              onPressed: () {},
+              icon: PhosphorIconsRegular.bandaids,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Ibuprofeno"),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20),
             FarmaButton(
               title: "Ketorolaco",
-              icon: PhosphorIconsRegular.pill,
-              onPressed: () {},
+              icon: PhosphorIconsRegular.bandaids,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Ketorolaco"),
+                  ),
+                );
+              },
             ),
           ],
         ),

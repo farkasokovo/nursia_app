@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/farma_button.dart';
+import '../ficha_medicamento.dart';
 
 class AntibioticosScreen extends StatelessWidget {
   const AntibioticosScreen({super.key});
@@ -12,7 +13,7 @@ class AntibioticosScreen extends StatelessWidget {
     return const ExpandableCategoryScreen(
       heroTag: "antibioticos",
       title: "Antibióticos",
-      icon: PhosphorIconsFill.virus,
+      icon: PhosphorIconsFill.shieldPlus,
       child: _AntibioticosLayout(),
     );
   }
@@ -30,20 +31,44 @@ class _AntibioticosLayout extends StatelessWidget {
           children: [
             FarmaButton(
               title: "Amoxicilina",
-              icon: PhosphorIconsRegular.virus,
-              onPressed: () {},
+              icon: PhosphorIconsRegular.shieldPlus,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Amoxicilina"),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20),
             FarmaButton(
               title: "Ciprofloxacino",
-              icon: PhosphorIconsRegular.virus,
-              onPressed: () {},
+              icon: PhosphorIconsRegular.shieldPlus,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Ciprofloxacino"),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20),
             FarmaButton(
               title: "Azitromicina",
-              icon: PhosphorIconsRegular.virus,
-              onPressed: () {},
+              icon: PhosphorIconsRegular.shieldPlus,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        FichaMedicamento(nombreMedicamento: "Azitromicina"),
+                  ),
+                );
+              },
             ),
           ],
         ),

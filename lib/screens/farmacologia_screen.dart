@@ -1,18 +1,14 @@
 // lib/screens/farmacologia_screen.dart
 import 'package:flutter/material.dart';
+import 'package:nursia_app/screens/ficha_medicamento.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/category_button.dart';
 import '../widgets/searchable_screen.dart';
 import 'farmacologia/analgesicos_screen.dart';
 import 'farmacologia/antibioticos_screen.dart';
 import 'farmacologia/cardiovascular_screen.dart';
-
-// Modelo temporal — reemplaza con el real cuando tengas el repositorio
-class FarmacoMetadata {
-  final String nombre;
-  final String categoria;
-  const FarmacoMetadata({required this.nombre, required this.categoria});
-}
+import '../repositories/repositorio_medicamentos.dart';
+import '../models/medicamento.dart';
 
 class FarmacologiaScreen extends StatefulWidget {
   const FarmacologiaScreen({super.key});
@@ -22,7 +18,7 @@ class FarmacologiaScreen extends StatefulWidget {
 }
 
 class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
-  List<FarmacoMetadata> _farmacos = [];
+  List<Medicamento> _farmacos = [];
   bool _cargando = true;
 
   @override
@@ -32,24 +28,23 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
   }
 
   Future<void> _cargarFarmacos() async {
-    // TODO: reemplazar con tu repositorio real
-    await Future.delayed(const Duration(milliseconds: 300));
+    final medicamentos = await RepositorioMedicamentos.cargarMedicamentos();
     setState(() {
-      _farmacos = const [
-        FarmacoMetadata(nombre: 'Paracetamol', categoria: 'Analgésico'),
-        FarmacoMetadata(nombre: 'Ibuprofeno', categoria: 'Analgésico'),
-        FarmacoMetadata(nombre: 'Amoxicilina', categoria: 'Antibiótico'),
-        FarmacoMetadata(nombre: 'Metoprolol', categoria: 'Cardiovascular'),
-      ];
+      _farmacos = medicamentos;
       _cargando = false;
     });
   }
 
-  void _navegarAFarmaco(FarmacoMetadata farmaco) {
-    // TODO: navegar a la pantalla del fármaco
-    ScaffoldMessenger.of(
+  void _navegarAFarmaco(Medicamento farmaco) {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Navigator.push(
       context,
-    ).showSnackBar(SnackBar(content: Text('${farmaco.nombre} — próximamente')));
+      MaterialPageRoute(
+        builder: (_) => FichaMedicamento(
+          nombreMedicamento: farmaco.nombre, // 👈 Solo el nombre
+        ),
+      ),
+    );
   }
 
   @override
@@ -61,12 +56,11 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return SearchableScreen<FarmacoMetadata>(
+    return SearchableScreen<Medicamento>(
       items: _farmacos,
       hintText: 'Buscar fármaco...',
       filterBy: (farmaco, query) =>
-          farmaco.nombre.toLowerCase().contains(query) ||
-          farmaco.categoria.toLowerCase().contains(query),
+          farmaco.nombre.toLowerCase().contains(query),
       itemTitle: (farmaco) => farmaco.nombre,
       onItemTap: _navegarAFarmaco,
       emptyWidget: Column(
@@ -94,7 +88,7 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
                 Expanded(
                   child: CategoryButton(
                     title: "Analgésicos",
-                    icon: PhosphorIconsRegular.pill,
+                    icon: PhosphorIconsRegular.bandaids,
                     heroTag: "analgesicos",
                     onTap: () => Navigator.push(
                       context,
@@ -108,7 +102,7 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
                 Expanded(
                   child: CategoryButton(
                     title: "Antibióticos",
-                    icon: PhosphorIconsRegular.virus,
+                    icon: PhosphorIconsRegular.shieldPlus,
                     heroTag: "antibioticos",
                     onTap: () => Navigator.push(
                       context,
@@ -125,7 +119,7 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
               children: [
                 Expanded(
                   child: CategoryButton(
-                    title: "Antihipertensivos",
+                    title: "Anti-\nhipertensivos",
                     icon: PhosphorIconsRegular.heartbeat,
                     heroTag: "antihipertensivos",
                     onTap: () => Navigator.push(
@@ -134,6 +128,15 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
                         builder: (_) => const CardiovascularScreen(),
                       ),
                     ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: CategoryButton(
+                    title: "Anti-\ninflamatorios",
+                    icon: PhosphorIconsRegular.thermometer,
+                    heroTag: "antiinflamatorios",
+                    onTap: () {},
                   ),
                 ),
               ],
