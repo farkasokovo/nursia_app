@@ -101,6 +101,7 @@ class _RamsayLayoutState extends State<_RamsayLayout> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

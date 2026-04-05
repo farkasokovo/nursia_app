@@ -130,6 +130,7 @@ class _RassLayoutState extends State<_RassLayout> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
