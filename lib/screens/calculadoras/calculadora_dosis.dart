@@ -14,8 +14,8 @@ class CalculadoraDosis extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpandableCategoryScreen(
       heroTag: "dosis",
-      title: "Calculadora de dosis",
-      icon: PhosphorIconsFill.syringe,
+      title: "Regla de tres",
+      icon: PhosphorIconsFill.mathOperations,
       child: TabbedContent(
         tabs: const [
           Tab(text: "Cálculo"),
