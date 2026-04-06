@@ -88,8 +88,16 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
     );
 
     if (volumen == null ||
+        volumen == 0 ||
+        volumen == 00 ||
+        volumen == 000 ||
+        volumen == 0000 ||
         porcentajeIndicado == null ||
-        porcentajeDisponible == null) {
+        porcentajeIndicado == 0 ||
+        porcentajeIndicado == 00 ||
+        porcentajeDisponible == null ||
+        porcentajeDisponible == 0 ||
+        porcentajeDisponible == 00) {
       _resultado.value = null;
       return;
     }

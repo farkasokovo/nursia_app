@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:nursia_app/screens/calculadoras/calculadora_dosis.dart';
 import 'package:nursia_app/screens/calculadoras/calculadora_soluciones.dart';
+import 'package:nursia_app/screens/calculadoras/perdidas_insensibles.dart';
 import '../widgets/category_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -74,10 +75,10 @@ class CalculadoraScreen extends StatelessWidget {
                 ),
                 _buildButton(
                   context,
-                  "Balance de\nlíquidos",
-                  PhosphorIconsRegular.scales,
-                  "imc",
-                  null,
+                  "Pérdidas\ninsensibles\n(Adultos)",
+                  PhosphorIconsRegular.waves,
+                  "perdidasinsensibles",
+                  const PerdidasInsensibles(),
                 ),
                 _buildButton(
                   context,

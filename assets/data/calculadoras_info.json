@@ -1,42 +1,69 @@
 {
   "calculadoras": [
     {
-      "id": "dosis",
-      "titulo": "Calculadora de dosis",
-      "descripcion": "Permite determinar la cantidad exacta de medicamento en mililitros a administrar.",
-      "formula": "Volumen a administrar (X ml) = (Dosis indicada mg × Diluyente ml) / Presentación mg",
-      "notas": [
-        "Alinear unidades: mg con mg, ml con ml en la proporción cruzada.",
-        "Verificar cambios físicos en la dilución (color, consistencia).",
-        "Siempre verificar unidades antes de administrar.",
-        "Aplicar los 4 'yo': yo preparo, administro, registro, respondo."
-      ],
-      "referencias": [
-        {
-          "text": "OMS: Administración segura de medicamentos",
-          "url": "https://www.who.int/es/news-room/fact-sheets/detail/patient-safety"
-        },
-        {
-          "text": "Liceo Carlos Condell. (2020). Cálculo y dilución de medicamentos.",
-          "url": "http://www.liceocarloscondell.cl/wp-content/uploads/2020/03/4.-C%C3%A1lculo-y-diluci%C3%B3n-de-medicamentos.pdf"
-        }
-      ]
+  "id": "dosis",
+  "titulo": "Calculadora de dosis",
+  "descripcion": "La regla de tres en enfermería es un procedimiento matemático que permite calcular la cantidad exacta de un fármaco (en mililitros o tabletas) que se debe administrar a un paciente, basándose en la dosis prescrita por el médico. Este método establece una relación de proporcionalidad entre tres valores conocidos: la dosis requerida, la concentración del fármaco en su presentación original y el volumen en el que está disuelto, permitiendo despejar una incógnita (X) de manera precisa para evitar errores de medicación.",
+  "formula": "X = (Dosis prescrita × Diluyente) / Presentación",
+  "notas": [
+    "Antes de aplicar la fórmula, es imperativo que la dosis prescrita y la presentación estén en la misma unidad de medida (ej. si la orden es en gramos y la ampolla en miligramos, se debe convertir a miligramos).",
+    "El cálculo es solo un paso; debe acompañarse de la verificación del paciente correcto, medicamento correcto, vía correcta, hora correcta, etc.",
+    "En medicamentos de alto riesgo (como insulina o anticoagulantes), el cálculo debe ser validado por un segundo profesional de enfermería.",
+    "La manipulación del diluyente y la carga del fármaco deben realizarse bajo técnica estéril para evitar infecciones nosocomiales.",
+    "En pediatría, el redondeo debe ser extremadamente cuidadoso, prefiriendo siempre jeringas de precisión (1 ml) para dosis pequeñas."
+  ],
+  "referencias": [
+    {
+      "text": "Mendoza Leandro, C. A. (2022). El Cálculo de Medicamentos por Regla de 3. Facultad de Enfermería y Obstetricia, UNAM.",
+      "url": "https://reto.cuaed.unam.mx/node/2192"
     },
     {
-      "id": "soluciones",
-      "titulo": "Calculadora de soluciones glucosadas",
-      "descripcion": "Ajusta concentraciones de soluciones glucosadas por dilución o enriquecimiento.",
-      "formula": "Para dilución: (Volumen necesario × Concentración indicada) / Concentración disponible. Para enriquecimiento: usar glucosa al 50%.",
-      "notas": [
-        "Verificar osmolaridad final.",
-        "No usar en pacientes con hiperglucemia no controlada."
-      ],
-      "referencias": [
-        {
-          "text": "Guía de nutrición parenteral, ASEN 2023",
-          "url": "https://www.nutricionparenteral.com/guias"
-        }
-      ]
+      "text": "AdminSalud. (2023). Regla de 3 en Enfermería: Un Pilar del Cuidado.",
+      "url": "https://adminsaludadultomayor.com/regla-de-tres-en-enfermeria/"
     }
+  ]
+},
+    {
+  "id": "soluciones",
+  "titulo": "Calculadora de soluciones glucosadas",
+  "descripcion": "En la práctica clínica, especialmente en cuidados críticos neonatales y pediátricos, es frecuente que se requieran concentraciones de glucosa que no están disponibles de forma comercial. Para obtenerlas, el personal de enfermería realiza mezclas precisas. Existen dos métodos principales: la dilución, donde se utiliza agua estéril para reducir la concentración de una solución disponible, y la fortificación o enriquecimiento, donde se añade glucosa hipertónica (habitualmente al 50%) a una solución de menor concentración para alcanzar el porcentaje deseado.",
+  "formula": "Para Dilución (Bajar la concentración):\nVolumen de solución disponible = (Volumen total deseado × Porcentaje indicado) / Porcentaje disponible.\nVolumen de agua estéril = Volumen total deseado - Volumen de solución disponible.\n\nPara Fortificación (Subir la concentración usando Glucosa al 50%):\nCantidad de Glucosa al 50% (ml) = (Volumen total × (Porcentaje indicado - Porcentaje disponible)) / (50 - Porcentaje disponible).\nCantidad de solución base (ml) = Volumen total - ml de Glucosa al 50%.",
+  "notas": [
+    "Las soluciones con concentraciones de glucosa superiores al 12.5% se consideran altamente hipertónicas y deben administrarse preferentemente por vía central para evitar flebitis química.",
+    "En recién nacidos, el cálculo del VIG (Volumen de Infusión de Glucosa) es vital para mantener la euglicemia; estas mezclas son la base de dicho aporte.",
+    "Toda solución preparada manualmente debe rotularse inmediatamente con la concentración final, fecha, hora y firma del responsable para evitar errores de medicación.",
+    "Al ser una mezcla de varios viales o bolsas, debe realizarse bajo técnica estéril (campana de flujo laminar si está disponible) para prevenir la contaminación del fluido.",
+    "Agitar suavemente la bolsa o frasco tras la mezcla para asegurar que la concentración sea homogénea antes de iniciar la infusión."
+  ],
+  "referencias": [
+    {
+      "text": "Secretaría de Salud. (2021). Guía de Práctica Clínica: Intervenciones de Enfermería en la Administración de Medicamentos. Ciudad de México, México.",
+      "url": "https://www.gob.mx/salud/documentos/guias-de-practica-clinica"
+    },
+    {
+      "text": "Hospital Universitario Reina Sofía. (2023). Manual de preparación de soluciones de glucosa en pediatría. Servicio de Farmacia y Enfermería Pediátrica.",
+      "url": "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=manuales_enfermeria"
+    }
+  ]
+},
+    {
+  "id": "perdidasinsensibles",
+  "titulo": "Calculadora de pérdidas insensibles (basales)",
+  "descripcion": "Las pérdidas insensibles representan la cantidad de líquido que el cuerpo pierde de manera imperceptible a través de la evaporación por la piel (convección) y los pulmones (vapor de agua en la exhalación). A diferencia de la orina o el sudor visible, estas pérdidas no pueden medirse directamente en un cómodo o sonda, por lo que se estiman mediante fórmulas estandarizadas para asegurar que el balance hídrico del paciente sea lo más exacto posible, evitando estados de deshidratación o sobrecarga de líquidos.",
+  "formula": "P.I. = 0.5 × Peso (kg) × Horas del turno",
+  "notas": [
+    "Si el paciente presenta fiebre, las pérdidas insensibles incrementan según la temperatura:\n38-39°C: +20 ml/h.\n39-40°C: +40 ml/h.\n40-41°C: +60 ml/h..",
+    "Si el paciente presenta una frecuencia respiratoria mayor a 20 rpm, se suelen añadir 1 ml/hr por cada respiración adicional.",
+    "En pacientes intubados, se considera una pérdida adicional fija de aproximadamente 500 ml en 24 horas (20 ml/hr), aunque esto puede variar según la humidificación del circuito.",
+    "Cirugía / Abdomen abierto: Se estima una pérdida incremental de 1 a 2 ml/kg/hr debido a la exposición de vísceras y evaporación directa en quirófano.",
+    "La sudoración se clasifica como leve (10 ml/hr), moderada (20 ml/hr) o intensa (40 ml/hr), sumándose al resultado final de la fórmula."
+  ],
+  "referencias": [
+    {
+      "text": "Ibarra-Naranjo, J. L., & Zaldaña-Crespo, V. L. (2022). Pérdidas insensibles: fisiología, fisiopatología y compensación. Enfermería Investiga, 7(4).",
+      "url": "https://revistas.uta.edu.ec/erevista/index.php/enfi/article/view/1690"
+    }
+  ]
+}
   ]
 }
