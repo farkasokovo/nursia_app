@@ -111,7 +111,7 @@ class AppTextStyles {
 
 class AppRadius {
   static const BorderRadius defaultRadius = BorderRadius.all(
-    Radius.circular(18),
+    Radius.circular(30),
   );
 }
 

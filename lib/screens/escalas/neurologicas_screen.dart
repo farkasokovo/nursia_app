@@ -27,7 +27,7 @@ class _NeurologicasLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       child: SingleChildScrollView(
         child: Column(
           children: [

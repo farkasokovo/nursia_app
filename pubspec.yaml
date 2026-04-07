@@ -35,3 +35,4 @@ flutter:
   - assets/data/calculadoras_info.json
   - assets/data/escalas_lista.json
   - assets/data/medicamentos.json
+  - assets/data/tips.json

@@ -152,7 +152,7 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
                   child: ElevatedButton(
                     onPressed: _calcular,
                     style: ElevatedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.tertiaryContainer,
                       minimumSize: const Size(double.infinity, 60),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
