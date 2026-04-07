@@ -56,7 +56,7 @@ class CategoryButton extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     color: colorScheme.primaryContainer,
-                    fontSize: 18,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

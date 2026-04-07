@@ -40,9 +40,6 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
     }
   }
 
-  // --- LÓGICA DE PAGINACIÓN POR BLOQUES ---
-
-  /// Divide una lista en sub-listas de un tamaño específico
   List<List<T>> _chunkList<T>(List<T> list, int chunkSize) {
     List<List<T>> chunks = [];
     for (var i = 0; i < list.length; i += chunkSize) {
@@ -56,7 +53,6 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
     return chunks;
   }
 
-  /// Crea un botón de categoría estandarizado
   Widget _buildButton(
     String title,
     IconData icon,
@@ -101,9 +97,6 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    // CAMBIO 1: Obtenemos la altura total de la pantalla del dispositivo
-    final screenHeight = MediaQuery.sizeOf(context).height;
-
     return SearchableScreen<Medicamento>(
       items: _farmacos,
       hintText: 'Buscar fármaco...',
@@ -129,111 +122,131 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
         ],
       ),
       categoriesBuilder: (context) {
-        final todasLasCategorias = [
-          _buildButton(
-            "Analgésicos",
-            PhosphorIconsRegular.bandaids,
-            "analgesicos",
-            const AnalgesicosScreen(),
-          ),
-          _buildButton(
-            "Antibióticos",
-            PhosphorIconsRegular.shieldPlus,
-            "antibioticos",
-            const AntibioticosScreen(),
-          ),
-          _buildButton(
-            "Anti-\nhipertensivos",
-            PhosphorIconsRegular.heartbeat,
-            "antihipertensivos",
-            const CardiovascularScreen(),
-          ),
-          _buildButton(
-            "Anti-\ninflamatorios",
-            PhosphorIconsRegular.thermometer,
-            "antiinflamatorios",
-            const AntiinflamatoriosScreen(),
-          ),
-          _buildButton(
-            "Diuréticos",
-            PhosphorIconsRegular.drop,
-            "diureticos",
-            const DiureticosScreen(),
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente1",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente2",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente3",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente4",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente5",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente6",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente7",
-            null,
-          ),
-        ];
+        return OrientationBuilder(
+          builder: (context, orientation) {
+            final screenWidth = MediaQuery.of(context).size.width;
+            final screenHeight = MediaQuery.of(context).size.height;
 
-        // CAMBIO 2: Cambiamos de 6 a 8 botones por bloque
-        final bloques = _chunkList(todasLasCategorias, 8);
+            final todasLasCategorias = [
+              _buildButton(
+                "Analgésicos",
+                PhosphorIconsRegular.bandaids,
+                "analgesicos",
+                const AnalgesicosScreen(),
+              ),
+              _buildButton(
+                "Antibióticos",
+                PhosphorIconsRegular.shieldPlus,
+                "antibioticos",
+                const AntibioticosScreen(),
+              ),
+              _buildButton(
+                "Anti-\nhipertensivos",
+                PhosphorIconsRegular.heartbeat,
+                "antihipertensivos",
+                const CardiovascularScreen(),
+              ),
+              _buildButton(
+                "Anti-\ninflamatorios",
+                PhosphorIconsRegular.thermometer,
+                "antiinflamatorios",
+                const AntiinflamatoriosScreen(),
+              ),
+              _buildButton(
+                "Diuréticos",
+                PhosphorIconsRegular.drop,
+                "diureticos",
+                const DiureticosScreen(),
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "prox1",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "prox2",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "prox3",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "prox4",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "prox5",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "prox6",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "prox7",
+                null,
+              ),
+            ];
 
-        return SizedBox(
-          height: screenHeight * 0.65,
-          child: PageView.builder(
-            scrollDirection: Axis.vertical,
-            physics: const BouncingScrollPhysics(),
-            itemCount: bloques.length,
-            itemBuilder: (context, index) {
-              final botonesDelBloque = bloques[index];
+            // --- LÓGICA DINÁMICA ---
+            const int botonesPorPagina = 8;
+            const double spacing = 16.0;
+            const double espacioSuperiorEstimado = 280;
 
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 columnas
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio:
-                        1.3, // Puedes ajustar esto si los botones se ven muy estirados o aplastados
-                  ),
-                  itemCount: botonesDelBloque.length,
-                  itemBuilder: (context, i) => botonesDelBloque[i],
-                ),
-              );
-            },
-          ),
+            final double espacioDisponible =
+                screenHeight - espacioSuperiorEstimado;
+            final double anchoBoton = (screenWidth - 48) / 2;
+            final double altoTotalParaBotones =
+                espacioDisponible - (3 * spacing);
+            final double altoBotonIdeal = altoTotalParaBotones / 4;
+
+            double ratioDinamico = anchoBoton / altoBotonIdeal;
+
+            final bloques = _chunkList(todasLasCategorias, botonesPorPagina);
+
+            return SizedBox(
+              height: espacioDisponible,
+              child: PageView.builder(
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                itemCount: bloques.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 16,
+                    ), // Tu padding de la victoria
+                    child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: spacing,
+                        crossAxisSpacing: spacing,
+                        childAspectRatio: ratioDinamico,
+                      ),
+                      itemCount: bloques[index].length,
+                      itemBuilder: (context, i) => bloques[index][i],
+                    ),
+                  );
+                },
+              ),
+            );
+          },
         );
       },
     );

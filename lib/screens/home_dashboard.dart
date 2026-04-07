@@ -6,11 +6,51 @@ import '../utils/tips_helper.dart';
 class HomeDashboard extends StatelessWidget {
   const HomeDashboard({super.key});
 
-  String _getSaludo() {
+  Widget _getSaludo(BuildContext context) {
     final hour = DateTime.now().hour;
-    if (hour < 12) return "Buenos días 🌞";
-    if (hour < 19) return "Buenas tardes 🌤️";
-    return "Buenas noches 🌙";
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    // Creamos un estilo base para no repetir código
+    final estiloTexto = textTheme.titleMedium;
+
+    if (hour < 6) {
+      return Row(
+        children: [
+          Text("Buenas noches", style: estiloTexto),
+          const SizedBox(width: 8),
+          Icon(PhosphorIconsFill.moon, color: colorScheme.primaryContainer),
+        ],
+      );
+    }
+
+    if (hour < 12) {
+      return Row(
+        children: [
+          Text("Buenos días", style: estiloTexto),
+          const SizedBox(width: 8),
+          Icon(PhosphorIconsFill.sun, color: Colors.amberAccent, size: 30),
+        ],
+      );
+    }
+
+    if (hour < 20) {
+      return Row(
+        children: [
+          Text("Buenas tardes", style: estiloTexto),
+          const SizedBox(width: 8),
+          Icon(PhosphorIconsFill.cloudSun, color: Colors.amber),
+        ],
+      );
+    }
+
+    return Row(
+      children: [
+        Text("Buenas noches", style: estiloTexto),
+        const SizedBox(width: 8),
+        Icon(PhosphorIconsFill.moonStars, color: Colors.indigoAccent),
+      ],
+    );
   }
 
   @override
@@ -19,91 +59,109 @@ class HomeDashboard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 98, 16, 16),
-        child: Column(
-          children: [
-            // Saludo
-            Align(
-              alignment: Alignment.centerLeft,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            // Mantenemos tus paddings exactos
+            padding: const EdgeInsets.fromLTRB(16, 98, 16, 16),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                // Esto obliga a la columna a medir al menos lo mismo que la pantalla
+                minHeight:
+                    constraints.maxHeight -
+                    114, // Restamos el padding superior/inferior
+              ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      _getSaludo(),
-                      style: textTheme.titleMedium?.copyWith(
-                        color: colorScheme.primaryContainer,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                  // BLOQUE SUPERIOR (Saludo + Botones)
+                  Column(
+                    children: [
+                      // Saludo
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: _getSaludo(context),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: Text(
+                                "¿Qué necesitas consultar hoy?",
+                                style: textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.onSecondaryContainer,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 32),
+
+                      // Botones
+                      Row(
+                        children: const [
+                          Expanded(
+                            child: HomeNavButton(
+                              title: "Escalas",
+                              tabIndex: 0,
+                              icon: PhosphorIconsRegular.clipboardText,
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: HomeNavButton(
+                              title: "Fármacos",
+                              tabIndex: 1,
+                              icon: PhosphorIconsRegular.pill,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: const [
+                          Expanded(
+                            child: HomeNavButton(
+                              title: "Calculadoras",
+                              tabIndex: 3,
+                              icon: PhosphorIconsRegular.calculator,
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: HomeNavButton(
+                              title: "Más",
+                              tabIndex: 4,
+                              icon: PhosphorIconsRegular.dotsThreeCircle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
+
+                  // BLOQUE INFERIOR (El Tip)
+                  // Al usar MainAxisAlignment.spaceBetween, este se irá al fondo
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      "¿Qué necesitas consultar hoy?",
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSecondaryContainer,
-                      ),
-                    ),
+                    padding: const EdgeInsets.only(top: 32),
+                    child: const TipDelDia(),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 32),
-
-            // Botones
-            Row(
-              children: const [
-                Expanded(
-                  child: HomeNavButton(
-                    title: "Escalas",
-                    tabIndex: 0,
-                    icon: PhosphorIconsRegular.clipboardText,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: HomeNavButton(
-                    title: "Calculadoras",
-                    tabIndex: 3,
-                    icon: PhosphorIconsRegular.calculator,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: const [
-                Expanded(
-                  child: HomeNavButton(
-                    title: "Fármacos",
-                    tabIndex: 1,
-                    icon: PhosphorIconsRegular.pill,
-                  ),
-                ),
-
-                SizedBox(width: 16),
-                Expanded(
-                  child: HomeNavButton(
-                    title: "Más",
-                    tabIndex: 4,
-                    icon: PhosphorIconsRegular.dotsThreeCircle,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 32),
-
-            // Tip del día con botón "siguiente"
-            const TipDelDia(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -117,18 +175,32 @@ class TipDelDia extends StatefulWidget {
 }
 
 class _TipDelDiaState extends State<TipDelDia> {
-  late Future<String> _tipFuture;
+  String _tipExhibido = "Cargando tip...";
 
   @override
   void initState() {
     super.initState();
-    _cargarNuevoTip();
+    _cargarTipDeMemoria();
   }
 
-  void _cargarNuevoTip() {
-    setState(() {
-      _tipFuture = TipsHelper.obtenerTipAleatorio();
-    });
+  // Carga el tip que el Helper ya tiene guardado
+  Future<void> _cargarTipDeMemoria() async {
+    final tip = await TipsHelper.obtenerTipPersistente();
+    if (mounted) {
+      setState(() {
+        _tipExhibido = tip;
+      });
+    }
+  }
+
+  // Fuerza al Helper a inventar uno nuevo
+  Future<void> _forzarNuevoTip() async {
+    final nuevoTip = await TipsHelper.generarNuevoTip();
+    if (mounted) {
+      setState(() {
+        _tipExhibido = nuevoTip;
+      });
+    }
   }
 
   @override
@@ -137,63 +209,57 @@ class _TipDelDiaState extends State<TipDelDia> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return FutureBuilder<String>(
-      future: _tipFuture,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox.shrink();
-        }
-        final tip = snapshot.data!;
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.fromLTRB(12, 5, 12, 12),
-          decoration: BoxDecoration(
-            color: colorScheme.secondaryContainer.withValues(alpha: 0.5),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: colorScheme.primaryContainer.withValues(alpha: 0.5),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(12, 5, 12, 12),
+      decoration: BoxDecoration(
+        color: colorScheme.secondaryContainer.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Icon(
-                    PhosphorIconsFill.lightbulb,
-                    size: 28,
+              Icon(
+                PhosphorIconsFill.lightbulb,
+                size: 28,
+                color: colorScheme.primaryContainer,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Tip del día",
+                style: textTheme.bodyLarge?.copyWith(fontSize: 18),
+              ),
+              const Spacer(),
+              Tooltip(
+                message: "Siguiente tip",
+                decoration: BoxDecoration(
+                  color: colorScheme.primary,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: IconButton(
+                  onPressed:
+                      _forzarNuevoTip, // Llamamos a la función de cambio manual
+                  icon: Icon(
+                    PhosphorIconsBold.arrowClockwise,
+                    size: 20,
                     color: colorScheme.primaryContainer,
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "Tip del día",
-                    style: textTheme.bodyLarge?.copyWith(fontSize: 18),
-                  ),
-                  const Spacer(),
-                  Tooltip(
-                    message: "Siguiente tip",
-                    decoration: BoxDecoration(
-                      color: colorScheme.primary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-
-                    child: IconButton(
-                      onPressed: _cargarNuevoTip,
-                      icon: Icon(
-                        PhosphorIconsBold.arrowClockwise,
-                        size: 20,
-                        color: colorScheme.primaryContainer,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-              const SizedBox(height: 8),
-              Text(tip, style: textTheme.bodySmall?.copyWith(fontSize: 13)),
             ],
           ),
-        );
-      },
+          const SizedBox(height: 8),
+          Text(
+            _tipExhibido,
+            style: textTheme.bodySmall?.copyWith(fontSize: 13),
+          ),
+        ],
+      ),
     );
   }
 }

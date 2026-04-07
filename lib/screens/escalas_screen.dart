@@ -101,9 +101,6 @@ class _EscalasScreenState extends State<EscalasScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    // Obtenemos la altura total de la pantalla del dispositivo
-    final screenHeight = MediaQuery.sizeOf(context).height;
-
     return SearchableScreen<EscalaMetadata>(
       items: _todasEscalas,
       hintText: 'Buscar escala...',
@@ -128,101 +125,129 @@ class _EscalasScreenState extends State<EscalasScreen> {
         ],
       ),
       categoriesBuilder: (context) {
-        final todasLasCategorias = [
-          _buildButton(
-            "Consciencia\ny sedación",
-            PhosphorIconsRegular.brain,
-            "neurologicas",
-            const NeurologicasScreen(),
-          ),
-          _buildButton(
-            "Valoración\nde riesgos",
-            PhosphorIconsRegular.shieldCheck,
-            "riesgos",
-            const RiesgosScreen(),
-          ),
-          _buildButton(
-            "Valoración\ngeneral",
-            PhosphorIconsRegular.stethoscope,
-            "clinica",
-            const ValoracionGeneralScreen(),
-          ),
-          _buildButton(
-            "TRIAGE y\nEmergencias",
-            PhosphorIconsRegular.siren,
-            "triage",
-            null,
-          ),
-          _buildButton(
-            "Valoración\ndel dolor",
-            PhosphorIconsRegular.smileyNervous,
-            "dolor",
-            null,
-          ),
-          _buildButton(
-            "Pediátricas\n/ Neonatales",
-            PhosphorIconsRegular.baby,
-            "neonatales",
-            null,
-          ),
-          // Agregamos de relleno para completar los 8 y que veas el scroll
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente1",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente2",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente3",
-            null,
-          ),
-          _buildButton(
-            "Próximamente",
-            PhosphorIconsRegular.dotsThreeCircle,
-            "proximamente4",
-            null,
-          ),
-        ];
+        return OrientationBuilder(
+          builder: (context, orientation) {
+            final screenWidth = MediaQuery.of(context).size.width;
+            final screenHeight = MediaQuery.of(context).size.height;
 
-        // Dividimos en bloques de 8
-        final bloques = _chunkList(todasLasCategorias, 8);
+            final todasLasCategorias = [
+              _buildButton(
+                "Consciencia\ny sedación",
+                PhosphorIconsRegular.brain,
+                "neurologicas",
+                const NeurologicasScreen(),
+              ),
+              _buildButton(
+                "Valoración\nde riesgos",
+                PhosphorIconsRegular.shieldCheck,
+                "riesgos",
+                const RiesgosScreen(),
+              ),
+              _buildButton(
+                "Valoración\ngeneral",
+                PhosphorIconsRegular.stethoscope,
+                "clinica",
+                const ValoracionGeneralScreen(),
+              ),
+              _buildButton(
+                "TRIAGE y\nEmergencias",
+                PhosphorIconsRegular.siren,
+                "triage",
+                null,
+              ),
+              _buildButton(
+                "Valoración\ndel dolor",
+                PhosphorIconsRegular.smileyNervous,
+                "dolor",
+                null,
+              ),
+              _buildButton(
+                "Pediátricas\n/ Neonatales",
+                PhosphorIconsRegular.baby,
+                "neonatales",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "proximamente1",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "proximamente2",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "proximamente3",
+                null,
+              ),
+              _buildButton(
+                "Próximamente",
+                PhosphorIconsRegular.dotsThreeCircle,
+                "proximamente4",
+                null,
+              ),
+            ];
 
-        return SizedBox(
-          // Como pusiste un aspect ratio de 1.3 (los botones son más anchos que altos),
-          // no ocuparán tanto espacio vertical. Con el 55% (0.55) de la pantalla debería bastar.
-          height: screenHeight * 0.55,
-          child: PageView.builder(
-            scrollDirection: Axis.vertical,
-            physics: const BouncingScrollPhysics(),
-            itemCount: bloques.length,
-            itemBuilder: (context, index) {
-              final botonesDelBloque = bloques[index];
+            // 1. Tu regla de oro: Siempre 8 botones por página
+            const int botonesPorPagina = 8;
+            const double spacing = 16.0;
 
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 columnas
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 1.3, // El cambio que me pediste
-                  ),
-                  itemCount: botonesDelBloque.length,
-                  itemBuilder: (context, i) => botonesDelBloque[i],
-                ),
-              );
-            },
-          ),
+            // 2. Calculamos el espacio disponible en pantalla
+            final double espacioSuperiorEstimado =
+                280; // Búsqueda, títulos, padding...
+            final double espacioDisponible =
+                screenHeight - espacioSuperiorEstimado;
+
+            // 3. Calculamos el ancho exacto de 1 botón
+            // Restamos 32 de padding de la pantalla (16 izq + 16 der) y 16 de en medio
+            final double anchoBoton = (screenWidth - 48) / 2;
+
+            // 4. Calculamos el alto IDEAL de 1 botón para que quepan exactamente 4 filas
+            // Al espacio disponible le restamos los 3 huecos de separación entre las 4 filas (3 * 16 = 48)
+            final double altoTotalParaBotones =
+                espacioDisponible - (3 * spacing);
+            final double altoBotonIdeal = altoTotalParaBotones / 4;
+
+            // 5. ¡LA MAGIA DE TU IDEA! Calculamos el ratio dinámico
+            double ratioDinamico = anchoBoton / altoBotonIdeal;
+
+            // Dividimos siempre en bloques de 8
+            final bloques = _chunkList(todasLasCategorias, botonesPorPagina);
+
+            return SizedBox(
+              height:
+                  espacioDisponible, // Le damos todo el espacio libre que calculamos
+              child: PageView.builder(
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                itemCount: bloques.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsetsGeometry.only(bottom: 16),
+                    child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: spacing,
+                        crossAxisSpacing: spacing,
+                        // Aquí pasamos tu ratio calculado en lugar de un número fijo
+                        childAspectRatio: ratioDinamico,
+                      ),
+                      itemCount: bloques[index].length,
+                      itemBuilder: (context, i) => bloques[index][i],
+                    ),
+                  );
+                },
+              ),
+            );
+          },
         );
       },
     );

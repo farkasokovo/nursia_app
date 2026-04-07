@@ -129,7 +129,7 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
         if (shouldPop && context.mounted) Navigator.of(context).pop();
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 98, 16, 16),
+        padding: const EdgeInsets.fromLTRB(16, 98, 16, 0),
         child: Column(
           children: [
             // ── Buscador ──────────────────────────────────────────
