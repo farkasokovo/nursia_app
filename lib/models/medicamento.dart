@@ -1,3 +1,5 @@
+import 'dart:convert'; // Importante para jsonEncode y jsonDecode
+
 class Medicamento {
   final String nombre;
   final String icono;
@@ -27,6 +29,7 @@ class Medicamento {
     required this.referencias,
   });
 
+  // --- MANTENEMOS TU FROMJSON ORIGINAL PARA LA CARGA INICIAL ---
   factory Medicamento.fromJson(Map<String, dynamic> json) {
     return Medicamento(
       nombre: json['nombre'] ?? '',
@@ -53,7 +56,57 @@ class Medicamento {
           [],
     );
   }
+
+  // --- NUEVA FUNCIÓN: CONVERTIR A MAPA PARA SQLITE ---
+  Map<String, dynamic> toMap() {
+    return {
+      'nombre': nombre,
+      'icono': icono,
+      'categoria': categoria,
+      'farmacodinamia': farmacodinamia,
+      'farmacocinetica': farmacocinetica,
+      'indicaciones': indicaciones,
+      'viaAdministracion': viaAdministracion,
+      // Aquí usamos jsonEncode para convertir objetos complejos en TEXTO
+      'contraindicaciones': jsonEncode(contraindicaciones.toJson()),
+      'efectosSecundarios': jsonEncode(efectosSecundarios),
+      'efectosAdversos': jsonEncode(efectosAdversos),
+      'interacciones': jsonEncode(
+        interacciones.map((i) => i.toJson()).toList(),
+      ),
+      'referencias': jsonEncode(referencias.map((r) => r.toJson()).toList()),
+    };
+  }
+
+  // --- NUEVA FUNCIÓN: LEER DESDE SQLITE ---
+  factory Medicamento.fromMap(Map<String, dynamic> map) {
+    return Medicamento(
+      nombre: map['nombre'],
+      icono: map['icono'],
+      categoria: map['categoria'],
+      farmacodinamia: map['farmacodinamia'],
+      farmacocinetica: map['farmacocinetica'],
+      indicaciones: map['indicaciones'],
+      viaAdministracion: map['viaAdministracion'],
+      // Aquí usamos jsonDecode para volver a convertir el TEXTO en objetos de Dart
+      contraindicaciones: Contraindicaciones.fromJson(
+        jsonDecode(map['contraindicaciones']),
+      ),
+      efectosSecundarios: List<String>.from(
+        jsonDecode(map['efectosSecundarios']),
+      ),
+      efectosAdversos: List<String>.from(jsonDecode(map['efectosAdversos'])),
+      interacciones: (jsonDecode(map['interacciones'] ?? '[]') as List)
+          .map((e) => Interaccion.fromJson(e))
+          .toList(),
+      referencias: (jsonDecode(map['referencias'] ?? '[]') as List)
+          .map((e) => Referencia.fromJson(e))
+          .toList(),
+    );
+  }
 }
+
+// --- ACTUALIZAMOS LAS CLASES SECUNDARIAS CON TOJSON ---
 
 class Contraindicaciones {
   final List<String> absolutas;
@@ -67,6 +120,11 @@ class Contraindicaciones {
       relativas: List<String>.from(json['relativas'] ?? []),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'absolutas': absolutas,
+    'relativas': relativas,
+  };
 }
 
 class Interaccion {
@@ -87,6 +145,12 @@ class Interaccion {
       severidad: json['severidad'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'medicamento': medicamento,
+    'efecto': efecto,
+    'severidad': severidad,
+  };
 }
 
 class Referencia {
@@ -98,4 +162,6 @@ class Referencia {
   factory Referencia.fromJson(Map<String, dynamic> json) {
     return Referencia(text: json['text'] ?? '', url: json['url'] ?? '');
   }
+
+  Map<String, dynamic> toJson() => {'text': text, 'url': url};
 }

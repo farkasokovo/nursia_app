@@ -11,8 +11,22 @@ class EscalaMetadata {
     required this.ruta,
   });
 
-  //! MODELO EscalaMetadata
+  // Convierte un registro de la DB de vuelta a Objeto
+  factory EscalaMetadata.fromMap(Map<String, dynamic> map) {
+    return EscalaMetadata(
+      id: map['id'],
+      nombre: map['nombre'],
+      categoria: map['categoria'],
+      ruta: map['ruta'],
+    );
+  }
 
+  // Prepara el objeto para ser guardado en la DB
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'nombre': nombre, 'categoria': categoria, 'ruta': ruta};
+  }
+
+  // Mantenemos tu fromJson por si lo necesitas para la migración inicial
   factory EscalaMetadata.fromJson(Map<String, dynamic> json) {
     return EscalaMetadata(
       id: json['id'],

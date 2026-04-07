@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/repositories/repositorio_escalas.dart';
+import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import '../../../widgets/scale_parameter_selector.dart';
@@ -250,7 +250,7 @@ class _DowntonInfo extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(20),
           child: FutureBuilder(
-            future: RepositorioEscalas.getScale("downton"),
+            future: DatabaseHelper.instance.obtenerDetalleEscala("downton"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());

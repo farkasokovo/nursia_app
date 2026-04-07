@@ -1,5 +1,6 @@
 // lib/screens/farmacologia_screen.dart
 import 'package:flutter/material.dart';
+import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/screens/farmacologia/antiinflamatorios.dart';
 import 'package:nursia_app/screens/farmacologia/diureticos_screen.dart';
 import 'package:nursia_app/screens/ficha_medicamento.dart';
@@ -30,11 +31,14 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
   }
 
   Future<void> _cargarFarmacos() async {
-    final medicamentos = await RepositorioMedicamentos.cargarMedicamentos();
-    setState(() {
-      _farmacos = medicamentos;
-      _cargando = false;
-    });
+    final medicamentos = await DatabaseHelper.instance
+        .obtenerTodosLosMedicamentos();
+    if (mounted) {
+      setState(() {
+        _farmacos = medicamentos;
+        _cargando = false;
+      });
+    }
   }
 
   // --- LÓGICA DE PAGINACIÓN POR BLOQUES ---

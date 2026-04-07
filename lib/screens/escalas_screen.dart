@@ -1,12 +1,12 @@
 // lib/screens/escalas_screen.dart
 import 'package:flutter/material.dart';
+import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/screens/escalas/neurologicas_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos_screen.dart';
 import 'package:nursia_app/screens/escalas/valoracion_general_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/category_button.dart';
 import '../widgets/searchable_screen.dart';
-import '../repositories/repositorio_escalas_metadata.dart';
 import '../models/escala_metadata.dart';
 import '../utils/escala_routes.dart';
 
@@ -28,11 +28,15 @@ class _EscalasScreenState extends State<EscalasScreen> {
   }
 
   Future<void> _cargarEscalas() async {
-    final escalas = await RepositorioEscalasMetadata.cargarEscalas();
-    setState(() {
-      _todasEscalas = escalas;
-      _cargando = false;
-    });
+    // CAMBIO: Ahora pedimos los metadatos a SQLite
+    final escalas = await DatabaseHelper.instance.obtenerEscalasMetadata();
+
+    if (mounted) {
+      setState(() {
+        _todasEscalas = escalas;
+        _cargando = false;
+      });
+    }
   }
 
   void _navegarAResultado(EscalaMetadata escala) {
