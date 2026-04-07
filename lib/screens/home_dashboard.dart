@@ -69,9 +69,9 @@ class HomeDashboard extends StatelessWidget {
                 SizedBox(width: 16),
                 Expanded(
                   child: HomeNavButton(
-                    title: "Fármacos",
-                    tabIndex: 1,
-                    icon: PhosphorIconsRegular.pill,
+                    title: "Calculadoras",
+                    tabIndex: 3,
+                    icon: PhosphorIconsRegular.calculator,
                   ),
                 ),
               ],
@@ -81,11 +81,12 @@ class HomeDashboard extends StatelessWidget {
               children: const [
                 Expanded(
                   child: HomeNavButton(
-                    title: "Calculadoras",
-                    tabIndex: 3,
-                    icon: PhosphorIconsRegular.calculator,
+                    title: "Fármacos",
+                    tabIndex: 1,
+                    icon: PhosphorIconsRegular.pill,
                   ),
                 ),
+
                 SizedBox(width: 16),
                 Expanded(
                   child: HomeNavButton(

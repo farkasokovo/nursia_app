@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:nursia_app/models/calculadora_info.dart';
 import 'package:nursia_app/models/escala_metadata.dart';
 import 'package:nursia_app/models/medicamento.dart';
 import 'package:nursia_app/models/ver_mas_screen.dart';
@@ -71,6 +72,17 @@ class DatabaseHelper {
         references_data TEXT -- Lista de mapas convertida a texto
       )
     ''');
+
+    await db.execute('''
+  CREATE TABLE calculadoras (
+    id TEXT PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    descripcion TEXT,
+    formula TEXT,
+    notas TEXT,        -- Se guarda como JSON string
+    referencias TEXT   -- Se guarda como JSON string
+  )
+''');
   }
 
   // Función para cerrar la base de datos cuando no se use
@@ -140,6 +152,26 @@ class DatabaseHelper {
     return List.generate(mapas.length, (i) {
       return Medicamento.fromMap(mapas[i]);
     });
+  }
+
+  // --- OBTENER UN SOLO MEDICAMENTO POR NOMBRE ---
+  Future<Medicamento?> obtenerMedicamentoPorNombre(String nombre) async {
+    final db = await instance.database;
+
+    // Buscamos en la tabla 'medicamentos' donde la columna 'nombre' coincida
+    final List<Map<String, dynamic>> mapas = await db.query(
+      'medicamentos',
+      where: 'nombre = ?',
+      whereArgs: [nombre],
+    );
+
+    // Si encontramos el medicamento, lo convertimos de Map a Objeto
+    if (mapas.isNotEmpty) {
+      return Medicamento.fromMap(mapas.first);
+    }
+
+    // Si no existe, devolvemos null
+    return null;
   }
 
   // --- 1. INSERTAR UNA ESCALA ---
@@ -229,6 +261,49 @@ class DatabaseHelper {
 
     if (mapas.isNotEmpty) {
       return VerMasScreen.fromMap(mapas.first);
+    }
+    return null;
+  }
+
+  Future<void> cargarCalculadorasDesdeJSON() async {
+    final db = await instance.database;
+    final resultado = await db.rawQuery('SELECT COUNT(*) FROM calculadoras');
+    int? cuenta = Sqflite.firstIntValue(resultado);
+
+    if (cuenta == 0) {
+      try {
+        final String respuesta = await rootBundle.loadString(
+          'assets/data/calculadoras_info.json',
+        );
+        final Map<String, dynamic> data = json.decode(respuesta);
+        final List<dynamic> calculadoras = data['calculadoras'];
+
+        for (var item in calculadoras) {
+          final calc = CalculadoraInfo.fromJson(item);
+          await db.insert(
+            'calculadoras',
+            calc.toMap(),
+            conflictAlgorithm: ConflictAlgorithm.replace,
+          );
+        }
+        print("¡Calculadoras migradas!");
+      } catch (e) {
+        print("Error migrando calculadoras: $e");
+      }
+    }
+  }
+
+  // --- OBTENER INFO DE UNA CALCULADORA ---
+  Future<CalculadoraInfo?> obtenerInfoCalculadora(String id) async {
+    final db = await instance.database;
+    final mapas = await db.query(
+      'calculadoras',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (mapas.isNotEmpty) {
+      return CalculadoraInfo.fromMap(mapas.first);
     }
     return null;
   }

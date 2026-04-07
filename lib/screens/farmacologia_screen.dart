@@ -10,7 +10,6 @@ import '../widgets/searchable_screen.dart';
 import 'farmacologia/analgesicos_screen.dart';
 import 'farmacologia/antibioticos_screen.dart';
 import 'farmacologia/cardiovascular_screen.dart';
-import '../repositories/repositorio_medicamentos.dart';
 import '../models/medicamento.dart';
 
 class FarmacologiaScreen extends StatefulWidget {

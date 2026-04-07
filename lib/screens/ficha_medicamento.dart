@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/utils/icon_mapper.dart';
 import 'package:nursia_app/utils/url_launcher_helper.dart';
 import '../models/medicamento.dart';
-import '../repositories/repositorio_medicamentos.dart';
 
 class FichaMedicamento extends StatefulWidget {
   final String nombreMedicamento;
@@ -19,7 +19,8 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
   @override
   void initState() {
     super.initState();
-    _medicamentoFuture = RepositorioMedicamentos.obtenerPorNombre(
+    // CAMBIO AQUÍ: Ahora usamos el helper
+    _medicamentoFuture = DatabaseHelper.instance.obtenerMedicamentoPorNombre(
       widget.nombreMedicamento,
     );
   }

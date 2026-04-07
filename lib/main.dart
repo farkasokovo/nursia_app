@@ -9,6 +9,7 @@ void main() async {
 
   await DatabaseHelper.instance.cargarSemillaDesdeJSON();
   await DatabaseHelper.instance.cargarEscalasDesdeJSON();
+  await DatabaseHelper.instance.cargarCalculadorasDesdeJSON();
   runApp(const MyApp());
 }
 
