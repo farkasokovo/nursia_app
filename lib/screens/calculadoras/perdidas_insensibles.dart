@@ -385,7 +385,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
             // Resultado y desglose
             ValueListenableBuilder<double?>(
               valueListenable: _resultado,
-              builder: (_, valor, __) {
+              builder: (_, valor, _) {
                 return Container(
                   width: double.infinity,
                   constraints: const BoxConstraints(minHeight: 180),

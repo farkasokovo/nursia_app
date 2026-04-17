@@ -198,7 +198,7 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
             const SizedBox(height: 20),
             ValueListenableBuilder<double?>(
               valueListenable: _resultado,
-              builder: (_, valor, __) {
+              builder: (_, valor, _) {
                 return Container(
                   width: double.infinity,
                   constraints: const BoxConstraints(minHeight: 180),

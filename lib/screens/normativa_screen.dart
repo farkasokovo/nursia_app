@@ -136,48 +136,48 @@ class _NormativaScreenState extends State<NormativaScreen> {
                 "n1",
                 const ListaNormasFiltradaScreen(categoria: "Enfermería"),
               ),
-              _buildButton(
-                "Expediente\nClínico",
-                PhosphorIconsRegular.folderOpen,
-                "n2",
-                null,
-              ),
-              _buildButton(
-                "Infecciones\ny Riesgos",
-                PhosphorIconsRegular.warningCircle,
-                "n3",
-                null,
-              ),
-              _buildButton(
-                "Terapia de\nInfusión",
-                PhosphorIconsRegular.drop,
-                "n4",
-                null,
-              ),
-              _buildButton(
-                "Manejo de\nResiduos",
-                PhosphorIconsRegular.trash,
-                "n5",
-                null,
-              ),
-              _buildButton(
-                "Salud\nReproductiva",
-                PhosphorIconsRegular.baby,
-                "n6",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "p1",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "p2",
-                null,
-              ),
+              // _buildButton(
+              //   "Expediente\nClínico",
+              //   PhosphorIconsRegular.folderOpen,
+              //   "n2",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Infecciones\ny Riesgos",
+              //   PhosphorIconsRegular.warningCircle,
+              //   "n3",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Terapia de\nInfusión",
+              //   PhosphorIconsRegular.drop,
+              //   "n4",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Manejo de\nResiduos",
+              //   PhosphorIconsRegular.trash,
+              //   "n5",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Salud\nReproductiva",
+              //   PhosphorIconsRegular.baby,
+              //   "n6",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "p1",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "p2",
+              //   null,
+              // ),
             ];
 
             // --- CAMBIOS PARA UNA SOLA COLUMNA ---

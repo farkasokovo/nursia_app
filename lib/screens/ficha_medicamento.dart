@@ -39,7 +39,6 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
         return Scaffold(
           backgroundColor: colorScheme.secondaryContainer,
           appBar: AppBar(
-            // 1. EL TRUCO CLAVE: Eliminamos el espacio predeterminado entre el leading y el title
             titleSpacing: 0,
             leading: IconButton(
               icon: Icon(

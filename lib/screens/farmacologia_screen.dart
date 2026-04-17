@@ -158,48 +158,48 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
                 "diureticos",
                 const DiureticosScreen(),
               ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "prox1",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "prox2",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "prox3",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "prox4",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "prox5",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "prox6",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "prox7",
-                null,
-              ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "prox1",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "prox2",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "prox3",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "prox4",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "prox5",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "prox6",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "prox7",
+              //   null,
+              // ),
             ];
 
             // --- LÓGICA DINÁMICA ---

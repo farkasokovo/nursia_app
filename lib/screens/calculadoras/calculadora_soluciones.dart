@@ -231,7 +231,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
             const SizedBox(height: 20),
             ValueListenableBuilder<_ResultadoSolucion?>(
               valueListenable: _resultado,
-              builder: (_, valor, __) {
+              builder: (_, valor, _) {
                 return Container(
                   width: double.infinity,
                   constraints: const BoxConstraints(minHeight: 180),

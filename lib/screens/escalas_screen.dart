@@ -149,48 +149,48 @@ class _EscalasScreenState extends State<EscalasScreen> {
                 "clinica",
                 const ValoracionGeneralScreen(),
               ),
-              _buildButton(
-                "TRIAGE y\nEmergencias",
-                PhosphorIconsRegular.siren,
-                "triage",
-                null,
-              ),
-              _buildButton(
-                "Valoración\ndel dolor",
-                PhosphorIconsRegular.smileyNervous,
-                "dolor",
-                null,
-              ),
-              _buildButton(
-                "Pediátricas\n/ Neonatales",
-                PhosphorIconsRegular.baby,
-                "neonatales",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "proximamente1",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "proximamente2",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "proximamente3",
-                null,
-              ),
-              _buildButton(
-                "Próximamente",
-                PhosphorIconsRegular.dotsThreeCircle,
-                "proximamente4",
-                null,
-              ),
+              // _buildButton(
+              //   "TRIAGE y\nEmergencias",
+              //   PhosphorIconsRegular.siren,
+              //   "triage",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Valoración\ndel dolor",
+              //   PhosphorIconsRegular.smileyNervous,
+              //   "dolor",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Pediátricas\n/ Neonatales",
+              //   PhosphorIconsRegular.baby,
+              //   "neonatales",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "proximamente1",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "proximamente2",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "proximamente3",
+              //   null,
+              // ),
+              // _buildButton(
+              //   "Próximamente",
+              //   PhosphorIconsRegular.dotsThreeCircle,
+              //   "proximamente4",
+              //   null,
+              // ),
             ];
 
             // 1. Tu regla de oro: Siempre 8 botones por página
