@@ -17,6 +17,14 @@ class FichaNormativaScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.secondaryContainer,
       appBar: AppBar(
+        leading: IconButton(
+          icon: PhosphorIcon(
+            PhosphorIconsBold.caretLeft,
+            color: colorScheme.onPrimaryContainer,
+            size: 32,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: Text(
           norma.codigo,
           style: const TextStyle(fontWeight: FontWeight.bold),
@@ -73,12 +81,7 @@ class FichaNormativaScreen extends StatelessWidget {
               ),
 
               // SECCIÓN: RESUMEN
-              _buildSectionHeader(
-                textTheme,
-                colorScheme,
-                "Resumen",
-                PhosphorIconsRegular.textColumns,
-              ),
+              _buildSectionHeader(textTheme, colorScheme, "Resumen"),
               const SizedBox(height: 8),
               Text(
                 norma.resumen,
@@ -88,12 +91,7 @@ class FichaNormativaScreen extends StatelessWidget {
               const SizedBox(height: 24),
 
               // SECCIÓN: PUNTOS CRÍTICOS
-              _buildSectionHeader(
-                textTheme,
-                colorScheme,
-                "Puntos Críticos",
-                PhosphorIconsRegular.listChecks,
-              ),
+              _buildSectionHeader(textTheme, colorScheme, "Puntos Críticos"),
               const SizedBox(height: 12),
               ...norma.puntosClave
                   .split('\n')
@@ -127,12 +125,7 @@ class FichaNormativaScreen extends StatelessWidget {
               const SizedBox(height: 24),
 
               // SECCIÓN: REFERENCIA (Estilo link de medicamentos)
-              _buildSectionHeader(
-                textTheme,
-                colorScheme,
-                "Referencia Oficial",
-                PhosphorIconsRegular.link,
-              ),
+              _buildSectionHeader(textTheme, colorScheme, "Referencia Oficial"),
               const SizedBox(height: 8),
               GestureDetector(
                 onTap: () {
@@ -163,12 +156,9 @@ class FichaNormativaScreen extends StatelessWidget {
     TextTheme textTheme,
     ColorScheme colorScheme,
     String titulo,
-    IconData icon,
   ) {
     return Row(
       children: [
-        Icon(icon, size: 25, color: colorScheme.primary),
-        const SizedBox(width: 8),
         Text(
           titulo,
           style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),

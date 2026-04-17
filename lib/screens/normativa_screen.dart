@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/models/norma.dart';
 import 'package:nursia_app/screens/ficha_normativa_screen.dart';
+import 'package:nursia_app/screens/lista_normas_filtrada_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/category_button.dart';
 import '../widgets/searchable_screen.dart';
@@ -133,7 +134,7 @@ class _NormativaScreenState extends State<NormativaScreen> {
                 "Práctica\nProfesional",
                 PhosphorIconsRegular.userList,
                 "n1",
-                null,
+                const ListaNormasFiltradaScreen(categoria: "Enfermería"),
               ),
               _buildButton(
                 "Expediente\nClínico",

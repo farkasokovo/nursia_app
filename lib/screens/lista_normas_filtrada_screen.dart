@@ -1,0 +1,131 @@
+import 'package:flutter/material.dart';
+import 'package:nursia_app/database/database_helper.dart';
+import 'package:nursia_app/models/norma.dart';
+import 'package:nursia_app/screens/ficha_normativa_screen.dart';
+import 'package:nursia_app/theme/app_theme.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+
+class ListaNormasFiltradaScreen extends StatelessWidget {
+  final String categoria;
+
+  const ListaNormasFiltradaScreen({super.key, required this.categoria});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: PhosphorIcon(
+            PhosphorIconsBold.caretLeft,
+            color: colorScheme.onPrimaryContainer,
+            size: 32,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(categoria),
+        centerTitle: true,
+      ),
+      body: FutureBuilder<List<Norma>>(
+        future: DatabaseHelper.instance.obtenerTodasLasNormas(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final normasFiltradas =
+              snapshot.data
+                  ?.where(
+                    (n) =>
+                        n.areaSalud.toLowerCase().contains(
+                          categoria.toLowerCase(),
+                        ) ||
+                        n.titulo.toLowerCase().contains(
+                          categoria.toLowerCase(),
+                        ),
+                  )
+                  .toList() ??
+              [];
+
+          if (normasFiltradas.isEmpty) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  "No hay normas registradas para $categoria aún.",
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.bodyMedium,
+                ),
+              ),
+            );
+          }
+
+          return ListView.separated(
+            padding: const EdgeInsets.all(20),
+            itemCount: normasFiltradas.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 12),
+            itemBuilder: (context, index) {
+              final norma = normasFiltradas[index];
+
+              return SizedBox(
+                width: double.infinity,
+                height: 70,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            FichaNormativaScreen(norma: norma),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: AppRadius.defaultRadius,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(PhosphorIconsRegular.fileText, size: 24),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              norma.codigo,
+                              style: theme.textTheme.titleSmall,
+                            ),
+                            Text(
+                              norma.tituloCorto,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        PhosphorIconsRegular.caretRight,
+                        color: Colors.white54,
+                        size: 30,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}

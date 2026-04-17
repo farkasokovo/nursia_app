@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/utils/icon_mapper.dart';
 import 'package:nursia_app/utils/url_launcher_helper.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../models/medicamento.dart';
 
 class FichaMedicamento extends StatefulWidget {
@@ -38,18 +39,37 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
         return Scaffold(
           backgroundColor: colorScheme.secondaryContainer,
           appBar: AppBar(
-            title: Text(widget.nombreMedicamento),
+            // 1. EL TRUCO CLAVE: Eliminamos el espacio predeterminado entre el leading y el title
+            titleSpacing: 0,
+            leading: IconButton(
+              icon: Icon(
+                PhosphorIconsBold.caretLeft,
+                color: colorScheme.onPrimaryContainer,
+                size: 32,
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                if (medicamento != null) ...[
+                  Icon(
+                    IconMapper.fromString(medicamento.icono),
+                    size: 26,
+                    color: colorScheme.onPrimaryContainer,
+                  ),
+                ],
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    widget.nombreMedicamento,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
             backgroundColor: colorScheme.primaryContainer,
-            leading: medicamento != null
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Icon(
-                      IconMapper.fromString(medicamento.icono),
-                      size: 28,
-                      color: colorScheme.onPrimaryContainer,
-                    ),
-                  )
-                : null,
           ),
           body: _buildBody(snapshot, colorScheme),
         );
