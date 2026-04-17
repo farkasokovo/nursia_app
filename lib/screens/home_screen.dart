@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'home_dashboard.dart';
-import 'placeholder_screen.dart';
+import 'normativa_screen.dart';
 import 'calculadora_screen.dart';
 import 'escalas_screen.dart';
 import 'farmacologia_screen.dart';
@@ -11,7 +11,7 @@ const List<Widget> _tabs = [
   Tab(text: "Farmacología"),
   Tab(icon: PhosphorIcon(PhosphorIconsFill.house, size: 28)),
   Tab(text: "Calculadoras"),
-  Tab(text: "Placeholder"),
+  Tab(text: "Normativa"),
 ];
 
 const List<Widget> _tabViews = [
@@ -19,7 +19,7 @@ const List<Widget> _tabViews = [
   FarmacologiaScreen(),
   HomeDashboard(),
   CalculadoraScreen(),
-  PlaceholderScreen(),
+  NormativaScreen(),
 ];
 
 class HomeScreen extends StatelessWidget {

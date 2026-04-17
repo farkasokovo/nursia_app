@@ -140,9 +140,9 @@ class HomeDashboard extends StatelessWidget {
                           SizedBox(width: 16),
                           Expanded(
                             child: HomeNavButton(
-                              title: "Más",
+                              title: "Normativa",
                               tabIndex: 4,
-                              icon: PhosphorIconsRegular.dotsThreeCircle,
+                              icon: PhosphorIconsRegular.books,
                             ),
                           ),
                         ],
