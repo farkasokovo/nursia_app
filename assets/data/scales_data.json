@@ -184,5 +184,53 @@
         "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=6046097"
       }
     ]
+  },
+  "maddox": {
+    "name": "Escala de Maddox (Valoración de Flebitis)",
+    "description": "La Escala de Maddox es un instrumento clínico de observación directa diseñado para estandarizar la evaluación de la flebitis (inflamación de la vena) en pacientes con catéteres venosos periféricos.\nA diferencia de las valoraciones subjetivas, Maddox permite clasificar el grado de afectación vascular mediante la identificación de signos cardinales de la inflamación —dolor, eritema, edema y cordón venoso palpable—, facilitando la toma de decisiones clínicas como la retirada inmediata del catéter o la monitorización intensiva del sitio de inserción.",
+    "when_to_use": [
+      "Durante cada turno de enfermería para la monitorización de rutina de catéteres periféricos.",
+      "Siempre que el paciente refiera dolor, ardor o sensibilidad en el sitio de punción.",
+      "Antes de la administración de fármacos irritantes, vesicantes o soluciones hipertónicas.",
+      "Como parte de los protocolos de seguridad del paciente para prevenir infecciones del torrente sanguíneo asociadas a catéter.",
+      "En la auditoría de calidad de cuidados de enfermería para medir la incidencia de flebitis en una unidad."
+    ],
+    "components": [
+      "Dolor: Sensibilidad reportada por el paciente a la palpación o en reposo.",
+      "Eritema: Enrojecimiento de la piel alrededor del punto de inserción.",
+      "Edema: Inflamación o hinchazón de los tejidos circundantes.",
+      "Cordón venoso: Induración o endurecimiento de la vena que se siente al tacto.",
+      "Exudado: Presencia de material purulento (pus) en el punto de inserción."
+    ],
+    "interpretation": [
+      "Grado 0: Sitio de inserción con aspecto saludable. Sin dolor ni signos inflamatorios.",
+      "Grado 1: Dolor en el sitio de inserción o ligero eritema. (Observar el catéter).",
+      "Grado 2: Dolor en el sitio de inserción con eritema y/o edema. (Retirar el catéter).",
+      "Grado 3: Dolor en el sitio de inserción con eritema, edema y formación de cordón venoso palpable. (Retirar el catéter).",
+      "Grado 4: Dolor en el sitio de inserción con eritema, edema, cordón venoso palpable mayor a 6 cm y/o drenaje purulento. (Retirar el catéter e iniciar tratamiento).",
+      "Grado 5: Tromboflebitis franca (todos los signos anteriores presentes de forma severa). (Emergencia clínica/Retirar catéter)."
+    ],
+    "limitations": [
+      "La percepción del dolor es subjetiva y puede variar según el umbral de cada paciente.",
+      "En pacientes con piel oscura, el eritema (enrojecimiento) puede ser difícil de visualizar en etapas tempranas.",
+      "No evalúa otros problemas del catéter como la extravasación o la infiltración, que requieren escalas distintas.",
+      "Requiere una técnica de palpación estandarizada para no confundir la anatomía normal con un cordón venoso."
+    ],
+    "clinical_notes": [
+      "Cualquier puntaje de Maddox igual o superior a 2 es una indicación clínica para retirar el catéter y canalizar una nueva vía en un sitio diferente (preferiblemente en el brazo contralateral).",
+      "El registro sistemático de esta escala reduce drásticamente el riesgo de bacteriemia secundaria a una flebitis no tratada.",
+      "Es vital documentar no solo el grado, sino las medidas tomadas (ej. \"Maddox 2: se retira catéter, se coloca compresa fría\").",
+      "La escala debe aplicarse no solo en el sitio de inserción, sino siguiendo el trayecto de la vena hacia arriba."
+    ],
+    "references": [
+      {
+        "text": "Rodríguez-Rajo, I., et al. (2023). Vigilancia de la flebitis mediante la escala de Maddox en pacientes hospitalizados. Enfermería Clínica.",
+        "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=8350124"
+      },
+      {
+        "text": "Martínez, A., & Pérez, L. (2021). Incidencia de flebitis y factores de riesgo asociados al catéter venoso periférico en adultos. SciELO - Revista de Enfermería.",
+        "url": "http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S0864-03192021000100008"
+      }
+    ]
   }
 }

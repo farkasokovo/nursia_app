@@ -23,6 +23,12 @@
       "nombre": "Escala de Downton",
       "categoria": "riesgos",
       "ruta": "downton_screen"
+    },
+    {
+      "id": "maddox",
+      "nombre": "Escala de Maddox",
+      "categoria": "riesgos",
+      "ruta": "maddox"
     }
   ]
 }

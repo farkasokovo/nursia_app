@@ -33,6 +33,7 @@ class _NeurologicasLayout extends StatelessWidget {
           children: [
             FarmaButton(
               title: "Escala de Glasgow",
+              subtitle: "Nivel de Conciencia",
               icon: PhosphorIconsRegular.brain,
               onPressed: () => Navigator.push(
                 context,
@@ -42,6 +43,7 @@ class _NeurologicasLayout extends StatelessWidget {
             const SizedBox(height: 20),
             FarmaButton(
               title: "Escala de Ramsay",
+              subtitle: "Agitación y Sedación",
               icon: PhosphorIconsRegular.moon,
               onPressed: () => Navigator.push(
                 context,
@@ -51,6 +53,7 @@ class _NeurologicasLayout extends StatelessWidget {
             const SizedBox(height: 20),
             FarmaButton(
               title: "Escala RASS",
+              subtitle: "Nivel de Sedación",
               icon: PhosphorIconsRegular.gauge,
               onPressed: () => Navigator.push(
                 context,

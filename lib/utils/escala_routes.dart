@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nursia_app/screens/escalas/neurologicas/ramsay_screen.dart';
 import 'package:nursia_app/screens/escalas/neurologicas/rass_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos/downton_screen.dart';
+import 'package:nursia_app/screens/escalas/riesgos/maddox.dart';
 import '../screens/escalas/neurologicas/glasgow_screen.dart';
 // Cuando tengas más escalas, impórtalas aquí
 
@@ -12,6 +13,5 @@ final Map<String, WidgetBuilder> escalaRoutes = {
   'ramsay_screen': (context) => const RamsayScreen(),
   'rass_screen': (context) => const RassScreen(),
   'downton_screen': (context) => const DowntonScreen(),
-  // 'rass_screen': (context) => const RassScreen(),
-  // 'dowton_screen': (context) => const DowtonScreen(),
+  'maddox': (context) => const MaddoxScreen(),
 };

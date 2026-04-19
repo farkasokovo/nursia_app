@@ -11,7 +11,7 @@ const List<Widget> _tabs = [
   Tab(text: "Farmacología"),
   Tab(icon: PhosphorIcon(PhosphorIconsFill.house, size: 28)),
   Tab(text: "Calculadoras"),
-  Tab(text: "Normativa"),
+  Tab(text: "Normativas"),
 ];
 
 const List<Widget> _tabViews = [

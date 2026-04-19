@@ -1,6 +1,7 @@
 // lib/screens/escalas/neurologicas_screen.dart
 import 'package:flutter/material.dart';
 import 'package:nursia_app/screens/escalas/riesgos/downton_screen.dart';
+import 'package:nursia_app/screens/escalas/riesgos/maddox.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/farma_button.dart';
@@ -31,6 +32,7 @@ class _RiesgosLayout extends StatelessWidget {
           children: [
             FarmaButton(
               title: "Escala de Downton",
+              subtitle: "Riesgo de Caídas",
               icon: PhosphorIconsRegular.boot,
               onPressed: () => Navigator.push(
                 context,
@@ -40,14 +42,19 @@ class _RiesgosLayout extends StatelessWidget {
             const SizedBox(height: 20),
             FarmaButton(
               title: "Escala de Braden",
+              subtitle: "Riesgo de UPP",
               icon: PhosphorIconsRegular.selectionBackground,
               onPressed: () {},
             ),
             const SizedBox(height: 20),
             FarmaButton(
-              title: "Escala de Norton",
-              icon: PhosphorIconsRegular.bed,
-              onPressed: () {},
+              title: "Escala de Maddox",
+              subtitle: "Riesgo de flebitis",
+              icon: PhosphorIconsRegular.hand,
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const MaddoxScreen()),
+              ),
             ),
           ],
         ),
