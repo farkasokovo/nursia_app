@@ -52,6 +52,7 @@ class DatabaseHelper {
         efectosSecundarios TEXT,
         efectosAdversos TEXT,
         interacciones TEXT,
+        observaciones TEXT,
         referencias TEXT
       )
     ''');

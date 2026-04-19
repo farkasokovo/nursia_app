@@ -1,4 +1,4 @@
-import 'dart:convert'; // Importante para jsonEncode y jsonDecode
+import 'dart:convert';
 
 class Medicamento {
   final String nombre;
@@ -12,6 +12,7 @@ class Medicamento {
   final List<String> efectosSecundarios;
   final List<String> efectosAdversos;
   final List<Interaccion> interacciones;
+  final Observaciones? observaciones;
   final List<Referencia> referencias;
 
   const Medicamento({
@@ -26,10 +27,10 @@ class Medicamento {
     required this.efectosSecundarios,
     required this.efectosAdversos,
     required this.interacciones,
+    this.observaciones,
     required this.referencias,
   });
 
-  // --- MANTENEMOS TU FROMJSON ORIGINAL PARA LA CARGA INICIAL ---
   factory Medicamento.fromJson(Map<String, dynamic> json) {
     return Medicamento(
       nombre: json['nombre'] ?? '',
@@ -49,6 +50,9 @@ class Medicamento {
               ?.map((e) => Interaccion.fromJson(e))
               .toList() ??
           [],
+      observaciones: json['observaciones'] != null
+          ? Observaciones.fromJson(json['observaciones'])
+          : null,
       referencias:
           (json['referencias'] as List?)
               ?.map((e) => Referencia.fromJson(e))
@@ -57,7 +61,6 @@ class Medicamento {
     );
   }
 
-  // --- NUEVA FUNCIÓN: CONVERTIR A MAPA PARA SQLITE ---
   Map<String, dynamic> toMap() {
     return {
       'nombre': nombre,
@@ -67,18 +70,19 @@ class Medicamento {
       'farmacocinetica': farmacocinetica,
       'indicaciones': indicaciones,
       'viaAdministracion': viaAdministracion,
-      // Aquí usamos jsonEncode para convertir objetos complejos en TEXTO
       'contraindicaciones': jsonEncode(contraindicaciones.toJson()),
       'efectosSecundarios': jsonEncode(efectosSecundarios),
       'efectosAdversos': jsonEncode(efectosAdversos),
       'interacciones': jsonEncode(
         interacciones.map((i) => i.toJson()).toList(),
       ),
+      'observaciones': observaciones != null
+          ? jsonEncode(observaciones!.toJson())
+          : null,
       'referencias': jsonEncode(referencias.map((r) => r.toJson()).toList()),
     };
   }
 
-  // --- NUEVA FUNCIÓN: LEER DESDE SQLITE ---
   factory Medicamento.fromMap(Map<String, dynamic> map) {
     return Medicamento(
       nombre: map['nombre'],
@@ -88,7 +92,6 @@ class Medicamento {
       farmacocinetica: map['farmacocinetica'],
       indicaciones: map['indicaciones'],
       viaAdministracion: map['viaAdministracion'],
-      // Aquí usamos jsonDecode para volver a convertir el TEXTO en objetos de Dart
       contraindicaciones: Contraindicaciones.fromJson(
         jsonDecode(map['contraindicaciones']),
       ),
@@ -99,14 +102,16 @@ class Medicamento {
       interacciones: (jsonDecode(map['interacciones'] ?? '[]') as List)
           .map((e) => Interaccion.fromJson(e))
           .toList(),
+      // 👇 NUEVO: deserializar observaciones desde SQLite
+      observaciones: map['observaciones'] != null
+          ? Observaciones.fromJson(jsonDecode(map['observaciones']))
+          : null,
       referencias: (jsonDecode(map['referencias'] ?? '[]') as List)
           .map((e) => Referencia.fromJson(e))
           .toList(),
     );
   }
 }
-
-// --- ACTUALIZAMOS LAS CLASES SECUNDARIAS CON TOJSON ---
 
 class Contraindicaciones {
   final List<String> absolutas;
@@ -164,4 +169,26 @@ class Referencia {
   }
 
   Map<String, dynamic> toJson() => {'text': text, 'url': url};
+}
+
+class Observaciones {
+  final String? preparacion;
+  final String? administracion;
+  final String? precauciones;
+
+  Observaciones({this.preparacion, this.administracion, this.precauciones});
+
+  factory Observaciones.fromJson(Map<String, dynamic> json) {
+    return Observaciones(
+      preparacion: json['preparacion'],
+      administracion: json['administracion'],
+      precauciones: json['precauciones'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    if (preparacion != null) 'preparacion': preparacion,
+    if (administracion != null) 'administracion': administracion,
+    if (precauciones != null) 'precauciones': precauciones,
+  };
 }

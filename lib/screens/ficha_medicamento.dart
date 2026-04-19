@@ -20,7 +20,6 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
   @override
   void initState() {
     super.initState();
-    // CAMBIO AQUÍ: Ahora usamos el helper
     _medicamentoFuture = DatabaseHelper.instance.obtenerMedicamentoPorNombre(
       widget.nombreMedicamento,
     );
@@ -139,6 +138,9 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
             const SizedBox(height: 16),
             _buildInteracciones(textTheme, medicamento.interacciones),
             const SizedBox(height: 16),
+            if (medicamento.observaciones != null)
+              _buildObservaciones(textTheme, medicamento.observaciones!),
+            if (medicamento.observaciones != null) const SizedBox(height: 16),
             _buildReferencias(textTheme, medicamento.referencias),
           ],
         ),
@@ -162,8 +164,6 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
     );
   }
 
-  /// Detecta palabras clave como "Absorción:", "Distribución:", etc.
-  /// y las resalta en negrita y color primario.
   Widget _buildFormattedSection(
     TextTheme textTheme,
     String titulo,
@@ -173,13 +173,11 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
       return _buildSection(textTheme, titulo, contenido);
     }
 
-    // Expresión regular para encontrar palabras que terminan en ":" al inicio de línea o después de salto
     final RegExp regex = RegExp(r'(^|\n)([A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+):\s*');
     final List<TextSpan> spans = [];
     int lastIndex = 0;
 
     for (final match in regex.allMatches(contenido)) {
-      // Texto antes de la palabra clave
       if (match.start > lastIndex) {
         spans.add(
           TextSpan(
@@ -188,7 +186,6 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
           ),
         );
       }
-      // Palabra clave resaltada
       spans.add(
         TextSpan(
           text: match.group(0)!,
@@ -201,7 +198,6 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
       lastIndex = match.end;
     }
 
-    // Texto después de la última palabra clave
     if (lastIndex < contenido.length) {
       spans.add(
         TextSpan(
@@ -344,6 +340,48 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildObservaciones(TextTheme textTheme, Observaciones obs) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final items = <Map<String, String>>[
+      if (obs.preparacion != null)
+        {'label': 'Preparación', 'valor': obs.preparacion!},
+      if (obs.administracion != null)
+        {'label': 'Administración', 'valor': obs.administracion!},
+      if (obs.precauciones != null)
+        {'label': 'Precauciones', 'valor': obs.precauciones!},
+    ];
+
+    if (items.isEmpty) return const SizedBox();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Observaciones', style: textTheme.titleMedium),
+        const SizedBox(height: 8),
+        ...items.map(
+          (item) => Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: '${item['label']}: ',
+                    style: textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.primary,
+                    ),
+                  ),
+                  TextSpan(text: item['valor'], style: textTheme.bodySmall),
+                ],
+              ),
             ),
           ),
         ),
