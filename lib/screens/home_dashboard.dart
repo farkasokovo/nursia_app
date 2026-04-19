@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/home_nav_button.dart';
 import '../utils/tips_helper.dart';
+import '../turno_activo/turno_activo_screen.dart';
 
 class HomeDashboard extends StatelessWidget {
   const HomeDashboard({super.key});
@@ -59,6 +60,55 @@ class HomeDashboard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
+    // --- LÓGICA DINÁMICA DE BOTONES ---
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // 1. Definimos los botones en una lista para manejarlos más fácil
+    final botones = [
+      const HomeNavButton(
+        title: "Escalas",
+        tabIndex: 0,
+        icon: PhosphorIconsRegular.clipboardText,
+      ),
+      const HomeNavButton(
+        title: "Fármacos",
+        tabIndex: 1,
+        icon: PhosphorIconsRegular.pill,
+      ),
+      const HomeNavButton(
+        title: "Calculadoras",
+        tabIndex: 3,
+        icon: PhosphorIconsRegular.calculator,
+      ),
+      const HomeNavButton(
+        title: "Normativas",
+        tabIndex: 4,
+        icon: PhosphorIconsRegular.books,
+      ),
+    ];
+
+    // 2. Calculamos el espacio disponible para los botones
+    // Restamos padding superior (98), saludo (~60), espaciado (32) y el bloque inferior del Tip (~180)
+    const double espacioFijoCaballete = 380;
+    final double espacioDisponible = screenHeight - espacioFijoCaballete;
+
+    // 3. Calculamos medidas para 3 filas (ya que son 5 botones)
+    const double spacing = 16.0;
+    final double anchoBoton =
+        (screenWidth - 48) /
+        2; // Pantalla - padding lateral (32) - espacio medio (16)
+
+    // Queremos que quepan 3 filas exactamente
+    final double altoTotalParaBotones = espacioDisponible - (2 * spacing);
+    final double altoBotonIdeal = altoTotalParaBotones / 3;
+
+    // 4. El ratio mágico
+    double ratioDinamico = anchoBoton / altoBotonIdeal;
+
+    // Si el ratio es demasiado bajo, ponemos un tope para que no se vean raros
+    if (ratioDinamico < 1.2) ratioDinamico = 1.3;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
@@ -74,7 +124,8 @@ class HomeDashboard extends StatelessWidget {
                     114, // Restamos el padding superior/inferior
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment
+                    .start, // Cambiamos a start para controlar el flujo
                 children: [
                   // BLOQUE SUPERIOR (Saludo + Botones)
                   Column(
@@ -105,48 +156,26 @@ class HomeDashboard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 32),
-
-                      // Botones
-                      Row(
-                        children: const [
-                          Expanded(
-                            child: HomeNavButton(
-                              title: "Escalas",
-                              tabIndex: 0,
-                              icon: PhosphorIconsRegular.clipboardText,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: HomeNavButton(
-                              title: "Fármacos",
-                              tabIndex: 1,
-                              icon: PhosphorIconsRegular.pill,
-                            ),
-                          ),
-                        ],
-                      ),
                       const SizedBox(height: 16),
-                      Row(
-                        children: const [
-                          Expanded(
-                            child: HomeNavButton(
-                              title: "Calculadoras",
-                              tabIndex: 3,
-                              icon: PhosphorIconsRegular.calculator,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: HomeNavButton(
-                              title: "Normativas",
-                              tabIndex: 4,
-                              icon: PhosphorIconsRegular.books,
-                            ),
-                          ),
-                        ],
+
+                      // Grid de Botones Dinámico
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 4, // Solo los primeros 4 botones (2 filas)
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: spacing,
+                          crossAxisSpacing: spacing,
+                          childAspectRatio: ratioDinamico,
+                        ),
+                        itemBuilder: (context, index) {
+                          return botones[index];
+                        },
                       ),
+                      // Botón de Turno Activo (lo sacamos del grid para que sea ancho completo)
+                      const SizedBox(height: 16),
+                      const BotonTurnoActivo(),
                     ],
                   ),
 
@@ -166,6 +195,99 @@ class HomeDashboard extends StatelessWidget {
   }
 }
 
+// ================== WIDGET TURNO ACTIVO ==================
+class BotonTurnoActivo extends StatelessWidget {
+  const BotonTurnoActivo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const Color cobreOscuro = Color(0xFF6F4225); // SaddleBrown
+    const Color oroCobrizo = Color(0xFF904714); // Bronze/Copper Gold
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const TurnoActivoScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              // Configuramos una curva suave (Curves.easeOut es muy 'cremita')
+              var curve = Curves.easeOutCubic;
+              var curvedAnimation = CurvedAnimation(
+                parent: animation,
+                curve: curve,
+              );
+
+              return FadeTransition(
+                opacity: curvedAnimation,
+                child: ScaleTransition(
+                  scale: Tween<double>(
+                    begin: 2.0,
+                    end: 1.0,
+                  ).animate(curvedAnimation),
+                  child: child,
+                ),
+              );
+            },
+            transitionDuration: const Duration(
+              milliseconds: 400,
+            ), // Duración ideal
+          ),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: cobreOscuro,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.white24,
+              radius: 25,
+              child: Icon(
+                PhosphorIconsFill.star,
+                color: colorScheme.onPrimary,
+                size: 30,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Turno Activo",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                  Text(
+                    "Pacientes • Pendientes • Medicación",
+                    style: textTheme.titleMedium?.copyWith(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(PhosphorIconsBold.caretRight, color: Colors.white),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 // ================== WIDGET TIP DEL DÍA ==================
 class TipDelDia extends StatefulWidget {
   const TipDelDia({super.key});
@@ -176,6 +298,7 @@ class TipDelDia extends StatefulWidget {
 
 class _TipDelDiaState extends State<TipDelDia> {
   String _tipExhibido = "Cargando tip...";
+  bool _isExpanded = false;
 
   @override
   void initState() {
@@ -209,56 +332,69 @@ class _TipDelDiaState extends State<TipDelDia> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(12, 5, 12, 12),
-      decoration: BoxDecoration(
-        color: colorScheme.secondaryContainer.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      child: Container(
+        width: double.infinity,
+        // Reducimos el padding inferior cuando está colapsado
+        padding: EdgeInsets.fromLTRB(12, 5, 12, _isExpanded ? 12 : 5),
+        decoration: BoxDecoration(
+          color: colorScheme.secondaryContainer.withValues(alpha: 0.5),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+          ),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                PhosphorIconsFill.lightbulb,
-                size: 28,
-                color: colorScheme.primaryContainer,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                "Tip del día",
-                style: textTheme.bodyLarge?.copyWith(fontSize: 18),
-              ),
-              const Spacer(),
-              Tooltip(
-                message: "Siguiente tip",
-                decoration: BoxDecoration(
-                  color: colorScheme.primary,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: IconButton(
-                  onPressed:
-                      _forzarNuevoTip, // Llamamos a la función de cambio manual
-                  icon: Icon(
-                    PhosphorIconsBold.arrowClockwise,
-                    size: 20,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Hacemos que toda la cabecera sea clickable para expandir/colapsar
+            InkWell(
+              onTap: () => setState(() => _isExpanded = !_isExpanded),
+              borderRadius: BorderRadius.circular(12),
+              child: Row(
+                children: [
+                  Icon(
+                    PhosphorIconsFill.lightbulb,
+                    size: 28,
                     color: colorScheme.primaryContainer,
                   ),
-                ),
+                  const SizedBox(width: 8),
+                  Text(
+                    "Tip del día",
+                    style: textTheme.bodyLarge?.copyWith(fontSize: 18),
+                  ),
+                  const Spacer(),
+                  Tooltip(
+                    message: _isExpanded ? "Siguiente tip" : "Ver tip",
+                    child: IconButton(
+                      onPressed: _isExpanded
+                          ? _forzarNuevoTip
+                          : () => setState(() => _isExpanded = true),
+                      icon: Icon(
+                        _isExpanded
+                            ? PhosphorIconsBold.arrowClockwise
+                            : PhosphorIconsRegular.caretDown,
+                        size: 20,
+                        color: colorScheme.primaryContainer,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Solo mostramos el contenido si está expandido
+            if (_isExpanded) ...[
+              const SizedBox(height: 8),
+              Text(
+                _tipExhibido,
+                style: textTheme.bodySmall?.copyWith(fontSize: 13),
               ),
             ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            _tipExhibido,
-            style: textTheme.bodySmall?.copyWith(fontSize: 13),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

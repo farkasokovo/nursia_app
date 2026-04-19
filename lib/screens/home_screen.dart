@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
   ) {
     return AppBar(
       title: Text(
-        'Nursia',
+        'Nurska',
         style: textTheme.titleLarge?.copyWith(
           fontSize: 25,
           color: colorScheme.onPrimaryContainer,
