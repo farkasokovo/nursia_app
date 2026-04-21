@@ -201,8 +201,7 @@ class BotonTurnoActivo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color cobreOscuro = Color(0xFF6F4225); // SaddleBrown
-    const Color oroCobrizo = Color(0xFF904714); // Bronze/Copper Gold
+    const Color cobreOscuro = Color(0xFF6F4225); // Color del botón especial
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -213,25 +212,25 @@ class BotonTurnoActivo extends StatelessWidget {
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const TurnoActivoScreen(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              // Configuramos una curva suave (Curves.easeOut es muy 'cremita')
-              var curve = Curves.easeOutCubic;
-              var curvedAnimation = CurvedAnimation(
-                parent: animation,
-                curve: curve,
-              );
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  var curve = Curves.easeInOutExpo;
+                  var curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
 
-              return FadeTransition(
-                opacity: curvedAnimation,
-                child: ScaleTransition(
-                  scale: Tween<double>(
-                    begin: 2.0,
-                    end: 1.0,
-                  ).animate(curvedAnimation),
-                  child: child,
-                ),
-              );
-            },
+                  return FadeTransition(
+                    opacity: curvedAnimation,
+                    child: ScaleTransition(
+                      scale: Tween<double>(
+                        begin: 2.0,
+                        end: 1,
+                      ).animate(curvedAnimation),
+                      child: child,
+                    ),
+                  );
+                },
             transitionDuration: const Duration(
               milliseconds: 400,
             ), // Duración ideal

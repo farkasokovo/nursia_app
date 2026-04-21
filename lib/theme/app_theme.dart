@@ -139,7 +139,7 @@ class AppTheme {
       error: AppColors.redAlertv1,
       onError: Colors.white,
       errorContainer: AppColors.redAlertv4,
-      onErrorContainer: Colors.white,
+      onErrorContainer: AppColors.lightSecondaryColor,
       surface: AppColors.secondaryColor,
       onSurface: AppColors.darkPrimaryColor,
     );
