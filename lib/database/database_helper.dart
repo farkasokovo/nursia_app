@@ -5,7 +5,8 @@ import 'package:nursia_app/models/calculadora_info.dart';
 import 'package:nursia_app/models/escala_metadata.dart';
 import 'package:nursia_app/models/medicamento.dart';
 import 'package:nursia_app/models/ver_mas_screen.dart';
-import 'package:nursia_app/models/norma.dart'; // <-- NUEVO IMPORT
+import 'package:nursia_app/models/norma.dart';
+import 'package:nursia_app/turno_activo/models/paciente.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -30,8 +31,34 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1, // Si luego cambias la estructura, subes este número
+      version: 3,
       onCreate: _createDB,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS normas (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              codigo TEXT,
+              titulo TEXT,
+              titulo_corto TEXT,
+              area_salud TEXT,
+              resumen TEXT,
+              palabras_clave TEXT,
+              puntos_clave TEXT,
+              dof_referencia TEXT
+            )
+          ''');
+        }
+        if (oldVersion < 3) {
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS pacientes_turno (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              nombre TEXT NOT NULL,
+              orden INTEGER NOT NULL DEFAULT 0
+            )
+          ''');
+        }
+      },
     );
   }
 
@@ -86,7 +113,7 @@ class DatabaseHelper {
       )
     ''');
 
-    // 4. NUEVA: Tabla de Normas (NOMs)
+    // 4. Tabla de Normas (NOMs)
     await db.execute('''
       CREATE TABLE normas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -98,6 +125,15 @@ class DatabaseHelper {
         palabras_clave TEXT,
         puntos_clave TEXT,
         dof_referencia TEXT
+      )
+    ''');
+
+    // 5. Tabla de Pacientes del Turno Activo
+    await db.execute('''
+      CREATE TABLE pacientes_turno (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT NOT NULL,
+        orden INTEGER NOT NULL DEFAULT 0
       )
     ''');
   }
@@ -330,5 +366,52 @@ class DatabaseHelper {
     return List.generate(mapas.length, (i) {
       return Norma.fromMap(mapas[i]);
     });
+  }
+
+  // =========================================================
+  // SECCIÓN PACIENTES DEL TURNO ACTIVO
+  // =========================================================
+
+  /// Inserta un paciente y devuelve el objeto con el id asignado por SQLite.
+  Future<Paciente> insertarPacienteTurno(Paciente paciente) async {
+    final db = await instance.database;
+    final id = await db.insert(
+      'pacientes_turno',
+      paciente.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return paciente.copyWith(id: id);
+  }
+
+  /// Carga todos los pacientes ordenados por el campo 'orden'.
+  Future<List<Paciente>> obtenerPacientesTurno() async {
+    final db = await instance.database;
+    final mapas = await db.query('pacientes_turno', orderBy: 'orden ASC');
+    return mapas.map((m) => Paciente.fromMap(m)).toList();
+  }
+
+  /// Elimina un paciente por su id.
+  Future<void> eliminarPacienteTurno(int id) async {
+    final db = await instance.database;
+    await db.delete('pacientes_turno', where: 'id = ?', whereArgs: [id]);
+  }
+
+  /// Actualiza el campo 'orden' de toda la lista de una vez.
+  /// Llámalo después de cualquier reordenamiento.
+  Future<void> actualizarOrdenPacientes(List<Paciente> pacientes) async {
+    final db = await instance.database;
+    final batch = db.batch();
+    for (int i = 0; i < pacientes.length; i++) {
+      final p = pacientes[i];
+      if (p.id != null) {
+        batch.update(
+          'pacientes_turno',
+          {'orden': i},
+          where: 'id = ?',
+          whereArgs: [p.id],
+        );
+      }
+    }
+    await batch.commit(noResult: true);
   }
 }

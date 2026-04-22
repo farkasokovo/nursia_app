@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/turno_activo/models/paciente.dart';
 import 'package:nursia_app/turno_activo/widgets/barra_acciones.dart';
 import 'package:nursia_app/turno_activo/tabs/pacientes_tab.dart';
@@ -39,6 +40,16 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
       }
     });
     _cargarMedicamentos();
+    _cargarPacientesDeDB();
+  }
+
+  /// Carga los pacientes persistidos al abrir la pantalla.
+  Future<void> _cargarPacientesDeDB() async {
+    final lista = await DatabaseHelper.instance.obtenerPacientesTurno();
+    setState(() {
+      _pacientes.clear();
+      _pacientes.addAll(lista);
+    });
   }
 
   Future<void> _cargarMedicamentos() async {
@@ -73,8 +84,15 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
         final sorted = _seleccionadosPacientes.toList()
           ..sort((a, b) => b.compareTo(a));
         for (final i in sorted) {
+          final paciente = _pacientes[i];
+          // Eliminar de DB si tiene id
+          if (paciente.id != null) {
+            DatabaseHelper.instance.eliminarPacienteTurno(paciente.id!);
+          }
           _pacientes.removeAt(i);
         }
+        // Actualizar orden en DB tras la eliminación
+        DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
       } else if (index == 1) {
         final sorted = _seleccionadosPendientes.toList()
           ..sort((a, b) => b.compareTo(a));
@@ -180,6 +198,8 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                 final moved = _pacientes.removeAt(oldIndex);
                 _pacientes.insert(newIndex, moved);
               });
+              // Persistir el nuevo orden en DB
+              DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
             },
           ),
 
@@ -417,10 +437,17 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(PhosphorIconsRegular.user),
                   ),
-                  onSubmitted: (_) {
+                  onSubmitted: (_) async {
                     final nombre = nombreController.text.trim();
                     if (nombre.isNotEmpty) {
-                      setState(() => _pacientes.add(Paciente(nombre: nombre)));
+                      // Insertar en DB primero para obtener el id
+                      final nuevo = Paciente(
+                        nombre: nombre,
+                        orden: _pacientes.length,
+                      );
+                      final guardado = await DatabaseHelper.instance
+                          .insertarPacienteTurno(nuevo);
+                      setState(() => _pacientes.add(guardado));
                       Navigator.pop(context);
                     }
                   },
@@ -443,12 +470,16 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           final nombre = nombreController.text.trim();
                           if (nombre.isNotEmpty) {
-                            setState(
-                              () => _pacientes.add(Paciente(nombre: nombre)),
+                            final nuevo = Paciente(
+                              nombre: nombre,
+                              orden: _pacientes.length,
                             );
+                            final guardado = await DatabaseHelper.instance
+                                .insertarPacienteTurno(nuevo);
+                            setState(() => _pacientes.add(guardado));
                             Navigator.pop(context);
                           }
                         },
