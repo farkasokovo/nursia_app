@@ -25,7 +25,6 @@ class PacientesTab extends StatelessWidget {
   });
 
   // Altura fija compartida entre modo normal y modo selección
-  static const double _itemHeight = 65.0;
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +105,8 @@ class PacientesTab extends StatelessWidget {
           onTap: () => onToggleSeleccion(index),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 150),
-            height: 55,
             margin: const EdgeInsets.only(bottom: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
               color: estaSeleccionado
                   ? colorScheme.error.withValues(alpha: 0.15)
@@ -217,16 +215,16 @@ class PacientesTab extends StatelessWidget {
 
         return SizedBox(
           key: itemKey,
-          height: _itemHeight,
+
           child: Card(
             color: colorScheme.primary,
             margin: const EdgeInsets.only(bottom: 10),
-            elevation: 0,
+
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               child: Row(
                 children: [
                   CircleAvatar(
