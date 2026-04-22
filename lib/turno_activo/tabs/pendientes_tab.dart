@@ -98,7 +98,7 @@ class PendientesTab extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        final estaSeleccionado = seleccionados.contains(index);
+        final estaSeleccionado = seleccionados.contains(item.id);
 
         return GestureDetector(
           onTap: () => onToggleSeleccion(index),

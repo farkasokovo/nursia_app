@@ -482,11 +482,11 @@ class DatabaseHelper {
   /// Inserta un pendiente en la lista activa del turno del usuario
   Future<PendienteInfo> insertarPendienteTurno(PendienteInfo pendiente) async {
     final db = await instance.database;
-    final id = await db.insert(
-      'pendientes_turno',
-      pendiente.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    final id = await db.insert('pendientes_turno', {
+      'nombre': pendiente.nombre,
+      'icono': pendiente.icono,
+      'orden': pendiente.orden,
+    });
     return pendiente.copyWith(id: id);
   }
 

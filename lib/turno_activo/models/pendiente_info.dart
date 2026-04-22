@@ -1,5 +1,3 @@
-import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
-
 class PendienteInfo {
   final int? id;
   final String nombre;

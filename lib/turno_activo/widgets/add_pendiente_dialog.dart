@@ -19,165 +19,183 @@ Future<void> showAddPendienteDialog(
     builder: (context) {
       final textTheme = Theme.of(context).textTheme;
       final colorScheme = Theme.of(context).colorScheme;
+
       PendienteInfo? seleccionTemporal;
 
       return MediaQuery(
-        // Evita que el diálogo suba erráticamente cuando aparece el teclado,
-        // igual que en el diálogo de pacientes
         data: MediaQuery.of(context).copyWith(viewInsets: EdgeInsets.zero),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 90.0),
-          child: Dialog(
-            alignment: Alignment.topCenter,
+        child: Dialog(
+          alignment: Alignment.topCenter,
+          insetPadding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Añadir Pendiente", style: textTheme.titleMedium),
 
-            insetPadding: const EdgeInsets.symmetric(
-              horizontal: 24,
-              vertical: 40,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Añadir Pendiente", style: textTheme.titleMedium),
-                  const SizedBox(height: 6),
-                  Text(
-                    "Busca y selecciona una tarea o procedimiento para agregar a tu lista.",
-                    style: textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSecondaryContainer,
-                    ),
+                const SizedBox(height: 6),
+
+                Text(
+                  "Busca y selecciona una tarea o procedimiento para agregar a tu lista.",
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSecondaryContainer,
                   ),
-                  const SizedBox(height: 20),
+                ),
 
-                  Autocomplete<PendienteInfo>(
-                    displayStringForOption: (option) => option.nombre,
-                    optionsBuilder: (textEditingValue) {
-                      if (textEditingValue.text.isEmpty) {
-                        return const Iterable.empty();
-                      }
-                      return catalogo.where(
-                        (p) => p.nombre.toLowerCase().contains(
-                          textEditingValue.text.toLowerCase(),
-                        ),
-                      );
-                    },
-                    onSelected: (selection) => seleccionTemporal = selection,
-                    fieldViewBuilder:
-                        (context, controller, focusNode, onFieldSubmitted) {
-                          return TextField(
-                            controller: controller,
-                            focusNode: focusNode,
-                            autofocus: true,
-                            decoration: InputDecoration(
-                              labelText: "Buscar tarea",
-                              hintText: "Ej: Baño de esponja",
-                              hintStyle: textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.primary.withValues(
-                                  alpha: 0.4,
-                                ),
-                              ),
-                              border: const OutlineInputBorder(),
-                              prefixIcon: const Icon(
-                                PhosphorIconsRegular.magnifyingGlass,
-                              ),
-                            ),
-                          );
-                        },
-                    optionsViewBuilder: (context, onSelected, options) {
-                      return Align(
-                        alignment: Alignment.topLeft,
-                        child: Material(
-                          elevation: 4,
-                          borderRadius: BorderRadius.circular(12),
-                          child: SizedBox(
-                            // Ajuste de ancho para que no se salga del diálogo
-                            width: MediaQuery.of(context).size.width - 96,
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              itemCount: options.length,
-                              itemBuilder: (context, index) {
-                                final option = options.elementAt(index);
-                                return ListTile(
-                                  leading: Icon(
-                                    IconMapper.getIcon(option.icono),
-                                  ),
-                                  title: Text(option.nombre),
-                                  onTap: () => onSelected(option),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                const SizedBox(height: 20),
 
-                  const SizedBox(height: 24),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () => Navigator.pop(context),
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            side: BorderSide(color: colorScheme.outline),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: Text(
-                            "Cancelar",
-                            style: textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                Autocomplete<PendienteInfo>(
+                  displayStringForOption: (option) => option.nombre,
+
+                  optionsBuilder: (textEditingValue) {
+                    if (textEditingValue.text.isEmpty) {
+                      return const Iterable.empty();
+                    }
+
+                    return catalogo.where(
+                      (p) => p.nombre.toLowerCase().contains(
+                        textEditingValue.text.toLowerCase(),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            // Solo confirmamos si hay algo seleccionado
-                            if (seleccionTemporal != null) {
-                              final nuevo = seleccionTemporal!.copyWith(
-                                orden: ordenSiguiente,
+                    );
+                  },
+
+                  onSelected: (selection) {
+                    seleccionTemporal = selection;
+                  },
+
+                  fieldViewBuilder:
+                      (context, controller, focusNode, onFieldSubmitted) {
+                        return TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText: "Buscar tarea",
+                            hintText: "Ej: Baño de esponja",
+
+                            hintStyle: textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.primary.withValues(alpha: 0.4),
+                            ),
+
+                            border: const OutlineInputBorder(),
+
+                            prefixIcon: const Icon(
+                              PhosphorIconsRegular.magnifyingGlass,
+                            ),
+                          ),
+                        );
+                      },
+
+                  optionsViewBuilder: (context, onSelected, options) {
+                    return Align(
+                      alignment: Alignment.topLeft,
+                      child: Material(
+                        elevation: 4,
+                        borderRadius: BorderRadius.circular(12),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width - 96,
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            itemCount: options.length,
+                            itemBuilder: (context, index) {
+                              final option = options.elementAt(index);
+
+                              return ListTile(
+                                leading: Icon(IconMapper.getIcon(option.icono)),
+                                title: Text(option.nombre),
+                                onTap: () => onSelected(option),
                               );
-                              // Guardamos en la base de datos
-                              final guardado = await DatabaseHelper.instance
-                                  .insertarPendienteTurno(nuevo);
-
-                              onGuardado(guardado);
-                              if (context.mounted) Navigator.pop(context);
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: colorScheme.primary,
-                            foregroundColor: colorScheme.onPrimary,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: const Text(
-                            "Confirmar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                            },
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 24),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.pop(context),
+
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+
+                          side: BorderSide(color: colorScheme.outline),
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+
+                        child: Text(
+                          "Cancelar",
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 12),
+
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (seleccionTemporal != null) {
+                            // 🔧 CORRECCIÓN: ya no usamos el id del catálogo
+                            final nuevo = PendienteInfo(
+                              nombre: seleccionTemporal!.nombre,
+                              icono: seleccionTemporal!.icono,
+                              orden: ordenSiguiente,
+                            );
+
+                            final guardado = await DatabaseHelper.instance
+                                .insertarPendienteTurno(nuevo);
+
+                            onGuardado(guardado);
+
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                            }
+                          }
+                        },
+
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
+
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+
+                          elevation: 0,
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+
+                        child: const Text(
+                          "Confirmar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
