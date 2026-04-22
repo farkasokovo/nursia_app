@@ -241,7 +241,7 @@ class BotonTurnoActivo extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: cobreOscuro,
+          color: colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(

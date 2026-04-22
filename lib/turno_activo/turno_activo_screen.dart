@@ -166,135 +166,147 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text("Gestión de Turno"),
-        leading: IconButton(
-          icon: PhosphorIcon(
-            PhosphorIconsBold.caretLeft,
-            color: colorScheme.onPrimaryContainer,
-            size: 32,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(72),
-          child: Container(
-            color: colorScheme.primaryContainer,
-            child: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              tabAlignment: TabAlignment.start,
-              dividerColor: Colors.transparent,
-              indicatorColor: colorScheme.onPrimaryContainer,
-              labelColor: colorScheme.onPrimaryContainer,
-              unselectedLabelColor: colorScheme.tertiaryContainer,
-              labelPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: textTheme.titleMedium?.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-              unselectedLabelStyle: textTheme.titleSmall?.copyWith(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-              tabs: const [
-                Tab(icon: Icon(PhosphorIconsFill.users), text: "Pacientes"),
-                Tab(
-                  icon: Icon(PhosphorIconsFill.listChecks),
-                  text: "Pendientes",
-                ),
-                Tab(icon: Icon(PhosphorIconsFill.pill), text: "Medicamentos"),
-              ],
+    return PopScope(
+      canPop:
+          !_modoSeleccion, // Solo permite salir si NO está en modo selección
+      onPopInvokedWithResult: (didPop, result) async {
+        if (!didPop && _modoSeleccion) {
+          _cancelarSeleccion();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text("Gestión de Turno"),
+          leading: IconButton(
+            icon: PhosphorIcon(
+              PhosphorIconsBold.caretLeft,
+              color: colorScheme.onPrimaryContainer,
+              size: 32,
             ),
+            onPressed: () => Navigator.pop(context),
           ),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          PacientesTab(
-            pacientes: _pacientes,
-            modoSeleccion: _modoSeleccion,
-            seleccionados: _seleccionadosPacientes,
-            onEntrarModoSeleccion: () => setState(() => _modoSeleccion = true),
-            onCancelarSeleccion: _cancelarSeleccion,
-            onToggleSeleccion: (i) => setState(() {
-              _seleccionadosPacientes.contains(i)
-                  ? _seleccionadosPacientes.remove(i)
-                  : _seleccionadosPacientes.add(i);
-            }),
-            onReorder: (oldIndex, newIndex) {
-              setState(() {
-                if (oldIndex < newIndex) newIndex -= 1;
-                _pacientes.insert(newIndex, _pacientes.removeAt(oldIndex));
-              });
-              DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
-            },
-          ),
-          PendientesTab(
-            items: _pendientes,
-            modoSeleccion: _modoSeleccion,
-            seleccionados: _seleccionadosPendientes,
-            onEntrarModoSeleccion: () => setState(() => _modoSeleccion = true),
-            onCancelarSeleccion: _cancelarSeleccion,
-            onToggleSeleccion: (i) => setState(() {
-              _seleccionadosPendientes.contains(i)
-                  ? _seleccionadosPendientes.remove(i)
-                  : _seleccionadosPendientes.add(i);
-            }),
-          ),
-          MedicamentosTab(
-            items: _medicamentosTurno,
-            modoSeleccion: _modoSeleccion,
-            seleccionados: _seleccionadosMedicamentos,
-            onEntrarModoSeleccion: () => setState(() => _modoSeleccion = true),
-            onCancelarSeleccion: _cancelarSeleccion,
-            onToggleSeleccion: (i) => setState(() {
-              _seleccionadosMedicamentos.contains(i)
-                  ? _seleccionadosMedicamentos.remove(i)
-                  : _seleccionadosMedicamentos.add(i);
-            }),
-          ),
-        ],
-      ),
-      floatingActionButton: _modoSeleccion
-          ? FloatingActionButton.extended(
-              onPressed: _seleccionActual.isEmpty
-                  ? null
-                  : _eliminarSeleccionados,
-              icon: const Icon(PhosphorIconsRegular.trash),
-              label: Text(
-                _seleccionActual.isEmpty
-                    ? "Selecciona items"
-                    : "Eliminar (${_seleccionActual.length})",
-                style: _seleccionActual.isEmpty
-                    ? textTheme.bodyLarge
-                    : textTheme.bodyLarge?.copyWith(
-                        color: colorScheme.secondary,
-                      ),
-              ),
-              backgroundColor: _seleccionActual.isEmpty
-                  ? colorScheme.surfaceContainerHighest
-                  : colorScheme.error,
-              foregroundColor: _seleccionActual.isEmpty
-                  ? colorScheme.onSurfaceVariant
-                  : colorScheme.onError,
-            )
-          : FloatingActionButton.extended(
-              onPressed: _showAddDialog,
-              icon: const Icon(PhosphorIconsBold.plus),
-              label: Text(
-                _fabLabel,
-                style: textTheme.bodySmall?.copyWith(
-                  color: colorScheme.onPrimaryContainer,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(72),
+            child: Container(
+              color: colorScheme.primaryContainer,
+              child: TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                tabAlignment: TabAlignment.start,
+                dividerColor: Colors.transparent,
+                indicatorColor: colorScheme.onPrimaryContainer,
+                labelColor: colorScheme.onPrimaryContainer,
+                unselectedLabelColor: colorScheme.tertiaryContainer,
+                labelPadding: const EdgeInsets.symmetric(horizontal: 20),
+                labelStyle: textTheme.titleMedium?.copyWith(
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
+                unselectedLabelStyle: textTheme.titleSmall?.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+                tabs: const [
+                  Tab(icon: Icon(PhosphorIconsFill.users), text: "Pacientes"),
+                  Tab(
+                    icon: Icon(PhosphorIconsFill.listChecks),
+                    text: "Pendientes",
+                  ),
+                  Tab(icon: Icon(PhosphorIconsFill.pill), text: "Medicamentos"),
+                ],
               ),
-              backgroundColor: colorScheme.primary,
-              foregroundColor: colorScheme.onPrimary,
             ),
+          ),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            PacientesTab(
+              pacientes: _pacientes,
+              modoSeleccion: _modoSeleccion,
+              seleccionados: _seleccionadosPacientes,
+              onEntrarModoSeleccion: () =>
+                  setState(() => _modoSeleccion = true),
+              onCancelarSeleccion: _cancelarSeleccion,
+              onToggleSeleccion: (i) => setState(() {
+                _seleccionadosPacientes.contains(i)
+                    ? _seleccionadosPacientes.remove(i)
+                    : _seleccionadosPacientes.add(i);
+              }),
+              onReorder: (oldIndex, newIndex) {
+                setState(() {
+                  if (oldIndex < newIndex) newIndex -= 1;
+                  _pacientes.insert(newIndex, _pacientes.removeAt(oldIndex));
+                });
+                DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
+              },
+            ),
+            PendientesTab(
+              items: _pendientes,
+              modoSeleccion: _modoSeleccion,
+              seleccionados: _seleccionadosPendientes,
+              onEntrarModoSeleccion: () =>
+                  setState(() => _modoSeleccion = true),
+              onCancelarSeleccion: _cancelarSeleccion,
+              onToggleSeleccion: (i) => setState(() {
+                _seleccionadosPendientes.contains(i)
+                    ? _seleccionadosPendientes.remove(i)
+                    : _seleccionadosPendientes.add(i);
+              }),
+            ),
+            MedicamentosTab(
+              items: _medicamentosTurno,
+              modoSeleccion: _modoSeleccion,
+              seleccionados: _seleccionadosMedicamentos,
+              onEntrarModoSeleccion: () =>
+                  setState(() => _modoSeleccion = true),
+              onCancelarSeleccion: _cancelarSeleccion,
+              onToggleSeleccion: (i) => setState(() {
+                _seleccionadosMedicamentos.contains(i)
+                    ? _seleccionadosMedicamentos.remove(i)
+                    : _seleccionadosMedicamentos.add(i);
+              }),
+            ),
+          ],
+        ),
+        floatingActionButton: _modoSeleccion
+            ? FloatingActionButton.extended(
+                onPressed: _seleccionActual.isEmpty
+                    ? null
+                    : _eliminarSeleccionados,
+                icon: const Icon(PhosphorIconsRegular.trash),
+                label: Text(
+                  _seleccionActual.isEmpty
+                      ? "Selecciona items"
+                      : "Eliminar (${_seleccionActual.length})",
+                  style: _seleccionActual.isEmpty
+                      ? textTheme.bodyLarge
+                      : textTheme.bodyLarge?.copyWith(
+                          color: colorScheme.secondary,
+                        ),
+                ),
+                backgroundColor: _seleccionActual.isEmpty
+                    ? colorScheme.surfaceContainerHighest
+                    : colorScheme.error,
+                foregroundColor: _seleccionActual.isEmpty
+                    ? colorScheme.onSurfaceVariant
+                    : colorScheme.onError,
+              )
+            : FloatingActionButton.extended(
+                onPressed: _showAddDialog,
+                icon: const Icon(PhosphorIconsBold.plus),
+                label: Text(
+                  _fabLabel,
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onPrimaryContainer,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
+              ),
+      ),
     );
   }
 }
