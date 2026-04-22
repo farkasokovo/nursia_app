@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/turno_activo/models/paciente.dart';
@@ -9,6 +10,7 @@ import 'package:nursia_app/turno_activo/tabs/pendientes_tab.dart';
 import 'package:nursia_app/turno_activo/tabs/medicamentos_tab.dart';
 import 'package:nursia_app/turno_activo/widgets/add_paciente_dialog.dart';
 import 'package:nursia_app/turno_activo/widgets/add_item_dialog.dart';
+import 'package:nursia_app/turno_activo/widgets/add_pendiente_dialog.dart'; // Import nuevo
 
 class TurnoActivoScreen extends StatefulWidget {
   const TurnoActivoScreen({super.key});
@@ -23,7 +25,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
 
   // ── DATOS ──────────────────────────────────────────────────────────────────
   final List<Paciente> _pacientes = [];
-  final List<String> _pendientes = [];
+  final List<PendienteInfo> _pendientes = [];
   final List<String> _medicamentosTurno = [];
   List<String> _medicamentosNombres = [];
 
@@ -47,7 +49,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) _cancelarSeleccion();
     });
-    _cargarPacientesDeDB();
+    _cargarDatosDeDB();
     _cargarMedicamentosNombres();
   }
 
@@ -58,13 +60,23 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
   }
 
   // ── CARGA INICIAL ──────────────────────────────────────────────────────────
-  Future<void> _cargarPacientesDeDB() async {
-    final lista = await DatabaseHelper.instance.obtenerPacientesTurno();
-    setState(
-      () => _pacientes
+  Future<void> _cargarDatosDeDB() async {
+    // Cargamos catálogo (JSON) por si es la primera vez
+    await DatabaseHelper.instance.cargarCatalogoPendientesDesdeJSON();
+
+    final listaPacientes = await DatabaseHelper.instance
+        .obtenerPacientesTurno();
+    final listaPendientes = await DatabaseHelper.instance
+        .obtenerPendientesTurno();
+
+    setState(() {
+      _pacientes
         ..clear()
-        ..addAll(lista),
-    );
+        ..addAll(listaPacientes);
+      _pendientes
+        ..clear()
+        ..addAll(listaPendientes);
+    });
   }
 
   Future<void> _cargarMedicamentosNombres() async {
@@ -93,25 +105,30 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
             ..sort((a, b) => b.compareTo(a));
           for (final i in sorted) {
             final p = _pacientes[i];
-            if (p.id != null) {
+            if (p.id != null)
               DatabaseHelper.instance.eliminarPacienteTurno(p.id!);
-            }
             _pacientes.removeAt(i);
           }
           DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
+          break;
         case 1:
           final sorted = _seleccionadosPendientes.toList()
             ..sort((a, b) => b.compareTo(a));
-          for (final i in sorted) _pendientes.removeAt(i);
+          for (final i in sorted) {
+            final p = _pendientes[i];
+            if (p.id != null)
+              DatabaseHelper.instance.eliminarPendienteTurno(p.id!);
+            _pendientes.removeAt(i);
+          }
+          DatabaseHelper.instance.actualizarOrdenPendientes(_pendientes);
+          break;
         case 2:
           final sorted = _seleccionadosMedicamentos.toList()
             ..sort((a, b) => b.compareTo(a));
           for (final i in sorted) _medicamentosTurno.removeAt(i);
+          break;
       }
-      _modoSeleccion = false;
-      _seleccionadosPacientes.clear();
-      _seleccionadosPendientes.clear();
-      _seleccionadosMedicamentos.clear();
+      _cancelarSeleccion();
     });
   }
 
@@ -124,22 +141,15 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
           ordenSiguiente: _pacientes.length,
           onGuardado: (p) => setState(() => _pacientes.add(p)),
         );
+        break;
       case 1:
-        showAddItemDialog(
+        // Usamos nuestro nuevo diálogo con autocompletado e iconos
+        showAddPendienteDialog(
           context,
-          titulo: "Añadir Tarea Pendiente",
-          label: "Procedimiento o cuidado",
-          icono: PhosphorIconsRegular.listChecks,
-          sugerencias: [
-            "Baño de esponja",
-            "Cambio de vendajes",
-            "Curación de catéter",
-            "Control de líquidos",
-            "Aspiración de secreciones",
-            "Cambio de posición",
-          ],
-          onConfirm: (item) => setState(() => _pendientes.add(item)),
+          ordenSiguiente: _pendientes.length,
+          onGuardado: (p) => setState(() => _pendientes.add(p)),
         );
+        break;
       case 2:
         showAddItemDialog(
           context,
@@ -149,6 +159,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
           sugerencias: _medicamentosNombres,
           onConfirm: (item) => setState(() => _medicamentosTurno.add(item)),
         );
+        break;
     }
   }
 
@@ -254,6 +265,13 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                     ? _seleccionadosPendientes.remove(i)
                     : _seleccionadosPendientes.add(i);
               }),
+              onReorder: (oldIndex, newIndex) {
+                setState(() {
+                  if (oldIndex < newIndex) newIndex -= 1;
+                  _pendientes.insert(newIndex, _pendientes.removeAt(oldIndex));
+                });
+                DatabaseHelper.instance.actualizarOrdenPendientes(_pendientes);
+              },
             ),
             MedicamentosTab(
               items: _medicamentosTurno,

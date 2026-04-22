@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Baño de esponja",
+    "icono": "bathtub"
+  },
+  {
+    "nombre": "Cambio de vendaje",
+    "icono": "bandaids"
+  },
+  {
+    "nombre": "Retiro de sonda vesical",
+    "icono": "drop"
+  }
+]

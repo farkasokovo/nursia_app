@@ -7,6 +7,7 @@ import 'package:nursia_app/models/medicamento.dart';
 import 'package:nursia_app/models/ver_mas_screen.dart';
 import 'package:nursia_app/models/norma.dart';
 import 'package:nursia_app/turno_activo/models/paciente.dart';
+import 'package:nursia_app/turno_activo/models/pendiente_info.dart'; // ¡NUEVO IMPORT!
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -16,7 +17,6 @@ class DatabaseHelper {
 
   DatabaseHelper._init();
 
-  // El "Getter" para obtener la base de datos
   Future<Database> get database async {
     if (_database != null) return _database!;
 
@@ -24,14 +24,13 @@ class DatabaseHelper {
     return _database!;
   }
 
-  // Inicializa la base de datos en el almacenamiento del celular
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
     return await openDatabase(
       path,
-      version: 3,
+      version: 5, // Aumentamos la versión a 5
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -58,11 +57,28 @@ class DatabaseHelper {
             )
           ''');
         }
+        // Migración para las nuevas tablas de pendientes
+        if (oldVersion < 5) {
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS catalogo_pendientes (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              nombre TEXT NOT NULL,
+              icono TEXT NOT NULL
+            )
+          ''');
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS pendientes_turno (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              nombre TEXT NOT NULL,
+              icono TEXT NOT NULL,
+              orden INTEGER NOT NULL DEFAULT 0
+            )
+          ''');
+        }
       },
     );
   }
 
-  // Aquí definimos el "molde" (las tablas) de Nursia
   Future _createDB(Database db, int version) async {
     // 1. Tabla de Medicamentos
     await db.execute('''
@@ -136,9 +152,27 @@ class DatabaseHelper {
         orden INTEGER NOT NULL DEFAULT 0
       )
     ''');
+
+    // 6. Tabla de Catálogo de Pendientes (JSON)
+    await db.execute('''
+      CREATE TABLE catalogo_pendientes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT NOT NULL,
+        icono TEXT NOT NULL
+      )
+    ''');
+
+    // 7. Tabla de Pendientes del Turno Activo
+    await db.execute('''
+      CREATE TABLE pendientes_turno (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT NOT NULL,
+        icono TEXT NOT NULL,
+        orden INTEGER NOT NULL DEFAULT 0
+      )
+    ''');
   }
 
-  // Función para cerrar la base de datos cuando no se use
   Future close() async {
     final db = await instance.database;
     db.close();
@@ -323,10 +357,8 @@ class DatabaseHelper {
   }
 
   // =========================================================
-  // SECCIÓN NORMAS (NOMs) - ¡NUEVO!
+  // SECCIÓN NORMAS (NOMs)
   // =========================================================
-
-  // Función para migrar el JSON a la tabla
   Future<void> cargarNormasDesdeJSON() async {
     final db = await instance.database;
     final resultado = await db.rawQuery('SELECT COUNT(*) FROM normas');
@@ -358,7 +390,6 @@ class DatabaseHelper {
     }
   }
 
-  // Función para obtener la lista de normas para tu buscador
   Future<List<Norma>> obtenerTodasLasNormas() async {
     final db = await instance.database;
     final List<Map<String, dynamic>> mapas = await db.query('normas');
@@ -371,8 +402,6 @@ class DatabaseHelper {
   // =========================================================
   // SECCIÓN PACIENTES DEL TURNO ACTIVO
   // =========================================================
-
-  /// Inserta un paciente y devuelve el objeto con el id asignado por SQLite.
   Future<Paciente> insertarPacienteTurno(Paciente paciente) async {
     final db = await instance.database;
     final id = await db.insert(
@@ -383,21 +412,17 @@ class DatabaseHelper {
     return paciente.copyWith(id: id);
   }
 
-  /// Carga todos los pacientes ordenados por el campo 'orden'.
   Future<List<Paciente>> obtenerPacientesTurno() async {
     final db = await instance.database;
     final mapas = await db.query('pacientes_turno', orderBy: 'orden ASC');
     return mapas.map((m) => Paciente.fromMap(m)).toList();
   }
 
-  /// Elimina un paciente por su id.
   Future<void> eliminarPacienteTurno(int id) async {
     final db = await instance.database;
     await db.delete('pacientes_turno', where: 'id = ?', whereArgs: [id]);
   }
 
-  /// Actualiza el campo 'orden' de toda la lista de una vez.
-  /// Llámalo después de cualquier reordenamiento.
   Future<void> actualizarOrdenPacientes(List<Paciente> pacientes) async {
     final db = await instance.database;
     final batch = db.batch();
@@ -406,6 +431,87 @@ class DatabaseHelper {
       if (p.id != null) {
         batch.update(
           'pacientes_turno',
+          {'orden': i},
+          where: 'id = ?',
+          whereArgs: [p.id],
+        );
+      }
+    }
+    await batch.commit(noResult: true);
+  }
+
+  // =========================================================
+  // SECCIÓN PENDIENTES (NUEVO)
+  // =========================================================
+
+  /// Carga la lista inicial del JSON al catálogo (para el buscador)
+  Future<void> cargarCatalogoPendientesDesdeJSON() async {
+    final db = await instance.database;
+    final resultado = await db.rawQuery(
+      'SELECT COUNT(*) FROM catalogo_pendientes',
+    );
+    int? cuenta = Sqflite.firstIntValue(resultado);
+
+    if (cuenta == 0) {
+      try {
+        final String respuesta = await rootBundle.loadString(
+          'assets/data/pendientes_data.json',
+        );
+        final List<dynamic> data = json.decode(respuesta);
+
+        for (var item in data) {
+          await db.insert('catalogo_pendientes', {
+            'nombre': item['nombre'],
+            'icono': item['icono'],
+          }, conflictAlgorithm: ConflictAlgorithm.replace);
+        }
+        print("¡Catálogo de pendientes migrado con éxito!");
+      } catch (e) {
+        print("Error migrando catálogo de pendientes: $e");
+      }
+    }
+  }
+
+  /// Obtiene todo el catálogo de pendientes disponibles para sugerir
+  Future<List<PendienteInfo>> obtenerCatalogoPendientes() async {
+    final db = await instance.database;
+    final mapas = await db.query('catalogo_pendientes');
+    return mapas.map((m) => PendienteInfo.fromMap(m)).toList();
+  }
+
+  /// Inserta un pendiente en la lista activa del turno del usuario
+  Future<PendienteInfo> insertarPendienteTurno(PendienteInfo pendiente) async {
+    final db = await instance.database;
+    final id = await db.insert(
+      'pendientes_turno',
+      pendiente.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return pendiente.copyWith(id: id);
+  }
+
+  /// Carga los pendientes activos ordenados
+  Future<List<PendienteInfo>> obtenerPendientesTurno() async {
+    final db = await instance.database;
+    final mapas = await db.query('pendientes_turno', orderBy: 'orden ASC');
+    return mapas.map((m) => PendienteInfo.fromMap(m)).toList();
+  }
+
+  /// Elimina un pendiente de la lista del turno activo
+  Future<void> eliminarPendienteTurno(int id) async {
+    final db = await instance.database;
+    await db.delete('pendientes_turno', where: 'id = ?', whereArgs: [id]);
+  }
+
+  /// Actualiza el orden cuando haces reorder (igual que en pacientes)
+  Future<void> actualizarOrdenPendientes(List<PendienteInfo> pendientes) async {
+    final db = await instance.database;
+    final batch = db.batch();
+    for (int i = 0; i < pendientes.length; i++) {
+      final p = pendientes[i];
+      if (p.id != null) {
+        batch.update(
+          'pendientes_turno',
           {'orden': i},
           where: 'id = ?',
           whereArgs: [p.id],
