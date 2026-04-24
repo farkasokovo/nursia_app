@@ -10,6 +10,7 @@ import 'package:nursia_app/turno_activo/models/paciente.dart';
 import 'package:nursia_app/turno_activo/models/pendiente_info.dart'; // ¡NUEVO IMPORT!
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -72,6 +73,14 @@ class DatabaseHelper {
               nombre TEXT NOT NULL,
               icono TEXT NOT NULL,
               orden INTEGER NOT NULL DEFAULT 0
+            )
+          ''');
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS medicamentos_turno (
+              id     INTEGER PRIMARY KEY AUTOINCREMENT,
+              nombre TEXT    NOT NULL,
+              icono  TEXT    NOT NULL DEFAULT 'pill',
+              orden  INTEGER NOT NULL DEFAULT 0
             )
           ''');
         }
@@ -169,6 +178,14 @@ class DatabaseHelper {
         nombre TEXT NOT NULL,
         icono TEXT NOT NULL,
         orden INTEGER NOT NULL DEFAULT 0
+      )
+    ''');
+    await db.execute('''
+      CREATE TABLE medicamentos_turno (
+        id     INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT    NOT NULL,
+        icono  TEXT    NOT NULL DEFAULT 'pill',
+        orden  INTEGER NOT NULL DEFAULT 0
       )
     ''');
   }
@@ -515,6 +532,50 @@ class DatabaseHelper {
           {'orden': i},
           where: 'id = ?',
           whereArgs: [p.id],
+        );
+      }
+    }
+    await batch.commit(noResult: true);
+  }
+  // =========================================================
+  // SECCIÓN MEDICAMENTOS DEL TURNO ACTIVO
+  // =========================================================
+  // ── MEDICAMENTOS TURNO ────────────────────────────────────────────────────────
+
+  /// Inserta un medicamento y devuelve la instancia con su id asignado.
+  Future<MedicamentoTurno> insertarMedicamentoTurno(
+    MedicamentoTurno med,
+  ) async {
+    final db = await database;
+    final id = await db.insert('medicamentos_turno', med.toMap());
+    return med.copyWith(id: id);
+  }
+
+  /// Devuelve todos los medicamentos del turno ordenados por [orden].
+  Future<List<MedicamentoTurno>> obtenerMedicamentosTurno() async {
+    final db = await database;
+    final rows = await db.query('medicamentos_turno', orderBy: 'orden ASC');
+    return rows.map(MedicamentoTurno.fromMap).toList();
+  }
+
+  /// Elimina un medicamento por su [id].
+  Future<void> eliminarMedicamentoTurno(int id) async {
+    final db = await database;
+    await db.delete('medicamentos_turno', where: 'id = ?', whereArgs: [id]);
+  }
+
+  /// Persiste el nuevo orden de la lista completa (llamar después de un reorder).
+  Future<void> actualizarOrdenMedicamentos(List<MedicamentoTurno> lista) async {
+    final db = await database;
+    final batch = db.batch();
+    for (var i = 0; i < lista.length; i++) {
+      final med = lista[i];
+      if (med.id != null) {
+        batch.update(
+          'medicamentos_turno',
+          {'orden': i},
+          where: 'id = ?',
+          whereArgs: [med.id],
         );
       }
     }

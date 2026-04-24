@@ -1,16 +1,15 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/turno_activo/models/paciente.dart';
+import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
+import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
 import 'package:nursia_app/turno_activo/tabs/pacientes_tab.dart';
 import 'package:nursia_app/turno_activo/tabs/pendientes_tab.dart';
 import 'package:nursia_app/turno_activo/tabs/medicamentos_tab.dart';
 import 'package:nursia_app/turno_activo/widgets/add_paciente_dialog.dart';
-import 'package:nursia_app/turno_activo/widgets/add_item_dialog.dart';
-import 'package:nursia_app/turno_activo/widgets/add_pendiente_dialog.dart'; // Import nuevo
+import 'package:nursia_app/turno_activo/widgets/add_pendiente_dialog.dart';
+import 'package:nursia_app/turno_activo/widgets/add_medicamento_turno_dialog.dart';
 
 class TurnoActivoScreen extends StatefulWidget {
   const TurnoActivoScreen({super.key});
@@ -26,8 +25,8 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
   // ── DATOS ──────────────────────────────────────────────────────────────────
   final List<Paciente> _pacientes = [];
   final List<PendienteInfo> _pendientes = [];
-  final List<String> _medicamentosTurno = [];
-  List<String> _medicamentosNombres = [];
+  final List<MedicamentoTurno> _medicamentos =
+      []; // ← ahora tipado y persistente
 
   // ── MODO SELECCIÓN ─────────────────────────────────────────────────────────
   bool _modoSeleccion = false;
@@ -50,7 +49,6 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
       if (!_tabController.indexIsChanging) _cancelarSeleccion();
     });
     _cargarDatosDeDB();
-    _cargarMedicamentosNombres();
   }
 
   @override
@@ -61,13 +59,14 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
 
   // ── CARGA INICIAL ──────────────────────────────────────────────────────────
   Future<void> _cargarDatosDeDB() async {
-    // Cargamos catálogo (JSON) por si es la primera vez
     await DatabaseHelper.instance.cargarCatalogoPendientesDesdeJSON();
 
     final listaPacientes = await DatabaseHelper.instance
         .obtenerPacientesTurno();
     final listaPendientes = await DatabaseHelper.instance
         .obtenerPendientesTurno();
+    final listaMedicamentos = await DatabaseHelper.instance
+        .obtenerMedicamentosTurno();
 
     setState(() {
       _pacientes
@@ -76,16 +75,9 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
       _pendientes
         ..clear()
         ..addAll(listaPendientes);
-    });
-  }
-
-  Future<void> _cargarMedicamentosNombres() async {
-    final response = await rootBundle.loadString(
-      'assets/data/medicamentos.json',
-    );
-    final data = json.decode(response) as List<dynamic>;
-    setState(() {
-      _medicamentosNombres = data.map((m) => m['nombre'] as String).toList();
+      _medicamentos
+        ..clear()
+        ..addAll(listaMedicamentos);
     });
   }
 
@@ -111,6 +103,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
           }
           DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
           break;
+
         case 1:
           final sorted = _seleccionadosPendientes.toList()
             ..sort((a, b) => b.compareTo(a));
@@ -122,10 +115,17 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
           }
           DatabaseHelper.instance.actualizarOrdenPendientes(_pendientes);
           break;
+
         case 2:
           final sorted = _seleccionadosMedicamentos.toList()
             ..sort((a, b) => b.compareTo(a));
-          for (final i in sorted) _medicamentosTurno.removeAt(i);
+          for (final i in sorted) {
+            final m = _medicamentos[i];
+            if (m.id != null)
+              DatabaseHelper.instance.eliminarMedicamentoTurno(m.id!);
+            _medicamentos.removeAt(i);
+          }
+          DatabaseHelper.instance.actualizarOrdenMedicamentos(_medicamentos);
           break;
       }
       _cancelarSeleccion();
@@ -143,7 +143,6 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
         );
         break;
       case 1:
-        // Usamos nuestro nuevo diálogo con autocompletado e iconos
         showAddPendienteDialog(
           context,
           ordenSiguiente: _pendientes.length,
@@ -151,13 +150,10 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
         );
         break;
       case 2:
-        showAddItemDialog(
+        showAddMedicamentoTurnoDialog(
           context,
-          titulo: "Asignar Medicamento",
-          label: "Nombre del fármaco",
-          icono: PhosphorIconsRegular.pill,
-          sugerencias: _medicamentosNombres,
-          onConfirm: (item) => setState(() => _medicamentosTurno.add(item)),
+          ordenSiguiente: _medicamentos.length,
+          onGuardado: (m) => setState(() => _medicamentos.add(m)),
         );
         break;
     }
@@ -178,12 +174,9 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
     final textTheme = theme.textTheme;
 
     return PopScope(
-      canPop:
-          !_modoSeleccion, // Solo permite salir si NO está en modo selección
+      canPop: !_modoSeleccion,
       onPopInvokedWithResult: (didPop, result) async {
-        if (!didPop && _modoSeleccion) {
-          _cancelarSeleccion();
-        }
+        if (!didPop && _modoSeleccion) _cancelarSeleccion();
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -274,7 +267,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
               },
             ),
             MedicamentosTab(
-              items: _medicamentosTurno,
+              items: _medicamentos,
               modoSeleccion: _modoSeleccion,
               seleccionados: _seleccionadosMedicamentos,
               onEntrarModoSeleccion: () =>
@@ -285,6 +278,18 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                     ? _seleccionadosMedicamentos.remove(i)
                     : _seleccionadosMedicamentos.add(i);
               }),
+              onReorder: (oldIndex, newIndex) {
+                setState(() {
+                  if (oldIndex < newIndex) newIndex -= 1;
+                  _medicamentos.insert(
+                    newIndex,
+                    _medicamentos.removeAt(oldIndex),
+                  );
+                });
+                DatabaseHelper.instance.actualizarOrdenMedicamentos(
+                  _medicamentos,
+                );
+              },
             ),
           ],
         ),

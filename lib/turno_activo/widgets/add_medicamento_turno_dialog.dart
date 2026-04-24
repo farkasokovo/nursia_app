@@ -1,16 +1,34 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:nursia_app/database/database_helper.dart';
-import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
-import 'package:nursia_app/turno_activo/utils/icon_mapper.dart';
+import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
+import 'package:nursia_app/utils/icon_mapper.dart'; // Tu IconMapper de lib/utils
 
-Future<void> showAddPendienteDialog(
+// Modelo liviano sólo para el catálogo en memoria
+class _MedCatalogEntry {
+  final String nombre;
+  final String icono;
+  const _MedCatalogEntry({required this.nombre, required this.icono});
+}
+
+Future<void> showAddMedicamentoTurnoDialog(
   BuildContext context, {
   required int ordenSiguiente,
-  required Function(PendienteInfo guardado) onGuardado,
+  required Function(MedicamentoTurno guardado) onGuardado,
 }) async {
-  // Obtenemos el catálogo del JSON que ya cargamos en DB
-  final catalogo = await DatabaseHelper.instance.obtenerCatalogoPendientes();
+  // Cargamos el catálogo desde assets
+  final response = await rootBundle.loadString('assets/data/medicamentos.json');
+  final data = json.decode(response) as List<dynamic>;
+  final catalogo = data
+      .map(
+        (m) => _MedCatalogEntry(
+          nombre: m['nombre'] as String,
+          icono: m['icono'] as String,
+        ),
+      )
+      .toList();
 
   if (!context.mounted) return;
 
@@ -20,7 +38,7 @@ Future<void> showAddPendienteDialog(
       final textTheme = Theme.of(context).textTheme;
       final colorScheme = Theme.of(context).colorScheme;
 
-      PendienteInfo? seleccionTemporal;
+      _MedCatalogEntry? seleccionTemporal;
 
       return MediaQuery(
         data: MediaQuery.of(context).copyWith(viewInsets: EdgeInsets.zero),
@@ -38,12 +56,13 @@ Future<void> showAddPendienteDialog(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Añadir Pendiente", style: textTheme.titleMedium),
+                  // ── Título ──────────────────────────────────────────────────
+                  Text("Añadir Medicamento", style: textTheme.titleMedium),
 
                   const SizedBox(height: 6),
 
                   Text(
-                    "Busca y selecciona una tarea o procedimiento para agregar a tu lista.",
+                    "Busca y selecciona un fármaco para agregar al turno.",
                     style: textTheme.bodySmall?.copyWith(
                       color: colorScheme.onSecondaryContainer,
                     ),
@@ -51,16 +70,16 @@ Future<void> showAddPendienteDialog(
 
                   const SizedBox(height: 20),
 
-                  Autocomplete<PendienteInfo>(
+                  // ── Autocomplete ────────────────────────────────────────────
+                  Autocomplete<_MedCatalogEntry>(
                     displayStringForOption: (option) => option.nombre,
 
                     optionsBuilder: (textEditingValue) {
                       if (textEditingValue.text.isEmpty) {
                         return const Iterable.empty();
                       }
-
                       return catalogo.where(
-                        (p) => p.nombre.toLowerCase().contains(
+                        (m) => m.nombre.toLowerCase().contains(
                           textEditingValue.text.toLowerCase(),
                         ),
                       );
@@ -77,17 +96,14 @@ Future<void> showAddPendienteDialog(
                             focusNode: focusNode,
                             autofocus: true,
                             decoration: InputDecoration(
-                              labelText: "Buscar tarea",
-                              hintText: "Ej: Baño de esponja",
-
+                              labelText: "Buscar fármaco",
+                              hintText: "Ej: Amoxicilina",
                               hintStyle: textTheme.bodyMedium?.copyWith(
                                 color: colorScheme.primary.withValues(
                                   alpha: 0.4,
                                 ),
                               ),
-
                               border: const OutlineInputBorder(),
-
                               prefixIcon: const Icon(
                                 PhosphorIconsRegular.magnifyingGlass,
                               ),
@@ -109,10 +125,9 @@ Future<void> showAddPendienteDialog(
                               itemCount: options.length,
                               itemBuilder: (context, index) {
                                 final option = options.elementAt(index);
-
                                 return ListTile(
                                   leading: Icon(
-                                    IconMapper.getIcon(option.icono),
+                                    IconMapper.fromString(option.icono),
                                   ),
                                   title: Text(option.nombre),
                                   onTap: () => onSelected(option),
@@ -127,22 +142,19 @@ Future<void> showAddPendienteDialog(
 
                   const SizedBox(height: 24),
 
+                  // ── Botones ─────────────────────────────────────────────────
                   Row(
                     children: [
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () => Navigator.pop(context),
-
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 14),
-
                             side: BorderSide(color: colorScheme.outline),
-
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-
                           child: Text(
                             "Cancelar",
                             style: textTheme.bodyMedium?.copyWith(
@@ -159,37 +171,29 @@ Future<void> showAddPendienteDialog(
                         child: ElevatedButton(
                           onPressed: () async {
                             if (seleccionTemporal != null) {
-                              // 🔧 CORRECCIÓN: ya no usamos el id del catálogo
-                              final nuevo = PendienteInfo(
+                              final nuevo = MedicamentoTurno(
                                 nombre: seleccionTemporal!.nombre,
                                 icono: seleccionTemporal!.icono,
                                 orden: ordenSiguiente,
                               );
 
                               final guardado = await DatabaseHelper.instance
-                                  .insertarPendienteTurno(nuevo);
+                                  .insertarMedicamentoTurno(nuevo);
 
                               onGuardado(guardado);
 
-                              if (context.mounted) {
-                                Navigator.pop(context);
-                              }
+                              if (context.mounted) Navigator.pop(context);
                             }
                           },
-
                           style: ElevatedButton.styleFrom(
                             backgroundColor: colorScheme.primary,
                             foregroundColor: colorScheme.onPrimary,
-
                             padding: const EdgeInsets.symmetric(vertical: 14),
-
                             elevation: 0,
-
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-
                           child: const Text(
                             "Confirmar",
                             style: TextStyle(
