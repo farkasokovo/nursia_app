@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
-import 'package:nursia_app/turno_activo/utils/icon_mapper.dart';
+import 'package:nursia_app/turno_activo/models/pendiente_turno.dart';
+import 'package:nursia_app/turno_activo/utils/icon_mapper_turno.dart';
 import 'package:nursia_app/turno_activo/widgets/barra_acciones.dart';
 
 class PendientesTab extends StatelessWidget {

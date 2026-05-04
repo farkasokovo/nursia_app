@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:nursia_app/database/database_helper.dart';
-import 'package:nursia_app/turno_activo/models/paciente.dart';
+import 'package:nursia_app/turno_activo/models/paciente_turno.dart';
 
 /// Muestra el diálogo flotante para registrar un nuevo paciente.
 /// Llama a [onGuardado] con el objeto ya persistido en DB (con su id).

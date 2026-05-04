@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:nursia_app/database/database_helper.dart';
-import 'package:nursia_app/turno_activo/models/paciente.dart';
-import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
+import 'package:nursia_app/turno_activo/models/paciente_turno.dart';
+import 'package:nursia_app/turno_activo/models/pendiente_turno.dart';
 import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
 import 'package:nursia_app/turno_activo/tabs/pacientes_tab.dart';
 import 'package:nursia_app/turno_activo/tabs/pendientes_tab.dart';
 import 'package:nursia_app/turno_activo/tabs/medicamentos_tab.dart';
-import 'package:nursia_app/turno_activo/widgets/add_paciente_dialog.dart';
-import 'package:nursia_app/turno_activo/widgets/add_pendiente_dialog.dart';
-import 'package:nursia_app/turno_activo/widgets/add_medicamento_turno_dialog.dart';
+import 'package:nursia_app/turno_activo/widgets/add_px_dialog.dart';
+import 'package:nursia_app/turno_activo/widgets/add_pend_dialog.dart';
+import 'package:nursia_app/turno_activo/widgets/add_med_dialog.dart';
 
 class TurnoActivoScreen extends StatefulWidget {
   const TurnoActivoScreen({super.key});

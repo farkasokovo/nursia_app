@@ -30,6 +30,34 @@ class CalculadoraDosis extends StatelessWidget {
   }
 }
 
+// ================== ENUM DE UNIDADES ==================
+enum UnidadDosis { mcg, mg, g }
+
+extension UnidadDosisExtension on UnidadDosis {
+  String get label {
+    switch (this) {
+      case UnidadDosis.mcg:
+        return 'mcg';
+      case UnidadDosis.mg:
+        return 'mg';
+      case UnidadDosis.g:
+        return 'g';
+    }
+  }
+
+  /// Convierte el valor ingresado a mg para el cálculo
+  double toMg(double valor) {
+    switch (this) {
+      case UnidadDosis.mcg:
+        return valor / 1000.0;
+      case UnidadDosis.mg:
+        return valor;
+      case UnidadDosis.g:
+        return valor * 1000.0;
+    }
+  }
+}
+
 // ================== PESTAÑA DE CÁLCULO ==================
 class _CalculoDosisLayout extends StatefulWidget {
   const _CalculoDosisLayout();
@@ -50,6 +78,9 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
   final _presentacionFocus = FocusNode();
 
   final _resultado = ValueNotifier<double?>(null);
+
+  /// Unidad seleccionada para la dosis indicada (mg por defecto)
+  UnidadDosis _unidadDosis = UnidadDosis.mg;
 
   @override
   bool get wantKeepAlive => true;
@@ -72,11 +103,11 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
     _dilucionFocus.unfocus();
     _presentacionFocus.unfocus();
 
-    final dosis = double.tryParse(_dosisController.text);
+    final dosisRaw = double.tryParse(_dosisController.text);
     final dilucion = double.tryParse(_dilucionController.text);
     final presentacion = double.tryParse(_presentacionController.text);
 
-    if (dosis == null ||
+    if (dosisRaw == null ||
         dilucion == null ||
         presentacion == null ||
         presentacion == 0) {
@@ -84,7 +115,10 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
       return;
     }
 
-    final calculo = (dosis * dilucion) / presentacion;
+    // Convierte la dosis indicada a mg antes de calcular
+    final dosisMg = _unidadDosis.toMg(dosisRaw);
+
+    final calculo = (dosisMg * dilucion) / presentacion;
 
     final parteEntera = calculo.toInt();
     if (parteEntera >= 10000) {
@@ -100,7 +134,6 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
       return;
     }
     _resultado.value = calculo;
-    _resultado.value = (dosis * dilucion) / presentacion;
   }
 
   void _limpiar() {
@@ -108,6 +141,10 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
     _dilucionController.clear();
     _presentacionController.clear();
     _resultado.value = null;
+    // Resetea la unidad a mg al limpiar
+    setState(() {
+      _unidadDosis = UnidadDosis.mg;
+    });
   }
 
   @override
@@ -121,13 +158,26 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
       padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // ── Campo de dosis con selector de unidades debajo ──
             NumericInputField(
-              label: "Dosis indicada (mg)",
+              label: "Dosis indicada (${_unidadDosis.label})",
               controller: _dosisController,
               focusNode: _dosisFocus,
-              maxLength: 4,
+              maxLength: 6,
               allowDecimal: true,
+            ),
+            const SizedBox(height: 10),
+            _UnitSelector(
+              selected: _unidadDosis,
+              onChanged: (unidad) {
+                setState(() {
+                  _unidadDosis = unidad;
+                  // Recalcula si ya hay un resultado visible
+                  if (_resultado.value != null) _calcular();
+                });
+              },
             ),
             const SizedBox(height: 20),
             NumericInputField(
@@ -236,6 +286,61 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
           ],
         ),
       ),
+    );
+  }
+}
+
+// ================== SELECTOR DE UNIDADES ==================
+class _UnitSelector extends StatelessWidget {
+  const _UnitSelector({required this.selected, required this.onChanged});
+
+  final UnidadDosis selected;
+  final ValueChanged<UnidadDosis> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Row(
+      children: UnidadDosis.values.map((unidad) {
+        final isSelected = unidad == selected;
+        return Expanded(
+          child: Padding(
+            // Espacio entre botones
+            padding: EdgeInsets.only(
+              right: unidad != UnidadDosis.values.last ? 8.0 : 0,
+            ),
+            child: OutlinedButton(
+              onPressed: () => onChanged(unidad),
+              style: OutlinedButton.styleFrom(
+                backgroundColor: isSelected
+                    ? colorScheme.primaryContainer
+                    : colorScheme.primary,
+                foregroundColor: isSelected
+                    ? colorScheme.onPrimaryContainer
+                    : colorScheme.primaryContainer,
+                minimumSize: const Size(double.infinity, 44),
+                padding: EdgeInsets.zero,
+                side: BorderSide(color: colorScheme.primaryContainer),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: AppRadius.defaultRadius,
+                ),
+              ),
+              child: Text(
+                unidad.label,
+                style: textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+
+                  color: isSelected
+                      ? colorScheme.onPrimaryContainer
+                      : colorScheme.onPrimaryContainer,
+                ),
+              ),
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }

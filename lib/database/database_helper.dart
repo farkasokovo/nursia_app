@@ -6,8 +6,8 @@ import 'package:nursia_app/models/escala_metadata.dart';
 import 'package:nursia_app/models/medicamento.dart';
 import 'package:nursia_app/models/ver_mas_screen.dart';
 import 'package:nursia_app/models/norma.dart';
-import 'package:nursia_app/turno_activo/models/paciente.dart';
-import 'package:nursia_app/turno_activo/models/pendiente_info.dart'; // ¡NUEVO IMPORT!
+import 'package:nursia_app/turno_activo/models/paciente_turno.dart';
+import 'package:nursia_app/turno_activo/models/pendiente_turno.dart'; // ¡NUEVO IMPORT!
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:nursia_app/database/database_helper.dart';
-import 'package:nursia_app/turno_activo/models/pendiente_info.dart';
-import 'package:nursia_app/turno_activo/utils/icon_mapper.dart';
+import 'package:nursia_app/turno_activo/models/pendiente_turno.dart';
+import 'package:nursia_app/turno_activo/utils/icon_mapper_turno.dart';
 
 Future<void> showAddPendienteDialog(
   BuildContext context, {
