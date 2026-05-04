@@ -165,7 +165,7 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
               label: "Dosis indicada (${_unidadDosis.label})",
               controller: _dosisController,
               focusNode: _dosisFocus,
-              maxLength: 6,
+              maxLength: 4,
               allowDecimal: true,
             ),
             const SizedBox(height: 10),

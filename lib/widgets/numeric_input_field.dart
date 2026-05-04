@@ -78,10 +78,29 @@ class NumericInputField extends StatelessWidget {
               floatingLabelAlignment: FloatingLabelAlignment.start,
               filled: true,
               fillColor: colorScheme.secondary,
+              // 1. Borde por defecto (cuando no tiene focus)
+              enabledBorder: OutlineInputBorder(
+                borderRadius: AppRadius.defaultRadius,
+                borderSide: BorderSide(
+                  color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+                  width: 2,
+                ),
+              ),
+
+              // 2. Borde cuando tiene el focus (clicado)
+              focusedBorder: OutlineInputBorder(
+                borderRadius: AppRadius.defaultRadius,
+                borderSide: BorderSide(
+                  color: colorScheme.primaryContainer, // Color más intenso
+                  width: 2.5, // Un poco más grueso para resaltar
+                ),
+              ),
+
+              // Mantener el esquema base por si acaso (errores, etc)
               border: const OutlineInputBorder(
                 borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide.none,
               ),
+
               contentPadding: const EdgeInsets.all(20),
             ),
           ),
