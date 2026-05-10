@@ -97,8 +97,9 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
             ..sort((a, b) => b.compareTo(a));
           for (final i in sorted) {
             final p = _pacientes[i];
-            if (p.id != null)
+            if (p.id != null) {
               DatabaseHelper.instance.eliminarPacienteTurno(p.id!);
+            }
             _pacientes.removeAt(i);
           }
           DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
@@ -109,8 +110,9 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
             ..sort((a, b) => b.compareTo(a));
           for (final i in sorted) {
             final p = _pendientes[i];
-            if (p.id != null)
+            if (p.id != null) {
               DatabaseHelper.instance.eliminarPendienteTurno(p.id!);
+            }
             _pendientes.removeAt(i);
           }
           DatabaseHelper.instance.actualizarOrdenPendientes(_pendientes);
@@ -121,8 +123,9 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
             ..sort((a, b) => b.compareTo(a));
           for (final i in sorted) {
             final m = _medicamentos[i];
-            if (m.id != null)
+            if (m.id != null) {
               DatabaseHelper.instance.eliminarMedicamentoTurno(m.id!);
+            }
             _medicamentos.removeAt(i);
           }
           DatabaseHelper.instance.actualizarOrdenMedicamentos(_medicamentos);

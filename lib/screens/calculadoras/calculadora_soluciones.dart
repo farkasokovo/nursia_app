@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:nursia_app/widgets/info_tab.dart';
 import 'package:nursia_app/widgets/numeric_input_field.dart';
@@ -50,13 +52,17 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
   final _volumenController = TextEditingController();
   final _porcentajeIndicadoController = TextEditingController();
   final _porcentajeDisponibleController = TextEditingController();
+  final _segundaConcentracionController = TextEditingController();
 
-  // FIX: FocusNodes para soltar el teclado al navegar o calcular
   final _volumenFocus = FocusNode();
   final _indicadoFocus = FocusNode();
   final _disponibleFocus = FocusNode();
+  final _segundaConcentracionFocus = FocusNode();
 
   final _resultado = ValueNotifier<_ResultadoSolucion?>(null);
+
+  /// Controla si el usuario quiere ingresar una segunda solución disponible
+  bool _usarSegundaSolucion = false;
 
   @override
   bool get wantKeepAlive => true;
@@ -66,18 +72,20 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
     _volumenController.dispose();
     _porcentajeIndicadoController.dispose();
     _porcentajeDisponibleController.dispose();
+    _segundaConcentracionController.dispose();
     _volumenFocus.dispose();
     _indicadoFocus.dispose();
     _disponibleFocus.dispose();
+    _segundaConcentracionFocus.dispose();
     _resultado.dispose();
     super.dispose();
   }
 
   void _calcular() {
-    // Quita el foco de todos los campos al calcular
     _volumenFocus.unfocus();
     _indicadoFocus.unfocus();
     _disponibleFocus.unfocus();
+    _segundaConcentracionFocus.unfocus();
 
     final volumen = double.tryParse(_volumenController.text);
     final porcentajeIndicado = double.tryParse(
@@ -87,21 +95,18 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
       _porcentajeDisponibleController.text,
     );
 
+    // ── Validación de campos base ──
     if (volumen == null ||
         volumen == 0 ||
-        volumen == 00 ||
-        volumen == 000 ||
-        volumen == 0000 ||
         porcentajeIndicado == null ||
         porcentajeIndicado == 0 ||
-        porcentajeIndicado == 00 ||
         porcentajeDisponible == null ||
-        porcentajeDisponible == 0 ||
-        porcentajeDisponible == 00) {
+        porcentajeDisponible == 0) {
       _resultado.value = null;
       return;
     }
 
+    // ── Validación: concentración indicada ≤ 50% ──
     if (porcentajeIndicado > 50) {
       _resultado.value = null;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -112,27 +117,195 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
       return;
     }
 
-    if (porcentajeDisponible > porcentajeIndicado) {
-      final mlSolucionDisponible =
-          ((volumen * porcentajeIndicado) / porcentajeDisponible).round();
-      final mlAgua = volumen.round() - mlSolucionDisponible;
-      _resultado.value = _ResultadoSolucion(
-        "${mlSolucionDisponible.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%",
-        "${mlAgua.toStringAsFixed(0)} ml de agua estéril",
+    // ── Validación: concentración disponible ≤ 50% ──
+    if (porcentajeDisponible > 50) {
+      _resultado.value = null;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("La concentración disponible no puede ser mayor a 50%"),
+        ),
       );
-    } else if (porcentajeDisponible < porcentajeIndicado) {
-      final diferencia = porcentajeIndicado - porcentajeDisponible;
-      final mlGlucosa50 = (volumen * diferencia) / 50;
-      final mlOtraSolucion = volumen - mlGlucosa50;
+      return;
+    }
+
+    if (_usarSegundaSolucion) {
+      // ══════════════════════════════════════════════════════════
+      // MODO MEZCLA: siempre usa la fórmula de dos soluciones,
+      // independientemente de la relación entre disponible e indicado.
+      // ══════════════════════════════════════════════════════════
+
+      // Parsear y validar la segunda concentración
+      final segundaConcentracion = double.tryParse(
+        _segundaConcentracionController.text,
+      );
+
+      if (segundaConcentracion == null || segundaConcentracion == 0) {
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Ingresa la segunda concentración disponible."),
+          ),
+        );
+        return;
+      }
+
+      // ── Validación: segunda concentración ≤ 50% ──
+      if (segundaConcentracion > 50) {
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "La segunda concentración disponible no puede ser mayor a 50%",
+            ),
+          ),
+        );
+        return;
+      }
+
+      // ── Validación: las dos concentraciones no pueden ser iguales ──
+      if (porcentajeDisponible == segundaConcentracion) {
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Las dos concentraciones disponibles no pueden ser iguales.",
+            ),
+          ),
+        );
+        return;
+      }
+
+      // Determinar cuál es la mayor y cuál la menor
+      final concentracionMax = max(porcentajeDisponible, segundaConcentracion);
+      final concentracionMin = min(porcentajeDisponible, segundaConcentracion);
+
+      // ── Validación: la concentración máx debe ser ≥ indicada ──
+      if (concentracionMax < porcentajeIndicado) {
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Al menos una de las soluciones disponibles debe ser mayor o igual a la concentración indicada.",
+            ),
+            duration: Duration(seconds: 3),
+          ),
+        );
+        return;
+      }
+
+      // ── Validación: indicado debe ser ≥ concentracionMin ──
+      // Si indicado < min, ambas soluciones son demasiado concentradas
+      // y la fórmula produciría resultados negativos.
+      if (porcentajeIndicado < concentracionMin) {
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "La concentración indicada es menor que ambas soluciones disponibles. "
+              "Desactiva la segunda solución y usa el modo de dilución con agua estéril.",
+            ),
+            duration: Duration(seconds: 4),
+          ),
+        );
+        return;
+      }
+
+      // ── Caso especial: indicado == concentracionMin → solo se usa la solución menor ──
+      if (porcentajeIndicado == concentracionMin) {
+        _resultado.value = _ResultadoSolucion(
+          "${volumen.toStringAsFixed(0)} ml de SG ${concentracionMin.toInt()}%",
+          "No requiere mezcla",
+        );
+        return;
+      }
+
+      // ── Caso especial: indicado == concentracionMax → solo se usa la solución mayor ──
+      if (porcentajeIndicado == concentracionMax) {
+        _resultado.value = _ResultadoSolucion(
+          "${volumen.toStringAsFixed(0)} ml de SG ${concentracionMax.toInt()}%",
+          "No requiere mezcla",
+        );
+        return;
+      }
+
+      // Fórmula de mezcla:
+      // mlMax = volumen × (% indicado − % menor) / (% mayor − % menor)
+      // mlMin = volumen − mlMax
+      final mlSolucionMax =
+          (volumen * (porcentajeIndicado - concentracionMin)) /
+          (concentracionMax - concentracionMin);
+      final mlSolucionMin = volumen - mlSolucionMax;
+
+      // ── Red de seguridad: resultado inválido (NaN, infinito o negativo) ──
+      if (mlSolucionMax.isNaN ||
+          mlSolucionMin.isNaN ||
+          mlSolucionMax.isInfinite ||
+          mlSolucionMin.isInfinite ||
+          mlSolucionMax < 0 ||
+          mlSolucionMin < 0) {
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "El resultado no es válido. Revisa los valores ingresados.",
+            ),
+          ),
+        );
+        return;
+      }
+
       _resultado.value = _ResultadoSolucion(
-        "${mlGlucosa50.toStringAsFixed(0)} ml de SG 50%",
-        "${mlOtraSolucion.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%",
+        "${mlSolucionMax.toStringAsFixed(0)} ml de SG ${concentracionMax.toInt()}%",
+        "${mlSolucionMin.toStringAsFixed(0)} ml de SG ${concentracionMin.toInt()}%",
       );
     } else {
-      _resultado.value = _ResultadoSolucion(
-        "$volumen ml de SG ${porcentajeIndicado.toInt()}%",
-        "No requiere ajuste",
-      );
+      // ══════════════════════════════════════════════════════════
+      // MODO DILUCIÓN: una sola solución disponible + agua estéril.
+      // ══════════════════════════════════════════════════════════
+
+      if (porcentajeDisponible > porcentajeIndicado) {
+        // Diluir con agua estéril
+        final mlSolucionDisponible =
+            ((volumen * porcentajeIndicado) / porcentajeDisponible).round();
+        final mlAgua = volumen.round() - mlSolucionDisponible;
+
+        // ── Caso límite: volumen demasiado pequeño para la diferencia de concentraciones ──
+        if (mlSolucionDisponible == 0) {
+          _resultado.value = null;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Las concentraciones son demasiado dispares para el volumen indicado. "
+                "Intenta con un volumen mayor.",
+              ),
+              duration: Duration(seconds: 3),
+            ),
+          );
+          return;
+        }
+
+        _resultado.value = _ResultadoSolucion(
+          "${mlSolucionDisponible.toStringAsFixed(0)} ml de SG ${porcentajeDisponible.toInt()}%",
+          "${mlAgua.toStringAsFixed(0)} ml de agua estéril",
+        );
+      } else if (porcentajeDisponible < porcentajeIndicado) {
+        // No se puede calcular sin una segunda solución
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Activa la segunda solución disponible para calcular esta mezcla.",
+            ),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      } else {
+        // disponible == indicado → sin ajuste
+        _resultado.value = _ResultadoSolucion(
+          "${volumen.toStringAsFixed(0)} ml de SG ${porcentajeIndicado.toInt()}%",
+          "No requiere ajuste",
+        );
+      }
     }
   }
 
@@ -140,7 +313,11 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
     _volumenController.clear();
     _porcentajeIndicadoController.clear();
     _porcentajeDisponibleController.clear();
+    _segundaConcentracionController.clear();
     _resultado.value = null;
+    setState(() {
+      _usarSegundaSolucion = false;
+    });
   }
 
   @override
@@ -154,6 +331,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
       padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NumericInputField(
               label: "Cantidad indicada (ml)",
@@ -178,6 +356,82 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
               maxLength: 2,
               allowDecimal: false,
             ),
+            const SizedBox(height: 10),
+
+            // ── Checkbox: activar segunda solución ──
+            InkWell(
+              onTap: () {
+                setState(() {
+                  _usarSegundaSolucion = !_usarSegundaSolucion;
+                  if (!_usarSegundaSolucion) {
+                    _segundaConcentracionController.clear();
+                    _resultado.value = null;
+                  }
+                });
+              },
+              borderRadius: BorderRadius.circular(8),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: Checkbox(
+                        value: _usarSegundaSolucion,
+                        onChanged: (val) {
+                          setState(() {
+                            _usarSegundaSolucion = val ?? false;
+                            if (!_usarSegundaSolucion) {
+                              _segundaConcentracionController.clear();
+                              _resultado.value = null;
+                            }
+                          });
+                        },
+                        activeColor: colorScheme.primaryContainer,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        side: BorderSide(
+                          color: colorScheme.primaryContainer,
+                          width: 1.5,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "Agregar segunda solución disponible",
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.primaryContainer,
+                        fontWeight: _usarSegundaSolucion
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // ── Campo de segunda concentración (aparece solo si checkbox activo) ──
+            AnimatedSize(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeInOut,
+              child: _usarSegundaSolucion
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: NumericInputField(
+                        label: "Segunda concentración disponible (%)",
+                        controller: _segundaConcentracionController,
+                        focusNode: _segundaConcentracionFocus,
+                        maxLength: 2,
+                        allowDecimal: false,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+
             const SizedBox(height: 20),
             Row(
               children: [
