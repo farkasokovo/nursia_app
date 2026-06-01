@@ -13,6 +13,7 @@ class MedicamentosTab extends StatelessWidget {
   final VoidCallback onCancelarSeleccion;
   final Function(int index) onToggleSeleccion;
   final Function(int oldIndex, int newIndex) onReorder;
+  final VoidCallback onAdd;
 
   const MedicamentosTab({
     super.key,
@@ -23,6 +24,7 @@ class MedicamentosTab extends StatelessWidget {
     required this.onCancelarSeleccion,
     required this.onToggleSeleccion,
     required this.onReorder,
+    required this.onAdd,
   });
 
   @override
@@ -62,6 +64,27 @@ class MedicamentosTab extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+
+        // ── FAB ESTÁTICO (solo visible fuera del modo selección) ───────────
+        if (!modoSeleccion)
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: FloatingActionButton.extended(
+              heroTag: 'fab_medicamentos',
+              onPressed: onAdd,
+              icon: const Icon(PhosphorIconsBold.plus),
+              label: Text(
+                "Añadir Fármaco",
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onPrimaryContainer,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              backgroundColor: colorScheme.primary,
+              foregroundColor: colorScheme.onPrimary,
             ),
           ),
 

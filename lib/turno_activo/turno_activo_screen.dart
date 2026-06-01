@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:nursia_app/database/database_helper.dart';
@@ -135,40 +136,6 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
     });
   }
 
-  // ── AGREGAR ITEMS ──────────────────────────────────────────────────────────
-  void _showAddDialog() {
-    switch (_tabController.index) {
-      case 0:
-        showAddPacienteDialog(
-          context,
-          ordenSiguiente: _pacientes.length,
-          onGuardado: (p) => setState(() => _pacientes.add(p)),
-        );
-        break;
-      case 1:
-        showAddPendienteDialog(
-          context,
-          ordenSiguiente: _pendientes.length,
-          onGuardado: (p) => setState(() => _pendientes.add(p)),
-        );
-        break;
-      case 2:
-        showAddMedicamentoTurnoDialog(
-          context,
-          ordenSiguiente: _medicamentos.length,
-          onGuardado: (m) => setState(() => _medicamentos.add(m)),
-        );
-        break;
-    }
-  }
-
-  String get _fabLabel => switch (_tabController.index) {
-    0 => "Nuevo Paciente",
-    1 => "Nuevo Pendiente",
-    2 => "Añadir Fármaco",
-    _ => "Nuevo Registro",
-  };
-
   // ── BUILD ──────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
@@ -228,6 +195,8 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
         ),
         body: TabBarView(
           controller: _tabController,
+          physics: const ClampingScrollPhysics(parent: PageScrollPhysics()),
+          dragStartBehavior: DragStartBehavior.start,
           children: [
             PacientesTab(
               pacientes: _pacientes,
@@ -248,6 +217,11 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                 });
                 DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
               },
+              onAdd: () => showAddPacienteDialog(
+                context,
+                ordenSiguiente: _pacientes.length,
+                onGuardado: (p) => setState(() => _pacientes.add(p)),
+              ),
             ),
             PendientesTab(
               items: _pendientes,
@@ -268,6 +242,11 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                 });
                 DatabaseHelper.instance.actualizarOrdenPendientes(_pendientes);
               },
+              onAdd: () => showAddPendienteDialog(
+                context,
+                ordenSiguiente: _pendientes.length,
+                onGuardado: (p) => setState(() => _pendientes.add(p)),
+              ),
             ),
             MedicamentosTab(
               items: _medicamentos,
@@ -293,6 +272,11 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                   _medicamentos,
                 );
               },
+              onAdd: () => showAddMedicamentoTurnoDialog(
+                context,
+                ordenSiguiente: _medicamentos.length,
+                onGuardado: (m) => setState(() => _medicamentos.add(m)),
+              ),
             ),
           ],
         ),
@@ -319,19 +303,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                     ? colorScheme.onSurfaceVariant
                     : colorScheme.onError,
               )
-            : FloatingActionButton.extended(
-                onPressed: _showAddDialog,
-                icon: const Icon(PhosphorIconsBold.plus),
-                label: Text(
-                  _fabLabel,
-                  style: textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onPrimaryContainer,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                backgroundColor: colorScheme.primary,
-                foregroundColor: colorScheme.onPrimary,
-              ),
+            : null,
       ),
     );
   }

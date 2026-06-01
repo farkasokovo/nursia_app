@@ -12,6 +12,7 @@ class PacientesTab extends StatelessWidget {
   final VoidCallback onCancelarSeleccion;
   final Function(int index) onToggleSeleccion;
   final Function(int oldIndex, int newIndex) onReorder;
+  final VoidCallback onAdd;
 
   const PacientesTab({
     super.key,
@@ -22,6 +23,7 @@ class PacientesTab extends StatelessWidget {
     required this.onCancelarSeleccion,
     required this.onToggleSeleccion,
     required this.onReorder,
+    required this.onAdd,
   });
 
   // Altura fija compartida entre modo normal y modo selección
@@ -83,6 +85,27 @@ class PacientesTab extends StatelessWidget {
                     : _buildListaNormal(context, theme, colorScheme, textTheme),
               ),
             ],
+          ),
+
+        // ── FAB ESTÁTICO (solo visible fuera del modo selección) ───────────
+        if (!modoSeleccion)
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: FloatingActionButton.extended(
+              heroTag: 'fab_pacientes',
+              onPressed: onAdd,
+              icon: const Icon(PhosphorIconsBold.plus),
+              label: Text(
+                "Nuevo Paciente",
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onPrimaryContainer,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              backgroundColor: colorScheme.primary,
+              foregroundColor: colorScheme.onPrimary,
+            ),
           ),
       ],
     );
