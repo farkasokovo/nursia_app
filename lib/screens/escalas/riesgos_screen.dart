@@ -1,5 +1,6 @@
 // lib/screens/escalas/neurologicas_screen.dart
 import 'package:flutter/material.dart';
+import 'package:nursia_app/screens/escalas/riesgos/braden.dart';
 import 'package:nursia_app/screens/escalas/riesgos/downton_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos/maddox.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -44,7 +45,10 @@ class _RiesgosLayout extends StatelessWidget {
               title: "Escala de Braden",
               subtitle: "Riesgo de UPP",
               icon: PhosphorIconsRegular.selectionBackground,
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const BradenScreen()),
+              ),
             ),
             const SizedBox(height: 20),
             FarmaButton(

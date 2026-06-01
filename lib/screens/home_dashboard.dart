@@ -7,59 +7,8 @@ import '../turno_activo/turno_activo_screen.dart';
 class HomeDashboard extends StatelessWidget {
   const HomeDashboard({super.key});
 
-  Widget _getSaludo(BuildContext context) {
-    final hour = DateTime.now().hour;
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    // Creamos un estilo base para no repetir código
-    final estiloTexto = textTheme.titleMedium;
-
-    if (hour < 6) {
-      return Row(
-        children: [
-          Text("Buenas noches", style: estiloTexto),
-          const SizedBox(width: 8),
-          Icon(PhosphorIconsFill.moon, color: colorScheme.primaryContainer),
-        ],
-      );
-    }
-
-    if (hour < 12) {
-      return Row(
-        children: [
-          Text("Buenos días", style: estiloTexto),
-          const SizedBox(width: 8),
-          Icon(PhosphorIconsFill.sun, color: Colors.amberAccent, size: 30),
-        ],
-      );
-    }
-
-    if (hour < 20) {
-      return Row(
-        children: [
-          Text("Buenas tardes", style: estiloTexto),
-          const SizedBox(width: 8),
-          Icon(PhosphorIconsFill.cloudSun, color: Colors.amber),
-        ],
-      );
-    }
-
-    return Row(
-      children: [
-        Text("Buenas noches", style: estiloTexto),
-        const SizedBox(width: 8),
-        Icon(PhosphorIconsFill.moonStars, color: Colors.indigoAccent),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
     // --- LÓGICA DINÁMICA DE BOTONES ---
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -69,22 +18,22 @@ class HomeDashboard extends StatelessWidget {
       const HomeNavButton(
         title: "Escalas",
         tabIndex: 0,
-        icon: PhosphorIconsRegular.clipboardText,
-      ),
-      const HomeNavButton(
-        title: "Fármacos",
-        tabIndex: 1,
-        icon: PhosphorIconsRegular.pill,
-      ),
-      const HomeNavButton(
-        title: "Calculadoras",
-        tabIndex: 3,
-        icon: PhosphorIconsRegular.calculator,
+        icon: PhosphorIconsFill.chartBarHorizontal,
       ),
       const HomeNavButton(
         title: "Normativas",
         tabIndex: 4,
-        icon: PhosphorIconsRegular.books,
+        icon: PhosphorIconsFill.bookOpen,
+      ),
+      const HomeNavButton(
+        title: "Fármacos",
+        tabIndex: 1,
+        icon: PhosphorIconsFill.syringe,
+      ),
+      const HomeNavButton(
+        title: "Calculadoras",
+        tabIndex: 3,
+        icon: PhosphorIconsFill.calculator,
       ),
     ];
 
@@ -131,32 +80,6 @@ class HomeDashboard extends StatelessWidget {
                   Column(
                     children: [
                       // Saludo
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: _getSaludo(context),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: Text(
-                                "¿Qué necesitas consultar hoy?",
-                                style: textTheme.bodyMedium?.copyWith(
-                                  color: colorScheme.onSecondaryContainer,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
 
                       // Grid de Botones Dinámico
                       GridView.builder(
@@ -182,7 +105,7 @@ class HomeDashboard extends StatelessWidget {
                   // BLOQUE INFERIOR (El Tip)
                   // Al usar MainAxisAlignment.spaceBetween, este se irá al fondo
                   Padding(
-                    padding: const EdgeInsets.only(top: 32),
+                    padding: const EdgeInsets.only(top: 16),
                     child: const TipDelDia(),
                   ),
                 ],
@@ -201,7 +124,6 @@ class BotonTurnoActivo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color cobreOscuro = Color(0xFF6F4225); // Color del botón especial
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -248,9 +170,9 @@ class BotonTurnoActivo extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: Colors.white24,
-              radius: 25,
+              radius: 20,
               child: Icon(
-                PhosphorIconsFill.star,
+                PhosphorIconsFill.chartDonut,
                 color: colorScheme.onPrimary,
                 size: 30,
               ),
@@ -263,23 +185,26 @@ class BotonTurnoActivo extends StatelessWidget {
                   Text(
                     "Turno Activo",
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: 20,
                       color: colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
                     ),
                   ),
+                  const SizedBox(height: 4),
                   Text(
-                    "Pacientes • Pendientes • Medicación",
-                    style: textTheme.titleMedium?.copyWith(
+                    "Pacientes | Pendientes | Medicamentos",
+                    style: textTheme.bodySmall?.copyWith(
                       fontSize: 13,
-                      fontWeight: FontWeight.w600,
                       color: colorScheme.onPrimary,
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(PhosphorIconsBold.caretRight, color: Colors.white),
+            const Icon(
+              PhosphorIconsRegular.caretRight,
+              color: Colors.white,
+              size: 45,
+            ),
           ],
         ),
       ),

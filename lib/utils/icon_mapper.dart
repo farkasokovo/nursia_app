@@ -22,7 +22,7 @@ class IconMapper {
         return PhosphorIconsFill.drop;
       // Escalas / otros
       default:
-        return PhosphorIconsFill.pill;
+        return PhosphorIconsFill.syringe;
     }
   }
 }

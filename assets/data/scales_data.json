@@ -15,13 +15,13 @@
       "Respuesta motora (1 a 6 puntos): Evalúa la integridad funcional del sistema nervioso central y es el predictor más potente del pronóstico clínico."
     ],
     "interpretation": [
-      "La puntuación total oscila entre un mínimo de 3 puntos (coma profundo) y un máximo de 15 puntos (paciente despierto y orientado).",
-      "Apertura Ocular: Espontánea (4), a la orden verbal (3), a la presión/dolor (2), ninguna (1).",
-      "Respuesta Verbal: Orientado (5), desorientado (4), palabras inapropiadas (3), sonidos incomprensibles (2), ninguna (1).",
-      "Respuesta Motora: Obedece órdenes (6), localiza el dolor (5), flexión normal/retirada (4), flexión anormal/decorticación (3), extensión/descerebración (2), ninguna (1).",
-      "TCE Leve: 14 a 15 puntos.",
-      "TCE Moderado: 9 a 13 puntos.",
-      "TCE Grave / Severo: 3 a 8 puntos (un puntaje menor o igual a 8 suele ser indicativo de intubación endotraqueal)."
+    "La puntuación total oscila entre un mínimo de 3 puntos (coma profundo) y un máximo de 15 puntos (paciente despierto y orientado).\n",
+    "Apertura ocular: Espontánea (4), a la orden verbal (3), al dolor (2), ninguna (1).\n",
+    "Respuesta verbal: Orientado (5), desorientado (4), palabras inapropiadas (3), sonidos incomprensibles (2), ninguna (1).\n",
+    "Respuesta motora: Obedece órdenes (6), localiza el dolor (5), flexión normal/retirada (4), flexión anormal/decorticación (3), extensión/descerebración (2), ninguna (1).\n",
+    "Deterioro neurológico leve: 14 a 15 puntos.\n",
+    "Deterioro neurológico moderado: 9 a 13 puntos.\n",
+    "Deterioro neurológico grave / severo: 3 a 8 puntos (puntaje ≤ 8 suele indicar necesidad de intubación endotraqueal).\n"
     ],
     "limitations": [
       "No puede evaluarse la respuesta verbal en pacientes intubados, con traqueostomía, afasia o barreras severas del lenguaje.",
@@ -63,12 +63,12 @@
       "Respuesta a estímulos nociceptivos: Evalúa si existe alguna reacción motora ante un estímulo doloroso en estados profundos de inconsciencia."
     ],
     "interpretation": [
-      "Nivel 1: El paciente se encuentra despierto, ansioso, agitado o inquieto.",
-      "Nivel 2: El paciente está despierto, cooperador, orientado y tranquilo.",
-      "Nivel 3: El paciente está dormido pero responde exclusivamente a órdenes verbales.",
-      "Nivel 4: El paciente está dormido y muestra una respuesta rápida a la percusión glabelar o a un estímulo auditivo fuerte.",
-      "Nivel 5: El paciente está dormido y muestra una respuesta lenta a la percusión glabelar o a un estímulo auditivo fuerte.",
-      "Nivel 6: El paciente está profundamente dormido y no presenta ninguna respuesta a estímulos físicos o auditivos."
+      "Nivel 1: El paciente se encuentra despierto, ansioso, agitado o inquieto.\n",
+      "Nivel 2: El paciente está despierto, cooperador, orientado y tranquilo.\n",
+      "Nivel 3: El paciente está dormido pero responde exclusivamente a órdenes verbales.\n",
+      "Nivel 4: El paciente está dormido y muestra una respuesta rápida a la percusión glabelar o a un estímulo auditivo fuerte.\n",
+      "Nivel 5: El paciente está dormido y muestra una respuesta lenta a la percusión glabelar o a un estímulo auditivo fuerte.\n",
+      "Nivel 6: El paciente está profundamente dormido y no presenta ninguna respuesta a estímulos físicos o auditivos.\n"
     ],
     "limitations": [
       "Al ser una herramienta puramente observacional y subjetiva, cuenta con variabilidad en la interpretación entre diferentes observadores.",
@@ -109,16 +109,16 @@
       "Estímulo Físico: Si el paciente no reacciona al llamado, se aplica un estímulo táctil (frotar el esternón o sacudir suavemente el hombro)."
     ],
     "interpretation": [
-      "+4 Combativo: Francamente combativo o violento; representa un peligro inmediato para el personal de salud.",
-      "+3 Muy agitado: Intenta arrancarse tubos, catéteres o sondas; muestra un comportamiento agresivo.",
-      "+2 Agitado: Presenta movimientos frecuentes sin propósito y lucha contra el ventilador mecánico.",
-      "+1 Inquieto: Ansioso o aprensivo, pero sus movimientos no son agresivos ni vigorosos.",
-      "0 Alerta y tranquilo: Paciente despierto y calmado con su entorno.",
-      "-1 Somnoliento: No está plenamente alerta, pero se mantiene despierto con contacto visual a la voz por más de 10 segundos.",
-      "-2 Sedación leve: Despierta brevemente con contacto visual a la voz por menos de 10 segundos.",
-      "-3 Sedación moderada: Presenta cualquier movimiento o apertura ocular a la voz, pero no logra realizar contacto visual.",
-      "-4 Sedación profunda: No responde a la voz, pero presenta algún movimiento o apertura ocular ante el estímulo físico.",
-      "-5 Sin respuesta: No presenta ninguna respuesta a la voz ni al estímulo físico."
+       "Puntuación +4: Combativo; francamente violento, representa un peligro inmediato para el personal.\n",
+  "Puntuación +3: Muy agitado; intenta arrancarse tubos, catéteres o sondas, comportamiento agresivo.\n",
+  "Puntuación +2: Agitado; movimientos frecuentes sin propósito, lucha contra el ventilador mecánico.\n",
+  "Puntuación +1: Inquieto; ansioso o aprensivo, movimientos no agresivos ni vigorosos.\n",
+  "Puntuación 0: Alerta y tranquilo; despierto y calmado con su entorno.\n",
+  "Puntuación -1: Somnoliento; no plenamente alerta, pero mantiene contacto visual a la voz por más de 10 segundos.\n",
+  "Puntuación -2: Sedación leve; despierta brevemente con contacto visual a la voz por menos de 10 segundos.\n",
+  "Puntuación -3: Sedación moderada; movimiento o apertura ocular a la voz, sin contacto visual.\n",
+  "Puntuación -4: Sedación profunda; no responde a la voz, pero presenta movimiento o apertura ocular al estímulo físico.\n",
+  "Puntuación -5: Sin respuesta; ninguna respuesta a la voz ni al estímulo físico.\n"
     ],
     "limitations": [
       "No es evaluable de manera directa en pacientes bajo el efecto de bloqueadores neuromusculares (paralizados).",
@@ -161,8 +161,8 @@
       "Deambulación: Clasificación del tipo de marcha del paciente (Insegura con o sin ayuda / Imposible: 1 punto; Normal / Segura con ayuda: 0 puntos)."
     ],
     "interpretation": [
-      "Riesgo bajo o nulo: De 0 a 2 puntos.",
-      "Riesgo alto de caídas: 3 o más puntos (Activa automáticamente los protocolos institucionales de prevención de caídas)."
+       "Riesgo bajo: 0 a 2 puntos.\n",
+  "Riesgo alto: 3 o más puntos (activa automáticamente los protocolos institucionales de prevención de caídas).\n"
     ],
     "limitations": [
       "Al simplificar las categorías de medicamentos, no logra profundizar en la polifarmacia ni en las dosis que toma el paciente.",
@@ -203,12 +203,12 @@
       "Exudado: Presencia de material purulento (pus) en el punto de inserción."
     ],
     "interpretation": [
-      "Grado 0: Sitio de inserción con aspecto saludable. Sin dolor ni signos inflamatorios.",
-      "Grado 1: Dolor en el sitio de inserción o ligero eritema. (Observar el catéter).",
-      "Grado 2: Dolor en el sitio de inserción con eritema y/o edema. (Retirar el catéter).",
-      "Grado 3: Dolor en el sitio de inserción con eritema, edema y formación de cordón venoso palpable. (Retirar el catéter).",
-      "Grado 4: Dolor en el sitio de inserción con eritema, edema, cordón venoso palpable mayor a 6 cm y/o drenaje purulento. (Retirar el catéter e iniciar tratamiento).",
-      "Grado 5: Tromboflebitis franca (todos los signos anteriores presentes de forma severa). (Emergencia clínica/Retirar catéter)."
+        "Grado 0: Sitio de inserción con aspecto saludable; sin dolor ni signos inflamatorios.\n",
+  "Grado 1: Dolor en el sitio de inserción o ligero eritema (observar el catéter).\n",
+  "Grado 2: Dolor en el sitio de inserción con eritema y/o edema (retirar el catéter).\n",
+  "Grado 3: Dolor con eritema, edema y cordón venoso palpable (retirar el catéter).\n",
+  "Grado 4: Dolor con eritema, edema, cordón venoso palpable > 6 cm y/o drenaje purulento (retirar el catéter e iniciar tratamiento).\n",
+  "Grado 5: Tromboflebitis franca con todos los signos anteriores de forma severa (emergencia clínica; retirar catéter de inmediato).\n"
     ],
     "limitations": [
       "La percepción del dolor es subjetiva y puede variar según el umbral de cada paciente.",
@@ -230,6 +230,53 @@
       {
         "text": "Martínez, A., & Pérez, L. (2021). Incidencia de flebitis y factores de riesgo asociados al catéter venoso periférico en adultos. SciELO - Revista de Enfermería.",
         "url": "http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S0864-03192021000100008"
+      }
+    ]
+  }, 
+  "braden": {
+    "name": "Escala de Braden",
+    "description": "La Escala de Braden es una herramienta clínica validada científicamente, diseñada en 1987 por las enfermeras Barbara Braden y Nancy Bergstrom, con el objetivo de evaluar y predecir el riesgo que tiene un paciente de desarrollar úlceras por presión (UPP) o lesiones por presión.\nSu modelo conceptual analiza de manera integral tanto los factores determinantes de la intensidad y duración de la presión sobre los tejidos, como aquellos que afectan la tolerancia de la piel a dicha presión.\nAl sumar sus componentes, proporciona un puntaje numérico inversamente proporcional al riesgo, convirtiéndose en la guía fundamental para los planes de prevención de enfermería.",
+    "when_to_use": [
+      "Al ingreso de cualquier paciente en unidades de hospitalización general, cuidados intensivos o centros geriátricos de larga estancia.",
+      "De forma programada y rutinaria cada 24 o 48 horas en pacientes críticos, inmovilizados o de alta dependencia.",
+      "Tras cualquier intervención quirúrgica prolongada o cambio drástico en la condición hemodinámica del paciente.",
+      "Inmediatamente después de detectar un deterioro en la movilidad, el estado cognitivo o el estado nutricional del usuario.",
+      "En el seguimiento periódico de pacientes crónicos integrados en programas de atención de salud domiciliaria."
+    ],
+    "components": [
+      "Percepción sensorial: Mide la capacidad del paciente para reaccionar y responder significativamente a las molestias o al dolor causado por la presión (Puntaje de 1 a 4).",
+      "Exposición a la humedad: Evalúa el grado de exposición de la piel a fluidos corporales como sudor, orina o heces (Puntaje de 1 a 4).",
+      "Actividad física: Valora el grado de actividad física del paciente o su capacidad para deambular fuera de la cama (Puntaje de 1 a 4).",
+      "Movilidad: Mide la capacidad del individuo para cambiar, ajustar y controlar la posición de su cuerpo de forma autónoma (Puntaje de 1 a 4).",
+      "Nutrición: Evalúa el patrón habitual de ingesta alimentaria, midiendo la cantidad consumida de alimentos por comida o el uso de soporte nutricional (Puntaje de 1 a 4).",
+      "Fricción y cizallamiento: Valora la fuerza mecánica ejercida sobre la piel durante los movimientos, transferencias o deslizamientos en la cama o silla (Puntaje de 1 a 3)."
+    ],
+    "interpretation": [
+        "La puntuación global oscila entre 6 (máximo riesgo) y 23 (sin riesgo).\n",
+  "Riesgo alto / muy alto: 12 puntos o menos.\n",
+  "Riesgo moderado: 13 a 14 puntos.\n",
+  "Riesgo bajo / leve: 15 a 18 puntos.\n",
+  "Sin riesgo: 19 a 23 puntos.\n"
+    ],
+    "limitations": [
+      "El apartado de nutrición es meramente estimativo y subjetivo; no sustituye a una valoración nutricional exhaustiva basada en biomarcadores.",
+      "No evalúa de forma específica el riesgo de lesiones generadas por dispositivos médicos (como sondas, tubos endotraqueales o mascarillas), las cuales requieren protocolos adicionales.",
+      "Requiere una unificación estricta de criterios entre el personal evaluador para evitar variaciones subjetivas, especialmente en el ítem de fricción y cizallamiento.",
+      "No pondera directamente alteraciones microvasculares agudas, estados de shock o el uso de fármacos vasopresores, factores que aceleran el daño tisular de manera independiente a la escala."
+    ],
+    "clinical_notes": [
+      "A menor puntuación en el resultado final, mayor debe ser la agresividad de las medidas preventivas implementadas por enfermería (por ejemplo, uso de superficies especiales de manejo de presión o reducción de los tiempos en los cambios posturales).",
+      "Es la herramienta de cribado con mayor nivel de evidencia y la más recomendada a nivel internacional por organizaciones referentes como el Grupo Nacional para el Estudio y Asesoramiento en Úlceras por Presión y Heridas Crónicas (GNEAUPP).",
+      "Para el desarrollo de tu app en Flutter, el componente de \"Fricción y cizallamiento\" es el único que llega hasta un máximo de 3 puntos, detalle técnico crucial para evitar errores en las validaciones de tus formularios."
+    ],
+    "references": [
+      {
+        "text": "Tarazona-Santabalbina, F. J., et al. (2011). Validez de la escala de Braden para la predicción de úlceras por presión en pacientes ingresados en unidades de agudos. Enfermería Clínica, 21(5), 241-248.",
+        "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=3728145"
+      },
+      {
+        "text": "González-Consuegra, R. V., & Cardona-Mazo, M. (2014). Escala de Braden: utilidad y validez en la práctica clínica diaria de enfermería en cuidados intensivos. Enfermería Global, 13(3), 120-131.",
+        "url": "https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1695-61412014000300007"
       }
     ]
   }
