@@ -7,6 +7,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/category_button.dart';
 import '../widgets/searchable_screen.dart';
 import 'farmacologia/analgesicos_screen.dart';
+import 'farmacologia/anticoagulantes_screen.dart';
 import 'farmacologia/antibioticos_screen.dart';
 import 'farmacologia/cardiovascular_screen.dart';
 import '../models/medicamento.dart';
@@ -158,6 +159,12 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
                 PhosphorIconsRegular.drop,
                 "diureticos",
                 const DiureticosScreen(),
+              ),
+              _buildButton(
+                "Anti-\ncoagulantes",
+                PhosphorIconsRegular.drop,
+                "anticoagulantes",
+                const AnticoagulantesScreen(),
               ),
               // _buildButton(
               //   "Próximamente",

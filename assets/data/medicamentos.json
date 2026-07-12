@@ -1030,5 +1030,201 @@
         "url": "https://www.vademecum.es/principios-activos-hidroclorotiazida-c03aa03"
       }
     ]
+  },
+  {
+    "nombre": "Heparina Sódica",
+    "icono": "drop",
+    "categoria": "anticoagulante",
+    "farmacodinamia": "Fármaco anticoagulante de acción rápida.\nSe une de forma reversible a la antitrombina III (ATIII), lo que provoca un cambio conformacional que acelera hasta 1000 veces la inactivación de los factores de coagulación activados.\nInactiva principalmente al Factor IIa (trombina) y al Factor Xa, impidiendo la conversión de fibrinógeno en fibrina.\nInhibe la activación de los factores IX, XI y XII, así como la agregación plaquetaria inducida por trombina.\nNo tiene actividad fibrinolítica intrínseca (no disuelve los coágulos ya formados, sino que evita su extensión).",
+    "farmacocinetica": "Absorción: No se absorbe por vía oral debido a su gran tamaño molecular y carga negativa; se destruye en el tracto gastrointestinal. Tras la inyección intravenosa el efecto es inmediato, mientras que por vía subcutánea se retrasa entre 20 y 60 minutos.\nDistribución: Se une extensamente a lipoproteínas, globulinas y fibrinógeno plasmáticos. No atraviesa la barrera placentaria ni se distribuye en la leche materna.\nMetabolismo: Se metaboliza de forma parcial en el hígado por la enzima heparinasa y también es capturada por el sistema reticuloendotelial.\nEliminación: Se excreta a través de la orina en forma de metabolitos y fármaco inalterado. Su semivida de eliminación plasmática es de 1 a 2 horas (dosis-dependiente) y se prolonga notablemente en pacientes con cirrosis o insuficiencia renal grave.",
+    "indicaciones": "Prevención y tratamiento de la trombosis venosa profunda (TVP) y de la tromboembolia pulmonar (TEP).\nManejo inicial del infarto agudo de miocardio (IAM) y la angina inestable.\nPrevención de la coagulación en la circulación extracorpórea durante la cirugía cardiovascular y procedimientos de hemodiálisis.\nTratamiento de la coagulación intravascular diseminada (CID).",
+    "viaAdministracion": "IV, SC",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad documentada a la heparina.",
+        "Presencia o antecedentes de Trombocitopenia Inducida por Heparina (TIH) de tipo inmunológico (Tipo II).",
+        "Hemorragia activa clínicamente significativa (salvo si es por CID).",
+        "Trastornos de la coagulación preexistentes graves (como hemofilia o púrpura vascular).",
+        "Cirugía reciente (en los últimos días) del sistema nervioso central, columna vertebral u ojos, o traumatismo craneoencefálico grave.",
+        "Endocarditis bacteriana subaguda."
+      ],
+      "relativas": [
+        "Insuficiencia hepática o renal severa.",
+        "Hipertensión arterial sistémica grave no controlada.",
+        "Úlcera péptica activa o lesiones gastrointestinales propensas a sangrar.",
+        "Antecedente reciente de punción lumbar o anestesia regional (espinal/epidural)."
+      ]
+    },
+    "efectosSecundarios": [
+      "Irritación local, dolor o eritema en el sitio de la inyección subcutánea.",
+      "Sofocos o elevación transitoria de la temperatura corporal.",
+      "Náuseas leves o cefalea."
+    ],
+    "efectosAdversos": [
+      "Hemorragia severa (puede ocurrir en cualquier sitio u órgano, manifestándose como hematuria, melena, epistaxis o hemorragia intracraneal).",
+      "Trombocitopenia Inducida por Heparina (TIH) Tipo II (reacción inmunológica grave que disminuye las plaquetas y paradójicamente genera trombosis arteriales y venosas masivas).",
+      "Osteoporosis y riesgo incrementado de fracturas óseas (asociado a terapias prolongadas de más de 3 meses).",
+      "Reacciones anafilácticas y choque alérgico.",
+      "Alopecia transitoria y priapismo (raros)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Antiagregantes plaquetarios (ácido acetilsalicílico, clopidogrel), AINEs y otros anticoagulantes",
+        "efecto": "Incrementan de forma sinérgica el riesgo de hemorragias graves.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antihistamínicos, digitálicos (digoxina), tetraciclinas y tabaquismo",
+        "efecto": "Pueden disminuir la acción anticoagulante de la heparina.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Fármacos que elevan el potasio sérico o diuréticos ahorradores de potasio",
+        "efecto": "Aumentan el riesgo de hiperpotasemia, ya que la heparina suprime la secreción de aldosterona.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "administracion": "IV en infusión continua o bolo intermitente; SC profunda en el tejido adiposo abdominal.",
+      "precauciones": "Contraindicada de forma estricta la vía intramuscular, por el alto riesgo de hematomas masivos y dolorosos."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2023). Compendio Nacional de Insumos para la Salud: Clave 010.000.4101.00 Heparina Sódica. Ciudad de México, México: Gobierno de México.",
+        "url": "https://www.gob.mx/csg"
+      },
+      {
+        "text": "Organización Mundial de la Salud. (2021). Formulario Modelo de la OMS: Heparina sódica. Ginebra, Suiza: OMS.",
+        "url": "https://apps.who.int/iris/handle/10665/44053"
+      }
+    ]
+  },
+  {
+    "nombre": "Enoxaparina",
+    "icono": "drop",
+    "categoria": "anticoagulante",
+    "farmacodinamia": "Anticoagulante derivado de la despolimerización de la heparina estándar.\nPresenta una alta afinidad por la antitrombina III (ATIII).\nSe caracteriza por tener una selectividad mucho mayor para inhibir al Factor Xa que al Factor IIa (trombina); su relación de actividad anti-Xa / anti-IIa es de aproximadamente 3:1 a 4:1.\nPosee un impacto mínimo sobre la agregación plaquetaria y sobre las pruebas globales de coagulación (como el TPTa) a dosis terapéuticas.",
+    "farmacocinetica": "Absorción: Excelente y rápida biodisponibilidad por vía subcutánea, alcanzando entre el 92% y el 100%. La actividad máxima anti-Xa en el plasma se observa entre las 3 y 5 horas posteriores a la inyección.\nDistribución: El volumen de distribución de la enoxaparina es cercano al volumen sanguíneo global. No atraviesa la placenta durante el embarazo.\nMetabolismo: Se metaboliza principalmente en el hígado mediante procesos de desulfatación y despolimerización a fragmentos de menor peso molecular con menor actividad biológica.\nEliminación: Se elimina de forma mayoritaria por vía renal (excreción urinaria de los fragmentos y del fármaco activo). Su semivida de eliminación basada en la actividad anti-Xa es de 4.5 a 7 horas, prolongándose hasta el doble en pacientes con falla renal avanzada.",
+    "indicaciones": "Profilaxis de la enfermedad tromboembólica venosa en pacientes sometidos a cirugía ortopédica, cirugía general o en pacientes no quirúrgicos inmovilizados por enfermedad médica aguda.\nTratamiento de la trombosis venosa profunda (TVP) establecida, acompañada o no de tromboembolia pulmonar (TEP).\nTratamiento del infarto agudo de miocardio sin elevación del segmento ST (IAMSEST), angina inestable e infarto agudo de miocardio con elevación del segmento ST (IAMCEST).\nPrevención de la formación de coágulos en el circuito de circulación extracorpórea durante las sesiones de hemodiálisis.",
+    "viaAdministracion": "SC, IV (bolo inicial en IAMCEST)",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al principio activo enoxaparina, a la heparina o a otras heparinas de bajo peso molecular.",
+        "Antecedentes de trombocitopenia inducida por heparina (TIH) mediada por anticuerpos.",
+        "Hemorragia activa de gran importancia clínica.",
+        "Endocarditis infecciosa aguda o enfermedades vasculares con alto riesgo hemorrágico."
+      ],
+      "relativas": [
+        "Insuficiencia renal grave (con depuración de creatinina menor a 30 ml/min; requiere ajuste estricto de dosis a la baja).",
+        "Insuficiencia hepática severa.",
+        "Úlcera péptica activa o historial de úlceras sangrantes.",
+        "Coadministración con anestesia neuroaxial (epidural o espinal), por el riesgo de hematoma espinal que cause parálisis a largo plazo."
+      ]
+    },
+    "efectosSecundarios": [
+      "Hematomas pequeños, dolor, equimosis o nódulos benignos en el sitio de la inyección subcutánea.",
+      "Elevación transitoria y asintomática de las transaminasas hepáticas (ALT/AST).",
+      "Cefalea leve."
+    ],
+    "efectosAdversos": [
+      "Hemorragia mayor (gastrointestinal, retroperitoneal, quirúrgica o intracraneal).",
+      "Trombocitopenia (aunque el riesgo de TIH es significativamente menor que con la heparina sódica).",
+      "Reacciones cutáneas locales graves (necrosis cutánea en la zona de inyección, muy rara).",
+      "Hiperpotasemia por supresión de aldosterona.",
+      "Reacciones de hipersensibilidad sistémica severa."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "AINEs (ketorolaco), ácido acetilsalicílico, clopidogrel, warfarina y trombolíticos",
+        "efecto": "Potencian de forma crítica y exponencial el peligro de hemorragias masivas.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Dextrano 40",
+        "efecto": "Su uso conjunto incrementa notablemente el riesgo de sangrado.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "administracion": "SC profunda, exclusivamente en el tejido celular subcutáneo de la región abdominal anterolateral o posterolateral. La vía IV se reserva únicamente para el bolo inicial del protocolo de IAMCEST.",
+      "precauciones": "Con depuración de creatinina menor a 30 ml/min, ajustar estrictamente la dosis a la baja. Evitar la coadministración con anestesia neuroaxial por riesgo de hematoma espinal."
+    },
+    "referencias": [
+      {
+        "text": "Instituto Mexicano del Seguro Social. (2018). Guía de Práctica Clínica: Prevención y diagnóstico de la enfermedad tromboembólica venosa en el paciente médico (con apartados farmacológicos de Enoxaparina). Ciudad de México, México: IMSS.",
+        "url": "http://www.imss.gob.mx/profesionales-salud/gpc"
+      },
+      {
+        "text": "Consejo de Salubridad General. (2023). Compendio Nacional de Insumos para la Salud: Clave 010.000.4103.00 Enoxaparina. Ciudad de México, México: Gobierno de México.",
+        "url": "https://www.gob.mx/csg"
+      }
+    ]
+  },
+  {
+    "nombre": "Warfarina Sódica",
+    "icono": "drop",
+    "categoria": "anticoagulante",
+    "farmacodinamia": "Anticoagulante oral de tipo cumarínico.\nActúa como un antagonista competitivo de la Vitamina K.\nInhibe de manera específica a la enzima epóxido reductasa de la vitamina K (VKORC1), bloqueando la regeneración de la vitamina K reducida.\nImpide la gamma-carboxilación indispensable para activar los factores de la coagulación dependientes de vitamina K: Factores II (protrombina), VII, IX y X.\nBloquea la activación de las proteínas anticoagulantes endógenas C y S.",
+    "farmacocinetica": "Absorción: Se absorbe casi por completo y con gran rapidez en el tracto gastrointestinal superior tras su administración por vía oral.\nDistribución: Posee una unión a las proteínas plasmáticas sumamente elevada (aproximadamente el 99%), en especial a la albúmina. Logra atravesar con facilidad la barrera placentaria (es altamente teratogénica).\nMetabolismo: Se metaboliza de forma muy extensa en el hígado a través de las enzimas del citocromo P450, principalmente por la isoenzima CYP2C9 (responsable de inactivar la S-warfarina, que es el isómero más potente).\nEliminación: Los metabolitos inactivos se excretan primordialmente en la orina y en menor porcentaje por la bilis. Su semivida de eliminación en el cuerpo humano es muy prolongada, oscilando entre las 36 y 42 horas.",
+    "indicaciones": "Tratamiento a largo plazo y profilaxis secundaria de la trombosis venosa profunda (TVP) y de la tromboembolia pulmonar (TEP).\nPrevención de eventos tromboembólicos sistémicos o eventos cerebrales vasculares (Ictus) en pacientes con fibrilación auricular crónica.\nPrevención de oclusiones trombóticas en pacientes con prótesis de válvulas cardíacas mecánicas o biológicas.\nReducción del riesgo de reinfarto o embolismo sistémico posterior a un infarto agudo de miocardio.",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad conocida a la warfarina o derivados cumarínicos.",
+        "Embarazo (causa el síndrome fetal por warfarina, con malformaciones del SNC y hemorragias fetales graves; solo se tolera en escenarios muy extremos de válvulas mecánicas bajo estricta valoración de beneficio/riesgo, prefiriéndose HBPM).",
+        "Hemorragias activas de importancia o tendencias hemorrágicas conocidas (diátesis hemorrágica).",
+        "Cirugía programada o reciente del cerebro, médula espinal o globos oculares.",
+        "Hipertensión arterial sistémica severa descontrolada (maligna).",
+        "Alcoholismo crónico o demencia senil (por riesgo de falta de apego y caídas)."
+      ],
+      "relativas": [
+        "Insuficiencia hepática moderada a grave (altera la síntesis endógena de factores de coagulación).",
+        "Insuficiencia renal moderada.",
+        "Presencia de úlcera péptica activa o gastritis erosiva.",
+        "Trastornos psicológicos o cognitivos que impidan la correcta monitorización del Índice Normalizado Internacional (INR)."
+      ]
+    },
+    "efectosSecundarios": [
+      "Náuseas, vómitos o malestar estomacal leve.",
+      "Pérdida del apetito y diarrea.",
+      "Alopecia reversible."
+    ],
+    "efectosAdversos": [
+      "Hemorragia mayor (hematomas retroperitoneales, hemorragia digestiva masiva o sangrado intracraneal potencialmente mortal).",
+      "Necrosis cutánea inducida por warfarina (urgencia dermatológica que ocurre en los primeros días del tratamiento, por la caída rápida de la Proteína C anticoagulante).",
+      "Síndrome de los dedos azules (lesiones cutáneas dolorosas y violáceas en los pies, generadas por microembolos de cristales de colesterol liberados por el efecto anticoagulante).",
+      "Reacciones alérgicas como vasculitis o urticaria."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Amiodarona, metronidazol, fluconazol, eritromicina, ciprofloxacino, paracetamol a dosis altas prolongadas y ácido acetilsalicílico",
+        "efecto": "Elevan el efecto de la warfarina (aumentan el INR y el riesgo de sangrado).",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Rifampicina, carbamazepina, fenitoína, fenobarbital y vitamina K1",
+        "efecto": "Disminuyen el efecto de la warfarina (bajan el INR y elevan el riesgo de trombosis).",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Alimentos ricos en vitamina K (espinacas, brócoli, col, lechuga)",
+        "efecto": "Reducen drásticamente la efectividad de la warfarina; su consumo en la dieta debe mantenerse estable y monitorizado.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "administracion": "Exclusivamente por vía oral.",
+      "precauciones": "El efecto terapéutico no es inmediato: se consolida entre 36 y 72 horas, por el tiempo que tardan en degradarse los factores de coagulación activos preexistentes. Requiere monitorización periódica del INR."
+    },
+    "referencias": [
+      {
+        "text": "Secretaría de Salud. (2019). Catálogo de Medicamentos del Compendio Nacional de Insumos para la Salud: Clave 010.000.0406.00 Warfarina Sódica. Ciudad de México, México: Gobierno de México.",
+        "url": "https://www.gob.mx/salud"
+      },
+      {
+        "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Warfarina. Ginebra, Suiza: OMS.",
+        "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
+      }
+    ]
   }
 ]

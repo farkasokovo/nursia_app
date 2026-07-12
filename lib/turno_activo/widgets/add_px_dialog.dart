@@ -139,5 +139,5 @@ Future<void> _confirmar(
     nuevo,
   );
   onGuardado(guardado);
-  Navigator.pop(context);
+  if (context.mounted) Navigator.pop(context);
 }

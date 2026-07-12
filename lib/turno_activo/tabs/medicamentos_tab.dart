@@ -67,6 +67,25 @@ class MedicamentosTab extends StatelessWidget {
             ),
           ),
 
+        // ── LISTA ──────────────────────────────────────────────────────────
+        if (items.isNotEmpty)
+          Column(
+            children: [
+              BarraAcciones(
+                modoSeleccion: modoSeleccion,
+                totalItems: items.length,
+                seleccionados: seleccionados.length,
+                onEntrarModo: onEntrarModoSeleccion,
+                onCancelar: onCancelarSeleccion,
+              ),
+              Expanded(
+                child: modoSeleccion
+                    ? _buildListaSeleccion(context, colorScheme, textTheme)
+                    : _buildListaNormal(context, theme, colorScheme, textTheme),
+              ),
+            ],
+          ),
+
         // ── FAB ESTÁTICO (solo visible fuera del modo selección) ───────────
         if (!modoSeleccion)
           Positioned(
@@ -86,25 +105,6 @@ class MedicamentosTab extends StatelessWidget {
               backgroundColor: colorScheme.primary,
               foregroundColor: colorScheme.onPrimary,
             ),
-          ),
-
-        // ── LISTA ──────────────────────────────────────────────────────────
-        if (items.isNotEmpty)
-          Column(
-            children: [
-              BarraAcciones(
-                modoSeleccion: modoSeleccion,
-                totalItems: items.length,
-                seleccionados: seleccionados.length,
-                onEntrarModo: onEntrarModoSeleccion,
-                onCancelar: onCancelarSeleccion,
-              ),
-              Expanded(
-                child: modoSeleccion
-                    ? _buildListaSeleccion(context, colorScheme, textTheme)
-                    : _buildListaNormal(context, theme, colorScheme, textTheme),
-              ),
-            ],
           ),
       ],
     );
