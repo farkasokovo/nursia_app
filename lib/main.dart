@@ -1,9 +1,12 @@
 // lib/main.dart
 
 import 'package:flutter/material.dart';
+import 'package:nursia_app/data/local/daos/escala_dao.dart';
 import 'package:nursia_app/data/local/daos/medicamento_dao.dart';
 import 'package:nursia_app/database/database_helper.dart';
+import 'package:nursia_app/repositories/escala_repository.dart';
 import 'package:nursia_app/repositories/medicamento_repository.dart';
+import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -13,12 +16,16 @@ void main() async {
   final db = await DatabaseHelper.instance.database;
   final medicamentoRepo = MedicamentoRepository(MedicamentoDao(db));
   await medicamentoRepo.cargarSemillaSiHaceFalta();
-  await DatabaseHelper.instance.cargarEscalasDesdeJSON();
+  final escalaRepo = EscalaRepository(EscalaDao(db));
+  await escalaRepo.cargarSemillaSiHaceFalta();
   await DatabaseHelper.instance.cargarCalculadorasDesdeJSON();
   await DatabaseHelper.instance.cargarNormasDesdeJSON();
   runApp(
-    Provider<MedicamentoRepository>.value(
-      value: medicamentoRepo,
+    MultiProvider(
+      providers: [
+        Provider<MedicamentoRepository>.value(value: medicamentoRepo),
+        Provider<EscalaRepository>.value(value: escalaRepo),
+      ],
       child: const MyApp(),
     ),
   );

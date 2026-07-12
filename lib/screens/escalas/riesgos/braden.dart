@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/database/database_helper.dart';
+import 'package:nursia_app/repositories/escala_repository.dart';
 import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
+import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
 import '../../../theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -253,7 +254,7 @@ class _BradenInfo extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(20),
           child: FutureBuilder(
-            future: DatabaseHelper.instance.obtenerDetalleEscala("braden"),
+            future: context.read<EscalaRepository>().obtenerPorId("braden"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
