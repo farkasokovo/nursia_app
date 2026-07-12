@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:nursia_app/database/database_helper.dart';
+import 'package:provider/provider.dart';
+import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/pendiente_turno.dart';
 import 'package:nursia_app/turno_activo/utils/icon_mapper_turno.dart';
 
@@ -9,8 +10,9 @@ Future<void> showAddPendienteDialog(
   required int ordenSiguiente,
   required Function(PendienteInfo guardado) onGuardado,
 }) async {
-  // Obtenemos el catálogo del JSON que ya cargamos en DB
-  final catalogo = await DatabaseHelper.instance.obtenerCatalogoPendientes();
+  final pendienteTurnoRepo = context.read<PendienteTurnoRepository>();
+  // Obtenemos el catálogo ya cargado en DB
+  final catalogo = await pendienteTurnoRepo.obtenerCatalogo();
 
   if (!context.mounted) return;
 
@@ -166,8 +168,8 @@ Future<void> showAddPendienteDialog(
                                 orden: ordenSiguiente,
                               );
 
-                              final guardado = await DatabaseHelper.instance
-                                  .insertarPendienteTurno(nuevo);
+                              final guardado = await pendienteTurnoRepo
+                                  .insertarActivo(nuevo);
 
                               onGuardado(guardado);
 

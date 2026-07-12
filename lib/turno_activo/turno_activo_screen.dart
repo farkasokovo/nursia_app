@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/repositories/paciente_turno_repository.dart';
+import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/paciente_turno.dart';
 import 'package:nursia_app/turno_activo/models/pendiente_turno.dart';
 import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
@@ -63,11 +64,10 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
   // ── CARGA INICIAL ──────────────────────────────────────────────────────────
   Future<void> _cargarDatosDeDB() async {
     final pacienteTurnoRepo = context.read<PacienteTurnoRepository>();
-    await DatabaseHelper.instance.cargarCatalogoPendientesDesdeJSON();
+    final pendienteTurnoRepo = context.read<PendienteTurnoRepository>();
 
     final listaPacientes = await pacienteTurnoRepo.obtenerTodos();
-    final listaPendientes = await DatabaseHelper.instance
-        .obtenerPendientesTurno();
+    final listaPendientes = await pendienteTurnoRepo.obtenerActivos();
     final listaMedicamentos = await DatabaseHelper.instance
         .obtenerMedicamentosTurno();
 
@@ -114,11 +114,13 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
           for (final i in sorted) {
             final p = _pendientes[i];
             if (p.id != null) {
-              DatabaseHelper.instance.eliminarPendienteTurno(p.id!);
+              context.read<PendienteTurnoRepository>().eliminarActivo(p.id!);
             }
             _pendientes.removeAt(i);
           }
-          DatabaseHelper.instance.actualizarOrdenPendientes(_pendientes);
+          context.read<PendienteTurnoRepository>().actualizarOrdenActivos(
+            _pendientes,
+          );
           break;
 
         case 2:
@@ -244,7 +246,9 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                   if (oldIndex < newIndex) newIndex -= 1;
                   _pendientes.insert(newIndex, _pendientes.removeAt(oldIndex));
                 });
-                DatabaseHelper.instance.actualizarOrdenPendientes(_pendientes);
+                context.read<PendienteTurnoRepository>().actualizarOrdenActivos(
+                  _pendientes,
+                );
               },
               onAdd: () => showAddPendienteDialog(
                 context,
