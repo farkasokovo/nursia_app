@@ -1,7 +1,8 @@
 // lib/widgets/info_tab.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/calculadora_info.dart';
-import '../repositories/repositorio_calculadoras.dart';
+import '../repositories/calculadora_repository.dart';
 import '../utils/url_launcher_helper.dart';
 
 class InfoTab extends StatelessWidget {
@@ -16,7 +17,7 @@ class InfoTab extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return FutureBuilder<CalculadoraInfo>(
-      future: RepositorioCalculadoras.getInfo(calculadoraId),
+      future: context.read<CalculadoraRepository>().obtenerPorId(calculadoraId),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
