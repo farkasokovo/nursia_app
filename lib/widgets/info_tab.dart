@@ -5,19 +5,38 @@ import '../models/calculadora_info.dart';
 import '../repositories/calculadora_repository.dart';
 import '../utils/url_launcher_helper.dart';
 
-class InfoTab extends StatelessWidget {
+class InfoTab extends StatefulWidget {
   final String calculadoraId;
 
   const InfoTab({super.key, required this.calculadoraId});
 
   @override
+  State<InfoTab> createState() => _InfoTabState();
+}
+
+class _InfoTabState extends State<InfoTab> with AutomaticKeepAliveClientMixin {
+  late final Future<CalculadoraInfo> _infoFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _infoFuture = context.read<CalculadoraRepository>().obtenerPorId(
+      widget.calculadoraId,
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
     return FutureBuilder<CalculadoraInfo>(
-      future: context.read<CalculadoraRepository>().obtenerPorId(calculadoraId),
+      future: _infoFuture,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
