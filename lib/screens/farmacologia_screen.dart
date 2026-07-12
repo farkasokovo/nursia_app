@@ -1,6 +1,5 @@
 // lib/screens/farmacologia_screen.dart
 import 'package:flutter/material.dart';
-import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/screens/farmacologia/antiinflamatorios.dart';
 import 'package:nursia_app/screens/farmacologia/diureticos_screen.dart';
 import 'package:nursia_app/screens/ficha_medicamento.dart';
@@ -11,6 +10,8 @@ import 'farmacologia/analgesicos_screen.dart';
 import 'farmacologia/antibioticos_screen.dart';
 import 'farmacologia/cardiovascular_screen.dart';
 import '../models/medicamento.dart';
+import 'package:nursia_app/repositories/medicamento_repository.dart';
+import 'package:provider/provider.dart';
 
 class FarmacologiaScreen extends StatefulWidget {
   const FarmacologiaScreen({super.key});
@@ -26,12 +27,12 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
   @override
   void initState() {
     super.initState();
-    _cargarFarmacos();
+    final medicamentoRepo = context.read<MedicamentoRepository>();
+    _cargarFarmacos(medicamentoRepo);
   }
 
-  Future<void> _cargarFarmacos() async {
-    final medicamentos = await DatabaseHelper.instance
-        .obtenerTodosLosMedicamentos();
+  Future<void> _cargarFarmacos(MedicamentoRepository medicamentoRepo) async {
+    final medicamentos = await medicamentoRepo.obtenerTodos();
     if (mounted) {
       setState(() {
         _farmacos = medicamentos;

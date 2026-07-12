@@ -1,7 +1,9 @@
 // lib/main.dart
 
 import 'package:flutter/material.dart';
+import 'package:nursia_app/data/local/daos/medicamento_dao.dart';
 import 'package:nursia_app/database/database_helper.dart';
+import 'package:nursia_app/repositories/medicamento_repository.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -14,7 +16,12 @@ void main() async {
   await DatabaseHelper.instance.cargarEscalasDesdeJSON();
   await DatabaseHelper.instance.cargarCalculadorasDesdeJSON();
   await DatabaseHelper.instance.cargarNormasDesdeJSON();
-  runApp(const MyApp());
+  runApp(
+    Provider<MedicamentoRepository>.value(
+      value: medicamentoRepo,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
