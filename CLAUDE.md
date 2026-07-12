@@ -87,7 +87,7 @@ Revisar `lib/utils/icon_mapper.dart`: si la categoría nueva encaja con un ícon
 
 **Si es un fármaco más de una categoría que YA tiene pantalla** (ej. otro antibiótico): solo agregar un `FarmaButton` más dentro de esa pantalla existente en `lib/screens/farmacologia/<categoria>_screen.dart`, apuntando a `FichaMedicamento(nombreMedicamento: "Nombre Exacto")`. No se toca nada más.
 
-**Si es una categoría/grupo nuevo** (como pasó con Anticoagulantes): crear una pantalla nueva en `lib/screens/farmacologia/<categoria>_screen.dart`, copiando la estructura de `diureticos_screen.dart` como plantilla exacta:
+**Si es una categoría/grupo nuevo** : crear una pantalla nueva en `lib/screens/farmacologia/<categoria>_screen.dart`, copiando la estructura de `diureticos_screen.dart` como plantilla exacta:
 - Un widget StatelessWidget que envuelve todo en `ExpandableCategoryScreen` (con `heroTag`, `title`, `icon`).
 - Un `_XLayout` interno con un `Column` de `FarmaButton`, uno por cada fármaco de esa categoría, cada uno navegando con `Navigator.push` a `FichaMedicamento(nombreMedicamento: "...")`.
 
@@ -101,7 +101,7 @@ Luego, registrar la categoría nueva en `lib/screens/farmacologia_screen.dart`:
 - `flutter analyze` — debe dar 0 issues.
 - Recordar a DIEGO el Paso 0 (borrar datos de la app / reinstalar) para ver los fármacos nuevos reflejados.
 
-### Si el usuario pide un campo que el modelo NO tiene hoy
+### Si DIEGO pide un campo que el modelo NO tiene hoy
 (ej. "dosis pediátrica" como columna nueva, no solo texto dentro de un campo existente) — eso NO es este flujo. Requiere: agregar el campo a `Medicamento` (`fromJson`/`fromMap`/`toMap`), una migración de schema en `database_helper.dart` (`onUpgrade`, bump de `version`), y ajustar `MedicamentoDao`. Avisar al usuario que es un cambio de arquitectura más grande antes de tocarlo.
 
 ## Qué NO hacer

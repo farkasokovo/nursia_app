@@ -1226,5 +1226,188 @@
         "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
       }
     ]
+  },
+  {
+    "nombre": "Insulina Lispro",
+    "icono": "syringe",
+    "categoria": "insulina",
+    "farmacodinamia": "Análogo de insulina humana de acción ultrarrápida obtenido por tecnología de ADN recombinante.\nDisminuye la glucemia al unirse a los receptores de insulina en el músculo esquelético y el tejido adiposo, facilitando la captación celular de glucosa.\nInhibe la producción hepática de glucosa al bloquear la gluconeogénesis y la glucogenólisis.\nEstimula la síntesis de proteínas, ácidos grasos y glucógeno, bloqueando la lipólisis y la proteólisis de forma paralela.",
+    "farmacocinetica": "Inicio de acción: De 10 a 15 minutos posteriores a la inyección subcutánea.\nEfecto máximo (pico de acción): Entre los 30 y los 90 minutos de su administración.\nDuración total del efecto: De 3 a 5 horas.\nAbsorción: Sumamente veloz debido a la inversión de los aminoácidos prolina y lisina en las posiciones B28 y B29, lo que impide la formación espontánea de hexámeros estables en el tejido subcutáneo.\nMetabolismo: Se degrada de manera celular principalmente en el hígado, seguido por los riñones y los tejidos periféricos musculares.\nEliminación: Depuración final por vía renal.",
+    "indicaciones": "Tratamiento de pacientes adultos, adolescentes y niños con diabetes mellitus que requieren control de la glucemia prandial (postprandial).\nEstabilización inicial de la diabetes mellitus descompensada.\nManejo intrahospitalario urgente de la cetoacidosis diabética o el estado hiperosmolar (vía intravenosa).",
+    "viaAdministracion": "SC, IV, IM",
+    "contraindicaciones": {
+      "absolutas": [
+        "Episodios agudos de hipoglucemia activa.",
+        "Hipersensibilidad documentada a la insulina lispro o a cualquiera de los componentes vehiculares de la solución."
+      ],
+      "relativas": [
+        "Insuficiencia renal avanzada o insuficiencia hepática grave (demanda un ajuste riguroso a la baja de las dosis programadas).",
+        "Procesos infecciosos concomitantes, traumatismos graves o estados febriles altos (incrementan o desestabilizan las demandas biológicas de insulina)."
+      ]
+    },
+    "efectosSecundarios": [
+      "Lipodistrofia localizada (hipertrofia o atrofia del tejido graso subcutáneo si no se rota sistemáticamente el sitio de inyección).",
+      "Reacciones locales leves en la zona cutánea elegida (eritema menor, prurito transitorio o dolor leve).",
+      "Incremento leve del peso corporal secundario al potente estímulo anabólico general."
+    ],
+    "efectosAdversos": [
+      "Hipoglucemia severa (puede desencadenar neuroglucopenia, crisis convulsivas, pérdida de la conciencia, coma y muerte).",
+      "Reacciones anafilácticas sistémicas generalizadas de instalación inmediata (shock anafiláctico).",
+      "Hipopotasemia grave (por desplazamiento forzado del potasio plasmático hacia el espacio intracelular, con riesgo de arritmias).",
+      "Edema insulínico periférico agudo debido a la retención súbita de sodio hidrosalino."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Antidiabéticos orales (metformina, sulfonilureas), IECA, salicilatos, sulfonamidas, IMAO y consumo agudo de alcohol",
+        "efecto": "Potencian el efecto hipoglucemiante, elevando el riesgo de hipoglucemia.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Corticosteroides sistémicos, hormonas tiroideas, diuréticos tiazídicos, anticonceptivos orales combinados, danazol y hormona del crecimiento",
+        "efecto": "Disminuyen el efecto de la insulina, elevando la glucemia.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Betabloqueadores",
+        "efecto": "Disminuyen o suprimen por completo los síntomas de alerta adrenérgicos de la hipoglucemia (palpitaciones, temblores, taquicardia).",
+        "severidad": "alta"
+      }
+    ],
+    "observaciones": {
+      "administracion": "SC mediante jeringa, pluma prellenada o bomba de infusión continua. IV solo en entornos clínicos controlados para urgencias metabólicas. IM posible, aunque no se recomienda de forma rutinaria.",
+      "precauciones": "Rotar sistemáticamente los sitios de inyección para evitar lipodistrofia."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud: Clave 010.000.4162.00 Insulina Lispro (Origen ADN recombinante). Ciudad de México, México: Gobierno de México.",
+        "url": "https://www.csg.gob.mx/"
+      },
+      {
+        "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Insulina de acción rápida. Ginebra, Suiza: OMS.",
+        "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
+      }
+    ]
+  },
+  {
+    "nombre": "Insulina NPH",
+    "icono": "syringe",
+    "categoria": "insulina",
+    "farmacodinamia": "Insulina humana de acción intermedia cuya estructura nativa se encuentra cristalizada junto con protamina y zinc a un pH neutro.\nSe encarga de mantener un aporte basal de insulina para mediar la captación constante de glucosa celular periférica durante periodos prolongados.\nDisminuye significativamente la producción endógena de glucosa por parte del parénquima hepático.\nPromueve el almacenamiento tisular de nutrientes, deprimiendo los procesos catabólicos de proteólisis celular.",
+    "farmacocinetica": "Inicio de acción: De 1 a 2 horas posteriores a la inyección por vía subcutánea.\nEfecto máximo (pico de acción): Entre las 4 y las 12 horas posteriores a la inyección (periodo crítico de vigilancia por riesgo de hipoglucemia).\nDuración total del efecto: De 12 a 18 horas en promedio.\nAbsorción: Lenta y sostenida desde el depósito subcutáneo, debido a la adición intencional de protamina, la cual retrasa la disolución y el paso de los cristales de insulina hacia el torrente sanguíneo.\nMetabolismo: Degradación enzimática interna mediada por peptidasas celulares, principalmente en el riñón e hígado.\nEliminación: Excreción metabólica por vía urinaria.",
+    "indicaciones": "Tratamiento de la diabetes mellitus tipo 1 como pauta de insulinización basal.\nTratamiento de la diabetes mellitus tipo 2 que no logra metas de control glucémico mediante dosis óptimas de fármacos orales.\nManejo prioritario de la diabetes pregestacional y gestacional durante el embarazo por su alto perfil de seguridad clínica.",
+    "viaAdministracion": "SC",
+    "contraindicaciones": {
+      "absolutas": [
+        "Cuadros clínicos de hipoglucemia activa.",
+        "Antecedentes de hipersensibilidad a la insulina de origen humano o específicamente a la protamina.",
+        "Administración errónea por vía intravenosa (riesgo de oclusión vascular o hipoglucemia fulminante por la naturaleza de la suspensión)."
+      ],
+      "relativas": [
+        "Disfunción renal o hepática de moderada a grave (exige monitorización estrecha de glucemias capilares y ajustes a la baja).",
+        "Trastornos endocrinos concurrentes no controlados (como hipotiroidismo o enfermedad de Addison)."
+      ]
+    },
+    "efectosSecundarios": [
+      "Lipohipertrofia cutánea local (acumulación nodular de grasa por inyecciones continuas en una misma zona anatómica).",
+      "Eritema transitorio, inflamación leve o dolor puntiforme en el sitio de punción.",
+      "Ganancia gradual de peso ligada a la estabilización de los procesos metabólicos y almacenamiento energético."
+    ],
+    "efectosAdversos": [
+      "Hipoglucemia (común si el pico de acción entre las 4-12 horas coincide con ayunos prolongados o ejercicio extenuante no planificado).",
+      "Reacciones alérgicas de hipersensibilidad inmediata (urticaria dérmica, prurito difuso generalizado).",
+      "Trastornos visuales refractarios transitorios (visión borrosa) al inicio de la terapia, por cambios en la turgencia del cristalino ocular."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "IMAO, esteroides anabólicos, IECA, salicilatos y betabloqueadores adrenérgicos",
+        "efecto": "Potencian el efecto hipoglucemiante.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Glucocorticoides sistémicos, diuréticos de asa y tiazídicos, hormona tiroidea, epinefrina y simpaticomiméticos",
+        "efecto": "Atenúan el efecto hipoglucemiante.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Betabloqueadores",
+        "efecto": "Eliminan las señales neurovegetativas típicas de alerta ante bajadas de glucosa (sudoración fría, temblores, inquietud).",
+        "severidad": "alta"
+      }
+    ],
+    "observaciones": {
+      "administracion": "SC exclusiva. Agitar o rotar suavemente el frasco antes de extraer la dosis para resuspender los cristales. Contraindicada por cualquier otra vía.",
+      "precauciones": "Vigilar de cerca entre las 4 y 12 horas post-inyección (pico de acción) por riesgo de hipoglucemia, en especial si coincide con ayuno prolongado o ejercicio no planificado."
+    },
+    "referencias": [
+      {
+        "text": "Secretaría de Salud. (2022). Catálogo de Medicamentos del Compendio Nacional de Insumos para la Salud: Clave 010.000.1050.00 Insulina Humana Isófana de Acción Intermedia NPH. Ciudad de México, México: Gobierno de México.",
+        "url": "https://www.gob.mx/salud"
+      },
+      {
+        "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Insulina de acción intermedia. Ginebra, Suiza: OMS.",
+        "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
+      }
+    ]
+  },
+  {
+    "nombre": "Insulina Glargina",
+    "icono": "syringe",
+    "categoria": "insulina",
+    "farmacodinamia": "Análogo de insulina humana de acción prolongada diseñado molecularmente para proveer concentraciones basales uniformes.\nPosee una baja solubilidad química a un pH neutro; al ser inyectada en el espacio subcutáneo (que es neutro), la solución ácida original precipita formando microdepósitos estables.\nSe une de manera sostenida al receptor de insulina celular con una afinidad biológica idéntica a la variante nativa humana.\nMedia la entrada constante de glucosa a los tejidos periféricos y bloquea la producción hepática de glucosa durante todo el día de forma lineal y suave.",
+    "farmacocinetica": "Inicio de acción: Entre 1 y 2 horas posteriores a la inyección en el tejido subcutáneo.\nEfecto máximo (pico de acción): No posee un pico de acción discernible (perfil farmacocinético plano o \"sin pico\").\nDuración total del efecto: Hasta 24 horas continuas (en concentraciones de alta densidad como 300 UI/mL, puede extenderse hasta 36 horas).\nAbsorción: Liberación lenta, continua, lineal y predecible a partir de la disolución progresiva de los microprecipitados de insulina glargina en la grasa subcutánea.\nMetabolismo: Se metaboliza de forma parcial en la zona subcutánea, dividiéndose en dos metabolitos activos principales (M1 y M2) encargados de ejercer el efecto sistémico.\nEliminación: Excreción final vía renal.",
+    "indicaciones": "Tratamiento de la diabetes mellitus en adultos, adolescentes y niños mayores de 2 o 6 años (dependiendo de la marca comercial específica) que requieren una cobertura de insulina basal de larga duración.\nPacientes con diabetes tipo 1 o tipo 2 propensos a desarrollar hipoglucemias nocturnas recurrentes asociadas al uso previo de insulinas de acción intermedia (NPH).",
+    "viaAdministracion": "SC",
+    "contraindicaciones": {
+      "absolutas": [
+        "Cuadros clínicos vigentes de hipoglucemia aguda.",
+        "Hipersensibilidad o alergia diagnosticada a la insulina glargina o a los componentes ácidos de la fórmula.",
+        "Administración por vía intravenosa o empleo directo dentro de bombas externas de infusión continua de insulina."
+      ],
+      "relativas": [
+        "Modificaciones abruptas de la dieta, horarios de comidas o variaciones drásticas en la rutina de ejercicio diario sin supervisión facultativa previa.",
+        "Coexistencia de insuficiencia renal o hepática avanzada no evaluada."
+      ]
+    },
+    "efectosSecundarios": [
+      "Ardor, escozor o dolor leve transitorio en el sitio exacto de inyección inmediatamente posterior a la aplicación (debido al pH marcadamente ácido [pH 4] de la solución).",
+      "Lipodistrofia localizada en las zonas de punción.",
+      "Retención hidrosalina inicial leve con edema periférico transitorio al optimizarse los valores de glucemia."
+    ],
+    "efectosAdversos": [
+      "Hipoglucemia grave (con menor incidencia nocturna en comparación con NPH, pero con riesgo latente si hay sobredosificación absoluta).",
+      "Reacciones de hipersensibilidad inmunológica severa inmediata (edema laríngeo, angioedema cutáneo difuso, broncoespasmo).",
+      "Empeoramiento temporal o progresión de retinopatía diabética preexistente ante descensos drásticos, rápidos e iniciales de los niveles de glucemia crónica."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Hipoglucemiantes orales, IECA, fibratos, fluoxetina, pentoxifilina, propoxifeno, salicilatos y esteroides anabólicos",
+        "efecto": "Potencian la acción de la insulina, con riesgo de hipoglucemia.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Glucocorticoides, diuréticos, hormonas estrogénicas y progestágenas, danazol, somatropina, inhibidores de la proteasa y antipsicóticos atípicos (clozapina, olanzapina)",
+        "efecto": "Disminuyen la acción de la insulina, con riesgo de hiperglucemia.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Betabloqueadores, clonidina y consumo crónico de sales de litio",
+        "efecto": "Pueden enmascarar o atenuar la respuesta simpática refleja ante descensos de glucosa.",
+        "severidad": "alta"
+      }
+    ],
+    "observaciones": {
+      "administracion": "SC exclusiva, preferentemente una sola vez al día a la misma hora. No administrar por vía IV ni mezclar en la misma jeringa con otras insulinas, ya que su pH ácido alteraría los componentes de las demás.",
+      "precauciones": "Perfil sin pico de acción discernible, con duración de hasta 24 horas (hasta 36 en presentaciones de 300 UI/mL). Vigilar cambios abruptos de dieta o rutina de ejercicio."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud: Clave 010.000.4158.00 Insulina Glargina Solución Inyectable. Ciudad de México, México: Gobierno de México.",
+        "url": "https://www.csg.gob.mx/"
+      },
+      {
+        "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Insulina de acción prolongada. Ginebra, Suiza: OMS.",
+        "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
+      }
+    ]
   }
 ]

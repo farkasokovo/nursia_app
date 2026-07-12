@@ -17,9 +17,12 @@ class IconMapper {
       // Antiinflamatorios
       case 'thermometer':
         return PhosphorIconsFill.thermometer;
-      // Diuréticos
+      // Diuréticos / Anticoagulantes
       case 'drop':
         return PhosphorIconsFill.drop;
+      // Insulinas
+      case 'syringe':
+        return PhosphorIconsFill.syringe;
       // Escalas / otros
       default:
         return PhosphorIconsFill.syringe;
