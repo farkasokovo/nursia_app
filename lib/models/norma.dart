@@ -33,4 +33,16 @@ class Norma {
     puntosClave: json['puntos_clave'],
     dofReferencia: json['dof_referencia'],
   );
+
+  // Para guardar en SQLite
+  Map<String, dynamic> toMap() => {
+    'codigo': codigo,
+    'titulo': titulo,
+    'titulo_corto': tituloCorto,
+    'area_salud': areaSalud,
+    'resumen': resumen,
+    'palabras_clave': palabrasClave,
+    'puntos_clave': puntosClave,
+    'dof_referencia': dofReferencia,
+  };
 }

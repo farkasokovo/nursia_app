@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:nursia_app/data/local/daos/calculadora_dao.dart';
 import 'package:nursia_app/data/local/daos/escala_dao.dart';
 import 'package:nursia_app/data/local/daos/medicamento_dao.dart';
+import 'package:nursia_app/data/local/daos/norma_dao.dart';
 import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/repositories/calculadora_repository.dart';
 import 'package:nursia_app/repositories/escala_repository.dart';
 import 'package:nursia_app/repositories/medicamento_repository.dart';
+import 'package:nursia_app/repositories/norma_repository.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
@@ -22,13 +24,15 @@ void main() async {
   await escalaRepo.cargarSemillaSiHaceFalta();
   final calculadoraRepo = CalculadoraRepository(CalculadoraDao(db));
   await calculadoraRepo.cargarSemillaSiHaceFalta();
-  await DatabaseHelper.instance.cargarNormasDesdeJSON();
+  final normaRepo = NormaRepository(NormaDao(db));
+  await normaRepo.cargarSemillaSiHaceFalta();
   runApp(
     MultiProvider(
       providers: [
         Provider<MedicamentoRepository>.value(value: medicamentoRepo),
         Provider<EscalaRepository>.value(value: escalaRepo),
         Provider<CalculadoraRepository>.value(value: calculadoraRepo),
+        Provider<NormaRepository>.value(value: normaRepo),
       ],
       child: const MyApp(),
     ),

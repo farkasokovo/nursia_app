@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/models/norma.dart';
+import 'package:nursia_app/repositories/norma_repository.dart';
 import 'package:nursia_app/screens/ficha_normativa_screen.dart';
 import 'package:nursia_app/screens/lista_normas_screen.dart';
 import 'package:nursia_app/widgets/expandable_category_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:provider/provider.dart';
 import '../widgets/category_button.dart';
 import '../widgets/searchable_screen.dart';
 
@@ -26,8 +27,7 @@ class _NormativaScreenState extends State<NormativaScreen> {
   }
 
   Future<void> _cargarNormas() async {
-    // Pedimos TODAS las normas a la base de datos
-    final normas = await DatabaseHelper.instance.obtenerTodasLasNormas();
+    final normas = await context.read<NormaRepository>().obtenerTodos();
 
     if (mounted) {
       setState(() {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/models/norma.dart';
+import 'package:nursia_app/repositories/norma_repository.dart';
 import 'package:nursia_app/screens/ficha_normativa_screen.dart';
 import 'package:nursia_app/theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:provider/provider.dart';
 
 class ListaNormasFiltradaScreen extends StatelessWidget {
   final String categoria;
@@ -17,7 +18,7 @@ class ListaNormasFiltradaScreen extends StatelessWidget {
 
     // Devolvemos el FutureBuilder directo, sin Scaffold
     return FutureBuilder<List<Norma>>(
-      future: DatabaseHelper.instance.obtenerTodasLasNormas(),
+      future: context.read<NormaRepository>().obtenerTodos(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
