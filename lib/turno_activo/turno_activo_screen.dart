@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:nursia_app/database/database_helper.dart';
+import 'package:nursia_app/repositories/medicamento_turno_repository.dart';
 import 'package:nursia_app/repositories/paciente_turno_repository.dart';
 import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/paciente_turno.dart';
@@ -65,11 +65,11 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
   Future<void> _cargarDatosDeDB() async {
     final pacienteTurnoRepo = context.read<PacienteTurnoRepository>();
     final pendienteTurnoRepo = context.read<PendienteTurnoRepository>();
+    final medicamentoTurnoRepo = context.read<MedicamentoTurnoRepository>();
 
     final listaPacientes = await pacienteTurnoRepo.obtenerTodos();
     final listaPendientes = await pendienteTurnoRepo.obtenerActivos();
-    final listaMedicamentos = await DatabaseHelper.instance
-        .obtenerMedicamentosTurno();
+    final listaMedicamentos = await medicamentoTurnoRepo.obtenerTodos();
 
     setState(() {
       _pacientes
@@ -129,11 +129,13 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
           for (final i in sorted) {
             final m = _medicamentos[i];
             if (m.id != null) {
-              DatabaseHelper.instance.eliminarMedicamentoTurno(m.id!);
+              context.read<MedicamentoTurnoRepository>().eliminar(m.id!);
             }
             _medicamentos.removeAt(i);
           }
-          DatabaseHelper.instance.actualizarOrdenMedicamentos(_medicamentos);
+          context.read<MedicamentoTurnoRepository>().actualizarOrden(
+            _medicamentos,
+          );
           break;
       }
       _cancelarSeleccion();
@@ -276,7 +278,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                     _medicamentos.removeAt(oldIndex),
                   );
                 });
-                DatabaseHelper.instance.actualizarOrdenMedicamentos(
+                context.read<MedicamentoTurnoRepository>().actualizarOrden(
                   _medicamentos,
                 );
               },

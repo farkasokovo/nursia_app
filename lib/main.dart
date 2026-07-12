@@ -5,6 +5,7 @@ import 'package:nursia_app/data/local/daos/calculadora_dao.dart';
 import 'package:nursia_app/data/local/daos/catalogo_pendiente_dao.dart';
 import 'package:nursia_app/data/local/daos/escala_dao.dart';
 import 'package:nursia_app/data/local/daos/medicamento_dao.dart';
+import 'package:nursia_app/data/local/daos/medicamento_turno_dao.dart';
 import 'package:nursia_app/data/local/daos/norma_dao.dart';
 import 'package:nursia_app/data/local/daos/paciente_turno_dao.dart';
 import 'package:nursia_app/data/local/daos/pendiente_turno_dao.dart';
@@ -12,6 +13,7 @@ import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/repositories/calculadora_repository.dart';
 import 'package:nursia_app/repositories/escala_repository.dart';
 import 'package:nursia_app/repositories/medicamento_repository.dart';
+import 'package:nursia_app/repositories/medicamento_turno_repository.dart';
 import 'package:nursia_app/repositories/norma_repository.dart';
 import 'package:nursia_app/repositories/paciente_turno_repository.dart';
 import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
@@ -37,6 +39,9 @@ void main() async {
     PendienteTurnoDao(db),
   );
   await pendienteTurnoRepo.cargarSemillaSiHaceFalta();
+  final medicamentoTurnoRepo = MedicamentoTurnoRepository(
+    MedicamentoTurnoDao(db),
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -46,6 +51,7 @@ void main() async {
         Provider<NormaRepository>.value(value: normaRepo),
         Provider<PacienteTurnoRepository>.value(value: pacienteTurnoRepo),
         Provider<PendienteTurnoRepository>.value(value: pendienteTurnoRepo),
+        Provider<MedicamentoTurnoRepository>.value(value: medicamentoTurnoRepo),
       ],
       child: const MyApp(),
     ),

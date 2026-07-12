@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:nursia_app/database/database_helper.dart';
+import 'package:provider/provider.dart';
+import 'package:nursia_app/repositories/medicamento_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
 import 'package:nursia_app/utils/icon_mapper.dart'; // Tu IconMapper de lib/utils
 
@@ -18,6 +19,8 @@ Future<void> showAddMedicamentoTurnoDialog(
   required int ordenSiguiente,
   required Function(MedicamentoTurno guardado) onGuardado,
 }) async {
+  final medicamentoTurnoRepo = context.read<MedicamentoTurnoRepository>();
+
   // Cargamos el catálogo desde assets
   final response = await rootBundle.loadString('assets/data/medicamentos.json');
   final data = json.decode(response) as List<dynamic>;
@@ -177,8 +180,8 @@ Future<void> showAddMedicamentoTurnoDialog(
                                 orden: ordenSiguiente,
                               );
 
-                              final guardado = await DatabaseHelper.instance
-                                  .insertarMedicamentoTurno(nuevo);
+                              final guardado = await medicamentoTurnoRepo
+                                  .insertar(nuevo);
 
                               onGuardado(guardado);
 
