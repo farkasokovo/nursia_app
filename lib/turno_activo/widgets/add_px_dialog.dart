@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:nursia_app/database/database_helper.dart';
+import 'package:provider/provider.dart';
+import 'package:nursia_app/repositories/paciente_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/paciente_turno.dart';
 
 /// Muestra el diálogo flotante para registrar un nuevo paciente.
@@ -134,7 +135,9 @@ Future<void> _confirmar(
   if (nombre.isEmpty) return;
 
   final nuevo = Paciente(nombre: nombre, orden: ordenSiguiente);
-  final guardado = await DatabaseHelper.instance.insertarPacienteTurno(nuevo);
+  final guardado = await context.read<PacienteTurnoRepository>().insertar(
+    nuevo,
+  );
   onGuardado(guardado);
   Navigator.pop(context);
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:nursia_app/database/database_helper.dart';
+import 'package:nursia_app/repositories/paciente_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/paciente_turno.dart';
 import 'package:nursia_app/turno_activo/models/pendiente_turno.dart';
 import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
@@ -60,10 +62,10 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
 
   // ── CARGA INICIAL ──────────────────────────────────────────────────────────
   Future<void> _cargarDatosDeDB() async {
+    final pacienteTurnoRepo = context.read<PacienteTurnoRepository>();
     await DatabaseHelper.instance.cargarCatalogoPendientesDesdeJSON();
 
-    final listaPacientes = await DatabaseHelper.instance
-        .obtenerPacientesTurno();
+    final listaPacientes = await pacienteTurnoRepo.obtenerTodos();
     final listaPendientes = await DatabaseHelper.instance
         .obtenerPendientesTurno();
     final listaMedicamentos = await DatabaseHelper.instance
@@ -99,11 +101,11 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
           for (final i in sorted) {
             final p = _pacientes[i];
             if (p.id != null) {
-              DatabaseHelper.instance.eliminarPacienteTurno(p.id!);
+              context.read<PacienteTurnoRepository>().eliminar(p.id!);
             }
             _pacientes.removeAt(i);
           }
-          DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
+          context.read<PacienteTurnoRepository>().actualizarOrden(_pacientes);
           break;
 
         case 1:
@@ -215,7 +217,9 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                   if (oldIndex < newIndex) newIndex -= 1;
                   _pacientes.insert(newIndex, _pacientes.removeAt(oldIndex));
                 });
-                DatabaseHelper.instance.actualizarOrdenPacientes(_pacientes);
+                context.read<PacienteTurnoRepository>().actualizarOrden(
+                  _pacientes,
+                );
               },
               onAdd: () => showAddPacienteDialog(
                 context,
