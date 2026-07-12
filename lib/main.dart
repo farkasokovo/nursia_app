@@ -8,7 +8,9 @@ import 'theme/app_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await DatabaseHelper.instance.cargarSemillaDesdeJSON();
+  final db = await DatabaseHelper.instance.database;
+  final medicamentoRepo = MedicamentoRepository(MedicamentoDao(db));
+  await medicamentoRepo.cargarSemillaSiHaceFalta();
   await DatabaseHelper.instance.cargarEscalasDesdeJSON();
   await DatabaseHelper.instance.cargarCalculadorasDesdeJSON();
   await DatabaseHelper.instance.cargarNormasDesdeJSON();
