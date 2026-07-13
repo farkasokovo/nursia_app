@@ -122,18 +122,13 @@ class _EscalasScreenState extends State<EscalasScreen> {
             "riesgos",
             const RiesgosScreen(),
           ),
+
           _buildButton(
-            "Valoración\ngeneral",
-            PhosphorIconsRegular.stethoscope,
-            "clinica",
-            const ValoracionGeneralScreen(),
+            "TRIAGE y\nEmergencias",
+            PhosphorIconsRegular.siren,
+            "triage",
+            null,
           ),
-          // _buildButton(
-          //   "TRIAGE y\nEmergencias",
-          //   PhosphorIconsRegular.siren,
-          //   "triage",
-          //   null,
-          // ),
           // _buildButton(
           //   "Valoración\ndel dolor",
           //   PhosphorIconsRegular.smileyNervous,

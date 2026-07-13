@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 5, // Aumentamos la versión a 5
+      version: 6, // Aumentamos la versión a 6
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -73,6 +73,11 @@ class DatabaseHelper {
               orden  INTEGER NOT NULL DEFAULT 0
             )
           ''');
+        }
+        // Catálogo de pendientes ampliado: se vacía para que
+        // cargarSemillaSiHaceFalta() lo vuelva a sembrar con el JSON nuevo.
+        if (oldVersion < 6) {
+          await db.delete('catalogo_pendientes');
         }
       },
     );

@@ -103,23 +103,26 @@ Future<void> showAddPendienteDialog(
                         child: Material(
                           elevation: 4,
                           borderRadius: BorderRadius.circular(12),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width - 96,
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              itemCount: options.length,
-                              itemBuilder: (context, index) {
-                                final option = options.elementAt(index);
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxHeight: 280),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 96,
+                              child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                itemCount: options.length,
+                                itemBuilder: (context, index) {
+                                  final option = options.elementAt(index);
 
-                                return ListTile(
-                                  leading: Icon(
-                                    IconMapper.getIcon(option.icono),
-                                  ),
-                                  title: Text(option.nombre),
-                                  onTap: () => onSelected(option),
-                                );
-                              },
+                                  return ListTile(
+                                    leading: Icon(
+                                      IconMapper.getIcon(option.icono),
+                                    ),
+                                    title: Text(option.nombre),
+                                    onTap: () => onSelected(option),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
