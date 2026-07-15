@@ -279,5 +279,411 @@
         "url": "https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1695-61412014000300007"
       }
     ]
+  },
+  "mews": {
+    "name": "MEWS (Puntuación Modificada de Alerta Temprana)",
+    "description": "El MEWS (Modified Early Warning Score) es un sistema de alerta temprana desarrollado y validado por Subbe y colaboradores en el año 2001 en unidades de admisión médica del Reino Unido. Su propósito es detectar de forma precoz el deterioro fisiológico de un paciente hospitalizado en sala general —antes de que evolucione a un paro cardiorrespiratorio o requiera ingreso a cuidados intensivos— mediante la medición rutinaria de cinco constantes vitales sencillas.\nA cada parámetro (frecuencia respiratoria, frecuencia cardíaca, presión arterial sistólica, temperatura y nivel de consciencia) se le asigna un puntaje de 0 a 3 según qué tan alejado esté del rango normal; la suma total estratifica el riesgo del paciente y dispara un escalamiento asistencial protocolizado. Es una herramienta central de los sistemas de respuesta rápida y de la seguridad del paciente en piso.",
+    "when_to_use": [
+      "En la toma rutinaria de constantes vitales de todo paciente hospitalizado en sala general, en cada turno.",
+      "Ante cualquier cambio clínico agudo o sospecha de deterioro (disnea, hipotensión, alteración del estado de alerta).",
+      "Como tamizaje de sepsis y otras condiciones tiempo-dependientes en pacientes de piso.",
+      "Durante el traslado interhospitalario o entre servicios para objetivar la estabilidad del paciente.",
+      "Tras un procedimiento invasivo, cirugía o inicio de un fármaco de alto riesgo, para vigilancia estrecha.",
+      "Para justificar y comunicar de forma objetiva la activación del equipo de respuesta rápida."
+    ],
+    "components": [
+      "Frecuencia respiratoria (rpm): <9 = 2 puntos; 9-14 = 0 puntos; 15-20 = 1 punto; 21-29 = 2 puntos; ≥30 = 3 puntos.",
+      "Frecuencia cardíaca (lpm): <40 = 2 puntos; 41-50 = 1 punto; 51-100 = 0 puntos; 101-110 = 1 punto; 111-129 = 2 puntos; ≥130 = 3 puntos.",
+      "Presión arterial sistólica (mmHg): ≤70 = 3 puntos; 71-80 = 2 puntos; 81-100 = 1 punto; 101-199 = 0 puntos; ≥200 = 2 puntos.",
+      "Temperatura (°C): <35 = 2 puntos; 35-38.4 = 0 puntos; ≥38.5 = 2 puntos.",
+      "Nivel de consciencia (AVPU): Alerta = 0 puntos; responde a la Voz = 1 punto; responde al dolor (Pain) = 2 puntos; sin respuesta (Unresponsive) = 3 puntos."
+    ],
+    "interpretation": [
+      "0 a 2 puntos: Riesgo bajo. Continuar con la monitorización rutinaria de constantes según protocolo del servicio.",
+      "3 a 4 puntos: Riesgo intermedio. Aumentar la frecuencia de monitorización (idealmente cada 1-2 horas) y notificar a la enfermera responsable del paciente.",
+      "5 o más puntos: Riesgo alto. Un puntaje ≥5 se asoció con mayor mortalidad (OR 5.4) e ingreso a UCI (OR 10.9) en el estudio de validación. Requiere revisión médica urgente y valorar la activación del equipo de respuesta rápida o el ingreso a cuidados intensivos.",
+      "Regla del parámetro único: cualquier constante individual que puntúe 3 (dato fisiológico extremo) debe disparar por sí sola el escalamiento, aunque el total sea bajo."
+    ],
+    "limitations": [
+      "Es un predictor de riesgo, no un diagnóstico; un MEWS bajo no descarta una patología grave de instauración lenta.",
+      "Existen múltiples variantes locales (con RASS en lugar de AVPU, o rangos ligeramente distintos), lo que dificulta comparar puntajes entre instituciones.",
+      "No incorpora la saturación de oxígeno ni el aporte de oxígeno suplementario, a diferencia de scores más modernos como el NEWS2.",
+      "Su rendimiento cae en poblaciones especiales (embarazadas, pacientes con EPOC o cardiopatía crónica) cuyos valores basales difieren del estándar.",
+      "Depende de una toma de constantes correcta y completa; un solo parámetro no medido invalida o subestima el puntaje."
+    ],
+    "clinical_notes": [
+      "El MEWS es dinámico: su mayor valor no está en un puntaje aislado, sino en la tendencia (un paciente que sube de 2 a 5 en pocas horas es una alarma aunque el 5 parezca 'moderado').",
+      "La frecuencia respiratoria es el parámetro más sensible y el que primero se altera en el deterioro; nunca debe estimarse 'a ojo', sino contarse durante 60 segundos.",
+      "Documentar siempre el puntaje junto con la acción tomada (ej. 'MEWS 5, se avisa a médico de guardia a las 03:00 h')."
+    ],
+    "references": [
+      {
+        "text": "Subbe, C. P., Kruger, M., Rutherford, P., & Gemmel, L. (2001). Validation of a modified Early Warning Score in medical admissions. QJM: An International Journal of Medicine, 94(10), 521-526.",
+        "url": "https://academic.oup.com/qjmed/article-abstract/94/10/521/1558977"
+      },
+      {
+        "text": "Hernández Amador, J. F., Villanueva Sáenz, E., Cortés Romano, P., et al. (2019). Sistemas de advertencia temprana por puntaje. Early Warning Scores (EWS). Acta Médica Grupo Ángeles, 17(3), 252-257.",
+        "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1870-72032019000300252"
+      }
+    ]
+  },
+  "qsofa": {
+    "name": "qSOFA (Evaluación Rápida de Falla Orgánica Secuencial)",
+    "description": "El qSOFA (quick Sequential Organ Failure Assessment) es una herramienta de tamizaje rápido derivada del consenso internacional Sepsis-3 (Singer y colaboradores, JAMA 2016). Fue diseñada para identificar, junto a la cama y sin necesidad de estudios de laboratorio, a los pacientes con sospecha de infección que tienen mayor riesgo de un desenlace desfavorable (muerte o estancia prolongada en UCI).\nEvalúa únicamente tres criterios clínicos, cada uno presente o ausente (1 o 0 puntos). No es un diagnóstico de sepsis ni sustituye al SOFA completo: es una señal de alarma que obliga a buscar activamente disfunción orgánica e iniciar el protocolo de sepsis.",
+    "when_to_use": [
+      "En cualquier paciente con sospecha o confirmación de infección fuera de la UCI (urgencias, piso, prehospitalario).",
+      "Como tamizaje rápido de sepsis cuando no se dispone de gasometría ni laboratorios inmediatos.",
+      "Ante un paciente febril o con foco infeccioso que además luce hipotenso, taquipneico o confuso.",
+      "Para priorizar y agilizar la atención (triaje) de pacientes infecciosos en urgencias.",
+      "Como disparador documentado para activar el 'paquete de la primera hora' de manejo de sepsis."
+    ],
+    "components": [
+      "Frecuencia respiratoria ≥22 respiraciones por minuto: presente = 1 punto / ausente = 0 puntos.",
+      "Alteración del estado mental (Escala de Glasgow <15 respecto al basal del paciente): presente = 1 punto / ausente = 0 puntos.",
+      "Presión arterial sistólica ≤100 mmHg: presente = 1 punto / ausente = 0 puntos."
+    ],
+    "interpretation": [
+      "0 a 1 punto: Bajo riesgo por qSOFA. NO descarta sepsis ni infección grave; mantener vigilancia clínica y reevaluar si el cuadro progresa.",
+      "2 a 3 puntos: Alto riesgo (qSOFA positivo). Se asocia con un aumento marcado de la mortalidad hospitalaria. Obliga a buscar disfunción orgánica (SOFA completo), medir lactato sérico, iniciar el protocolo de sepsis y considerar el escalamiento a un nivel de cuidados mayor."
+    ],
+    "limitations": [
+      "Tiene alta especificidad pero baja sensibilidad: un qSOFA <2 no excluye sepsis, por lo que no debe usarse para 'descartar' la enfermedad.",
+      "Detecta al paciente cuando ya hay disfunción orgánica instalada, lo que puede ser un signo tardío; scores como el NEWS2 pueden anticiparse.",
+      "El criterio de 'alteración mental' es subjetivo y difícil de valorar en pacientes con demencia previa, sedación o barrera idiomática.",
+      "No fue diseñado ni validado para población pediátrica ni obstétrica.",
+      "La Surviving Sepsis Campaign (2021) desaconseja usarlo como herramienta única de tamizaje, precisamente por su baja sensibilidad."
+    ],
+    "clinical_notes": [
+      "Su gran ventaja es la rapidez: los tres datos se obtienen sin pinchar al paciente ni esperar laboratorios, ideal para el triaje.",
+      "Un solo criterio positivo en un paciente infectado ya justifica vigilancia estrecha; no hay que esperar a que 'sumen 2' para preocuparse.",
+      "El lactato sérico no forma parte del qSOFA, pero debe medirse siempre que el qSOFA sea positivo, pues orienta la gravedad de la hipoperfusión."
+    ],
+    "references": [
+      {
+        "text": "Singer, M., Deutschman, C. S., Seymour, C. W., et al. (2016). The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA, 315(8), 801-810.",
+        "url": "https://jamanetwork.com/journals/jama/fullarticle/2492881"
+      },
+      {
+        "text": "Seymour, C. W., Liu, V. X., Iwashyna, T. J., et al. (2016). Assessment of Clinical Criteria for Sepsis: For the Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA, 315(8), 762-774.",
+        "url": "https://jamanetwork.com/journals/jama/fullarticle/2492875"
+      }
+    ]
+  },
+  "indice_shock": {
+    "name": "Índice de Shock",
+    "description": "El Índice de Shock (Shock Index) es un indicador hemodinámico simple, descrito originalmente por Allgöwer y Burri en 1967, que resulta de dividir la frecuencia cardíaca entre la presión arterial sistólica (IS = FC ÷ PAS). Su utilidad radica en que detecta la inestabilidad circulatoria de forma más temprana que cualquiera de los dos valores por separado, ya que refleja el estado de compensación del paciente.\nUn paciente en shock incipiente suele mantener una presión sistólica 'normal' a costa de taquicardia: el índice de shock desenmascara esa fase compensada antes de que aparezca la hipotensión franca, que es un signo tardío y de peor pronóstico. Se usa ampliamente en trauma, hemorragia y sepsis para predecir necesidad de transfusión masiva, ingreso a UCI y mortalidad.",
+    "when_to_use": [
+      "En la valoración inicial del paciente politraumatizado o con sospecha de hemorragia activa.",
+      "Para detectar shock compensado en un paciente que aún mantiene la presión sistólica dentro de rangos normales.",
+      "En el tamizaje y seguimiento de la sepsis y el shock séptico.",
+      "Para anticipar la necesidad de transfusión masiva o activación del protocolo de hemorragia.",
+      "En la valoración de la hemorragia obstétrica (posparto), donde es especialmente útil.",
+      "Como parámetro de reevaluación tras la reanimación con líquidos o hemoderivados."
+    ],
+    "components": [
+      "Frecuencia cardíaca (latidos por minuto): numerador de la fórmula.",
+      "Presión arterial sistólica (mmHg): denominador de la fórmula.",
+      "Cálculo: Índice de Shock = Frecuencia Cardíaca ÷ Presión Arterial Sistólica (valor adimensional)."
+    ],
+    "interpretation": [
+      "Menor a 0.5: Puede reflejar bradicardia o hipertensión; valorar el contexto clínico.",
+      "0.5 a 0.7: Rango normal. Estado hemodinámico estable.",
+      "0.7 a 0.9: Elevado. Sugiere hipoperfusión incipiente o shock compensado; vigilancia estrecha y reevaluación frecuente.",
+      "0.9 a 1.0: Alto. Fuerte indicador de compromiso hemodinámico; iniciar/optimizar la reanimación y buscar la causa.",
+      "Mayor o igual a 1.0: Shock establecido. Se asocia con un aumento aproximado de 4 veces en la mortalidad hospitalaria y mayor probabilidad de transfusión masiva. Requiere reanimación agresiva y escalamiento inmediato."
+    ],
+    "limitations": [
+      "Pierde fiabilidad en pacientes que toman betabloqueadores u otros cronotrópicos negativos, ya que la taquicardia compensadora queda enmascarada.",
+      "Los marcapasos, arritmias como la fibrilación auricular y la hipertensión crónica de base alteran la interpretación del índice.",
+      "Los umbrales del adulto no aplican en pediatría (donde se usa el SIPA, ajustado por edad) ni son idénticos en el adulto mayor de 65 años, que tolera peor valores altos.",
+      "Es un dato puntual e inespecífico: no distingue la causa del shock (hemorrágico, séptico, cardiogénico, etc.).",
+      "Puede alterarse por dolor, ansiedad o fiebre, que elevan la frecuencia cardíaca sin que exista hipovolemia real."
+    ],
+    "clinical_notes": [
+      "La mayor fortaleza del índice es identificar al paciente 'que se ve bien pero está compensando': tensión normal con taquicardia debe encender la alerta.",
+      "Más importante que un valor aislado es su tendencia: un índice que sube entre dos tomas indica deterioro aunque siga por debajo de 1.0.",
+      "Existe el Índice de Shock Modificado (IS Modificado = FC ÷ Presión Arterial Media), que algunos estudios consideran aún más sensible en sepsis."
+    ],
+    "references": [
+      {
+        "text": "Koch, E., Lovett, S., Nghiem, T., Riggs, R. A., & Rech, M. A. (2019). Shock index in the emergency department: utility and limitations. Open Access Emergency Medicine, 11, 179-199.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6698590/"
+      },
+      {
+        "text": "Allgöwer, M., & Burri, C. (1967). Schockindex [Shock index]. Deutsche Medizinische Wochenschrift, 92(43), 1947-1950.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/5299769/"
+      }
+    ]
+  },
+  "evna": {
+    "name": "EVNA (Escala Verbal Numérica del Dolor)",
+    "description": "La Escala Verbal Numérica (EVN), también llamada Escala Numérica del Dolor (NRS, Numeric Rating Scale), es el instrumento autoinformado más usado para cuantificar la intensidad del dolor en pacientes conscientes y colaboradores. El paciente asigna un número del 0 al 10 a su dolor, donde 0 es 'ausencia total de dolor' y 10 es 'el peor dolor imaginable'.\nA diferencia de las escalas conductuales u observacionales, la EVN se basa en la vivencia subjetiva del propio paciente, considerada el estándar de oro cuando la persona puede comunicarse. Es rápida, no requiere material y permite dar seguimiento a la respuesta al tratamiento analgésico.",
+    "when_to_use": [
+      "En la valoración inicial del dolor de cualquier paciente adulto consciente y orientado.",
+      "Antes y después de administrar un analgésico, para medir objetivamente su eficacia.",
+      "Como parte del registro rutinario de constantes (el dolor como 'quinto signo vital').",
+      "En el seguimiento del dolor agudo posoperatorio o postraumático.",
+      "En el ajuste y titulación de la analgesia en dolor crónico u oncológico."
+    ],
+    "components": [
+      "Intensidad del dolor autorreportada por el paciente en una escala de 0 a 10, donde 0 = sin dolor y 10 = el peor dolor imaginable. Es un parámetro único; el paciente enuncia verbalmente el número que representa su dolor actual."
+    ],
+    "interpretation": [
+      "0: Ausencia de dolor.",
+      "1 a 3: Dolor leve. Habitualmente manejable con analgésicos no opioides.",
+      "4 a 6: Dolor moderado. Interfiere con la actividad; suele requerir ajuste analgésico.",
+      "7 a 10: Dolor intenso/severo. Interfiere gravemente con la funcionalidad y el descanso; requiere intervención analgésica prioritaria y reevaluación estrecha."
+    ],
+    "limitations": [
+      "Requiere un paciente consciente, colaborador y capaz de comunicarse; no es aplicable en niños pequeños, deterioro cognitivo avanzado o sedación.",
+      "Es puramente subjetiva: el mismo número puede representar experiencias muy distintas entre dos personas.",
+      "No se debe confundir con la Escala Visual Analógica (EVA), en la que el paciente marca sobre una línea de 10 cm; aunque correlacionan, no son idénticas.",
+      "Factores culturales, emocionales (ansiedad, depresión) y el idioma pueden modificar la puntuación referida.",
+      "Solo mide intensidad: no capta la naturaleza del dolor (neuropático, nociceptivo) ni su repercusión funcional."
+    ],
+    "clinical_notes": [
+      "Lo relevante clínicamente no es solo el número aislado, sino su cambio tras la intervención: una reducción de ≥2 puntos suele considerarse una respuesta analgésica significativa.",
+      "Conviene anclar siempre los extremos al explicarla al paciente ('0 es nada de dolor, 10 es el peor dolor que pueda imaginar') para estandarizar la respuesta.",
+      "Documentar la puntuación junto con la localización y el tipo de dolor enriquece la valoración mucho más que el número solo."
+    ],
+    "references": [
+      {
+        "text": "Hjermstad, M. J., Fayers, P. M., Haugen, D. F., et al. (2011). Studies comparing Numerical Rating Scales, Verbal Rating Scales, and Visual Analogue Scales for assessment of pain intensity in adults: a systematic literature review. Journal of Pain and Symptom Management, 41(6), 1073-1093.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21621130/"
+      },
+      {
+        "text": "Pardo, C., Muñoz, T., & Chamorro, C. (2006). Monitorización del dolor: Recomendaciones del grupo de trabajo de analgesia y sedación de la SEMICYUC. Medicina Intensiva, 30(8), 379-385.",
+        "url": "https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0210-56912006000800004"
+      }
+    ]
+  },
+  "painad": {
+    "name": "PAINAD (Evaluación del Dolor en Demencia Avanzada)",
+    "description": "La escala PAINAD (Pain Assessment in Advanced Dementia) fue desarrollada por Warden, Hurley y Volicer, con su evaluación psicométrica publicada en 2003 en el Journal of the American Medical Directors Association. Está diseñada para valorar el dolor en personas con demencia avanzada u otras condiciones que les impiden comunicar verbalmente su malestar.\nAnte la imposibilidad de un autoinforme, PAINAD infiere la presencia e intensidad del dolor a partir de la observación de cinco conductas: respiración, vocalización negativa, expresión facial, lenguaje corporal y consolabilidad. Cada ítem se puntúa de 0 a 2, con un total de 0 a 10. Cuenta con una versión española validada (PAINAD-Sp) ampliamente utilizada en el ámbito geriátrico.",
+    "when_to_use": [
+      "En pacientes con demencia avanzada o deterioro cognitivo severo que no pueden autoinformar su dolor.",
+      "En personas con afasia, delirium, sedación o barrera comunicativa que impida usar la escala numérica verbal.",
+      "Antes y después de administrar analgesia, para valorar la respuesta al tratamiento en estos pacientes.",
+      "Ante cambios conductuales inexplicados (agitación, agresividad, rechazo a la movilización) que puedan traducir dolor.",
+      "Durante procedimientos o movilizaciones potencialmente dolorosos en el paciente no comunicativo.",
+      "En la valoración rutinaria del dolor en unidades de geriatría, cuidados paliativos y residencias."
+    ],
+    "components": [
+      "Respiración (independiente de la vocalización): Normal = 0; respiración dificultosa ocasional o periodos cortos de hiperventilación = 1; respiración ruidosa y dificultosa, periodos largos de hiperventilación o respiración de Cheyne-Stokes = 2.",
+      "Vocalización negativa: Ninguna = 0; quejidos o gemidos ocasionales, habla con tono bajo de desaprobación = 1; llamadas agitadas repetidas, quejidos o gemidos en voz alta, llanto = 2.",
+      "Expresión facial: Sonriente o inexpresiva = 0; triste, atemorizada o con el ceño fruncido = 1; muecas de disgusto o desagrado = 2.",
+      "Lenguaje corporal: Relajado = 0; tenso, movimientos nerviosos, no para quieto = 1; rígido, puños cerrados, rodillas flexionadas, agarra o empuja, agresividad física = 2.",
+      "Consolabilidad: Sin necesidad de consuelo = 0; se distrae o tranquiliza con la voz o el tacto = 1; imposible de consolar, distraer o tranquilizar = 2."
+    ],
+    "interpretation": [
+      "0: Ausencia de indicadores conductuales de dolor.",
+      "1 a 3: Dolor leve (equivalencia orientativa con la escala numérica).",
+      "4 a 6: Dolor moderado.",
+      "7 a 10: Dolor intenso/severo.",
+      "Nota importante: la escala original de Warden no fijó puntos de corte oficiales por rangos; estos intervalos son una equivalencia práctica ampliamente usada, análoga a la escala numérica 0-10. Muchos protocolos consideran que un puntaje ≥2 ya justifica valorar intervención analgésica."
+    ],
+    "limitations": [
+      "Es una valoración observacional indirecta: infiere el dolor a partir de conductas que también pueden deberse a ansiedad, miedo, hambre o necesidad de eliminación.",
+      "Los puntos de corte por intensidad no están estandarizados de forma universal, lo que limita la comparabilidad entre servicios.",
+      "El ítem de respiración es el de menor consistencia interna en la validación española (la fiabilidad mejora si se excluye).",
+      "Requiere observar al paciente en reposo y, sobre todo, durante la movilización, para no infravalorar el dolor incidental.",
+      "La interpretación puede variar entre evaluadores poco entrenados, aunque su fiabilidad interobservador es buena tras capacitación."
+    ],
+    "clinical_notes": [
+      "Idealmente se aplica dos veces: en reposo y durante una actividad (aseo, cambio postural), ya que el dolor de estos pacientes suele manifestarse solo con el movimiento.",
+      "Un aumento del puntaje tras una intervención dolorosa o su descenso tras administrar analgesia es la mejor prueba de que la conducta observada era realmente dolor.",
+      "No sustituye el juicio clínico ni la búsqueda de causas: un PAINAD elevado obliga a descartar causas tratables antes de asumir que es dolor crónico."
+    ],
+    "references": [
+      {
+        "text": "Warden, V., Hurley, A. C., & Volicer, L. (2003). Development and psychometric evaluation of the Pain Assessment in Advanced Dementia (PAINAD) scale. Journal of the American Medical Directors Association, 4(1), 9-15.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12807591/"
+      },
+      {
+        "text": "García-Soler, Á., Sánchez-Iglesias, I., Buiza, C., et al. (2014). Adaptación y validación de la versión española de la escala de evaluación de dolor en personas con demencia avanzada: PAINAD-Sp. Revista Española de Geriatría y Gerontología, 49(1), 10-14.",
+        "url": "https://www.elsevier.es/es-revista-revista-espanola-geriatria-gerontologia-124-articulo-adaptacion-validacion-version-espanola-escala-S0211139X13000516"
+      }
+    ]
+  },
+  "dn4": {
+    "name": "DN4 (Cuestionario de Dolor Neuropático)",
+    "description": "El cuestionario DN4 (Douleur Neuropathique 4 questions) fue desarrollado por Bouhassira y colaboradores en Francia en 2005 para diferenciar el dolor neuropático del dolor nociceptivo. Es una herramienta de cribado sencilla, con buena sensibilidad (~83%) y especificidad (~90%), y cuenta con una versión validada al español.\nConsta de 10 ítems repartidos en dos partes: 7 preguntas sobre las características que refiere el paciente (interrogatorio) y 3 signos que explora el profesional (examen físico). Cada ítem positivo suma 1 punto; un total ≥4 sobre 10 sugiere que el dolor tiene un componente neuropático y orienta hacia un abordaje terapéutico específico.",
+    "when_to_use": [
+      "Ante un paciente con dolor crónico en el que se sospecha un componente neuropático.",
+      "En el estudio del dolor asociado a diabetes (neuropatía diabética), herpes zóster, radiculopatías o lesiones nerviosas.",
+      "Para orientar la elección terapéutica hacia fármacos para dolor neuropático (anticonvulsivantes, antidepresivos) en lugar de analgésicos convencionales.",
+      "En la valoración del dolor posquirúrgico o postraumático persistente con características anómalas (quemazón, descargas).",
+      "Como cribado inicial que justifique la derivación a una unidad del dolor o a valoración especializada."
+    ],
+    "components": [
+      "Interrogatorio (7 ítems) — ¿El dolor tiene alguna de estas características?: 1) Quemazón; 2) Sensación de frío doloroso; 3) Descargas eléctricas. ¿Se asocia en la misma zona a?: 4) Hormigueo; 5) Sensación de alfileres y agujas (pinchazos); 6) Entumecimiento (adormecimiento); 7) Picazón o comezón. Cada característica presente = 1 punto.",
+      "Examen físico (3 ítems) — En la zona dolorosa: 8) Hipoestesia al tacto (menor sensibilidad al roce); 9) Hipoestesia al pinchazo (menor sensibilidad al pinchar); 10) El roce (cepillado suave) provoca o aumenta el dolor (alodinia). Cada signo presente = 1 punto.",
+      "Puntuación total: suma de los 10 ítems (rango 0 a 10 puntos)."
+    ],
+    "interpretation": [
+      "0 a 3 puntos: Poco probable que el dolor sea neuropático (DN4 negativo). Reconsiderar un origen nociceptivo u otras causas.",
+      "4 a 10 puntos: Alta probabilidad de dolor neuropático (DN4 positivo). Orienta hacia un abordaje farmacológico específico del dolor neuropático y, si procede, derivación a la unidad del dolor."
+    ],
+    "limitations": [
+      "Es una herramienta de cribado, no un diagnóstico definitivo; un resultado positivo debe confirmarse con la valoración clínica integral.",
+      "Los tres ítems de exploración requieren un paciente colaborador y explorable; sin ellos solo puede usarse la versión abreviada de interrogatorio (DN4-interview).",
+      "Puede dar falsos negativos en dolor neuropático de predominio profundo o en fases muy iniciales.",
+      "Su rendimiento se validó sobre todo en dolor neuropático periférico; es menos preciso en el dolor de origen central.",
+      "Depende de la correcta comprensión de descriptores (quemazón, descargas) por parte del paciente, sensible a factores culturales e idiomáticos."
+    ],
+    "clinical_notes": [
+      "Existe una versión abreviada, el DN4-interview, que usa solo los 7 ítems del interrogatorio (sin exploración) con un punto de corte ≥3/7; es útil por teléfono o cuando no se puede explorar al paciente, a costa de algo de precisión.",
+      "Un punto clave de la exploración es la alodinia: que un roce suave con un algodón o pincel desencadene dolor es muy sugestivo de mecanismo neuropático.",
+      "El DN4 mide la naturaleza del dolor, no su intensidad; conviene combinarlo con una escala de intensidad (como la EVN) para una valoración completa."
+    ],
+    "references": [
+      {
+        "text": "Bouhassira, D., Attal, N., Alchaar, H., et al. (2005). Comparison of pain syndromes associated with nervous or somatic lesions and development of a new neuropathic pain diagnostic questionnaire (DN4). Pain, 114(1-2), 29-36.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15733628/"
+      },
+      {
+        "text": "Perez, C., Galvez, R., Huelbes, S., et al. (2007). Validity and reliability of the Spanish version of the DN4 (Douleur Neuropathique 4 questions) questionnaire for differential diagnosis of pain syndromes associated to a neuropathic or somatic component. Health and Quality of Life Outcomes, 5, 66.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2217518/"
+      }
+    ]
+  },
+  "apgar": {
+    "name": "Escala de APGAR",
+    "description": "La escala de APGAR fue creada por la anestesióloga Virginia Apgar en 1952 (publicada en 1953) como un método rápido y estandarizado para evaluar la adaptación del recién nacido a la vida extrauterina y determinar su estado general inmediatamente tras el nacimiento. Es la valoración neonatal más universalmente utilizada.\nEvalúa cinco signos clínicos —frecuencia cardíaca, esfuerzo respiratorio, tono muscular, respuesta a estímulos (irritabilidad refleja) y color de la piel—, cada uno puntuado de 0 a 2, con un total de 0 a 10. El acrónimo APGAR ayuda a recordarlos: Apariencia (color), Pulso (frecuencia cardíaca), Gesticulación (irritabilidad refleja), Actividad (tono muscular) y Respiración. Se aplica clásicamente al minuto 1 y a los 5 minutos de vida.",
+    "when_to_use": [
+      "En todo recién nacido, de forma sistemática, al primer minuto de vida.",
+      "A los 5 minutos de vida, para valorar la respuesta a la adaptación o a las maniobras iniciales.",
+      "Repetido cada 5 minutos (a los 10, 15, 20 min) cuando el puntaje a los 5 minutos es menor de 7.",
+      "Como registro objetivo del estado del neonato al nacimiento en la historia clínica perinatal.",
+      "Para comunicar de forma rápida y estandarizada el estado del recién nacido al equipo de neonatología."
+    ],
+    "components": [
+      "Frecuencia cardíaca (Pulso): Ausente = 0; menor de 100 lpm = 1; mayor o igual a 100 lpm = 2.",
+      "Esfuerzo respiratorio (Respiración): Ausente = 0; lento, irregular o llanto débil = 1; llanto vigoroso, respiración regular = 2.",
+      "Tono muscular (Actividad): Flácido = 0; cierta flexión de extremidades = 1; movimientos activos, buena flexión = 2.",
+      "Respuesta a estímulos / irritabilidad refleja (Gesticulación): Sin respuesta = 0; mueca o gesto leve = 1; tos, estornudo, llanto o retirada enérgica = 2.",
+      "Color de la piel (Apariencia): Cianosis generalizada o palidez = 0; cuerpo rosado con extremidades azules (acrocianosis) = 1; totalmente rosado = 2."
+    ],
+    "interpretation": [
+      "7 a 10 puntos: Recién nacido vigoroso, en buen estado. Cuidados de rutina.",
+      "4 a 6 puntos: Depresión moderada. Requiere estimulación, apoyo y vigilancia estrecha; valorar maniobras de reanimación según la evolución.",
+      "0 a 3 puntos: Depresión severa. Emergencia neonatal que exige maniobras de reanimación avanzada inmediatas."
+    ],
+    "limitations": [
+      "El APGAR NO debe usarse para decidir si se inicia la reanimación: esa decisión se toma antes, en los primeros segundos, evaluando respiración, frecuencia cardíaca y tono (según el algoritmo de reanimación neonatal).",
+      "Un puntaje bajo no equivale a asfixia perinatal ni predice por sí solo el pronóstico neurológico a largo plazo.",
+      "El color de la piel (acrocianosis) es un ítem poco fiable, pues muchos neonatos sanos tienen extremidades azuladas en los primeros minutos.",
+      "Se ve afectado por la prematuridad, la sedación o anestesia materna y las malformaciones, sin que ello implique sufrimiento fetal.",
+      "El componente de color es difícil de valorar en neonatos con piel oscura."
+    ],
+    "clinical_notes": [
+      "Se valora clásicamente al minuto 1 (refleja la tolerancia al parto) y a los 5 minutos (refleja la adaptación y la respuesta a la reanimación); si a los 5 minutos es <7, se repite cada 5 minutos hasta los 20 minutos de vida.",
+      "Debe documentarse cada valoración por separado indicando el minuto correspondiente (ej. 'APGAR 8/9', minuto 1 y minuto 5), ya que la evolución entre ambas tomas es tan informativa como los valores mismos.",
+      "El neonato debe estar en las condiciones adecuadas (secado, bajo fuente de calor) durante la valoración; no debe retrasarse la reanimación para 'esperar' a puntuar el APGAR."
+    ],
+    "references": [
+      {
+        "text": "Apgar, V. (1953). A proposal for a new method of evaluation of the newborn infant. Current Researches in Anesthesia & Analgesia, 32(4), 260-267.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/13083014/"
+      },
+      {
+        "text": "American Academy of Pediatrics, Committee on Fetus and Newborn, & American College of Obstetricians and Gynecologists, Committee on Obstetric Practice. (2015). The Apgar Score. Pediatrics, 136(4), 819-822.",
+        "url": "https://publications.aap.org/pediatrics/article/136/4/819/74014/The-Apgar-Score"
+      }
+    ]
+  },
+  "silverman_anderson": {
+    "name": "Escala de Silverman-Anderson",
+    "description": "La escala de Silverman-Anderson fue descrita por William Silverman y Dorothy Andersen en 1956 para valorar de forma rápida y objetiva la dificultad respiratoria (distrés respiratorio) del recién nacido y cuantificar su gravedad. Evalúa cinco signos de trabajo respiratorio, cada uno puntuado de 0 a 2, con un total de 0 a 10.\nUn aspecto FUNDAMENTAL es que su puntuación es INVERSA a la del APGAR: aquí, a mayor puntaje, PEOR es la dificultad respiratoria. Un recién nacido sin esfuerzo respiratorio patológico obtiene 0 puntos (el mejor resultado posible), mientras que un neonato con dificultad respiratoria severa se acerca a los 10 puntos. Es una herramienta esencial en la valoración y el seguimiento del neonato con signos de distrés.",
+    "when_to_use": [
+      "En la valoración inicial de todo recién nacido que presente signos de dificultad respiratoria (quejido, tiraje, aleteo nasal).",
+      "En el seguimiento seriado del neonato con distrés respiratorio para monitorizar su evolución y la respuesta al tratamiento.",
+      "Para objetivar la necesidad y el nivel de soporte respiratorio (oxígeno, CPAP, ventilación mecánica).",
+      "En el recién nacido prematuro, con riesgo de enfermedad de membrana hialina, taquipnea transitoria u otras causas de distrés.",
+      "Durante la estabilización y el traslado del neonato con compromiso respiratorio."
+    ],
+    "components": [
+      "Movimientos toracoabdominales (disociación): Rítmicos y regulares (tórax y abdomen suben juntos) = 0; el tórax permanece inmóvil mientras el abdomen se mueve = 1; disociación total o 'balanceo' (mientras el tórax se hunde, el abdomen se eleva) = 2.",
+      "Tiraje intercostal (retracción entre las costillas): Ausente = 0; leve o apenas visible = 1; marcado y constante = 2.",
+      "Retracción xifoidea (hundimiento del apéndice xifoides): Ausente = 0; leve = 1; marcada = 2.",
+      "Aleteo nasal (apertura de las fosas nasales al inspirar): Ausente = 0; leve o mínimo = 1; marcado = 2.",
+      "Quejido espiratorio: Ausente = 0; audible solo con estetoscopio = 1; audible a distancia, sin estetoscopio = 2."
+    ],
+    "interpretation": [
+      "0 puntos: Sin dificultad respiratoria. El recién nacido no presenta esfuerzo respiratorio patológico (mejor resultado posible).",
+      "1 a 3 puntos: Dificultad respiratoria leve.",
+      "4 a 6 puntos: Dificultad respiratoria moderada. Requiere vigilancia estrecha y valorar soporte respiratorio.",
+      "7 a 10 puntos: Dificultad respiratoria severa. Suele precisar soporte ventilatorio activo (CPAP o ventilación mecánica) y traslado a cuidados intensivos neonatales.",
+      "IMPORTANTE — puntuación invertida: a diferencia del APGAR, aquí el puntaje MÁS ALTO indica PEOR estado respiratorio. El 0 es el objetivo terapéutico."
+    ],
+    "limitations": [
+      "Valora exclusivamente el esfuerzo respiratorio; no mide la oxigenación real (debe complementarse con la saturación de oxígeno por pulsioximetría).",
+      "Algunos signos, como la intensidad del tiraje o del aleteo, tienen cierta variabilidad interobservador.",
+      "En el prematuro extremo con musculatura muy débil, la dificultad puede infravalorarse porque el neonato no genera retracciones vigorosas.",
+      "No identifica la causa del distrés (membrana hialina, neumonía, cardiopatía, etc.), solo cuantifica su gravedad.",
+      "Un neonato exhausto o en fallo respiratorio inminente puede disminuir sus signos de esfuerzo, dando un puntaje engañosamente 'mejor'."
+    ],
+    "clinical_notes": [
+      "Su gran utilidad es el seguimiento seriado: comparar puntajes a lo largo del tiempo muestra si el neonato mejora o se deteriora, más que un valor aislado.",
+      "Debe combinarse siempre con la saturación de oxígeno y la frecuencia respiratoria, ya que un Silverman bajo con hipoxemia sigue siendo una alarma.",
+      "Recordar la inversión respecto al APGAR al documentar, para evitar confusiones peligrosas en el registro (aquí 'subir de puntaje' es empeorar)."
+    ],
+    "references": [
+      {
+        "text": "Silverman, W. A., & Andersen, D. H. (1956). A controlled clinical trial of effects of water mist on obstructive respiratory signs, death rate and necropsy findings among premature infants. Pediatrics, 17(1), 1-10.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/13285343/"
+      },
+      {
+        "text": "Ávila-Reyes, D., et al. (2020). Escala de Silverman en la dificultad respiratoria neonatal. RECIMUNDO, 4(1).",
+        "url": "https://dialnet.unirioja.es/descarga/articulo/7402228.pdf"
+      }
+    ]
+  },
+  "flacc": {
+    "name": "Escala FLACC (Cara, Piernas, Actividad, Llanto, Consolabilidad)",
+    "description": "La escala FLACC (acrónimo de Face, Legs, Activity, Cry, Consolability) fue desarrollada por Merkel, Voepel-Lewis y Malviya en el Hospital Infantil C. S. Mott de la Universidad de Michigan, con su validación publicada en 1997. Es una escala conductual para valorar el dolor en niños pequeños (de 2 meses a 7 años) o en pacientes que no pueden comunicar verbalmente su dolor.\nAnte la imposibilidad de un autoinforme, FLACC evalúa cinco categorías de comportamiento observable: expresión facial, movimiento de las piernas, actividad, llanto y consolabilidad. Cada categoría se puntúa de 0 a 2, con un total de 0 a 10, donde a mayor puntaje mayor intensidad del dolor.",
+    "when_to_use": [
+      "En la valoración del dolor de lactantes y niños pequeños (aproximadamente de 2 meses a 7 años).",
+      "En pacientes de cualquier edad que no pueden comunicarse verbalmente (con discapacidad cognitiva, intubados o sedados).",
+      "En la valoración del dolor agudo posoperatorio o postraumático en pediatría.",
+      "Antes y después de administrar analgesia, para medir la respuesta al tratamiento.",
+      "Durante procedimientos dolorosos (canalización, curaciones) para cuantificar el dolor del niño.",
+      "En el seguimiento rutinario del dolor como 'quinto signo vital' en unidades pediátricas."
+    ],
+    "components": [
+      "Cara (Face): Sin expresión particular o sonriente = 0; muecas o ceño fruncido ocasional, retraído o desinteresado = 1; temblor frecuente del mentón, mandíbula apretada = 2.",
+      "Piernas (Legs): Posición normal o relajada = 0; inquietas, tensas = 1; pataleo o piernas encogidas/rígidas = 2.",
+      "Actividad (Activity): Acostado tranquilo, posición normal, se mueve con facilidad = 0; se retuerce, cambia de posición, tenso = 1; encorvado, rígido o con movimientos bruscos = 2.",
+      "Llanto (Cry): Sin llanto (despierto o dormido) = 0; gemidos o quejidos, quejas ocasionales = 1; llanto sostenido, gritos o sollozos, quejas frecuentes = 2.",
+      "Consolabilidad (Consolability): Contento, relajado = 0; se tranquiliza con el contacto, el abrazo o la voz, se puede distraer = 1; difícil de consolar o confortar = 2."
+    ],
+    "interpretation": [
+      "0: Relajado y cómodo, sin signos de dolor.",
+      "1 a 3: Malestar o dolor leve.",
+      "4 a 6: Dolor moderado.",
+      "7 a 10: Dolor intenso o malestar severo. Requiere intervención analgésica prioritaria y reevaluación."
+    ],
+    "limitations": [
+      "Es una valoración observacional: las conductas medidas también pueden deberse a miedo, hambre, ansiedad de separación o incomodidad no dolorosa.",
+      "En niños con discapacidad cognitiva o neurológica severa, algunos comportamientos basales pueden simular o enmascarar el dolor (existe una versión FLACC revisada para este grupo).",
+      "Requiere un periodo de observación adecuado del niño; una valoración apresurada puede infra o sobreestimar el dolor.",
+      "Su fiabilidad depende del entrenamiento del observador, aunque en la validación mostró muy buena concordancia interobservador.",
+      "No capta el componente subjetivo que sí ofrecería un autoinforme en niños mayores capaces de comunicarse."
+    ],
+    "clinical_notes": [
+      "Es especialmente valiosa porque cubre la 'zona gris' de edad y de pacientes no verbales donde la escala numérica no es aplicable.",
+      "La consolabilidad es un ítem muy informativo: un niño con dolor real suele ser difícil de consolar pese al abrazo o la voz de los padres.",
+      "El descenso del puntaje tras administrar analgesia es la mejor confirmación de que la conducta observada correspondía a dolor y no a otra causa."
+    ],
+    "references": [
+      {
+        "text": "Merkel, S. I., Voepel-Lewis, T., Shayevitz, J. R., & Malviya, S. (1997). The FLACC: a behavioral scale for scoring postoperative pain in young children. Pediatric Nursing, 23(3), 293-297.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9220806/"
+      },
+      {
+        "text": "Crellin, D. J., Harrison, D., Santamaria, N., & Babl, F. E. (2015). Systematic review of the Face, Legs, Activity, Cry and Consolability scale for assessing pain in infants and children: is it reliable, valid, and feasible for use? Pain, 156(11), 2132-2151.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26035256/"
+      }
+    ]
   }
 }

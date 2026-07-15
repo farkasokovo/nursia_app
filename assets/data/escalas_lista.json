@@ -29,6 +29,60 @@
       "nombre": "Escala de Maddox",
       "categoria": "riesgos",
       "ruta": "maddox"
+    },
+    {
+      "id": "mews",
+      "nombre": "MEWS (Alerta Temprana)",
+      "categoria": "emergencias",
+      "ruta": "mews_screen"
+    },
+    {
+      "id": "qsofa",
+      "nombre": "qSOFA",
+      "categoria": "emergencias",
+      "ruta": "qsofa_screen"
+    },
+    {
+      "id": "indice_shock",
+      "nombre": "Índice de Shock",
+      "categoria": "emergencias",
+      "ruta": "indice_shock_screen"
+    },
+    {
+      "id": "evna",
+      "nombre": "EVNA (Escala Numérica del Dolor)",
+      "categoria": "dolor",
+      "ruta": "evna_screen"
+    },
+    {
+      "id": "painad",
+      "nombre": "Escala PAINAD",
+      "categoria": "dolor",
+      "ruta": "painad_screen"
+    },
+    {
+      "id": "dn4",
+      "nombre": "Cuestionario DN4",
+      "categoria": "dolor",
+      "ruta": "dn4_screen"
+    },
+    {
+      "id": "apgar",
+      "nombre": "Escala de APGAR",
+      "categoria": "pediatricas",
+      "ruta": "apgar_screen"
+    },
+    {
+      "id": "silverman_anderson",
+      "nombre": "Escala de Silverman-Anderson",
+      "categoria": "pediatricas",
+      "ruta": "silverman_anderson_screen"
+    },
+    {
+      "id": "flacc",
+      "nombre": "Escala FLACC",
+      "categoria": "pediatricas",
+      "ruta": "flacc_screen"
     }
   ]
 }

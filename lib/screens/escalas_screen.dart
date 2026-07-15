@@ -1,7 +1,10 @@
 // lib/screens/escalas_screen.dart
 import 'package:flutter/material.dart';
 import 'package:nursia_app/repositories/escala_repository.dart';
+import 'package:nursia_app/screens/escalas/dolor_screen.dart';
+import 'package:nursia_app/screens/escalas/emergencias_screen.dart';
 import 'package:nursia_app/screens/escalas/neurologicas_screen.dart';
+import 'package:nursia_app/screens/escalas/pediatricas_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos_screen.dart';
 import 'package:nursia_app/screens/escalas/valoracion_general_screen.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -124,23 +127,23 @@ class _EscalasScreenState extends State<EscalasScreen> {
           ),
 
           _buildButton(
-            "TRIAGE y\nEmergencias",
+            "Emergencias\ny Triaje",
             PhosphorIconsRegular.siren,
-            "triage",
-            null,
+            "emergencias",
+            const EmergenciasScreen(),
           ),
-          // _buildButton(
-          //   "Valoración\ndel dolor",
-          //   PhosphorIconsRegular.smileyNervous,
-          //   "dolor",
-          //   null,
-          // ),
-          // _buildButton(
-          //   "Pediátricas\n/ Neonatales",
-          //   PhosphorIconsRegular.baby,
-          //   "neonatales",
-          //   null,
-          // ),
+          _buildButton(
+            "Evaluación\ndel Dolor",
+            PhosphorIconsRegular.smileyNervous,
+            "dolor",
+            const DolorScreen(),
+          ),
+          _buildButton(
+            "Pediátricas\ny Neonatales",
+            PhosphorIconsRegular.baby,
+            "pediatricas",
+            const PediatricasScreen(),
+          ),
           // _buildButton(
           //   "Próximamente",
           //   PhosphorIconsRegular.dotsThreeCircle,

@@ -31,7 +31,10 @@ class ScaleParameterSelector extends StatefulWidget {
 }
 
 class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
-  int? selectedScore;
+  // Se rastrea por ÍNDICE (no por score) para soportar escalas como MEWS donde
+  // dos rangos distintos de un mismo parámetro comparten puntaje (ej. FC <40 y
+  // 111-129 = 2 pts). Rastrear por score iluminaría ambas opciones a la vez.
+  int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +63,17 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
           ),
           const SizedBox(height: 20),
           Column(
-            children: widget.options.map((option) {
-              final isSelected = selectedScore == option.score;
+            children: widget.options.asMap().entries.map((entry) {
+              final index = entry.key;
+              final option = entry.value;
+              final isSelected = selectedIndex == index;
 
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: InkWell(
                   onTap: () {
                     setState(() {
-                      selectedScore = option.score;
+                      selectedIndex = index;
                       widget.onChanged(option.score);
                     });
                   },
