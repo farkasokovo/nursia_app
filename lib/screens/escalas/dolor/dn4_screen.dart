@@ -225,8 +225,19 @@ class _Dn4Info extends StatelessWidget {
           child: FutureBuilder(
             future: context.read<EscalaRepository>().obtenerPorId("dn4"),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
+              if (snapshot.connectionState != ConnectionState.done) {
                 return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError || snapshot.data == null) {
+                return Center(
+                  child: Text(
+                    "No se pudo cargar la información de esta escala.",
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSecondaryContainer,
+                    ),
+                  ),
+                );
               }
               return EstructuraVerMasScreen(info: snapshot.data!);
             },

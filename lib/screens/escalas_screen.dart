@@ -91,7 +91,7 @@ class _EscalasScreenState extends State<EscalasScreen> {
     return SearchableScreen<EscalaMetadata>(
       items: _todasEscalas,
       hintText: 'Buscar escala...',
-      filterBy: (escala, query) => escala.nombre.toLowerCase().contains(query),
+      searchableFields: (escala) => [escala.nombre],
       itemTitle: (escala) => escala.nombre,
       onItemTap: _navegarAResultado,
       emptyWidget: Column(

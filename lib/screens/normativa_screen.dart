@@ -83,12 +83,13 @@ class _NormativaScreenState extends State<NormativaScreen> {
     return SearchableScreen<Norma>(
       items: _todasLasNormas,
       hintText: 'Ej: "cateter", "NOM-019", "notas"...',
-      filterBy: (norma, query) {
-        final search = query.toLowerCase();
-        return norma.codigo.toLowerCase().contains(search) ||
-            norma.titulo.toLowerCase().contains(search) ||
-            norma.palabrasClave.toLowerCase().contains(search);
-      },
+      // Orden = prioridad: un match en el código pesa más que en el título, y
+      // el título más que en las palabras clave.
+      searchableFields: (norma) => [
+        norma.codigo,
+        norma.titulo,
+        norma.palabrasClave,
+      ],
       itemTitle: (norma) => '${norma.codigo}: ${norma.tituloCorto}',
       onItemTap: _navegarAResultado,
       emptyWidget: Column(

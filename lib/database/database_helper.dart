@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 6, // Aumentamos la versión a 6
+      version: 7, // Aumentamos la versión a 7
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -78,6 +78,13 @@ class DatabaseHelper {
         // cargarSemillaSiHaceFalta() lo vuelva a sembrar con el JSON nuevo.
         if (oldVersion < 6) {
           await db.delete('catalogo_pendientes');
+        }
+        // Contenido de escalas actualizado (corrección de Braden, limpieza de
+        // puntuación y convención de saltos de línea). Se vacía la tabla para
+        // que cargarSemillaSiHaceFalta() la vuelva a sembrar desde el JSON en
+        // el próximo arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 7) {
+          await db.delete('escalas');
         }
       },
     );

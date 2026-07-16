@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nursia_app/repositories/escala_repository.dart';
 import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
+import 'package:nursia_app/widgets/numeric_input_field.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../theme/app_theme.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
+
+// Rangos fisiológicos plausibles (criterio clínico). Fuera de estos límites,
+// el valor se considera un error de captura: no se calcula y se avisa.
+const int _fcMin = 20, _fcMax = 300; // Frecuencia cardíaca (lpm)
+const int _pasMin = 30, _pasMax = 300; // Presión arterial sistólica (mmHg)
 
 class IndiceShockScreen extends StatelessWidget {
   const IndiceShockScreen({super.key});
@@ -33,28 +38,80 @@ class _IndiceShockLayout extends StatefulWidget {
 class _IndiceShockLayoutState extends State<_IndiceShockLayout> {
   // A diferencia de las demás escalas, el Índice de Shock NO es una suma de
   // opciones categóricas: es una fórmula (FC ÷ PAS). Por eso usa dos campos
-  // numéricos con cálculo en vivo en lugar de ScaleParameterSelector.
+  // numéricos (NumericInputField) con cálculo en vivo.
   final TextEditingController _fcController = TextEditingController();
   final TextEditingController _pasController = TextEditingController();
+
+  final FocusNode _fcFocus = FocusNode();
+  final FocusNode _pasFocus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    // Recalculo en vivo: NumericInputField no expone onChanged, así que se
+    // escucha directamente el controller.
+    _fcController.addListener(_onInputChanged);
+    _pasController.addListener(_onInputChanged);
+    // El SnackBar de "valor implausible" se dispara al perder el foco, no en
+    // cada tecla (evita avisar mientras el usuario aún está escribiendo).
+    _fcFocus.addListener(_onFcFocusChange);
+    _pasFocus.addListener(_onPasFocusChange);
+  }
 
   @override
   void dispose() {
     _fcController.dispose();
     _pasController.dispose();
+    _fcFocus.dispose();
+    _pasFocus.dispose();
     super.dispose();
   }
 
-  double? get _fc =>
-      double.tryParse(_fcController.text.trim().replaceAll(',', '.'));
-  double? get _pas =>
-      double.tryParse(_pasController.text.trim().replaceAll(',', '.'));
+  void _onInputChanged() => setState(() {});
 
-  // Válido solo si ambos son números positivos (evita división entre cero).
-  bool get _valido => _fc != null && _pas != null && _fc! > 0 && _pas! > 0;
+  double? get _fc => double.tryParse(_fcController.text.trim());
+  double? get _pas => double.tryParse(_pasController.text.trim());
+
+  bool _fcPlausible(double? fc) => fc != null && fc >= _fcMin && fc <= _fcMax;
+  bool _pasPlausible(double? pas) =>
+      pas != null && pas >= _pasMin && pas <= _pasMax;
+
+  // Válido solo si ambos están en rango fisiológico. Como _pasMin > 0, esto
+  // también protege la división contra un denominador cero.
+  bool get _valido => _fcPlausible(_fc) && _pasPlausible(_pas);
 
   double get _indice => _fc! / _pas!;
 
   String get resultado => _valido ? _indice.toStringAsFixed(2) : "";
+
+  void _onFcFocusChange() {
+    if (!mounted || _fcFocus.hasFocus) return;
+    if (_fcController.text.trim().isEmpty) return;
+    if (!_fcPlausible(_fc)) {
+      _mostrarSnack(
+        "Frecuencia cardíaca fuera de rango fisiológico ($_fcMin–$_fcMax lpm).",
+      );
+    }
+  }
+
+  void _onPasFocusChange() {
+    if (!mounted || _pasFocus.hasFocus) return;
+    if (_pasController.text.trim().isEmpty) return;
+    if (_pas == 0) {
+      _mostrarSnack("La presión arterial sistólica no puede ser 0.");
+    } else if (!_pasPlausible(_pas)) {
+      _mostrarSnack(
+        "Presión arterial sistólica fuera de rango fisiológico "
+        "($_pasMin–$_pasMax mmHg).",
+      );
+    }
+  }
+
+  void _mostrarSnack(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(mensaje), duration: const Duration(seconds: 2)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,22 +126,22 @@ class _IndiceShockLayoutState extends State<_IndiceShockLayout> {
                   const SizedBox(height: 20),
 
                   // ================== FRECUENCIA CARDÍACA ==================
-                  _buildInput(
-                    context,
-                    title: "Frecuencia cardíaca",
-                    hint: "Ej. 110",
-                    suffix: "lpm",
+                  NumericInputField(
+                    label: "Frecuencia cardíaca (lpm)",
                     controller: _fcController,
+                    focusNode: _fcFocus,
+                    maxLength: 3, // hasta 999: cubre cualquier FC fisiológica
+                    allowDecimal: false, // FC es un entero en la práctica
                   ),
                   const SizedBox(height: 20),
 
                   // ================== PRESIÓN ARTERIAL SISTÓLICA ==================
-                  _buildInput(
-                    context,
-                    title: "Presión arterial sistólica",
-                    hint: "Ej. 100",
-                    suffix: "mmHg",
+                  NumericInputField(
+                    label: "Presión arterial sistólica (mmHg)",
                     controller: _pasController,
+                    focusNode: _pasFocus,
+                    maxLength: 3, // hasta 999: cubre cualquier PAS fisiológica
+                    allowDecimal: false, // PAS es un entero en la práctica
                   ),
                   const SizedBox(height: 20),
                 ],
@@ -98,77 +155,6 @@ class _IndiceShockLayoutState extends State<_IndiceShockLayout> {
           colorResolver: (resultado) => _shockColor(_indice),
         ),
       ],
-    );
-  }
-
-  Widget _buildInput(
-    BuildContext context, {
-    required String title,
-    required String hint,
-    required String suffix,
-    required TextEditingController controller,
-  }) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: colorScheme.secondary,
-        borderRadius: AppRadius.defaultRadius,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: textTheme.headlineMedium?.copyWith(
-              color: colorScheme.primaryContainer,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20),
-          TextField(
-            controller: controller,
-            onChanged: (_) => setState(() {}),
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]')),
-            ],
-            textAlign: TextAlign.center,
-            style: textTheme.bodyLarge?.copyWith(
-              color: colorScheme.primaryContainer,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-            decoration: InputDecoration(
-              hintText: hint,
-              suffixText: suffix,
-              filled: true,
-              fillColor: colorScheme.onPrimaryContainer,
-              border: OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide(color: colorScheme.primaryContainer),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide(color: colorScheme.primaryContainer),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide(
-                  color: colorScheme.primaryContainer,
-                  width: 2,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -196,8 +182,19 @@ class _IndiceShockInfo extends StatelessWidget {
               "indice_shock",
             ),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
+              if (snapshot.connectionState != ConnectionState.done) {
                 return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError || snapshot.data == null) {
+                return Center(
+                  child: Text(
+                    "No se pudo cargar la información de esta escala.",
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSecondaryContainer,
+                    ),
+                  ),
+                );
               }
               return EstructuraVerMasScreen(info: snapshot.data!);
             },

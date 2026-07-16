@@ -34,15 +34,33 @@ lib/
 **Estado actual de la migración (julio 2026): ✅ COMPLETA.**
 Los 7 módulos ya están migrados al patrón Dao + Repository + Provider: `medicamentos`, `escalas`, `calculadoras`, `normas`, y los tres de `turno_activo` (`pacientes_turno`, `pendientes_turno`, `medicamentos_turno`). Todos conectados vía `MultiProvider` en `main.dart`.
 
-`database_helper.dart` quedó adelgazado a ~187 líneas: SOLO conexión (`database` getter, `_initDB`), migraciones de schema (`_createDB`, `onUpgrade`) y `close()`. Ninguna lógica de negocio ni carga de JSON debe volver a vivir ahí.
+`database_helper.dart` quedó adelgazado a ~199 líneas: SOLO conexión (`database` getter, `_initDB`), migraciones de schema (`_createDB`, `onUpgrade`) y `close()`. Ninguna lógica de negocio ni carga de JSON debe volver a vivir ahí. Versión actual de la BD: **7**.
 
 Si en el futuro se agrega un módulo nuevo (tabla nueva), usa `medicamento_dao.dart` y `medicamento_repository.dart` como plantilla exacta del patrón (mismos nombres de método: `insertar`, `contar`, `obtenerTodos`, `obtenerPorNombre`/`obtenerPorId`, `cargarSemillaSiHaceFalta`). Para tablas sin semilla JSON (datos generados por el usuario, como los de `turno_activo`), usa `paciente_turno_dao.dart` / `paciente_turno_repository.dart` como plantilla — mismo patrón pero sin `cargarSemillaSiHaceFalta`.
+
+### ⚠️ Regla crítica: el seed de cada módulo solo carga UNA VEZ
+`cargarSemillaSiHaceFalta()` de cada repository (medicamentos, escalas, calculadoras, normas) solo lee su JSON de `assets/data/*.json` si la tabla correspondiente está vacía. **Si editas el contenido de un JSON de un módulo que ya tiene datos sembrados, ese cambio NO llega a dispositivos que ya instalaron la app** — solo se ve en instalación limpia (borrar datos / reinstalar). Esto causó un bug real: la corrección de contenido clínico de la Escala de Braden y la limpieza de puntuación de `scales_data.json` no llegaban a dispositivos ya instalados.
+
+Para que un cambio de contenido SÍ llegue a todos:
+1. Sube `version` en `_initDB` (ej. 6 → 7).
+2. Agrega un bloque `if (oldVersion < N) { await db.delete('nombre_tabla'); }` en `onUpgrade` (ver el bloque de `escalas` en la versión 7 como plantilla exacta).
+3. En el próximo arranque, `cargarSemillaSiHaceFalta()` detecta la tabla vacía y re-siembra desde el JSON actualizado.
+
+Esto vacía SOLO la tabla de contenido de referencia afectada (`escalas`, `medicamentos`, etc.) — **nunca** toques ahí las tablas de datos del usuario (`pacientes_turno`, `pendientes_turno`, `medicamentos_turno`). Avisar siempre a DIEGO de este paso al editar un JSON de un módulo ya sembrado.
 
 ## Convenciones
 - Nombres de clases, métodos y variables de dominio en **español**, consistente con el resto del código (`obtenerTodos`, `Medicamento`, `PacienteTurno`, etc.).
 - Nunca uses `print()` para logging — usa `debugPrint()`.
 - Providers se registran en `main.dart` con `Provider<XRepository>.value(value: ..., child: ...)`.
 - Después de cualquier cambio, verifica con `flutter analyze` antes de dar por hecho que algo compila.
+
+## Widgets reutilizables clave
+
+Antes de escribir un input, un buscador o una pantalla de escala desde cero, revisa si ya existe el widget genérico — evita duplicar lógica (ej. formatters de input, filtrado) que ya vive en un widget compartido:
+
+- **Escalas clínicas**: `MoldeEscalasScreen` (estructura con tabs "Escala"/"Ver más"), `ScaleParameterSelector` (opciones categóricas con puntaje) y `ScaleResultFooter` (footer con resultado + color). Usa `lib/screens/escalas/riesgos/downton_screen.dart` como plantilla para escalas de opciones categóricas, o `lib/screens/escalas/pediatricas/silverman_anderson_screen.dart` si la escala es **INVERTIDA** (puntaje bajo = peor, como Braden). Para escalas de un solo parámetro continuo (ej. EVNA, dolor 0-10), usa un `Slider` con el mismo patrón de tarjeta y colores en vez de `ScaleParameterSelector` — ver `lib/screens/escalas/dolor/evna_screen.dart`.
+- **Inputs numéricos**: `lib/widgets/numeric_input_field.dart` (`NumericInputField`) — ya maneja `maxLength`, restricción a solo dígitos o decimales (`allowDecimal`), y el estilo visual estándar. NO uses `TextField` crudo con `inputFormatters` manuales para capturar números.
+- **Buscadores**: `lib/widgets/searchable_screen.dart` (`SearchableScreen<T>`) — recibe `searchableFields: (T item) => List<String>` (el orden de la lista es la prioridad del campo) y ordena los resultados por relevancia usando `lib/utils/search_utils.dart` (`normalizar` quita acentos/mayúsculas, `rankearCampo` puntúa el tipo de coincidencia). NO implementes un `filterBy`/`.where(contains())` ad-hoc: ese contrato es el que mantiene la búsqueda consistente y ordenada por relevancia en toda la app.
 
 ## Cómo agregar medicamentos nuevos a Farmacología
 

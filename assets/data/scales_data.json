@@ -187,7 +187,7 @@
   },
   "maddox": {
     "name": "Escala de Maddox (Valoración de Flebitis)",
-    "description": "La Escala de Maddox es un instrumento clínico de observación directa diseñado para estandarizar la evaluación de la flebitis (inflamación de la vena) en pacientes con catéteres venosos periféricos.\nA diferencia de las valoraciones subjetivas, Maddox permite clasificar el grado de afectación vascular mediante la identificación de signos cardinales de la inflamación —dolor, eritema, edema y cordón venoso palpable—, facilitando la toma de decisiones clínicas como la retirada inmediata del catéter o la monitorización intensiva del sitio de inserción.",
+    "description": "La Escala de Maddox es un instrumento clínico de observación directa diseñado para estandarizar la evaluación de la flebitis (inflamación de la vena) en pacientes con catéteres venosos periféricos.\nA diferencia de las valoraciones subjetivas, Maddox permite clasificar el grado de afectación vascular mediante la identificación de signos cardinales de la inflamación (dolor, eritema, edema y cordón venoso palpable), facilitando la toma de decisiones clínicas como la retirada inmediata del catéter o la monitorización intensiva del sitio de inserción.",
     "when_to_use": [
       "Durante cada turno de enfermería para la monitorización de rutina de catéteres periféricos.",
       "Siempre que el paciente refiera dolor, ardor o sensibilidad en el sitio de punción.",
@@ -282,7 +282,7 @@
   },
   "mews": {
     "name": "MEWS (Puntuación Modificada de Alerta Temprana)",
-    "description": "El MEWS (Modified Early Warning Score) es un sistema de alerta temprana desarrollado y validado por Subbe y colaboradores en el año 2001 en unidades de admisión médica del Reino Unido. Su propósito es detectar de forma precoz el deterioro fisiológico de un paciente hospitalizado en sala general —antes de que evolucione a un paro cardiorrespiratorio o requiera ingreso a cuidados intensivos— mediante la medición rutinaria de cinco constantes vitales sencillas.\nA cada parámetro (frecuencia respiratoria, frecuencia cardíaca, presión arterial sistólica, temperatura y nivel de consciencia) se le asigna un puntaje de 0 a 3 según qué tan alejado esté del rango normal; la suma total estratifica el riesgo del paciente y dispara un escalamiento asistencial protocolizado. Es una herramienta central de los sistemas de respuesta rápida y de la seguridad del paciente en piso.",
+    "description": "El MEWS (Modified Early Warning Score) es un sistema de alerta temprana desarrollado y validado por Subbe y colaboradores en el año 2001 en unidades de admisión médica del Reino Unido. Su propósito es detectar de forma precoz el deterioro fisiológico de un paciente hospitalizado en sala general (antes de que evolucione a un paro cardiorrespiratorio o requiera ingreso a cuidados intensivos) mediante la medición rutinaria de cinco constantes vitales sencillas.\nA cada parámetro (frecuencia respiratoria, frecuencia cardíaca, presión arterial sistólica, temperatura y nivel de consciencia) se le asigna un puntaje de 0 a 3 según qué tan alejado esté del rango normal; la suma total estratifica el riesgo del paciente y dispara un escalamiento asistencial protocolizado. Es una herramienta central de los sistemas de respuesta rápida y de la seguridad del paciente en piso.",
     "when_to_use": [
       "En la toma rutinaria de constantes vitales de todo paciente hospitalizado en sala general, en cada turno.",
       "Ante cualquier cambio clínico agudo o sospecha de deterioro (disnea, hipotensión, alteración del estado de alerta).",
@@ -299,10 +299,10 @@
       "Nivel de consciencia (AVPU): Alerta = 0 puntos; responde a la Voz = 1 punto; responde al dolor (Pain) = 2 puntos; sin respuesta (Unresponsive) = 3 puntos."
     ],
     "interpretation": [
-      "0 a 2 puntos: Riesgo bajo. Continuar con la monitorización rutinaria de constantes según protocolo del servicio.",
-      "3 a 4 puntos: Riesgo intermedio. Aumentar la frecuencia de monitorización (idealmente cada 1-2 horas) y notificar a la enfermera responsable del paciente.",
-      "5 o más puntos: Riesgo alto. Un puntaje ≥5 se asoció con mayor mortalidad (OR 5.4) e ingreso a UCI (OR 10.9) en el estudio de validación. Requiere revisión médica urgente y valorar la activación del equipo de respuesta rápida o el ingreso a cuidados intensivos.",
-      "Regla del parámetro único: cualquier constante individual que puntúe 3 (dato fisiológico extremo) debe disparar por sí sola el escalamiento, aunque el total sea bajo."
+      "0 a 2 puntos: Riesgo bajo. Continuar con la monitorización rutinaria de constantes según protocolo del servicio.\n",
+      "3 a 4 puntos: Riesgo intermedio. Aumentar la frecuencia de monitorización (idealmente cada 1-2 horas) y notificar a la enfermera responsable del paciente.\n",
+      "5 o más puntos: Riesgo alto. Un puntaje ≥5 se asoció con mayor mortalidad (OR 5.4) e ingreso a UCI (OR 10.9) en el estudio de validación. Requiere revisión médica urgente y valorar la activación del equipo de respuesta rápida o el ingreso a cuidados intensivos.\n",
+      "Regla del parámetro único: cualquier constante individual que puntúe 3 (dato fisiológico extremo) debe disparar por sí sola el escalamiento, aunque el total sea bajo.\n"
     ],
     "limitations": [
       "Es un predictor de riesgo, no un diagnóstico; un MEWS bajo no descarta una patología grave de instauración lenta.",
@@ -343,8 +343,8 @@
       "Presión arterial sistólica ≤100 mmHg: presente = 1 punto / ausente = 0 puntos."
     ],
     "interpretation": [
-      "0 a 1 punto: Bajo riesgo por qSOFA. NO descarta sepsis ni infección grave; mantener vigilancia clínica y reevaluar si el cuadro progresa.",
-      "2 a 3 puntos: Alto riesgo (qSOFA positivo). Se asocia con un aumento marcado de la mortalidad hospitalaria. Obliga a buscar disfunción orgánica (SOFA completo), medir lactato sérico, iniciar el protocolo de sepsis y considerar el escalamiento a un nivel de cuidados mayor."
+      "0 a 1 punto: Bajo riesgo por qSOFA. NO descarta sepsis ni infección grave; mantener vigilancia clínica y reevaluar si el cuadro progresa.\n",
+      "2 a 3 puntos: Alto riesgo (qSOFA positivo). Se asocia con un aumento marcado de la mortalidad hospitalaria. Obliga a buscar disfunción orgánica (SOFA completo), medir lactato sérico, iniciar el protocolo de sepsis y considerar el escalamiento a un nivel de cuidados mayor.\n"
     ],
     "limitations": [
       "Tiene alta especificidad pero baja sensibilidad: un qSOFA <2 no excluye sepsis, por lo que no debe usarse para 'descartar' la enfermedad.",
@@ -386,11 +386,11 @@
       "Cálculo: Índice de Shock = Frecuencia Cardíaca ÷ Presión Arterial Sistólica (valor adimensional)."
     ],
     "interpretation": [
-      "Menor a 0.5: Puede reflejar bradicardia o hipertensión; valorar el contexto clínico.",
-      "0.5 a 0.7: Rango normal. Estado hemodinámico estable.",
-      "0.7 a 0.9: Elevado. Sugiere hipoperfusión incipiente o shock compensado; vigilancia estrecha y reevaluación frecuente.",
-      "0.9 a 1.0: Alto. Fuerte indicador de compromiso hemodinámico; iniciar/optimizar la reanimación y buscar la causa.",
-      "Mayor o igual a 1.0: Shock establecido. Se asocia con un aumento aproximado de 4 veces en la mortalidad hospitalaria y mayor probabilidad de transfusión masiva. Requiere reanimación agresiva y escalamiento inmediato."
+      "Menor a 0.5: Puede reflejar bradicardia o hipertensión; valorar el contexto clínico.\n",
+      "0.5 a 0.7: Rango normal. Estado hemodinámico estable.\n",
+      "0.7 a 0.9: Elevado. Sugiere hipoperfusión incipiente o shock compensado; vigilancia estrecha y reevaluación frecuente.\n",
+      "0.9 a 1.0: Alto. Fuerte indicador de compromiso hemodinámico; iniciar/optimizar la reanimación y buscar la causa.\n",
+      "Mayor o igual a 1.0: Shock establecido. Se asocia con un aumento aproximado de 4 veces en la mortalidad hospitalaria y mayor probabilidad de transfusión masiva. Requiere reanimación agresiva y escalamiento inmediato.\n"
     ],
     "limitations": [
       "Pierde fiabilidad en pacientes que toman betabloqueadores u otros cronotrópicos negativos, ya que la taquicardia compensadora queda enmascarada.",
@@ -429,10 +429,10 @@
       "Intensidad del dolor autorreportada por el paciente en una escala de 0 a 10, donde 0 = sin dolor y 10 = el peor dolor imaginable. Es un parámetro único; el paciente enuncia verbalmente el número que representa su dolor actual."
     ],
     "interpretation": [
-      "0: Ausencia de dolor.",
-      "1 a 3: Dolor leve. Habitualmente manejable con analgésicos no opioides.",
-      "4 a 6: Dolor moderado. Interfiere con la actividad; suele requerir ajuste analgésico.",
-      "7 a 10: Dolor intenso/severo. Interfiere gravemente con la funcionalidad y el descanso; requiere intervención analgésica prioritaria y reevaluación estrecha."
+      "0: Ausencia de dolor.\n",
+      "1 a 3: Dolor leve. Habitualmente manejable con analgésicos no opioides.\n",
+      "4 a 6: Dolor moderado. Interfiere con la actividad; suele requerir ajuste analgésico.\n",
+      "7 a 10: Dolor intenso/severo. Interfiere gravemente con la funcionalidad y el descanso; requiere intervención analgésica prioritaria y reevaluación estrecha.\n"
     ],
     "limitations": [
       "Requiere un paciente consciente, colaborador y capaz de comunicarse; no es aplicable en niños pequeños, deterioro cognitivo avanzado o sedación.",
@@ -476,11 +476,11 @@
       "Consolabilidad: Sin necesidad de consuelo = 0; se distrae o tranquiliza con la voz o el tacto = 1; imposible de consolar, distraer o tranquilizar = 2."
     ],
     "interpretation": [
-      "0: Ausencia de indicadores conductuales de dolor.",
-      "1 a 3: Dolor leve (equivalencia orientativa con la escala numérica).",
-      "4 a 6: Dolor moderado.",
-      "7 a 10: Dolor intenso/severo.",
-      "Nota importante: la escala original de Warden no fijó puntos de corte oficiales por rangos; estos intervalos son una equivalencia práctica ampliamente usada, análoga a la escala numérica 0-10. Muchos protocolos consideran que un puntaje ≥2 ya justifica valorar intervención analgésica."
+      "0: Ausencia de indicadores conductuales de dolor.\n",
+      "1 a 3: Dolor leve (equivalencia orientativa con la escala numérica).\n",
+      "4 a 6: Dolor moderado.\n",
+      "7 a 10: Dolor intenso/severo.\n",
+      "Nota importante: la escala original de Warden no fijó puntos de corte oficiales por rangos; estos intervalos son una equivalencia práctica ampliamente usada, análoga a la escala numérica 0-10. Muchos protocolos consideran que un puntaje ≥2 ya justifica valorar intervención analgésica.\n"
     ],
     "limitations": [
       "Es una valoración observacional indirecta: infiere el dolor a partir de conductas que también pueden deberse a ansiedad, miedo, hambre o necesidad de eliminación.",
@@ -516,13 +516,13 @@
       "Como cribado inicial que justifique la derivación a una unidad del dolor o a valoración especializada."
     ],
     "components": [
-      "Interrogatorio (7 ítems) — ¿El dolor tiene alguna de estas características?: 1) Quemazón; 2) Sensación de frío doloroso; 3) Descargas eléctricas. ¿Se asocia en la misma zona a?: 4) Hormigueo; 5) Sensación de alfileres y agujas (pinchazos); 6) Entumecimiento (adormecimiento); 7) Picazón o comezón. Cada característica presente = 1 punto.",
-      "Examen físico (3 ítems) — En la zona dolorosa: 8) Hipoestesia al tacto (menor sensibilidad al roce); 9) Hipoestesia al pinchazo (menor sensibilidad al pinchar); 10) El roce (cepillado suave) provoca o aumenta el dolor (alodinia). Cada signo presente = 1 punto.",
+      "Interrogatorio (7 ítems). ¿El dolor tiene alguna de estas características?: 1) Quemazón; 2) Sensación de frío doloroso; 3) Descargas eléctricas. ¿Se asocia en la misma zona a?: 4) Hormigueo; 5) Sensación de alfileres y agujas (pinchazos); 6) Entumecimiento (adormecimiento); 7) Picazón o comezón. Cada característica presente = 1 punto.",
+      "Examen físico (3 ítems). En la zona dolorosa: 8) Hipoestesia al tacto (menor sensibilidad al roce); 9) Hipoestesia al pinchazo (menor sensibilidad al pinchar); 10) El roce (cepillado suave) provoca o aumenta el dolor (alodinia). Cada signo presente = 1 punto.",
       "Puntuación total: suma de los 10 ítems (rango 0 a 10 puntos)."
     ],
     "interpretation": [
-      "0 a 3 puntos: Poco probable que el dolor sea neuropático (DN4 negativo). Reconsiderar un origen nociceptivo u otras causas.",
-      "4 a 10 puntos: Alta probabilidad de dolor neuropático (DN4 positivo). Orienta hacia un abordaje farmacológico específico del dolor neuropático y, si procede, derivación a la unidad del dolor."
+      "0 a 3 puntos: Poco probable que el dolor sea neuropático (DN4 negativo). Reconsiderar un origen nociceptivo u otras causas.\n",
+      "4 a 10 puntos: Alta probabilidad de dolor neuropático (DN4 positivo). Orienta hacia un abordaje farmacológico específico del dolor neuropático y, si procede, derivación a la unidad del dolor.\n"
     ],
     "limitations": [
       "Es una herramienta de cribado, no un diagnóstico definitivo; un resultado positivo debe confirmarse con la valoración clínica integral.",
@@ -549,7 +549,7 @@
   },
   "apgar": {
     "name": "Escala de APGAR",
-    "description": "La escala de APGAR fue creada por la anestesióloga Virginia Apgar en 1952 (publicada en 1953) como un método rápido y estandarizado para evaluar la adaptación del recién nacido a la vida extrauterina y determinar su estado general inmediatamente tras el nacimiento. Es la valoración neonatal más universalmente utilizada.\nEvalúa cinco signos clínicos —frecuencia cardíaca, esfuerzo respiratorio, tono muscular, respuesta a estímulos (irritabilidad refleja) y color de la piel—, cada uno puntuado de 0 a 2, con un total de 0 a 10. El acrónimo APGAR ayuda a recordarlos: Apariencia (color), Pulso (frecuencia cardíaca), Gesticulación (irritabilidad refleja), Actividad (tono muscular) y Respiración. Se aplica clásicamente al minuto 1 y a los 5 minutos de vida.",
+    "description": "La escala de APGAR fue creada por la anestesióloga Virginia Apgar en 1952 (publicada en 1953) como un método rápido y estandarizado para evaluar la adaptación del recién nacido a la vida extrauterina y determinar su estado general inmediatamente tras el nacimiento. Es la valoración neonatal más universalmente utilizada.\nEvalúa cinco signos clínicos: frecuencia cardíaca, esfuerzo respiratorio, tono muscular, respuesta a estímulos (irritabilidad refleja) y color de la piel. Cada uno puntuado de 0 a 2, con un total de 0 a 10. El acrónimo APGAR ayuda a recordarlos: Apariencia (color), Pulso (frecuencia cardíaca), Gesticulación (irritabilidad refleja), Actividad (tono muscular) y Respiración. Se aplica clásicamente al minuto 1 y a los 5 minutos de vida.",
     "when_to_use": [
       "En todo recién nacido, de forma sistemática, al primer minuto de vida.",
       "A los 5 minutos de vida, para valorar la respuesta a la adaptación o a las maniobras iniciales.",
@@ -565,9 +565,9 @@
       "Color de la piel (Apariencia): Cianosis generalizada o palidez = 0; cuerpo rosado con extremidades azules (acrocianosis) = 1; totalmente rosado = 2."
     ],
     "interpretation": [
-      "7 a 10 puntos: Recién nacido vigoroso, en buen estado. Cuidados de rutina.",
-      "4 a 6 puntos: Depresión moderada. Requiere estimulación, apoyo y vigilancia estrecha; valorar maniobras de reanimación según la evolución.",
-      "0 a 3 puntos: Depresión severa. Emergencia neonatal que exige maniobras de reanimación avanzada inmediatas."
+      "7 a 10 puntos: Recién nacido vigoroso, en buen estado. Cuidados de rutina.\n",
+      "4 a 6 puntos: Depresión moderada. Requiere estimulación, apoyo y vigilancia estrecha; valorar maniobras de reanimación según la evolución.\n",
+      "0 a 3 puntos: Depresión severa. Emergencia neonatal que exige maniobras de reanimación avanzada inmediatas.\n"
     ],
     "limitations": [
       "El APGAR NO debe usarse para decidir si se inicia la reanimación: esa decisión se toma antes, en los primeros segundos, evaluando respiración, frecuencia cardíaca y tono (según el algoritmo de reanimación neonatal).",
@@ -610,11 +610,11 @@
       "Quejido espiratorio: Ausente = 0; audible solo con estetoscopio = 1; audible a distancia, sin estetoscopio = 2."
     ],
     "interpretation": [
-      "0 puntos: Sin dificultad respiratoria. El recién nacido no presenta esfuerzo respiratorio patológico (mejor resultado posible).",
-      "1 a 3 puntos: Dificultad respiratoria leve.",
-      "4 a 6 puntos: Dificultad respiratoria moderada. Requiere vigilancia estrecha y valorar soporte respiratorio.",
-      "7 a 10 puntos: Dificultad respiratoria severa. Suele precisar soporte ventilatorio activo (CPAP o ventilación mecánica) y traslado a cuidados intensivos neonatales.",
-      "IMPORTANTE — puntuación invertida: a diferencia del APGAR, aquí el puntaje MÁS ALTO indica PEOR estado respiratorio. El 0 es el objetivo terapéutico."
+      "0 puntos: Sin dificultad respiratoria. El recién nacido no presenta esfuerzo respiratorio patológico (mejor resultado posible).\n",
+      "1 a 3 puntos: Dificultad respiratoria leve.\n",
+      "4 a 6 puntos: Dificultad respiratoria moderada. Requiere vigilancia estrecha y valorar soporte respiratorio.\n",
+      "7 a 10 puntos: Dificultad respiratoria severa. Suele precisar soporte ventilatorio activo (CPAP o ventilación mecánica) y traslado a cuidados intensivos neonatales.\n",
+      "IMPORTANTE (puntuación invertida): a diferencia del APGAR, aquí el puntaje MÁS ALTO indica PEOR estado respiratorio. El 0 es el objetivo terapéutico.\n"
     ],
     "limitations": [
       "Valora exclusivamente el esfuerzo respiratorio; no mide la oxigenación real (debe complementarse con la saturación de oxígeno por pulsioximetría).",
@@ -658,10 +658,10 @@
       "Consolabilidad (Consolability): Contento, relajado = 0; se tranquiliza con el contacto, el abrazo o la voz, se puede distraer = 1; difícil de consolar o confortar = 2."
     ],
     "interpretation": [
-      "0: Relajado y cómodo, sin signos de dolor.",
-      "1 a 3: Malestar o dolor leve.",
-      "4 a 6: Dolor moderado.",
-      "7 a 10: Dolor intenso o malestar severo. Requiere intervención analgésica prioritaria y reevaluación."
+      "0: Relajado y cómodo, sin signos de dolor.\n",
+      "1 a 3: Malestar o dolor leve.\n",
+      "4 a 6: Dolor moderado.\n",
+      "7 a 10: Dolor intenso o malestar severo. Requiere intervención analgésica prioritaria y reevaluación.\n"
     ],
     "limitations": [
       "Es una valoración observacional: las conductas medidas también pueden deberse a miedo, hambre, ansiedad de separación o incomodidad no dolorosa.",

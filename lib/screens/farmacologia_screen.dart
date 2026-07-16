@@ -90,8 +90,7 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
     return SearchableScreen<Medicamento>(
       items: _farmacos,
       hintText: 'Buscar fármaco...',
-      filterBy: (farmaco, query) =>
-          farmaco.nombre.toLowerCase().contains(query),
+      searchableFields: (farmaco) => [farmaco.nombre],
       itemTitle: (farmaco) => farmaco.nombre,
       onItemTap: _navegarAFarmaco,
       emptyWidget: Column(

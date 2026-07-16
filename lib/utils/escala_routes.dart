@@ -12,6 +12,7 @@ import 'package:nursia_app/screens/escalas/pediatricas/flacc_screen.dart';
 import 'package:nursia_app/screens/escalas/pediatricas/silverman_anderson_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos/downton_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos/maddox.dart';
+import 'package:nursia_app/screens/escalas/riesgos/braden.dart';
 import '../screens/escalas/neurologicas/glasgow_screen.dart';
 // Cuando tengas más escalas, impórtalas aquí
 
@@ -23,6 +24,7 @@ final Map<String, WidgetBuilder> escalaRoutes = {
   'rass_screen': (context) => const RassScreen(),
   'downton_screen': (context) => const DowntonScreen(),
   'maddox': (context) => const MaddoxScreen(),
+  'braden': (context) => const BradenScreen(),
   // Emergencias y Triaje
   'mews_screen': (context) => const MewsScreen(),
   'qsofa_screen': (context) => const QsofaScreen(),

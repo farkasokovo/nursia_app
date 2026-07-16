@@ -37,37 +37,41 @@ class _BradenLayout extends StatefulWidget {
 }
 
 class _BradenLayoutState extends State<_BradenLayout> {
-  ScaleValue? caidas;
-  ScaleValue? medicamentos;
-  ScaleValue? deficitSensorial;
-  ScaleValue? deambulacion;
-  ScaleValue? estadoMental;
+  ScaleValue? percepcionSensorial;
+  ScaleValue? humedad;
+  ScaleValue? actividad;
+  ScaleValue? movilidad;
+  ScaleValue? nutricion;
+  ScaleValue? friccion;
 
   bool get _todoCompleto =>
-      caidas != null &&
-      medicamentos != null &&
-      deficitSensorial != null &&
-      deambulacion != null &&
-      estadoMental != null;
+      percepcionSensorial != null &&
+      humedad != null &&
+      actividad != null &&
+      movilidad != null &&
+      nutricion != null &&
+      friccion != null;
 
   int get _puntajeTotal {
     int total = 0;
-    total += caidas?.score ?? 0;
-    total += medicamentos?.score ?? 0;
-    total += deficitSensorial?.score ?? 0;
-    total += deambulacion?.score ?? 0;
-    total += estadoMental?.score ?? 0;
+    total += percepcionSensorial?.score ?? 0;
+    total += humedad?.score ?? 0;
+    total += actividad?.score ?? 0;
+    total += movilidad?.score ?? 0;
+    total += nutricion?.score ?? 0;
+    total += friccion?.score ?? 0;
     return total;
   }
 
   String get resultado {
     return ScaleResultFormatter.formatWithNV(
       parameters: {
-        "Caídas previas": caidas?.score,
-        "Medicamentos": medicamentos?.score,
-        "Déficit sensorial": deficitSensorial?.score,
-        "Deambulación": deambulacion?.score,
-        "Estado mental": estadoMental?.score,
+        "Percepción sensorial": percepcionSensorial?.score,
+        "Humedad": humedad?.score,
+        "Actividad": actividad?.score,
+        "Movilidad": movilidad?.score,
+        "Nutrición": nutricion?.score,
+        "Fricción y cizallamiento": friccion?.score,
       },
     );
   }
@@ -84,138 +88,198 @@ class _BradenLayoutState extends State<_BradenLayout> {
                 children: [
                   const SizedBox(height: 20),
 
-                  // ================== CAÍDAS PREVIAS ==================
+                  // ================== PERCEPCIÓN SENSORIAL ==================
                   ScaleParameterSelector(
                     title: "Percepción sensorial",
                     onChanged: (int? value) =>
-                        setState(() => caidas = ScaleValue(value)),
+                        setState(() => percepcionSensorial = ScaleValue(value)),
                     options: const [
                       ScaleOption(
                         score: 1,
                         label: "Completamente limitada",
-                        description: "info.",
+                        description:
+                            "No responde ante estímulos dolorosos por bajo nivel de conciencia o sedación, o capacidad limitada para sentir dolor en la mayoría del cuerpo.",
                       ),
                       ScaleOption(
                         score: 2,
                         label: "Muy limitada",
-                        description: "info.",
+                        description:
+                            "Responde solo a estímulos dolorosos; no puede comunicar el disconfort excepto por quejido o agitación, o tiene un deterioro sensorial que limita percibir dolor en la mitad del cuerpo.",
+                      ),
+                      ScaleOption(
+                        score: 3,
+                        label: "Levemente limitada",
+                        description:
+                            "Responde a órdenes verbales pero no siempre puede comunicar el disconfort, o tiene alteración sensorial en una o dos extremidades.",
+                      ),
+                      ScaleOption(
+                        score: 4,
+                        label: "No alterada",
+                        description:
+                            "Responde a órdenes verbales. Sin déficit sensorial que limite sentir o manifestar dolor.",
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+
+                  // ================== HUMEDAD ==================
+                  ScaleParameterSelector(
+                    title: "Humedad",
+                    onChanged: (int? value) =>
+                        setState(() => humedad = ScaleValue(value)),
+                    options: const [
+                      ScaleOption(
+                        score: 1,
+                        label: "Constantemente húmeda",
+                        description:
+                            "La piel permanece húmeda casi todo el tiempo por sudor, orina o líquidos corporales; se encuentra mojada cada vez que se moviliza.",
+                      ),
+                      ScaleOption(
+                        score: 2,
+                        label: "Muy húmeda",
+                        description:
+                            "La piel está frecuentemente húmeda; las sábanas deben cambiarse al menos una vez por turno (cada 8 horas).",
+                      ),
+                      ScaleOption(
+                        score: 3,
+                        label: "Ocasionalmente húmeda",
+                        description:
+                            "La piel está ocasionalmente húmeda; requiere un cambio extra de sábanas aproximadamente una vez al día (cada 12 horas).",
+                      ),
+                      ScaleOption(
+                        score: 4,
+                        label: "Raramente húmeda",
+                        description:
+                            "La piel está usualmente seca; las sábanas se cambian con intervalos de rutina (cada 24 horas).",
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+
+                  // ================== ACTIVIDAD ==================
+                  ScaleParameterSelector(
+                    title: "Actividad",
+                    onChanged: (int? value) =>
+                        setState(() => actividad = ScaleValue(value)),
+                    options: const [
+                      ScaleOption(
+                        score: 1,
+                        label: "En cama",
+                        description: "Confinado a la cama.",
+                      ),
+                      ScaleOption(
+                        score: 2,
+                        label: "En silla",
+                        description:
+                            "Capacidad para caminar severamente limitada o inexistente; no soporta su propio peso o requiere asistencia para la silla.",
+                      ),
+                      ScaleOption(
+                        score: 3,
+                        label: "Camina ocasionalmente",
+                        description:
+                            "Camina ocasionalmente durante el día, distancias muy cortas, con o sin ayuda; pasa la mayor parte del turno en silla o cama.",
+                      ),
+                      ScaleOption(
+                        score: 4,
+                        label: "Camina con frecuencia",
+                        description:
+                            "Camina fuera del cuarto al menos dos veces al día y dentro de él al menos una vez cada dos horas.",
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+
+                  // ================== MOVILIDAD ==================
+                  ScaleParameterSelector(
+                    title: "Movilidad",
+                    onChanged: (int? value) =>
+                        setState(() => movilidad = ScaleValue(value)),
+                    options: const [
+                      ScaleOption(
+                        score: 1,
+                        label: "Completamente inmóvil",
+                        description:
+                            "No realiza ni ligeros cambios de posición del cuerpo o extremidades sin ayuda.",
+                      ),
+                      ScaleOption(
+                        score: 2,
+                        label: "Muy limitada",
+                        description:
+                            "Realiza cambios mínimos y ocasionales de posición, pero no puede hacerlo con frecuencia o de forma significativa por sí solo.",
                       ),
                       ScaleOption(
                         score: 3,
                         label: "Ligeramente limitada",
-                        description: "info.",
+                        description:
+                            "Realiza cambios frecuentes, aunque ligeros, en la posición del cuerpo o extremidades de forma independiente.",
                       ),
                       ScaleOption(
                         score: 4,
                         label: "Sin limitaciones",
-                        description: "info.",
+                        description:
+                            "Realiza cambios mayores y frecuentes en la posición sin ayuda.",
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
 
-                  // ================== MEDICAMENTOS ==================
+                  // ================== NUTRICIÓN ==================
                   ScaleParameterSelector(
-                    title: "Medicamentos",
+                    title: "Nutrición",
                     onChanged: (int? value) =>
-                        setState(() => medicamentos = ScaleValue(value)),
+                        setState(() => nutricion = ScaleValue(value)),
                     options: const [
                       ScaleOption(
                         score: 1,
-                        label: "Sí",
+                        label: "Muy pobre",
                         description:
-                            "Consume fármacos de riesgo: tranquilizantes, sedantes, diuréticos, antidepresivos o antiparkinsonianos.",
+                            "Nunca come una comida completa; rara vez come más de un tercio de lo ofrecido; poca ingesta de proteínas y líquidos, o dieta líquida/intravenosa por más de 5 días.",
                       ),
                       ScaleOption(
-                        score: 0,
-                        label: "No",
-                        description: "No consume ninguno de estos fármacos.",
+                        score: 2,
+                        label: "Probablemente inadecuada",
+                        description:
+                            "Rara vez come una comida completa; generalmente solo la mitad de lo ofrecido; ingesta de proteínas limitada.",
                       ),
                       ScaleOption(
-                        score: null,
-                        label: "No valorable",
-                        description: "No se puede obtener la información.",
+                        score: 3,
+                        label: "Adecuada",
+                        description:
+                            "Come más de la mitad de la mayoría de las comidas; ingesta de proteínas adecuada; ocasionalmente rechaza una comida pero acepta suplemento si se ofrece.",
+                      ),
+                      ScaleOption(
+                        score: 4,
+                        label: "Excelente",
+                        description:
+                            "Come la mayoría de las comidas, nunca las rechaza, buena ingesta de proteínas; no requiere suplemento.",
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
 
-                  // ================== DÉFICIT SENSORIAL ==================
+                  // ================== FRICCIÓN Y CIZALLAMIENTO ==================
                   ScaleParameterSelector(
-                    title: "Déficit sensorial",
+                    title: "Fricción y cizallamiento",
                     onChanged: (int? value) =>
-                        setState(() => deficitSensorial = ScaleValue(value)),
+                        setState(() => friccion = ScaleValue(value)),
                     options: const [
                       ScaleOption(
                         score: 1,
-                        label: "Sí",
+                        label: "Es un problema",
                         description:
-                            "Presencia comprobada de alteraciones visuales, auditivas o déficits motores en extremidades.",
+                            "Requiere asistencia moderada a máxima para movilizarse; se desliza frecuentemente en la cama o silla.",
                       ),
                       ScaleOption(
-                        score: 0,
-                        label: "No",
+                        score: 2,
+                        label: "Es un problema potencial",
                         description:
-                            "Sin alteraciones visuales, auditivas ni motoras.",
+                            "Se mueve con cierta torpeza o requiere mínima asistencia; la piel se desliza en algún grado durante el movimiento.",
                       ),
                       ScaleOption(
-                        score: null,
-                        label: "No valorable",
-                        description: "No se puede evaluar adecuadamente.",
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-
-                  // ================== DEAMBULACIÓN ==================
-                  ScaleParameterSelector(
-                    title: "Deambulación",
-                    onChanged: (int? value) =>
-                        setState(() => deambulacion = ScaleValue(value)),
-                    options: const [
-                      ScaleOption(
-                        score: 1,
-                        label: "Insegura / Imposible",
+                        score: 3,
+                        label: "Sin problema aparente",
                         description:
-                            "Marcha insegura con o sin ayuda, o imposibilidad para deambular.",
-                      ),
-                      ScaleOption(
-                        score: 0,
-                        label: "Normal / Segura con ayuda",
-                        description:
-                            "Marcha normal o segura con ayuda de dispositivos.",
-                      ),
-                      ScaleOption(
-                        score: null,
-                        label: "No valorable",
-                        description: "No se puede evaluar la marcha.",
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-
-                  // ================== ESTADO MENTAL ==================
-                  ScaleParameterSelector(
-                    title: "Estado mental",
-                    onChanged: (int? value) =>
-                        setState(() => estadoMental = ScaleValue(value)),
-                    options: const [
-                      ScaleOption(
-                        score: 1,
-                        label: "Confuso",
-                        description:
-                            "Paciente desorientado o con alteración cognitiva.",
-                      ),
-                      ScaleOption(
-                        score: 0,
-                        label: "Orientado",
-                        description:
-                            "Paciente alerta y orientado en sus tres esferas.",
-                      ),
-                      ScaleOption(
-                        score: null,
-                        label: "No valorable",
-                        description: "No se puede evaluar el estado mental.",
+                            "Se mueve con fuerza muscular suficiente para sostenerse completamente durante el movimiento.",
                       ),
                     ],
                   ),
@@ -256,8 +320,19 @@ class _BradenInfo extends StatelessWidget {
           child: FutureBuilder(
             future: context.read<EscalaRepository>().obtenerPorId("braden"),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
+              if (snapshot.connectionState != ConnectionState.done) {
                 return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError || snapshot.data == null) {
+                return Center(
+                  child: Text(
+                    "No se pudo cargar la información de esta escala.",
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSecondaryContainer,
+                    ),
+                  ),
+                );
               }
               return EstructuraVerMasScreen(info: snapshot.data!);
             },
@@ -268,9 +343,13 @@ class _BradenInfo extends StatelessWidget {
   }
 }
 
-// Colores específicos de la escala de Downton
+// Colores específicos de Braden.
+// ¡Escala INVERTIDA! (a diferencia de Downton): aquí el puntaje BAJO significa
+// MAYOR riesgo de úlceras por presión, por lo que se mapea a colores de alerta;
+// el puntaje más alto (19-23, mejor estado) va a verde.
 Color _bradenColor(int puntajeTotal) {
-  if (puntajeTotal >= 3) return AppColors.redAlertv3; // Riesgo alto
-  if (puntajeTotal >= 0) return AppColors.withoutAlert; // Riesgo bajo
-  return AppColors.withoutAlert;
+  if (puntajeTotal <= 12) return AppColors.redAlertv3; // Riesgo alto / muy alto
+  if (puntajeTotal <= 14) return AppColors.redAlertv1; // Riesgo moderado
+  if (puntajeTotal <= 18) return AppColors.withoutAlert; // Riesgo bajo
+  return AppColors.greenAlert; // Sin riesgo (19-23)
 }

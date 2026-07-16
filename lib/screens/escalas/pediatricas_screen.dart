@@ -14,7 +14,7 @@ class PediatricasScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ExpandableCategoryScreen(
       heroTag: "pediatricas",
-      title: "Escalas Pediátricas y Neonatales",
+      title: "Escalas Pediátricas\ny Neonatales",
       icon: PhosphorIconsFill.baby,
       child: _PediatricasLayout(),
     );

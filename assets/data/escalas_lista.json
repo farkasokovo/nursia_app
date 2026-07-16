@@ -31,6 +31,12 @@
       "ruta": "maddox"
     },
     {
+      "id": "braden",
+      "nombre": "Escala de Braden",
+      "categoria": "riesgos",
+      "ruta": "braden"
+    },
+    {
       "id": "mews",
       "nombre": "MEWS (Alerta Temprana)",
       "categoria": "emergencias",

@@ -1,6 +1,7 @@
 // lib/widgets/searchable_screen.dart
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import '../utils/search_utils.dart';
 
 /// Widget genérico de pantalla con buscador integrado.
 ///
@@ -8,7 +9,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 /// ```dart
 /// SearchableScreen<EscalaMetadata>(
 ///   items: _todasEscalas,
-///   filterBy: (escala, query) => escala.nombre.toLowerCase().contains(query),
+///   searchableFields: (escala) => [escala.nombre],
 ///   hintText: 'Buscar escala...',
 ///   onItemTap: (escala) => _navegarA(escala),
 ///   itemTitle: (escala) => escala.nombre,
@@ -20,8 +21,10 @@ class SearchableScreen<T> extends StatefulWidget {
   /// Lista completa de items a buscar
   final List<T> items;
 
-  /// Función que determina si un item coincide con la búsqueda
-  final bool Function(T item, String query) filterBy;
+  /// Campos buscables de un item, EN ORDEN DE PRIORIDAD.
+  /// El índice 0 es el campo más relevante (p. ej. el código de la norma antes
+  /// que su título). Se usan para rankear los resultados por relevancia.
+  final List<String> Function(T item) searchableFields;
 
   /// Texto placeholder del buscador
   final String hintText;
@@ -42,7 +45,7 @@ class SearchableScreen<T> extends StatefulWidget {
   const SearchableScreen({
     super.key,
     required this.items,
-    required this.filterBy,
+    required this.searchableFields,
     required this.hintText,
     required this.onItemTap,
     required this.itemTitle,
@@ -86,12 +89,44 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
   void _filtrar(String texto) {
     setState(() {
       _busqueda = texto;
-      _resultados = texto.isEmpty
-          ? widget.items
-          : widget.items
-                .where((item) => widget.filterBy(item, texto.toLowerCase()))
-                .toList();
+      _resultados = texto.isEmpty ? widget.items : _buscarYRankear(texto);
     });
+  }
+
+  /// Filtra y ORDENA los items por relevancia respecto a la consulta.
+  ///
+  /// El rank de cada item se calcula como (indiceDelCampo * 10 + tipoDeMatch),
+  /// tomando el MEJOR (menor) match entre sus campos. El factor 10 garantiza
+  /// que cualquier coincidencia en un campo prioritario (índice 0) gane a
+  /// cualquier coincidencia en un campo menos relevante. Se descartan los
+  /// items sin coincidencia; se ordena por rank ascendente y, como desempate,
+  /// alfabéticamente por el título normalizado.
+  List<T> _buscarYRankear(String texto) {
+    final consulta = normalizar(texto);
+
+    final conRank = <({T item, int rank})>[];
+    for (final item in widget.items) {
+      final campos = widget.searchableFields(item);
+      int? mejor;
+      for (var i = 0; i < campos.length; i++) {
+        final tipo = rankearCampo(normalizar(campos[i]), consulta);
+        if (tipo != null) {
+          final rank = i * 10 + tipo;
+          if (mejor == null || rank < mejor) mejor = rank;
+        }
+      }
+      if (mejor != null) conRank.add((item: item, rank: mejor));
+    }
+
+    conRank.sort((a, b) {
+      final porRank = a.rank.compareTo(b.rank);
+      if (porRank != 0) return porRank;
+      return normalizar(
+        widget.itemTitle(a.item),
+      ).compareTo(normalizar(widget.itemTitle(b.item)));
+    });
+
+    return conRank.map((e) => e.item).toList();
   }
 
   void _limpiar() {
