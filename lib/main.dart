@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Nursia',
+      title: 'Nurska',
       theme: AppTheme.lightTheme(),
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,

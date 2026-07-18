@@ -1,4 +1,4 @@
-package com.example.nursia_app
+package com.farkasokovo.nurska
 
 import io.flutter.embedding.android.FlutterActivity
 
