@@ -6,12 +6,36 @@ import 'package:provider/provider.dart';
 import 'package:nursia_app/repositories/medicamento_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/medicamento_turno.dart';
 import 'package:nursia_app/utils/icon_mapper.dart'; // Tu IconMapper de lib/utils
+import 'package:nursia_app/utils/search_utils.dart';
 
 // Modelo liviano sólo para el catálogo en memoria
 class _MedCatalogEntry {
   final String nombre;
   final String icono;
   const _MedCatalogEntry({required this.nombre, required this.icono});
+}
+
+/// Filtra y ordena `catalogo` por relevancia respecto a `consultaCruda`,
+/// usando la misma lógica de ranking que las pantallas principales
+/// (lib/widgets/searchable_screen.dart): coincidencia al inicio del nombre
+/// primero, luego coincidencias parciales, con desempate alfabético.
+Iterable<T> _ordenarPorRelevancia<T>(
+  List<T> catalogo,
+  String Function(T item) campo,
+  String consultaCruda,
+) {
+  final consulta = normalizar(consultaCruda);
+  final conRank = <({T item, int rank})>[];
+  for (final item in catalogo) {
+    final rank = rankearCampo(normalizar(campo(item)), consulta);
+    if (rank != null) conRank.add((item: item, rank: rank));
+  }
+  conRank.sort((a, b) {
+    final porRank = a.rank.compareTo(b.rank);
+    if (porRank != 0) return porRank;
+    return normalizar(campo(a.item)).compareTo(normalizar(campo(b.item)));
+  });
+  return conRank.map((e) => e.item);
 }
 
 Future<void> showAddMedicamentoTurnoDialog(
@@ -81,10 +105,10 @@ Future<void> showAddMedicamentoTurnoDialog(
                       if (textEditingValue.text.isEmpty) {
                         return const Iterable.empty();
                       }
-                      return catalogo.where(
-                        (m) => m.nombre.toLowerCase().contains(
-                          textEditingValue.text.toLowerCase(),
-                        ),
+                      return _ordenarPorRelevancia(
+                        catalogo,
+                        (m) => m.nombre,
+                        textEditingValue.text,
                       );
                     },
 

@@ -7,7 +7,7 @@ import 'normativa_screen.dart';
 import 'calculadora_screen.dart';
 import 'escalas_screen.dart';
 import 'farmacologia_screen.dart';
-import 'proximamente_screen.dart';
+import 'sugerencias_screen.dart';
 
 const List<Widget> _tabs = [
   Tab(text: "Escalas"),
@@ -110,15 +110,14 @@ class HomeScreen extends StatelessWidget {
                     context: context,
                     colorScheme: colorScheme,
                     textTheme: textTheme,
-                    icon: PhosphorIconsBold.gearSix,
-                    title: 'Ajustes',
+                    icon: PhosphorIconsBold.chatCircleDots,
+                    title: 'Sugerencias',
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) =>
-                              const ProximamenteScreen(titulo: 'Ajustes'),
+                          builder: (_) => const SugerenciasScreen(),
                         ),
                       );
                     },

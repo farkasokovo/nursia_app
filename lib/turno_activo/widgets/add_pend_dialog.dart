@@ -4,6 +4,30 @@ import 'package:provider/provider.dart';
 import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
 import 'package:nursia_app/turno_activo/models/pendiente_turno.dart';
 import 'package:nursia_app/turno_activo/utils/icon_mapper_turno.dart';
+import 'package:nursia_app/utils/search_utils.dart';
+
+/// Filtra y ordena `catalogo` por relevancia respecto a `consultaCruda`,
+/// usando la misma lógica de ranking que las pantallas principales
+/// (lib/widgets/searchable_screen.dart): coincidencia al inicio del nombre
+/// primero, luego coincidencias parciales, con desempate alfabético.
+Iterable<T> _ordenarPorRelevancia<T>(
+  List<T> catalogo,
+  String Function(T item) campo,
+  String consultaCruda,
+) {
+  final consulta = normalizar(consultaCruda);
+  final conRank = <({T item, int rank})>[];
+  for (final item in catalogo) {
+    final rank = rankearCampo(normalizar(campo(item)), consulta);
+    if (rank != null) conRank.add((item: item, rank: rank));
+  }
+  conRank.sort((a, b) {
+    final porRank = a.rank.compareTo(b.rank);
+    if (porRank != 0) return porRank;
+    return normalizar(campo(a.item)).compareTo(normalizar(campo(b.item)));
+  });
+  return conRank.map((e) => e.item);
+}
 
 Future<void> showAddPendienteDialog(
   BuildContext context, {
@@ -61,10 +85,10 @@ Future<void> showAddPendienteDialog(
                         return const Iterable.empty();
                       }
 
-                      return catalogo.where(
-                        (p) => p.nombre.toLowerCase().contains(
-                          textEditingValue.text.toLowerCase(),
-                        ),
+                      return _ordenarPorRelevancia(
+                        catalogo,
+                        (p) => p.nombre,
+                        textEditingValue.text,
                       );
                     },
 

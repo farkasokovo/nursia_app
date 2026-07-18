@@ -86,10 +86,10 @@ class _AcercaDeScreenState extends State<AcercaDeScreen> {
               Text('Descripción', style: textTheme.titleMedium),
               const SizedBox(height: 6),
               Text(
-                'Nurska es una herramienta de referencia clínica para '
+                'Nurska es una herramienta de referencia para '
                 'profesionales y estudiantes de enfermería. Reúne '
                 'calculadoras, escalas de valoración, fichas farmacológicas '
-                'y normativa vigente en un solo lugar — pensada para '
+                'y normativa vigente en un solo lugar, y está pensada para '
                 'consultarse rápido, incluso sin conexión a internet, '
                 'durante el turno.',
                 style: textTheme.bodySmall,
