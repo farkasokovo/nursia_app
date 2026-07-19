@@ -36,7 +36,8 @@ class _GlasgowLayout extends StatefulWidget {
   State<_GlasgowLayout> createState() => _GlasgowLayoutState();
 }
 
-class _GlasgowLayoutState extends State<_GlasgowLayout> {
+class _GlasgowLayoutState extends State<_GlasgowLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? ocular;
   ScaleValue? verbal;
   ScaleValue? motora;
@@ -54,7 +55,11 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -203,6 +208,7 @@ class _GlasgowLayoutState extends State<_GlasgowLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: _glasgowColor,
+          etiquetaResolver: _glasgowEtiqueta,
         ),
       ],
     );
@@ -251,6 +257,18 @@ class _GlasgowInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de Glasgow (consciencia; parsea el puntaje total).
+// Si el resultado no es numérico (algún parámetro "No valorable"), lo indica.
+String _glasgowEtiqueta(String resultado) {
+  final match = RegExp(r'^\d+').firstMatch(resultado);
+  if (match == null) return "No valorable";
+  final score = int.parse(match.group(0)!);
+  if (score == 15) return "Normal / Orientado";
+  if (score >= 13) return "Deterioro leve"; // 13-14
+  if (score >= 9) return "Deterioro moderado"; // 9-12
+  return "Deterioro grave"; // 3-8
 }
 
 // Colores específicos de la escala (no dependen del tema)

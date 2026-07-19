@@ -36,7 +36,8 @@ class _ApgarLayout extends StatefulWidget {
   State<_ApgarLayout> createState() => _ApgarLayoutState();
 }
 
-class _ApgarLayoutState extends State<_ApgarLayout> {
+class _ApgarLayoutState extends State<_ApgarLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? frecuenciaCardiaca;
   ScaleValue? esfuerzoRespiratorio;
   ScaleValue? tonoMuscular;
@@ -73,7 +74,11 @@ class _ApgarLayoutState extends State<_ApgarLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -254,6 +259,7 @@ class _ApgarLayoutState extends State<_ApgarLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _apgarColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _apgarEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -302,6 +308,13 @@ class _ApgarInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de APGAR (vitalidad neonatal; puntaje alto = mejor).
+String _apgarEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 7) return "Buen estado";
+  if (puntajeTotal >= 4) return "Depresión moderada";
+  return "Depresión severa";
 }
 
 // Colores específicos de la escala APGAR (puntaje alto = mejor)

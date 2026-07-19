@@ -36,7 +36,8 @@ class _MewsLayout extends StatefulWidget {
   State<_MewsLayout> createState() => _MewsLayoutState();
 }
 
-class _MewsLayoutState extends State<_MewsLayout> {
+class _MewsLayoutState extends State<_MewsLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? respiratoria;
   ScaleValue? cardiaca;
   ScaleValue? sistolica;
@@ -73,7 +74,11 @@ class _MewsLayoutState extends State<_MewsLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -257,6 +262,7 @@ class _MewsLayoutState extends State<_MewsLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _mewsColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _mewsEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -305,6 +311,13 @@ class _MewsInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de MEWS (mismos cortes que _mewsColor)
+String _mewsEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 5) return "Riesgo alto";
+  if (puntajeTotal >= 3) return "Riesgo intermedio";
+  return "Riesgo bajo";
 }
 
 // Colores específicos de la escala MEWS

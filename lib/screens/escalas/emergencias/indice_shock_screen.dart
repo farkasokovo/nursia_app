@@ -35,7 +35,8 @@ class _IndiceShockLayout extends StatefulWidget {
   State<_IndiceShockLayout> createState() => _IndiceShockLayoutState();
 }
 
-class _IndiceShockLayoutState extends State<_IndiceShockLayout> {
+class _IndiceShockLayoutState extends State<_IndiceShockLayout>
+    with AutomaticKeepAliveClientMixin {
   // A diferencia de las demás escalas, el Índice de Shock NO es una suma de
   // opciones categóricas: es una fórmula (FC ÷ PAS). Por eso usa dos campos
   // numéricos (NumericInputField) con cálculo en vivo.
@@ -114,7 +115,11 @@ class _IndiceShockLayoutState extends State<_IndiceShockLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -153,6 +158,7 @@ class _IndiceShockLayoutState extends State<_IndiceShockLayout> {
           visible: _valido,
           resultado: resultado,
           colorResolver: (resultado) => _shockColor(_indice),
+          etiquetaResolver: (resultado) => _shockEtiqueta(_indice),
         ),
       ],
     );
@@ -203,6 +209,15 @@ class _IndiceShockInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta del Índice de Shock (mismos cortes que _shockColor)
+String _shockEtiqueta(double indice) {
+  if (indice >= 1.0) return "Shock establecido";
+  if (indice >= 0.9) return "Alto";
+  if (indice >= 0.7) return "Elevado";
+  if (indice >= 0.5) return "Normal / Estable";
+  return "Valorar contexto";
 }
 
 // Colores específicos del Índice de Shock (según el valor del cociente)

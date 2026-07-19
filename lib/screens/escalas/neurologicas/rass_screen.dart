@@ -40,7 +40,8 @@ class _RassLayout extends StatefulWidget {
 }
 
 //! CAMBIA EL NOMBRE
-class _RassLayoutState extends State<_RassLayout> {
+class _RassLayoutState extends State<_RassLayout>
+    with AutomaticKeepAliveClientMixin {
   //! CAMBIA EL NOMBRE
   ScaleValue? nivelSedacion;
 
@@ -54,7 +55,11 @@ class _RassLayoutState extends State<_RassLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -141,6 +146,7 @@ class _RassLayoutState extends State<_RassLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: _rassColor,
+          etiquetaResolver: _rassEtiqueta,
         ),
       ],
     );
@@ -194,6 +200,38 @@ class _RassInfo extends StatelessWidget {
 }
 
 //! CAMBIA EL NOMBRE
+// Etiqueta clínica corta de RASS (términos textuales de la escala; parsea el
+// puntaje, que puede ser negativo).
+String _rassEtiqueta(String resultado) {
+  final match = RegExp(r'-?\d+').firstMatch(resultado);
+  if (match == null) return "No valorable";
+  final score = int.parse(match.group(0)!);
+  switch (score) {
+    case 4:
+      return "Combativo";
+    case 3:
+      return "Muy agitado";
+    case 2:
+      return "Agitado";
+    case 1:
+      return "Inquieto";
+    case 0:
+      return "Alerta y tranquilo";
+    case -1:
+      return "Somnoliento";
+    case -2:
+      return "Sedación leve";
+    case -3:
+      return "Sedación moderada";
+    case -4:
+      return "Sedación profunda";
+    case -5:
+      return "Sin respuesta";
+    default:
+      return "";
+  }
+}
+
 // Colores específicos de la escala RASS
 Color _rassColor(String resultado) {
   final match = RegExp(r'-?\d+').firstMatch(resultado);

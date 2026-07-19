@@ -35,7 +35,8 @@ class _EvnaLayout extends StatefulWidget {
   State<_EvnaLayout> createState() => _EvnaLayoutState();
 }
 
-class _EvnaLayoutState extends State<_EvnaLayout> {
+class _EvnaLayoutState extends State<_EvnaLayout>
+    with AutomaticKeepAliveClientMixin {
   // Escala de un solo parámetro (0-10 autoreportado por el paciente).
   ScaleValue? intensidad;
 
@@ -58,7 +59,11 @@ class _EvnaLayoutState extends State<_EvnaLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -184,6 +189,7 @@ class _EvnaLayoutState extends State<_EvnaLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _evnaColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _evnaEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -232,6 +238,14 @@ class _EvnaInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de la EVNA (mismos cortes que _evnaColor)
+String _evnaEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 7) return "Dolor intenso";
+  if (puntajeTotal >= 4) return "Dolor moderado";
+  if (puntajeTotal >= 1) return "Dolor leve";
+  return "Sin dolor";
 }
 
 // Colores específicos de la EVNA

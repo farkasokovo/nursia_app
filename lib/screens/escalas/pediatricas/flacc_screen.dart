@@ -36,7 +36,8 @@ class _FlaccLayout extends StatefulWidget {
   State<_FlaccLayout> createState() => _FlaccLayoutState();
 }
 
-class _FlaccLayoutState extends State<_FlaccLayout> {
+class _FlaccLayoutState extends State<_FlaccLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? cara;
   ScaleValue? piernas;
   ScaleValue? actividad;
@@ -73,7 +74,11 @@ class _FlaccLayoutState extends State<_FlaccLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -219,6 +224,7 @@ class _FlaccLayoutState extends State<_FlaccLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _flaccColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _flaccEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -267,6 +273,14 @@ class _FlaccInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de FLACC (mismos cortes que _flaccColor)
+String _flaccEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 7) return "Dolor intenso";
+  if (puntajeTotal >= 4) return "Dolor moderado";
+  if (puntajeTotal >= 1) return "Dolor leve";
+  return "Sin dolor";
 }
 
 // Colores específicos de la escala FLACC

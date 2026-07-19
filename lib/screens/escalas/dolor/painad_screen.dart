@@ -36,7 +36,8 @@ class _PainadLayout extends StatefulWidget {
   State<_PainadLayout> createState() => _PainadLayoutState();
 }
 
-class _PainadLayoutState extends State<_PainadLayout> {
+class _PainadLayoutState extends State<_PainadLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? respiracion;
   ScaleValue? vocalizacion;
   ScaleValue? expresionFacial;
@@ -73,7 +74,11 @@ class _PainadLayoutState extends State<_PainadLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -223,6 +228,7 @@ class _PainadLayoutState extends State<_PainadLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _painadColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _painadEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -271,6 +277,14 @@ class _PainadInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de PAINAD (mismos cortes que _painadColor)
+String _painadEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 7) return "Dolor intenso";
+  if (puntajeTotal >= 4) return "Dolor moderado";
+  if (puntajeTotal >= 1) return "Dolor leve";
+  return "Sin dolor";
 }
 
 // Colores específicos de la escala PAINAD

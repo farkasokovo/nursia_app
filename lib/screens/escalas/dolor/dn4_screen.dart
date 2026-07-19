@@ -36,7 +36,8 @@ class _Dn4Layout extends StatefulWidget {
   State<_Dn4Layout> createState() => _Dn4LayoutState();
 }
 
-class _Dn4LayoutState extends State<_Dn4Layout> {
+class _Dn4LayoutState extends State<_Dn4Layout>
+    with AutomaticKeepAliveClientMixin {
   // Interrogatorio (7 ítems)
   ScaleValue? quemazon;
   ScaleValue? frioDoloroso;
@@ -115,7 +116,11 @@ class _Dn4LayoutState extends State<_Dn4Layout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -198,6 +203,7 @@ class _Dn4LayoutState extends State<_Dn4Layout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _dn4Color(_puntajeTotal),
+          etiquetaResolver: (resultado) => _dn4Etiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -246,6 +252,12 @@ class _Dn4Info extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta del DN4 (mismo corte que _dn4Color)
+String _dn4Etiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 4) return "DN4 positivo";
+  return "DN4 negativo";
 }
 
 // Colores específicos del DN4 (punto de corte en ≥ 4/10)

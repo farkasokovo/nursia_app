@@ -36,7 +36,8 @@ class _QsofaLayout extends StatefulWidget {
   State<_QsofaLayout> createState() => _QsofaLayoutState();
 }
 
-class _QsofaLayoutState extends State<_QsofaLayout> {
+class _QsofaLayoutState extends State<_QsofaLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? respiratoria;
   ScaleValue? mental;
   ScaleValue? sistolica;
@@ -63,7 +64,11 @@ class _QsofaLayoutState extends State<_QsofaLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -144,6 +149,7 @@ class _QsofaLayoutState extends State<_QsofaLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _qsofaColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _qsofaEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -192,6 +198,12 @@ class _QsofaInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de qSOFA (mismo corte que _qsofaColor)
+String _qsofaEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 2) return "Alto riesgo (positivo)";
+  return "Bajo riesgo";
 }
 
 // Colores específicos de la escala qSOFA

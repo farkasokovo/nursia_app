@@ -36,7 +36,8 @@ class _SilvermanLayout extends StatefulWidget {
   State<_SilvermanLayout> createState() => _SilvermanLayoutState();
 }
 
-class _SilvermanLayoutState extends State<_SilvermanLayout> {
+class _SilvermanLayoutState extends State<_SilvermanLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? movimientos;
   ScaleValue? tiraje;
   ScaleValue? retraccion;
@@ -73,7 +74,11 @@ class _SilvermanLayoutState extends State<_SilvermanLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -218,6 +223,7 @@ class _SilvermanLayoutState extends State<_SilvermanLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _silvermanColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _silvermanEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -268,6 +274,15 @@ class _SilvermanInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de Silverman-Anderson.
+// ¡INVERTIDA! Puntaje ALTO = PEOR dificultad respiratoria; 0 = sin dificultad.
+String _silvermanEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 7) return "Dificultad severa";
+  if (puntajeTotal >= 4) return "Dificultad moderada";
+  if (puntajeTotal >= 1) return "Dificultad leve";
+  return "Sin dificultad";
 }
 
 // Colores específicos de Silverman-Anderson.

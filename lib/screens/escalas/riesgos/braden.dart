@@ -36,7 +36,8 @@ class _BradenLayout extends StatefulWidget {
   State<_BradenLayout> createState() => _BradenLayoutState();
 }
 
-class _BradenLayoutState extends State<_BradenLayout> {
+class _BradenLayoutState extends State<_BradenLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? percepcionSensorial;
   ScaleValue? humedad;
   ScaleValue? actividad;
@@ -77,7 +78,11 @@ class _BradenLayoutState extends State<_BradenLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -293,6 +298,7 @@ class _BradenLayoutState extends State<_BradenLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _bradenColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _bradenEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -341,6 +347,15 @@ class _BradenInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de Braden (riesgo de úlceras por presión).
+// ¡INVERTIDA! Puntaje BAJO (≤12) = MAYOR riesgo; 19-23 = sin riesgo.
+String _bradenEtiqueta(int puntajeTotal) {
+  if (puntajeTotal <= 12) return "Riesgo alto";
+  if (puntajeTotal <= 14) return "Riesgo moderado";
+  if (puntajeTotal <= 18) return "Riesgo bajo";
+  return "Sin riesgo";
 }
 
 // Colores específicos de Braden.

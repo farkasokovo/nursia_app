@@ -110,15 +110,6 @@ class _SugerenciasScreenState extends State<SugerenciasScreen> {
                 subtitulo: 'nurska.app@gmail.com',
                 onTap: _abrirCorreo,
               ),
-              const SizedBox(height: 12),
-              _buildContactoTile(
-                colorScheme: colorScheme,
-                textTheme: textTheme,
-                icon: PhosphorIconsBold.instagramLogo,
-                titulo: 'Instagram',
-                subtitulo: '@diego_munozslv',
-                onTap: _abrirInstagram,
-              ),
               const SizedBox(height: 24),
               Text(
                 'Nurska es un proyecto independiente mantenido por un estudiante de enfermería. Cada sugerencia ayuda a que la app sea más útil y segura para todos.',

@@ -36,7 +36,8 @@ class _MaddoxLayout extends StatefulWidget {
   State<_MaddoxLayout> createState() => _MaddoxLayoutState();
 }
 
-class _MaddoxLayoutState extends State<_MaddoxLayout> {
+class _MaddoxLayoutState extends State<_MaddoxLayout>
+    with AutomaticKeepAliveClientMixin {
   // Parámetros de la escala de Maddox (igual que Downton, pero con los 5 signos)
   ScaleValue? dolor;
   ScaleValue? eritema;
@@ -74,7 +75,11 @@ class _MaddoxLayoutState extends State<_MaddoxLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -195,6 +200,7 @@ class _MaddoxLayoutState extends State<_MaddoxLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _maddoxColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _maddoxEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -243,6 +249,15 @@ class _MaddoxInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de Maddox (flebitis). Etiquetas NEUTRAS de intensidad:
+// la suma simple de signos no garantiza el grado clínico exacto de Maddox.
+String _maddoxEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 5) return "Flebitis severa";
+  if (puntajeTotal >= 3) return "Flebitis moderada";
+  if (puntajeTotal >= 1) return "Flebitis leve";
+  return "Sin flebitis";
 }
 
 // Colores específicos de la escala de Maddox

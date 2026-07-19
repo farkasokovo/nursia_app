@@ -36,7 +36,8 @@ class _DowntonLayout extends StatefulWidget {
   State<_DowntonLayout> createState() => _DowntonLayoutState();
 }
 
-class _DowntonLayoutState extends State<_DowntonLayout> {
+class _DowntonLayoutState extends State<_DowntonLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? caidas;
   ScaleValue? medicamentos;
   ScaleValue? deficitSensorial;
@@ -73,7 +74,11 @@ class _DowntonLayoutState extends State<_DowntonLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -226,6 +231,7 @@ class _DowntonLayoutState extends State<_DowntonLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: (resultado) => _downtonColor(_puntajeTotal),
+          etiquetaResolver: (resultado) => _downtonEtiqueta(_puntajeTotal),
         ),
       ],
     );
@@ -274,6 +280,13 @@ class _DowntonInfo extends StatelessWidget {
       ),
     );
   }
+}
+
+// Etiqueta clínica corta de Downton (riesgo de caídas).
+// El caso "No valorable" lo resuelve el footer (resultado no numérico).
+String _downtonEtiqueta(int puntajeTotal) {
+  if (puntajeTotal >= 3) return "Riesgo alto de caídas";
+  return "Riesgo bajo de caídas";
 }
 
 // Colores específicos de la escala de Downton

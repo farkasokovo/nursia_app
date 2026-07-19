@@ -36,7 +36,8 @@ class _RamsayLayout extends StatefulWidget {
   State<_RamsayLayout> createState() => _RamsayLayoutState();
 }
 
-class _RamsayLayoutState extends State<_RamsayLayout> {
+class _RamsayLayoutState extends State<_RamsayLayout>
+    with AutomaticKeepAliveClientMixin {
   ScaleValue? sedacion;
 
   bool get _todoCompleto => sedacion != null;
@@ -48,7 +49,11 @@ class _RamsayLayoutState extends State<_RamsayLayout> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         Expanded(
@@ -112,6 +117,7 @@ class _RamsayLayoutState extends State<_RamsayLayout> {
           visible: _todoCompleto,
           resultado: resultado,
           colorResolver: _ramsayColor,
+          etiquetaResolver: _ramsayEtiqueta,
         ),
       ],
     );
@@ -159,6 +165,29 @@ class _RamsayInfo extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// Etiqueta clínica corta de Ramsay (nivel de sedación; parsea el puntaje).
+String _ramsayEtiqueta(String resultado) {
+  final match = RegExp(r'^\d+').firstMatch(resultado);
+  if (match == null) return "No valorable";
+  final score = int.parse(match.group(0)!);
+  switch (score) {
+    case 1:
+      return "Agitado / Insuficiente";
+    case 2:
+      return "Sedación óptima";
+    case 3:
+      return "Somnoliento";
+    case 4:
+      return "Sedación superficial";
+    case 5:
+      return "Sedación profunda";
+    case 6:
+      return "Sin respuesta";
+    default:
+      return "";
   }
 }
 
