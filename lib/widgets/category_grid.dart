@@ -113,6 +113,22 @@ class _CategoryGridState extends State<CategoryGrid> {
         itemCount: _bloques.length,
         itemBuilder: (context, index) {
           final bloque = _bloques[index];
+
+          // Cuando el bloque tiene un número impar de ítems en 2 columnas, el
+          // último quedaría huérfano a media pantalla. En vez de eso, sumamos
+          // un cell "Próximamente" para completar la fila. Al ser una celda
+          // más del grid, hereda el mismo childAspectRatio dinámico. Con
+          // crossAxisCount == 1 nunca aplica (cada botón ya llena su fila).
+          final tieneHuerfano =
+              widget.crossAxisCount == 2 && bloque.length.isOdd;
+          if (tieneHuerfano) {
+            debugPrint(
+              'CategoryGrid: bloque $index impar (${bloque.length}) -> '
+              'se agrega placeholder "Próximamente"',
+            );
+          }
+          final itemCount = bloque.length + (tieneHuerfano ? 1 : 0);
+
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: GridView.builder(
@@ -125,8 +141,12 @@ class _CategoryGridState extends State<CategoryGrid> {
                 crossAxisSpacing: _spacing,
                 childAspectRatio: _ratioDinamico,
               ),
-              itemCount: bloque.length,
+              itemCount: itemCount,
               itemBuilder: (context, i) {
+                // La celda extra (índice fuera del bloque) es el placeholder.
+                if (i >= bloque.length) {
+                  return const ComingSoonButton();
+                }
                 final item = bloque[i];
                 return CategoryButton(
                   title: item.titulo,

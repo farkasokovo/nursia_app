@@ -28,7 +28,7 @@ class NormaRepository {
       );
       final data = json.decode(respuesta) as List<dynamic>;
       for (final item in data) {
-        await _dao.insertar(Norma.fromMap(item));
+        await _dao.insertar(Norma.fromJson(item));
       }
       debugPrint('Normas: semilla cargada (${data.length} registros).');
     } catch (e) {

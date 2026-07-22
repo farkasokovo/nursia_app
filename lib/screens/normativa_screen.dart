@@ -134,18 +134,28 @@ class _NormativaScreenState extends State<NormativaScreen> {
           //   "n3",
           //   null,
           // ),
-          // _buildButton(
-          //   "Terapia de\nInfusión",
-          //   PhosphorIconsRegular.drop,
-          //   "n4",
-          //   null,
-          // ),
-          // _buildButton(
-          //   "Manejo de\nResiduos",
-          //   PhosphorIconsRegular.trash,
-          //   "n5",
-          //   null,
-          // ),
+          _buildButton(
+            "Terapia de\nInfusión",
+            PhosphorIconsRegular.drop,
+            "n4", // Este tag DEBE coincidir con el del ExpandableCategoryScreen
+            const ExpandableCategoryScreen(
+              heroTag: "n4",
+              title: "Terapia de Infusión",
+              icon: PhosphorIconsRegular.drop,
+              child: ListaNormasFiltradaScreen(categoria: "Terapia de infusión"),
+            ),
+          ),
+          _buildButton(
+            "Manejo de\nResiduos",
+            PhosphorIconsRegular.trash,
+            "n5", // Este tag DEBE coincidir con el del ExpandableCategoryScreen
+            const ExpandableCategoryScreen(
+              heroTag: "n5",
+              title: "Manejo de Residuos",
+              icon: PhosphorIconsRegular.trash,
+              child: ListaNormasFiltradaScreen(categoria: "RPBI"),
+            ),
+          ),
           // _buildButton(
           //   "Salud\nReproductiva",
           //   PhosphorIconsRegular.baby,

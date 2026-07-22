@@ -10,8 +10,220 @@
     "fecha_publicacion": "2013-09-02",
     "resumen": "Establece las características y especificaciones mínimas para la prestación del servicio de enfermería en los establecimientos de atención médica del Sistema Nacional de Salud, así como para quienes lo ejercen de forma independiente. Define los niveles de formación del personal de enfermería, sus funciones (asistencial, administrativa, docente e investigación) y delimita el grado de responsabilidad y complejidad de cuidados según la preparación académica de cada categoría.",
     "palabras_clave": "enfermería, cuidados, práctica de enfermería, personal de enfermería, auxiliar de enfermería, técnico en enfermería, licenciado en enfermería, enfermero especialista, proceso de atención de enfermería, intervenciones independientes, intervenciones dependientes, intervenciones interdependientes, diagnóstico de enfermería, competencias, formación académica, cédula profesional",
-    "puntos_clave": "• La norma es obligatoria en todos los establecimientos del SNS donde se presten servicios de enfermería, y para quienes los presten de forma independiente.\n• El personal de enfermería se clasifica en: no profesional (auxiliares, estudiantes, pasantes) y profesional (técnico, técnico especializado, licenciado, especialista, maestría, doctorado).\n• Auxiliar de enfermería: curso mínimo de 1 año; realiza cuidados de baja complejidad delegados y supervisados; función de colaborador asistencial.\n• Técnico en enfermería: nivel medio superior; cuidados de mediana complejidad; acciones interdependientes e independientes; función sustantiva asistencial.\n• Técnico especializado en enfermería: nivel medio superior + diploma de área específica; cuidados de mediana complejidad en campo específico; función asistencial en área particular.\n• Licenciada en enfermería: nivel superior; predominio de acciones independientes; aplica proceso de atención de enfermería; cuidados de mediana complejidad con predominio independiente; puede colaborar en docencia e investigación operativa.\n• Enfermera especialista: licenciatura + diploma de especialización; cuidados de alta complejidad; aplica modelos de calidad e innovación en su especialidad; función sustantiva asistencial.\n• Enfermera con maestría: roles de educador, investigador, consultor o asesor; genera conocimiento; función sustantiva de docencia, administración e investigación.\n• Enfermera con doctorado: dirige investigación interdisciplinaria o multidisciplinaria; aporta evidencias científicas para políticas de salud; función sustantiva de investigación.\n• Las actividades están ordenadas por grado de complejidad: son limitativas hacia abajo (no puede realizarlas quien no tiene el grado mínimo requerido) pero no hacia arriba.\n• Solo se reconocen estudios de instituciones pertenecientes al Sistema Educativo Nacional; los estudios del extranjero requieren revalidación oficial.\n• Las instituciones deben procurar que el personal cuente con certificación profesional vigente expedida por organismos colegiados reconocidos.\n• Las instituciones deben dar inducción al puesto a todo personal de nuevo ingreso o sujeto a movimiento.\n• Está prohibido emplear personal de enfermería en funciones fuera de sus competencias, salvo urgencia con supervisión y carácter provisional.\n• El personal de enfermería está obligado a verificar el equipo antes de usarlo, reportar fallas o faltantes y actualizar sus conocimientos científicos, técnicos, éticos y humanísticos.\n• El proceso de atención de enfermería (PAE) consta de cinco etapas: valoración, diagnóstico de enfermería, planeación, ejecución y evaluación.\n• Las intervenciones de enfermería se clasifican en: dependientes (por prescripción de otro profesional), independientes (autónomas según su formación) e interdependientes (en conjunto con el equipo multidisciplinario).\n• La vigilancia de la norma corresponde a la Secretaría de Salud y a los gobiernos de las entidades federativas en sus respectivos ámbitos de competencia.",
+    "puntos_clave": [
+      {
+        "icono": "gavel",
+        "texto": "La norma es obligatoria en todos los establecimientos del SNS donde se presten servicios de enfermería, y para quienes los presten de forma independiente."
+      },
+      {
+        "icono": "usersThree",
+        "texto": "El personal de enfermería se clasifica en: no profesional (auxiliares, estudiantes, pasantes) y profesional (técnico, técnico especializado, licenciado, especialista, maestría, doctorado)."
+      },
+      {
+        "icono": "handHeart",
+        "texto": "Auxiliar de enfermería: curso mínimo de 1 año; realiza cuidados de baja complejidad delegados y supervisados; función de colaborador asistencial."
+      },
+      {
+        "icono": "stethoscope",
+        "texto": "Técnico en enfermería: nivel medio superior; cuidados de mediana complejidad; acciones interdependientes e independientes; función sustantiva asistencial."
+      },
+      {
+        "icono": "certificate",
+        "texto": "Técnico especializado en enfermería: nivel medio superior + diploma de área específica; cuidados de mediana complejidad en campo específico; función asistencial en área particular."
+      },
+      {
+        "icono": "graduationCap",
+        "texto": "Licenciada en enfermería: nivel superior; predominio de acciones independientes; aplica proceso de atención de enfermería; cuidados de mediana complejidad con predominio independiente; puede colaborar en docencia e investigación operativa."
+      },
+      {
+        "icono": "star",
+        "texto": "Enfermera especialista: licenciatura + diploma de especialización; cuidados de alta complejidad; aplica modelos de calidad e innovación en su especialidad; función sustantiva asistencial."
+      },
+      {
+        "icono": "chalkboardTeacher",
+        "texto": "Enfermera con maestría: roles de educador, investigador, consultor o asesor; genera conocimiento; función sustantiva de docencia, administración e investigación."
+      },
+      {
+        "icono": "flask",
+        "texto": "Enfermera con doctorado: dirige investigación interdisciplinaria o multidisciplinaria; aporta evidencias científicas para políticas de salud; función sustantiva de investigación."
+      },
+      {
+        "icono": "arrowsDownUp",
+        "texto": "Las actividades están ordenadas por grado de complejidad: son limitativas hacia abajo (no puede realizarlas quien no tiene el grado mínimo requerido) pero no hacia arriba."
+      },
+      {
+        "icono": "sealCheck",
+        "texto": "Solo se reconocen estudios de instituciones pertenecientes al Sistema Educativo Nacional; los estudios del extranjero requieren revalidación oficial."
+      },
+      {
+        "icono": "medal",
+        "texto": "Las instituciones deben procurar que el personal cuente con certificación profesional vigente expedida por organismos colegiados reconocidos."
+      },
+      {
+        "icono": "student",
+        "texto": "Las instituciones deben dar inducción al puesto a todo personal de nuevo ingreso o sujeto a movimiento."
+      },
+      {
+        "icono": "prohibit",
+        "texto": "Está prohibido emplear personal de enfermería en funciones fuera de sus competencias, salvo urgencia con supervisión y carácter provisional."
+      },
+      {
+        "icono": "wrench",
+        "texto": "El personal de enfermería está obligado a verificar el equipo antes de usarlo, reportar fallas o faltantes y actualizar sus conocimientos científicos, técnicos, éticos y humanísticos."
+      },
+      {
+        "icono": "listChecks",
+        "texto": "El proceso de atención de enfermería (PAE) consta de cinco etapas: valoración, diagnóstico de enfermería, planeación, ejecución y evaluación."
+      },
+      {
+        "icono": "clipboardText",
+        "texto": "Las intervenciones de enfermería se clasifican en: dependientes (por prescripción de otro profesional), independientes (autónomas según su formación) e interdependientes (en conjunto con el equipo multidisciplinario)."
+      },
+      {
+        "icono": "eye",
+        "texto": "La vigilancia de la norma corresponde a la Secretaría de Salud y a los gobiernos de las entidades federativas en sus respectivos ámbitos de competencia."
+      }
+    ],
     "observaciones": "Esta norma no tiene concordancia con ninguna norma internacional ni mexicana. Debe aplicarse en conjunto con múltiples NOMs según el área de atención, incluyendo NOM-004-SSA3-2012 (expediente clínico), NOM-022-SSA3-2012 (terapia de infusión), NOM-045-SSA2-2005 (infecciones nosocomiales), entre otras listadas en el apartado 3 del documento.",
     "dof_referencia": "Secretaría de Salud. (2013, 2 de septiembre). Norma Oficial Mexicana NOM-019-SSA3-2013, Para la práctica de enfermería en el Sistema Nacional de Salud. Diario Oficial de la Federación. http://www.dof.gob.mx/nota_detalle.php?codigo=5312523&fecha=02/09/2013"
+  },
+  {
+    "id": 2,
+    "codigo": "NOM-022-SSA3-2012",
+    "titulo": "Norma Oficial Mexicana NOM-022-SSA3-2012, Que instituye las condiciones para la administración de la terapia de infusión en los Estados Unidos Mexicanos",
+    "titulo_corto": "Terapia de infusión intravenosa",
+    "area_salud": "Enfermería",
+    "ambito": "Establecimientos para la atención médica de los sectores público, social y privado del Sistema Nacional de Salud que administran terapia de infusión intravenosa",
+    "personal_aplicable": "Personal médico y de enfermería que instala, maneja, vigila y retira los accesos vasculares para la terapia de infusión",
+    "fecha_publicacion": "2012-09-18",
+    "resumen": "Instituye las condiciones y los requisitos mínimos para la instalación, el mantenimiento, la vigilancia y el retiro de los accesos vasculares utilizados en la administración de la terapia de infusión intravenosa. Su propósito es estandarizar el manejo de los dispositivos de acceso vascular, reducir la variabilidad en la práctica y prevenir las complicaciones locales y sistémicas, entre ellas las infecciones asociadas a la atención de la salud. Establece la técnica aséptica, la selección del dispositivo y del sitio, la identificación de los accesos y las soluciones, la vigilancia del sitio de punción y el registro en el expediente clínico.",
+    "palabras_clave": "terapia de infusión, infusión intravenosa, intravenosa, acceso vascular, catéter venoso periférico, catéter venoso central, PICC, venoclisis, técnica aséptica, antisepsia, higiene de manos, flebitis, infiltración, extravasación, infección asociada a la atención de la salud, apósito estéril, punción venosa, mantenimiento de catéter, retiro de catéter, expediente clínico, NOM-022, 022",
+    "puntos_clave": [
+      {
+        "icono": "gavel",
+        "texto": "Aplica a los establecimientos públicos, sociales y privados del Sistema Nacional de Salud que administran terapia de infusión intravenosa."
+      },
+      {
+        "icono": "syringe",
+        "texto": "Define la terapia de infusión y los dispositivos de acceso vascular (catéter venoso periférico, central y de inserción periférica —PICC—, entre otros), así como sus condiciones de uso."
+      },
+      {
+        "icono": "handSoap",
+        "texto": "La higiene de manos es obligatoria antes de instalar y cada vez que se manipula el acceso vascular o el sistema de infusión."
+      },
+      {
+        "icono": "shieldCheck",
+        "texto": "La instalación se realiza con técnica aséptica, previa antisepsia de la piel del sitio de punción con el antiséptico indicado."
+      },
+      {
+        "icono": "mapPin",
+        "texto": "La selección del dispositivo y del sitio de punción se hace según las condiciones del paciente, el tipo de solución y el tiempo previsto de tratamiento."
+      },
+      {
+        "icono": "bandaids",
+        "texto": "El sitio de inserción se cubre y protege con material estéril (gasa estéril o membrana transparente), que debe mantenerse limpio, seco y bien adherido."
+      },
+      {
+        "icono": "tag",
+        "texto": "El acceso vascular, el equipo de administración y las soluciones deben identificarse (rotularse) con los datos que permitan su control, incluyendo fecha y hora de instalación."
+      },
+      {
+        "icono": "eye",
+        "texto": "El sitio de punción se vigila y valora de forma periódica para prevenir y detectar oportunamente complicaciones: flebitis, infiltración, extravasación, obstrucción e infección."
+      },
+      {
+        "icono": "notePencil",
+        "texto": "Toda instalación, mantenimiento, incidente y retiro del acceso vascular debe registrarse en el expediente clínico."
+      },
+      {
+        "icono": "xCircle",
+        "texto": "El acceso vascular se retira ante datos de complicación o cuando deja de ser necesario, registrando el motivo y las condiciones del retiro."
+      },
+      {
+        "icono": "flask",
+        "texto": "La preparación y mezcla de las soluciones a infundir se realiza bajo técnica aséptica para evitar su contaminación."
+      },
+      {
+        "icono": "trash",
+        "texto": "Los materiales punzocortantes e insumos contaminados se desechan conforme a la normatividad de residuos peligrosos biológico-infecciosos (NOM-087)."
+      },
+      {
+        "icono": "student",
+        "texto": "El personal que instala y maneja la terapia de infusión debe estar capacitado y actualizado en el procedimiento y en la prevención de complicaciones."
+      }
+    ],
+    "observaciones": "Corresponde a la versión vigente (2012). Debe aplicarse en conjunto con la NOM-019-SSA3-2013 (práctica de enfermería), la NOM-004-SSA3-2012 (expediente clínico) y la NOM-087-ECOL-SSA1-2002 (manejo de los RPBI generados durante el procedimiento).",
+    "dof_referencia": "Secretaría de Salud. (2012, 18 de septiembre). Norma Oficial Mexicana NOM-022-SSA3-2012, Que instituye las condiciones para la administración de la terapia de infusión en los Estados Unidos Mexicanos. Diario Oficial de la Federación. https://dof.gob.mx/nota_detalle.php?codigo=5268977&fecha=18/09/2012#gsc.tab=0"
+  },
+  {
+    "id": 3,
+    "codigo": "NOM-087-SSA1-2002",
+    "titulo": "Norma Oficial Mexicana NOM-087-ECOL-SSA1-2002, Protección ambiental - Salud ambiental - Residuos peligrosos biológico-infecciosos - Clasificación y especificaciones de manejo",
+    "titulo_corto": "Manejo de RPBI",
+    "area_salud": "RPBI",
+    "ambito": "Establecimientos que generan residuos peligrosos biológico-infecciosos (RPBI) y prestadores de servicios para su manejo, en los sectores público, social y privado",
+    "personal_aplicable": "Todo el personal de los establecimientos de atención médica que genera, identifica, envasa, almacena o maneja RPBI, incluido el personal de enfermería",
+    "fecha_publicacion": "2003-02-17",
+    "resumen": "Norma emitida de manera conjunta por la Secretaría de Medio Ambiente y Recursos Naturales y la Secretaría de Salud. Clasifica los residuos peligrosos biológico-infecciosos (RPBI) generados durante la atención a la salud y establece las especificaciones para su identificación, separación, envasado, almacenamiento, recolección, transporte y disposición final. Su objeto es proteger al personal, a los pacientes, a la población y al ambiente frente al riesgo de infección, mediante un manejo seguro y estandarizado de estos residuos desde el punto donde se generan.",
+    "palabras_clave": "RPBI, residuos peligrosos biológico-infecciosos, residuos, bioseguridad, código de colores, bolsa roja, bolsa amarilla, objetos punzocortantes, contenedor rígido, símbolo universal de riesgo biológico, sangre, cultivos y cepas, patológicos, residuos no anatómicos, envasado, segregación, almacenamiento temporal, disposición final, manejo de residuos, NOM-087, 087",
+    "puntos_clave": [
+      {
+        "icono": "gavel",
+        "texto": "Norma emitida en conjunto por la SEMARNAT y la Secretaría de Salud; clasifica los RPBI y fija las especificaciones para su manejo."
+      },
+      {
+        "icono": "virus",
+        "texto": "Se consideran RPBI los residuos generados durante la atención a la salud que contienen agentes biológico-infecciosos capaces de causar enfermedad."
+      },
+      {
+        "icono": "listChecks",
+        "texto": "Se clasifican en cinco tipos: sangre, cultivos y cepas de agentes biológico-infecciosos, residuos patológicos, residuos no anatómicos y objetos punzocortantes."
+      },
+      {
+        "icono": "drop",
+        "texto": "Sangre en estado líquido y sus derivados: se envasan en recipientes herméticos, que la norma permite en color rojo o amarillo."
+      },
+      {
+        "icono": "testTube",
+        "texto": "Cultivos y cepas de agentes biológico-infecciosos: se envasan en bolsas de polietileno. Por el código de colores de uso estándar en el sector, se emplea bolsa roja."
+      },
+      {
+        "icono": "dna",
+        "texto": "Residuos patológicos (tejidos, órganos y partes que se extraen o remueven): bolsas de polietileno y, si son líquidos, recipientes herméticos. Por convención del sector, se emplea el color amarillo."
+      },
+      {
+        "icono": "bandaids",
+        "texto": "Residuos no anatómicos (gasas, apósitos y materiales de curación empapados o saturados de sangre): bolsas de polietileno. Por convención del sector, se emplea bolsa roja."
+      },
+      {
+        "icono": "syringe",
+        "texto": "Objetos punzocortantes (agujas, hojas de bisturí, estiletes, etc.): se depositan en recipientes rígidos de polipropileno de color rojo, color que la norma señala de forma explícita (punto 6.2.2)."
+      },
+      {
+
+      },
+      {
+        "icono": "percent",
+        "texto": "Las bolsas y los recipientes rígidos se llenan únicamente hasta el 80% de su capacidad."
+      },
+      {
+        "icono": "biohazard",
+        "texto": "Todas las bolsas y recipientes se marcan con el símbolo universal de riesgo biológico y la leyenda \"RESIDUOS PELIGROSOS BIOLÓGICO-INFECCIOSOS\"."
+      },
+      {
+        "icono": "arrowsSplit",
+        "texto": "La separación (segregación) de los residuos se realiza en el mismo lugar y momento en que se generan."
+      },
+      {
+        "icono": "warehouse",
+        "texto": "El almacenamiento temporal se realiza en áreas específicas señalizadas, con tiempos máximos de 30, 15 o 7 días según el nivel del establecimiento generador (punto 6.3.3)."
+      },
+      {
+        "icono": "truck",
+        "texto": "Los RPBI no se mezclan con la basura común; su recolección, transporte y disposición final los realizan prestadores de servicios autorizados."
+      }
+    ],
+    "observaciones": "Es la versión vigente (2002, publicada en el DOF en 2003), que sustituyó a la NOM-087-ECOL-1995. Se aplica de forma complementaria a las normas del ámbito clínico (por ejemplo, NOM-019-SSA3-2013 y NOM-022-SSA3-2012), ya que gran parte de los RPBI se generan durante los procedimientos de enfermería. Nota: la asignación de colores de bolsa por tipo de residuo corresponde al código de uso estándar del sector y no siempre aparece de forma literal en el texto de la norma.",
+    "dof_referencia": "Secretaría de Medio Ambiente y Recursos Naturales y Secretaría de Salud. (2003, 17 de febrero). Norma Oficial Mexicana NOM-087-ECOL-SSA1-2002, Protección ambiental - Salud ambiental - Residuos peligrosos biológico-infecciosos - Clasificación y especificaciones de manejo. Diario Oficial de la Federación. https://dof.gob.mx/nota_detalle.php?codigo=704675&fecha=17/02/2003#gsc.tab=0"
   }
 ]

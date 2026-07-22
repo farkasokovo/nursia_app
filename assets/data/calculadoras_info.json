@@ -1,69 +1,115 @@
 {
   "calculadoras": [
     {
-  "id": "dosis",
-  "titulo": "Calculadora de dosis",
-  "descripcion": "La regla de tres en enfermería es un procedimiento matemático que permite calcular la cantidad exacta de un fármaco (en mililitros o tabletas) que se debe administrar a un paciente, basándose en la dosis prescrita por el médico. Este método establece una relación de proporcionalidad entre tres valores conocidos: la dosis requerida, la concentración del fármaco en su presentación original y el volumen en el que está disuelto, permitiendo despejar una incógnita (X) de manera precisa para evitar errores de medicación.",
-  "formula": "X = (Dosis prescrita × Diluyente) / Presentación",
-  "notas": [
-    "Antes de aplicar la fórmula, es imperativo que la dosis prescrita y la presentación estén en la misma unidad de medida (ej. si la orden es en gramos y la ampolla en miligramos, se debe convertir a miligramos).",
-    "El cálculo es solo un paso; debe acompañarse de la verificación del paciente correcto, medicamento correcto, vía correcta, hora correcta, etc.",
-    "En medicamentos de alto riesgo (como insulina o anticoagulantes), el cálculo debe ser validado por un segundo profesional de enfermería.",
-    "La manipulación del diluyente y la carga del fármaco deben realizarse bajo técnica estéril para evitar infecciones nosocomiales.",
-    "En pediatría, el redondeo debe ser extremadamente cuidadoso, prefiriendo siempre jeringas de precisión (1 ml) para dosis pequeñas."
-  ],
-  "referencias": [
-    {
-      "text": "Mendoza Leandro, C. A. (2022). El Cálculo de Medicamentos por Regla de 3. Facultad de Enfermería y Obstetricia, UNAM.",
-      "url": "https://reto.cuaed.unam.mx/node/2192"
+      "id": "dosis",
+      "titulo": "Calculadora de dosis",
+      "descripcion": "La regla de tres en enfermería es un procedimiento matemático que permite calcular la cantidad exacta de un fármaco (en mililitros o tabletas) que se debe administrar a un paciente, basándose en la dosis prescrita por el médico. Este método establece una relación de proporcionalidad entre tres valores conocidos: la dosis requerida, la concentración del fármaco en su presentación original y el volumen en el que está disuelto, permitiendo despejar una incógnita (X) de manera precisa para evitar errores de medicación.",
+      "formula": "X = (Dosis prescrita × Diluyente) / Presentación",
+      "notas": [
+        "Antes de aplicar la fórmula, es imperativo que la dosis prescrita y la presentación estén en la misma unidad de medida (ej. si la orden es en gramos y la ampolla en miligramos, se debe convertir a miligramos).",
+        "El cálculo es solo un paso; debe acompañarse de la verificación del paciente correcto, medicamento correcto, vía correcta, hora correcta, etc.",
+        "En medicamentos de alto riesgo (como insulina o anticoagulantes), el cálculo debe ser validado por un segundo profesional de enfermería.",
+        "La manipulación del diluyente y la carga del fármaco deben realizarse bajo técnica estéril para evitar infecciones nosocomiales.",
+        "En pediatría, el redondeo debe ser extremadamente cuidadoso, prefiriendo siempre jeringas de precisión (1 ml) para dosis pequeñas."
+      ],
+      "referencias": [
+        {
+          "text": "Mendoza Leandro, C. A. (2022). El Cálculo de Medicamentos por Regla de 3. Facultad de Enfermería y Obstetricia, UNAM.",
+          "url": "https://reto.cuaed.unam.mx/node/2192"
+        },
+        {
+          "text": "AdminSalud. (2023). Regla de 3 en Enfermería: Un Pilar del Cuidado.",
+          "url": "https://adminsaludadultomayor.com/regla-de-tres-en-enfermeria/"
+        }
+      ]
     },
     {
-      "text": "AdminSalud. (2023). Regla de 3 en Enfermería: Un Pilar del Cuidado.",
-      "url": "https://adminsaludadultomayor.com/regla-de-tres-en-enfermeria/"
-    }
-  ]
-},
-    {
-  "id": "soluciones",
-  "titulo": "Calculadora de soluciones glucosadas",
-  "descripcion": "En la práctica clínica, especialmente en cuidados críticos neonatales y pediátricos, es frecuente que se requieran concentraciones de glucosa que no están disponibles de forma comercial. Para obtenerlas, el personal de enfermería realiza mezclas precisas. Existen dos métodos principales: la dilución, donde se utiliza agua estéril para reducir la concentración de una solución disponible, y la mezcla de dos soluciones, donde se combinan dos concentraciones disponibles para alcanzar el porcentaje deseado.",
-  "formula": "Para Dilución (Bajar la concentración con agua estéril):\nVolumen de solución disponible = (Volumen total deseado × Porcentaje indicado) / Porcentaje disponible.\nVolumen de agua estéril = Volumen total deseado - Volumen de solución disponible.\n\nPara Mezcla de dos soluciones (Ajustar la concentración con una segunda solución):\nVolumen de la solución de mayor concentración (ml) = Volumen total × (Porcentaje indicado - Porcentaje de menor concentración) / (Porcentaje de mayor concentración - Porcentaje de menor concentración).\nVolumen de la solución de menor concentración (ml) = Volumen total - Volumen de la solución de mayor concentración.",
-  "notas": [
-    "Las soluciones con concentraciones de glucosa superiores al 12.5% se consideran altamente hipertónicas y deben administrarse preferentemente por vía central para evitar flebitis química.",
-    "En recién nacidos, el cálculo del VIG (Volumen de Infusión de Glucosa) es vital para mantener la euglicemia; estas mezclas son la base de dicho aporte.",
-    "Toda solución preparada manualmente debe rotularse inmediatamente con la concentración final, fecha, hora y firma del responsable para evitar errores de medicación.",
-    "Al ser una mezcla de varios viales o bolsas, debe realizarse bajo técnica estéril (campana de flujo laminar si está disponible) para prevenir la contaminación del fluido.",
-    "Agitar suavemente la bolsa o frasco tras la mezcla para asegurar que la concentración sea homogénea antes de iniciar la infusión."
-  ],
-  "referencias": [
-    {
-      "text": "Secretaría de Salud. (2021). Guía de Práctica Clínica: Intervenciones de Enfermería en la Administración de Medicamentos. Ciudad de México, México.",
-      "url": "https://www.gob.mx/salud/documentos/guias-de-practica-clinica"
+      "id": "soluciones",
+      "titulo": "Calculadora de soluciones glucosadas",
+      "descripcion": "En la práctica clínica, especialmente en cuidados críticos neonatales y pediátricos, es frecuente que se requieran concentraciones de glucosa que no están disponibles de forma comercial. Para obtenerlas, el personal de enfermería realiza mezclas precisas. Existen dos métodos principales: la dilución, donde se utiliza agua estéril para reducir la concentración de una solución disponible, y la mezcla de dos soluciones, donde se combinan dos concentraciones disponibles para alcanzar el porcentaje deseado.",
+      "formula": "Para Dilución (Bajar la concentración con agua estéril):\nVolumen de solución disponible = (Volumen total deseado × Porcentaje indicado) / Porcentaje disponible.\nVolumen de agua estéril = Volumen total deseado - Volumen de solución disponible.\n\nPara Mezcla de dos soluciones (Ajustar la concentración con una segunda solución):\nVolumen de la solución de mayor concentración (ml) = Volumen total × (Porcentaje indicado - Porcentaje de menor concentración) / (Porcentaje de mayor concentración - Porcentaje de menor concentración).\nVolumen de la solución de menor concentración (ml) = Volumen total - Volumen de la solución de mayor concentración.",
+      "notas": [
+        "Las soluciones con concentraciones de glucosa superiores al 12.5% se consideran altamente hipertónicas y deben administrarse preferentemente por vía central para evitar flebitis química.",
+        "En recién nacidos, el cálculo del VIG (Volumen de Infusión de Glucosa) es vital para mantener la euglicemia; estas mezclas son la base de dicho aporte.",
+        "Toda solución preparada manualmente debe rotularse inmediatamente con la concentración final, fecha, hora y firma del responsable para evitar errores de medicación.",
+        "Al ser una mezcla de varios viales o bolsas, debe realizarse bajo técnica estéril (campana de flujo laminar si está disponible) para prevenir la contaminación del fluido.",
+        "Agitar suavemente la bolsa o frasco tras la mezcla para asegurar que la concentración sea homogénea antes de iniciar la infusión."
+      ],
+      "referencias": [
+        {
+          "text": "Secretaría de Salud. (2021). Guía de Práctica Clínica: Intervenciones de Enfermería en la Administración de Medicamentos. Ciudad de México, México.",
+          "url": "https://www.gob.mx/salud/documentos/guias-de-practica-clinica"
+        },
+        {
+          "text": "Hospital Universitario Reina Sofía. (2023). Manual de preparación de soluciones de glucosa en pediatría. Servicio de Farmacia y Enfermería Pediátrica.",
+          "url": "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=manuales_enfermeria"
+        }
+      ]
     },
     {
-      "text": "Hospital Universitario Reina Sofía. (2023). Manual de preparación de soluciones de glucosa en pediatría. Servicio de Farmacia y Enfermería Pediátrica.",
-      "url": "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=manuales_enfermeria"
-    }
-  ]
-},
+      "id": "perdidasinsensibles",
+      "titulo": "Calculadora de pérdidas insensibles (basales)",
+      "descripcion": "Las pérdidas insensibles representan la cantidad de líquido que el cuerpo pierde de manera imperceptible a través de la evaporación por la piel (convección) y los pulmones (vapor de agua en la exhalación). A diferencia de la orina o el sudor visible, estas pérdidas no pueden medirse directamente en un cómodo o sonda, por lo que se estiman mediante fórmulas estandarizadas para asegurar que el balance hídrico del paciente sea lo más exacto posible, evitando estados de deshidratación o sobrecarga de líquidos.",
+      "formula": "P.I. = 0.5 × Peso (kg) × Horas del turno",
+      "notas": [
+        "Si el paciente presenta fiebre, las pérdidas insensibles incrementan según la temperatura:\n38-39°C: +20 ml/h.\n39-40°C: +40 ml/h.\n40-41°C: +60 ml/h..",
+        "Si el paciente presenta una frecuencia respiratoria mayor a 20 rpm, se suelen añadir 1 ml/hr por cada respiración adicional.",
+        "En pacientes intubados, se considera una pérdida adicional fija de aproximadamente 500 ml en 24 horas (20 ml/hr), aunque esto puede variar según la humidificación del circuito.",
+        "Cirugía / Abdomen abierto: Se estima una pérdida incremental de 1 a 2 ml/kg/hr debido a la exposición de vísceras y evaporación directa en quirófano.",
+        "La sudoración se clasifica como leve (10 ml/hr), moderada (20 ml/hr) o intensa (40 ml/hr), sumándose al resultado final de la fórmula."
+      ],
+      "referencias": [
+        {
+          "text": "Ibarra-Naranjo, J. L., & Zaldaña-Crespo, V. L. (2022). Pérdidas insensibles: fisiología, fisiopatología y compensación. Enfermería Investiga, 7(4).",
+          "url": "https://revistas.uta.edu.ec/erevista/index.php/enfi/article/view/1690"
+        }
+      ]
+    },
     {
-  "id": "perdidasinsensibles",
-  "titulo": "Calculadora de pérdidas insensibles (basales)",
-  "descripcion": "Las pérdidas insensibles representan la cantidad de líquido que el cuerpo pierde de manera imperceptible a través de la evaporación por la piel (convección) y los pulmones (vapor de agua en la exhalación). A diferencia de la orina o el sudor visible, estas pérdidas no pueden medirse directamente en un cómodo o sonda, por lo que se estiman mediante fórmulas estandarizadas para asegurar que el balance hídrico del paciente sea lo más exacto posible, evitando estados de deshidratación o sobrecarga de líquidos.",
-  "formula": "P.I. = 0.5 × Peso (kg) × Horas del turno",
-  "notas": [
-    "Si el paciente presenta fiebre, las pérdidas insensibles incrementan según la temperatura:\n38-39°C: +20 ml/h.\n39-40°C: +40 ml/h.\n40-41°C: +60 ml/h..",
-    "Si el paciente presenta una frecuencia respiratoria mayor a 20 rpm, se suelen añadir 1 ml/hr por cada respiración adicional.",
-    "En pacientes intubados, se considera una pérdida adicional fija de aproximadamente 500 ml en 24 horas (20 ml/hr), aunque esto puede variar según la humidificación del circuito.",
-    "Cirugía / Abdomen abierto: Se estima una pérdida incremental de 1 a 2 ml/kg/hr debido a la exposición de vísceras y evaporación directa en quirófano.",
-    "La sudoración se clasifica como leve (10 ml/hr), moderada (20 ml/hr) o intensa (40 ml/hr), sumándose al resultado final de la fórmula."
-  ],
-  "referencias": [
+      "id": "pam",
+      "titulo": "Calculadora de presión arterial media (PAM)",
+      "descripcion": "La presión arterial media (PAM) es el promedio de la presión que la sangre ejerce sobre las paredes arteriales durante un ciclo cardiaco completo. A diferencia de la presión sistólica o diastólica por separado, la PAM se considera el mejor indicador de la presión con la que la sangre realmente perfunde los órganos vitales (cerebro, corazón y riñones). Como el corazón permanece más tiempo en diástole que en sístole durante cada latido, la fórmula pondera el doble a la presión diastólica. Es un parámetro clave en la vigilancia del paciente crítico: una PAM sostenidamente baja advierte que la perfusión de los tejidos puede estar comprometida.",
+      "formula": "PAM = (PAS + 2 × PAD) / 3\n\nDonde PAS es la presión arterial sistólica y PAD la presión arterial diastólica, ambas en mmHg. Se pondera el doble a la diastólica porque, a frecuencias cardiacas normales, el corazón pasa aproximadamente dos tercios del ciclo cardiaco en diástole y un tercio en sístole.",
+      "notas": [
+        "Interpretación en el adulto: menor a 65 mmHg sugiere hipoperfusión de órganos vitales y por debajo de la meta mínima habitual; de 65 a 69 mmHg es un límite inferior aceptable; de 70 a 100 mmHg es un rango normal con perfusión adecuada; mayor a 100 mmHg puede reflejar hipertensión o aumento de la poscarga.",
+        "La meta de PAM es individual: un paciente con hipertensión crónica puede requerir cifras más altas para perfundir sus órganos, y en lesión cerebral la meta se ajusta para mantener una adecuada presión de perfusión cerebral (PPC = PAM − PIC). El valor aislado nunca sustituye la valoración clínica integral.",
+        "La interpretación de esta calculadora está pensada para población adulta. No la utilices para evaluar la PAM en pediatría.",
+        "La PAM obtenida con esta fórmula es una estimación no invasiva. En el paciente con línea arterial, el monitor calcula la PAM directamente a partir de la curva de presión, y ese valor es el de referencia.",
+        "Correlaciona siempre la PAM con otros signos de perfusión: estado de conciencia, llenado capilar, diuresis, lactato y frecuencia cardiaca."
+      ],
+      "referencias": [
+        {
+          "text": "DeMers D, Wachs D. Physiology, Mean Arterial Pressure. StatPearls. Treasure Island (FL): StatPearls Publishing.",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK538226/"
+        },
+        {
+          "text": "Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: Guidelines for Management of Sepsis and Septic Shock 2021. Critical Care Medicine.",
+          "url": "https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-guidelines-2021"
+        }
+      ]
+    },
     {
-      "text": "Ibarra-Naranjo, J. L., & Zaldaña-Crespo, V. L. (2022). Pérdidas insensibles: fisiología, fisiopatología y compensación. Enfermería Investiga, 7(4).",
-      "url": "https://revistas.uta.edu.ec/erevista/index.php/enfi/article/view/1690"
+      "id": "goteo",
+      "titulo": "Calculadora de goteo (gotas por minuto)",
+      "descripcion": "El cálculo de goteo permite determinar cuántas gotas por minuto se deben administrar para infundir un volumen de solución en un tiempo determinado cuando se utiliza un equipo por gravedad (sin bomba de infusión). Cada tipo de equipo libera un número distinto de gotas por cada mililitro (factor de goteo), por lo que el resultado se ajusta según el equipo seleccionado. Es una habilidad fundamental para garantizar que las soluciones y los medicamentos intravenosos se administren a la velocidad prescrita, evitando infusiones demasiado rápidas o demasiado lentas.",
+      "formula": "Gotas por minuto = Volumen (ml) / (Tiempo (horas) × Constante del equipo)\n\nConstante según el equipo:\n\nMicrogotero\n(60 gotas/ml):\nconstante 1\nNormogotero\n(20 gotas/ml):\nconstante 3\nMacrogotero\n(15 gotas/ml):\nconstante 4\n\nLa constante equivale a 60 dividido entre el factor de goteo del equipo (gotas por ml). Por eso, con microgotero, el número de gotas por minuto coincide con los mililitros por hora.",
+      "notas": [
+        "El resultado se redondea al número entero de gotas más cercano, ya que no es posible administrar fracciones de gota.",
+        "Verifica el factor de goteo impreso en el empaque del equipo: aunque los valores más frecuentes son micro (60), normo (20) y macro (15) gotas/ml, algunos fabricantes utilizan otros (por ejemplo 10 o 12 gotas/ml).",
+        "Tras ajustar el goteo, confirma la velocidad contando las gotas reales durante un minuto y revísala de forma periódica, ya que la infusión por gravedad varía con la posición del paciente, la altura del recipiente y la permeabilidad de la vía.",
+        "El microgotero se prefiere en pediatría, neonatología y cuando se requieren volúmenes pequeños y precisos; el macrogotero se emplea en infusiones rápidas o de gran volumen.",
+        "Para medicamentos de alto riesgo o velocidades críticas, se recomienda utilizar bomba de infusión en lugar de goteo por gravedad."
+      ],
+      "referencias": [
+        {
+          "text": "Potter PA, Perry AG, Stockert PA, Hall AM. Fundamentos de Enfermería. 9.ª ed. Barcelona: Elsevier.",
+          "url": "https://www.elsevier.com/books/fundamentos-de-enfermeria/potter/978-84-9113-260-8"
+        },
+        {
+          "text": "Secretaría de Salud. Guía de Práctica Clínica: Intervenciones de Enfermería en la Administración de Medicamentos. México.",
+          "url": "https://www.gob.mx/salud/documentos/guias-de-practica-clinica"
+        }
+      ]
     }
-  ]
-}
   ]
 }

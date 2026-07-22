@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 7, // Aumentamos la versión a 7
+      version: 11, // Aumentamos la versión a 11
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -85,6 +85,35 @@ class DatabaseHelper {
         // el próximo arranque. NO afecta datos del usuario (turno activo).
         if (oldVersion < 7) {
           await db.delete('escalas');
+        }
+        // Contenido de normas actualizado: "puntos_clave" pasó de un String
+        // con saltos de línea a una lista de objetos {icono, texto} (cada
+        // punto con su propio ícono). Se vacía la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar desde el JSON nuevo
+        // en el próximo arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 8) {
+          await db.delete('normas');
+        }
+        // Se agregaron dos calculadoras nuevas (PAM y goteo) al JSON. Se vacía
+        // la tabla para que cargarSemillaSiHaceFalta() la vuelva a sembrar con
+        // el contenido actualizado en el próximo arranque. NO afecta datos del
+        // usuario (turno activo).
+        if (oldVersion < 9) {
+          await db.delete('calculadoras');
+        }
+        // Contenido de la calculadora de PAM actualizado (se retiró la
+        // interpretación pediátrica y su nota). Se vacía la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo en
+        // el próximo arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 10) {
+          await db.delete('calculadoras');
+        }
+        // Se agregaron dos normas nuevas (NOM-022 terapia de infusión y NOM-087
+        // RPBI) al JSON. Se vacía la tabla para que cargarSemillaSiHaceFalta()
+        // la vuelva a sembrar con el contenido actualizado en el próximo
+        // arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 11) {
+          await db.delete('normas');
         }
       },
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nursia_app/models/norma.dart';
+import 'package:nursia_app/utils/norma_icon_mapper.dart';
 import 'package:nursia_app/utils/url_launcher_helper.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -91,36 +92,33 @@ class FichaNormativaScreen extends StatelessWidget {
               const SizedBox(height: 24),
 
               // SECCIÓN: PUNTOS CRÍTICOS
-              _buildSectionHeader(textTheme, colorScheme, "Puntos Críticos"),
+              _buildSectionHeader(textTheme, colorScheme, "Desglose"),
               const SizedBox(height: 12),
-              ...norma.puntosClave
-                  .split('\n')
-                  .where((s) => s.trim().isNotEmpty)
-                  .map((punto) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 2),
-                            child: Icon(
-                              PhosphorIconsFill.caretRight,
-                              size: 14,
-                              color: colorScheme.primary,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              punto.replaceFirst('• ', '').trim(),
-                              style: textTheme.bodySmall,
-                            ),
-                          ),
-                        ],
+              ...norma.puntosClave.map((punto) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Icon(
+                          NormaIconMapper.fromString(punto.icono),
+                          size: 30,
+                          color: colorScheme.primary,
+                        ),
                       ),
-                    );
-                  }),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          punto.texto.trim(),
+                          style: textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
 
               const SizedBox(height: 24),
 
