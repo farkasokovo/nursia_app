@@ -98,20 +98,42 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Checkmark cuando está seleccionado
-                            if (isSelected) ...[
-                              PhosphorIcon(
-                                PhosphorIconsBold.check,
-                                size: 25,
-                                color: colorScheme.onPrimaryContainer,
+                            // Insignia con el valor (puntaje) del ítem. Va en un
+                            // recuadro con color invertido respecto al chip, para
+                            // que el número resalte y NO se confunda con los
+                            // números de la etiqueta (ej. rangos de MEWS). Esto
+                            // reemplaza al antiguo "valor — etiqueta".
+                            Container(
+                              constraints: const BoxConstraints(minWidth: 36),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 6,
                               ),
-                              const SizedBox(width: 8),
-                            ],
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? colorScheme.onPrimaryContainer
+                                    : colorScheme.primaryContainer,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                "${option.score ?? "NV"}",
+                                textAlign: TextAlign.center,
+                                style: textTheme.titleMedium?.copyWith(
+                                  color: isSelected
+                                      ? colorScheme.primaryContainer
+                                      : colorScheme.onPrimaryContainer,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.1,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 14),
                             Expanded(
                               child: Text(
-                                "${option.score ?? "NV"} — ${option.label}",
+                                option.label,
                                 softWrap: true,
                                 style: isSelected
                                     ? textTheme.bodyLarge?.copyWith(
@@ -126,13 +148,23 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                                       ),
                               ),
                             ),
+                            // Palomita a la derecha cuando está seleccionado.
+                            if (isSelected) ...[
+                              const SizedBox(width: 10),
+                              PhosphorIcon(
+                                PhosphorIconsBold.checkCircle,
+                                size: 24,
+                                color: colorScheme.onPrimaryContainer,
+                              ),
+                            ],
                           ],
                         ),
-                        // 👇 NUEVO: Mostrar descripción si existe
+                        // Descripción clínica opcional, alineada bajo la etiqueta
+                        // (indentada el ancho de la insignia + separación).
                         if (option.description != null) ...[
-                          const SizedBox(height: 6),
+                          const SizedBox(height: 8),
                           Padding(
-                            padding: const EdgeInsets.only(left: 8),
+                            padding: const EdgeInsets.only(left: 50),
                             child: Text(
                               option.description!,
                               style: isSelected

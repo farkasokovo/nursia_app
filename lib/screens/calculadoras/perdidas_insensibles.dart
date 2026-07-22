@@ -126,7 +126,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
           if (fr != null && fr > 20) {
             int extras = ((fr - 20) / 5).floor();
             if (extras > 0) {
-              ajusteResp = (4 * extras) * horas;
+              ajusteResp = (5 * extras) * horas;
               textoResp =
                   "Taquipnea (+${5 * extras} ml/h): +${ajusteResp.toStringAsFixed(1)} ml";
             }
@@ -151,7 +151,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
       switch (_sudor) {
         case 1:
           ajusteSudor = 10 * horas;
-          textoSudor = "Sudor moderado: +${ajusteSudor.toStringAsFixed(1)} ml";
+          textoSudor = "Sudor leve: +${ajusteSudor.toStringAsFixed(1)} ml";
           break;
         case 2:
           ajusteSudor = 20 * horas;

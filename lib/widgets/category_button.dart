@@ -90,6 +90,12 @@ class _CategoryButtonState extends State<CategoryButton> with RouteAware {
   // pegado: sin esto seguiría oculto hasta cambiar de pestaña y volver.
   int _epoca = 0;
 
+  // Animación secundaria de nuestra ruta: refleja la transición de la ruta que
+  // está ENCIMA (la ficha). La escuchamos para saber cuándo esa transición
+  // terminó del todo y solo entonces recrear el Hero de forma segura.
+  Animation<double>? _animRutaSuperior;
+  bool _reinicioPendiente = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -101,13 +107,55 @@ class _CategoryButtonState extends State<CategoryButton> with RouteAware {
 
   @override
   void dispose() {
+    _animRutaSuperior?.removeStatusListener(_alCambiarTransicion);
     appRouteObserver.unsubscribe(this);
     super.dispose();
   }
 
   @override
   void didPopNext() {
-    // Se regresó a esta pantalla (se cerró la ruta que estaba encima).
+    // Se cerró la ruta que estaba encima y regresamos a esta pantalla.
+    //
+    // OJO: didPopNext se dispara al ARRANCAR el pop (no al terminar), así que
+    // en este instante el vuelo Hero de regreso — y, si el usuario venía
+    // deslizando las pestañas del molde de escalas, la animación del
+    // TabController — siguen ACTIVOS. Si cambiáramos la key del Hero aquí
+    // (recreando su elemento) en pleno vuelo, corrompemos el estado de
+    // animación del motor y la app crashea sin log. Por eso NO reiniciamos
+    // aquí: diferimos hasta que la transición de la ruta superior termine.
+    _programarReinicioHero();
+  }
+
+  /// Reinicia el Hero solo cuando ya no hay transición de ruta en curso.
+  void _programarReinicioHero() {
+    if (!mounted) return;
+    final anim = ModalRoute.of(context)?.secondaryAnimation;
+
+    // Sin transición viva (o ya terminó): es seguro reiniciar de una vez.
+    if (anim == null || anim.status == AnimationStatus.dismissed) {
+      _reiniciarHero();
+      return;
+    }
+
+    // Hay una transición en curso: diferimos hasta que llegue a 'dismissed',
+    // es decir, cuando la ficha de encima terminó de animarse hacia afuera y
+    // el vuelo Hero ya concluyó.
+    _reinicioPendiente = true;
+    _animRutaSuperior?.removeStatusListener(_alCambiarTransicion);
+    _animRutaSuperior = anim;
+    anim.addStatusListener(_alCambiarTransicion);
+  }
+
+  void _alCambiarTransicion(AnimationStatus status) {
+    if (status == AnimationStatus.dismissed && _reinicioPendiente) {
+      _animRutaSuperior?.removeStatusListener(_alCambiarTransicion);
+      _animRutaSuperior = null;
+      _reiniciarHero();
+    }
+  }
+
+  void _reiniciarHero() {
+    _reinicioPendiente = false;
     if (mounted) {
       setState(() => _epoca++);
     }
