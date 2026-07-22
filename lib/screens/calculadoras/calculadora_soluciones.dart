@@ -401,7 +401,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Agregar segunda solución disponible",
+                      "Agregar segunda solución\ndisponible",
                       style: textTheme.bodyMedium?.copyWith(
                         color: colorScheme.primaryContainer,
                         fontWeight: _usarSegundaSolucion

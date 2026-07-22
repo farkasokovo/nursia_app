@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'acerca_de_screen.dart';
@@ -47,24 +48,37 @@ class _HomeScreenState extends State<HomeScreen> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return DefaultTabController(
-      length: 5,
-      initialIndex: 2,
-      child: Scaffold(
-        backgroundColor: colorScheme.secondary,
-        extendBody: true,
-        appBar: _buildAppBar(theme, colorScheme, textTheme),
-        drawer: _buildDrawer(context, colorScheme, textTheme),
-        body: Stack(
-          children: [
-            const TabBarView(children: _tabViews),
-            Positioned(
-              top: 15,
-              left: 15,
-              right: 15,
-              child: _buildTabBar(theme, colorScheme, textTheme),
-            ),
-          ],
+    // La pantalla principal es la raíz de la pila de navegación. Sin esto,
+    // el botón "atrás" de Android intenta hacer pop de la ruta raíz y deja
+    // la app en pantalla negra. Con canPop:false interceptamos ese gesto y,
+    // en vez de hacer pop, mandamos la app al segundo plano (como el botón
+    // Home). No afecta la navegación interna: las escalas, medicamentos, etc.
+    // se abren en rutas nuevas empujadas encima, con su propio botón atrás.
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        SystemNavigator.pop();
+      },
+      child: DefaultTabController(
+        length: 5,
+        initialIndex: 2,
+        child: Scaffold(
+          backgroundColor: colorScheme.secondary,
+          extendBody: true,
+          appBar: _buildAppBar(theme, colorScheme, textTheme),
+          drawer: _buildDrawer(context, colorScheme, textTheme),
+          body: Stack(
+            children: [
+              const TabBarView(children: _tabViews),
+              Positioned(
+                top: 15,
+                left: 15,
+                right: 15,
+                child: _buildTabBar(theme, colorScheme, textTheme),
+              ),
+            ],
+          ),
         ),
       ),
     );

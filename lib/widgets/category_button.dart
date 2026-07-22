@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nursia_app/utils/route_observer.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 /// Botón placeholder "Próximamente" para rellenar el hueco cuando un bloque
@@ -63,7 +64,7 @@ class ComingSoonButton extends StatelessWidget {
   }
 }
 
-class CategoryButton extends StatelessWidget {
+class CategoryButton extends StatefulWidget {
   final String title;
   final IconData icon;
   final VoidCallback? onTap;
@@ -78,13 +79,49 @@ class CategoryButton extends StatelessWidget {
   });
 
   @override
+  State<CategoryButton> createState() => _CategoryButtonState();
+}
+
+class _CategoryButtonState extends State<CategoryButton> with RouteAware {
+  // "Época" del Hero. Al regresar a esta pantalla tras cerrar una ficha la
+  // incrementamos y la usamos en la key del Hero, forzando a Flutter a crear un
+  // _HeroState nuevo y limpio. Esto cura el caso en que un vuelo Hero
+  // interrumpido (salir MUY rápido) deja el botón con su placeholder invisible
+  // pegado: sin esto seguiría oculto hasta cambiar de pestaña y volver.
+  int _epoca = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute) {
+      appRouteObserver.subscribe(this, route);
+    }
+  }
+
+  @override
+  void dispose() {
+    appRouteObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPopNext() {
+    // Se regresó a esta pantalla (se cerró la ruta que estaba encima).
+    if (mounted) {
+      setState(() => _epoca++);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
     return Hero(
-      tag: heroTag,
+      key: ValueKey('${widget.heroTag}#$_epoca'),
+      tag: widget.heroTag,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -93,7 +130,7 @@ class CategoryButton extends StatelessWidget {
           onTap: () {
             // 👇 Cerrar teclado antes de ejecutar la acción
             FocusManager.instance.primaryFocus?.unfocus();
-            onTap?.call();
+            widget.onTap?.call();
           },
           child: Ink(
             decoration: BoxDecoration(
@@ -108,13 +145,13 @@ class CategoryButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PhosphorIcon(
-                  icon,
+                  widget.icon,
                   size: 40,
                   color: colorScheme.primaryContainer,
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  title,
+                  widget.title,
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     color: colorScheme.primaryContainer,
