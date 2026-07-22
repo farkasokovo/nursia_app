@@ -1,6 +1,7 @@
 // lib/main.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nursia_app/data/local/daos/calculadora_dao.dart';
 import 'package:nursia_app/data/local/daos/catalogo_pendiente_dao.dart';
 import 'package:nursia_app/data/local/daos/escala_dao.dart';
@@ -24,6 +25,14 @@ import 'utils/route_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Bloquea la orientación en vertical (portrait) en todos los dispositivos,
+  // teléfono o tablet. Se aplica lo antes posible en el arranque para evitar
+  // que el usuario alcance a ver un frame en horizontal.
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   // Blindaje del arranque: si abrir la BD o sembrar alguna semilla falla
   // (ej. un JSON mal formado tras una actualización, o una BD corrupta en un
