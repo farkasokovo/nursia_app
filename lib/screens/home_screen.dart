@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nursia_app/theme/app_theme.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../utils/url_launcher_helper.dart';
@@ -88,7 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
         // cerrar la app de golpe. Cuando no hay foco activo (primaryFocus es
         // null o es el nodo raíz del árbol de foco), recién ahí minimizamos.
         final primaryFocus = FocusManager.instance.primaryFocus;
-        if (primaryFocus != null && primaryFocus != FocusManager.instance.rootScope) {
+        if (primaryFocus != null &&
+            primaryFocus != FocusManager.instance.rootScope) {
           primaryFocus.unfocus();
           return;
         }
@@ -112,16 +114,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 right: 15,
                 child: _buildTabBar(theme, colorScheme, textTheme),
               ),
-              // Banner de actualización: flota abajo, sobre el contenido, sin
-              // empujar el layout. Solo se construye si hay versión nueva y no
-              // fue descartado esta sesión; si no, el Stack queda igual que antes.
-              if (_infoActualizacion != null && !_bannerDescartado)
-                Positioned(
-                  left: 12,
-                  right: 12,
-                  bottom: 12,
-                  child: SafeArea(
-                    top: false,
+              // Banner de actualización: aparece centrado, sobre un scrim que
+              // opaca (sin ocultar del todo) el resto de la pantalla. Solo se
+              // construye si hay versión nueva y no fue descartado esta
+              // sesión; si no, el Stack queda igual que antes.
+              if (_infoActualizacion != null && !_bannerDescartado) ...[
+                Positioned.fill(
+                  child: GestureDetector(
+                    // Absorbe los toques sobre el scrim: el contenido de
+                    // atrás se ve, pero no es interactuable mientras el
+                    // banner está abierto. Se cierra solo con sus botones.
+                    onTap: () {},
+                    child: Container(
+                      color: Colors.black.withValues(alpha: 0.45),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 28),
                     child: _buildBannerActualizacion(
                       colorScheme,
                       textTheme,
@@ -129,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
+              ],
             ],
           ),
         ),
@@ -142,12 +154,28 @@ class _HomeScreenState extends State<HomeScreen> {
     TextTheme textTheme,
   ) {
     return AppBar(
-      title: Text(
-        'Nurska',
-        style: textTheme.titleLarge?.copyWith(
-          fontSize: 25,
-          color: colorScheme.onPrimaryContainer,
-        ),
+      title: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Nurska',
+            style: textTheme.titleLarge?.copyWith(
+              fontSize: 25,
+              color: colorScheme.onPrimaryContainer,
+            ),
+          ),
+          // Pastilla de notificación: solo aparece cuando hay una versión
+          // nueva disponible (misma condición que el banner), pero a
+          // diferencia del banner NO se puede descartar — no depende de
+          // _bannerDescartado. Solo desaparece cuando la app se actualiza de
+          // verdad (en el próximo arranque ya con la versión nueva
+          // instalada, buscarActualizacion() ya no encuentra una versión
+          // remota mayor y _infoActualizacion nunca se llena).
+          if (_infoActualizacion != null) ...[
+            const SizedBox(width: 16),
+            _buildPildoraActualizacion(),
+          ],
+        ],
       ),
       backgroundColor: colorScheme.primaryContainer,
       elevation: 0,
@@ -358,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.primaryContainer,
+        color: AppColors.greenAlert,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -412,7 +440,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     alpha: 0.8,
                   ),
                 ),
-                child: const Text('Más tarde'),
+                child: const Text('Más tarde', style: TextStyle(fontSize: 16)),
               ),
               const SizedBox(width: 8),
               ElevatedButton(
@@ -425,11 +453,47 @@ class _HomeScreenState extends State<HomeScreen> {
                     vertical: 10,
                   ),
                 ),
-                child: const Text('Actualizar'),
+                child: Text(
+                  'Actualizar',
+                  style: textTheme.bodySmall?.copyWith(
+                    color: AppColors.greenAlert,
+                  ),
+                ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPildoraActualizacion() {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: () => abrirUrl(context, _infoActualizacion!.urlDescarga),
+        child: Ink(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+          decoration: BoxDecoration(
+            color: AppColors.greenAlert,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            children: [
+              Icon(PhosphorIconsBold.arrowCircleUp, size: 16),
+              const SizedBox(width: 6),
+              const Text(
+                'Nueva versión',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
