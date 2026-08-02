@@ -10,6 +10,7 @@ class FarmaButton extends StatelessWidget {
   final String? subtitle; // 1. Marcado como nullable con '?'
   final IconData icon;
   final VoidCallback onPressed;
+  final bool altoRiesgo;
 
   const FarmaButton({
     super.key,
@@ -17,6 +18,7 @@ class FarmaButton extends StatelessWidget {
     required this.icon,
     required this.onPressed,
     this.subtitle, // Ahora es opcional y puede ser null
+    this.altoRiesgo = false,
   });
 
   @override
@@ -53,6 +55,17 @@ class FarmaButton extends StatelessWidget {
                   if (subtitle != null)
                     Text(
                       subtitle!, // Usamos '!' porque ya comprobamos que no es nulo
+                      style: textTheme.titleSmall?.copyWith(
+                        fontSize: 13,
+                        color: Colors.white70,
+                      ),
+                    ),
+
+                  // Misma línea de descripción que usan los botones de NOMs,
+                  // reutilizada para marcar fármacos de alto riesgo.
+                  if (altoRiesgo)
+                    Text(
+                      "Alto riesgo",
                       style: textTheme.titleSmall?.copyWith(
                         fontSize: 13,
                         color: Colors.white70,

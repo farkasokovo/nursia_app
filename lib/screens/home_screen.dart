@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import '../utils/url_launcher_helper.dart';
+import '../utils/verificador_actualizacion.dart';
 import 'acerca_de_screen.dart';
 import 'home_dashboard.dart';
 import 'normativa_screen.dart';
@@ -36,10 +38,32 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late Future<PackageInfo> _packageInfoFuture;
 
+  // Info de una versión nueva, si la hay. Empieza en null (sin banner). El
+  // banner solo aparece cuando la verificación remota confirma una versión
+  // mayor. _bannerDescartado se activa con "Más tarde": oculta el banner SOLO
+  // esta sesión (es un bool en memoria, no una preferencia persistente), así
+  // que puede reaparecer en el próximo arranque de la app.
+  InfoActualizacion? _infoActualizacion;
+  bool _bannerDescartado = false;
+
   @override
   void initState() {
     super.initState();
     _packageInfoFuture = PackageInfo.fromPlatform();
+
+    // La verificación corre DESPUÉS del primer frame para no bloquear ni
+    // retrasar el arranque ni la interacción. Es completamente opcional: si
+    // falla o no hay red, buscarActualizacion() devuelve null y no pasa nada.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _verificarActualizacion();
+    });
+  }
+
+  Future<void> _verificarActualizacion() async {
+    final info = await buscarActualizacion();
+    if (info != null && mounted) {
+      setState(() => _infoActualizacion = info);
+    }
   }
 
   @override
@@ -58,6 +82,17 @@ class _HomeScreenState extends State<HomeScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
+
+        // Si un buscador u otro campo tiene el foco, el primer "atrás" solo
+        // le quita el foco (lo que también cierra el teclado) en vez de
+        // cerrar la app de golpe. Cuando no hay foco activo (primaryFocus es
+        // null o es el nodo raíz del árbol de foco), recién ahí minimizamos.
+        final primaryFocus = FocusManager.instance.primaryFocus;
+        if (primaryFocus != null && primaryFocus != FocusManager.instance.rootScope) {
+          primaryFocus.unfocus();
+          return;
+        }
+
         SystemNavigator.pop();
       },
       child: DefaultTabController(
@@ -77,6 +112,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 right: 15,
                 child: _buildTabBar(theme, colorScheme, textTheme),
               ),
+              // Banner de actualización: flota abajo, sobre el contenido, sin
+              // empujar el layout. Solo se construye si hay versión nueva y no
+              // fue descartado esta sesión; si no, el Stack queda igual que antes.
+              if (_infoActualizacion != null && !_bannerDescartado)
+                Positioned(
+                  left: 12,
+                  right: 12,
+                  bottom: 12,
+                  child: SafeArea(
+                    top: false,
+                    child: _buildBannerActualizacion(
+                      colorScheme,
+                      textTheme,
+                      _infoActualizacion!,
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
@@ -293,6 +345,89 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: colorScheme.onSecondary.withValues(alpha: 0.6),
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBannerActualizacion(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+    InfoActualizacion info,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.10),
+            blurRadius: 16,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                PhosphorIconsBold.arrowCircleUp,
+                size: 24,
+                color: colorScheme.onPrimaryContainer,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'Nueva versión disponible',
+                  style: textTheme.titleMedium?.copyWith(
+                    color: colorScheme.onPrimaryContainer,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          if (info.notas.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              info.notas,
+              style: textTheme.bodySmall?.copyWith(
+                color: colorScheme.onPrimaryContainer.withValues(alpha: 0.85),
+              ),
+            ),
+          ],
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () => setState(() => _bannerDescartado = true),
+                style: TextButton.styleFrom(
+                  foregroundColor: colorScheme.onPrimaryContainer.withValues(
+                    alpha: 0.8,
+                  ),
+                ),
+                child: const Text('Más tarde'),
+              ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: () => abrirUrl(context, info.urlDescarga),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorScheme.onPrimaryContainer,
+                  foregroundColor: colorScheme.primaryContainer,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                ),
+                child: const Text('Actualizar'),
+              ),
+            ],
           ),
         ],
       ),

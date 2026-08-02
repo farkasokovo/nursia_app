@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 11, // Aumentamos la versión a 11
+      version: 12, // Aumentamos la versión a 12
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -115,6 +115,18 @@ class DatabaseHelper {
         if (oldVersion < 11) {
           await db.delete('normas');
         }
+        // Se agregó el campo "altoRiesgo" a medicamentos (electrolitos
+        // concentrados, insulinas, anticoagulantes, citotóxicos). Se agrega
+        // la columna a la tabla existente y se vacía para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON
+        // actualizado en el próximo arranque. NO afecta datos del usuario
+        // (turno activo).
+        if (oldVersion < 12) {
+          await db.execute(
+            'ALTER TABLE medicamentos ADD COLUMN altoRiesgo INTEGER NOT NULL DEFAULT 0',
+          );
+          await db.delete('medicamentos');
+        }
       },
     );
   }
@@ -136,7 +148,8 @@ class DatabaseHelper {
         efectosAdversos TEXT,
         interacciones TEXT,
         observaciones TEXT,
-        referencias TEXT
+        referencias TEXT,
+        altoRiesgo INTEGER NOT NULL DEFAULT 0
       )
     ''');
 

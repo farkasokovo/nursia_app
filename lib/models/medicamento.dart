@@ -14,6 +14,7 @@ class Medicamento {
   final List<Interaccion> interacciones;
   final Observaciones? observaciones;
   final List<Referencia> referencias;
+  final bool altoRiesgo;
 
   const Medicamento({
     required this.nombre,
@@ -29,6 +30,7 @@ class Medicamento {
     required this.interacciones,
     this.observaciones,
     required this.referencias,
+    this.altoRiesgo = false,
   });
 
   factory Medicamento.fromJson(Map<String, dynamic> json) {
@@ -58,6 +60,7 @@ class Medicamento {
               ?.map((e) => Referencia.fromJson(e))
               .toList() ??
           [],
+      altoRiesgo: json['altoRiesgo'] ?? false,
     );
   }
 
@@ -80,6 +83,7 @@ class Medicamento {
           ? jsonEncode(observaciones!.toJson())
           : null,
       'referencias': jsonEncode(referencias.map((r) => r.toJson()).toList()),
+      'altoRiesgo': altoRiesgo ? 1 : 0,
     };
   }
 
@@ -109,6 +113,7 @@ class Medicamento {
       referencias: (jsonDecode(map['referencias'] ?? '[]') as List)
           .map((e) => Referencia.fromJson(e))
           .toList(),
+      altoRiesgo: (map['altoRiesgo'] ?? 0) == 1,
     );
   }
 }

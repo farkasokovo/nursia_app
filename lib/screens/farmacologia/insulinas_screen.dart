@@ -32,6 +32,7 @@ class _InsulinasLayout extends StatelessWidget {
             FarmaButton(
               title: "Insulina Lispro",
               icon: PhosphorIconsRegular.syringe,
+              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -46,6 +47,7 @@ class _InsulinasLayout extends StatelessWidget {
             FarmaButton(
               title: "Insulina NPH",
               icon: PhosphorIconsRegular.syringe,
+              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -60,6 +62,7 @@ class _InsulinasLayout extends StatelessWidget {
             FarmaButton(
               title: "Insulina Glargina",
               icon: PhosphorIconsRegular.syringe,
+              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,

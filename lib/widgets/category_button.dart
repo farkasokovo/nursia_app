@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/utils/route_observer.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 /// Botón placeholder "Próximamente" para rellenar el hueco cuando un bloque
@@ -64,7 +63,7 @@ class ComingSoonButton extends StatelessWidget {
   }
 }
 
-class CategoryButton extends StatefulWidget {
+class CategoryButton extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback? onTap;
@@ -79,97 +78,13 @@ class CategoryButton extends StatefulWidget {
   });
 
   @override
-  State<CategoryButton> createState() => _CategoryButtonState();
-}
-
-class _CategoryButtonState extends State<CategoryButton> with RouteAware {
-  // "Época" del Hero. Al regresar a esta pantalla tras cerrar una ficha la
-  // incrementamos y la usamos en la key del Hero, forzando a Flutter a crear un
-  // _HeroState nuevo y limpio. Esto cura el caso en que un vuelo Hero
-  // interrumpido (salir MUY rápido) deja el botón con su placeholder invisible
-  // pegado: sin esto seguiría oculto hasta cambiar de pestaña y volver.
-  int _epoca = 0;
-
-  // Animación secundaria de nuestra ruta: refleja la transición de la ruta que
-  // está ENCIMA (la ficha). La escuchamos para saber cuándo esa transición
-  // terminó del todo y solo entonces recrear el Hero de forma segura.
-  Animation<double>? _animRutaSuperior;
-  bool _reinicioPendiente = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final route = ModalRoute.of(context);
-    if (route is PageRoute) {
-      appRouteObserver.subscribe(this, route);
-    }
-  }
-
-  @override
-  void dispose() {
-    _animRutaSuperior?.removeStatusListener(_alCambiarTransicion);
-    appRouteObserver.unsubscribe(this);
-    super.dispose();
-  }
-
-  @override
-  void didPopNext() {
-    // Se cerró la ruta que estaba encima y regresamos a esta pantalla.
-    //
-    // OJO: didPopNext se dispara al ARRANCAR el pop (no al terminar), así que
-    // en este instante el vuelo Hero de regreso — y, si el usuario venía
-    // deslizando las pestañas del molde de escalas, la animación del
-    // TabController — siguen ACTIVOS. Si cambiáramos la key del Hero aquí
-    // (recreando su elemento) en pleno vuelo, corrompemos el estado de
-    // animación del motor y la app crashea sin log. Por eso NO reiniciamos
-    // aquí: diferimos hasta que la transición de la ruta superior termine.
-    _programarReinicioHero();
-  }
-
-  /// Reinicia el Hero solo cuando ya no hay transición de ruta en curso.
-  void _programarReinicioHero() {
-    if (!mounted) return;
-    final anim = ModalRoute.of(context)?.secondaryAnimation;
-
-    // Sin transición viva (o ya terminó): es seguro reiniciar de una vez.
-    if (anim == null || anim.status == AnimationStatus.dismissed) {
-      _reiniciarHero();
-      return;
-    }
-
-    // Hay una transición en curso: diferimos hasta que llegue a 'dismissed',
-    // es decir, cuando la ficha de encima terminó de animarse hacia afuera y
-    // el vuelo Hero ya concluyó.
-    _reinicioPendiente = true;
-    _animRutaSuperior?.removeStatusListener(_alCambiarTransicion);
-    _animRutaSuperior = anim;
-    anim.addStatusListener(_alCambiarTransicion);
-  }
-
-  void _alCambiarTransicion(AnimationStatus status) {
-    if (status == AnimationStatus.dismissed && _reinicioPendiente) {
-      _animRutaSuperior?.removeStatusListener(_alCambiarTransicion);
-      _animRutaSuperior = null;
-      _reiniciarHero();
-    }
-  }
-
-  void _reiniciarHero() {
-    _reinicioPendiente = false;
-    if (mounted) {
-      setState(() => _epoca++);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
     return Hero(
-      key: ValueKey('${widget.heroTag}#$_epoca'),
-      tag: widget.heroTag,
+      tag: heroTag,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -178,7 +93,7 @@ class _CategoryButtonState extends State<CategoryButton> with RouteAware {
           onTap: () {
             // 👇 Cerrar teclado antes de ejecutar la acción
             FocusManager.instance.primaryFocus?.unfocus();
-            widget.onTap?.call();
+            onTap?.call();
           },
           child: Ink(
             decoration: BoxDecoration(
@@ -192,14 +107,10 @@ class _CategoryButtonState extends State<CategoryButton> with RouteAware {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PhosphorIcon(
-                  widget.icon,
-                  size: 40,
-                  color: colorScheme.primaryContainer,
-                ),
+                PhosphorIcon(icon, size: 40, color: colorScheme.primaryContainer),
                 const SizedBox(height: 10),
                 Text(
-                  widget.title,
+                  title,
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     color: colorScheme.primaryContainer,

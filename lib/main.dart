@@ -21,7 +21,6 @@ import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
-import 'utils/route_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -89,7 +88,6 @@ class MyApp extends StatelessWidget {
       title: 'Nurska',
       theme: AppTheme.lightTheme(),
       home: const HomeScreen(),
-      navigatorObservers: [appRouteObserver],
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1097,7 +1097,8 @@
         "text": "Organización Mundial de la Salud. (2021). Formulario Modelo de la OMS: Heparina sódica. Ginebra, Suiza: OMS.",
         "url": "https://apps.who.int/iris/handle/10665/44053"
       }
-    ]
+    ],
+    "altoRiesgo": true
   },
   {
     "nombre": "Enoxaparina",
@@ -1158,7 +1159,8 @@
         "text": "Consejo de Salubridad General. (2023). Compendio Nacional de Insumos para la Salud: Clave 010.000.4103.00 Enoxaparina. Ciudad de México, México: Gobierno de México.",
         "url": "https://www.gob.mx/csg"
       }
-    ]
+    ],
+    "altoRiesgo": true
   },
   {
     "nombre": "Warfarina Sódica",
@@ -1225,7 +1227,8 @@
         "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Warfarina. Ginebra, Suiza: OMS.",
         "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
       }
-    ]
+    ],
+    "altoRiesgo": true
   },
   {
     "nombre": "Insulina Lispro",
@@ -1286,7 +1289,8 @@
         "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Insulina de acción rápida. Ginebra, Suiza: OMS.",
         "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
       }
-    ]
+    ],
+    "altoRiesgo": true
   },
   {
     "nombre": "Insulina NPH",
@@ -1347,7 +1351,8 @@
         "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Insulina de acción intermedia. Ginebra, Suiza: OMS.",
         "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
       }
-    ]
+    ],
+    "altoRiesgo": true
   },
   {
     "nombre": "Insulina Glargina",
@@ -1408,6 +1413,7 @@
         "text": "Organización Mundial de la Salud. (2021). Lista de Medicamentos Esenciales de la OMS (22ª Lista): Insulina de acción prolongada. Ginebra, Suiza: OMS.",
         "url": "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2021.02"
       }
-    ]
+    ],
+    "altoRiesgo": true
   }
 ]

@@ -32,6 +32,7 @@ class _AnticoagulantesLayout extends StatelessWidget {
             FarmaButton(
               title: "Heparina Sódica",
               icon: PhosphorIconsRegular.drop,
+              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -46,6 +47,7 @@ class _AnticoagulantesLayout extends StatelessWidget {
             FarmaButton(
               title: "Enoxaparina",
               icon: PhosphorIconsRegular.drop,
+              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -60,6 +62,7 @@ class _AnticoagulantesLayout extends StatelessWidget {
             FarmaButton(
               title: "Warfarina Sódica",
               icon: PhosphorIconsRegular.drop,
+              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,

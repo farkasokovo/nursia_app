@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nursia_app/repositories/medicamento_repository.dart';
 import 'package:nursia_app/utils/icon_mapper.dart';
 import 'package:nursia_app/utils/url_launcher_helper.dart';
+import 'package:nursia_app/widgets/alto_riesgo_badge.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../models/medicamento.dart';
 import 'package:provider/provider.dart';
@@ -100,6 +101,10 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (medicamento.altoRiesgo) ...[
+              const AltoRiesgoBadge(),
+              const SizedBox(height: 16),
+            ],
             _buildFormattedSection(
               textTheme,
               "Farmacodinamia",

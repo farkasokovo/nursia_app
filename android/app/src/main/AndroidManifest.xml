@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permiso normal (no requiere confirmación del usuario). Nurska es
+         offline-first; internet solo se usa para la verificación opcional de
+         nuevas versiones (ver lib/utils/verificador_actualizacion.dart). -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="Nurska"
         android:name="${applicationName}"
