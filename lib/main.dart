@@ -21,6 +21,7 @@ import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
+import 'theme/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,9 +57,13 @@ void main() async {
     final medicamentoTurnoRepo = MedicamentoTurnoRepository(
       MedicamentoTurnoDao(db),
     );
+    // La preferencia de tema se lee ANTES de runApp para que la app dibuje su
+    // primer frame ya en el tema correcto, sin parpadeo de claro a oscuro.
+    final themeProvider = await ThemeProvider.cargar();
     runApp(
       MultiProvider(
         providers: [
+          ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
           Provider<MedicamentoRepository>.value(value: medicamentoRepo),
           Provider<EscalaRepository>.value(value: escalaRepo),
           Provider<CalculadoraRepository>.value(value: calculadoraRepo),
@@ -84,9 +89,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // `watch` (y no `read`) porque este widget SÍ debe reconstruirse cuando
+    // cambia la preferencia: es quien le pasa el themeMode a MaterialApp.
+    final themeMode = context.watch<ThemeProvider>().themeMode;
+
     return MaterialApp(
       title: 'Nurska',
       theme: AppTheme.lightTheme(),
+      darkTheme: AppTheme.darkTheme(),
+      // Con ThemeMode.system, Flutter elige entre theme y darkTheme según el
+      // ajuste del sistema operativo y reacciona solo si el usuario lo cambia.
+      themeMode: themeMode,
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
     );

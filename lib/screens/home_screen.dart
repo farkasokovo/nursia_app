@@ -6,6 +6,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../utils/url_launcher_helper.dart';
 import '../utils/verificador_actualizacion.dart';
 import 'acerca_de_screen.dart';
+import 'ajustes_screen.dart';
 import 'home_dashboard.dart';
 import 'normativa_screen.dart';
 import 'calculadora_screen.dart';
@@ -211,6 +212,23 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
+                  _buildDrawerItem(
+                    context: context,
+                    colorScheme: colorScheme,
+                    textTheme: textTheme,
+                    icon: PhosphorIconsBold.gear,
+                    title: 'Ajustes',
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const AjustesScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 12),
                   _buildDrawerItem(
                     context: context,
                     colorScheme: colorScheme,
