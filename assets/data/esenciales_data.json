@@ -9,7 +9,7 @@
     "contenido": [
       {
         "tipo": "nota",
-        "valor": "Esta ficha describe el sistema BD Vacutainer. Tanto el color del tapón como el aditivo pueden variar entre fabricantes: si tu unidad usa otra marca, confirma el color contra el instructivo del tubo y contra lo que pida el laboratorio de tu unidad antes de guiarte por este cuadro. Los datos de aditivo e inversiones provienen del documento BD de 2024."
+        "valor": "Esta ficha describe el sistema BD Vacutainer. Tanto el color del tapón como el aditivo pueden variar entre fabricantes."
       },
       {
         "tipo": "texto",
@@ -65,10 +65,7 @@
           { "color": "#9AA0A6", "etiqueta": "Gris", "descripcion": "Fluoruro y oxalato. Glucosa y lactato." }
         ]
       },
-      {
-        "tipo": "nota",
-        "valor": "Los colores de arriba son una aproximación visual de referencia, no una muestra exacta: el tapón físico y su etiqueta mandan. Los frascos de hemocultivo no llevan tapón de color, por eso no aparecen en esta paleta."
-      },
+
       {
         "tipo": "referencias",
         "items": [
@@ -123,7 +120,7 @@
       },
       {
         "tipo": "nota",
-        "valor": "Lateralidad: por convención anatómica, el lado derecho del paciente se dibuja a la izquierda de quien observa. Esta tabla ya está en esa orientación, o sea que la primera columna es lo que tú ves de tu lado izquierdo cuando estás frente al paciente."
+        "valor": "Lateralidad: por convención anatómica, el lado derecho del paciente se dibuja a la izquierda de quien observa."
       },
       {
         "tipo": "tabla",
@@ -153,10 +150,6 @@
           "Ambas fosas iliacas: vías urinarias. Del lado derecho, el apéndice es el sitio más común.",
           "Abdomen inferior: anexos en la mujer, vejiga o sigmoides en ambos sexos."
         ]
-      },
-      {
-        "tipo": "nota",
-        "valor": "La proyección de un órgano sobre una región es una referencia, no un diagnóstico. El dolor puede ser referido, la anatomía varía entre personas y las regiones no tienen límites tajantes."
       },
       {
         "tipo": "referencias",
@@ -250,7 +243,7 @@
     "contenido": [
       {
         "tipo": "nota",
-        "valor": "El número de activación, quiénes integran el equipo y los tiempos de respuesta los define cada hospital. No existe un código azul nacional. Lo que sí es obligatorio en México es que cada establecimiento documente el suyo: busca el de tu unidad."
+        "valor": "El número de activación, quiénes integran el equipo y los tiempos de respuesta los define cada hospital."
       },
       {
         "tipo": "texto",

@@ -164,7 +164,8 @@ class _ApgarLayoutState extends State<_ApgarLayout>
                       ScaleOption(
                         score: 1,
                         label: "Lento / irregular",
-                        description: "Respiración lenta, irregular o llanto débil.",
+                        description:
+                            "Respiración lenta, irregular o llanto débil.",
                       ),
                       ScaleOption(
                         score: 2,
@@ -203,9 +204,8 @@ class _ApgarLayoutState extends State<_ApgarLayout>
                   // ================== RESPUESTA A ESTÍMULOS ==================
                   ScaleParameterSelector(
                     title: "Respuesta a estímulos",
-                    onChanged: (int? value) => setState(
-                      () => respuestaEstimulos = ScaleValue(value),
-                    ),
+                    onChanged: (int? value) =>
+                        setState(() => respuestaEstimulos = ScaleValue(value)),
                     options: const [
                       ScaleOption(
                         score: 0,
@@ -220,7 +220,8 @@ class _ApgarLayoutState extends State<_ApgarLayout>
                       ScaleOption(
                         score: 2,
                         label: "Tos / estornudo / llanto",
-                        description: "Tos, estornudo, llanto o retirada enérgica.",
+                        description:
+                            "Tos, estornudo, llanto o retirada enérgica.",
                       ),
                     ],
                   ),

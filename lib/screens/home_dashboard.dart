@@ -99,16 +99,13 @@ class HomeDashboard extends StatelessWidget {
                           return botones[index];
                         },
                       ),
-                      // Dos botones medianos de ancho igual, en el lugar que
-                      // antes ocupaba el botón de Turno Activo.
-                      const SizedBox(height: 16),
-                      const Row(
-                        children: [
-                          Expanded(child: BotonEsenciales()),
-                          SizedBox(width: 16),
-                          Expanded(child: BotonProcedimientos()),
-                        ],
-                      ),
+                      // Dos botones de ancho completo, uno encima del otro, en
+                      // el lugar que antes ocupaba el botón de Turno Activo.
+                      // El espaciado es el mismo que separa los HomeNavButton.
+                      const SizedBox(height: spacing),
+                      const BotonEsenciales(),
+                      const SizedBox(height: spacing),
+                      const BotonProcedimientos(),
                     ],
                   ),
 
@@ -128,9 +125,9 @@ class HomeDashboard extends StatelessWidget {
   }
 }
 
-// ================== BOTONES MEDIANOS ==================
+// ================== BOTONES LARGOS ==================
 
-/// Transición compartida por los botones medianos: el mismo fade + scale que
+/// Transición compartida por los botones largos: el mismo fade + scale que
 /// usaba el botón de Turno Activo.
 PageRouteBuilder _rutaConTransicion(Widget destino) {
   return PageRouteBuilder(
@@ -151,16 +148,16 @@ PageRouteBuilder _rutaConTransicion(Widget destino) {
   );
 }
 
-/// Cáscara visual de los dos botones medianos: mismo look que tenía
-/// BotonTurnoActivo (primaryContainer, radio 20, ícono en círculo), pero en
-/// formato cuadrado para que quepan dos por renglón.
-class _BotonMediano extends StatelessWidget {
+/// Cáscara visual de los dos botones largos: mismas medidas y mismo look que
+/// tenía BotonTurnoActivo (ancho completo, padding 20, primaryContainer,
+/// radio 20, ícono en círculo a la izquierda y caret a la derecha).
+class _BotonLargo extends StatelessWidget {
   final IconData icono;
   final String titulo;
   final String subtitulo;
   final VoidCallback onTap;
 
-  const _BotonMediano({
+  const _BotonLargo({
     required this.icono,
     required this.titulo,
     required this.subtitulo,
@@ -176,36 +173,46 @@ class _BotonMediano extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Row(
           children: [
             CircleAvatar(
               backgroundColor: Colors.white24,
               radius: 20,
-              child: Icon(icono, color: colorScheme.onPrimary, size: 26),
+              child: Icon(icono, color: colorScheme.onPrimary, size: 30),
             ),
-            const SizedBox(height: 10),
-            Text(
-              titulo,
-              textAlign: TextAlign.center,
-              style: textTheme.titleLarge?.copyWith(
-                fontSize: 17,
-                color: colorScheme.onPrimary,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    titulo,
+                    style: textTheme.titleLarge?.copyWith(
+                      fontSize: 20,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitulo,
+                    style: textTheme.bodySmall?.copyWith(
+                      fontSize: 13,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 2),
-            Text(
-              subtitulo,
-              textAlign: TextAlign.center,
-              style: textTheme.bodySmall?.copyWith(
-                fontSize: 12,
-                color: colorScheme.onPrimary,
-              ),
+            const Icon(
+              PhosphorIconsRegular.caretRight,
+              color: Colors.white,
+              size: 45,
             ),
           ],
         ),
@@ -219,7 +226,7 @@ class BotonEsenciales extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BotonMediano(
+    return _BotonLargo(
       icono: PhosphorIconsFill.bookmarkSimple,
       titulo: "Esenciales",
       subtitulo: "Referencia rápida",
@@ -234,7 +241,7 @@ class BotonProcedimientos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BotonMediano(
+    return _BotonLargo(
       icono: PhosphorIconsFill.listChecks,
       titulo: "Procedimientos",
       subtitulo: "Próximamente",

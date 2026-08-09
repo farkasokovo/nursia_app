@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import '../../models/ficha_esencial.dart';
 import '../../repositories/esencial_repository.dart';
-import '../../theme/app_theme.dart';
 import '../../utils/categorias_esenciales.dart';
 import '../../utils/esencial_icon_mapper.dart';
 import '../../utils/search_utils.dart';
@@ -486,7 +485,6 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
         for (final categoria in categoriasEsenciales)
           _buildRenglonCategoria(categoria, colorScheme, textTheme),
         const SizedBox(height: 12),
-        _buildDescargo(colorScheme, textTheme),
       ],
     );
   }
@@ -534,36 +532,4 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
 
   /// greenAlert no vive dentro del ColorScheme, por eso se llama directo desde
   /// AppColors.
-  Widget _buildDescargo(ColorScheme colorScheme, TextTheme textTheme) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.greenAlert,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PhosphorIcon(
-            PhosphorIconsFill.warningCircle,
-            size: 20,
-            color: colorScheme.onPrimaryContainer,
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              'Esta información es de consulta rápida y no sustituye el '
-              'protocolo de tu institución ni el criterio clínico. Ante '
-              'cualquier duda, consulta la normativa vigente de tu unidad.',
-              style: textTheme.bodySmall?.copyWith(
-                fontSize: 12,
-                color: colorScheme.onPrimaryContainer,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

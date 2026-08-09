@@ -1,4 +1,5 @@
 // lib/screens/esenciales/ficha_esencial_screen.dart
+import 'dart:math'; // EXPERIMENTAL: solo lo usa _anchosProporcionales
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -202,52 +203,47 @@ class FichaEsencialScreen extends StatelessWidget {
     );
   }
 
-  /// Por diseño las tablas no pasan de 3 columnas, pero igual van dentro de un
-  /// scroll horizontal: un texto largo en una celda nunca debe provocar
-  /// overflow en un celular en vertical.
+  /// La tabla se ajusta al ancho disponible: no hay scroll horizontal, el
+  /// texto de cada celda se acomoda en varias líneas dentro de su columna.
+  /// El ancho de cada columna lo reparte [_anchosProporcionales].
   Widget _buildTabla(
     List<String> encabezados,
     List<List<String>> filas,
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Table(
-          defaultColumnWidth: const IntrinsicColumnWidth(),
-          border: TableBorder.symmetric(
-            inside: BorderSide(
-              color: colorScheme.onSecondaryContainer.withValues(alpha: 0.25),
-            ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Table(
+        columnWidths: _anchosProporcionales(encabezados, filas),
+        border: TableBorder.symmetric(
+          inside: BorderSide(
+            color: colorScheme.onSecondaryContainer.withValues(alpha: 0.25),
           ),
-          children: [
-            TableRow(
-              decoration: BoxDecoration(color: colorScheme.primaryContainer),
-              children: [
-                for (final encabezado in encabezados)
-                  _buildCelda(
-                    encabezado,
-                    textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onPrimaryContainer,
-                    ),
+        ),
+        children: [
+          TableRow(
+            decoration: BoxDecoration(color: colorScheme.primaryContainer),
+            children: [
+              for (final encabezado in encabezados)
+                _buildCelda(
+                  encabezado,
+                  textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.onPrimaryContainer,
                   ),
+                ),
+            ],
+          ),
+          for (final fila in filas)
+            TableRow(
+              decoration: BoxDecoration(color: colorScheme.onPrimaryContainer),
+              children: [
+                for (final celda in fila)
+                  _buildCelda(celda, textTheme.bodySmall),
               ],
             ),
-            for (final fila in filas)
-              TableRow(
-                decoration: BoxDecoration(
-                  color: colorScheme.onPrimaryContainer,
-                ),
-                children: [
-                  for (final celda in fila)
-                    _buildCelda(celda, textTheme.bodySmall),
-                ],
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -360,4 +356,53 @@ class FichaEsencialScreen extends StatelessWidget {
       ],
     );
   }
+}
+
+// ── EXPERIMENTAL: anchos de columna proporcionales ──────────────────────
+// Todo lo que sigue existe solo para que las tablas quepan a lo ancho sin
+// scroll horizontal. Para revertir: borrar esta función, quitar la línea
+// `columnWidths:` de _buildTabla, volver a envolver la tabla en un
+// SingleChildScrollView horizontal con `defaultColumnWidth:
+// IntrinsicColumnWidth()`, y quitar el import de dart:math.
+
+/// Reparte el ancho disponible entre las columnas según cuánto texto lleva
+/// cada una, para que ninguna quede aplastada ni acapare el renglón.
+///
+/// El peso NO es el largo promedio crudo sino su raíz cuadrada. Con el largo
+/// crudo, en la tabla de regiones del abdomen ("Región" contra "Estructuras")
+/// la primera columna se quedaba con ~22% del ancho y partía "Hipocondrio" a
+/// media palabra. La raíz suaviza la diferencia sin volver iguales a las
+/// columnas. Para usar la proporción cruda, quitar el sqrt.
+///
+/// El piso y el techo se aplican sobre el peso relativo al promedio (donde
+/// 1.0 = columna promedio): ninguna columna baja de la mitad ni sube del
+/// doble de ese promedio.
+Map<int, TableColumnWidth> _anchosProporcionales(
+  List<String> encabezados,
+  List<List<String>> filas,
+) {
+  const pesoMinimo = 0.5;
+  const pesoMaximo = 2.0;
+
+  final pesos = <double>[];
+  for (var i = 0; i < encabezados.length; i++) {
+    // El encabezado cuenta como una celda más: una columna titulada
+    // "Estructuras" con celdas cortas no debería quedar más angosta que su
+    // propio título.
+    var caracteres = encabezados[i].length;
+    var celdas = 1;
+    for (final fila in filas) {
+      if (i < fila.length) {
+        caracteres += fila[i].length;
+        celdas++;
+      }
+    }
+    pesos.add(sqrt(caracteres / celdas));
+  }
+
+  final promedio = pesos.reduce((a, b) => a + b) / pesos.length;
+  return {
+    for (var i = 0; i < pesos.length; i++)
+      i: FlexColumnWidth((pesos[i] / promedio).clamp(pesoMinimo, pesoMaximo)),
+  };
 }
