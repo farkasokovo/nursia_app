@@ -15,7 +15,6 @@ dependencies:
   path: ^1.9.0     
   provider: ^6.1.2
   package_info_plus: ^10.2.0
-  shared_preferences: ^2.3.0   # preferencias simples clave/valor (ej. tema claro/oscuro)
   http: ^1.2.0     # única parte de la app que usa red: verificación opcional de versión
 
 dev_dependencies:

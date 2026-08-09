@@ -48,8 +48,3 @@ app.*.map.json
 android/key.properties
 *.jks
 *.keystore
-
-# Capturas y temporales
-flutter_*.png
-*.bak
-*_backup.dart

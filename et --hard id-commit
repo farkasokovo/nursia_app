@@ -1,0 +1,16 @@
+[33mab4d98a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Pequeño fix con sizedboxes en las escalas
+[33m88b2835[m Nuevas escalas con nuevas categorias y nuevos medicamentos con nuevas categorias
+[33m4f8391f[m pantalla farmacos funcionando adecuadamente + buscador
+[33m062dc25[m Pantalla de farmacología iniciada, buscador agregado, no es funcional
+[33md68684f[m Implementacion de barra de busqueda para pestaña escalas
+[33mf329750[m Nursia entero refactorizado y calculadoras con tab bar
+[33ma942156[m COLORES CORREGIDOS EN APPTHEME
+[33mcadadb3[m A punto de modificar app_theme
+[33m24d3223[m Escala glasgow mas pestaña ver mas finalizadas
+[33mfb79715[m Avance: Escala Glasgow Finalizada. A punto de modificar nombres de las rutas para facil lectura
+[33m471bd1b[m Avance: Escala Glasgow terminada. Pestaña de Ver más lista para empezar
+[33m9cf9fe5[m Avance: Lo mismo de antes
+[33medf37aa[m Avance: Calculadora de dosis finalizada e interfaz de Calculadora de soluciones glucosadas terminada
+[33m4ce61bf[m[33m ([m[1;32mexperimento-animaciones[m[33m)[m Avance: interfaz calculadora de dosis y pantallas princpales
+[33m954d26e[m[33m ([m[1;32mdesarrollo[m[33m)[m Avance: primera animacion hero
+[33m0762cc3[m Primera versión: pantalla de inicio y navegación
