@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/home_nav_button.dart';
+import '../widgets/tarjeta_desplegable.dart';
 import '../utils/tips_helper.dart';
 import '../turno_activo/turno_activo_screen.dart';
 
@@ -222,7 +223,6 @@ class TipDelDia extends StatefulWidget {
 
 class _TipDelDiaState extends State<TipDelDia> {
   String _tipExhibido = "Cargando tip...";
-  bool _isExpanded = false;
 
   @override
   void initState() {
@@ -256,69 +256,26 @@ class _TipDelDiaState extends State<TipDelDia> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return AnimatedSize(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      child: Container(
-        width: double.infinity,
-        // Reducimos el padding inferior cuando está colapsado
-        padding: EdgeInsets.fromLTRB(12, 5, 12, _isExpanded ? 12 : 5),
-        decoration: BoxDecoration(
-          color: colorScheme.secondaryContainer.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+    return TarjetaDesplegable(
+      icono: PhosphorIconsFill.lightbulb,
+      titulo: "Tip del día",
+      // Expandida, el botón genera un tip nuevo en vez de colapsar
+      accionTrailing: (context, expandido, alternar) => Tooltip(
+        message: expandido ? "Siguiente tip" : "Ver tip",
+        child: IconButton(
+          onPressed: expandido ? _forzarNuevoTip : alternar,
+          icon: Icon(
+            expandido
+                ? PhosphorIconsBold.arrowClockwise
+                : PhosphorIconsRegular.caretDown,
+            size: 20,
+            color: colorScheme.primaryContainer,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Hacemos que toda la cabecera sea clickable para expandir/colapsar
-            InkWell(
-              onTap: () => setState(() => _isExpanded = !_isExpanded),
-              borderRadius: BorderRadius.circular(12),
-              child: Row(
-                children: [
-                  Icon(
-                    PhosphorIconsFill.lightbulb,
-                    size: 28,
-                    color: colorScheme.primaryContainer,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "Tip del día",
-                    style: textTheme.bodyLarge?.copyWith(fontSize: 18),
-                  ),
-                  const Spacer(),
-                  Tooltip(
-                    message: _isExpanded ? "Siguiente tip" : "Ver tip",
-                    child: IconButton(
-                      onPressed: _isExpanded
-                          ? _forzarNuevoTip
-                          : () => setState(() => _isExpanded = true),
-                      icon: Icon(
-                        _isExpanded
-                            ? PhosphorIconsBold.arrowClockwise
-                            : PhosphorIconsRegular.caretDown,
-                        size: 20,
-                        color: colorScheme.primaryContainer,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Solo mostramos el contenido si está expandido
-            if (_isExpanded) ...[
-              const SizedBox(height: 8),
-              Text(
-                _tipExhibido,
-                style: textTheme.bodySmall?.copyWith(fontSize: 13),
-              ),
-            ],
-          ],
-        ),
+      ),
+      contenido: Text(
+        _tipExhibido,
+        style: textTheme.bodySmall?.copyWith(fontSize: 13),
       ),
     );
   }

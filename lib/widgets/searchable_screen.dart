@@ -93,41 +93,15 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
     });
   }
 
-  /// Filtra y ORDENA los items por relevancia respecto a la consulta.
-  ///
-  /// El rank de cada item se calcula como (indiceDelCampo * 10 + tipoDeMatch),
-  /// tomando el MEJOR (menor) match entre sus campos. El factor 10 garantiza
-  /// que cualquier coincidencia en un campo prioritario (índice 0) gane a
-  /// cualquier coincidencia en un campo menos relevante. Se descartan los
-  /// items sin coincidencia; se ordena por rank ascendente y, como desempate,
-  /// alfabéticamente por el título normalizado.
-  List<T> _buscarYRankear(String texto) {
-    final consulta = normalizar(texto);
-
-    final conRank = <({T item, int rank})>[];
-    for (final item in widget.items) {
-      final campos = widget.searchableFields(item);
-      int? mejor;
-      for (var i = 0; i < campos.length; i++) {
-        final tipo = rankearCampo(normalizar(campos[i]), consulta);
-        if (tipo != null) {
-          final rank = i * 10 + tipo;
-          if (mejor == null || rank < mejor) mejor = rank;
-        }
-      }
-      if (mejor != null) conRank.add((item: item, rank: mejor));
-    }
-
-    conRank.sort((a, b) {
-      final porRank = a.rank.compareTo(b.rank);
-      if (porRank != 0) return porRank;
-      return normalizar(
-        widget.itemTitle(a.item),
-      ).compareTo(normalizar(widget.itemTitle(b.item)));
-    });
-
-    return conRank.map((e) => e.item).toList();
-  }
+  /// Delega en `buscarYRankear` de `utils/search_utils.dart`, que es la única
+  /// implementación de la lógica de ranking (compartida con los buscadores que
+  /// no usan este widget completo).
+  List<T> _buscarYRankear(String texto) => buscarYRankear<T>(
+    items: widget.items,
+    consulta: texto,
+    camposBuscables: widget.searchableFields,
+    titulo: widget.itemTitle,
+  );
 
   void _limpiar() {
     _searchController.clear();

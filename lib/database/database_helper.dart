@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 12, // Aumentamos la versión a 12
+      version: 13, // Aumentamos la versión a 13
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -127,6 +127,24 @@ class DatabaseHelper {
           );
           await db.delete('medicamentos');
         }
+        // Módulo nuevo "Esenciales" (fichas de referencia rápida). Es una
+        // tabla nueva: no se borra ni se altera ninguna existente.
+        if (oldVersion < 13) {
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS esenciales (
+              id             INTEGER PRIMARY KEY AUTOINCREMENT,
+              titulo         TEXT NOT NULL,
+              titulo_corto   TEXT,
+              categoria      TEXT NOT NULL,
+              icono          TEXT NOT NULL,
+              resumen        TEXT,
+              palabras_clave TEXT,
+              contenido      TEXT NOT NULL,
+              fuente         TEXT NOT NULL,
+              orden          INTEGER NOT NULL DEFAULT 0
+            )
+          ''');
+        }
       },
     );
   }
@@ -230,6 +248,22 @@ class DatabaseHelper {
         nombre TEXT    NOT NULL,
         icono  TEXT    NOT NULL DEFAULT 'pill',
         orden  INTEGER NOT NULL DEFAULT 0
+      )
+    ''');
+
+    // 8. Tabla de Esenciales (fichas de referencia rápida)
+    await db.execute('''
+      CREATE TABLE esenciales (
+        id             INTEGER PRIMARY KEY AUTOINCREMENT,
+        titulo         TEXT NOT NULL,
+        titulo_corto   TEXT,
+        categoria      TEXT NOT NULL,
+        icono          TEXT NOT NULL,
+        resumen        TEXT,
+        palabras_clave TEXT,
+        contenido      TEXT NOT NULL,
+        fuente         TEXT NOT NULL,
+        orden          INTEGER NOT NULL DEFAULT 0
       )
     ''');
   }

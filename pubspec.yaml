@@ -69,3 +69,4 @@ flutter:
   - assets/data/tips.json
   - assets/data/normas_data.json
   - assets/data/pendientes_data.json
+  - assets/data/esenciales_data.json

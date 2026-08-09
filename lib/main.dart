@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:nursia_app/data/local/daos/calculadora_dao.dart';
 import 'package:nursia_app/data/local/daos/catalogo_pendiente_dao.dart';
 import 'package:nursia_app/data/local/daos/escala_dao.dart';
+import 'package:nursia_app/data/local/daos/esencial_dao.dart';
 import 'package:nursia_app/data/local/daos/medicamento_dao.dart';
 import 'package:nursia_app/data/local/daos/medicamento_turno_dao.dart';
 import 'package:nursia_app/data/local/daos/norma_dao.dart';
@@ -13,6 +14,7 @@ import 'package:nursia_app/data/local/daos/pendiente_turno_dao.dart';
 import 'package:nursia_app/database/database_helper.dart';
 import 'package:nursia_app/repositories/calculadora_repository.dart';
 import 'package:nursia_app/repositories/escala_repository.dart';
+import 'package:nursia_app/repositories/esencial_repository.dart';
 import 'package:nursia_app/repositories/medicamento_repository.dart';
 import 'package:nursia_app/repositories/medicamento_turno_repository.dart';
 import 'package:nursia_app/repositories/norma_repository.dart';
@@ -47,6 +49,8 @@ void main() async {
     await calculadoraRepo.cargarSemillaSiHaceFalta();
     final normaRepo = NormaRepository(NormaDao(db));
     await normaRepo.cargarSemillaSiHaceFalta();
+    final esencialRepo = EsencialRepository(EsencialDao(db));
+    await esencialRepo.cargarSemillaSiHaceFalta();
     final pacienteTurnoRepo = PacienteTurnoRepository(PacienteTurnoDao(db));
     final pendienteTurnoRepo = PendienteTurnoRepository(
       CatalogoPendienteDao(db),
@@ -63,6 +67,7 @@ void main() async {
           Provider<EscalaRepository>.value(value: escalaRepo),
           Provider<CalculadoraRepository>.value(value: calculadoraRepo),
           Provider<NormaRepository>.value(value: normaRepo),
+          Provider<EsencialRepository>.value(value: esencialRepo),
           Provider<PacienteTurnoRepository>.value(value: pacienteTurnoRepo),
           Provider<PendienteTurnoRepository>.value(value: pendienteTurnoRepo),
           Provider<MedicamentoTurnoRepository>.value(

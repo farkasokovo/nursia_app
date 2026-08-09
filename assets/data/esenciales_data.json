@@ -1,0 +1,129 @@
+[
+  {
+    "titulo": "[PRUEBA] Calibres imaginarios de tubo",
+    "titulo_corto": "[PRUEBA] Calibres",
+    "categoria": "insumos",
+    "icono": "syringe",
+    "resumen": "Ficha de prueba con dos tablas seguidas para revisar subtítulos.",
+    "palabras_clave": "prueba tabla calibre tubo insumo demo",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "valor": "Este texto es relleno de prueba. Sirve para revisar cómo se ve un párrafo largo dentro de una ficha y no dice absolutamente nada útil."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Tabla uno de prueba",
+        "encabezados": ["Calibre", "Color", "Flujo"],
+        "filas": [
+          ["99Z", "Turquesa fosforescente", "500 zumbidos/min"],
+          ["77Q", "Morado a cuadros", "12 zumbidos/min"],
+          ["01A", "Transparente invisible", "0 zumbidos/min"]
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Tabla dos de prueba",
+        "encabezados": ["Etiqueta", "Valor inventado"],
+        "filas": [
+          ["Alfa", "Cuarenta y dos"],
+          ["Beta", "Menos siete"],
+          ["Gama", "Pi elevado a burrito"]
+        ]
+      }
+    ],
+    "fuente": "Contenido de prueba — no es información clínica",
+    "orden": 1
+  },
+  {
+    "titulo": "[PRUEBA] Valores absurdos por edad",
+    "titulo_corto": "[PRUEBA] Valores",
+    "categoria": "paciente",
+    "icono": "user",
+    "resumen": "Ficha de prueba con lista de viñetas y una nota destacada.",
+    "palabras_clave": "prueba lista nota paciente edad demo",
+    "contenido": [
+      {
+        "tipo": "lista",
+        "titulo": "Lista con viñetas",
+        "estilo": "vinetas",
+        "items": [
+          "Grupo Ficticio A: 300 unidades de nada.",
+          "Grupo Ficticio B: 2 kilos de relleno.",
+          "Grupo Ficticio C: valor pendiente de inventar."
+        ]
+      },
+      {
+        "tipo": "nota",
+        "titulo": "Nota de prueba",
+        "valor": "Este bloque existe solo para verificar que el texto destacado se distingue del texto normal. No lo tomes como referencia de nada."
+      }
+    ],
+    "fuente": "Contenido de prueba — no es información clínica",
+    "orden": 2
+  },
+  {
+    "titulo": "[PRUEBA] Aparato de utilería",
+    "titulo_corto": "[PRUEBA] Aparato",
+    "categoria": "equipo",
+    "icono": "wrench",
+    "resumen": "Ficha de prueba con lista numerada y texto sin subtítulo.",
+    "palabras_clave": "prueba equipo lista numerada demo",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "titulo": "Párrafo con subtítulo",
+        "valor": "Relleno para comprobar que un bloque de texto puede llevar subtítulo propio."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Pasos inventados",
+        "estilo": "numerada",
+        "items": [
+          "Primero, girar la perilla imaginaria.",
+          "Después, esperar tres parpadeos.",
+          "Al final, anotar el resultado en una servilleta."
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "Nota sin subtítulo, para verificar que el bloque se ve bien cuando el título va vacío."
+      }
+    ],
+    "fuente": "Contenido de prueba — no es información clínica",
+    "orden": 3
+  },
+  {
+    "titulo": "[PRUEBA] Colores inventados de código",
+    "titulo_corto": "[PRUEBA] Colores",
+    "categoria": "codigos",
+    "icono": "palette",
+    "resumen": "Ficha de prueba con una paleta de colores y un párrafo final.",
+    "palabras_clave": "prueba colores paleta codigos demo",
+    "contenido": [
+      {
+        "tipo": "colores",
+        "titulo": "Paleta de prueba",
+        "items": [
+          {
+            "color": "#FF00FF",
+            "etiqueta": "Magenta imposible",
+            "descripcion": "Significa que la ficha es de prueba."
+          },
+          {
+            "color": "#00FFAA",
+            "etiqueta": "Verde alienígena",
+            "descripcion": "Tampoco significa nada real."
+          },
+          { "color": "#3366FF", "etiqueta": "Azul sin descripción" }
+        ]
+      },
+      {
+        "tipo": "texto",
+        "valor": "Los tres colores de arriba son inventados. Ninguno corresponde a un código, un triage ni una bolsa de residuos real."
+      }
+    ],
+    "fuente": "Contenido de prueba — no es información clínica",
+    "orden": 4
+  }
+]

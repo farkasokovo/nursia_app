@@ -34,7 +34,7 @@ lib/
 **Estado actual de la migración (julio 2026): ✅ COMPLETA.**
 Los 7 módulos ya están migrados al patrón Dao + Repository + Provider: `medicamentos`, `escalas`, `calculadoras`, `normas`, y los tres de `turno_activo` (`pacientes_turno`, `pendientes_turno`, `medicamentos_turno`). Todos conectados vía `MultiProvider` en `main.dart`.
 
-`database_helper.dart` quedó adelgazado a ~199 líneas: SOLO conexión (`database` getter, `_initDB`), migraciones de schema (`_createDB`, `onUpgrade`) y `close()`. Ninguna lógica de negocio ni carga de JSON debe volver a vivir ahí. Versión actual de la BD: **7**.
+`database_helper.dart` quedó adelgazado a ~199 líneas: SOLO conexión (`database` getter, `_initDB`), migraciones de schema (`_createDB`, `onUpgrade`) y `close()`. Ninguna lógica de negocio ni carga de JSON debe volver a vivir ahí. Versión actual de la BD: **12**.
 
 Si en el futuro se agrega un módulo nuevo (tabla nueva), usa `medicamento_dao.dart` y `medicamento_repository.dart` como plantilla exacta del patrón (mismos nombres de método: `insertar`, `contar`, `obtenerTodos`, `obtenerPorNombre`/`obtenerPorId`, `cargarSemillaSiHaceFalta`). Para tablas sin semilla JSON (datos generados por el usuario, como los de `turno_activo`), usa `paciente_turno_dao.dart` / `paciente_turno_repository.dart` como plantilla — mismo patrón pero sin `cargarSemillaSiHaceFalta`.
 

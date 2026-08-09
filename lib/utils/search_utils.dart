@@ -58,3 +58,46 @@ int? rankearCampo(String campoNorm, String consultaNorm) {
   if (campoNorm.contains(consultaNorm)) return 3;
   return null;
 }
+
+/// Filtra y ORDENA los items por relevancia respecto a la consulta.
+///
+/// El rank de cada item se calcula como (indiceDelCampo * 10 + tipoDeMatch),
+/// tomando el MEJOR (menor) match entre sus campos. El factor 10 garantiza
+/// que cualquier coincidencia en un campo prioritario (índice 0) gane a
+/// cualquier coincidencia en un campo menos relevante. Se descartan los
+/// items sin coincidencia; se ordena por rank ascendente y, como desempate,
+/// alfabéticamente por el título normalizado.
+///
+/// [camposBuscables] devuelve los campos de un item EN ORDEN DE PRIORIDAD
+/// (índice 0 = el más relevante). [titulo] es el texto que se usa para el
+/// desempate alfabético.
+List<T> buscarYRankear<T>({
+  required List<T> items,
+  required String consulta,
+  required List<String> Function(T item) camposBuscables,
+  required String Function(T item) titulo,
+}) {
+  final consultaNorm = normalizar(consulta);
+
+  final conRank = <({T item, int rank})>[];
+  for (final item in items) {
+    final campos = camposBuscables(item);
+    int? mejor;
+    for (var i = 0; i < campos.length; i++) {
+      final tipo = rankearCampo(normalizar(campos[i]), consultaNorm);
+      if (tipo != null) {
+        final rank = i * 10 + tipo;
+        if (mejor == null || rank < mejor) mejor = rank;
+      }
+    }
+    if (mejor != null) conRank.add((item: item, rank: mejor));
+  }
+
+  conRank.sort((a, b) {
+    final porRank = a.rank.compareTo(b.rank);
+    if (porRank != 0) return porRank;
+    return normalizar(titulo(a.item)).compareTo(normalizar(titulo(b.item)));
+  });
+
+  return conRank.map((e) => e.item).toList();
+}
