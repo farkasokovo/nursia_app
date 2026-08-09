@@ -130,25 +130,37 @@ Esquema del objeto (en `assets/data/medicamentos.json`):
 
 ```json
 "dilucion": {
-  "requiereDilucion": true,          // bool, obligatorio
+  "requiereDilucion": "requiere",    // obligatorio. Uno de:
+                                     //   "no_requiere" (ya viene aforado)
+                                     //   "no_diluir"   (no debe diluirse)
+                                     //   "opcional"    (con o sin diluir)
+                                     //   "requiere"
+                                     // Cualquier otro valor se normaliza a
+                                     // "requiere", que es lo más conservador.
   "verificado": false,               // bool, obligatorio (default false)
   "reconstitucion": "...",           // string opcional
-  "diluyente": "...",                // string opcional
-  "ivDirecta": "...",                // string opcional
+  "diluyente": "...",                // string opcional. Aclara si requiere
+                                     // dilución, si ya viene aforado o si no
+                                     // debe diluirse, y con qué soluciones.
+  "volumen": "...",                  // string opcional. Volumen final en mL.
+  "tiempoInfusion": "...",           // string opcional
+  "bolo": "...",                     // string opcional. Administración directa.
   "perfusionIntermitente": "...",    // string opcional
   "perfusionContinua": "...",        // string opcional
   "notas": "...",                    // string opcional
-  "fuente": "...",                   // string opcional — cita de la fuente
-  "fechaRevision": "..."             // string opcional — cuándo se revisó
+  "fuente": "...",                   // string opcional. Cita de la fuente.
+  "fechaRevision": "..."             // string opcional. Cuándo se revisó.
 }
 ```
 
 Reglas:
 - **`dilucion` nulo oculta la sección por completo.** `_buildDilucion` en `lib/screens/ficha_medicamento.dart` devuelve `const SizedBox()` — no se dibuja placeholder, ni "no disponible", ni encabezado vacío. Un medicamento sin datos de dilución se ve exactamente como antes.
-- La sección se renderiza **destacada** (Container con fondo `surfaceContainerHighest`, padding y borderRadius) porque es la información más consultada y casi siempre se lee con prisa. Los valores de `ivDirecta`, `perfusionIntermitente` y `perfusionContinua` van un escalón tipográfico más grande (`bodyMedium`) que el resto (`bodySmall`).
+- La sección se renderiza **destacada** (Container con fondo `surfaceContainerHighest`, padding y borderRadius) porque es la información más consultada y casi siempre se lee con prisa. Los valores de `volumen`, `tiempoInfusion`, `bolo`, `perfusionIntermitente` y `perfusionContinua` van un escalón tipográfico más grande (`bodyMedium`) que el resto (`bodySmall`).
 - `verificado: false` dibuja arriba de todo una franja `errorContainer` con el texto "Contenido en revisión — no usar en la práctica clínica". Al transcribir contenido real con su fuente, subir el flag a `true` **en el mismo cambio**.
 - ⚠️ **Ningún modelo genera contenido clínico de dilución.** Nada de volúmenes, tiempos, diluyentes ni concentraciones inferidos, deducidos o recordados. Solo se **transcribe** contenido que venga de una fuente citada y con revisión humana; mientras eso no exista, el valor del campo es literalmente `"[PENDIENTE DE VERIFICAR]"`. Si algo tienta a completar un dato, parar y preguntarle a DIEGO.
 - **Amoxicilina no lleva campo `dilucion`, y es a propósito.** Esa ficha corresponde a amoxicilina sola, NO a la combinación con ácido clavulánico: son medicamentos distintos, con claves distintas en el formulario mexicano. Los datos de dilución disponibles son de la combinación y no aplican a la amoxicilina sola, así que la ficha se queda sin el campo. No inventar el dato ni crear una ficha nueva sin pedírselo a DIEGO.
+- **El listado de diluyentes es por fármaco, nunca genérico.** No todos admiten las mismas soluciones: ketorolaco sí acepta Hartmann, ceftriaxona NO, porque el Hartmann y el Ringer lactato contienen calcio y la precipitan. Nunca completar el campo `diluyente` con una lista general de soluciones; solo se pone lo que la fuente diga para ese fármaco en concreto.
+- **No usar guiones largos** (— ni –) en el contenido clínico del JSON. Separar con punto, coma o dos puntos.
 - Editar contenido de dilución en el JSON cae bajo la regla crítica del seed: hay que subir `version` en `_initDB` y agregar un `if (oldVersion < N) { await db.delete('medicamentos'); }` en `onUpgrade`, si no el cambio no llega a dispositivos ya instalados.
 
 ## Qué NO hacer

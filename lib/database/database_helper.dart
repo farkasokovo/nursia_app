@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 16, // Aumentamos la versión a 16
+      version: 18, // Aumentamos la versión a 18
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -161,6 +161,24 @@ class DatabaseHelper {
         // el JSON corregido en el próximo arranque. NO afecta datos del
         // usuario (turno activo).
         if (oldVersion < 16) {
+          await db.delete('medicamentos');
+        }
+        // El objeto "dilucion" se reestructuró: se retiraron "ivDirecta" y
+        // "perfusionIntermitente", y en su lugar entraron "volumen",
+        // "tiempoInfusion" y "bolo". El diluyente ahora aclara si requiere
+        // dilución o ya viene aforado. Se vacía la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON en el
+        // formato nuevo en el próximo arranque. NO afecta datos del usuario
+        // (turno activo).
+        if (oldVersion < 17) {
+          await db.delete('medicamentos');
+        }
+        // Se restauró "perfusionIntermitente" dentro de "dilucion", que se
+        // había retirado en la v17. Convive con "volumen" y "tiempoInfusion".
+        // Se vacía la tabla para que cargarSemillaSiHaceFalta() la vuelva a
+        // sembrar con el JSON actualizado en el próximo arranque. NO afecta
+        // datos del usuario (turno activo).
+        if (oldVersion < 18) {
           await db.delete('medicamentos');
         }
       },

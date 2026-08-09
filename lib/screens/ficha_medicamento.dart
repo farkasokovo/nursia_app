@@ -419,8 +419,16 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
         },
       if (dil.diluyente != null)
         {'label': 'Diluyente', 'valor': dil.diluyente!, 'destacado': false},
-      if (dil.ivDirecta != null)
-        {'label': 'IV directa', 'valor': dil.ivDirecta!, 'destacado': true},
+      if (dil.volumen != null)
+        {'label': 'Volumen', 'valor': dil.volumen!, 'destacado': true},
+      if (dil.tiempoInfusion != null)
+        {
+          'label': 'Tiempo de infusión',
+          'valor': dil.tiempoInfusion!,
+          'destacado': true,
+        },
+      if (dil.bolo != null)
+        {'label': 'Bolo IV', 'valor': dil.bolo!, 'destacado': true},
       if (dil.perfusionIntermitente != null)
         {
           'label': 'Perfusión intermitente',
@@ -456,7 +464,7 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                'Contenido en revisión — no usar en la práctica clínica',
+                'Contenido en revisión. No usar en la práctica clínica.',
                 style: textTheme.bodySmall?.copyWith(
                   color: colorScheme.onErrorContainer,
                   fontWeight: FontWeight.bold,

@@ -231,8 +231,18 @@ class Dilucion {
   final String requiereDilucion;
   final bool verificado;
   final String? reconstitucion;
+
+  /// Aclara si requiere dilución, si ya viene aforado o si no debe diluirse,
+  /// y con qué soluciones. El listado de soluciones es por fármaco: no todos
+  /// admiten los mismos (ceftriaxona, por ejemplo, no va con Hartmann).
   final String? diluyente;
-  final String? ivDirecta;
+
+  /// Volumen final de la dilución, en mL.
+  final String? volumen;
+  final String? tiempoInfusion;
+
+  /// Administración directa en bolo, cuando la vía lo permite.
+  final String? bolo;
   final String? perfusionIntermitente;
   final String? perfusionContinua;
   final String? notas;
@@ -244,7 +254,9 @@ class Dilucion {
     this.verificado = false,
     this.reconstitucion,
     this.diluyente,
-    this.ivDirecta,
+    this.volumen,
+    this.tiempoInfusion,
+    this.bolo,
     this.perfusionIntermitente,
     this.perfusionContinua,
     this.notas,
@@ -265,7 +277,9 @@ class Dilucion {
       verificado: json['verificado'] ?? false,
       reconstitucion: json['reconstitucion'],
       diluyente: json['diluyente'],
-      ivDirecta: json['ivDirecta'],
+      volumen: json['volumen'],
+      tiempoInfusion: json['tiempoInfusion'],
+      bolo: json['bolo'],
       perfusionIntermitente: json['perfusionIntermitente'],
       perfusionContinua: json['perfusionContinua'],
       notas: json['notas'],
@@ -279,7 +293,9 @@ class Dilucion {
     'verificado': verificado,
     if (reconstitucion != null) 'reconstitucion': reconstitucion,
     if (diluyente != null) 'diluyente': diluyente,
-    if (ivDirecta != null) 'ivDirecta': ivDirecta,
+    if (volumen != null) 'volumen': volumen,
+    if (tiempoInfusion != null) 'tiempoInfusion': tiempoInfusion,
+    if (bolo != null) 'bolo': bolo,
     if (perfusionIntermitente != null)
       'perfusionIntermitente': perfusionIntermitente,
     if (perfusionContinua != null) 'perfusionContinua': perfusionContinua,
