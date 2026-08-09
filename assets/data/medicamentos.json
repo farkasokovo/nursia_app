@@ -127,6 +127,18 @@
       "administracion": "IV: Infundir en al menos 60 min para minimizar la irritación venosa y el riesgo de reacciones.",
       "precauciones": "Proteger la solución IV de la luz solar directa. Mantener hidratación adecuada para prevenir cristaluria. Vigilar signos de tendinitis (especialmente tendón de Aquiles) durante el tratamiento."
     },
+    "dilucion": {
+      "requiereDilucion": "no_requiere",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": null,
+      "ivDirecta": null,
+      "perfusionIntermitente": "La presentación de 200 mg/100 mL ya viene aforada. Administrar directamente en 60 min.",
+      "perfusionContinua": null,
+      "notas": null,
+      "fuente": "Guía de administración parenteral, H.U. Cruz Roja Madrid, Serv. Farmacia, 2023",
+      "fechaRevision": "2026-08-08"
+    },
     "referencias": [
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2022). Ficha técnica Ciprofloxacino Normon 500 mg comprimidos recubiertos con película EFG. CIMA.",
@@ -191,6 +203,18 @@
     "observaciones": {
       "administracion": "IV: Administrar en perfusión intermitente de 30 min. IM: Inyectar profundamente en músculo grande (glúteo mayor). Nunca mezclar ni administrar simultáneamente por la misma vía con soluciones que contengan calcio.",
       "precauciones": "En neonatos, cualquier administración IV de calcio debe separarse al menos 48 h."
+    },
+    "dilucion": {
+      "requiereDilucion": "requiere",
+      "verificado": false,
+      "reconstitucion": "Frasco ámpula de 1 g con 10 mL de agua inyectable",
+      "diluyente": "Solución fisiológica 0.9% o solución glucosada al 5%",
+      "ivDirecta": "Administrar en 2 a 4 min. Máximo 1 g por esta vía; no aplicar 2 g en IV directa.",
+      "perfusionIntermitente": "Diluir en 50 a 100 mL y pasar en 30 a 60 min. Para 2 g, mínimo 30 min.",
+      "perfusionContinua": null,
+      "notas": null,
+      "fuente": "Guía de administración parenteral, H.U. Cruz Roja Madrid, Serv. Farmacia, 2023",
+      "fechaRevision": "2026-08-08"
     },
     "referencias": [
       {
@@ -257,6 +281,18 @@
     ],
     "observaciones": {
       "precauciones": "No superar la dosis máxima diaria de 4 g (reducir a 2 g/día en pacientes con riesgo hepático o desnutrición). Monitorizar la presión arterial durante la infusión IV por riesgo de hipotensión."
+    },
+    "dilucion": {
+      "requiereDilucion": "no_requiere",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": null,
+      "ivDirecta": null,
+      "perfusionIntermitente": "La presentación de 1 g/100 mL ya viene aforada. Pasar los 100 mL en al menos 15 min.",
+      "perfusionContinua": null,
+      "notas": "Respetar la velocidad de perfusión para evitar reacciones locales.",
+      "fuente": "Guía de administración parenteral, H.U. Cruz Roja Madrid, Serv. Farmacia, 2023",
+      "fechaRevision": "2026-08-08"
     },
     "referencias": [
       {
@@ -402,6 +438,18 @@
       "administracion": "IV: En bolo, administrar lentamente en al menos 15 segundos; en perfusión, infundir en 15-30 min. IM: Inyectar profundamente en músculo grande.",
       "precauciones": "Monitorizar función renal, especialmente en pacientes deshidratados o de edad avanzada."
     },
+    "dilucion": {
+      "requiereDilucion": "opcional",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": "Solución fisiológica 0.9%, solución glucosada al 5% o solución Hartmann",
+      "ivDirecta": "Sin diluir, en al menos 20 segundos.",
+      "perfusionIntermitente": "Diluir en 50 a 100 mL y pasar en 30 min.",
+      "perfusionContinua": "Diluir y administrar a 1.5 a 3 mg/h.",
+      "notas": "El tratamiento por vía IV no debe superar los dos días.",
+      "fuente": "Guía de administración parenteral, H.U. Cruz Roja Madrid, Serv. Farmacia, 2023",
+      "fechaRevision": "2026-08-08"
+    },
     "referencias": [
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Ketorolaco Trometamol premed 30 mg/ml solución inyectable. CIMA.",
@@ -474,6 +522,18 @@
     ],
     "observaciones": {
       "precauciones": "No suspender abruptamente tras tratamiento crónico (riesgo de angina o isquemia de rebote); reducir la dosis de forma gradual."
+    },
+    "dilucion": {
+      "requiereDilucion": "no_diluir",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": null,
+      "ivDirecta": "Sin diluir. La solución de 1 mg/mL no debe diluirse.",
+      "perfusionIntermitente": null,
+      "perfusionContinua": null,
+      "notas": "Si se requiere, pueden añadirse 40 mg (8 ampolletas) a 1000 mL de solución fisiológica 0.9% o glucosada al 5%.",
+      "fuente": "Guía de administración parenteral, H.U. Cruz Roja Madrid, Serv. Farmacia, 2023",
+      "fechaRevision": "2026-08-08"
     },
     "referencias": [
       {
@@ -682,6 +742,18 @@
       "administracion": "IV: Administrar en perfusión lenta de 15-30 min; nunca en bolo rápido por riesgo de hipotensión grave. IM: Inyectar profundamente en músculo grande.",
       "precauciones": "Mantener al paciente en decúbito y monitorizar la presión arterial durante la infusión IV."
     },
+    "dilucion": {
+      "requiereDilucion": "requiere",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": "Solución de cloruro de sodio 0.9%",
+      "ivDirecta": "Diluir la ampolleta de 2 mL en un mínimo de 20 mL (relación 1:10) y pasar por venoclisis a 1 mL/min, equivalente a 20 gotas o 60 microgotas por minuto. La aplicación directa y rápida puede causar hipotensión severa y choque.",
+      "perfusionIntermitente": null,
+      "perfusionContinua": null,
+      "notas": "Reservar la vía IV para los casos más severos, con el paciente hemodinámicamente estable y tensión arterial de al menos 100/60 mmHg.",
+      "fuente": "Información para prescribir, metamizol sódico solución inyectable 1 g/2 mL (México). Cuadro Básico clave 0109.00",
+      "fechaRevision": "2026-08-08"
+    },
     "referencias": [
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2021). Ficha técnica Metamizol Normon 500 mg cápsulas duras. CIMA.",
@@ -748,6 +820,18 @@
     "observaciones": {
       "administracion": "IV: Administrar en bolo lento o en perfusión intermitente. Oral: Tomar con alimentos para reducir la irritación gástrica; administrar preferentemente por la mañana para respetar el ritmo circadiano del cortisol. IM: Inyectar profundamente en músculo grande.",
       "precauciones": "No suspender bruscamente tras tratamientos prolongados; reducir la dosis de forma gradual para evitar insuficiencia suprarrenal aguda. Vigilar la glucemia, especialmente en pacientes diabéticos. Estar alerta a infecciones enmascaradas por el efecto inmunosupresor."
+    },
+    "dilucion": {
+      "requiereDilucion": "opcional",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": "Solución fisiológica 0.9% o solución glucosada al 5%",
+      "ivDirecta": "Sin diluir, lentamente en al menos 1 min.",
+      "perfusionIntermitente": "Diluir en 50 a 100 mL y pasar en 30 a 60 min.",
+      "perfusionContinua": null,
+      "notas": null,
+      "fuente": "Guía de administración parenteral, H.U. Cruz Roja Madrid, Serv. Farmacia, 2023",
+      "fechaRevision": "2026-08-08"
     },
     "referencias": [
       {
@@ -881,9 +965,21 @@
       }
     ],
     "observaciones": {
-      "preparacion": "Evitar mezclar con soluciones ácidas (pH < 5.5) o con glucosa 5% por riesgo de precipitación.",
+      "preparacion": "La solución no tiene capacidad tamponante y su pH es 9, por lo que el principio activo puede precipitar por debajo de pH 7. Evitar soluciones ácidas. El diluyente adecuado es la solución fisiológica 0.9%.",
       "administracion": "IV en bolo: No superar una velocidad de infusión de 4 mg/min (reducir a 1 mg/min en insuficiencia renal grave) para evitar ototoxicidad. En dosis altas, preferir perfusión continua. Oral: Administrar preferentemente por la mañana para evitar nicturia.",
       "precauciones": "Vigilar signos de deshidratación y desequilibrio hidroelectrolítico."
+    },
+    "dilucion": {
+      "requiereDilucion": "opcional",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": "Solución fisiológica 0.9%",
+      "ivDirecta": "20 a 40 mg sin diluir, lentamente en 1 a 2 min.",
+      "perfusionIntermitente": "Diluir en 50 a 250 mL a una velocidad máxima de 4 mg/min. En insuficiencia renal grave no exceder 2.5 mg/min.",
+      "perfusionContinua": "Diluir 100 mg en 100 mL y administrar a 1 a 10 mg/h según diuresis.",
+      "notas": null,
+      "fuente": "Ficha técnica AEMPS furosemida solución inyectable; Guía H.U. Cruz Roja Madrid, 2023",
+      "fechaRevision": "2026-08-08"
     },
     "referencias": [
       {
@@ -1087,6 +1183,18 @@
     "observaciones": {
       "administracion": "IV en infusión continua o bolo intermitente; SC profunda en el tejido adiposo abdominal.",
       "precauciones": "Contraindicada de forma estricta la vía intramuscular, por el alto riesgo de hematomas masivos y dolorosos."
+    },
+    "dilucion": {
+      "requiereDilucion": "requiere",
+      "verificado": false,
+      "reconstitucion": null,
+      "diluyente": "Solución fisiológica 0.9% o solución glucosada al 5%",
+      "ivDirecta": "Diluir en 25 a 50 mL, a velocidad no mayor de 2000 UI/min.",
+      "perfusionIntermitente": "Sin diluir, o diluida en 50 a 100 mL, a 1000 UI/min.",
+      "perfusionContinua": "Diluir en 250 a 1000 mL. Siempre con bomba de infusión.",
+      "notas": "No preparar la dosis total del día en un solo envase, para evitar sobredosificación accidental.",
+      "fuente": "Guía de administración parenteral, H.U. Cruz Roja Madrid, Serv. Farmacia, 2023",
+      "fechaRevision": "2026-08-08"
     },
     "referencias": [
       {

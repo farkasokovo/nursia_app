@@ -129,6 +129,10 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
               medicamento.viaAdministracion,
             ),
             const SizedBox(height: 16),
+            if (medicamento.dilucion != null) ...[
+              _buildDilucion(textTheme, medicamento.dilucion!),
+              const SizedBox(height: 16),
+            ],
             _buildContraindicaciones(textTheme, medicamento.contraindicaciones),
             const SizedBox(height: 16),
             _buildListSection(
@@ -393,6 +397,138 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
           ),
         ),
       ],
+    );
+  }
+
+  /// Sección de dilución. Se renderiza destacada (contenedor con fondo propio)
+  /// porque es la información que más se consulta y casi siempre con prisa.
+  /// Si el medicamento no tiene datos de dilución NO se dibuja nada.
+  Widget _buildDilucion(TextTheme textTheme, Dilucion? dil) {
+    if (dil == null) return const SizedBox();
+
+    final colorScheme = Theme.of(context).colorScheme;
+
+    // 'destacado' = campo que se lee de reojo durante la administración, va un
+    // escalón tipográfico más grande que el resto.
+    final items = <Map<String, dynamic>>[
+      if (dil.reconstitucion != null)
+        {
+          'label': 'Reconstitución',
+          'valor': dil.reconstitucion!,
+          'destacado': false,
+        },
+      if (dil.diluyente != null)
+        {'label': 'Diluyente', 'valor': dil.diluyente!, 'destacado': false},
+      if (dil.ivDirecta != null)
+        {'label': 'IV directa', 'valor': dil.ivDirecta!, 'destacado': true},
+      if (dil.perfusionIntermitente != null)
+        {
+          'label': 'Perfusión intermitente',
+          'valor': dil.perfusionIntermitente!,
+          'destacado': true,
+        },
+      if (dil.perfusionContinua != null)
+        {
+          'label': 'Perfusión continua',
+          'valor': dil.perfusionContinua!,
+          'destacado': true,
+        },
+      if (dil.notas != null)
+        {'label': 'Nota', 'valor': dil.notas!, 'destacado': false},
+    ];
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (!dil.verificado) ...[
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: colorScheme.errorContainer,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'Contenido en revisión — no usar en la práctica clínica',
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onErrorContainer,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+          ],
+          Text(
+            'Dilución',
+            style: textTheme.titleMedium?.copyWith(
+              color: colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: 10),
+          // Encabezado de estado. Se muestra siempre, en los cuatro casos; los
+          // campos poblados se listan debajo sin importar cuál sea el estado.
+          Text(
+            switch (dil.requiereDilucion) {
+              Dilucion.noRequiere =>
+                'No requiere dilución: la presentación ya viene lista.',
+              Dilucion.noDiluir => 'No debe diluirse.',
+              Dilucion.opcional =>
+                'Puede administrarse sin diluir o diluido, según la vía.',
+              _ => 'Requiere dilución antes de administrarse.',
+            },
+            style: textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 10),
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '${item['label']}: ',
+                      style:
+                          (item['destacado'] as bool
+                                  ? textTheme.bodyMedium
+                                  : textTheme.bodySmall)
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: colorScheme.primary,
+                              ),
+                    ),
+                    TextSpan(
+                      text: item['valor'] as String,
+                      style:
+                          (item['destacado'] as bool
+                                  ? textTheme.bodyMedium
+                                  : textTheme.bodySmall)
+                              ?.copyWith(color: colorScheme.onSurface),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          if (dil.fuente != null)
+            Text(
+              'Fuente: ${dil.fuente} (rev. ${dil.fechaRevision})',
+              style: textTheme.bodySmall?.copyWith(
+                fontSize: 11,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+        ],
+      ),
     );
   }
 

@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 12, // Aumentamos la versión a 12
+      version: 16, // Aumentamos la versión a 16
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -127,6 +127,42 @@ class DatabaseHelper {
           );
           await db.delete('medicamentos');
         }
+        // Se agregó el campo "dilucion" a medicamentos (objeto JSON con
+        // reconstitución, diluyente y tiempos de perfusión). Se agrega la
+        // columna a la tabla existente y se vacía para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON
+        // actualizado en el próximo arranque. NO afecta datos del usuario
+        // (turno activo).
+        if (oldVersion < 13) {
+          await db.execute('ALTER TABLE medicamentos ADD COLUMN dilucion TEXT');
+          await db.delete('medicamentos');
+        }
+        // Se agregó contenido de dilución al JSON de medicamentos (9 fármacos
+        // con reconstitución, diluyente y tiempos de perfusión con fuente
+        // citada). Se vacía la tabla para que cargarSemillaSiHaceFalta() la
+        // vuelva a sembrar con el JSON actualizado en el próximo arranque. NO
+        // afecta datos del usuario (turno activo).
+        if (oldVersion < 14) {
+          await db.delete('medicamentos');
+        }
+        // El campo "requiereDilucion" dentro de "dilucion" cambió de booleano
+        // a cadena, con cuatro estados clínicos ("no_requiere", "no_diluir",
+        // "opcional", "requiere"). Se vacía la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON en el
+        // formato nuevo en el próximo arranque. NO afecta datos del usuario
+        // (turno activo).
+        if (oldVersion < 15) {
+          await db.delete('medicamentos');
+        }
+        // Se corrigió el umbral de pH en las observaciones de furosemida: la
+        // solución no tiene capacidad tamponante, su pH es 9 y el principio
+        // activo precipita por debajo de pH 7 (antes decía pH 5.5). Se vacía
+        // la tabla para que cargarSemillaSiHaceFalta() la vuelva a sembrar con
+        // el JSON corregido en el próximo arranque. NO afecta datos del
+        // usuario (turno activo).
+        if (oldVersion < 16) {
+          await db.delete('medicamentos');
+        }
       },
     );
   }
@@ -148,6 +184,7 @@ class DatabaseHelper {
         efectosAdversos TEXT,
         interacciones TEXT,
         observaciones TEXT,
+        dilucion TEXT,
         referencias TEXT,
         altoRiesgo INTEGER NOT NULL DEFAULT 0
       )

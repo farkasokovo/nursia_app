@@ -122,6 +122,35 @@ Luego, registrar la categoría nueva en `lib/screens/farmacologia_screen.dart`:
 ### Si DIEGO pide un campo que el modelo NO tiene hoy
 (ej. "dosis pediátrica" como columna nueva, no solo texto dentro de un campo existente) — eso NO es este flujo. Requiere: agregar el campo a `Medicamento` (`fromJson`/`fromMap`/`toMap`), una migración de schema en `database_helper.dart` (`onUpgrade`, bump de `version`), y ajustar `MedicamentoDao`. Avisar al usuario que es un cambio de arquitectura más grande antes de tocarlo.
 
+## Sección de Dilución
+
+Campo **opcional** dentro de cada medicamento (`Dilucion?` en `lib/models/medicamento.dart`). Viaja dentro de la tabla `medicamentos` como una columna `dilucion TEXT` con JSON serializado — mismo patrón que `observaciones`. El DAO y el repository **no** necesitan cambios para esto.
+
+Esquema del objeto (en `assets/data/medicamentos.json`):
+
+```json
+"dilucion": {
+  "requiereDilucion": true,          // bool, obligatorio
+  "verificado": false,               // bool, obligatorio (default false)
+  "reconstitucion": "...",           // string opcional
+  "diluyente": "...",                // string opcional
+  "ivDirecta": "...",                // string opcional
+  "perfusionIntermitente": "...",    // string opcional
+  "perfusionContinua": "...",        // string opcional
+  "notas": "...",                    // string opcional
+  "fuente": "...",                   // string opcional — cita de la fuente
+  "fechaRevision": "..."             // string opcional — cuándo se revisó
+}
+```
+
+Reglas:
+- **`dilucion` nulo oculta la sección por completo.** `_buildDilucion` en `lib/screens/ficha_medicamento.dart` devuelve `const SizedBox()` — no se dibuja placeholder, ni "no disponible", ni encabezado vacío. Un medicamento sin datos de dilución se ve exactamente como antes.
+- La sección se renderiza **destacada** (Container con fondo `surfaceContainerHighest`, padding y borderRadius) porque es la información más consultada y casi siempre se lee con prisa. Los valores de `ivDirecta`, `perfusionIntermitente` y `perfusionContinua` van un escalón tipográfico más grande (`bodyMedium`) que el resto (`bodySmall`).
+- `verificado: false` dibuja arriba de todo una franja `errorContainer` con el texto "Contenido en revisión — no usar en la práctica clínica". Al transcribir contenido real con su fuente, subir el flag a `true` **en el mismo cambio**.
+- ⚠️ **Ningún modelo genera contenido clínico de dilución.** Nada de volúmenes, tiempos, diluyentes ni concentraciones inferidos, deducidos o recordados. Solo se **transcribe** contenido que venga de una fuente citada y con revisión humana; mientras eso no exista, el valor del campo es literalmente `"[PENDIENTE DE VERIFICAR]"`. Si algo tienta a completar un dato, parar y preguntarle a DIEGO.
+- **Amoxicilina no lleva campo `dilucion`, y es a propósito.** Esa ficha corresponde a amoxicilina sola, NO a la combinación con ácido clavulánico: son medicamentos distintos, con claves distintas en el formulario mexicano. Los datos de dilución disponibles son de la combinación y no aplican a la amoxicilina sola, así que la ficha se queda sin el campo. No inventar el dato ni crear una ficha nueva sin pedírselo a DIEGO.
+- Editar contenido de dilución en el JSON cae bajo la regla crítica del seed: hay que subir `version` en `_initDB` y agregar un `if (oldVersion < N) { await db.delete('medicamentos'); }` en `onUpgrade`, si no el cambio no llega a dispositivos ya instalados.
+
 ## Qué NO hacer
 - No modifiques módulos que no se te pidió tocar.
 - No agregues dependencias nuevas sin decir cuáles y por qué.
