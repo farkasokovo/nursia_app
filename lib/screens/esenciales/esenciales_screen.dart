@@ -6,28 +6,17 @@ import 'package:provider/provider.dart';
 import '../../models/ficha_esencial.dart';
 import '../../repositories/esencial_repository.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/categorias_esenciales.dart';
 import '../../utils/esencial_icon_mapper.dart';
 import '../../utils/search_utils.dart';
 import '../../widgets/home_nav_button.dart';
 import '../../widgets/tarjeta_desplegable.dart';
+import 'ficha_esencial_screen.dart';
 
-/// Nombre visible de cada categoría. La clave es el valor del campo
-/// `categoria` en el JSON/SQLite.
-const Map<String, String> _etiquetasCategoria = {
-  'insumos': 'Insumos',
-  'paciente': 'Paciente',
-  'equipo': 'Equipo',
-  'codigos': 'Códigos',
-};
-
-/// Índice de pestaña de cada categoría. El 2 es la pestaña casa.
-const List<String> _categoriaPorTab = [
-  'insumos',
-  'paciente',
-  '', // pestaña casa
-  'equipo',
-  'codigos',
-];
+/// Índice de la pestaña casa. Las otras 4 las define
+/// `utils/categorias_esenciales.dart`, que es la fuente única del nombre y el
+/// ícono de cada categoría.
+const int _tabCasa = 2;
 
 /// Pantalla del módulo Esenciales: fichas de referencia rápida agrupadas en
 /// 4 categorías, con una pestaña casa al centro a modo de dashboard.
@@ -123,12 +112,17 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
     return true;
   }
 
+  /// La ficha ya está en memoria, así que se pasa completa a la pantalla de
+  /// detalle en vez de volver a consultarla en la BD.
+  ///
+  /// El unfocus va antes de navegar: si el teclado sigue abierto al empujar la
+  /// ruta, regresa solo al volver de la ficha.
   void _abrirFicha(FichaEsencial ficha) {
     _searchFocus.unfocus();
-    // TODO: navegar a la pantalla de ficha cuando exista.
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('Ficha: ${ficha.titulo}')));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => FichaEsencialScreen(ficha: ficha)),
+    );
   }
 
   @override
@@ -199,12 +193,12 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
-        tabs: const [
-          Tab(text: 'Insumos'),
-          Tab(text: 'Paciente'),
-          Tab(icon: PhosphorIcon(PhosphorIconsFill.house, size: 26)),
-          Tab(text: 'Equipo'),
-          Tab(text: 'Códigos'),
+        tabs: [
+          for (var i = 0; i < 5; i++)
+            if (i == _tabCasa)
+              const Tab(icon: PhosphorIcon(PhosphorIconsFill.house, size: 26))
+            else
+              Tab(text: categoriaPorTab(i)!.etiqueta),
         ],
       ),
     );
@@ -281,25 +275,25 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
 
     return TabBarView(
       children: [
-        _buildListaCategoria('insumos', colorScheme, textTheme),
-        _buildListaCategoria('paciente', colorScheme, textTheme),
-        _buildDashboard(colorScheme, textTheme),
-        _buildListaCategoria('equipo', colorScheme, textTheme),
-        _buildListaCategoria('codigos', colorScheme, textTheme),
+        for (var i = 0; i < 5; i++)
+          if (i == _tabCasa)
+            _buildDashboard(colorScheme, textTheme)
+          else
+            _buildListaCategoria(categoriaPorTab(i)!, colorScheme, textTheme),
       ],
     );
   }
 
   Widget _buildListaCategoria(
-    String categoria,
+    CategoriaEsencial categoria,
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
-    final fichas = _deCategoria(categoria);
+    final fichas = _deCategoria(categoria.clave);
     if (fichas.isEmpty) {
       return _buildVacio(
         PhosphorIconsFill.folderOpen,
-        'Todavía no hay fichas en ${_etiquetasCategoria[categoria]}.',
+        'Todavía no hay fichas en ${categoria.etiqueta}.',
         colorScheme,
         textTheme,
       );
@@ -384,23 +378,40 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
   }
 
   Widget _buildChipCategoria(
-    String categoria,
+    String clave,
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
+    final categoria = categoriaPorClave(clave);
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       decoration: BoxDecoration(
         color: colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(
-        _etiquetasCategoria[categoria] ?? categoria,
-        style: textTheme.bodySmall?.copyWith(
-          fontSize: 11,
-          fontWeight: FontWeight.w600,
-          color: colorScheme.onSecondaryContainer,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Si el JSON trae una categoría mal escrita, el chip degrada a solo
+          // texto en vez de tronar.
+          if (categoria != null) ...[
+            PhosphorIcon(
+              categoria.icono,
+              size: 12,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            const SizedBox(width: 5),
+          ],
+          Text(
+            categoria?.etiqueta ?? clave,
+            style: textTheme.bodySmall?.copyWith(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSecondaryContainer,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -446,28 +457,15 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
             childAspectRatio: 1.15,
-            children: const [
-              // Los índices saltan el 2: esa es esta misma pestaña.
-              HomeNavButton(
-                title: 'Insumos',
-                tabIndex: 0,
-                icon: PhosphorIconsFill.testTube,
-              ),
-              HomeNavButton(
-                title: 'Paciente',
-                tabIndex: 1,
-                icon: PhosphorIconsFill.person,
-              ),
-              HomeNavButton(
-                title: 'Equipo',
-                tabIndex: 3,
-                icon: PhosphorIconsFill.pulse,
-              ),
-              HomeNavButton(
-                title: 'Códigos',
-                tabIndex: 4,
-                icon: PhosphorIconsFill.firstAid,
-              ),
+            children: [
+              // Nombre, ícono y pestaña destino salen de categorias_esenciales;
+              // ninguna categoría usa el índice 2 (esta misma pestaña).
+              for (final categoria in categoriasEsenciales)
+                HomeNavButton(
+                  title: categoria.etiqueta,
+                  tabIndex: categoria.tabIndex,
+                  icon: categoria.icono,
+                ),
             ],
           ),
           const SizedBox(height: 16),
@@ -485,31 +483,16 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (var i = 0; i < _categoriaPorTab.length; i++)
-          if (i != 2)
-            _buildRenglonCategoria(
-              _categoriaPorTab[i],
-              _descripcionCategoria(_categoriaPorTab[i]),
-              colorScheme,
-              textTheme,
-            ),
+        for (final categoria in categoriasEsenciales)
+          _buildRenglonCategoria(categoria, colorScheme, textTheme),
         const SizedBox(height: 12),
         _buildDescargo(colorScheme, textTheme),
       ],
     );
   }
 
-  String _descripcionCategoria(String categoria) => switch (categoria) {
-    'insumos' => 'calibres, medidas y material de uso diario.',
-    'paciente' => 'valores de referencia y datos por edad.',
-    'equipo' => 'manejo y parámetros del equipo de la unidad.',
-    'codigos' => 'colores, claves y señalización.',
-    _ => '',
-  };
-
   Widget _buildRenglonCategoria(
-    String categoria,
-    String descripcion,
+    CategoriaEsencial categoria,
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
@@ -521,8 +504,8 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
           Padding(
             padding: const EdgeInsets.only(top: 2),
             child: PhosphorIcon(
-              PhosphorIconsFill.caretRight,
-              size: 14,
+              categoria.icono,
+              size: 16,
               color: colorScheme.primaryContainer,
             ),
           ),
@@ -532,13 +515,13 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: '${_etiquetasCategoria[categoria]}: ',
+                    text: '${categoria.etiqueta}: ',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: colorScheme.primaryContainer,
                     ),
                   ),
-                  TextSpan(text: descripcion),
+                  TextSpan(text: categoria.descripcion),
                 ],
               ),
               style: textTheme.bodySmall?.copyWith(fontSize: 13),

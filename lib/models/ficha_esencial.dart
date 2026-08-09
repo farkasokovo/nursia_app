@@ -143,6 +143,38 @@ class BloqueColores extends BloqueContenido {
   };
 }
 
+/// Una referencia bibliográfica. Mismo contrato que `Referencia` en
+/// `models/medicamento.dart` (campos texto + url), pero con el nombre del
+/// campo en español para ir con el resto del módulo.
+///
+/// [url] es opcional: una referencia puede ser un libro impreso sin liga.
+class ItemReferencia {
+  final String texto;
+  final String? url;
+
+  const ItemReferencia({required this.texto, this.url});
+
+  Map<String, dynamic> toJson() => {
+    'texto': texto,
+    if (url != null) 'url': url,
+  };
+}
+
+/// Lista de referencias al final de la ficha. Las que traen [ItemReferencia.url]
+/// se abren en el navegador; las demás son texto plano.
+class BloqueReferencias extends BloqueContenido {
+  final List<ItemReferencia> items;
+
+  const BloqueReferencias({super.titulo, required this.items});
+
+  @override
+  Map<String, dynamic> toJson() => {
+    'tipo': 'referencias',
+    if (titulo != null) 'titulo': titulo,
+    'items': items.map((i) => i.toJson()).toList(),
+  };
+}
+
 // ── Parseo defensivo ────────────────────────────────────────────────────
 //
 // El JSON semilla se edita a mano, así que un bloque con el "tipo" mal
@@ -272,6 +304,34 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
         return null;
       }
       return BloqueColores(titulo: titulo, items: items);
+
+    case 'referencias':
+      final itemsCrudos = json['items'];
+      final items = <ItemReferencia>[];
+      if (itemsCrudos is List) {
+        for (final item in itemsCrudos) {
+          if (item is! Map) continue;
+          final mapa = item.cast<String, dynamic>();
+          final texto = _textoRequerido(mapa['texto']);
+          if (texto == null) {
+            debugPrint(
+              'Esenciales: referencia sin "texto", se omite el item: $mapa',
+            );
+            continue;
+          }
+          // Sin url es válido: una referencia puede ser un libro impreso.
+          items.add(
+            ItemReferencia(texto: texto, url: _textoRequerido(mapa['url'])),
+          );
+        }
+      }
+      if (items.isEmpty) {
+        debugPrint(
+          'Esenciales: bloque "referencias" sin items válidos, se omite.',
+        );
+        return null;
+      }
+      return BloqueReferencias(titulo: titulo, items: items);
 
     default:
       debugPrint('Esenciales: tipo de bloque desconocido "$tipo", se omite.');

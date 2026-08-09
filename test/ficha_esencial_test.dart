@@ -74,7 +74,7 @@ void main() {
       }
     });
 
-    test('cubre las 4 categorías y los 5 tipos de bloque', () {
+    test('cubre las 4 categorías y los 6 tipos de bloque', () {
       expect(fichas.map((f) => f.categoria).toSet(), {
         'insumos',
         'paciente',
@@ -88,7 +88,40 @@ void main() {
           tipos.add(b.toJson()['tipo'] as String);
         }
       }
-      expect(tipos, {'texto', 'nota', 'lista', 'tabla', 'colores'});
+      expect(tipos, {
+        'texto',
+        'nota',
+        'lista',
+        'tabla',
+        'colores',
+        'referencias',
+      });
+    });
+
+    test('las referencias cubren el caso con url y el caso sin url', () {
+      final referencias = [
+        for (final f in fichas) ...f.contenido.whereType<BloqueReferencias>(),
+      ];
+      expect(
+        referencias,
+        isNotEmpty,
+        reason: 'Ninguna ficha trae un bloque de referencias.',
+      );
+
+      final items = [for (final b in referencias) ...b.items];
+      expect(
+        items.any((i) => i.url != null),
+        isTrue,
+        reason: 'Falta una referencia CON url para probar el toque.',
+      );
+      expect(
+        items.any((i) => i.url == null),
+        isTrue,
+        reason: 'Falta una referencia SIN url (libro impreso).',
+      );
+      for (final i in items) {
+        expect(i.texto, isNotEmpty);
+      }
     });
 
     test('round-trip toMap -> fromMap conserva el contenido', () {
@@ -125,6 +158,7 @@ void main() {
             BloqueLista() => 'lista',
             BloqueTabla() => 'tabla',
             BloqueColores() => 'colores',
+            BloqueReferencias() => 'referencias',
           };
           expect(etiqueta, isNotEmpty);
         }
@@ -175,6 +209,35 @@ void main() {
       expect((ficha.contenido[1] as BloqueTabla).filas.length, 1);
       expect((ficha.contenido[2] as BloqueColores).items.length, 1);
       expect((ficha.contenido[3] as BloqueTexto).valor, 'este sí sobrevive');
+    });
+
+    test('en referencias se descarta el item malo, no la lista', () {
+      final ficha = FichaEsencial.fromJson({
+        'titulo': 'Rota',
+        'contenido': [
+          {
+            'tipo': 'referencias',
+            'items': [
+              {'url': 'https://example.com'}, // sin "texto": se va el item
+              {'texto': 'Con liga', 'url': 'https://example.com'},
+              {'texto': 'Sin liga'}, // url es opcional
+            ],
+          },
+          // Bloque de referencias donde NINGÚN item sirve: se va completo.
+          {
+            'tipo': 'referencias',
+            'items': [
+              {'url': 'https://example.com'},
+            ],
+          },
+        ],
+      });
+
+      expect(ficha.contenido.length, 1);
+      final bloque = ficha.contenido.first as BloqueReferencias;
+      expect(bloque.items.length, 2);
+      expect(bloque.items[0].url, 'https://example.com');
+      expect(bloque.items[1].url, isNull);
     });
 
     test('un contenido que no es lista deja la ficha vacía, no crashea', () {

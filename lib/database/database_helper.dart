@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 13, // Aumentamos la versión a 13
+      version: 14, // Aumentamos la versión a 14
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -144,6 +144,13 @@ class DatabaseHelper {
               orden          INTEGER NOT NULL DEFAULT 0
             )
           ''');
+        }
+        // Se agregó el tipo de bloque "referencias" al contenido de las fichas
+        // de Esenciales. Se vacía la tabla para que cargarSemillaSiHaceFalta()
+        // la vuelva a sembrar con el JSON actualizado en el próximo arranque.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 14) {
+          await db.delete('esenciales');
         }
       },
     );

@@ -121,6 +121,19 @@
       {
         "tipo": "texto",
         "valor": "Los tres colores de arriba son inventados. Ninguno corresponde a un código, un triage ni una bolsa de residuos real."
+      },
+      {
+        "tipo": "referencias",
+        "titulo": "Referencias de prueba",
+        "items": [
+          {
+            "texto": "Autor Inventado, A. (2099). Manual de colores que no existen (3a ed.). Editorial Ficticia.",
+            "url": "https://example.com/no-es-una-referencia-real"
+          },
+          {
+            "texto": "Otro Autor, B. (2098). Libro impreso sin liga, para probar el caso sin url. Editorial Ficticia."
+          }
+        ]
       }
     ],
     "fuente": "Contenido de prueba — no es información clínica",
