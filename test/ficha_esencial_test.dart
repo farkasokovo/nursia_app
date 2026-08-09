@@ -74,6 +74,44 @@ void main() {
       }
     });
 
+    test('ninguna tabla se queda sin filas', () {
+      // Una fila con distinto número de celdas que encabezados se descarta en
+      // silencio al parsear. Con fichas que mezclan tablas de 2 y de 3
+      // columnas, ese error de dedo es fácil: esto lo atrapa.
+      for (final f in fichas) {
+        for (final b in f.contenido.whereType<BloqueTabla>()) {
+          expect(
+            b.filas,
+            isNotEmpty,
+            reason:
+                'La tabla "${b.titulo ?? f.titulo}" se quedó sin filas. '
+                'Revisa que cada fila tenga ${b.encabezados.length} celdas.',
+          );
+        }
+      }
+    });
+
+    test('toda fila de tabla cuadra con sus encabezados', () {
+      // Se valida sobre el JSON CRUDO: el parseo tira la fila que no cuadra,
+      // así que revisarla ya parseada nunca detectaría la que falta.
+      for (final ficha in crudo) {
+        for (final bloque in (ficha['contenido'] as List)) {
+          if (bloque['tipo'] != 'tabla') continue;
+          final columnas = (bloque['encabezados'] as List).length;
+          for (final fila in (bloque['filas'] as List)) {
+            expect(
+              (fila as List).length,
+              columnas,
+              reason:
+                  'En "${ficha['titulo']}", la tabla "${bloque['titulo']}" '
+                  'tiene una fila con ${fila.length} celdas y $columnas '
+                  'encabezados: $fila',
+            );
+          }
+        }
+      }
+    });
+
     test('cubre las 4 categorías y los 6 tipos de bloque', () {
       expect(fichas.map((f) => f.categoria).toSet(), {
         'insumos',

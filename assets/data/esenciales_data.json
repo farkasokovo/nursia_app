@@ -9,12 +9,12 @@
     "contenido": [
       {
         "tipo": "nota",
-        "valor": "Esta ficha describe el sistema BD Vacutainer. El color del tapón depende del fabricante: si tu unidad usa otra marca, confirma el color contra el instructivo del tubo antes de guiarte por este cuadro. Los datos de aditivo e inversiones provienen del documento BD de 2024."
+        "valor": "Esta ficha describe el sistema BD Vacutainer. Tanto el color del tapón como el aditivo pueden variar entre fabricantes: si tu unidad usa otra marca, confirma el color contra el instructivo del tubo y contra lo que pida el laboratorio de tu unidad antes de guiarte por este cuadro. Los datos de aditivo e inversiones provienen del documento BD de 2024."
       },
       {
         "tipo": "texto",
         "titulo": "Por qué existe un orden",
-        "valor": "El orden de llenado no es una costumbre local: lo define la norma internacional CLSI GP41-Ed7 (antes H3-A6), que es la que BD cita como base de su tabla. Llenar los tubos fuera de ese orden, no llenarlos hasta su línea o no mezclarlos de inmediato invalida la muestra y obliga a volver a puncionar al paciente."
+        "valor": "El orden de llenado no es una costumbre local: lo define la norma internacional CLSI GP41-Ed7 (antes H3-A6), que es la que BD cita como base de su tabla, y la OMS lo resume en una sola frase: se llenan en orden para evitar la contaminación cruzada de aditivos entre tubos.\nEl mecanismo es simple. Cada tapón trae un aditivo distinto y la punta del tubo arrastra un poco de ese aditivo al siguiente. Si un tubo con EDTA (lavanda) pasa antes que uno de química, el EDTA que se arrastra secuestra calcio y magnesio dentro del tubo siguiente: el potasio sale falsamente alto y el calcio y el magnesio falsamente bajos. Si contamina un tubo de coagulación, los tiempos salen alargados.\nEso no es un error que el laboratorio pueda detectar y corregir: es un resultado que parece válido pero no corresponde al paciente, y puede llevar a tratar una alteración que no existe. El riesgo es mayor cuando la sangre se pasa de una jeringa a los tubos que cuando se llenan directo al vacío.\nAparte del orden: llenar cada tubo hasta su línea y mezclarlo de inmediato. No hacerlo invalida la muestra y obliga a volver a puncionar al paciente."
       },
       {
         "tipo": "tabla",
@@ -83,6 +83,14 @@
           {
             "texto": "Becton, Dickinson U.K. Limited. (2023). BD tube guide and recommended order of draw (WEU227.1).",
             "url": "https://www.ouh.nhs.uk/media/bmrp2ll4/tube-guide.pdf"
+          },
+          {
+            "texto": "Organización Mundial de la Salud. (2010). WHO guidelines on drawing blood: best practices in phlebotomy. Capítulo 2, Prácticas de flebotomía. Ginebra: OMS.",
+            "url": "https://www.ncbi.nlm.nih.gov/books/NBK138665/"
+          },
+          {
+            "texto": "Bazzano, G., Galazzi, A., Giusti, G. D., Panigada, M., y Laquintana, D. (2021). The order of draw during blood collection: A systematic literature review. International Journal of Environmental Research and Public Health, 18(4), 1568.",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7915193/"
           }
         ]
       }
@@ -118,6 +126,22 @@
         "valor": "Lateralidad: por convención anatómica, el lado derecho del paciente se dibuja a la izquierda de quien observa. Esta tabla ya está en esa orientación, o sea que la primera columna es lo que tú ves de tu lado izquierdo cuando estás frente al paciente."
       },
       {
+        "tipo": "tabla",
+        "titulo": "Qué se proyecta en cada región",
+        "encabezados": ["Región", "Estructuras"],
+        "filas": [
+          ["Hipocondrio derecho", "Hígado (lóbulo derecho), vesícula biliar, riñón (polo superior), flexura hepática del colon, glándula suprarrenal"],
+          ["Epigastrio", "Hígado (lóbulo izquierdo), estómago (porción pilórica)"],
+          ["Hipocondrio izquierdo", "Bazo, páncreas (cola), riñón izquierdo, estómago, esófago abdominal, flexura esplénica del colon"],
+          ["Flanco derecho", "Colon ascendente, duodeno, yeyuno"],
+          ["Mesogastrio", "Epiplón, mesenterio, yeyuno, íleon, colon transverso"],
+          ["Flanco izquierdo", "Colon descendente"],
+          ["Fosa iliaca derecha", "Ciego, apéndice, ovario derecho, cordón espermático derecho"],
+          ["Hipogastrio", "Vejiga urinaria, útero"],
+          ["Fosa iliaca izquierda", "Colon sigmoideo, ovario izquierdo, cordón espermático izquierdo"]
+        ]
+      },
+      {
         "tipo": "lista",
         "titulo": "Correlación clínica del dolor",
         "estilo": "vinetas",
@@ -144,6 +168,10 @@
           {
             "texto": "Bracho Blanchet, E. Abdomen agudo. Dolor: Clínica y Terapia. Revista Mexicana de Algología, 5(4), 12.",
             "url": "https://biblat.unam.mx/hevila/DolorclinicayterapiaRevistamexicanadealgologia/2007-08/vol5/no4/1.pdf"
+          },
+          {
+            "texto": "Rojas Duarte, M., y Marinkovic Gómez, B. (Eds.). (2020). Cirugía en medicina general: manual de enfermedades quirúrgicas (Tabla 8-1). Santiago: Universidad de Chile, Facultad de Medicina.",
+            "url": "https://libros.uchile.cl/files/presses/1/monographs/1061/submission/proof/89/"
           }
         ]
       }
