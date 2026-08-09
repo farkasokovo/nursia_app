@@ -316,7 +316,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
   Widget _buildResultados(ColorScheme colorScheme, TextTheme textTheme) {
     if (_resultados.isEmpty) {
       return _buildVacio(
-        PhosphorIconsFill.magnifyingGlass,
+        PhosphorIconsThin.listMagnifyingGlass,
         'No se encontraron fichas.',
         colorScheme,
         textTheme,
@@ -417,19 +417,14 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            PhosphorIcon(
-              icono,
-              size: 44,
-              color: colorScheme.onSecondaryContainer.withValues(alpha: 0.5),
-            ),
-            const SizedBox(height: 12),
             Text(
               mensaje,
               textAlign: TextAlign.center,
-              style: textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSecondaryContainer.withValues(alpha: 0.8),
-              ),
+              style: textTheme.bodyLarge?.copyWith(fontSize: 22),
             ),
+            const SizedBox(height: 16),
+            PhosphorIcon(icono, size: 130, color: colorScheme.onTertiary),
+            const SizedBox(height: 32),
           ],
         ),
       ),
