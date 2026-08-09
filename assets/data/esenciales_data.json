@@ -1,142 +1,284 @@
 [
   {
-    "titulo": "[PRUEBA] Calibres imaginarios de tubo",
-    "titulo_corto": "[PRUEBA] Calibres",
+    "titulo": "Orden de llenado de tubos (BD Vacutainer)",
+    "titulo_corto": "Orden de tubos",
     "categoria": "insumos",
-    "icono": "syringe",
-    "resumen": "Ficha de prueba con dos tablas seguidas para revisar subtítulos.",
-    "palabras_clave": "prueba tabla calibre tubo insumo demo",
+    "icono": "testTube",
+    "resumen": "Secuencia de llenado, aditivo, inversiones y estudios de cada tapón.",
+    "palabras_clave": "tubos, tapon, tapón, orden de extracción, orden de llenado, vacutainer, morado, lila, lavanda, EDTA, biometría hemática, BH, azul, citrato, TP, TTP, INR, coagulación, rojo, suero, química sanguínea, QS, dorado, gel, SST, verde, heparina, gris, fluoruro, glucosa, rosa, banco de sangre, pruebas cruzadas, hemocultivo, inversiones, hemólisis, muestra, laboratorio",
     "contenido": [
+      {
+        "tipo": "nota",
+        "valor": "Esta ficha describe el sistema BD Vacutainer. El color del tapón depende del fabricante: si tu unidad usa otra marca, confirma el color contra el instructivo del tubo antes de guiarte por este cuadro. Los datos de aditivo e inversiones provienen del documento BD de 2024."
+      },
       {
         "tipo": "texto",
-        "valor": "Este texto es relleno de prueba. Sirve para revisar cómo se ve un párrafo largo dentro de una ficha y no dice absolutamente nada útil."
+        "titulo": "Por qué existe un orden",
+        "valor": "El orden de llenado no es una costumbre local: lo define la norma internacional CLSI GP41-Ed7 (antes H3-A6), que es la que BD cita como base de su tabla. Llenar los tubos fuera de ese orden, no llenarlos hasta su línea o no mezclarlos de inmediato invalida la muestra y obliga a volver a puncionar al paciente."
       },
       {
         "tipo": "tabla",
-        "titulo": "Tabla uno de prueba",
-        "encabezados": ["Calibre", "Color", "Flujo"],
+        "titulo": "Orden de llenado",
+        "encabezados": ["#", "Tubo (tapón)", "Estudios"],
         "filas": [
-          ["99Z", "Turquesa fosforescente", "500 zumbidos/min"],
-          ["77Q", "Morado a cuadros", "12 zumbidos/min"],
-          ["01A", "Transparente invisible", "0 zumbidos/min"]
+          ["1", "Frascos de hemocultivo", "Aerobio y luego anaerobio. Se extraen solo con palomilla."],
+          ["2", "Tubo de descarte", "Solo si se usa palomilla y el siguiente tubo es de citrato. No se necesita para los hemocultivos."],
+          ["3", "Citrato de sodio (azul claro)", "Coagulación: TP, INR, TTP, dímero D"],
+          ["4", "Suero: rojo, dorado, naranja", "Química sanguínea, serología, inmunología"],
+          ["5", "Heparina: verde, verde claro", "Química en plasma"],
+          ["6", "EDTA: lavanda y rosa", "Biometría hemática. El rosa es para pruebas cruzadas"],
+          ["7", "Fluoruro y oxalato (gris)", "Glucosa, lactato"]
         ]
       },
       {
         "tipo": "tabla",
-        "titulo": "Tabla dos de prueba",
-        "encabezados": ["Etiqueta", "Valor inventado"],
+        "titulo": "Aditivo e inversiones",
+        "encabezados": ["Tapón", "Aditivo", "Inversiones"],
         "filas": [
-          ["Alfa", "Cuarenta y dos"],
-          ["Beta", "Menos siete"],
-          ["Gama", "Pi elevado a burrito"]
-        ]
-      }
-    ],
-    "fuente": "Contenido de prueba — no es información clínica",
-    "orden": 1
-  },
-  {
-    "titulo": "[PRUEBA] Valores absurdos por edad",
-    "titulo_corto": "[PRUEBA] Valores",
-    "categoria": "paciente",
-    "icono": "user",
-    "resumen": "Ficha de prueba con lista de viñetas y una nota destacada.",
-    "palabras_clave": "prueba lista nota paciente edad demo",
-    "contenido": [
-      {
-        "tipo": "lista",
-        "titulo": "Lista con viñetas",
-        "estilo": "vinetas",
-        "items": [
-          "Grupo Ficticio A: 300 unidades de nada.",
-          "Grupo Ficticio B: 2 kilos de relleno.",
-          "Grupo Ficticio C: valor pendiente de inventar."
+          ["Azul claro", "Citrato de sodio 3.2%", "3 a 4"],
+          ["Rojo", "Activador de la coagulación", "5"],
+          ["Dorado (SST II)", "Activador y gel separador", "5"],
+          ["Naranja (RST)", "Trombina y gel", "5 a 6"],
+          ["Verde claro (PST II)", "Heparina de litio y gel", "8"],
+          ["Verde", "Heparina de litio o de sodio", "8"],
+          ["Lavanda", "K2EDTA", "8"],
+          ["Rosa", "K2EDTA para banco de sangre", "8"],
+          ["Gris", "Fluoruro de sodio y oxalato de potasio", "8"]
         ]
       },
       {
         "tipo": "nota",
-        "titulo": "Nota de prueba",
-        "valor": "Este bloque existe solo para verificar que el texto destacado se distingue del texto normal. No lo tomes como referencia de nada."
-      }
-    ],
-    "fuente": "Contenido de prueba — no es información clínica",
-    "orden": 2
-  },
-  {
-    "titulo": "[PRUEBA] Aparato de utilería",
-    "titulo_corto": "[PRUEBA] Aparato",
-    "categoria": "equipo",
-    "icono": "wrench",
-    "resumen": "Ficha de prueba con lista numerada y texto sin subtítulo.",
-    "palabras_clave": "prueba equipo lista numerada demo",
-    "contenido": [
-      {
-        "tipo": "texto",
-        "titulo": "Párrafo con subtítulo",
-        "valor": "Relleno para comprobar que un bloque de texto puede llevar subtítulo propio."
+        "valor": "Mezcla cada tubo apenas lo retires: se invierte suavemente 180 grados y de regreso, tantas veces como indica la tabla. No lo agites."
       },
-      {
-        "tipo": "lista",
-        "titulo": "Pasos inventados",
-        "estilo": "numerada",
-        "items": [
-          "Primero, girar la perilla imaginaria.",
-          "Después, esperar tres parpadeos.",
-          "Al final, anotar el resultado en una servilleta."
-        ]
-      },
-      {
-        "tipo": "nota",
-        "valor": "Nota sin subtítulo, para verificar que el bloque se ve bien cuando el título va vacío."
-      }
-    ],
-    "fuente": "Contenido de prueba — no es información clínica",
-    "orden": 3
-  },
-  {
-    "titulo": "[PRUEBA] Colores inventados de código",
-    "titulo_corto": "[PRUEBA] Colores",
-    "categoria": "codigos",
-    "icono": "palette",
-    "resumen": "Ficha de prueba con una paleta de colores y un párrafo final.",
-    "palabras_clave": "prueba colores paleta codigos demo",
-    "contenido": [
       {
         "tipo": "colores",
-        "titulo": "Paleta de prueba",
+        "titulo": "Tapones del sistema BD Vacutainer",
         "items": [
-          {
-            "color": "#FF00FF",
-            "etiqueta": "Magenta imposible",
-            "descripcion": "Significa que la ficha es de prueba."
-          },
-          {
-            "color": "#00FFAA",
-            "etiqueta": "Verde alienígena",
-            "descripcion": "Tampoco significa nada real."
-          },
-          { "color": "#3366FF", "etiqueta": "Azul sin descripción" }
+          { "color": "#7FB2E5", "etiqueta": "Azul claro", "descripcion": "Citrato de sodio. Coagulación." },
+          { "color": "#C8102E", "etiqueta": "Rojo", "descripcion": "Suero con activador de la coagulación." },
+          { "color": "#C9A227", "etiqueta": "Dorado", "descripcion": "Suero con gel separador (SST II)." },
+          { "color": "#E8710A", "etiqueta": "Naranja", "descripcion": "Suero con trombina (RST). Química urgente." },
+          { "color": "#8CC63F", "etiqueta": "Verde claro", "descripcion": "Heparina con gel (PST II). Plasma." },
+          { "color": "#00843D", "etiqueta": "Verde", "descripcion": "Heparina de litio o de sodio." },
+          { "color": "#9B7CB9", "etiqueta": "Lavanda", "descripcion": "EDTA. Biometría hemática." },
+          { "color": "#F4A6C0", "etiqueta": "Rosa", "descripcion": "EDTA para banco de sangre y pruebas cruzadas." },
+          { "color": "#9AA0A6", "etiqueta": "Gris", "descripcion": "Fluoruro y oxalato. Glucosa y lactato." }
         ]
       },
       {
-        "tipo": "texto",
-        "valor": "Los tres colores de arriba son inventados. Ninguno corresponde a un código, un triage ni una bolsa de residuos real."
+        "tipo": "nota",
+        "valor": "Los colores de arriba son una aproximación visual de referencia, no una muestra exacta: el tapón físico y su etiqueta mandan. Los frascos de hemocultivo no llevan tapón de color, por eso no aparecen en esta paleta."
       },
       {
         "tipo": "referencias",
-        "titulo": "Referencias de prueba",
         "items": [
           {
-            "texto": "Autor Inventado, A. (2099). Manual de colores que no existen (3a ed.). Editorial Ficticia.",
-            "url": "https://example.com/no-es-una-referencia-real"
+            "texto": "Becton, Dickinson and Company. (2024). BD Vacutainer venous blood collection tube guide (BD-83178).",
+            "url": "https://alvernolabs.com/wp-content/uploads/BD-83178-BD-Vacutainer%C2%AE-Venous-Blood-Collection-Tube-Guide-1.pdf"
           },
           {
-            "texto": "Otro Autor, B. (2098). Libro impreso sin liga, para probar el caso sin url. Editorial Ficticia."
+            "texto": "Becton, Dickinson and Company. (2016). BD Life Sciences Preanalytical Systems: Catálogo de productos 2017.",
+            "url": "https://www.clinicord.com/wp-content/uploads/2018/11/BD-Vacutainer-cat%C3%A1logo.pdf"
+          },
+          {
+            "texto": "Becton, Dickinson U.K. Limited. (2023). BD tube guide and recommended order of draw (WEU227.1).",
+            "url": "https://www.ouh.nhs.uk/media/bmrp2ll4/tube-guide.pdf"
           }
         ]
       }
     ],
-    "fuente": "Contenido de prueba — no es información clínica",
-    "orden": 4
+    "fuente": "BD Vacutainer Venous Blood Collection Tube Guide (2024) y Catálogo BD Preanalytical Systems 2017",
+    "orden": 1
+  },
+  {
+    "titulo": "Las nueve regiones abdominales",
+    "titulo_corto": "Regiones del abdomen",
+    "categoria": "paciente",
+    "icono": "user",
+    "resumen": "Los nueve sectores de la pared abdominal y la correlación clínica del dolor.",
+    "palabras_clave": "abdomen, regiones, cuadrantes, hipocondrio, epigastrio, mesogastrio, umbilical, flanco, vacío, fosa iliaca, hipogastrio, dolor abdominal, exploración, palpación, McBurney, Murphy, apendicitis, nueve regiones, cuatro cuadrantes, topografía",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "titulo": "Dos esquemas distintos",
+        "valor": "La pared anterolateral del abdomen se divide de dos maneras que se confunden seguido y no son intercambiables. En cuatro cuadrantes, con el plano medio y el transumbilical, que es la división rápida. En nueve regiones, agregando los planos medioclaviculares, el subcostal y el intertubercular, que es la división precisa y la que se usa para describir un hallazgo."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Mapa de las nueve regiones",
+        "encabezados": ["Derecha del paciente", "Centro", "Izquierda del paciente"],
+        "filas": [
+          ["Hipocondrio derecho", "Epigastrio", "Hipocondrio izquierdo"],
+          ["Flanco derecho", "Mesogastrio", "Flanco izquierdo"],
+          ["Fosa iliaca derecha", "Hipogastrio", "Fosa iliaca izquierda"]
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "Lateralidad: por convención anatómica, el lado derecho del paciente se dibuja a la izquierda de quien observa. Esta tabla ya está en esa orientación, o sea que la primera columna es lo que tú ves de tu lado izquierdo cuando estás frente al paciente."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Correlación clínica del dolor",
+        "estilo": "vinetas",
+        "items": [
+          "Hipocondrio derecho: vesícula biliar, hígado o duodeno.",
+          "Epigastrio: estómago.",
+          "Hipocondrio o flanco izquierdos: bazo, colon o riñón.",
+          "Mesogastrio: intestino delgado, páncreas.",
+          "Ambas fosas iliacas: vías urinarias. Del lado derecho, el apéndice es el sitio más común.",
+          "Abdomen inferior: anexos en la mujer, vejiga o sigmoides en ambos sexos."
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "La proyección de un órgano sobre una región es una referencia, no un diagnóstico. El dolor puede ser referido, la anatomía varía entre personas y las regiones no tienen límites tajantes."
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Universidad Nacional Autónoma de México, Facultad de Medicina, Departamento de Anatomía. (2020). Perfil de referencia. Unidad temática 4: Abdomen, pelvis y miembro inferior.",
+            "url": "https://anatomia.facmed.unam.mx/wp-content/uploads/Ciclo2019-2020/PerfilreferenciaUT42020-0.pdf"
+          },
+          {
+            "texto": "Bracho Blanchet, E. Abdomen agudo. Dolor: Clínica y Terapia. Revista Mexicana de Algología, 5(4), 12.",
+            "url": "https://biblat.unam.mx/hevila/DolorclinicayterapiaRevistamexicanadealgologia/2007-08/vol5/no4/1.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "UNAM, Facultad de Medicina, Departamento de Anatomía; Revista Mexicana de Algología",
+    "orden": 1
+  },
+  {
+    "titulo": "Dispositivos de oxígeno: flujo y FiO2",
+    "titulo_corto": "Dispositivos de O2",
+    "categoria": "equipo",
+    "icono": "gauge",
+    "resumen": "Flujo en litros por minuto y FiO2 aproximada de cada dispositivo.",
+    "palabras_clave": "oxigeno, oxígeno, oxigenoterapia, FiO2, mascarilla, puntas nasales, cánula nasal, catéter nasal, reservorio, bolsa, no reinhalación, venturi, alto flujo, PNAF, litros, saturación, SpO2, hipoxemia, flujómetro",
+    "contenido": [
+      {
+        "tipo": "tabla",
+        "titulo": "Dispositivos de bajo flujo",
+        "encabezados": ["Dispositivo", "Flujo (L/min)", "FiO2"],
+        "filas": [
+          ["Puntas nasales", "1 a 6", "0.24 a 0.44"],
+          ["Mascarilla simple", "5 a 8", "0.40 a 0.60"],
+          ["Mascarilla con reservorio", "10 a 15", "0.60 a 0.95"]
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "En la mascarilla con reservorio el flujo nunca debe ser tan bajo que la bolsa se colapse. Verifica que la bolsa esté inflada antes de colocarla y que siga inflada durante la inspiración del paciente: si se vacía, sube el flujo."
+      },
+      {
+        "tipo": "nota",
+        "valor": "En los dispositivos de bajo flujo la FiO2 es estimada, no exacta: cambia con el patrón respiratorio del paciente. Los valores de la tabla suponen un patrón respiratorio normal."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Mascarilla Venturi",
+        "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Como los valores y los colores cambian entre fabricantes, siempre lee el adaptador que tengas en la mano en vez de memorizar una tabla. Criterio práctico: si el paciente necesita más de 8 L/min para mantener una saturación de 90 a 94%, se cambia a Venturi."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Puntas nasales de alto flujo",
+        "valor": "Administran de 30 a 60 L/min de una mezcla de aire y oxígeno, calentada y humidificada, con FiO2 regulable de 0.21 a 1.0. Requieren equipo específico, no es lo mismo que subirle el flujo a unas puntas nasales comunes."
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Organización Mundial de la Salud. (2020). Clinical care for severe acute respiratory infection: toolkit. COVID-19 adaptation (WHO/2019-nCoV/SARI_toolkit/2020.1). Sección 6.1.",
+            "url": "https://hlh.who.int/docs/librariesprovider4/hlh-documents/clinical-care-of-severe-acute-respiratory-infections-tool-kit.pdf?sfvrsn=6e7baeb0_5"
+          },
+          {
+            "texto": "Saucedo Rodríguez, E. G., y cols. (2020). Manejo del paciente grave y crítico. Revista Latinoamericana de Infectología Pediátrica, 33(s1), s52-s69.",
+            "url": "https://www.medigraphic.com/pdfs/infectologia/lip-2020/lips201f.pdf"
+          },
+          {
+            "texto": "Martínez Guerrero, E. X., Morales Sánchez, G., Segura Medina, L. E., y De la Cruz Velázquez, A. (2022). Métodos no invasivos de oxigenación en pacientes con COVID-19. Revisión descriptiva. Medicina Crítica, 36(6), 378.",
+            "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-89092022000600378"
+          },
+          {
+            "texto": "Grupo de trabajo mexicano COVID-19, Colegio Mexicano de Medicina Crítica. (2020). Guía COVID-19 para la atención del paciente crítico con infección por SARS-CoV-2. Medicina Crítica, 34(1).",
+            "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-89092020000100007"
+          }
+        ]
+      }
+    ],
+    "fuente": "OMS, Clinical care for severe acute respiratory infection: toolkit (2020); Revista Latinoamericana de Infectología Pediátrica",
+    "orden": 1
+  },
+  {
+    "titulo": "Código azul: principios generales",
+    "titulo_corto": "Código azul",
+    "categoria": "codigos",
+    "icono": "heartbeat",
+    "resumen": "Qué exige la normativa mexicana y qué debes tener claro de tu unidad.",
+    "palabras_clave": "codigo azul, código azul, paro, paro cardiorrespiratorio, PCR, RCP, reanimación, carro rojo, DEA, desfibrilador, soporte vital, SVB, SVA, compresiones, adrenalina, epinefrina, amiodarona, emergencia, equipo de reanimación, simulacro",
+    "contenido": [
+      {
+        "tipo": "nota",
+        "valor": "El número de activación, quiénes integran el equipo y los tiempos de respuesta los define cada hospital. No existe un código azul nacional. Lo que sí es obligatorio en México es que cada establecimiento documente el suyo: busca el de tu unidad."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Qué exige la normativa",
+        "valor": "El Consejo de Salubridad General clasifica como estándar indispensable que el hospital defina un proceso documentado para atender el paro cardiorrespiratorio, con respuesta inmediata, personal competente y recursos disponibles. La supervivencia y la recuperación neurológica dependen de cuatro factores críticos."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Los cuatro factores críticos",
+        "estilo": "numerada",
+        "items": [
+          "Reconocimiento inmediato del evento.",
+          "Inicio oportuno del soporte vital básico.",
+          "Acceso al soporte vital avanzado.",
+          "Atención post-reanimación adecuada."
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Parámetros de RCP en el adulto",
+        "encabezados": ["Parámetro", "Valor"],
+        "filas": [
+          ["Secuencia", "C-A-B: circulación, vía aérea, ventilación"],
+          ["Compresiones", "100 a 120 por minuto"],
+          ["Profundidad", "Al menos 5 a 6 cm"],
+          ["Ventilaciones", "Menos de 1 segundo, viendo la expansión torácica"],
+          ["Adrenalina", "1 mg cada 3 a 5 minutos"],
+          ["Amiodarona", "300 mg después de 3 descargas en FV o TV sin pulso"]
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Qué debes saber de tu unidad",
+        "estilo": "vinetas",
+        "items": [
+          "Cómo se activa el código y a qué número o extensión.",
+          "Quién integra el equipo de reanimación en cada turno y dónde localizarlo.",
+          "Dónde están el carro rojo y el DEA más cercanos a tu servicio.",
+          "Cuándo fue el último simulacro documentado: la norma pide al menos uno cada 12 meses."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Consejo de Salubridad General, Comisión para la Certificación de Establecimientos de Atención Médica. (2025). Manual del Modelo de Certificación y Estandarización de Buenas Prácticas en Atención de Servicios de Salud para Hospitales (2a ed.). Estándar 27/31.",
+            "url": "https://www.gob.mx/cms/uploads/attachment/file/1066569/Manual_Hospitales_19.03.26.pdf"
+          },
+          {
+            "texto": "Instituto Mexicano del Seguro Social. (2017). Reanimación cardiopulmonar en adultos. Guía de referencia rápida (GPC IMSS-633-13).",
+            "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/633GRR.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "Consejo de Salubridad General, Manual MOCEBPASS 2a edición (2025); GPC IMSS-633-13",
+    "orden": 1
   }
 ]

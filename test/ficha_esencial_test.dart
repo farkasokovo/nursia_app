@@ -98,29 +98,55 @@ void main() {
       });
     });
 
-    test('las referencias cubren el caso con url y el caso sin url', () {
-      final referencias = [
-        for (final f in fichas) ...f.contenido.whereType<BloqueReferencias>(),
-      ];
-      expect(
-        referencias,
-        isNotEmpty,
-        reason: 'Ninguna ficha trae un bloque de referencias.',
-      );
+    test('toda ficha cierra con referencias utilizables', () {
+      for (final f in fichas) {
+        final referencias = f.contenido.whereType<BloqueReferencias>().toList();
+        expect(
+          referencias,
+          isNotEmpty,
+          reason: '"${f.titulo}" no trae bloque de referencias.',
+        );
+        expect(
+          f.contenido.last,
+          isA<BloqueReferencias>(),
+          reason: 'Las referencias de "${f.titulo}" deben ir al final.',
+        );
 
-      final items = [for (final b in referencias) ...b.items];
-      expect(
-        items.any((i) => i.url != null),
-        isTrue,
-        reason: 'Falta una referencia CON url para probar el toque.',
-      );
-      expect(
-        items.any((i) => i.url == null),
-        isTrue,
-        reason: 'Falta una referencia SIN url (libro impreso).',
-      );
-      for (final i in items) {
-        expect(i.texto, isNotEmpty);
+        for (final item in [for (final b in referencias) ...b.items]) {
+          expect(item.texto, isNotEmpty);
+          // url es opcional (un libro impreso no tiene liga), pero si viene
+          // tiene que ser una liga real: la UI la abre en el navegador.
+          if (item.url != null) {
+            expect(
+              item.url,
+              startsWith('http'),
+              reason:
+                  'La referencia "${item.texto}" tiene una url que no parece '
+                  'una liga: ${item.url}',
+            );
+          }
+        }
+      }
+    });
+
+    test('todo color del JSON viene en formato #RRGGBB', () {
+      // Se valida sobre el JSON CRUDO a propósito: el parseo descarta en
+      // silencio un color mal escrito, así que revisarlo ya parseado no
+      // atraparía el error de dedo.
+      final hex = RegExp(r'^#[0-9a-fA-F]{6}$');
+      for (final ficha in crudo) {
+        for (final bloque in (ficha['contenido'] as List)) {
+          if (bloque['tipo'] != 'colores') continue;
+          for (final item in (bloque['items'] as List)) {
+            expect(
+              hex.hasMatch(item['color'] as String),
+              isTrue,
+              reason:
+                  'En "${ficha['titulo']}" el color "${item['color']}" de '
+                  '"${item['etiqueta']}" no tiene formato #RRGGBB.',
+            );
+          }
+        }
       }
     });
 

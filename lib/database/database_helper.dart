@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 14, // Aumentamos la versión a 14
+      version: 15, // Aumentamos la versión a 15
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -150,6 +150,14 @@ class DatabaseHelper {
         // la vuelva a sembrar con el JSON actualizado en el próximo arranque.
         // NO afecta datos del usuario (turno activo).
         if (oldVersion < 14) {
+          await db.delete('esenciales');
+        }
+        // Las 4 fichas [PRUEBA] se reemplazaron por las 4 fichas reales
+        // (tubos de laboratorio, regiones abdominales, dispositivos de oxígeno
+        // y código azul). Se vacía la tabla para que cargarSemillaSiHaceFalta()
+        // la vuelva a sembrar con el JSON nuevo en el próximo arranque.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 15) {
           await db.delete('esenciales');
         }
       },
