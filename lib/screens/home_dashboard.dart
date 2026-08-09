@@ -3,6 +3,8 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../widgets/home_nav_button.dart';
 import '../widgets/tarjeta_desplegable.dart';
 import '../utils/tips_helper.dart';
+import 'esenciales/esenciales_screen.dart';
+// Lo sigue usando BotonTurnoActivo, que se conserva aunque ya no se muestre.
 import '../turno_activo/turno_activo_screen.dart';
 
 class HomeDashboard extends StatelessWidget {
@@ -97,9 +99,16 @@ class HomeDashboard extends StatelessWidget {
                           return botones[index];
                         },
                       ),
-                      // Botón de Turno Activo (lo sacamos del grid para que sea ancho completo)
+                      // Dos botones medianos de ancho igual, en el lugar que
+                      // antes ocupaba el botón de Turno Activo.
                       const SizedBox(height: 16),
-                      const BotonTurnoActivo(),
+                      const Row(
+                        children: [
+                          Expanded(child: BotonEsenciales()),
+                          SizedBox(width: 16),
+                          Expanded(child: BotonProcedimientos()),
+                        ],
+                      ),
                     ],
                   ),
 
@@ -119,7 +128,129 @@ class HomeDashboard extends StatelessWidget {
   }
 }
 
+// ================== BOTONES MEDIANOS ==================
+
+/// Transición compartida por los botones medianos: el mismo fade + scale que
+/// usaba el botón de Turno Activo.
+PageRouteBuilder _rutaConTransicion(Widget destino) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => destino,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var curve = Curves.easeInOutExpo;
+      var curvedAnimation = CurvedAnimation(parent: animation, curve: curve);
+
+      return FadeTransition(
+        opacity: curvedAnimation,
+        child: ScaleTransition(
+          scale: Tween<double>(begin: 2.0, end: 1).animate(curvedAnimation),
+          child: child,
+        ),
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 400),
+  );
+}
+
+/// Cáscara visual de los dos botones medianos: mismo look que tenía
+/// BotonTurnoActivo (primaryContainer, radio 20, ícono en círculo), pero en
+/// formato cuadrado para que quepan dos por renglón.
+class _BotonMediano extends StatelessWidget {
+  final IconData icono;
+  final String titulo;
+  final String subtitulo;
+  final VoidCallback onTap;
+
+  const _BotonMediano({
+    required this.icono,
+    required this.titulo,
+    required this.subtitulo,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+        decoration: BoxDecoration(
+          color: colorScheme.primaryContainer,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.white24,
+              radius: 20,
+              child: Icon(icono, color: colorScheme.onPrimary, size: 26),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              titulo,
+              textAlign: TextAlign.center,
+              style: textTheme.titleLarge?.copyWith(
+                fontSize: 17,
+                color: colorScheme.onPrimary,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              subtitulo,
+              textAlign: TextAlign.center,
+              style: textTheme.bodySmall?.copyWith(
+                fontSize: 12,
+                color: colorScheme.onPrimary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BotonEsenciales extends StatelessWidget {
+  const BotonEsenciales({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return _BotonMediano(
+      icono: PhosphorIconsFill.bookmarkSimple,
+      titulo: "Esenciales",
+      subtitulo: "Referencia rápida",
+      onTap: () =>
+          Navigator.push(context, _rutaConTransicion(const EsencialesScreen())),
+    );
+  }
+}
+
+class BotonProcedimientos extends StatelessWidget {
+  const BotonProcedimientos({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return _BotonMediano(
+      icono: PhosphorIconsFill.listChecks,
+      titulo: "Procedimientos",
+      subtitulo: "Próximamente",
+      // Placeholder: el módulo todavía no existe.
+      onTap: () => ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(const SnackBar(content: Text("Próximamente"))),
+    );
+  }
+}
+
 // ================== WIDGET TURNO ACTIVO ==================
+// Retirado de la vista, pero se conserva completo (junto con su import de
+// turno_activo_screen.dart) para poder reactivarlo agregándolo de nuevo al
+// dashboard. La carpeta lib/turno_activo/, sus repositories y sus tablas
+// siguen intactas.
 class BotonTurnoActivo extends StatelessWidget {
   const BotonTurnoActivo({super.key});
 
