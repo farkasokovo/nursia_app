@@ -44,6 +44,15 @@ class TarjetaDesplegable extends StatefulWidget {
   /// Estado inicial de la tarjeta.
   final bool expandidoInicial;
 
+  /// Color de fondo de la tarjeta.
+  ///
+  /// Si es null se usa el translúcido de siempre (`secondaryContainer` al
+  /// 50 %), que da por hecho que detrás hay un fondo claro (`surface`). Una
+  /// pantalla cuyo Scaffold ya sea `secondaryContainer` tiene que pasar un
+  /// color sólido, porque ese translúcido sobre ese fondo devuelve
+  /// exactamente el color del fondo y la tarjeta desaparece.
+  final Color? colorFondo;
+
   const TarjetaDesplegable({
     super.key,
     required this.icono,
@@ -51,6 +60,7 @@ class TarjetaDesplegable extends StatefulWidget {
     required this.contenido,
     this.accionTrailing,
     this.expandidoInicial = false,
+    this.colorFondo,
   });
 
   @override
@@ -76,7 +86,9 @@ class _TarjetaDesplegableState extends State<TarjetaDesplegable> {
         // Reducimos el padding inferior cuando está colapsado
         padding: EdgeInsets.fromLTRB(12, 5, 12, _isExpanded ? 12 : 5),
         decoration: BoxDecoration(
-          color: colorScheme.secondaryContainer.withValues(alpha: 0.5),
+          color:
+              widget.colorFondo ??
+              colorScheme.secondaryContainer.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: colorScheme.primaryContainer.withValues(alpha: 0.5),
@@ -98,11 +110,17 @@ class _TarjetaDesplegableState extends State<TarjetaDesplegable> {
                     color: colorScheme.primaryContainer,
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    widget.titulo,
-                    style: textTheme.bodyLarge?.copyWith(fontSize: 18),
+                  // Expanded en vez de Text + Spacer: el layout se ve igual
+                  // (título a la izquierda, acción hasta la derecha), pero un
+                  // título que no cabe se acomoda en dos renglones en vez de
+                  // desbordar el Row. Con Spacer, "Acerca de Esenciales" a
+                  // 18 px se pasaba 13 px en pantallas de 320 dp.
+                  Expanded(
+                    child: Text(
+                      widget.titulo,
+                      style: textTheme.bodyLarge?.copyWith(fontSize: 18),
+                    ),
                   ),
-                  const Spacer(),
                   widget.accionTrailing?.call(
                         context,
                         _isExpanded,

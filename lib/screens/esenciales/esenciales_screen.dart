@@ -349,34 +349,68 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
       ),
     );
 
-    return Card(
-      color: colorScheme.primary,
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        leading: PhosphorIcon(
-          EsencialIconMapper.fromString(ficha.icono),
-          size: 32,
-          color: colorScheme.onPrimary,
+    // Mismo armado que `CategoryButton`: Material transparente > InkWell >
+    // Ink con la decoración. Es lo que resuelve los dos defectos que tenía el
+    // `Card`: la sombra la pinta el Ink (suave) en vez de la elevation, y el
+    // splash lo recorta el `borderRadius` del InkWell en vez de desbordar las
+    // esquinas (el Card no clipea a su hijo por defecto).
+    //
+    // El `onTap` sube del ListTile al InkWell; si se quedara abajo volveríamos
+    // a tener un splash rectangular, que es justo el bug.
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          // Velo claro sobre el café de la tarjeta. CategoryButton usa un
+          // color opaco porque su fondo es claro; aquí eso taparía la ficha.
+          overlayColor: WidgetStateProperty.all(
+            colorScheme.onPrimary.withValues(alpha: 0.2),
+          ),
+          borderRadius: BorderRadius.circular(28),
+          onTap: () => _abrirFicha(ficha),
+          child: Ink(
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: const [
+                BoxShadow(color: Colors.black12, blurRadius: 6),
+              ],
+            ),
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ),
+              leading: PhosphorIcon(
+                EsencialIconMapper.fromString(ficha.icono),
+                size: 32,
+                color: colorScheme.onPrimary,
+              ),
+              title: Text(ficha.tituloCorto, style: textTheme.titleSmall),
+              subtitle: mostrarCategoria
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 4),
+                        _buildChipCategoria(
+                          ficha.categoria,
+                          colorScheme,
+                          textTheme,
+                        ),
+                        const SizedBox(height: 6),
+                        resumen,
+                      ],
+                    )
+                  : resumen,
+              trailing: Icon(
+                PhosphorIconsBold.caretRight,
+                color: Colors.white54,
+                size: 30,
+              ),
+            ),
+          ),
         ),
-        title: Text(ficha.tituloCorto, style: textTheme.titleSmall),
-        subtitle: mostrarCategoria
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 4),
-                  _buildChipCategoria(ficha.categoria, colorScheme, textTheme),
-                  const SizedBox(height: 6),
-                  resumen,
-                ],
-              )
-            : resumen,
-        trailing: Icon(
-          PhosphorIconsBold.caretRight,
-          color: Colors.white54,
-          size: 30,
-        ),
-        onTap: () => _abrirFicha(ficha),
       ),
     );
   }
@@ -435,10 +469,22 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             Text(
               mensaje,
               textAlign: TextAlign.center,
-              style: textTheme.bodyLarge?.copyWith(fontSize: 22),
+              // Sobre el fondo `secondaryContainer` el café medio del
+              // bodyLarge se lava; el café oscuro del container mantiene el
+              // mensaje como lo primero que se lee.
+              style: textTheme.bodyLarge?.copyWith(
+                fontSize: 22,
+                color: colorScheme.primaryContainer,
+              ),
             ),
             const SizedBox(height: 16),
-            PhosphorIcon(icono, size: 130, color: colorScheme.onTertiary),
+            // El ícono es decorativo: a 130 px y opaco competía con el
+            // mensaje. Atenuado queda como fondo del estado vacío.
+            PhosphorIcon(
+              icono,
+              size: 130,
+              color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+            ),
             const SizedBox(height: 32),
           ],
         ),
@@ -473,12 +519,72 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             ],
           ),
           const SizedBox(height: 16),
+          _buildBotonInicio(colorScheme, textTheme),
+          const SizedBox(height: 16),
           TarjetaDesplegable(
             icono: PhosphorIconsFill.info,
             titulo: 'Acerca de Esenciales',
+            // El Scaffold de esta pantalla ya es `secondaryContainer`, que es
+            // justo lo que pinta la tarjeta por defecto: sin un color sólido
+            // aquí, se funde con el fondo.
+            colorFondo: colorScheme.secondary,
             contenido: _buildAcercaDe(colorScheme, textTheme),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Salida del módulo hacia el inicio, en el mismo lenguaje visual que los
+  /// botones largos de `home_dashboard.dart` (primaryContainer, radio 20,
+  /// padding 20, ícono en círculo `white24`), pero medido por su contenido en
+  /// vez de a ancho completo: es una salida, no una de las secciones.
+  ///
+  /// El estilo se reescribe aquí porque `_BotonLargo` es privado de
+  /// home_dashboard.dart y ese archivo no se toca.
+  Widget _buildBotonInicio(ColorScheme colorScheme, TextTheme textTheme) {
+    return Center(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+          overlayColor: WidgetStateProperty.all(
+            colorScheme.onPrimary.withValues(alpha: 0.2),
+          ),
+          // El AppBar hace lo mismo. `Navigator.pop` no pasa por el PopScope
+          // de arriba (ese solo intercepta el back del sistema), así que sale
+          // directo del módulo sin tener que limpiar el buscador primero.
+          onTap: () => Navigator.pop(context),
+          child: Ink(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.white24,
+                  radius: 20,
+                  child: Icon(
+                    PhosphorIconsBold.caretLeft,
+                    color: colorScheme.onPrimary,
+                    size: 30,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Text(
+                  'Menú principal',
+                  style: textTheme.titleLarge?.copyWith(
+                    fontSize: 20,
+                    color: colorScheme.onPrimary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
