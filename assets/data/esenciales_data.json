@@ -9,20 +9,34 @@
     "contenido": [
       {
         "tipo": "nota",
-        "valor": "Esta ficha describe el sistema BD Vacutainer. Tanto el color del tapón como el aditivo pueden variar entre fabricantes."
+        "valor": "Esta ficha describe el sistema BD Vacutainer."
       },
       {
         "tipo": "texto",
         "titulo": "Por qué existe un orden",
-        "valor": "El orden de llenado no es una costumbre local: lo define la norma internacional CLSI GP41-Ed7 (antes H3-A6), que es la que BD cita como base de su tabla, y la OMS lo resume en una sola frase: se llenan en orden para evitar la contaminación cruzada de aditivos entre tubos.\nEl mecanismo es simple. Cada tapón trae un aditivo distinto y la punta del tubo arrastra un poco de ese aditivo al siguiente. Si un tubo con EDTA (lavanda) pasa antes que uno de química, el EDTA que se arrastra secuestra calcio y magnesio dentro del tubo siguiente: el potasio sale falsamente alto y el calcio y el magnesio falsamente bajos. Si contamina un tubo de coagulación, los tiempos salen alargados.\nEso no es un error que el laboratorio pueda detectar y corregir: es un resultado que parece válido pero no corresponde al paciente, y puede llevar a tratar una alteración que no existe. El riesgo es mayor cuando la sangre se pasa de una jeringa a los tubos que cuando se llenan directo al vacío.\nAparte del orden: llenar cada tubo hasta su línea y mezclarlo de inmediato. No hacerlo invalida la muestra y obliga a volver a puncionar al paciente."
+        "valor": "Cada tapón trae un aditivo distinto y la punta del tubo arrastra un poco de ese aditivo al siguiente. Si un tubo con EDTA pasa antes que uno de química, el EDTA que se arrastra secuestra calcio y magnesio dentro del tubo siguiente: el potasio sale falsamente alto y el calcio y el magnesio falsamente bajos. Si contamina un tubo de coagulación, los tiempos salen alargados.\nEl riesgo es mayor cuando la sangre se pasa de una jeringa a los tubos que cuando se llenan directo al vacío.\nAparte del orden: llenar cada tubo hasta su línea y mezclarlo de inmediato. No hacerlo invalida la muestra y obliga a volver a puncionar al paciente."
+      },
+      {
+        "tipo": "colores",
+        "titulo": "Orden de llenado",
+        "items": [
+          { "color": "#7FB2E5", "etiqueta": "Azul claro", "descripcion": "Citrato de sodio. Coagulación." },
+          { "color": "#C8102E", "etiqueta": "Rojo", "descripcion": "Suero con activador de la coagulación." },
+          { "color": "#C9A227", "etiqueta": "Dorado", "descripcion": "Suero con gel separador (SST II)." },
+          { "color": "#E8710A", "etiqueta": "Naranja", "descripcion": "Suero con trombina (RST). Química urgente." },
+          { "color": "#8CC63F", "etiqueta": "Verde claro", "descripcion": "Heparina con gel (PST II). Plasma." },
+          { "color": "#00843D", "etiqueta": "Verde", "descripcion": "Heparina de litio o de sodio." },
+          { "color": "#9B7CB9", "etiqueta": "Lavanda", "descripcion": "EDTA. Biometría hemática." },
+          { "color": "#F4A6C0", "etiqueta": "Rosa", "descripcion": "EDTA para banco de sangre y pruebas cruzadas." },
+          { "color": "#9AA0A6", "etiqueta": "Gris", "descripcion": "Fluoruro y oxalato. Glucosa y lactato." }
+        ]
       },
       {
         "tipo": "tabla",
-        "titulo": "Orden de llenado",
         "encabezados": ["#", "Tubo (tapón)", "Estudios"],
         "filas": [
-          ["1", "Frascos de hemocultivo", "Aerobio y luego anaerobio. Se extraen solo con palomilla."],
-          ["2", "Tubo de descarte", "Solo si se usa palomilla y el siguiente tubo es de citrato. No se necesita para los hemocultivos."],
+          ["1", "Frascos de hemovultivo", "Aerobio y luego anaerobio"],
+          ["2", "Tubo de descarte", "Solo si el siguiente tubo es de citrato. No se necesita para los hemocultivos."],
           ["3", "Citrato de sodio (azul claro)", "Coagulación: TP, INR, TTP, dímero D"],
           ["4", "Suero: rojo, dorado, naranja", "Química sanguínea, serología, inmunología"],
           ["5", "Heparina: verde, verde claro", "Química en plasma"],
@@ -49,21 +63,6 @@
       {
         "tipo": "nota",
         "valor": "Mezcla cada tubo apenas lo retires: se invierte suavemente 180 grados y de regreso, tantas veces como indica la tabla. No lo agites."
-      },
-      {
-        "tipo": "colores",
-        "titulo": "Tapones del sistema BD Vacutainer",
-        "items": [
-          { "color": "#7FB2E5", "etiqueta": "Azul claro", "descripcion": "Citrato de sodio. Coagulación." },
-          { "color": "#C8102E", "etiqueta": "Rojo", "descripcion": "Suero con activador de la coagulación." },
-          { "color": "#C9A227", "etiqueta": "Dorado", "descripcion": "Suero con gel separador (SST II)." },
-          { "color": "#E8710A", "etiqueta": "Naranja", "descripcion": "Suero con trombina (RST). Química urgente." },
-          { "color": "#8CC63F", "etiqueta": "Verde claro", "descripcion": "Heparina con gel (PST II). Plasma." },
-          { "color": "#00843D", "etiqueta": "Verde", "descripcion": "Heparina de litio o de sodio." },
-          { "color": "#9B7CB9", "etiqueta": "Lavanda", "descripcion": "EDTA. Biometría hemática." },
-          { "color": "#F4A6C0", "etiqueta": "Rosa", "descripcion": "EDTA para banco de sangre y pruebas cruzadas." },
-          { "color": "#9AA0A6", "etiqueta": "Gris", "descripcion": "Fluoruro y oxalato. Glucosa y lactato." }
-        ]
       },
 
       {
@@ -104,13 +103,7 @@
     "palabras_clave": "abdomen, regiones, cuadrantes, hipocondrio, epigastrio, mesogastrio, umbilical, flanco, vacío, fosa iliaca, hipogastrio, dolor abdominal, exploración, palpación, McBurney, Murphy, apendicitis, nueve regiones, cuatro cuadrantes, topografía",
     "contenido": [
       {
-        "tipo": "texto",
-        "titulo": "Dos esquemas distintos",
-        "valor": "La pared anterolateral del abdomen se divide de dos maneras que se confunden seguido y no son intercambiables. En cuatro cuadrantes, con el plano medio y el transumbilical, que es la división rápida. En nueve regiones, agregando los planos medioclaviculares, el subcostal y el intertubercular, que es la división precisa y la que se usa para describir un hallazgo."
-      },
-      {
         "tipo": "tabla",
-        "titulo": "Mapa de las nueve regiones",
         "encabezados": ["Derecha del paciente", "Centro", "Izquierda del paciente"],
         "filas": [
           ["Hipocondrio derecho", "Epigastrio", "Hipocondrio izquierdo"],
@@ -140,7 +133,7 @@
       },
       {
         "tipo": "lista",
-        "titulo": "Correlación clínica del dolor",
+        "titulo": "Correlación del dolor",
         "estilo": "vinetas",
         "items": [
           "Hipocondrio derecho: vesícula biliar, hígado o duodeno.",
@@ -201,7 +194,7 @@
       {
         "tipo": "texto",
         "titulo": "Mascarilla Venturi",
-        "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Como los valores y los colores cambian entre fabricantes, siempre lee el adaptador que tengas en la mano en vez de memorizar una tabla. Criterio práctico: si el paciente necesita más de 8 L/min para mantener una saturación de 90 a 94%, se cambia a Venturi."
+        "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Criterio práctico: si el paciente necesita más de 8 L/min para mantener una saturación de 90 a 94%, se cambia a Venturi."
       },
       {
         "tipo": "texto",
@@ -238,7 +231,7 @@
     "titulo_corto": "Código azul",
     "categoria": "codigos",
     "icono": "heartbeat",
-    "resumen": "Qué exige la normativa mexicana y qué debes tener claro de tu unidad.",
+    "resumen": "Qué exige la normativa mexicana.",
     "palabras_clave": "codigo azul, código azul, paro, paro cardiorrespiratorio, PCR, RCP, reanimación, carro rojo, DEA, desfibrilador, soporte vital, SVB, SVA, compresiones, adrenalina, epinefrina, amiodarona, emergencia, equipo de reanimación, simulacro",
     "contenido": [
       {
@@ -248,7 +241,7 @@
       {
         "tipo": "texto",
         "titulo": "Qué exige la normativa",
-        "valor": "El Consejo de Salubridad General clasifica como estándar indispensable que el hospital defina un proceso documentado para atender el paro cardiorrespiratorio, con respuesta inmediata, personal competente y recursos disponibles. La supervivencia y la recuperación neurológica dependen de cuatro factores críticos."
+        "valor": "El Consejo de Salubridad General clasifica como estándar indispensable que el hospital defina un proceso documentado para atender el paro cardiorrespiratorio, con respuesta inmediata, personal competente y recursos disponibles. La supervivencia y la recuperación neurológica dependen de cuatro factores."
       },
       {
         "tipo": "lista",
@@ -275,17 +268,6 @@
         ]
       },
       {
-        "tipo": "lista",
-        "titulo": "Qué debes saber de tu unidad",
-        "estilo": "vinetas",
-        "items": [
-          "Cómo se activa el código y a qué número o extensión.",
-          "Quién integra el equipo de reanimación en cada turno y dónde localizarlo.",
-          "Dónde están el carro rojo y el DEA más cercanos a tu servicio.",
-          "Cuándo fue el último simulacro documentado: la norma pide al menos uno cada 12 meses."
-        ]
-      },
-      {
         "tipo": "referencias",
         "items": [
           {
@@ -301,5 +283,463 @@
     ],
     "fuente": "Consejo de Salubridad General, Manual MOCEBPASS 2a edición (2025); GPC IMSS-633-13",
     "orden": 1
+  },
+  {
+    "titulo": "Catéteres venosos periféricos: calibres",
+    "titulo_corto": "Calibres de catéter",
+    "categoria": "insumos",
+    "icono": "syringe",
+    "resumen": "Calibre, color, flujo aproximado y para qué se usa cada catéter.",
+    "palabras_clave": "cateter, catéter, punzocat, venoclisis, calibre, gauge, G, 14, 16, 18, 20, 22, 24, naranja, gris, verde, rosa, azul, amarillo, flujo, transfusión, transfusion, sangre, trauma, cirugía, pediatría, neonatos, vena, canalizar, venopunción, venopuncion, CVP",
+    "contenido": [
+      {
+        "tipo": "tabla",
+        "titulo": "Calibre, longitud y flujo",
+        "encabezados": ["Calibre", "Longitud", "Flujo"],
+        "filas": [
+          ["14 G", "51 mm", "276 mL/min"],
+          ["16 G", "51 mm", "145 mL/min"],
+          ["18 G", "32 mm", "110 mL/min"],
+          ["20 G", "32 mm", "65 mL/min"],
+          ["22 G", "25 mm", "42 mL/min"],
+          ["24 G", "14 mm", "22 mL/min"]
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "Cifras del protocolo de la Secretaría de Salud."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Uso habitual de cada calibre",
+        "estilo": "vinetas",
+        "items": [
+          "14 G: alto flujo, cirugía mayor, trauma, venas gruesas o transfusión. Solo en adultos.",
+          "16 G: alto flujo, cirugía mayor, trauma o venas gruesas. Adultos y niños.",
+          "18 G: cirugía general, soluciones hipertónicas o isotónicas con aditivos, sangre y sus componentes.",
+          "20 G: cirugía general y pediátrica. Apropiado para la mayoría de las terapias, en niños, adultos y personas mayores.",
+          "22 G: venas delgadas y pediatría. Apropiado para la mayoría de las terapias.",
+          "24 G: bajo flujo, venas delgadas y pediatría. Permite venas metacarpianas en adultos."
+        ]
+      },
+      {
+        "tipo": "colores",
+        "titulo": "Código de color por calibre",
+        "items": [
+          { "color": "#F07D24", "etiqueta": "14 G", "descripcion": "Naranja" },
+          { "color": "#9AA0A6", "etiqueta": "16 G", "descripcion": "Gris" },
+          { "color": "#00843D", "etiqueta": "18 G", "descripcion": "Verde" },
+          { "color": "#F4A6C0", "etiqueta": "20 G", "descripcion": "Rosa" },
+          { "color": "#3B7DD8", "etiqueta": "22 G", "descripcion": "Azul" },
+          { "color": "#F2C300", "etiqueta": "24 G", "descripcion": "Amarillo" }
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Secretaría de Salud. (2011). Protocolo para el manejo estandarizado del paciente con catéter periférico, central y permanente (1a ed., Tabla 4). México: Comisión Permanente de Enfermería.",
+            "url": "https://ssj.jalisco.gob.mx/sites/ssj.jalisco.gob.mx/files/protocolo_para_el_manejo_estandarizado_del_paciente_con_cateter_periferico_central_y_permanente.pdf"
+          },
+          {
+            "texto": "Vygon. Intraflon 2: catéter venoso periférico. Código de color conforme a la norma ISO 10555-5. Ficha técnica del fabricante.",
+            "url": "https://www.vygon.com/en/products/vascular/peripheral-iv-catheters/peripheral-iv-catheters/intraflon-2"
+          }
+        ]
+      }
+    ],
+    "fuente": "Secretaría de Salud, Protocolo para el manejo estandarizado del paciente con catéter periférico, central y permanente (2011)",
+    "orden": 2
+  },
+  {
+    "titulo": "Toma de presión arterial: datos de referencia",
+    "titulo_corto": "Presión arterial",
+    "categoria": "paciente",
+    "icono": "stethoscope",
+    "resumen": "Brazalete, ruidos de Korotkoff y sitios alternativos de medición.",
+    "palabras_clave": "presión arterial, presion arterial, PA, TA, tensión arterial, brazalete, manguito, baumanómetro, esfigmomanómetro, korotkoff, ruidos, sistólica, diastólica, braquial, radial, poplítea, antebrazo, muslo, circunferencia, brazo, error, medición",
+    "contenido": [
+      {
+        "tipo": "tabla",
+        "titulo": "Brazalete según circunferencia del brazo",
+        "encabezados": ["Tamaño", "Circunferencia", "Cámara"],
+        "filas": [
+          ["Adulto pequeño", "22 a 26 cm", "12 x 22 cm"],
+          ["Adulto", "27 a 34 cm", "16 x 30 cm"],
+          ["Adulto grande", "35 a 44 cm", "16 x 36 cm"],
+          ["Adulto extra grande", "45 a 52 cm", "16 x 42 cm"]
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Ruidos de Korotkoff",
+        "encabezados": ["Fase", "Qué se escucha"],
+        "filas": [
+          ["I", "Aparición súbita de golpeteo nítido. Marca la sistólica"],
+          ["II", "Sonidos como soplo o silbido"],
+          ["III", "Sonidos regulares y más fuertes"],
+          ["IV", "Apagamiento brusco del sonido"],
+          ["V", "Desaparición de todo sonido. Marca la diastólica"]
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Sitios de medición y dónde auscultar",
+        "estilo": "vinetas",
+        "items": [
+          "Brazo: brazalete en el brazo y estetoscopio sobre la arteria braquial, en el pliegue del codo. Es el sitio de referencia.",
+          "Antebrazo: brazalete en el antebrazo y estetoscopio sobre la arteria radial, en la muñeca. Alternativa cuando no hay brazalete del tamaño adecuado para un brazo de más de 34 cm de circunferencia."
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "Las lecturas entre sitios no son intercambiables. En el antebrazo salen consistentemente más altas que en el brazo: alrededor de 3.5 mmHg en la sistólica y 4.2 mmHg en la diastólica."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Condiciones que desvían la lectura",
+        "estilo": "vinetas",
+        "items": [
+          "Brazalete más chico de lo que corresponde: sobreestima.",
+          "Brazo por debajo o por encima del nivel del corazón.",
+          "Espalda sin respaldo o pies sin apoyo en el piso.",
+          "Piernas cruzadas.",
+          "Hablar durante la medición.",
+          "Medir sobre la ropa o con la manga enrollada apretando el brazo.",
+          "Diferencia mayor de 5 mmHg entre un brazo y el otro: repite la toma."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Muntner, P., Shimbo, D., Carey, R. M., y cols. (2019). Measurement of blood pressure in humans: A scientific statement from the American Heart Association. Hypertension, 73(5), e35-e66.",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11409525/"
+          },
+          {
+            "texto": "Ishigami, J., Charleston, J., Miller, E. R., y cols. (2023). Effects of cuff size on the accuracy of blood pressure readings: The Cuff(SZ) randomized crossover trial. JAMA Internal Medicine, 183(10), 1061-1068.",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/37548984/"
+          },
+          {
+            "texto": "Gómez Ayala, A. E., y cols. (2016). Técnica para una correcta toma de la presión arterial en el paciente ambulatorio. Revista de la Facultad de Medicina UNAM, 59(3), 49-55.",
+            "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0026-17422016000300049"
+          },
+          {
+            "texto": "Diferencia de la presión arterial medida en el brazo vs antebrazo en pacientes con circunferencia de brazo mayor a 34 cm. (2018). Medicina Interna de México, 34(4), 517-523.",
+            "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0186-48662018000400002"
+          }
+        ]
+      }
+    ],
+    "fuente": "American Heart Association (2019); Revista de la Facultad de Medicina UNAM (2016)",
+    "orden": 2
+  },
+  {
+    "titulo": "Tipos de drenajes",
+    "titulo_corto": "Drenajes",
+    "categoria": "equipo",
+    "icono": "drop",
+    "resumen": "Cómo funciona cada drenaje y qué se vigila en cada uno.",
+    "palabras_clave": "drenaje, dren, drenes, penrose, jackson pratt, JP, hemovac, drenovac, bulbo, pera, sello de agua, pleurovac, pleur-evac, torácico, toracico, sonda pleural, succión, gravedad, herida, débito, gasto, fuga aérea, burbujeo",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "titulo": "Se agrupan por cómo sacan el líquido",
+        "valor": "Un drenaje no es solo un tubo: lo que cambia entre uno y otro es la fuerza que mueve el líquido hacia afuera. Unos trabajan por gravedad y capilaridad, sin nada que jale. Otros generan succión continua. Y los torácicos son un caso aparte, porque además de sacar aire y líquido tienen que impedir que el aire regrese al tórax."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Drenajes por mecanismo",
+        "encabezados": ["Drenaje", "Mecanismo", "Sale a"],
+        "filas": [
+          ["Penrose", "Gravedad y capilaridad", "Apósito"],
+          ["Jackson-Pratt", "Succión por bulbo", "Bulbo graduado"],
+          ["Hemovac", "Succión por resorte", "Recipiente graduado"],
+          ["Pleur-evac", "Gravedad, con o sin aspiración", "Sistema de cámaras"]
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "En los de succión, el bulbo o el resorte son la succión. Si el bulbo está inflado, ese drenaje ya no está jalando nada: hay que vaciarlo y volver a comprimirlo antes de taparlo."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Pleur-evac",
+        "valor": "El sistema clásico tiene tres cámaras: la primera, conectada al paciente, recoge lo que sale; la segunda contiene el sello de agua de 2 cm, que deja salir aire pero no lo deja regresar al tórax; la tercera se conecta a la aspiración, entre -10 y -30 cm H2O."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Qué se vigila",
+        "estilo": "numerada",
+        "items": [
+          "Permeabilidad.",
+          "Cuánto salió y de qué color, con horario.",
+          "Burbujeo en la cámara del sello de agua.",
+          "Oscilación de la columna de agua en los torácicos. Su ausencia puede indicar que el pulmón ya se expandió o que el tubo se obstruyó.",
+          "El sistema siempre por debajo del nivel del paciente.",
+          "Reponer el sello de agua si baja de nivel.",
+          "No pinzar los drenajes de rutina, ni para trasladar al paciente: favorece que se obstruyan."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Guzmán-Valdivia Gómez, G., y Arellano-Lomelí, S. M. (2016). Bosquejo histórico de los drenajes en cirugía y sus autores. Cirujano General, 38(1), 35-45.",
+            "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1405-00992016000100035"
+          },
+          {
+            "texto": "Val-Jordán, E., Fuentes-Esteban, D., Vicente-Gordo, M. D., y cols. (2022). Actualización en el abordaje del drenaje torácico. Sanidad Militar, 78(4), 273-283.",
+            "url": "https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1887-85712022000400012"
+          }
+        ]
+      }
+    ],
+    "fuente": "Cirujano General (2016); Sanidad Militar (2022)",
+    "orden": 2
+  },
+  {
+    "titulo": "Acciones Esenciales para la Seguridad del Paciente",
+    "titulo_corto": "AESP",
+    "categoria": "codigos",
+    "icono": "shieldCheck",
+    "resumen": "Las ocho acciones vigentes y su relación con las Metas Internacionales.",
+    "palabras_clave": "AESP, acciones esenciales, seguridad del paciente, metas internacionales, MISP, consejo de salubridad general, CSG, identificación, comunicación efectiva, medicación, procedimientos, IAAS, caídas, eventos adversos, centinela, cuasifalla, cultura de seguridad, certificación",
+    "contenido": [
+      {
+        "tipo": "tabla",
+        "titulo": "Las ocho acciones",
+        "encabezados": ["#", "Acción esencial"],
+        "filas": [
+          ["1", "Identificación correcta de los pacientes"],
+          ["2", "Comunicación efectiva"],
+          ["3", "Seguridad en el proceso de medicación"],
+          ["4", "Seguridad en los procedimientos"],
+          ["5", "Reducción del riesgo de IAAS"],
+          ["6", "Reducción del riesgo de daño por caídas"],
+          ["7", "Registro y análisis de cuasifallas y eventos"],
+          ["8", "Cultura de seguridad del paciente"]
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Qué implica cada una en la práctica",
+        "estilo": "numerada",
+        "items": [
+          "Identificar con al menos dos datos: nombre completo y fecha de nacimiento. Nunca el número de cama.",
+          "Comunicación clara entre el equipo y con el paciente o su familiar, sobre todo al dar y recibir indicaciones.",
+          "Cuidar toda la cadena del medicamento: prescripción, transcripción, preparación y administración.",
+          "Aplicar el Protocolo Universal en cirugía y en procedimientos de alto riesgo fuera del quirófano.",
+          "Programa integral de higiene de manos durante todo el proceso de atención.",
+          "Evaluar el riesgo de caída de cada paciente y actuar para reducirlo.",
+          "Notificar y registrar cuasifallas, eventos adversos y centinela, para que se analicen y no se repitan.",
+          "Medir el clima de seguridad de la unidad para poder mejorarlo."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Consejo de Salubridad General, Dirección General de Calidad y Educación en Salud. (2023). Acciones Esenciales para la Seguridad del Paciente. Actualización 2023. México: CSG.",
+            "url": "https://www.gob.mx/cms/uploads/attachment/file/920141/AESP_CSG-DGCES_16_junio_2023.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "Consejo de Salubridad General, Acciones Esenciales para la Seguridad del Paciente, actualización 2023",
+    "orden": 2
+  },
+  {
+    "titulo": "Hora Dorada en neutropenia febril pediátrica",
+    "titulo_corto": "Hora Dorada (neutropenia)",
+    "categoria": "codigos",
+    "icono": "clock",
+    "resumen": "Meta de antibiótico en 60 minutos desde la llegada a urgencias del niño con fiebre y neutropenia.",
+    "palabras_clave": "hora dorada, hora de oro, golden hour, neutropenia, neutropenia febril, netropenia, neutropenia febril pediatrica, fiebre y neutropenia, NF, fiebre, febril, pediatria, pediatría, oncologia, oncología, hematologia, hematología, oncohematologia, oncohematología, hemato-oncologico, hematooncologico, quimioterapia, quimio, cancer, cáncer, leucemia, urgencias, triage, triaje, antibiotico, antibiótico, primera dosis, 60 minutos, hemocultivo, hemocultivos, neutrofilos, neutrófilos, RAN, sepsis, catéter puerto, cateter puerto, st jude, MAS",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "titulo": "Qué es y a quién aplica",
+        "valor": "Es un plan de mejora cuyo objetivo es administrar la primera dosis de antibiótico dentro de los primeros 60 minutos posteriores a la llegada al servicio de urgencias del paciente con sospecha de fiebre y neutropenia.\nAplica a pacientes pediátricos hemato-oncológicos: niños y adolescentes con enfermedades malignas de la sangre o con tumores sólidos."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Definición operativa (Consenso SLIPE 2021)",
+        "encabezados": ["Criterio", "Cifra"],
+        "filas": [
+          ["Fiebre, toma única", "Temperatura axilar ≥ 38.5 °C"],
+          ["Fiebre, dos tomas", "≥ 38 °C, separadas al menos 1 hora"],
+          ["Neutropenia", "Neutrófilos totales ≤ 500/mm³"],
+          ["Neutropenia inminente", "≤ 1000/mm³ si se predice caída a ≤ 500/mm³ en 24 a 48 h"]
+        ]
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Por qué importa el tiempo",
+        "valor": "En el paciente neutropénico los signos de inflamación están atenuados o ausentes, así que la fiebre suele ser el único síntoma de una infección grave: una neumonía puede no verse en la radiografía y una infección urinaria puede cursar sin piuria. Por eso el retraso del antibiótico se asocia a mayor morbilidad, mortalidad, estancia hospitalaria e interrupciones del tratamiento oncológico."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "El papel de enfermería",
+        "estilo": "vinetas",
+        "items": [
+          "Identificar al paciente hemato-oncológico con fiebre desde que llega y activar el código correspondiente, para que pase directo y no espere en la fila general.",
+          "Registrar la hora de llegada o de triage.",
+          "Mantener lista y surtida la caja de Hora Dorada, con material para permeabilizar catéter puerto y accesos periféricos, material estéril para toma de cultivos, medio para hemocultivo pediátrico, tubos de laboratorio, jeringas, soluciones isotónicas, antibióticos de amplio espectro y dispositivos para administrar oxígeno.",
+          "Conseguir el acceso venoso y tomar las muestras.",
+          "Educar a la familia para que reconozca la fiebre en casa y acuda directo a urgencias, con termómetro y datos de alarma claros.",
+          "Documentar el motivo cuando se rebasan los 60 minutos, para que la causa del retraso se pueda corregir."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Santolaya, M. E., Contardo, V., Torres, J. P., y cols. (2021). Manejo de los episodios de neutropenia febril en niños con cáncer. Consenso de la Sociedad Latinoamericana de Infectología Pediátrica 2021. Revista Chilena de Infectología, 38(6), 857-909.",
+            "url": "https://slipe.org/web/wp-content/uploads/2022/08/consenso-NF-SLIPE-2021-final.pdf"
+          },
+          {
+            "texto": "Colunga-Pedraza, J. E., López-Reyna, I. G., Vaquera-Aparicio, D. N., y cols. (2024). Overcoming challenges to reduce time to antibiotic therapy in febrile neutropenic children: insights from a Mexican center. Hematology, Transfusion and Cell Therapy, 46(Supl. 6), S193-S201.",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11726110/"
+          },
+          {
+            "texto": "Galván Alvarado, F. (2023). Tiempo para el inicio de tratamiento antibiótico en pacientes hematooncológicos con neutropenia febril posterior a la implementación del plan de mejora Hora Dorada [Tesis de especialidad, Universidad Autónoma de San Luis Potosí]. Repositorio Institucional UASLP.",
+            "url": "https://repositorioinstitucional.uaslp.mx/xmlui/handle/i/8234"
+          },
+          {
+            "texto": "Sharma, D. (2017). Golden hour of neonatal life: Need of the hour. Maternal Health, Neonatology and Perinatology, 3, 16.",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5604187/"
+          }
+        ]
+      }
+    ],
+    "fuente": "Consenso SLIPE 2021; Hospital Universitario UANL (2024); Hospital Central de San Luis Potosí (2023)",
+    "orden": 3
+  },
+  {
+    "titulo": "Cuidados de la fístula arteriovenosa",
+    "titulo_corto": "Fístula arteriovenosa",
+    "categoria": "paciente",
+    "icono": "pulse",
+    "resumen": "Frémito y soplo, qué no se hace nunca en ese brazo y los signos de alarma que obligan a avisar.",
+    "palabras_clave": "fistula, fístula, fistula arteriovenosa, fístula arteriovenosa, FAV, FAVI, FAVn, favi, acceso vascular, hemodialisis, hemodiálisis, dialisis, diálisis, nefrologia, nefrología, insuficiencia renal, enfermedad renal cronica, enfermedad renal crónica, ERC, renal, riñon, riñón, thrill, tril, thril, fremito, frémito, soplo, anastomosis, vena arterializada, trombosis, estenosis, sindrome de robo, síndrome de robo, isquemia, aneurisma, maduracion, maduración, puncion, punción, venopuncion, venopunción, presion arterial, presión arterial, brazo, catéter, cateter",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "titulo": "Qué es y para qué sirve",
+        "valor": "La fístula arteriovenosa (FAV) es una conexión quirúrgica entre una arteria y una vena, casi siempre en el brazo. La vena recibe el flujo arterial, se engrosa y se dilata, y con eso queda en condiciones de tolerar las punciones repetidas que exige la hemodiálisis. Es el acceso vascular de elección por su mejor función, su mayor duración y sus menores complicaciones frente a los demás accesos.\nEsta ficha trata del cuidado del paciente hospitalizado que ya llega con una FAV."
+      },
+      {
+        "tipo": "nota",
+        "titulo": "No es lo mismo una FAV en maduración que una en uso",
+        "valor": "Una FAV recién creada todavía no se punciona: necesita tiempo para madurar. Una FAV ya funcional se punciona en cada sesión de hemodiálisis. Lo que aplica a las dos por igual son las contraindicaciones del brazo y la valoración de frémito y soplo. Lo que cambia son los cuidados locales de la herida y de la piel."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Frémito (thrill) y soplo",
+        "valor": "El frémito o thrill es la vibración palpable de la fístula, producida por la sangre que circula por la vena arterializada. Se explora mejor con la palma de la mano. El soplo es la manifestación auditiva del mismo fenómeno y se ausculta con estetoscopio.\nUna FAV que funciona tiene frémito palpable y soplo audible a nivel de la anastomosis, de tono claro y potente. La ausencia de frémito indica déficit de flujo, y junto con la ausencia de pulso es lo característico de una fístula trombosada. Si el frémito o el soplo cambian de carácter respecto a controles previos, eso apunta a estenosis."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Qué esperar en la valoración",
+        "encabezados": ["Se valora", "FAV normal", "Alerta"],
+        "filas": [
+          ["Frémito", "Continuo y suave", "Ausente, o aumentado en un punto"],
+          ["Soplo", "Continuo, tono bajo", "Ausente, o de tono alto"],
+          ["Pulso", "Blando, fácil de comprimir", "Muy aumentado, o muy débil"],
+          ["Vena al elevar el brazo", "Se colapsa", "No se colapsa"],
+          ["Brazo", "Sin edema", "Edema o circulación colateral"]
+        ]
+      },
+      {
+        "tipo": "nota",
+        "titulo": "No se punciona sin comprobar antes",
+        "valor": "No se debe puncionar una FAV sin verificar primero su funcionamiento mediante observación directa, palpación y auscultación. Si hay zonas enrojecidas con supuración, hematoma, piel alterada, aneurisma o pseudoaneurisma, no se punciona."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Qué no se hace nunca en ese brazo",
+        "estilo": "vinetas",
+        "items": [
+          "No tomar la presión arterial en el brazo de la FAV. Tampoco en el posoperatorio inmediato.",
+          "No hacer venopunción, no tomar muestras de laboratorio y no instalar venoclisis en ese brazo.",
+          "No colocar vendajes oclusivos ni ningún vendaje que cubra toda la circunferencia de la extremidad.",
+          "No comprimir el miembro: nada de ropa apretada, reloj ni pulseras."
+        ]
+      },
+      {
+        "tipo": "texto",
+        "titulo": "¿Por qué?",
+        "valor": "La razón es doble. Las punciones y la compresión dañan la vena arterializada y favorecen la estenosis y la trombosis, que son las causas principales de que una fístula deje de funcionar; de hecho la estenosis se produce en general por punciones repetidas sobre la misma zona.\nY hay una razón de más largo plazo: en el paciente renal hay que preservar el capital venoso, porque cada vena que se pierde es una opción menos para un acceso vascular futuro. Por eso la indicación de mantener libres de punciones las venas superficiales de ambos brazos empieza desde antes de que la fístula exista, y las muestras de sangre se toman de preferencia de las venas del dorso de la mano."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Signos de alarma",
+        "estilo": "vinetas",
+        "items": [
+          "Infección: enrojecimiento, calor, dolor y supuración.",
+          "Endurecimiento o dolor, con ausencia de frémito y de soplo.",
+          "Isquemia de la mano de ese brazo, o síndrome de robo: frialdad, palidez y dolor.",
+          "Edema del brazo.",
+          "Edema del brazo que persiste dos semanas después de las sesiones y no cede al elevarlo.",
+          "Hemostasia que tarda más de 20 minutos tras retirar las agujas, sin exceso de anticoagulación. Sugiere presión aumentada dentro de la fístula por estenosis.",
+          "Sangrado por el orificio de punción que no cede. Se comprime suave con gasa; nunca se coloca un vendaje circular compresivo."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "FAV recién creada, en maduración",
+        "estilo": "vinetas",
+        "items": [
+          "Comprobar que haya soplo y frémito, para detectar falla y trombosis temprana.",
+          "Vigilar las tres complicaciones más importantes de esta etapa: hemorragia, isquemia y trombosis de la FAV.",
+          "Mantener seca la zona quirúrgica hasta que se retiren los puntos de sutura.",
+          "Mantener el apósito limpio y seco, y cambiarlo si se ensucia o se humedece.",
+          "A partir de las primeras 24 a 48 horas conviene hacer movimientos suaves con los dedos y el brazo para favorecer la circulación, evitando ejercicios bruscos que puedan sangrar la herida o dificultar el retorno venoso.",
+          "Si la fístula está en el codo o en la flexura, evitar la flexión completa del brazo."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "FAV ya en uso",
+        "estilo": "vinetas",
+        "items": [
+          "Comprobar el funcionamiento antes de cada punción.",
+          "Retirar el apósito de los sitios de punción al día siguiente de la sesión. Si quedó pegado a la piel, humedecerlo con solución fisiológica 0.9% para no lesionarla.",
+          "Nunca levantar la costra de la herida de punción."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Educación al paciente",
+        "estilo": "vinetas",
+        "items": [
+          "Enseñarle a explorar su fístula a diario: que compruebe el frémito y revise si hay eritema, edema, hemorragia, hematoma o disminución de la sensibilidad.",
+          "Que sepa que no le deben tomar la presión arterial ni puncionarle ese brazo, y que puede decirlo cuando alguien lo intente.",
+          "Que acuda de inmediato a valoración ante cualquier anomalía del acceso, sin esperar a la siguiente sesión de diálisis."        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Espinoza-Sánchez, I., de la Peña-León, B., Luna-Pérez, D., Lezana-Fernández, M. Á., y Meneses-González, F. (2021). Manejo de enfermería en complicaciones de fístula arteriovenosa para hemodiálisis. Revista CONAMED, 26(1), 48-52.",
+            "url": "https://www.medigraphic.com/pdfs/conamed/con-2021/con211f.pdf"
+          },
+          {
+            "texto": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado. (2013). Accesos vasculares en hemodiálisis. Guía de práctica clínica, guía de referencia rápida (ISSSTE-680-13). México: ISSSTE."
+          },
+          {
+            "texto": "Ibeas, J., Roca-Tey, R., Vallespín, J., y cols. (2017). Guía clínica española del acceso vascular para hemodiálisis. Nefrología, 37(Supl. 1), 1-177.",
+            "url": "https://portal.guiasalud.es/wp-content/uploads/2018/12/GPC_572_Acceso_Vascular_HEMODIALISIS_Nefrologia_Guia_AV.pdf"
+          },
+          {
+            "texto": "Casares-Bran, T., Olivares-Cruz, S., Lecuona-Huet, N., y cols. (2017). Fístulas arteriovenosas para hemodiálisis: tres años de experiencia en el Servicio de Angiología del Hospital General de México Dr. Eduardo Liceaga. Revista Mexicana de Angiología, 45(4), 163-169.",
+            "url": "https://www.medigraphic.com/cgi-bin/new/resumen.cgi?IDARTICULO=77893"
+          }
+        ]
+      }
+    ],
+    "fuente": "Revista CONAMED (2021); GPC ISSSTE-680-13 (2013); Guía clínica española del acceso vascular GEMAV (2017)",
+    "orden": 4
   }
 ]

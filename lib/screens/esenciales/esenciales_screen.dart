@@ -141,7 +141,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
           if (shouldPop && context.mounted) Navigator.of(context).pop();
         },
         child: Scaffold(
-          backgroundColor: colorScheme.secondary,
+          backgroundColor: colorScheme.secondaryContainer,
           appBar: AppBar(
             titleSpacing: 0,
             leading: IconButton(
@@ -195,7 +195,12 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
         tabs: [
           for (var i = 0; i < 5; i++)
             if (i == _tabCasa)
-              const Tab(icon: PhosphorIcon(PhosphorIconsFill.house, size: 26))
+              const Tab(
+                icon: PhosphorIcon(
+                  PhosphorIconsFill.chalkboardTeacher,
+                  size: 26,
+                ),
+              )
             else
               Tab(text: categoriaPorTab(i)!.etiqueta),
         ],
@@ -455,7 +460,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             crossAxisCount: 2,
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
-            childAspectRatio: 1.15,
+            childAspectRatio: 1.3,
             children: [
               // Nombre, ícono y pestaña destino salen de categorias_esenciales;
               // ninguna categoría usa el índice 2 (esta misma pestaña).

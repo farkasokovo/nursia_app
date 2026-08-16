@@ -28,6 +28,8 @@ class EsencialIconMapper {
     'thermometer': PhosphorIconsFill.thermometer,
     'baby': PhosphorIconsFill.baby,
     'stethoscope': PhosphorIconsFill.stethoscope,
+    'clock': PhosphorIconsFill.clock,
+    'pulse': PhosphorIconsFill.pulse,
     // Equipo
     'gauge': PhosphorIconsFill.gauge,
     'plugCharging': PhosphorIconsFill.plugCharging,

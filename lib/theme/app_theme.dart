@@ -25,6 +25,7 @@ class AppColors {
   static const Color redAlertv4 = Color(0xff6F4346);
 
   static const Color semiDarkPrimaryColor = Color(0xff7E6754);
+  static const Color darkestColor = Color(0xff2F2318);
 }
 
 // ============================================================
@@ -132,7 +133,7 @@ class AppTheme {
       onSecondary: AppColors.darkPrimaryColor,
       secondaryContainer: AppColors.widgetLightBrown,
       onSecondaryContainer: AppColors.semiDarkPrimaryColor,
-      tertiary: AppColors.widgetLightBrown,
+      tertiary: AppColors.darkestColor,
       onTertiary: AppColors.darkPrimaryColor,
       tertiaryContainer: AppColors.accentLightColor,
       onTertiaryContainer: AppColors.darkPrimaryColor,

@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 16, // Aumentamos la versión a 16
+      version: 18, // Aumentamos la versión a 18
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -166,6 +166,22 @@ class DatabaseHelper {
         // la tabla para que cargarSemillaSiHaceFalta() la vuelva a sembrar con
         // el JSON nuevo. NO afecta datos del usuario (turno activo).
         if (oldVersion < 16) {
+          await db.delete('esenciales');
+        }
+        // Se agregaron 4 fichas nuevas, una por categoría (catéteres venosos
+        // periféricos, toma de presión arterial, tipos de drenajes y Acciones
+        // Esenciales para la Seguridad del Paciente). Se vacía la tabla para
+        // que cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON
+        // nuevo. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 17) {
+          await db.delete('esenciales');
+        }
+        // Se agregaron 2 fichas nuevas a la categoría "paciente": la Hora
+        // Dorada en neutropenia febril pediátrica y los cuidados de la fístula
+        // arteriovenosa. Se vacía la tabla para que cargarSemillaSiHaceFalta()
+        // la vuelva a sembrar con el JSON nuevo. NO afecta datos del usuario
+        // (turno activo).
+        if (oldVersion < 18) {
           await db.delete('esenciales');
         }
       },

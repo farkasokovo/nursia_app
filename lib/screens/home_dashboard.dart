@@ -227,7 +227,7 @@ class BotonEsenciales extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BotonLargo(
-      icono: PhosphorIconsFill.bookmarkSimple,
+      icono: PhosphorIconsFill.chalkboardTeacher,
       titulo: "Esenciales",
       subtitulo: "Referencia rápida",
       onTap: () =>
@@ -242,7 +242,7 @@ class BotonProcedimientos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BotonLargo(
-      icono: PhosphorIconsFill.listChecks,
+      icono: PhosphorIconsFill.chartPolar,
       titulo: "Procedimientos",
       subtitulo: "Próximamente",
       // Placeholder: el módulo todavía no existe.

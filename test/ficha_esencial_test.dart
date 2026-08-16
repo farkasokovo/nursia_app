@@ -11,7 +11,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+
 import 'package:nursia_app/models/ficha_esencial.dart';
+import 'package:nursia_app/utils/esencial_icon_mapper.dart';
 
 const _rutaSemilla = 'assets/data/esenciales_data.json';
 
@@ -56,6 +59,24 @@ void main() {
           reason:
               '"${f.titulo}" tiene la categoría "${f.categoria}", que no '
               'existe. Válidas: $categoriasValidas',
+        );
+      }
+    });
+
+    test('el ícono de cada ficha existe en el mapper', () {
+      // EsencialIconMapper cae a un ícono genérico cuando el nombre no está
+      // mapeado: es a prueba de crashes, pero eso significa que un "icono"
+      // mal escrito en el JSON pasa desapercibido y la ficha sale con el
+      // ícono equivocado. Una ficha nueva con ícono nuevo necesita su renglón
+      // en el mapper, y esto lo exige.
+      const generico = PhosphorIconsFill.clipboardText;
+      for (final f in fichas) {
+        expect(
+          EsencialIconMapper.fromString(f.icono),
+          isNot(generico),
+          reason:
+              '"${f.titulo}" usa el ícono "${f.icono}", que no está en '
+              'EsencialIconMapper. Agrégalo ahí o corrige el nombre.',
         );
       }
     });
@@ -109,6 +130,23 @@ void main() {
             );
           }
         }
+      }
+    });
+
+    test('el orden no se repite dentro de una categoría', () {
+      // El DAO ordena por "orden ASC, titulo ASC". Si dos fichas de la misma
+      // categoría comparten orden, quién sale primero lo decide el alfabeto y
+      // el campo deja de servir para lo que existe.
+      final vistos = <String, Set<int>>{};
+      for (final f in fichas) {
+        final ordenes = vistos.putIfAbsent(f.categoria, () => <int>{});
+        expect(
+          ordenes.add(f.orden),
+          isTrue,
+          reason:
+              'En "${f.categoria}" hay dos fichas con orden ${f.orden}. '
+              'La última en chocar fue "${f.titulo}".',
+        );
       }
     });
 
