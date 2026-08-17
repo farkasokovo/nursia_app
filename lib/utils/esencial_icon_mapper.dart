@@ -23,6 +23,7 @@ class EsencialIconMapper {
     'bandaids': PhosphorIconsFill.bandaids,
     'ruler': PhosphorIconsFill.ruler,
     'pill': PhosphorIconsFill.pill,
+    'flask': PhosphorIconsFill.flask,
     // Paciente
     'heartbeat': PhosphorIconsFill.heartbeat,
     'thermometer': PhosphorIconsFill.thermometer,

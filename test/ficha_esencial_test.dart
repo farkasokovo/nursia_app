@@ -226,6 +226,63 @@ void main() {
       }
     });
 
+    test('toda ficha trae palabras clave para el buscador', () {
+      for (final f in fichas) {
+        expect(
+          f.palabrasClave,
+          isNotEmpty,
+          reason:
+              '"${f.titulo}" no tiene palabras_clave. El buscador de Esenciales '
+              'rankea sobre ese campo: sin él la ficha solo se encuentra '
+              'escribiendo su título.',
+        );
+      }
+    });
+
+    test('ningún texto de ficha usa raya larga', () {
+      // Regla de redacción del proyecto: la raya larga queda fuera del
+      // contenido clínico. Se revisa el cuerpo y no las referencias, porque
+      // el título de una publicación se cita tal como está publicado.
+      for (final f in fichas) {
+        for (final texto in _textoDelCuerpo(f)) {
+          expect(
+            texto.contains('—') || texto.contains('–'),
+            isFalse,
+            reason:
+                'En "${f.titulo}" hay una raya larga. Reescribe con coma, '
+                'punto y coma, dos puntos o paréntesis:\n$texto',
+          );
+        }
+      }
+    });
+
+    test('el contenido usa la terminología mexicana de soluciones', () {
+      // "Solución Hartmann", nunca "Ringer lactato"; "solución fisiológica
+      // 0.9%", nunca "suero fisiológico". Las referencias quedan fuera por la
+      // misma razón que en la prueba anterior: ahí se cita el título real del
+      // documento, que sí puede llamarse "Lactato de Ringer".
+      const prohibidos = [
+        'ringer',
+        'suero fisiológico',
+        'suero glucosado',
+        'lactato de ringer',
+      ];
+      for (final f in fichas) {
+        for (final texto in _textoDelCuerpo(f)) {
+          for (final termino in prohibidos) {
+            expect(
+              texto.toLowerCase().contains(termino),
+              isFalse,
+              reason:
+                  'En "${f.titulo}" aparece "$termino" en el cuerpo de la '
+                  'ficha. En México se usa "solución Hartmann" y "solución '
+                  'fisiológica 0.9%":\n$texto',
+            );
+          }
+        }
+      }
+    });
+
     test('round-trip toMap -> fromMap conserva el contenido', () {
       // toMap serializa los bloques a JSON dentro de una columna TEXT; fromMap
       // los vuelve a leer. Si algo se pierde ahí, la ficha se ve bien en la
@@ -350,4 +407,36 @@ void main() {
       expect(ficha.contenido, isEmpty);
     });
   });
+}
+
+/// Todo el texto visible de una ficha EXCEPTO el bloque de referencias.
+///
+/// Las reglas de redacción aplican al contenido clínico, no a las citas: el
+/// título de una publicación se transcribe tal como está publicado, aunque
+/// use términos que la ficha no debe usar por su cuenta.
+List<String> _textoDelCuerpo(FichaEsencial ficha) {
+  final textos = <String>[ficha.titulo, ficha.tituloCorto, ficha.resumen];
+  for (final b in ficha.contenido) {
+    if (b is BloqueReferencias) continue;
+    final titulo = b.titulo;
+    if (titulo != null) textos.add(titulo);
+    switch (b) {
+      case BloqueTexto(:final valor) || BloqueNota(:final valor):
+        textos.add(valor);
+      case BloqueLista(:final items):
+        textos.addAll(items);
+      case BloqueTabla(:final encabezados, :final filas):
+        textos.addAll(encabezados);
+        textos.addAll(filas.expand((fila) => fila));
+      case BloqueColores(:final items):
+        for (final item in items) {
+          textos.add(item.etiqueta);
+          final descripcion = item.descripcion;
+          if (descripcion != null) textos.add(descripcion);
+        }
+      case BloqueReferencias():
+        break;
+    }
+  }
+  return textos;
 }

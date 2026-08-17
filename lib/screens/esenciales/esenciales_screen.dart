@@ -564,11 +564,17 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
             child: Row(
               children: [
+                Icon(
+                  PhosphorIconsRegular.caretLeft,
+                  color: colorScheme.onPrimary,
+                  size: 45,
+                ),
+                const SizedBox(width: 8),
                 CircleAvatar(
                   backgroundColor: Colors.white24,
                   radius: 20,
                   child: Icon(
-                    PhosphorIconsBold.caretLeft,
+                    PhosphorIconsFill.house,
                     color: colorScheme.onPrimary,
                     size: 30,
                   ),

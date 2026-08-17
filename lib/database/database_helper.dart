@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 18, // Aumentamos la versión a 18
+      version: 19, // Aumentamos la versión a 19
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -182,6 +182,16 @@ class DatabaseHelper {
         // la vuelva a sembrar con el JSON nuevo. NO afecta datos del usuario
         // (turno activo).
         if (oldVersion < 18) {
+          await db.delete('esenciales');
+        }
+        // Se reescribieron las 10 fichas existentes al estilo de redacción de
+        // manual clínico y se agregaron 2 fichas nuevas: tipos de aislamiento
+        // (codigos) y soluciones intravenosas (insumos). Como el cambio es de
+        // CONTENIDO y no de esquema, la única forma de que llegue a un
+        // dispositivo ya instalado es vaciar la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 19) {
           await db.delete('esenciales');
         }
       },

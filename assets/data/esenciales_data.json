@@ -14,57 +14,164 @@
       {
         "tipo": "texto",
         "titulo": "Por qué existe un orden",
-        "valor": "Cada tapón trae un aditivo distinto y la punta del tubo arrastra un poco de ese aditivo al siguiente. Si un tubo con EDTA pasa antes que uno de química, el EDTA que se arrastra secuestra calcio y magnesio dentro del tubo siguiente: el potasio sale falsamente alto y el calcio y el magnesio falsamente bajos. Si contamina un tubo de coagulación, los tiempos salen alargados.\nEl riesgo es mayor cuando la sangre se pasa de una jeringa a los tubos que cuando se llenan directo al vacío.\nAparte del orden: llenar cada tubo hasta su línea y mezclarlo de inmediato. No hacerlo invalida la muestra y obliga a volver a puncionar al paciente."
+        "valor": "Cada tapón trae un aditivo distinto y la punta del tubo arrastra un poco de ese aditivo al siguiente. Si un tubo con EDTA pasa antes que uno de química, el EDTA arrastrado secuestra calcio y magnesio dentro del tubo siguiente: el potasio sale falsamente alto y el calcio y el magnesio falsamente bajos. Si contamina un tubo de coagulación, los tiempos salen alargados.\nEl riesgo es mayor cuando la sangre se pasa de una jeringa a los tubos que cuando se llenan directo al vacío.\nAdemás del orden, cada tubo se llena hasta su línea y se mezcla de inmediato. Omitirlo invalida la muestra y obliga a volver a puncionar al paciente."
       },
       {
         "tipo": "colores",
         "titulo": "Orden de llenado",
         "items": [
-          { "color": "#7FB2E5", "etiqueta": "Azul claro", "descripcion": "Citrato de sodio. Coagulación." },
-          { "color": "#C8102E", "etiqueta": "Rojo", "descripcion": "Suero con activador de la coagulación." },
-          { "color": "#C9A227", "etiqueta": "Dorado", "descripcion": "Suero con gel separador (SST II)." },
-          { "color": "#E8710A", "etiqueta": "Naranja", "descripcion": "Suero con trombina (RST). Química urgente." },
-          { "color": "#8CC63F", "etiqueta": "Verde claro", "descripcion": "Heparina con gel (PST II). Plasma." },
-          { "color": "#00843D", "etiqueta": "Verde", "descripcion": "Heparina de litio o de sodio." },
-          { "color": "#9B7CB9", "etiqueta": "Lavanda", "descripcion": "EDTA. Biometría hemática." },
-          { "color": "#F4A6C0", "etiqueta": "Rosa", "descripcion": "EDTA para banco de sangre y pruebas cruzadas." },
-          { "color": "#9AA0A6", "etiqueta": "Gris", "descripcion": "Fluoruro y oxalato. Glucosa y lactato." }
+          {
+            "color": "#7FB2E5",
+            "etiqueta": "Azul claro",
+            "descripcion": "Citrato de sodio. Coagulación."
+          },
+          {
+            "color": "#C8102E",
+            "etiqueta": "Rojo",
+            "descripcion": "Suero con activador de la coagulación."
+          },
+          {
+            "color": "#C9A227",
+            "etiqueta": "Dorado",
+            "descripcion": "Suero con gel separador (SST II)."
+          },
+          {
+            "color": "#E8710A",
+            "etiqueta": "Naranja",
+            "descripcion": "Suero con trombina (RST). Química urgente."
+          },
+          {
+            "color": "#8CC63F",
+            "etiqueta": "Verde claro",
+            "descripcion": "Heparina con gel (PST II). Plasma."
+          },
+          {
+            "color": "#00843D",
+            "etiqueta": "Verde",
+            "descripcion": "Heparina de litio o de sodio."
+          },
+          {
+            "color": "#9B7CB9",
+            "etiqueta": "Lavanda",
+            "descripcion": "EDTA. Biometría hemática."
+          },
+          {
+            "color": "#F4A6C0",
+            "etiqueta": "Rosa",
+            "descripcion": "EDTA para banco de sangre y pruebas cruzadas."
+          },
+          {
+            "color": "#9AA0A6",
+            "etiqueta": "Gris",
+            "descripcion": "Fluoruro y oxalato. Glucosa y lactato."
+          }
         ]
       },
       {
         "tipo": "tabla",
-        "encabezados": ["#", "Tubo (tapón)", "Estudios"],
+        "encabezados": [
+          "#",
+          "Tubo (tapón)",
+          "Estudios"
+        ],
         "filas": [
-          ["1", "Frascos de hemovultivo", "Aerobio y luego anaerobio"],
-          ["2", "Tubo de descarte", "Solo si el siguiente tubo es de citrato. No se necesita para los hemocultivos."],
-          ["3", "Citrato de sodio (azul claro)", "Coagulación: TP, INR, TTP, dímero D"],
-          ["4", "Suero: rojo, dorado, naranja", "Química sanguínea, serología, inmunología"],
-          ["5", "Heparina: verde, verde claro", "Química en plasma"],
-          ["6", "EDTA: lavanda y rosa", "Biometría hemática. El rosa es para pruebas cruzadas"],
-          ["7", "Fluoruro y oxalato (gris)", "Glucosa, lactato"]
+          [
+            "1",
+            "Frascos de hemocultivo",
+            "Aerobio y luego anaerobio"
+          ],
+          [
+            "2",
+            "Tubo de descarte",
+            "Solo si el siguiente tubo es de citrato. No se necesita para los hemocultivos."
+          ],
+          [
+            "3",
+            "Citrato de sodio (azul claro)",
+            "Coagulación: TP, INR, TTP, dímero D"
+          ],
+          [
+            "4",
+            "Suero: rojo, dorado, naranja",
+            "Química sanguínea, serología, inmunología"
+          ],
+          [
+            "5",
+            "Heparina: verde, verde claro",
+            "Química en plasma"
+          ],
+          [
+            "6",
+            "EDTA: lavanda y rosa",
+            "Biometría hemática. El rosa es para pruebas cruzadas"
+          ],
+          [
+            "7",
+            "Fluoruro y oxalato (gris)",
+            "Glucosa, lactato"
+          ]
         ]
       },
       {
         "tipo": "tabla",
         "titulo": "Aditivo e inversiones",
-        "encabezados": ["Tapón", "Aditivo", "Inversiones"],
+        "encabezados": [
+          "Tapón",
+          "Aditivo",
+          "Inversiones"
+        ],
         "filas": [
-          ["Azul claro", "Citrato de sodio 3.2%", "3 a 4"],
-          ["Rojo", "Activador de la coagulación", "5"],
-          ["Dorado (SST II)", "Activador y gel separador", "5"],
-          ["Naranja (RST)", "Trombina y gel", "5 a 6"],
-          ["Verde claro (PST II)", "Heparina de litio y gel", "8"],
-          ["Verde", "Heparina de litio o de sodio", "8"],
-          ["Lavanda", "K2EDTA", "8"],
-          ["Rosa", "K2EDTA para banco de sangre", "8"],
-          ["Gris", "Fluoruro de sodio y oxalato de potasio", "8"]
+          [
+            "Azul claro",
+            "Citrato de sodio 3.2%",
+            "3 a 4"
+          ],
+          [
+            "Rojo",
+            "Activador de la coagulación",
+            "5"
+          ],
+          [
+            "Dorado (SST II)",
+            "Activador y gel separador",
+            "5"
+          ],
+          [
+            "Naranja (RST)",
+            "Trombina y gel",
+            "5 a 6"
+          ],
+          [
+            "Verde claro (PST II)",
+            "Heparina de litio y gel",
+            "8"
+          ],
+          [
+            "Verde",
+            "Heparina de litio o de sodio",
+            "8"
+          ],
+          [
+            "Lavanda",
+            "K2EDTA",
+            "8"
+          ],
+          [
+            "Rosa",
+            "K2EDTA para banco de sangre",
+            "8"
+          ],
+          [
+            "Gris",
+            "Fluoruro de sodio y oxalato de potasio",
+            "8"
+          ]
         ]
       },
       {
         "tipo": "nota",
-        "valor": "Mezcla cada tubo apenas lo retires: se invierte suavemente 180 grados y de regreso, tantas veces como indica la tabla. No lo agites."
+        "valor": "Cada tubo se mezcla apenas se retira: se invierte suavemente 180 grados y de regreso, tantas veces como indica la tabla. No se agita."
       },
-
       {
         "tipo": "referencias",
         "items": [
@@ -104,11 +211,27 @@
     "contenido": [
       {
         "tipo": "tabla",
-        "encabezados": ["Derecha del paciente", "Centro", "Izquierda del paciente"],
+        "encabezados": [
+          "Derecha del paciente",
+          "Centro",
+          "Izquierda del paciente"
+        ],
         "filas": [
-          ["Hipocondrio derecho", "Epigastrio", "Hipocondrio izquierdo"],
-          ["Flanco derecho", "Mesogastrio", "Flanco izquierdo"],
-          ["Fosa iliaca derecha", "Hipogastrio", "Fosa iliaca izquierda"]
+          [
+            "Hipocondrio derecho",
+            "Epigastrio",
+            "Hipocondrio izquierdo"
+          ],
+          [
+            "Flanco derecho",
+            "Mesogastrio",
+            "Flanco izquierdo"
+          ],
+          [
+            "Fosa iliaca derecha",
+            "Hipogastrio",
+            "Fosa iliaca izquierda"
+          ]
         ]
       },
       {
@@ -118,17 +241,47 @@
       {
         "tipo": "tabla",
         "titulo": "Qué se proyecta en cada región",
-        "encabezados": ["Región", "Estructuras"],
+        "encabezados": [
+          "Región",
+          "Estructuras"
+        ],
         "filas": [
-          ["Hipocondrio derecho", "Hígado (lóbulo derecho), vesícula biliar, riñón (polo superior), flexura hepática del colon, glándula suprarrenal"],
-          ["Epigastrio", "Hígado (lóbulo izquierdo), estómago (porción pilórica)"],
-          ["Hipocondrio izquierdo", "Bazo, páncreas (cola), riñón izquierdo, estómago, esófago abdominal, flexura esplénica del colon"],
-          ["Flanco derecho", "Colon ascendente, duodeno, yeyuno"],
-          ["Mesogastrio", "Epiplón, mesenterio, yeyuno, íleon, colon transverso"],
-          ["Flanco izquierdo", "Colon descendente"],
-          ["Fosa iliaca derecha", "Ciego, apéndice, ovario derecho, cordón espermático derecho"],
-          ["Hipogastrio", "Vejiga urinaria, útero"],
-          ["Fosa iliaca izquierda", "Colon sigmoideo, ovario izquierdo, cordón espermático izquierdo"]
+          [
+            "Hipocondrio derecho",
+            "Hígado (lóbulo derecho), vesícula biliar, riñón (polo superior), flexura hepática del colon, glándula suprarrenal"
+          ],
+          [
+            "Epigastrio",
+            "Hígado (lóbulo izquierdo), estómago (porción pilórica)"
+          ],
+          [
+            "Hipocondrio izquierdo",
+            "Bazo, páncreas (cola), riñón izquierdo, estómago, esófago abdominal, flexura esplénica del colon"
+          ],
+          [
+            "Flanco derecho",
+            "Colon ascendente, duodeno, yeyuno"
+          ],
+          [
+            "Mesogastrio",
+            "Epiplón, mesenterio, yeyuno, íleon, colon transverso"
+          ],
+          [
+            "Flanco izquierdo",
+            "Colon descendente"
+          ],
+          [
+            "Fosa iliaca derecha",
+            "Ciego, apéndice, ovario derecho, cordón espermático derecho"
+          ],
+          [
+            "Hipogastrio",
+            "Vejiga urinaria, útero"
+          ],
+          [
+            "Fosa iliaca izquierda",
+            "Colon sigmoideo, ovario izquierdo, cordón espermático izquierdo"
+          ]
         ]
       },
       {
@@ -176,16 +329,32 @@
       {
         "tipo": "tabla",
         "titulo": "Dispositivos de bajo flujo",
-        "encabezados": ["Dispositivo", "Flujo (L/min)", "FiO2"],
+        "encabezados": [
+          "Dispositivo",
+          "Flujo (L/min)",
+          "FiO2"
+        ],
         "filas": [
-          ["Puntas nasales", "1 a 6", "0.24 a 0.44"],
-          ["Mascarilla simple", "5 a 8", "0.40 a 0.60"],
-          ["Mascarilla con reservorio", "10 a 15", "0.60 a 0.95"]
+          [
+            "Puntas nasales",
+            "1 a 6",
+            "0.24 a 0.44"
+          ],
+          [
+            "Mascarilla simple",
+            "5 a 8",
+            "0.40 a 0.60"
+          ],
+          [
+            "Mascarilla con reservorio",
+            "10 a 15",
+            "0.60 a 0.95"
+          ]
         ]
       },
       {
         "tipo": "nota",
-        "valor": "En la mascarilla con reservorio el flujo nunca debe ser tan bajo que la bolsa se colapse. Verifica que la bolsa esté inflada antes de colocarla y que siga inflada durante la inspiración del paciente: si se vacía, sube el flujo."
+        "valor": "En la mascarilla con reservorio el flujo nunca debe ser tan bajo que la bolsa se colapse. La bolsa se comprueba inflada antes de colocar la mascarilla y durante la inspiración del paciente: si se vacía, se aumenta el flujo."
       },
       {
         "tipo": "nota",
@@ -194,12 +363,12 @@
       {
         "tipo": "texto",
         "titulo": "Mascarilla Venturi",
-        "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Criterio práctico: si el paciente necesita más de 8 L/min para mantener una saturación de 90 a 94%, se cambia a Venturi."
+        "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Si el paciente necesita más de 8 L/min para mantener una saturación de 90 a 94%, se cambia a Venturi."
       },
       {
         "tipo": "texto",
         "titulo": "Puntas nasales de alto flujo",
-        "valor": "Administran de 30 a 60 L/min de una mezcla de aire y oxígeno, calentada y humidificada, con FiO2 regulable de 0.21 a 1.0. Requieren equipo específico, no es lo mismo que subirle el flujo a unas puntas nasales comunes."
+        "valor": "Administran de 30 a 60 L/min de una mezcla de aire y oxígeno, calentada y humidificada, con FiO2 regulable de 0.21 a 1.0. Requieren equipo específico; no equivalen a aumentar el flujo de unas puntas nasales comunes."
       },
       {
         "tipo": "referencias",
@@ -257,14 +426,35 @@
       {
         "tipo": "tabla",
         "titulo": "Parámetros de RCP en el adulto",
-        "encabezados": ["Parámetro", "Valor"],
+        "encabezados": [
+          "Parámetro",
+          "Valor"
+        ],
         "filas": [
-          ["Secuencia", "C-A-B: circulación, vía aérea, ventilación"],
-          ["Compresiones", "100 a 120 por minuto"],
-          ["Profundidad", "Al menos 5 a 6 cm"],
-          ["Ventilaciones", "Menos de 1 segundo, viendo la expansión torácica"],
-          ["Adrenalina", "1 mg cada 3 a 5 minutos"],
-          ["Amiodarona", "300 mg después de 3 descargas en FV o TV sin pulso"]
+          [
+            "Secuencia",
+            "C-A-B: circulación, vía aérea, ventilación"
+          ],
+          [
+            "Compresiones",
+            "100 a 120 por minuto"
+          ],
+          [
+            "Profundidad",
+            "Al menos 5 a 6 cm"
+          ],
+          [
+            "Ventilaciones",
+            "Menos de 1 segundo, viendo la expansión torácica"
+          ],
+          [
+            "Adrenalina",
+            "1 mg cada 3 a 5 minutos"
+          ],
+          [
+            "Amiodarona",
+            "300 mg después de 3 descargas en FV o TV sin pulso"
+          ]
         ]
       },
       {
@@ -295,19 +485,43 @@
       {
         "tipo": "tabla",
         "titulo": "Calibre, longitud y flujo",
-        "encabezados": ["Calibre", "Longitud", "Flujo"],
+        "encabezados": [
+          "Calibre",
+          "Longitud",
+          "Flujo"
+        ],
         "filas": [
-          ["14 G", "51 mm", "276 mL/min"],
-          ["16 G", "51 mm", "145 mL/min"],
-          ["18 G", "32 mm", "110 mL/min"],
-          ["20 G", "32 mm", "65 mL/min"],
-          ["22 G", "25 mm", "42 mL/min"],
-          ["24 G", "14 mm", "22 mL/min"]
+          [
+            "14 G",
+            "51 mm",
+            "276 mL/min"
+          ],
+          [
+            "16 G",
+            "51 mm",
+            "145 mL/min"
+          ],
+          [
+            "18 G",
+            "32 mm",
+            "110 mL/min"
+          ],
+          [
+            "20 G",
+            "32 mm",
+            "65 mL/min"
+          ],
+          [
+            "22 G",
+            "25 mm",
+            "42 mL/min"
+          ],
+          [
+            "24 G",
+            "14 mm",
+            "22 mL/min"
+          ]
         ]
-      },
-      {
-        "tipo": "nota",
-        "valor": "Cifras del protocolo de la Secretaría de Salud."
       },
       {
         "tipo": "lista",
@@ -326,12 +540,36 @@
         "tipo": "colores",
         "titulo": "Código de color por calibre",
         "items": [
-          { "color": "#F07D24", "etiqueta": "14 G", "descripcion": "Naranja" },
-          { "color": "#9AA0A6", "etiqueta": "16 G", "descripcion": "Gris" },
-          { "color": "#00843D", "etiqueta": "18 G", "descripcion": "Verde" },
-          { "color": "#F4A6C0", "etiqueta": "20 G", "descripcion": "Rosa" },
-          { "color": "#3B7DD8", "etiqueta": "22 G", "descripcion": "Azul" },
-          { "color": "#F2C300", "etiqueta": "24 G", "descripcion": "Amarillo" }
+          {
+            "color": "#F07D24",
+            "etiqueta": "14 G",
+            "descripcion": "Naranja"
+          },
+          {
+            "color": "#9AA0A6",
+            "etiqueta": "16 G",
+            "descripcion": "Gris"
+          },
+          {
+            "color": "#00843D",
+            "etiqueta": "18 G",
+            "descripcion": "Verde"
+          },
+          {
+            "color": "#F4A6C0",
+            "etiqueta": "20 G",
+            "descripcion": "Rosa"
+          },
+          {
+            "color": "#3B7DD8",
+            "etiqueta": "22 G",
+            "descripcion": "Azul"
+          },
+          {
+            "color": "#F2C300",
+            "etiqueta": "24 G",
+            "descripcion": "Amarillo"
+          }
         ]
       },
       {
@@ -362,24 +600,62 @@
       {
         "tipo": "tabla",
         "titulo": "Brazalete según circunferencia del brazo",
-        "encabezados": ["Tamaño", "Circunferencia", "Cámara"],
+        "encabezados": [
+          "Tamaño",
+          "Circunferencia",
+          "Cámara"
+        ],
         "filas": [
-          ["Adulto pequeño", "22 a 26 cm", "12 x 22 cm"],
-          ["Adulto", "27 a 34 cm", "16 x 30 cm"],
-          ["Adulto grande", "35 a 44 cm", "16 x 36 cm"],
-          ["Adulto extra grande", "45 a 52 cm", "16 x 42 cm"]
+          [
+            "Adulto pequeño",
+            "22 a 26 cm",
+            "12 x 22 cm"
+          ],
+          [
+            "Adulto",
+            "27 a 34 cm",
+            "16 x 30 cm"
+          ],
+          [
+            "Adulto grande",
+            "35 a 44 cm",
+            "16 x 36 cm"
+          ],
+          [
+            "Adulto extra grande",
+            "45 a 52 cm",
+            "16 x 42 cm"
+          ]
         ]
       },
       {
         "tipo": "tabla",
         "titulo": "Ruidos de Korotkoff",
-        "encabezados": ["Fase", "Qué se escucha"],
+        "encabezados": [
+          "Fase",
+          "Qué se escucha"
+        ],
         "filas": [
-          ["I", "Aparición súbita de golpeteo nítido. Marca la sistólica"],
-          ["II", "Sonidos como soplo o silbido"],
-          ["III", "Sonidos regulares y más fuertes"],
-          ["IV", "Apagamiento brusco del sonido"],
-          ["V", "Desaparición de todo sonido. Marca la diastólica"]
+          [
+            "I",
+            "Aparición súbita de golpeteo nítido. Marca la sistólica"
+          ],
+          [
+            "II",
+            "Sonidos como soplo o silbido"
+          ],
+          [
+            "III",
+            "Sonidos regulares y más fuertes"
+          ],
+          [
+            "IV",
+            "Apagamiento brusco del sonido"
+          ],
+          [
+            "V",
+            "Desaparición de todo sonido. Marca la diastólica"
+          ]
         ]
       },
       {
@@ -406,7 +682,7 @@
           "Piernas cruzadas.",
           "Hablar durante la medición.",
           "Medir sobre la ropa o con la manga enrollada apretando el brazo.",
-          "Diferencia mayor de 5 mmHg entre un brazo y el otro: repite la toma."
+          "Diferencia mayor de 5 mmHg entre un brazo y el otro: se repite la toma."
         ]
       },
       {
@@ -445,22 +721,42 @@
       {
         "tipo": "texto",
         "titulo": "Se agrupan por cómo sacan el líquido",
-        "valor": "Un drenaje no es solo un tubo: lo que cambia entre uno y otro es la fuerza que mueve el líquido hacia afuera. Unos trabajan por gravedad y capilaridad, sin nada que jale. Otros generan succión continua. Y los torácicos son un caso aparte, porque además de sacar aire y líquido tienen que impedir que el aire regrese al tórax."
+        "valor": "Lo que distingue un drenaje de otro es la fuerza que mueve el líquido hacia afuera. Unos trabajan por gravedad y capilaridad. Otros generan succión continua. Los torácicos, además de sacar aire y líquido, tienen que impedir que el aire regrese al tórax."
       },
       {
         "tipo": "tabla",
         "titulo": "Drenajes por mecanismo",
-        "encabezados": ["Drenaje", "Mecanismo", "Sale a"],
+        "encabezados": [
+          "Drenaje",
+          "Mecanismo",
+          "Sale a"
+        ],
         "filas": [
-          ["Penrose", "Gravedad y capilaridad", "Apósito"],
-          ["Jackson-Pratt", "Succión por bulbo", "Bulbo graduado"],
-          ["Hemovac", "Succión por resorte", "Recipiente graduado"],
-          ["Pleur-evac", "Gravedad, con o sin aspiración", "Sistema de cámaras"]
+          [
+            "Penrose",
+            "Gravedad y capilaridad",
+            "Apósito"
+          ],
+          [
+            "Jackson-Pratt",
+            "Succión por bulbo",
+            "Bulbo graduado"
+          ],
+          [
+            "Hemovac",
+            "Succión por resorte",
+            "Recipiente graduado"
+          ],
+          [
+            "Pleur-evac",
+            "Gravedad, con o sin aspiración",
+            "Sistema de cámaras"
+          ]
         ]
       },
       {
         "tipo": "nota",
-        "valor": "En los de succión, el bulbo o el resorte son la succión. Si el bulbo está inflado, ese drenaje ya no está jalando nada: hay que vaciarlo y volver a comprimirlo antes de taparlo."
+        "valor": "En los de succión, el bulbo o el resorte son la succión. Un bulbo inflado ya no aspira: se vacía y se vuelve a comprimir antes de taparlo."
       },
       {
         "tipo": "texto",
@@ -470,7 +766,7 @@
       {
         "tipo": "lista",
         "titulo": "Qué se vigila",
-        "estilo": "numerada",
+        "estilo": "vinetas",
         "items": [
           "Permeabilidad.",
           "Cuánto salió y de qué color, con horario.",
@@ -509,16 +805,43 @@
       {
         "tipo": "tabla",
         "titulo": "Las ocho acciones",
-        "encabezados": ["#", "Acción esencial"],
+        "encabezados": [
+          "#",
+          "Acción esencial"
+        ],
         "filas": [
-          ["1", "Identificación correcta de los pacientes"],
-          ["2", "Comunicación efectiva"],
-          ["3", "Seguridad en el proceso de medicación"],
-          ["4", "Seguridad en los procedimientos"],
-          ["5", "Reducción del riesgo de IAAS"],
-          ["6", "Reducción del riesgo de daño por caídas"],
-          ["7", "Registro y análisis de cuasifallas y eventos"],
-          ["8", "Cultura de seguridad del paciente"]
+          [
+            "1",
+            "Identificación correcta de los pacientes"
+          ],
+          [
+            "2",
+            "Comunicación efectiva"
+          ],
+          [
+            "3",
+            "Seguridad en el proceso de medicación"
+          ],
+          [
+            "4",
+            "Seguridad en los procedimientos"
+          ],
+          [
+            "5",
+            "Reducción del riesgo de IAAS"
+          ],
+          [
+            "6",
+            "Reducción del riesgo de daño por caídas"
+          ],
+          [
+            "7",
+            "Registro y análisis de cuasifallas y eventos"
+          ],
+          [
+            "8",
+            "Cultura de seguridad del paciente"
+          ]
         ]
       },
       {
@@ -564,13 +887,28 @@
       },
       {
         "tipo": "tabla",
-        "titulo": "Definición operativa (Consenso SLIPE 2021)",
-        "encabezados": ["Criterio", "Cifra"],
+        "titulo": "Definición operativa",
+        "encabezados": [
+          "Criterio",
+          "Cifra"
+        ],
         "filas": [
-          ["Fiebre, toma única", "Temperatura axilar ≥ 38.5 °C"],
-          ["Fiebre, dos tomas", "≥ 38 °C, separadas al menos 1 hora"],
-          ["Neutropenia", "Neutrófilos totales ≤ 500/mm³"],
-          ["Neutropenia inminente", "≤ 1000/mm³ si se predice caída a ≤ 500/mm³ en 24 a 48 h"]
+          [
+            "Fiebre, toma única",
+            "Temperatura axilar ≥ 38.5 °C"
+          ],
+          [
+            "Fiebre, dos tomas",
+            "≥ 38 °C, separadas al menos 1 hora"
+          ],
+          [
+            "Neutropenia",
+            "Neutrófilos totales ≤ 500/mm³"
+          ],
+          [
+            "Neutropenia inminente",
+            "≤ 1000/mm³ si se predice caída a ≤ 500/mm³ en 24 a 48 h"
+          ]
         ]
       },
       {
@@ -632,7 +970,7 @@
       {
         "tipo": "nota",
         "titulo": "No es lo mismo una FAV en maduración que una en uso",
-        "valor": "Una FAV recién creada todavía no se punciona: necesita tiempo para madurar. Una FAV ya funcional se punciona en cada sesión de hemodiálisis. Lo que aplica a las dos por igual son las contraindicaciones del brazo y la valoración de frémito y soplo. Lo que cambia son los cuidados locales de la herida y de la piel."
+        "valor": "Una FAV recién creada todavía no se punciona: necesita tiempo para madurar. Una FAV ya funcional se punciona en cada sesión de hemodiálisis. Las contraindicaciones del brazo y la valoración de frémito y soplo aplican a las dos por igual; los cuidados locales de la herida y de la piel son distintos."
       },
       {
         "tipo": "texto",
@@ -642,13 +980,37 @@
       {
         "tipo": "tabla",
         "titulo": "Qué esperar en la valoración",
-        "encabezados": ["Se valora", "FAV normal", "Alerta"],
+        "encabezados": [
+          "Se valora",
+          "FAV normal",
+          "Alerta"
+        ],
         "filas": [
-          ["Frémito", "Continuo y suave", "Ausente, o aumentado en un punto"],
-          ["Soplo", "Continuo, tono bajo", "Ausente, o de tono alto"],
-          ["Pulso", "Blando, fácil de comprimir", "Muy aumentado, o muy débil"],
-          ["Vena al elevar el brazo", "Se colapsa", "No se colapsa"],
-          ["Brazo", "Sin edema", "Edema o circulación colateral"]
+          [
+            "Frémito",
+            "Continuo y suave",
+            "Ausente, o aumentado en un punto"
+          ],
+          [
+            "Soplo",
+            "Continuo, tono bajo",
+            "Ausente, o de tono alto"
+          ],
+          [
+            "Pulso",
+            "Blando, fácil de comprimir",
+            "Muy aumentado, o muy débil"
+          ],
+          [
+            "Vena al elevar el brazo",
+            "Se colapsa",
+            "No se colapsa"
+          ],
+          [
+            "Brazo",
+            "Sin edema",
+            "Edema o circulación colateral"
+          ]
         ]
       },
       {
@@ -670,7 +1032,7 @@
       {
         "tipo": "texto",
         "titulo": "¿Por qué?",
-        "valor": "La razón es doble. Las punciones y la compresión dañan la vena arterializada y favorecen la estenosis y la trombosis, que son las causas principales de que una fístula deje de funcionar; de hecho la estenosis se produce en general por punciones repetidas sobre la misma zona.\nY hay una razón de más largo plazo: en el paciente renal hay que preservar el capital venoso, porque cada vena que se pierde es una opción menos para un acceso vascular futuro. Por eso la indicación de mantener libres de punciones las venas superficiales de ambos brazos empieza desde antes de que la fístula exista, y las muestras de sangre se toman de preferencia de las venas del dorso de la mano."
+        "valor": "Las punciones y la compresión dañan la vena arterializada y favorecen la estenosis y la trombosis, que son las causas principales de que una fístula deje de funcionar; la estenosis se produce en general por punciones repetidas sobre la misma zona.\nEn el paciente renal también hay que preservar el capital venoso: cada vena que se pierde es una opción menos para un acceso vascular futuro. La indicación de mantener libres de punciones las venas superficiales de ambos brazos empieza desde antes de que la fístula exista, y las muestras de sangre se toman de preferencia de las venas del dorso de la mano."
       },
       {
         "tipo": "lista",
@@ -680,8 +1042,7 @@
           "Infección: enrojecimiento, calor, dolor y supuración.",
           "Endurecimiento o dolor, con ausencia de frémito y de soplo.",
           "Isquemia de la mano de ese brazo, o síndrome de robo: frialdad, palidez y dolor.",
-          "Edema del brazo.",
-          "Edema del brazo que persiste dos semanas después de las sesiones y no cede al elevarlo.",
+          "Edema del brazo, sobre todo si persiste dos semanas después de las sesiones y no cede al elevarlo.",
           "Hemostasia que tarda más de 20 minutos tras retirar las agujas, sin exceso de anticoagulación. Sugiere presión aumentada dentro de la fístula por estenosis.",
           "Sangrado por el orificio de punción que no cede. Se comprime suave con gasa; nunca se coloca un vendaje circular compresivo."
         ]
@@ -716,7 +1077,8 @@
         "items": [
           "Enseñarle a explorar su fístula a diario: que compruebe el frémito y revise si hay eritema, edema, hemorragia, hematoma o disminución de la sensibilidad.",
           "Que sepa que no le deben tomar la presión arterial ni puncionarle ese brazo, y que puede decirlo cuando alguien lo intente.",
-          "Que acuda de inmediato a valoración ante cualquier anomalía del acceso, sin esperar a la siguiente sesión de diálisis."        ]
+          "Que acuda de inmediato a valoración ante cualquier anomalía del acceso, sin esperar a la siguiente sesión de diálisis."
+        ]
       },
       {
         "tipo": "referencias",
@@ -741,5 +1103,245 @@
     ],
     "fuente": "Revista CONAMED (2021); GPC ISSSTE-680-13 (2013); Guía clínica española del acceso vascular GEMAV (2017)",
     "orden": 4
+  },
+  {
+    "titulo": "Precauciones de aislamiento por mecanismo de transmisión",
+    "titulo_corto": "Tipos de aislamiento",
+    "categoria": "codigos",
+    "icono": "biohazard",
+    "resumen": "Color del tarjetón, equipo de protección y condiciones de habitación de cada precaución.",
+    "palabras_clave": "aislamiento, aislamientos, aislado, aislada, precauciones, precaucion, precaución, estandar, estándar, contacto, gotas, gotitas, aerea, aérea, via aerea, vía aérea, aereo, aéreo, tarjeton, tarjetón, tarjeta, colores, color, rojo, amarillo, verde, azul, EPP, equipo de proteccion personal, equipo de protección personal, N95, KN95, cubrebocas, mascarilla, respirador, bata, guantes, lentes, proteccion ocular, protección ocular, presion negativa, presión negativa, ventilacion, ventilación, puerta cerrada, cuarto individual, habitacion, habitación, IAAS, infeccion nosocomial, infección nosocomial, NOM-045, tuberculosis, TB, sarampion, sarampión, varicela, zoster, influenza, tosferina, meningococo, C. difficile, clostridium, multirresistente, transmision, transmisión, micras",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "valor": "Las precauciones estándar se aplican a todo paciente, en toda área del hospital y desde el primer contacto, sin importar el diagnóstico. Las precauciones específicas se suman a las estándar según el mecanismo de transmisión del agente; no las sustituyen."
+      },
+      {
+        "tipo": "colores",
+        "titulo": "Color del tarjetón",
+        "items": [
+          {
+            "color": "#C8102E",
+            "etiqueta": "Rojo",
+            "descripcion": "Precauciones estándar."
+          },
+          {
+            "color": "#F2C300",
+            "etiqueta": "Amarillo",
+            "descripcion": "Precauciones por contacto."
+          },
+          {
+            "color": "#00843D",
+            "etiqueta": "Verde",
+            "descripcion": "Precauciones por gotas."
+          },
+          {
+            "color": "#3B7DD8",
+            "etiqueta": "Azul",
+            "descripcion": "Precauciones por vía aérea."
+          }
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "El tarjetón va en la entrada de la habitación cuando el cuarto es individual, y en la cabecera del paciente cuando el cuarto es compartido."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Cuándo se aplica cada una",
+        "encabezados": [
+          "Precaución",
+          "Se aplica en"
+        ],
+        "filas": [
+          [
+            "Estándar",
+            "Todo paciente, en toda área y desde el primer contacto"
+          ],
+          [
+            "Contacto",
+            "Bacterias multirresistentes, diarrea por C. difficile, infecciones de piel y heridas"
+          ],
+          [
+            "Gotas",
+            "Influenza, tosferina, parotiditis, rubéola, enfermedad invasiva por meningococo"
+          ],
+          [
+            "Vía aérea",
+            "Tuberculosis, sarampión, varicela y zóster diseminado"
+          ]
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "Lo que separa gotas de vía aérea es el tamaño de la partícula. Las gotas miden cinco micras o más y no se desplazan más de un metro. Los núcleos de gotas miden menos de cinco micras y quedan suspendidos en el aire largos periodos."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Equipo de protección",
+        "encabezados": [
+          "Precaución",
+          "Equipo"
+        ],
+        "filas": [
+          [
+            "Estándar",
+            "Higiene de manos; guantes, bata, cubrebocas y lentes según riesgo de salpicadura"
+          ],
+          [
+            "Contacto",
+            "Guantes y bata"
+          ],
+          [
+            "Gotas",
+            "Cubrebocas quirúrgico"
+          ],
+          [
+            "Vía aérea",
+            "Respirador N95, colocado antes de entrar"
+          ]
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "La habitación",
+        "estilo": "vinetas",
+        "items": [
+          "Gotas: cuarto individual. Si no lo hay, el paciente se mantiene a más de un metro de distancia de los demás.",
+          "Vía aérea: cuarto individual bien ventilado, con la puerta cerrada e idealmente con presión negativa.",
+          "El cuarto de aislamiento se maneja a través de un filtro de aislamiento o control de acceso, con lavabo, jabón germicida y toallas desechables. Cuando cuenta con aire acondicionado de alta eficiencia, este permite seis circulaciones y el recambio de dos volúmenes de aire por hora.",
+          "Donde el hospital tenga sistema de inyección y extracción de aire, las áreas de aislados requieren ductos de extracción.",
+          "En gotas y en vía aérea el traslado se limita al mínimo. Cuando es necesario, el paciente lleva cubrebocas y se avisa al servicio que lo recibe."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Secretaría de Salud. (2009). Norma Oficial Mexicana NOM-045-SSA2-2005, Para la vigilancia epidemiológica, prevención y control de las infecciones nosocomiales. Diario Oficial de la Federación, 20 de noviembre de 2009.",
+            "url": "https://dof.gob.mx/nota_detalle.php?codigo=5120943&fecha=20/11/2009"
+          },
+          {
+            "texto": "Instituto Mexicano del Seguro Social, Dirección de Prestaciones Médicas. (2020). Guía para el uso de Equipo de Protección Personal. México: IMSS.",
+            "url": "https://educacionensalud.imss.gob.mx/ces_wp/wp-content/uploads/2021/09/CEPP1-guia_de_uso_de_equipo_de_proteccion_personal_nocovid.pdf"
+          },
+          {
+            "texto": "Secretaría de Salud. (2013). Norma Oficial Mexicana NOM-016-SSA3-2012, Que establece las características mínimas de infraestructura y equipamiento de hospitales y consultorios de atención médica especializada. Diario Oficial de la Federación, 8 de enero de 2013.",
+            "url": "https://www.gob.mx/cms/uploads/attachment/file/512104/NOM-016-SSA3-2012.pdf"
+          },
+          {
+            "texto": "Universidad Nacional Autónoma de México, Facultad de Enfermería y Obstetricia, Centro de Enseñanza Clínica Avanzada. (2024). Manual del taller: Precauciones estándar, medidas de aislamiento y uso del equipo de protección personal.",
+            "url": "https://enfermeria.unam.mx/taller-ep5/materiales/Manual%20taller%20EPP%202024.pdf"
+          },
+          {
+            "texto": "Instituto Nacional de Pediatría, Comité de Prevención y Control de Infecciones Asociadas a la Atención de la Salud. Algoritmos de aislamiento. México: INP.",
+            "url": "https://www.pediatria.gob.mx/archivos/burbuja/2_Algoritmos_aislamiento.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "NOM-045-SSA2-2005; NOM-016-SSA3-2012; IMSS, Guía para el uso de Equipo de Protección Personal (2020)",
+    "orden": 4
+  },
+  {
+    "titulo": "Soluciones intravenosas de uso común",
+    "titulo_corto": "Soluciones IV",
+    "categoria": "insumos",
+    "icono": "flask",
+    "resumen": "Composición, tonicidad, indicaciones y cuidados de las cuatro soluciones de uso diario.",
+    "palabras_clave": "solucion, solución, soluciones, intravenosa, intravenosas, IV, endovenosa, fisiologica, fisiológica, solucion fisiologica, solución fisiológica, salina, salino, NaCl, cloruro de sodio, 0.9, glucosada, glucosa, dextrosa, mixta, solucion mixta, solución mixta, hartmann, hartman, artman, hartmam, cristaloide, cristaloides, isotonica, isotónica, hipotonica, hipotónica, hipertonica, hipertónica, tonicidad, osmolaridad, mOsm, mEq, miliequivalentes, lactato, electrolitos, sodio, potasio, calcio, cloro, cloruro, hidratacion, hidratación, deshidratacion, deshidratación, venoclisis, sueroterapia, suero, terapia de infusion, terapia de infusión, NOM-022, cuadro basico, cuadro básico, compendio, CNIS, ceftriaxona, hemoderivados, transfusion, transfusión, acidosis hiperclorémica",
+    "contenido": [
+      {
+        "tipo": "tabla",
+        "titulo": "Qué trae cada litro",
+        "encabezados": [
+          "Solución",
+          "Por litro",
+          "Tonicidad"
+        ],
+        "filas": [
+          [
+            "Fisiológica 0.9%",
+            "Na 154, Cl 154 mEq",
+            "Isotónica"
+          ],
+          [
+            "Glucosada 5%",
+            "Glucosa 50 g",
+            "Isotónica en el envase"
+          ],
+          [
+            "Mixta",
+            "Na 154, Cl 154 mEq; glucosa 50 g",
+            "Hipertónica"
+          ],
+          [
+            "Hartmann",
+            "Na 130, K 4, Ca 2.7 a 3, Cl 109, lactato 28 mEq",
+            "Isotónica"
+          ]
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "La glucosa se metaboliza apenas se infunde. De la solución glucosada al 5% queda agua libre que se reparte entre todos los compartimentos, así que no repone volumen intravascular aunque el envase sea isosmolar. De la mixta queda el equivalente de solución fisiológica 0.9%."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Indicaciones habituales",
+        "estilo": "vinetas",
+        "items": [
+          "Solución fisiológica 0.9%: deshidratación hipotónica con hiponatremia, depleción grave de sodio, estado de choque por hemorragia y por quemaduras. También como vehículo para disolver y aplicar medicamentos.",
+          "Solución glucosada al 5%: aporte calórico, deshidratación hipertónica, deficiencia de agua e hipoglucemia inducida por insulina o hipoglucemiantes orales. Cada gramo de glucosa aporta 4 calorías.",
+          "Solución mixta: alteraciones del estado hidroelectrolítico cuando además hay que cubrir necesidades calóricas.",
+          "Solución Hartmann: deshidratación isotónica y acidosis moderada por vómito, diarrea, fístulas, exudados, traumatismos, quemaduras, choque y cirugía."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Consideraciones de enfermería",
+        "estilo": "vinetas",
+        "items": [
+          "La solución fisiológica 0.9% es la que acompaña a los hemoderivados. La Hartmann no: su calcio favorece la coagulación de la sangre conservada con citrato.",
+          "El calcio de la Hartmann también precipita con la ceftriaxona. No comparten línea ni se usa Hartmann para reconstituir o diluir el antibiótico.",
+          "El lactato de la Hartmann se convierte en bicarbonato en el hígado, así que su efecto alcalinizante disminuye en insuficiencia hepática. Está contraindicada en alcalosis grave e hipercalcemia.",
+          "La fisiológica 0.9% aporta 154 mEq de cloro por litro contra los 98 a 106 del plasma; en volúmenes altos produce acidosis metabólica hiperclorémica.",
+          "Con la glucosada al 5% y con la mixta se vigila la glucemia. Los corticoesteroides, los diuréticos tiacídicos y la furosemida favorecen la hiperglucemia.",
+          "La mixta está contraindicada en diabetes descompensada, coma hiperglucémico, sobrehidratación e hiperosmolaridad.",
+          "En cardiopatía y en enfermedad renal, cualquiera de las cuatro en exceso produce edema."
+        ]
+      },
+      {
+        "tipo": "nota",
+        "valor": "Van por catéter venoso central las soluciones con osmolaridad mayor de 600 mOsm/L o con pH menor de 5 o mayor de 9, además de la dextrosa al 10% y al 50%, las proteínas y la nutrición parenteral total."
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Instituto Mexicano del Seguro Social. Cuadro Básico y Catálogo de Medicamentos. Grupo Nº 21: Soluciones electrolíticas y sustitutos del plasma. México: IMSS.",
+            "url": "https://www.imss.gob.mx/sites/all/statics/pdf/cuadros-basicos/Grupo-N21-Soluciones-Electroliticas-y-Sustitutos-del-Plasma-R.pdf"
+          },
+          {
+            "texto": "Secretaría de Salud. (2012). Norma Oficial Mexicana NOM-022-SSA3-2012, Que instituye las condiciones para la administración de la terapia de infusión en los Estados Unidos Mexicanos. Diario Oficial de la Federación, 18 de septiembre de 2012.",
+            "url": "https://dof.gob.mx/nota_detalle.php?codigo=5268977&fecha=18/09/2012"
+          },
+          {
+            "texto": "George Aguilar, F. (2018). Manejo de fluidos intravenosos: del uso indiscriminado y empírico al manejo racional y científico. Medicina Crítica, 32(2), 100-107.",
+            "url": "https://www.medigraphic.com/pdfs/medcri/ti-2018/ti182g.pdf"
+          },
+          {
+            "texto": "Agencia Española de Medicamentos y Productos Sanitarios. Ficha técnica: Solución Lactato de Ringer Hartmann Braun, solución para perfusión. Madrid: AEMPS.",
+            "url": "https://cima.aemps.es/cima/dochtml/ft/39000/FT_39000.html"
+          },
+          {
+            "texto": "Agencia Española de Medicamentos y Productos Sanitarios. Ficha técnica: Ceftriaxona Normon 1.000 mg, polvo y disolvente para solución inyectable y para perfusión EFG. Madrid: AEMPS.",
+            "url": "https://cima.aemps.es/cima/dochtml/ft/62635/FichaTecnica_62635.html"
+          }
+        ]
+      }
+    ],
+    "fuente": "IMSS, Cuadro Básico y Catálogo de Medicamentos, Grupo Nº 21; NOM-022-SSA3-2012",
+    "orden": 3
   }
 ]
