@@ -1415,5 +1415,491 @@
       }
     ],
     "altoRiesgo": true
+  },
+  {
+    "nombre": "Omeprazol",
+    "icono": "shield",
+    "categoria": "protector_gastrico",
+    "farmacodinamia": "Inhibidor de la bomba de protones. Es una base débil que se concentra y pasa a su forma activa en el medio ácido de los canalículos de la célula parietal gástrica, donde inhibe la enzima H+/K+-ATPasa.\nAl bloquear el paso final de la formación de ácido gástrico, reduce tanto la secreción basal como la estimulada, con independencia del estímulo que la desencadene.\nNo se ha observado taquifilaxia durante el tratamiento.",
+    "farmacocinetica": "Absorción: rápida, en el intestino delgado. La concentración plasmática máxima se alcanza entre 1 y 2 horas. La biodisponibilidad es cercana al 40% tras una dosis oral única y aumenta hasta cerca del 60% con la administración repetida. El alimento no modifica la biodisponibilidad.\nDistribución: volumen de distribución aparente cercano a 0.3 L/kg. La unión a proteínas plasmáticas es del 97%.\nMetabolismo: hepático y completo por el sistema citocromo P450, principalmente por CYP2C19 y en menor medida por CYP3A4. Los metabolizadores lentos de CYP2C19 alcanzan exposiciones varias veces mayores.\nEliminación: semivida plasmática habitualmente menor de una hora, sin acumulación entre dosis. Cerca del 80% se excreta como metabolitos en la orina y el resto en las heces, procedente de la secreción biliar.",
+    "indicaciones": "Úlcera péptica, gástrica y duodenal.\nPrevención de la recidiva de úlcera gástrica y duodenal.\nEsofagitis por reflujo y enfermedad por reflujo gastroesofágico.\nSíndrome de Zollinger-Ellison.\nErradicación de Helicobacter pylori, en combinación con antibióticos.\nTratamiento y prevención de la úlcera gástrica y duodenal asociada a AINE en pacientes de riesgo.",
+    "viaAdministracion": "Oral, IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al omeprazol, a los bencimidazoles sustituidos o a cualquier componente de la formulación.",
+        "Administración concomitante con nelfinavir."
+      ],
+      "relativas": [
+        "Sospecha de úlcera gástrica o presencia de síntomas de alarma, porque el alivio sintomático puede enmascarar un proceso maligno y retrasar el diagnóstico.",
+        "Uso concomitante con clopidogrel.",
+        "Uso concomitante con atazanavir.",
+        "Tratamiento prolongado en pacientes con riesgo de hipomagnesemia o de déficit de vitamina B12.",
+        "Insuficiencia hepática grave."
+      ]
+    },
+    "efectosSecundarios": [
+      "Cefalea.",
+      "Dolor abdominal y flatulencia.",
+      "Estreñimiento o diarrea.",
+      "Náusea y vómito."
+    ],
+    "efectosAdversos": [
+      "Hipomagnesemia grave en tratamientos prolongados, que puede acompañarse de hipocalcemia e hipopotasemia y manifestarse como fatiga, tetania, convulsiones o arritmia ventricular.",
+      "Reacciones cutáneas graves: síndrome de Stevens-Johnson, necrólisis epidérmica tóxica, reacción a fármaco con eosinofilia y síntomas sistémicos, y pustulosis exantemática generalizada aguda.",
+      "Nefritis tubulointersticial aguda, con posible progresión a insuficiencia renal.",
+      "Agranulocitosis y pancitopenia.",
+      "Reacción anafiláctica y angioedema.",
+      "Hiponatremia.",
+      "Menor absorción de vitamina B12 en tratamientos prolongados."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Nelfinavir",
+        "efecto": "Reduce de forma marcada las concentraciones plasmáticas de nelfinavir y de su metabolito activo. La asociación está contraindicada.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Clopidogrel",
+        "efecto": "Disminuye la formación del metabolito activo de clopidogrel y su efecto antiagregante. Se desaconseja el uso conjunto.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Atazanavir",
+        "efecto": "Reduce de forma significativa la exposición a atazanavir. No se recomienda la asociación.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Ketoconazol, itraconazol, posaconazol y erlotinib",
+        "efecto": "El aumento del pH gástrico reduce su absorción y pueden perder eficacia clínica.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Diazepam, fenitoína y warfarina",
+        "efecto": "La inhibición de CYP2C19 retrasa su eliminación y prolonga o intensifica su efecto.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Digoxina",
+        "efecto": "Incrementa su biodisponibilidad. El riesgo de toxicidad es mayor en personas de edad avanzada.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Metotrexato",
+        "efecto": "Puede incrementar las concentraciones plasmáticas de metotrexato cuando este se emplea a dosis altas.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "La presentación intravenosa se reconstituye con el diluyente que acompaña al frasco ámpula y se administra en inyección intravenosa lenta o en infusión.",
+      "administracion": "Las cápsulas y tabletas se degluten enteras, sin masticar ni triturar, porque el recubrimiento entérico protege al fármaco del ácido gástrico. Se administran por la mañana con agua. Ante dificultad para deglutir puede abrirse la cápsula e ingerirse los gránulos sin masticarlos, en agua o en un líquido ligeramente ácido.",
+      "precauciones": "El tratamiento prolongado se asocia a hipomagnesemia y a menor absorción de vitamina B12. La supresión ácida sostenida aumenta el riesgo de infección gastrointestinal por Salmonella, Campylobacter y Clostridioides difficile."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
+        "url": "https://www.csg.gob.mx/Comp26042025.pdf"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2026). Ficha técnica Omeprazol Normon 20 mg cápsulas duras gastrorresistentes EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/63710/FichaTecnica_63710.html"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2025). Ficha técnica Omeprazol Normon 40 mg polvo para solución para perfusión EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/67270/FichaTecnica_67270.html"
+      }
+    ],
+    "altoRiesgo": false
+  },
+  {
+    "nombre": "Pantoprazol",
+    "icono": "shield",
+    "categoria": "protector_gastrico",
+    "farmacodinamia": "Inhibidor de la bomba de protones. Se activa en el medio ácido de los canalículos de la célula parietal y bloquea de forma específica la enzima H+/K+-ATPasa, paso final de la secreción de ácido gástrico.\nLa unión al sistema enzimático es prolongada, de modo que la duración del efecto antisecretor excede con mucho a la permanencia del fármaco en plasma.\nSu afinidad por el citocromo P450 es menor que la de otros inhibidores de la bomba de protones, lo que se traduce en un perfil de interacciones más reducido.",
+    "farmacocinetica": "Absorción: rápida, con concentración sérica máxima cerca de 2.5 horas. La biodisponibilidad absoluta es cercana al 77% y no se modifica con el alimento. La cinética es lineal por vía oral e intravenosa.\nDistribución: unión a proteínas séricas cercana al 98%. Volumen de distribución aproximado de 0.15 L/kg.\nMetabolismo: casi exclusivamente hepático. La vía principal es la desmetilación por CYP2C19 seguida de conjugación con sulfato; una vía secundaria es la oxidación por CYP3A4.\nEliminación: semivida terminal cercana a 1 hora. Alrededor del 80% de los metabolitos se excreta por vía renal y el resto en las heces. No requiere ajuste en insuficiencia renal, incluida la diálisis.",
+    "indicaciones": "Úlcera péptica, gástrica y duodenal.\nEsofagitis por reflujo y enfermedad por reflujo gastroesofágico.\nSíndrome de Zollinger-Ellison y otros estados de hipersecreción patológica.\nErradicación de Helicobacter pylori, en combinación con antibióticos.\nPrevención de la úlcera gastroduodenal asociada a AINE en pacientes de riesgo.",
+    "viaAdministracion": "Oral, IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al pantoprazol, a los bencimidazoles sustituidos o a cualquier componente de la formulación."
+      ],
+      "relativas": [
+        "Sospecha de úlcera gástrica o presencia de síntomas de alarma, porque el alivio sintomático puede retrasar el diagnóstico de un proceso maligno.",
+        "Insuficiencia hepática grave, que obliga a vigilar las enzimas hepáticas.",
+        "Tratamiento concomitante con inhibidores de la proteasa del VIH.",
+        "Tratamiento con metotrexato a dosis altas.",
+        "Tratamiento prolongado en pacientes con riesgo de hipomagnesemia o de déficit de vitamina B12."
+      ]
+    },
+    "efectosSecundarios": [
+      "Cefalea y vértigo.",
+      "Diarrea o estreñimiento.",
+      "Náusea y vómito.",
+      "Distensión abdominal y meteorismo.",
+      "Sequedad de boca.",
+      "Pólipos benignos de las glándulas fúndicas en tratamientos prolongados."
+    ],
+    "efectosAdversos": [
+      "Hipomagnesemia grave en tratamientos prolongados, que puede producir hipocalcemia e hipopotasemia.",
+      "Reacciones de hipersensibilidad, incluidas anafilaxia y choque anafiláctico.",
+      "Agranulocitosis, trombocitopenia, leucopenia y pancitopenia.",
+      "Lesión hepatocelular grave con ictericia e insuficiencia hepática.",
+      "Nefritis intersticial con posible progresión a insuficiencia renal.",
+      "Reacciones cutáneas graves: síndrome de Stevens-Johnson, necrólisis epidérmica tóxica y eritema multiforme.",
+      "Mayor riesgo de infección gastrointestinal por Salmonella, Campylobacter y Clostridioides difficile."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Inhibidores de la proteasa del VIH (atazanavir)",
+        "efecto": "El aumento del pH gástrico reduce de forma significativa su biodisponibilidad y su eficacia antirretroviral. No se recomienda la asociación.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Metotrexato a dosis altas",
+        "efecto": "Incrementa las concentraciones plasmáticas de metotrexato y su toxicidad. Puede requerir la suspensión temporal del pantoprazol.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes cumarínicos (warfarina)",
+        "efecto": "Se han descrito aumentos del INR y del tiempo de protrombina con riesgo de hemorragia, pese a que la farmacocinética del anticoagulante no se modifica.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Ketoconazol, itraconazol, posaconazol y erlotinib",
+        "efecto": "El aumento del pH gástrico reduce su absorción y pueden perder eficacia clínica.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Fenitoína y diazepam",
+        "efecto": "Puede retrasar su eliminación hepática por vía del citocromo P450.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "La presentación intravenosa se reconstituye con el diluyente que acompaña al frasco ámpula y se administra en inyección intravenosa lenta o en infusión. La vía intravenosa se reserva para cuando la vía oral no es viable.",
+      "administracion": "Los comprimidos se ingieren enteros con agua, sin masticar ni partir, una hora antes de un alimento principal.",
+      "precauciones": "A diferencia del omeprazol, el pantoprazol no muestra una interacción relevante con el clopidogrel, por lo que suele preferirse cuando se requiere gastroprotección en un paciente antiagregado."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
+        "url": "https://www.csg.gob.mx/Comp26042025.pdf"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2024). Ficha técnica Pantoprazol Normon 40 mg comprimidos gastrorresistentes EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/69548/FichaTecnica_69548.html"
+      }
+    ],
+    "altoRiesgo": false
+  },
+  {
+    "nombre": "Metoclopramida",
+    "icono": "pill",
+    "categoria": "antiemetico",
+    "farmacodinamia": "Benzamida sustituida con acción antiemética y procinética.\nEl efecto antiemético deriva del antagonismo de los receptores dopaminérgicos D2 de la zona gatillo quimiorreceptora y del centro del vómito, y del antagonismo de receptores serotoninérgicos 5-HT3 junto con agonismo de receptores 5-HT4.\nLa acción procinética resulta del bloqueo de receptores D2 periféricos y de una acción colinérgica indirecta que facilita la liberación de acetilcolina: aumenta el tono y la amplitud de las contracciones gástricas, relaja el bulbo duodenal y el esfínter pilórico, y acelera el vaciamiento gástrico y el tránsito intestinal, sin incrementar las secreciones gástrica, biliar ni pancreática.",
+    "farmacocinetica": "Absorción: las vías intramuscular e intravenosa evitan el metabolismo de primer paso hepático que sí ocurre por vía oral.\nDistribución: volumen de distribución cercano a 3.5 L/kg. Cruza con facilidad la barrera hematoencefálica y la placenta, y alcanza en leche materna concentraciones que pueden superar a las plasmáticas. La unión a proteínas plasmáticas es del 13% al 30%.\nMetabolismo: hepático, por conjugación con sulfato y con ácido glucurónico. Participa CYP2D6, y los metabolizadores deficientes eliminan el fármaco con mayor lentitud, lo que incrementa el riesgo de efectos extrapiramidales.\nEliminación: renal. Hasta 39% se excreta sin cambios en la orina. La semivida es de 5 a 6 horas y se prolonga en la insuficiencia renal y en la cirrosis hepática.",
+    "indicaciones": "Náusea y vómito.\nPrevención de náusea y vómito postoperatorios.\nPrevención de náusea y vómito inducidos por radioterapia.\nReflujo gastroesofágico.\nGastroparesia.",
+    "viaAdministracion": "Oral, IM, IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a la metoclopramida o a cualquier componente de la formulación.",
+        "Hemorragia gastrointestinal, obstrucción mecánica o perforación intestinal, situaciones en las que estimular la motilidad constituye un riesgo.",
+        "Feocromocitoma confirmado o sospechado, por el riesgo de crisis hipertensiva.",
+        "Antecedente de discinesia tardía inducida por neurolépticos o por metoclopramida.",
+        "Epilepsia, por aumento de la frecuencia e intensidad de las crisis.",
+        "Enfermedad de Parkinson.",
+        "Tratamiento concomitante con levodopa o con agonistas dopaminérgicos.",
+        "Antecedente de metahemoglobinemia por metoclopramida o deficiencia de NADH citocromo b5 reductasa.",
+        "Menores de un año, por el mayor riesgo de trastornos extrapiramidales."
+      ],
+      "relativas": [
+        "Insuficiencia renal e insuficiencia hepática, que prolongan la eliminación.",
+        "Edad avanzada, por mayor riesgo de discinesia tardía.",
+        "Alteraciones de la conducción cardiaca, prolongación del intervalo QT, bradicardia o desequilibrio electrolítico no corregido, sobre todo con la vía intravenosa.",
+        "Enfermedad neurológica de base o tratamiento con otros fármacos de acción central.",
+        "Población pediátrica y adultos jóvenes, en quienes los trastornos extrapiramidales son más frecuentes."
+      ]
+    },
+    "efectosSecundarios": [
+      "Somnolencia.",
+      "Astenia, fatiga y lasitud.",
+      "Cefalea y mareo.",
+      "Diarrea.",
+      "Hipotensión, particularmente con la presentación intravenosa."
+    ],
+    "efectosAdversos": [
+      "Trastornos extrapiramidales: distonía aguda, crisis oculógira, parkinsonismo y acatisia. Aparecen sobre todo en niños y adultos jóvenes, suelen presentarse al inicio del tratamiento y pueden ocurrir tras una sola administración.",
+      "Discinesia tardía, potencialmente irreversible, asociada al tratamiento prolongado y a la edad avanzada.",
+      "Síndrome neuroléptico maligno.",
+      "Convulsiones, en particular en pacientes epilépticos.",
+      "Bradicardia, bloqueo auriculoventricular, paro sinusal, prolongación del intervalo QT y torsade de pointes, principalmente por vía intravenosa.",
+      "Paro cardiaco poco después de la administración inyectable, que puede ser consecuencia de la bradicardia.",
+      "Metahemoglobinemia, sobre todo en el neonato con deficiencia de NADH citocromo b5 reductasa.",
+      "Hiperprolactinemia con galactorrea, amenorrea y ginecomastia.",
+      "Depresión."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Levodopa y agonistas dopaminérgicos",
+        "efecto": "Antagonismo mutuo que anula el efecto de ambos fármacos. La combinación está contraindicada.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Neurolépticos",
+        "efecto": "Efecto aditivo sobre la aparición de trastornos extrapiramidales y de síndrome neuroléptico maligno.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Fármacos serotoninérgicos (ISRS)",
+        "efecto": "Aumentan el riesgo de síndrome serotoninérgico.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Depresores del sistema nervioso central y alcohol",
+        "efecto": "Potencian el efecto sedante de la metoclopramida.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Anticolinérgicos y derivados de la morfina",
+        "efecto": "Antagonizan el efecto de la metoclopramida sobre la motilidad digestiva.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Mivacurio y suxametonio",
+        "efecto": "La metoclopramida inyectable prolonga el bloqueo neuromuscular por inhibición de la colinesterasa plasmática.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Digoxina",
+        "efecto": "Reduce su biodisponibilidad. Requiere vigilar las concentraciones plasmáticas de digoxina.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Ciclosporina",
+        "efecto": "Aumenta su biodisponibilidad y sus concentraciones plasmáticas.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Inhibidores potentes de CYP2D6 (fluoxetina, paroxetina)",
+        "efecto": "Incrementan la exposición a metoclopramida y el riesgo de reacciones adversas.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Rifampicina y otros inductores enzimáticos",
+        "efecto": "Disminuyen la exposición plasmática de la metoclopramida y pueden reducir su efecto antiemético.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "administracion": "La vía intravenosa se administra en bolo lento, durante al menos tres minutos, para reducir el riesgo de bradicardia, hipotensión y colapso circulatorio.",
+      "precauciones": "El tratamiento no se prolonga más de tres meses por el riesgo de discinesia tardía. La aparición de síntomas extrapiramidales obliga a suspender el fármaco de inmediato; suelen ser reversibles tras la retirada, aunque pueden requerir tratamiento sintomático. La sospecha de síndrome neuroléptico maligno o de metahemoglobinemia obliga a la suspensión definitiva."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
+        "url": "https://www.csg.gob.mx/Comp26042025.pdf"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2026). Ficha técnica Metoclopramida Kern Pharma 5 mg/ml solución inyectable EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/78556/FichaTecnica_78556.html"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2013). Metoclopramida: restricciones de uso, actualización de indicaciones y posología. Nota informativa MUH (FV) 22/2013.",
+        "url": "https://www.aemps.gob.es/informa/notasinformativas/medicamentosusohumano-3/seguridad-1/2013/ni-muh_fv_22-2013-metoclopramida/"
+      }
+    ],
+    "altoRiesgo": false
+  },
+  {
+    "nombre": "Ondansetrón",
+    "icono": "pill",
+    "categoria": "antiemetico",
+    "farmacodinamia": "Antagonista potente y selectivo de los receptores serotoninérgicos 5-HT3.\nLa quimioterapia y la radioterapia liberan serotonina en el intestino delgado, que activa las vías aferentes vagales a través de receptores 5-HT3 e inicia el reflejo del vómito. El ondansetrón bloquea ese inicio, tanto en los receptores periféricos como en los del área postrema.\nNo modifica las concentraciones plasmáticas de prolactina, no produce sedación y no interfiere con el funcionamiento psicomotor.",
+    "farmacocinetica": "Absorción: la biodisponibilidad oral es del 55% al 60%, con concentración plasmática máxima cerca de 1.5 horas. La exposición sistémica por vía intravenosa es comparable a la oral.\nDistribución: unión a proteínas plasmáticas del 70% al 76%. Volumen de distribución teórico de 2.5 L/kg.\nMetabolismo: hepático y extenso, por CYP3A4, CYP1A2 y CYP2D6. La multiplicidad de vías compensa la inhibición o el déficit de una sola enzima.\nEliminación: los metabolitos se excretan en heces y orina; menos del 5% se elimina sin cambios en la orina. La semivida terminal es cercana a 3 horas y se prolonga en la insuficiencia hepática.",
+    "indicaciones": "Náusea y vómito secundarios a quimioterapia antineoplásica.\nNáusea y vómito secundarios a radioterapia.\nPrevención y tratamiento de náusea y vómito postoperatorios.",
+    "viaAdministracion": "Oral, IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al ondansetrón o a cualquier componente de la formulación.",
+        "Uso concomitante con apomorfina, por hipotensión grave y pérdida de la conciencia."
+      ],
+      "relativas": [
+        "Síndrome de QT largo congénito.",
+        "Alteraciones del ritmo o de la conducción cardiaca, y tratamiento con antiarrítmicos o betabloqueadores.",
+        "Hipopotasemia e hipomagnesemia no corregidas.",
+        "Insuficiencia hepática, que reduce su depuración.",
+        "Signos de obstrucción intestinal subaguda, porque prolonga el tránsito en el intestino grueso.",
+        "Hipersensibilidad conocida a otros antagonistas de los receptores 5-HT3.",
+        "Cirugía adenoamigdalina, porque el control del vómito puede enmascarar una hemorragia oculta."
+      ]
+    },
+    "efectosSecundarios": [
+      "Cefalea.",
+      "Estreñimiento.",
+      "Diarrea.",
+      "Sensación de calor o rubor.",
+      "Mareo durante la administración intravenosa rápida."
+    ],
+    "efectosAdversos": [
+      "Prolongación del intervalo QT y torsade de pointes.",
+      "Arritmias, bradicardia e hipotensión.",
+      "Isquemia miocárdica, que puede aparecer de inmediato tras la administración intravenosa.",
+      "Reacciones de hipersensibilidad inmediata, incluida anafilaxia.",
+      "Convulsiones y trastornos del movimiento, incluidas reacciones distónicas y crisis oculógiras.",
+      "Síndrome serotoninérgico con el uso concomitante de otros fármacos serotoninérgicos.",
+      "Alteraciones transitorias de la visión y, de forma excepcional, ceguera transitoria durante la administración intravenosa.",
+      "Elevación transitoria de las aminotransferasas."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Apomorfina",
+        "efecto": "Hipotensión grave y pérdida de la conciencia. La asociación está contraindicada.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Fármacos que prolongan el intervalo QT (amiodarona, eritromicina, ketoconazol)",
+        "efecto": "Suman su efecto sobre el intervalo QT e incrementan el riesgo de arritmia ventricular.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antraciclinas (doxorrubicina, daunorrubicina) y trastuzumab",
+        "efecto": "El efecto cardiotóxico conjunto incrementa el riesgo de arritmias.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "ISRS e IRSN",
+        "efecto": "Aumentan el riesgo de síndrome serotoninérgico.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Fármacos que producen alteraciones electrolíticas",
+        "efecto": "La hipopotasemia y la hipomagnesemia favorecen la prolongación del QT inducida por ondansetrón.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Inductores potentes de CYP3A4 (fenitoína, carbamazepina, rifampicina)",
+        "efecto": "Aumentan la depuración del ondansetrón y reducen sus concentraciones plasmáticas, con posible pérdida de eficacia.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Tramadol",
+        "efecto": "El ondansetrón puede reducir su efecto analgésico.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "La presentación inyectable se diluye en solución fisiológica 0.9% o en solución glucosada al 5% para su administración en infusión.",
+      "administracion": "La inyección intravenosa directa se aplica de forma lenta. La administración en infusión se realiza en no menos de 15 minutos. La velocidad rápida se asocia a mareo y a alteraciones visuales transitorias.",
+      "precauciones": "La hipopotasemia y la hipomagnesemia se corrigen antes de administrarlo. El ondansetrón prolonga el intervalo QT de forma dependiente de la dosis, por lo que la vigilancia electrocardiográfica es pertinente en pacientes con cardiopatía o con otros fármacos que prolongan el QT."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
+        "url": "https://www.csg.gob.mx/Comp26042025.pdf"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2022). Ficha técnica Ondansetrón Accord 2 mg/ml solución inyectable EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/72117/FichaTecnica_72117.html"
+      }
+    ],
+    "altoRiesgo": false
+  },
+  {
+    "nombre": "Salbutamol",
+    "icono": "wind",
+    "categoria": "broncodilatador",
+    "farmacodinamia": "Agonista selectivo de los receptores beta-2 adrenérgicos. A dosis terapéuticas actúa sobre los receptores del músculo liso bronquial y produce broncodilatación de acción corta, con inicio cercano a los 5 minutos y duración de 4 a 6 horas.\nTambién relaja el músculo liso vascular, uterino e intestinal.\nLa estimulación beta-2 favorece el desplazamiento de potasio hacia el interior de la célula, mecanismo que explica la hipopotasemia asociada a su uso.",
+    "farmacocinetica": "Absorción: tras la inhalación, cerca del 10% o menos del fármaco se deposita en la vía aérea y el resto se deglute y se absorbe en el tubo digestivo. Las concentraciones plasmáticas máximas aparecen entre 2 y 4 horas.\nDistribución: los niveles sistémicos son bajos tras la inhalación a dosis recomendadas, por la absorción gradual desde los bronquios.\nMetabolismo: el metabolismo presistémico es considerable y ocurre sobre todo en el tubo digestivo, con formación de un éster de sulfato inactivo. El resto se metaboliza en el hígado.\nEliminación: principalmente renal, como fármaco inalterado y como metabolito conjugado. La semivida de eliminación es de 3 a 7 horas.",
+    "indicaciones": "Asma bronquial.\nBronquitis.\nEnfisema.\nObstrucción aguda reversible de la vía aérea en asma y en enfermedad pulmonar obstructiva crónica.",
+    "viaAdministracion": "Inhalada, Nebulizada, Oral",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al salbutamol, a las aminas simpaticomiméticas o a cualquier componente de la formulación.",
+        "Arritmias cardiacas.",
+        "Insuficiencia coronaria."
+      ],
+      "relativas": [
+        "Hipertiroidismo y tirotoxicosis.",
+        "Diabetes mellitus y cetoacidosis, por el riesgo de hiperglucemia.",
+        "Edad avanzada.",
+        "Hipopotasemia previa o tratamiento con fármacos que reducen el potasio sérico.",
+        "Predisposición al glaucoma de ángulo cerrado, en particular si se nebuliza junto con anticolinérgicos.",
+        "Asma persistente tratada únicamente con broncodilatador, sin tratamiento antiinflamatorio de mantenimiento."
+      ]
+    },
+    "efectosSecundarios": [
+      "Temblor fino, sobre todo distal.",
+      "Cefalea.",
+      "Taquicardia y palpitaciones.",
+      "Nerviosismo e intranquilidad.",
+      "Resequedad orofaríngea y mal sabor de boca.",
+      "Calambres musculares transitorios."
+    ],
+    "efectosAdversos": [
+      "Hipopotasemia potencialmente grave, más probable con las presentaciones nebulizada y parenteral, y potenciada por la hipoxia de la crisis asmática.",
+      "Acidosis láctica.",
+      "Broncoespasmo paradójico, con aumento inmediato de las sibilancias tras la administración.",
+      "Arritmias: fibrilación auricular, taquicardia supraventricular y extrasístoles.",
+      "Isquemia miocárdica.",
+      "Glaucoma de ángulo cerrado agudo, descrito con la combinación nebulizada de salbutamol y bromuro de ipratropio.",
+      "Angioedema, urticaria, hipotensión y colapso.",
+      "Hiperactividad psicomotora, sobre todo en población pediátrica."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Betabloqueadores no selectivos (propranolol)",
+        "efecto": "Antagonizan el efecto broncodilatador y pueden desencadenar broncoespasmo. La asociación se evita.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Derivados de la xantina, corticoides y diuréticos",
+        "efecto": "Potencian la hipopotasemia inducida por el salbutamol. El riesgo es mayor en la crisis asmática grave y en presencia de hipoxia.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Inhibidores de la monoaminooxidasa y antidepresivos tricíclicos",
+        "efecto": "Potencian la acción del salbutamol sobre el sistema vascular.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Otros adrenérgicos y broncodilatadores simpaticomiméticos",
+        "efecto": "Suman los efectos cardiovasculares adversos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Glucósidos cardiacos (digoxina)",
+        "efecto": "Aumenta el riesgo de arritmias, sobre todo si coexiste hipopotasemia.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Anestésicos halogenados",
+        "efecto": "Incrementan el riesgo de arritmias cardiacas.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Bromuro de ipratropio nebulizado",
+        "efecto": "La combinación se ha asociado a glaucoma de ángulo cerrado agudo cuando la nebulización alcanza los ojos.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "La solución para nebulizador se diluye en solución fisiológica 0.9% antes de administrarla.",
+      "administracion": "Durante la nebulización se evita que la solución o el aerosol alcancen los ojos. El efecto broncodilatador inicia alrededor de los 5 minutos. El uso de espaciador con el inhalador presurizado mejora el depósito pulmonar y reduce la fracción deglutida.",
+      "precauciones": "El aumento en la frecuencia de uso indica deterioro del control del asma y obliga a reevaluar el tratamiento. El broncodilatador no sustituye al tratamiento antiinflamatorio de mantenimiento. La falta de respuesta puede señalar una crisis grave. Las presentaciones inhaladas no se emplean para inhibir el trabajo de parto prematuro."
+    },
+    "referencias": [
+      {
+        "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
+        "url": "https://www.csg.gob.mx/Comp26042025.pdf"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2026). Ficha técnica Salbutamol Aldo-Union 100 microgramos/dosis suspensión para inhalación en envase a presión. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/65850/FichaTecnica_65850.html"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2024). Ficha técnica Salbutamol Neutec 2,5 mg solución para inhalación por nebulizador. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/89256/FichaTecnica_89256.html"
+      }
+    ],
+    "altoRiesgo": false
   }
 ]

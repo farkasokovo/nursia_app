@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 19, // Aumentamos la versión a 19
+      version: 20, // Aumentamos la versión a 20
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -193,6 +193,16 @@ class DatabaseHelper {
         // NO afecta datos del usuario (turno activo).
         if (oldVersion < 19) {
           await db.delete('esenciales');
+        }
+        // Se agregaron 5 medicamentos nuevos al JSON (omeprazol y pantoprazol
+        // como protectores gástricos, metoclopramida y ondansetrón como
+        // antieméticos, y salbutamol como broncodilatador). Como el cambio es
+        // de CONTENIDO y no de esquema, la única forma de que llegue a un
+        // dispositivo ya instalado es vaciar la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 20) {
+          await db.delete('medicamentos');
         }
       },
     );

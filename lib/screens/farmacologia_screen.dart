@@ -9,8 +9,11 @@ import '../widgets/searchable_screen.dart';
 import 'farmacologia/analgesicos_screen.dart';
 import 'farmacologia/anticoagulantes_screen.dart';
 import 'farmacologia/antibioticos_screen.dart';
+import 'farmacologia/antiemeticos_screen.dart';
+import 'farmacologia/broncodilatadores_screen.dart';
 import 'farmacologia/cardiovascular_screen.dart';
 import 'farmacologia/insulinas_screen.dart';
+import 'farmacologia/protectores_gastricos_screen.dart';
 import '../models/medicamento.dart';
 import 'package:nursia_app/repositories/medicamento_repository.dart';
 import 'package:provider/provider.dart';
@@ -153,6 +156,24 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
             PhosphorIconsRegular.syringe,
             "insulinas",
             const InsulinasScreen(),
+          ),
+          _buildButton(
+            "Protectores\ngástricos",
+            PhosphorIconsRegular.shield,
+            "protectores_gastricos",
+            const ProtectoresGastricosScreen(),
+          ),
+          _buildButton(
+            "Antieméticos",
+            PhosphorIconsRegular.pill,
+            "antiemeticos",
+            const AntiemeticosScreen(),
+          ),
+          _buildButton(
+            "Bronco-\ndilatadores",
+            PhosphorIconsRegular.wind,
+            "broncodilatadores",
+            const BroncodilatadoresScreen(),
           ),
           // _buildButton(
           //   "Próximamente",

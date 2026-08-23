@@ -23,6 +23,15 @@ class IconMapper {
       // Insulinas
       case 'syringe':
         return PhosphorIconsFill.syringe;
+      // Protectores gástricos
+      case 'shield':
+        return PhosphorIconsFill.shield;
+      // Antieméticos
+      case 'pill':
+        return PhosphorIconsFill.pill;
+      // Broncodilatadores
+      case 'wind':
+        return PhosphorIconsFill.wind;
       // Escalas / otros
       default:
         return PhosphorIconsFill.syringe;
