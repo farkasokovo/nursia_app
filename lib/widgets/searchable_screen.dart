@@ -35,6 +35,14 @@ class SearchableScreen<T> extends StatefulWidget {
   /// Texto que se muestra en cada Card de resultado
   final String Function(T item) itemTitle;
 
+  /// Marca opcional que se dibuja debajo del título del resultado.
+  ///
+  /// Devuelve null para los items que no la llevan. Es opcional para no
+  /// obligar a los módulos que no la necesitan (Escalas, Normativa); hoy la
+  /// usa Farmacología para marcar los fármacos de alto riesgo, de modo que la
+  /// advertencia aparezca también al buscar y no solo dentro de la categoría.
+  final Widget? Function(T item)? itemBadge;
+
   /// Widget que se muestra cuando no hay resultados
   final Widget emptyWidget;
 
@@ -51,6 +59,7 @@ class SearchableScreen<T> extends StatefulWidget {
     required this.itemTitle,
     required this.emptyWidget,
     required this.categoriesBuilder,
+    this.itemBadge,
   });
 
   @override
@@ -212,11 +221,15 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
       itemCount: _resultados.length,
       itemBuilder: (context, index) {
         final item = _resultados[index];
+        final badge = widget.itemBadge?.call(item);
         return Card(
           color: colorScheme.primary,
           margin: const EdgeInsets.symmetric(vertical: 6),
           child: ListTile(
             title: Text(widget.itemTitle(item), style: textTheme.titleSmall),
+            subtitle: badge == null
+                ? null
+                : Padding(padding: const EdgeInsets.only(top: 5), child: badge),
             trailing: Icon(
               PhosphorIconsBold.caretRight,
               color: Colors.white54,

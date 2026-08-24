@@ -4,6 +4,7 @@ import 'package:nursia_app/screens/farmacologia/antiinflamatorios.dart';
 import 'package:nursia_app/screens/farmacologia/diureticos_screen.dart';
 import 'package:nursia_app/screens/ficha_medicamento.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import '../widgets/alto_riesgo_badge.dart';
 import '../widgets/category_grid.dart';
 import '../widgets/searchable_screen.dart';
 import 'farmacologia/analgesicos_screen.dart';
@@ -95,6 +96,11 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
       hintText: 'Buscar fármaco...',
       searchableFields: (farmaco) => [farmaco.nombre],
       itemTitle: (farmaco) => farmaco.nombre,
+      // Al buscar se salta la pantalla de categoría, que es donde vive la otra
+      // marca de alto riesgo. Sin esto, llegar por el buscador significaba no
+      // ver la advertencia hasta abrir la ficha.
+      itemBadge: (farmaco) =>
+          farmaco.altoRiesgo ? const AltoRiesgoBadge(compact: true) : null,
       onItemTap: _navegarAFarmaco,
       emptyWidget: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../theme/app_theme.dart';
+import 'alto_riesgo_badge.dart';
 
 class FarmaButton extends StatelessWidget {
   final String title;
@@ -27,13 +28,18 @@ class FarmaButton extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return SizedBox(
-      width: double.infinity,
-      height: 70, // Subí un poco el height para que quepan bien las dos líneas
+    // Antes era una altura fija de 70. El chip de alto riesgo es más alto que
+    // la línea de texto que reemplazó, así que en pantallas angostas (donde un
+    // nombre largo como "Warfarina Sódica" cae a dos renglones) 70 se quedaba
+    // corto y salía el overflow rayado. Con minHeight el botón conserva los 70
+    // de siempre y solo crece cuando de verdad hace falta.
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 70),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          minimumSize: const Size(double.infinity, 70),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           shape: const RoundedRectangleBorder(
             borderRadius: AppRadius.defaultRadius,
           ),
@@ -61,16 +67,13 @@ class FarmaButton extends StatelessWidget {
                       ),
                     ),
 
-                  // Misma línea de descripción que usan los botones de NOMs,
-                  // reutilizada para marcar fármacos de alto riesgo.
-                  if (altoRiesgo)
-                    Text(
-                      "Alto riesgo",
-                      style: textTheme.titleSmall?.copyWith(
-                        fontSize: 13,
-                        color: Colors.white70,
-                      ),
-                    ),
+                  // Chip rojo con ícono. Antes era una línea de texto gris con
+                  // el mismo estilo que el subtítulo, así que la marca de alto
+                  // riesgo se leía como descripción y pasaba desapercibida.
+                  if (altoRiesgo) ...[
+                    const SizedBox(height: 5),
+                    const AltoRiesgoBadge(compact: true),
+                  ],
                 ],
               ),
             ),
