@@ -195,6 +195,7 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
           children: [
             NumericInputField(
               label: "Volumen total (ml)",
+              textoAyuda: "Volumen a infundir",
               controller: _volumenController,
               focusNode: _volumenFocus,
               maxLength: 4,
@@ -203,6 +204,7 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
             const SizedBox(height: 20),
             NumericInputField(
               label: "Tiempo (horas)",
+              textoAyuda: "Horas de infusión",
               controller: _tiempoController,
               focusNode: _tiempoFocus,
               maxLength: 3,

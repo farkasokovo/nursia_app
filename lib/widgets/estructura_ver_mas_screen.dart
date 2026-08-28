@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import '../models/ver_mas_screen.dart';
+import '../utils/secciones_ficha.dart';
 import '../utils/url_launcher_helper.dart';
+import 'seccion_ficha_view.dart';
 
+/// Pestaña "Ver más" de todas las escalas clínicas.
+///
+/// Los encabezados y el acento de "Limitaciones" salen de
+/// `seccionesFichaEscala` y los pinta `SeccionFichaView`, el mismo widget que
+/// usa la ficha de medicamento.
 class EstructuraVerMasScreen extends StatelessWidget {
   final VerMasScreen info;
 
@@ -12,6 +19,17 @@ class EstructuraVerMasScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
+
+    // Se arman primero las secciones con contenido y luego se separan entre sí.
+    // Hacerlo en dos pasos evita que una sección vacía deje un hueco doble.
+    final secciones = <Widget?>[
+      _buildSection(context, 'cuando_usarla', info.whenToUse),
+      _buildSection(context, 'componentes', info.components),
+      _buildSection(context, 'interpretacion', info.interpretation),
+      _buildSection(context, 'limitaciones', info.limitations),
+      _buildSection(context, 'notas_clinicas', info.clinicalNotes),
+      _buildReferencias(context, info.references),
+    ].whereType<Widget>().toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -27,33 +45,32 @@ class EstructuraVerMasScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          _buildSection(context, "¿Cuándo usarla?", info.whenToUse),
-          _buildSection(context, "Componentes", info.components),
-          _buildSection(context, "Interpretación", info.interpretation),
-          _buildSection(context, "Limitaciones", info.limitations),
-          _buildSection(context, "Notas clínicas", info.clinicalNotes),
-          _buildReferencias(context, info.references),
+          for (int i = 0; i < secciones.length; i++) ...[
+            if (i > 0) const SizedBox(height: 16),
+            secciones[i],
+          ],
+          const SizedBox(height: 10),
         ],
       ),
     );
   }
 
-  Widget _buildSection(
+  /// Devuelve null si la sección no tiene contenido, para que el llamador la
+  /// omita junto con su separación.
+  Widget? _buildSection(
     BuildContext context,
-    String titulo,
+    String clave,
     List<String> contenido,
   ) {
-    if (contenido.isEmpty) return const SizedBox();
+    if (contenido.isEmpty) return null;
 
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return SeccionFichaView(
+      seccion: seccionPorClave(seccionesFichaEscala, clave),
       children: [
-        Text(titulo, style: textTheme.titleMedium),
-        const SizedBox(height: 6),
         ...contenido.map(
           (item) => Padding(
             padding: const EdgeInsets.only(bottom: 4),
@@ -71,22 +88,19 @@ class EstructuraVerMasScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildReferencias(
+  Widget? _buildReferencias(
     BuildContext context,
     List<Map<String, dynamic>> refs,
   ) {
-    if (refs.isEmpty) return const SizedBox();
+    if (refs.isEmpty) return null;
 
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return SeccionFichaView(
+      seccion: seccionPorClave(seccionesFichaEscala, 'referencias'),
       children: [
-        const SizedBox(height: 12),
-        Text("Material de apoyo", style: textTheme.titleMedium),
-        const SizedBox(height: 6),
         ...refs.map(
           (ref) => Padding(
             padding: const EdgeInsets.only(bottom: 6),
@@ -105,7 +119,6 @@ class EstructuraVerMasScreen extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
       ],
     );
   }

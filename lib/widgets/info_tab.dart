@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/calculadora_info.dart';
 import '../repositories/calculadora_repository.dart';
+import '../utils/secciones_ficha.dart';
 import '../utils/url_launcher_helper.dart';
+import 'seccion_ficha_view.dart';
 
 class InfoTab extends StatefulWidget {
   final String calculadoraId;
@@ -57,39 +59,58 @@ class _InfoTabState extends State<InfoTab> with AutomaticKeepAliveClientMixin {
               children: [
                 Text(info.descripcion, style: textTheme.bodySmall),
                 const SizedBox(height: 16),
-                Text("Fórmula", style: textTheme.titleMedium),
-                const SizedBox(height: 8),
-                Text(info.formula, style: textTheme.bodySmall),
-                const SizedBox(height: 16),
-                Text("Notas clínicas", style: textTheme.titleMedium),
-                const SizedBox(height: 8),
-                ...info.notas.map(
-                  (n) => Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Text("• $n", style: textTheme.bodySmall),
+                SeccionFichaView(
+                  seccion: seccionPorClave(
+                    seccionesFichaCalculadora,
+                    'formula',
                   ),
+                  espacioTitulo: 8,
+                  children: [Text(info.formula, style: textTheme.bodySmall)],
                 ),
                 const SizedBox(height: 16),
-                Text("Material de apoyo", style: textTheme.titleMedium),
-                const SizedBox(height: 8),
-                ...info.referencias.map(
-                  (ref) => Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: GestureDetector(
-                      // FIX: Usa helper compartido — mismo comportamiento que estructura_ver_mas_screen
-                      // FIX: Elimina canLaunchUrl() deprecado
-                      onTap: () => abrirUrl(context, ref['url']!),
-                      child: Text(
-                        "• ${ref['text']}",
-                        style: textTheme.bodyLarge?.copyWith(
-                          color: colorScheme.onSecondaryContainer,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
+                SeccionFichaView(
+                  seccion: seccionPorClave(
+                    seccionesFichaCalculadora,
+                    'notas_clinicas',
+                  ),
+                  espacioTitulo: 8,
+                  children: [
+                    ...info.notas.map(
+                      (n) => Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Text("• $n", style: textTheme.bodySmall),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                SeccionFichaView(
+                  seccion: seccionPorClave(
+                    seccionesFichaCalculadora,
+                    'referencias',
+                  ),
+                  espacioTitulo: 8,
+                  children: [
+                    ...info.referencias.map(
+                      (ref) => Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: GestureDetector(
+                          // FIX: Usa helper compartido — mismo comportamiento que estructura_ver_mas_screen
+                          // FIX: Elimina canLaunchUrl() deprecado
+                          onTap: () => abrirUrl(context, ref['url']!),
+                          child: Text(
+                            "• ${ref['text']}",
+                            style: textTheme.bodyLarge?.copyWith(
+                              color: colorScheme.onSecondaryContainer,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

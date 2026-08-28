@@ -335,6 +335,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
           children: [
             NumericInputField(
               label: "Cantidad indicada (ml)",
+              textoAyuda: "Volumen a preparar",
               controller: _volumenController,
               focusNode: _volumenFocus,
               maxLength: 4,
@@ -343,6 +344,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
             const SizedBox(height: 20),
             NumericInputField(
               label: "Concentración indicada (%)",
+              textoAyuda: "Porcentaje prescrito",
               controller: _porcentajeIndicadoController,
               focusNode: _indicadoFocus,
               maxLength: 2,
@@ -351,6 +353,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
             const SizedBox(height: 20),
             NumericInputField(
               label: "Concentración disponible (%)",
+              textoAyuda: "Porcentaje del frasco",
               controller: _porcentajeDisponibleController,
               focusNode: _disponibleFocus,
               maxLength: 2,
@@ -423,6 +426,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                       padding: const EdgeInsets.only(top: 16),
                       child: NumericInputField(
                         label: "Segunda concentración disponible (%)",
+                        textoAyuda: "Porcentaje del 2° frasco",
                         controller: _segundaConcentracionController,
                         focusNode: _segundaConcentracionFocus,
                         maxLength: 2,

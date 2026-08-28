@@ -165,6 +165,7 @@ class _CalculoPamLayoutState extends State<_CalculoPamLayout>
           children: [
             NumericInputField(
               label: "Presión sistólica (mmHg)",
+              textoAyuda: "Cifra sistólica",
               controller: _pasController,
               focusNode: _pasFocus,
               maxLength: 3,
@@ -173,6 +174,7 @@ class _CalculoPamLayoutState extends State<_CalculoPamLayout>
             const SizedBox(height: 20),
             NumericInputField(
               label: "Presión diastólica (mmHg)",
+              textoAyuda: "Cifra diastólica",
               controller: _padController,
               focusNode: _padFocus,
               maxLength: 3,

@@ -3,6 +3,7 @@ import 'package:nursia_app/widgets/info_tab.dart';
 import 'package:nursia_app/widgets/numeric_input_field.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../utils/calculo_dosis.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/tabbed_content.dart';
 import '../../theme/app_theme.dart';
@@ -19,10 +20,12 @@ class CalculadoraDosis extends StatelessWidget {
       child: TabbedContent(
         tabs: const [
           Tab(text: "Cálculo"),
+          Tab(text: "Conversor"),
           Tab(text: "Información"),
         ],
         tabViews: [
           const _CalculoDosisLayout(),
+          const _ConversorLayout(),
           const InfoTab(calculadoraId: "dosis"),
         ],
       ),
@@ -30,33 +33,10 @@ class CalculadoraDosis extends StatelessWidget {
   }
 }
 
-// ================== ENUM DE UNIDADES ==================
-enum UnidadDosis { mcg, mg, g }
-
-extension UnidadDosisExtension on UnidadDosis {
-  String get label {
-    switch (this) {
-      case UnidadDosis.mcg:
-        return 'mcg';
-      case UnidadDosis.mg:
-        return 'mg';
-      case UnidadDosis.g:
-        return 'g';
-    }
-  }
-
-  /// Convierte el valor ingresado a mg para el cálculo
-  double toMg(double valor) {
-    switch (this) {
-      case UnidadDosis.mcg:
-        return valor / 1000.0;
-      case UnidadDosis.mg:
-        return valor;
-      case UnidadDosis.g:
-        return valor * 1000.0;
-    }
-  }
-}
+// El enum UnidadDosis y toda la lógica de conversión viven en
+// lib/utils/calculo_dosis.dart para poder probarse con pruebas unitarias y
+// para que la pestaña "Cálculo" y la pestaña "Conversor" usen exactamente la
+// misma conversión.
 
 // ================== PESTAÑA DE CÁLCULO ==================
 class _CalculoDosisLayout extends StatefulWidget {
@@ -82,6 +62,9 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
   /// Unidad seleccionada para la dosis indicada (mg por defecto)
   UnidadDosis _unidadDosis = UnidadDosis.mg;
 
+  /// Unidad seleccionada para la presentación del fármaco (mg por defecto)
+  UnidadDosis _unidadPresentacion = UnidadDosis.mg;
+
   @override
   bool get wantKeepAlive => true;
 
@@ -103,37 +86,30 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
     _dilucionFocus.unfocus();
     _presentacionFocus.unfocus();
 
-    final dosisRaw = double.tryParse(_dosisController.text);
-    final dilucion = double.tryParse(_dilucionController.text);
-    final presentacion = double.tryParse(_presentacionController.text);
+    final resultado = calcularDosis(
+      dosisTexto: _dosisController.text,
+      diluyenteTexto: _dilucionController.text,
+      presentacionTexto: _presentacionController.text,
+      unidadDosis: _unidadDosis,
+      unidadPresentacion: _unidadPresentacion,
+    );
 
-    if (dosisRaw == null ||
-        dilucion == null ||
-        presentacion == null ||
-        presentacion == 0) {
-      _resultado.value = null;
-      return;
-    }
-
-    // Convierte la dosis indicada a mg antes de calcular
-    final dosisMg = _unidadDosis.toMg(dosisRaw);
-
-    final calculo = (dosisMg * dilucion) / presentacion;
-
-    final parteEntera = calculo.toInt();
-    if (parteEntera >= 10000) {
-      _resultado.value = null;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'El resultado es demasiado grande. Revisa los valores ingresados.',
+    switch (resultado) {
+      case DosisInvalida():
+        _resultado.value = null;
+      case DosisDemasiadoGrande():
+        _resultado.value = null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'El resultado es demasiado grande. Revisa los valores ingresados.',
+            ),
+            duration: Duration(seconds: 2),
           ),
-          duration: Duration(seconds: 2),
-        ),
-      );
-      return;
+        );
+      case DosisCalculada(:final ml):
+        _resultado.value = ml;
     }
-    _resultado.value = calculo;
   }
 
   void _limpiar() {
@@ -141,9 +117,10 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
     _dilucionController.clear();
     _presentacionController.clear();
     _resultado.value = null;
-    // Resetea la unidad a mg al limpiar
+    // Resetea ambas unidades a mg al limpiar
     setState(() {
       _unidadDosis = UnidadDosis.mg;
+      _unidadPresentacion = UnidadDosis.mg;
     });
   }
 
@@ -163,6 +140,7 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
             // ── Campo de dosis con selector de unidades debajo ──
             NumericInputField(
               label: "Dosis indicada (${_unidadDosis.label})",
+              textoAyuda: "Cantidad prescrita",
               controller: _dosisController,
               focusNode: _dosisFocus,
               maxLength: 4,
@@ -182,18 +160,32 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
             const SizedBox(height: 20),
             NumericInputField(
               label: "Diluyente (ml)",
+              textoAyuda: "Volumen de dilución",
               controller: _dilucionController,
               focusNode: _dilucionFocus,
               maxLength: 3,
               allowDecimal: true,
             ),
             const SizedBox(height: 20),
+            // ── Campo de presentación con su propio selector de unidades ──
             NumericInputField(
-              label: "Presentación del fármaco (mg)",
+              label: "Presentación del fármaco (${_unidadPresentacion.label})",
+              textoAyuda: "Contenido de la ámpula",
               controller: _presentacionController,
               focusNode: _presentacionFocus,
               maxLength: 4,
               allowDecimal: true,
+            ),
+            const SizedBox(height: 10),
+            _UnitSelector(
+              selected: _unidadPresentacion,
+              onChanged: (unidad) {
+                setState(() {
+                  _unidadPresentacion = unidad;
+                  // Recalcula si ya hay un resultado visible
+                  if (_resultado.value != null) _calcular();
+                });
+              },
             ),
             const SizedBox(height: 20),
             Row(
@@ -249,41 +241,236 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
             ValueListenableBuilder<double?>(
               valueListenable: _resultado,
               builder: (_, valor, _) {
-                return Container(
-                  width: double.infinity,
-                  constraints: const BoxConstraints(minHeight: 180),
-                  decoration: BoxDecoration(
-                    color: colorScheme.secondary,
-                    borderRadius: AppRadius.defaultRadius,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Cantidad a administrar:",
-                        style: textTheme.titleMedium?.copyWith(
-                          color: colorScheme.primaryContainer,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        valor == null
-                            ? "0 ml"
-                            : "${valor.toStringAsFixed(1)} ml",
-                        style: textTheme.displayLarge?.copyWith(
-                          color: colorScheme.primaryContainer,
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                return _ResultadoContainer(
+                  titulo: "Cantidad a administrar:",
+                  valor: valor == null
+                      ? "0 ml"
+                      : "${valor.toStringAsFixed(1)} ml",
                 );
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ================== PESTAÑA DE CONVERSOR ==================
+class _ConversorLayout extends StatefulWidget {
+  const _ConversorLayout();
+
+  @override
+  State<_ConversorLayout> createState() => _ConversorLayoutState();
+}
+
+class _ConversorLayoutState extends State<_ConversorLayout>
+    with AutomaticKeepAliveClientMixin {
+  final _valorController = TextEditingController();
+  final _valorFocus = FocusNode();
+
+  /// Resultado ya convertido, en la unidad de destino. Null = sin valor válido.
+  final _resultado = ValueNotifier<double?>(null);
+
+  UnidadDosis _origen = UnidadDosis.mg;
+  UnidadDosis _destino = UnidadDosis.mcg;
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    // La conversión es en vivo: no hay botón "Convertir". NumericInputField no
+    // expone onChanged, así que se escucha el controller (mismo patrón que
+    // indice_shock_screen.dart).
+    _valorController.addListener(_convertir);
+  }
+
+  @override
+  void dispose() {
+    _valorController.removeListener(_convertir);
+    _valorController.dispose();
+    _valorFocus.dispose();
+    _resultado.dispose();
+    super.dispose();
+  }
+
+  void _convertir() {
+    final valor = double.tryParse(_valorController.text.trim());
+    if (valor == null) {
+      _resultado.value = null;
+      return;
+    }
+    _resultado.value = convertirDosis(
+      valor: valor,
+      origen: _origen,
+      destino: _destino,
+    );
+  }
+
+  void _limpiar() {
+    _valorFocus.unfocus();
+    _valorController.clear();
+    setState(() {
+      _origen = UnidadDosis.mg;
+      _destino = UnidadDosis.mcg;
+    });
+    _convertir();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            NumericInputField(
+              label: "Unidad a convertir",
+              textoAyuda: "Ingresa un valor",
+              controller: _valorController,
+              focusNode: _valorFocus,
+              maxLength: 7,
+              allowDecimal: true,
+            ),
+            const SizedBox(height: 20),
+            _TituloSelector(texto: "Unidad original"),
+            _UnitSelector(
+              selected: _origen,
+              onChanged: (unidad) {
+                setState(() => _origen = unidad);
+                _convertir();
+              },
+            ),
+            const SizedBox(height: 20),
+            _TituloSelector(texto: "Convertir a:"),
+            _UnitSelector(
+              selected: _destino,
+              onChanged: (unidad) {
+                setState(() => _destino = unidad);
+                _convertir();
+              },
+            ),
+            const SizedBox(height: 20),
+            OutlinedButton(
+              onPressed: _limpiar,
+              style: OutlinedButton.styleFrom(
+                overlayColor: colorScheme.primaryContainer,
+                minimumSize: const Size(double.infinity, 60),
+                side: BorderSide(color: colorScheme.primaryContainer, width: 2),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: AppRadius.defaultRadius,
+                ),
+              ),
+              child: Text(
+                "Limpiar",
+                style: textTheme.titleSmall?.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.primaryContainer,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ValueListenableBuilder<double?>(
+              valueListenable: _resultado,
+              builder: (_, valor, _) {
+                return _ResultadoContainer(
+                  titulo: "Equivale a:",
+                  valor: valor == null
+                      ? "0 ${_destino.label}"
+                      : "${formatearCantidad(valor)} ${_destino.label}",
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ================== CONTENEDOR DE RESULTADO ==================
+// Compartido por las pestañas "Cálculo" y "Conversor" para que se vean igual.
+class _ResultadoContainer extends StatelessWidget {
+  const _ResultadoContainer({required this.titulo, required this.valor});
+
+  final String titulo;
+  final String valor;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    return Container(
+      width: double.infinity,
+      constraints: const BoxConstraints(minHeight: 180),
+      decoration: BoxDecoration(
+        color: colorScheme.secondary,
+        borderRadius: AppRadius.defaultRadius,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            titulo,
+            style: textTheme.titleMedium?.copyWith(
+              color: colorScheme.primaryContainer,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          // El conversor puede producir "1000000 mcg" o "0.000001 g": el
+          // FittedBox encoge el texto en vez de desbordarlo.
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                valor,
+                style: textTheme.displayLarge?.copyWith(
+                  color: colorScheme.primaryContainer,
+                  fontSize: 60,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ================== TÍTULO DE UN SELECTOR ==================
+// Mismo estilo que el título de NumericInputField, para que el conversor no se
+// vea distinto al resto de las calculadoras.
+class _TituloSelector extends StatelessWidget {
+  const _TituloSelector({required this.texto});
+
+  final String texto;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(left: 8, bottom: 8),
+      child: Text(
+        texto,
+        style: theme.textTheme.titleMedium?.copyWith(
+          color: theme.colorScheme.primaryContainer,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

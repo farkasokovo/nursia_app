@@ -7,7 +7,16 @@ import '../theme/app_theme.dart';
 final _decimalRegex = RegExp(r'^\d*\.?\d*');
 
 class NumericInputField extends StatelessWidget {
+  /// Título grande arriba del campo: dice QUÉ dato se pide.
   final String label;
+
+  /// Label flotante dentro del campo: dice CÓMO llenarlo.
+  ///
+  /// Sube y se encoge al enfocar el campo, y sigue visible mientras se escribe
+  /// (a diferencia del hint anterior, que desaparecía con la primera tecla).
+  /// Debe ser corto: al flotar ocupa el hueco del borde superior.
+  final String? textoAyuda;
+
   final TextEditingController controller;
   final FocusNode? focusNode;
   final int maxLength;
@@ -19,6 +28,7 @@ class NumericInputField extends StatelessWidget {
     required this.label,
     required this.controller,
     required this.maxLength,
+    this.textoAyuda,
     this.focusNode,
     this.allowDecimal = false,
   });
@@ -44,64 +54,77 @@ class NumericInputField extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: 50,
-          child: TextField(
-            textAlignVertical: const TextAlignVertical(y: -0.8),
-            controller: controller,
-            focusNode: focusNode,
-            keyboardType: TextInputType.numberWithOptions(
-              decimal: allowDecimal,
+        // Sin SizedBox de altura fija: el campo se mide solo. Con altura fija de
+        // 50 el label flotante y el texto de 25 px no caben juntos y se recortan.
+        TextField(
+          controller: controller,
+          focusNode: focusNode,
+          keyboardType: TextInputType.numberWithOptions(decimal: allowDecimal),
+          textAlign: TextAlign.center,
+          enableInteractiveSelection: false,
+          style: textTheme.titleMedium?.copyWith(
+            color: colorScheme.primaryContainer,
+            //! TAMAÑO DEL INPUT
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+          inputFormatters: [
+            allowDecimal
+                ? FilteringTextInputFormatter.allow(_decimalRegex)
+                : FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(maxLength),
+          ],
+          decoration: InputDecoration(
+            // Label flotante en vez de hint: permanece visible al escribir.
+            labelText: textoAyuda ?? "Ingresa un valor",
+            // Estilo del label cuando está en reposo (dentro del campo, como el
+            // hint de antes).
+            labelStyle: textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSecondaryContainer.withValues(alpha: 0.40),
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
             ),
-            textAlign: TextAlign.center,
-            enableInteractiveSelection: false,
-            style: textTheme.titleMedium?.copyWith(
+            // Estilo al flotar. Flutter lo encoge a 75% (18 -> 13.5), y aquí se
+            // sube el contraste porque queda sobre el borde, no sobre el relleno.
+            floatingLabelStyle: textTheme.bodyMedium?.copyWith(
               color: colorScheme.primaryContainer,
-              //! TAMAÑO DEL INPUT
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
             ),
-            inputFormatters: [
-              allowDecimal
-                  ? FilteringTextInputFormatter.allow(_decimalRegex)
-                  : FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(maxLength),
-            ],
-            decoration: InputDecoration(
-              hintText: "Ingresa un valor",
-              hintStyle: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSecondaryContainer.withValues(alpha: 0.40),
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
 
-              floatingLabelAlignment: FloatingLabelAlignment.start,
-              filled: true,
-              fillColor: colorScheme.secondary,
-              // 1. Borde por defecto (cuando no tiene focus)
-              enabledBorder: OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide(
-                  color: colorScheme.primaryContainer.withValues(alpha: 0.5),
-                  width: 2,
-                ),
+            // El label flota al centro del borde superior. Con el radio de 30
+            // del tema, al inicio caería encima de la curva de la esquina.
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            filled: true,
+            fillColor: colorScheme.secondary,
+            // 1. Borde por defecto (cuando no tiene focus)
+            enabledBorder: OutlineInputBorder(
+              borderRadius: AppRadius.defaultRadius,
+              borderSide: BorderSide(
+                color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+                width: 2,
               ),
+            ),
 
-              // 2. Borde cuando tiene el focus (clicado)
-              focusedBorder: OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-                borderSide: BorderSide(
-                  color: colorScheme.primaryContainer, // Color más intenso
-                  width: 2.5, // Un poco más grueso para resaltar
-                ),
+            // 2. Borde cuando tiene el focus (clicado)
+            focusedBorder: OutlineInputBorder(
+              borderRadius: AppRadius.defaultRadius,
+              borderSide: BorderSide(
+                color: colorScheme.primaryContainer, // Color más intenso
+                width: 2.5, // Un poco más grueso para resaltar
               ),
+            ),
 
-              // Mantener el esquema base por si acaso (errores, etc)
-              border: const OutlineInputBorder(
-                borderRadius: AppRadius.defaultRadius,
-              ),
+            // Mantener el esquema base por si acaso (errores, etc)
+            border: const OutlineInputBorder(
+              borderRadius: AppRadius.defaultRadius,
+            ),
 
-              contentPadding: const EdgeInsets.all(20),
+            // Vertical 14: deja respirar el texto de 25 px sin estirar el campo
+            // (queda en ~58 px de alto, contra los 50 fijos de antes).
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 14,
             ),
           ),
         ),

@@ -216,6 +216,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
             // Campos básicos
             NumericInputField(
               label: "Peso del paciente (kg)",
+              textoAyuda: "Peso registrado",
               controller: _pesoController,
               focusNode: _pesoFocus,
               maxLength: 3,
@@ -224,6 +225,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
             const SizedBox(height: 20),
             NumericInputField(
               label: "Horas del turno (h)",
+              textoAyuda: "Duración del turno",
               controller: _hrsTurnoController,
               focusNode: _hrsTurnoFocus,
               maxLength: 2,
@@ -294,6 +296,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
             if (_tipoRespiracion == 1)
               NumericInputField(
                 label: "Frecuencia respiratoria (rpm)",
+                textoAyuda: "Respiraciones por minuto",
                 controller: _frController,
                 focusNode: _frFocus,
                 maxLength: 2,
