@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nursia_app/theme/app_theme.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -73,29 +72,40 @@ class _HomeScreenState extends State<HomeScreen> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    // La pantalla principal es la raíz de la pila de navegación. Sin esto,
-    // el botón "atrás" de Android intenta hacer pop de la ruta raíz y deja
-    // la app en pantalla negra. Con canPop:false interceptamos ese gesto y,
-    // en vez de hacer pop, mandamos la app al segundo plano (como el botón
-    // Home). No afecta la navegación interna: las escalas, medicamentos, etc.
-    // se abren en rutas nuevas empujadas encima, con su propio botón atrás.
+    // ¿Hay teclado en pantalla? Es la única razón por la que esta pantalla
+    // intercepta el botón atrás. Se mide con viewInsets, que es lo que el
+    // sistema reserva para el teclado, y no con el árbol de foco: casi
+    // siempre hay ALGÚN nodo enfocado dentro de un TabBarView aunque no haya
+    // ningún campo de texto abierto, y esa condición tan laxa era la que
+    // obligaba a presionar atrás cuatro veces para salir.
+    //
+    // Leerlo aquí (y no dentro del callback) es lo que permite usarlo en
+    // `canPop`: el widget se reconstruye solo cuando el teclado aparece o
+    // desaparece, así que el valor nunca queda viejo.
+    final tecladoAbierto = MediaQuery.viewInsetsOf(context).bottom > 0;
+
+    // Esta es la ruta raíz de la app. `canPop` es la única palanca que decide:
+    // la ruta deja pasar el atrás solo cuando TODOS sus PopScope dicen que sí,
+    // así que basta con que esta pantalla no bloquee para que el evento siga
+    // su curso. Si ningún PopScope de la ruta bloquea (ni este ni el del
+    // buscador de la pestaña activa), Flutter no encuentra nada que cerrar y
+    // termina llamando a SystemNavigator.pop(): la app se minimiza al PRIMER
+    // atrás, como el botón Home.
+    //
+    // No afecta la navegación interna: las escalas, medicamentos y la pantalla
+    // de Esenciales se abren como rutas empujadas encima, y mientras una de
+    // ellas está arriba este PopScope ni siquiera se consulta.
     return PopScope(
-      canPop: false,
+      canPop: !tecladoAbierto,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
 
-        // Si un buscador u otro campo tiene el foco, el primer "atrás" solo
-        // le quita el foco (lo que también cierra el teclado) en vez de
-        // cerrar la app de golpe. Cuando no hay foco activo (primaryFocus es
-        // null o es el nodo raíz del árbol de foco), recién ahí minimizamos.
-        final primaryFocus = FocusManager.instance.primaryFocus;
-        if (primaryFocus != null &&
-            primaryFocus != FocusManager.instance.rootScope) {
-          primaryFocus.unfocus();
-          return;
+        // Único caso que esta pantalla atiende: cerrar el teclado. El resto
+        // (limpiar el texto del buscador) lo resuelve el PopScope de
+        // SearchableScreen, que recibe este mismo evento.
+        if (tecladoAbierto) {
+          FocusManager.instance.primaryFocus?.unfocus();
         }
-
-        SystemNavigator.pop();
       },
       child: DefaultTabController(
         length: 5,

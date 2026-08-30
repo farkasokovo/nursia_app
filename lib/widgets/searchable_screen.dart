@@ -73,10 +73,25 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
   List<T> _resultados = [];
   String _busqueda = '';
 
+  /// Copia del estado del foco del buscador.
+  ///
+  /// Existe porque `canPop` del PopScope es un valor que se lee al construir,
+  /// y `_searchFocus.hasFocus` cambia sin reconstruir el widget. Sin esta
+  /// copia, el PopScope se quedaría con un `canPop` viejo justo en el momento
+  /// en que el usuario abre el teclado y presiona atrás.
+  bool _tieneFoco = false;
+
   @override
   void initState() {
     super.initState();
     _resultados = widget.items;
+    _searchFocus.addListener(_alCambiarFoco);
+  }
+
+  void _alCambiarFoco() {
+    if (_searchFocus.hasFocus != _tieneFoco) {
+      setState(() => _tieneFoco = _searchFocus.hasFocus);
+    }
   }
 
   // Si los items cambian desde afuera (carga async), actualiza los resultados
@@ -91,6 +106,7 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
   @override
   void dispose() {
     _searchController.dispose();
+    _searchFocus.removeListener(_alCambiarFoco);
     _searchFocus.dispose();
     super.dispose();
   }
@@ -122,16 +138,26 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
   /// hacer Navigator.push para evitar que el teclado regrese al volver
   void unfocus() => _searchFocus.unfocus();
 
-  Future<bool> _onWillPop() async {
+  /// ¿El buscador tiene algo que cerrar antes de dejar salir de la app?
+  ///
+  /// Es lo que alimenta el `canPop` del PopScope, y con eso basta para que el
+  /// botón atrás no salga de la app: la ruta solo deja pasar el evento cuando
+  /// TODOS sus PopScope dicen que sí.
+  bool get _tieneAlgoQueCerrar => _busqueda.isNotEmpty || _tieneFoco;
+
+  /// Cierra lo que el buscador tenga abierto, en orden de prioridad.
+  ///
+  /// NO llama a `Navigator.pop()`. SearchableScreen no es una ruta empujada:
+  /// vive dentro del TabBarView de la pantalla raíz, así que ese pop vaciaba
+  /// el navegador y dejaba la app en pantalla negra sin cerrarla.
+  void _manejarAtras() {
     if (_busqueda.isNotEmpty) {
       _limpiar();
-      return false;
+      return;
     }
     if (_searchFocus.hasFocus) {
       _searchFocus.unfocus();
-      return false;
     }
-    return true;
   }
 
   @override
@@ -139,12 +165,15 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
+    // `canPop` dinámico en vez de `false` fijo: este widget solo intercepta el
+    // botón atrás cuando de verdad tiene algo que cerrar. Cuando no lo tiene,
+    // deja de bloquear y el evento sigue su curso normal hasta el PopScope de
+    // home_screen (o, si tampoco bloquea, hasta Android, que cierra la app).
     return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, _) async {
+      canPop: !_tieneAlgoQueCerrar,
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
-        final shouldPop = await _onWillPop();
-        if (shouldPop && context.mounted) Navigator.of(context).pop();
+        _manejarAtras();
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 98, 16, 0),
