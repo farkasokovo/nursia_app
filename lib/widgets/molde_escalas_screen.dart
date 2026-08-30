@@ -33,7 +33,16 @@ class MoldeEscalasScreen extends StatelessWidget {
               tag: heroTag,
               child: Material(
                 color: colorScheme.primaryContainer,
+                // `bottom: false` es el arreglo del hueco entre el título y las
+                // pestañas: SafeArea no sabe en qué parte de la pantalla está,
+                // así que por defecto también apartaba la barra de navegación
+                // (48 px con botones, 24 con gestos) DEBAJO de este encabezado,
+                // que vive pegado arriba. Aquí solo hace falta esquivar la
+                // barra de estado. Es lo mismo que hace el molde de las
+                // calculadoras, donde el SafeArea envuelve la columna completa
+                // y su borde inferior cae donde de verdad está el fondo.
                 child: SafeArea(
+                  bottom: false,
                   child: Row(
                     children: [
                       IconButton(

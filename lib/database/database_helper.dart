@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 20, // Aumentamos la versión a 20
+      version: 21, // Aumentamos la versión a 21
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -202,6 +202,16 @@ class DatabaseHelper {
         // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo.
         // NO afecta datos del usuario (turno activo).
         if (oldVersion < 20) {
+          await db.delete('medicamentos');
+        }
+        // Se corrigió la farmacodinamia de ondansetrón: describía el mecanismo
+        // atado a quimioterapia y radioterapia, que son indicaciones y ya viven
+        // en su propio campo. Ahora describe el antagonismo 5-HT3 de forma
+        // general. Como el cambio es de CONTENIDO y no de esquema, la única
+        // forma de que llegue a un dispositivo ya instalado es vaciar la tabla
+        // para que cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON
+        // nuevo. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 21) {
           await db.delete('medicamentos');
         }
       },

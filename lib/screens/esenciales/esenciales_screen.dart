@@ -8,6 +8,7 @@ import '../../repositories/esencial_repository.dart';
 import '../../utils/categorias_esenciales.dart';
 import '../../utils/esencial_icon_mapper.dart';
 import '../../utils/search_utils.dart';
+import '../../widgets/grid_botones_dashboard.dart';
 import '../../widgets/home_nav_button.dart';
 import '../../widgets/tarjeta_desplegable.dart';
 import 'ficha_esencial_screen.dart';
@@ -16,6 +17,11 @@ import 'ficha_esencial_screen.dart';
 /// `utils/categorias_esenciales.dart`, que es la fuente única del nombre y el
 /// ícono de cada categoría.
 const int _tabCasa = 2;
+
+/// Margen mínimo entre el último bloque de la pestaña casa y la barra de
+/// navegación del sistema, sumado al inset real de esa barra. Mismo criterio
+/// que `category_grid.dart` y que el dashboard de inicio.
+const double _margenInferiorMinimo = 12;
 
 /// Pantalla del módulo Esenciales: fichas de referencia rápida agrupadas en
 /// 4 categorías, con una pestaña casa al centro a modo de dashboard.
@@ -495,42 +501,49 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
   // ── Pestaña casa (índice 2) ───────────────────────────────────────────
 
   Widget _buildDashboard(ColorScheme colorScheme, TextTheme textTheme) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      child: Column(
-        children: [
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-            childAspectRatio: 1.3,
-            children: [
-              // Nombre, ícono y pestaña destino salen de categorias_esenciales;
-              // ninguna categoría usa el índice 2 (esta misma pestaña).
-              for (final categoria in categoriasEsenciales)
-                HomeNavButton(
-                  title: categoria.etiqueta,
-                  tabIndex: categoria.tabIndex,
-                  icon: categoria.icono,
-                ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildBotonInicio(colorScheme, textTheme),
-          const SizedBox(height: 16),
-          TarjetaDesplegable(
-            icono: PhosphorIconsFill.info,
-            titulo: 'Acerca de Esenciales',
-            // El Scaffold de esta pantalla ya es `secondaryContainer`, que es
-            // justo lo que pinta la tarjeta por defecto: sin un color sólido
-            // aquí, se funde con el fondo.
-            colorFondo: colorScheme.secondary,
-            contenido: _buildAcercaDe(colorScheme, textTheme),
-          ),
-        ],
+    // Mismo patrón que el dashboard de inicio y que category_grid.dart:
+    // SafeArea aparta la barra de navegación del sistema, el padding inferior
+    // deja el margen mínimo encima de ella, y el grid es el bloque elástico que
+    // absorbe la holgura. Antes el grid tenía un aspect ratio fijo (1.3) y todo
+    // el sobrante quedaba como un hueco al final de la pestaña.
+    return SafeArea(
+      top: false,
+      left: false,
+      right: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, _margenInferiorMinimo),
+        child: Column(
+          children: [
+            Flexible(
+              fit: FlexFit.loose,
+              child: GridBotonesDashboard(
+                botones: [
+                  // Nombre, ícono y pestaña destino salen de
+                  // categorias_esenciales; ninguna categoría usa el índice 2
+                  // (esta misma pestaña).
+                  for (final categoria in categoriasEsenciales)
+                    HomeNavButton(
+                      title: categoria.etiqueta,
+                      tabIndex: categoria.tabIndex,
+                      icon: categoria.icono,
+                    ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            _buildBotonInicio(colorScheme, textTheme),
+            const SizedBox(height: 16),
+            TarjetaDesplegable(
+              icono: PhosphorIconsFill.info,
+              titulo: 'Acerca de Esenciales',
+              // El Scaffold de esta pantalla ya es `secondaryContainer`, que es
+              // justo lo que pinta la tarjeta por defecto: sin un color sólido
+              // aquí, se funde con el fondo.
+              colorFondo: colorScheme.secondary,
+              contenido: _buildAcercaDe(colorScheme, textTheme),
+            ),
+          ],
+        ),
       ),
     );
   }

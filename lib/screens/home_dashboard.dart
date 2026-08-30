@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import '../widgets/grid_botones_dashboard.dart';
 import '../widgets/home_nav_button.dart';
 import '../widgets/tarjeta_desplegable.dart';
 import '../utils/tips_helper.dart';
@@ -10,13 +11,22 @@ import '../turno_activo/turno_activo_screen.dart';
 class HomeDashboard extends StatelessWidget {
   const HomeDashboard({super.key});
 
+  /// Separación entre bloques y entre botones del grid. Es el mismo valor en
+  /// toda la pantalla: si los huecos son iguales, no hay ninguno que resalte.
+  static const double _espacio = 16;
+
+  /// Margen mínimo entre el último bloque y la barra de navegación del
+  /// sistema, sumado al inset real. Mismo criterio que `category_grid.dart`.
+  static const double _margenInferiorMinimo = 12;
+
+  /// Hueco superior para el TabBar que `home_screen.dart` dibuja flotando en
+  /// un `Stack` encima del body. Es el único valor fijo que sobrevive: el
+  /// dashboard no tiene forma de medir un widget que no es su ancestro, y es
+  /// el mismo 98 que usan las otras cuatro pestañas.
+  static const double _espacioTabBarFlotante = 98;
+
   @override
   Widget build(BuildContext context) {
-    // --- LÓGICA DINÁMICA DE BOTONES ---
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    // 1. Definimos los botones en una lista para manejarlos más fácil
     final botones = [
       const HomeNavButton(
         title: "Escalas",
@@ -40,87 +50,39 @@ class HomeDashboard extends StatelessWidget {
       ),
     ];
 
-    // 2. Calculamos el espacio disponible para los botones
-    // Restamos padding superior (98), saludo (~60), espaciado (32) y el bloque inferior del Tip (~180)
-    const double espacioFijoCaballete = 380;
-    final double espacioDisponible = screenHeight - espacioFijoCaballete;
-
-    // 3. Calculamos medidas para 3 filas (ya que son 5 botones)
-    const double spacing = 16.0;
-    final double anchoBoton =
-        (screenWidth - 48) /
-        2; // Pantalla - padding lateral (32) - espacio medio (16)
-
-    // Queremos que quepan 3 filas exactamente
-    final double altoTotalParaBotones = espacioDisponible - (2 * spacing);
-    final double altoBotonIdeal = altoTotalParaBotones / 3;
-
-    // 4. El ratio mágico
-    double ratioDinamico = anchoBoton / altoBotonIdeal;
-
-    // Si el ratio es demasiado bajo, ponemos un tope para que no se vean raros
-    if (ratioDinamico < 1.2) ratioDinamico = 1.3;
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            // Mantenemos tus paddings exactos
-            padding: const EdgeInsets.fromLTRB(16, 98, 16, 16),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                // Esto obliga a la columna a medir al menos lo mismo que la pantalla
-                minHeight:
-                    constraints.maxHeight -
-                    114, // Restamos el padding superior/inferior
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment
-                    .start, // Cambiamos a start para controlar el flujo
-                children: [
-                  // BLOQUE SUPERIOR (Saludo + Botones)
-                  Column(
-                    children: [
-                      // Saludo
-
-                      // Grid de Botones Dinámico
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 4, // Solo los primeros 4 botones (2 filas)
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: spacing,
-                          crossAxisSpacing: spacing,
-                          childAspectRatio: ratioDinamico,
-                        ),
-                        itemBuilder: (context, index) {
-                          return botones[index];
-                        },
-                      ),
-                      // Dos botones de ancho completo, uno encima del otro, en
-                      // el lugar que antes ocupaba el botón de Turno Activo.
-                      // El espaciado es el mismo que separa los HomeNavButton.
-                      const SizedBox(height: spacing),
-                      const BotonEsenciales(),
-                      const SizedBox(height: spacing),
-                      const BotonProcedimientos(),
-                    ],
-                  ),
-
-                  // BLOQUE INFERIOR (El Tip)
-                  // Al usar MainAxisAlignment.spaceBetween, este se irá al fondo
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: const TipDelDia(),
-                  ),
-                ],
-              ),
+    // SafeArea aparta la barra de navegación del sistema (de gestos o de
+    // botones) y el padding inferior agrega el margen mínimo encima de ella.
+    // Mismo patrón que category_grid.dart.
+    return SafeArea(
+      top: false,
+      left: false,
+      right: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          16,
+          _espacioTabBarFlotante,
+          16,
+          _margenInferiorMinimo,
+        ),
+        child: Column(
+          children: [
+            // El grid es el único bloque elástico: absorbe la holgura que
+            // dejan los tres bloques de abajo, que se miden solos. Flutter le
+            // pasa como maxHeight lo que de verdad sobró, así que no hay nada
+            // que estimar.
+            Flexible(
+              fit: FlexFit.loose,
+              child: GridBotonesDashboard(botones: botones, espacio: _espacio),
             ),
-          ),
-        );
-      },
+            const SizedBox(height: _espacio),
+            const BotonEsenciales(),
+            const SizedBox(height: _espacio),
+            const BotonProcedimientos(),
+            const SizedBox(height: _espacio),
+            const TipDelDia(),
+          ],
+        ),
+      ),
     );
   }
 }
