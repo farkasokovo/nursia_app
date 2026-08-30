@@ -1,7 +1,7 @@
 name: nursia_app
 description: "Herramienta de referencia clínica offline para profesionales y estudiantes de enfermería."
 publish_to: 'none'
-version: 1.1.0+2
+version: 1.2.0+3
 
 environment:
   sdk: ^3.11.1
