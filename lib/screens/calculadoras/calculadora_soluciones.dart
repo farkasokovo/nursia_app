@@ -440,27 +440,6 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
-                      minimumSize: const Size(double.infinity, 60),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: AppRadius.defaultRadius,
-                      ),
-                    ),
-                    onPressed: _calcular,
-                    child: Text(
-                      "Calcular",
-                      style: textTheme.titleSmall?.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       overlayColor: colorScheme.primaryContainer,
@@ -480,6 +459,27 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: colorScheme.primaryContainer,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      overlayColor: colorScheme.primaryContainer,
+                      minimumSize: const Size(double.infinity, 60),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadius.defaultRadius,
+                      ),
+                    ),
+                    onPressed: _calcular,
+                    child: Text(
+                      "Calcular",
+                      style: textTheme.titleSmall?.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onPrimaryContainer,
                       ),
                     ),
                   ),

@@ -6,11 +6,20 @@ class TabbedContent extends StatefulWidget {
   final List<Widget> tabViews;
   final TabController? controller; // opcional, si quieres control externo
 
+  /// Aire a los lados del texto de cada pestaña.
+  ///
+  /// El texto de la pestaña activa se pinta a 20 px y el de las demás a 15, así
+  /// que el ancho disponible tiene que alcanzar para el tamaño grande. Con dos
+  /// pestañas sobra; con tres y etiquetas largas no, y ahí conviene bajarlo
+  /// (ver la calculadora de dosis). El valor por defecto es el que traía la app.
+  final EdgeInsetsGeometry labelPadding;
+
   const TabbedContent({
     super.key,
     required this.tabs,
     required this.tabViews,
     this.controller,
+    this.labelPadding = const EdgeInsets.symmetric(horizontal: 20),
   });
 
   @override
@@ -51,7 +60,7 @@ class _TabbedContentState extends State<TabbedContent>
           child: TabBar(
             controller: _controller,
             tabAlignment: TabAlignment.fill,
-            labelPadding: const EdgeInsets.symmetric(horizontal: 20),
+            labelPadding: widget.labelPadding,
             dividerColor: Colors.transparent,
             indicatorColor: colorScheme.onPrimaryContainer,
             labelColor: colorScheme.onPrimaryContainer,

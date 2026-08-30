@@ -24,8 +24,8 @@ enum NivelSeguridad {
   /// Puede contraindicar o dañar. Es lo que se busca primero en un turno.
   alto;
 
-  /// Color del borde izquierdo y del ícono. Null en las secciones sin acento,
-  /// que usan el color normal del texto.
+  /// Color del ícono del encabezado y del tinte de fondo. Null en las secciones
+  /// sin acento, que usan el color normal del texto y no llevan fondo.
   Color? get colorAcento => switch (this) {
     NivelSeguridad.ninguno => null,
     NivelSeguridad.leve => AppColors.withoutAlert,
@@ -33,28 +33,28 @@ enum NivelSeguridad {
     NivelSeguridad.alto => AppColors.redAlertv2,
   };
 
-  /// Tinte de fondo sobre la tarjeta. Muy bajo a propósito: sobre el crema de
-  /// la tarjeta apenas se percibe como una banda cálida, no como un bloque.
+  /// Tinte de fondo sobre la tarjeta.
+  ///
+  /// Antes había además un borde izquierdo de color, y era ese borde el que
+  /// cargaba la gradación entre niveles; el fondo casi no cambiaba. Al quitarse
+  /// el borde, la gradación pasó aquí: los tres valores se separaron para que
+  /// un nivel se distinga del siguiente sin él.
+  ///
+  /// Siguen siendo tintes, no bloques. Sobre el crema de la tarjeta (#EFE9E4)
+  /// quedan en #E8E0D9 (leve), #E6DAD6 (medio) y #E0D3CF (alto): un lavado
+  /// cálido que se nota de reojo sin competir con `AltoRiesgoBadge`, que sí es
+  /// un bloque sólido.
   double get opacidadFondo => switch (this) {
     NivelSeguridad.ninguno => 0,
-    NivelSeguridad.leve => 0.04,
-    NivelSeguridad.medio => 0.05,
-    NivelSeguridad.alto => 0.06,
-  };
-
-  /// Grosor del borde izquierdo. Es el que carga la gradación, junto con el
-  /// color; el fondo casi no cambia entre niveles.
-  double get grosorBorde => switch (this) {
-    NivelSeguridad.ninguno => 0,
-    NivelSeguridad.leve => 3,
-    NivelSeguridad.medio => 3,
-    NivelSeguridad.alto => 4,
+    NivelSeguridad.leve => 0.08,
+    NivelSeguridad.medio => 0.11,
+    NivelSeguridad.alto => 0.15,
   };
 
   /// Cuánto se le resta al tamaño normal de `titleMedium` en el encabezado.
   ///
-  /// Las secciones con acento llevan el título más chico: el borde de color y
-  /// el ícono teñido ya las hacen visibles, así que un título del tamaño
+  /// Las secciones con acento llevan el título más chico: el fondo teñido y el
+  /// ícono de color ya las hacen visibles, así que un título del tamaño
   /// completo dentro de la caja se siente pesado. Es un delta, no un tamaño
   /// fijo, para que siga al tema si `titleBrownText` cambia.
   double get reduccionTitulo => this == NivelSeguridad.ninguno ? 0 : 4;

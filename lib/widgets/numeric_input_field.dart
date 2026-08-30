@@ -59,6 +59,10 @@ class NumericInputField extends StatelessWidget {
         TextField(
           controller: controller,
           focusNode: focusNode,
+          // Centra el número dentro del área de contenido. Con el padding
+          // vertical ya recortado, es lo que evita que el texto quede pegado a
+          // un borde y que el label flotante lo alcance.
+          textAlignVertical: TextAlignVertical.center,
           keyboardType: TextInputType.numberWithOptions(decimal: allowDecimal),
           textAlign: TextAlign.center,
           enableInteractiveSelection: false,
@@ -120,11 +124,14 @@ class NumericInputField extends StatelessWidget {
               borderRadius: AppRadius.defaultRadius,
             ),
 
-            // Vertical 14: deja respirar el texto de 25 px sin estirar el campo
-            // (queda en ~58 px de alto, contra los 50 fijos de antes).
+            // Vertical 6: el campo queda en 50 px de alto (38 del texto de
+            // 25 px + 12 de padding), contra los 66 de antes. Sigue por encima
+            // del mínimo cómodo para el pulgar (48 px) y el label flotante no
+            // se toca con el número porque flota sobre el borde, fuera del área
+            // de contenido.
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 20,
-              vertical: 14,
+              vertical: 6,
             ),
           ),
         ),

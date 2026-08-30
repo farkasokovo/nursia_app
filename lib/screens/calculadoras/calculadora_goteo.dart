@@ -3,7 +3,9 @@ import 'package:nursia_app/widgets/info_tab.dart';
 import 'package:nursia_app/widgets/numeric_input_field.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../utils/calculo_goteo.dart';
 import '../../widgets/expandable_category_screen.dart';
+import '../../widgets/opcion_selector.dart';
 import '../../widgets/tabbed_content.dart';
 import '../../theme/app_theme.dart';
 
@@ -30,64 +32,8 @@ class CalculadoraGoteo extends StatelessWidget {
   }
 }
 
-// ================== ENUM DE EQUIPO ==================
-enum TipoEquipo { micro, normo, macro }
-
-extension TipoEquipoExtension on TipoEquipo {
-  String get label {
-    switch (this) {
-      case TipoEquipo.micro:
-        return 'Micro';
-      case TipoEquipo.normo:
-        return 'Normo';
-      case TipoEquipo.macro:
-        return 'Macro';
-    }
-  }
-
-  /// Factor de goteo del equipo (gotas por ml)
-  int get factorGoteo {
-    switch (this) {
-      case TipoEquipo.micro:
-        return 60;
-      case TipoEquipo.normo:
-        return 20;
-      case TipoEquipo.macro:
-        return 15;
-    }
-  }
-
-  /// Constante de la fórmula = 60 ÷ factor de goteo
-  int get constante {
-    switch (this) {
-      case TipoEquipo.micro:
-        return 1; // 60 / 60
-      case TipoEquipo.normo:
-        return 3; // 60 / 20
-      case TipoEquipo.macro:
-        return 4; // 60 / 15
-    }
-  }
-
-  /// Nombre largo para el desglose del resultado
-  String get nombreLargo {
-    switch (this) {
-      case TipoEquipo.micro:
-        return 'Microgotero';
-      case TipoEquipo.normo:
-        return 'Normogotero';
-      case TipoEquipo.macro:
-        return 'Macrogotero';
-    }
-  }
-}
-
-// ================== RESULTADO (clase auxiliar) ==================
-class _ResultadoGoteo {
-  final int gotasPorMinuto; // resultado redondeado
-  final TipoEquipo equipo; // equipo con el que se calculó
-  const _ResultadoGoteo(this.gotasPorMinuto, this.equipo);
-}
+// Los enums TipoEquipo y UnidadTiempo, y toda la fórmula, viven en
+// lib/utils/calculo_goteo.dart para poder probarse con pruebas unitarias.
 
 // ================== PESTAÑA DE CÁLCULO ==================
 class _CalculoGoteoLayout extends StatefulWidget {
@@ -105,10 +51,13 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
   final _volumenFocus = FocusNode();
   final _tiempoFocus = FocusNode();
 
-  final _resultado = ValueNotifier<_ResultadoGoteo?>(null);
+  final _resultado = ValueNotifier<GoteoCalculado?>(null);
 
   /// Equipo seleccionado (normogotero por defecto)
   TipoEquipo _equipo = TipoEquipo.normo;
+
+  /// Unidad del campo de tiempo (horas por defecto)
+  UnidadTiempo _unidadTiempo = UnidadTiempo.horas;
 
   @override
   bool get wantKeepAlive => true;
@@ -128,55 +77,50 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
     _volumenFocus.unfocus();
     _tiempoFocus.unfocus();
 
-    final volumen = double.tryParse(_volumenController.text);
-    final tiempo = double.tryParse(_tiempoController.text);
+    final resultado = calcularGoteo(
+      volumenTexto: _volumenController.text,
+      tiempoTexto: _tiempoController.text,
+      equipo: _equipo,
+      unidadTiempo: _unidadTiempo,
+    );
 
-    // ── Validación de campos base (evita también la división por cero) ──
-    if (volumen == null || tiempo == null || volumen <= 0 || tiempo <= 0) {
-      _resultado.value = null;
-      return;
+    switch (resultado) {
+      case GoteoInvalido():
+        _resultado.value = null;
+      case GoteoDemasiadoLento():
+        _resultado.value = null;
+        _mostrarSnack(
+          "El volumen es demasiado pequeño para el tiempo indicado. "
+          "Revisa los valores ingresados.",
+          segundos: 3,
+        );
+      case GoteoDemasiadoRapido():
+        _resultado.value = null;
+        _mostrarSnack(
+          "El resultado es demasiado grande. Revisa los valores ingresados.",
+        );
+      case GoteoCalculado():
+        _resultado.value = resultado;
     }
+  }
 
-    // gotas/min = Volumen / (Tiempo × Constante del equipo)
-    final gotasPorMinuto = (volumen / (tiempo * _equipo.constante)).round();
-
-    // ── Red de seguridad: resultado sin sentido clínico ──
-    if (gotasPorMinuto <= 0) {
-      _resultado.value = null;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            "El volumen es demasiado pequeño para el tiempo indicado. "
-            "Revisa los valores ingresados.",
-          ),
-          duration: Duration(seconds: 3),
-        ),
-      );
-      return;
-    }
-    if (gotasPorMinuto >= 1000) {
-      _resultado.value = null;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            "El resultado es demasiado grande. Revisa los valores ingresados.",
-          ),
-          duration: Duration(seconds: 2),
-        ),
-      );
-      return;
-    }
-
-    _resultado.value = _ResultadoGoteo(gotasPorMinuto, _equipo);
+  void _mostrarSnack(String mensaje, {int segundos = 2}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(mensaje),
+        duration: Duration(seconds: segundos),
+      ),
+    );
   }
 
   void _limpiar() {
     _volumenController.clear();
     _tiempoController.clear();
     _resultado.value = null;
-    // Resetea el equipo a normogotero al limpiar
+    // Resetea el equipo a normogotero y el tiempo a horas al limpiar
     setState(() {
       _equipo = TipoEquipo.normo;
+      _unidadTiempo = UnidadTiempo.horas;
     });
   }
 
@@ -202,17 +146,33 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
               allowDecimal: false,
             ),
             const SizedBox(height: 20),
+            // ── Campo de tiempo con su selector de unidad debajo ──
+            // Sigue sin aceptar decimales a propósito: teniendo minutos
+            // disponibles, "0.5 horas" se captura como "30 minutos".
             NumericInputField(
-              label: "Tiempo (horas)",
-              textoAyuda: "Horas de infusión",
+              label: "Tiempo (${_unidadTiempo.label})",
+              textoAyuda: _unidadTiempo.textoAyuda,
               controller: _tiempoController,
               focusNode: _tiempoFocus,
               maxLength: 3,
               allowDecimal: false,
             ),
+            const SizedBox(height: 10),
+            OpcionSelector<UnidadTiempo>(
+              opciones: UnidadTiempo.values,
+              seleccionada: _unidadTiempo,
+              etiqueta: (unidad) => unidad.label,
+              onChanged: (unidad) {
+                setState(() {
+                  _unidadTiempo = unidad;
+                  // Recalcula si ya hay un resultado visible
+                  if (_resultado.value != null) _calcular();
+                });
+              },
+            ),
             const SizedBox(height: 20),
 
-            // ── Selector de tipo de equipo (aplica la constante) ──
+            // ── Selector de tipo de equipo (aplica el factor de goteo) ──
             Padding(
               padding: const EdgeInsets.only(left: 8, bottom: 8),
               child: Text(
@@ -224,8 +184,10 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
                 ),
               ),
             ),
-            _EquipoSelector(
-              selected: _equipo,
+            OpcionSelector<TipoEquipo>(
+              opciones: TipoEquipo.values,
+              seleccionada: _equipo,
+              etiqueta: (equipo) => equipo.label,
               onChanged: (equipo) {
                 setState(() {
                   _equipo = equipo;
@@ -237,27 +199,6 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
             const SizedBox(height: 20),
             Row(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: _calcular,
-                    style: ElevatedButton.styleFrom(
-                      overlayColor: colorScheme.tertiaryContainer,
-                      minimumSize: const Size(double.infinity, 60),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: AppRadius.defaultRadius,
-                      ),
-                    ),
-                    child: Text(
-                      "Calcular",
-                      style: textTheme.titleSmall?.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
                 Expanded(
                   child: OutlinedButton(
                     onPressed: _limpiar,
@@ -282,10 +223,31 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
                     ),
                   ),
                 ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _calcular,
+                    style: ElevatedButton.styleFrom(
+                      overlayColor: colorScheme.tertiaryContainer,
+                      minimumSize: const Size(double.infinity, 60),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadius.defaultRadius,
+                      ),
+                    ),
+                    child: Text(
+                      "Calcular",
+                      style: textTheme.titleSmall?.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onPrimaryContainer,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 20),
-            ValueListenableBuilder<_ResultadoGoteo?>(
+            ValueListenableBuilder<GoteoCalculado?>(
               valueListenable: _resultado,
               builder: (_, valor, _) {
                 return Container(
@@ -340,58 +302,6 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
           ],
         ),
       ),
-    );
-  }
-}
-
-// ================== SELECTOR DE EQUIPO ==================
-class _EquipoSelector extends StatelessWidget {
-  const _EquipoSelector({required this.selected, required this.onChanged});
-
-  final TipoEquipo selected;
-  final ValueChanged<TipoEquipo> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return Row(
-      children: TipoEquipo.values.map((equipo) {
-        final isSelected = equipo == selected;
-        return Expanded(
-          child: Padding(
-            // Espacio entre botones
-            padding: EdgeInsets.only(
-              right: equipo != TipoEquipo.values.last ? 8.0 : 0,
-            ),
-            child: OutlinedButton(
-              onPressed: () => onChanged(equipo),
-              style: OutlinedButton.styleFrom(
-                backgroundColor: isSelected
-                    ? colorScheme.primaryContainer
-                    : colorScheme.primary,
-                foregroundColor: isSelected
-                    ? colorScheme.onPrimaryContainer
-                    : colorScheme.primaryContainer,
-                minimumSize: const Size(double.infinity, 44),
-                padding: EdgeInsets.zero,
-                side: BorderSide(color: colorScheme.primaryContainer),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: AppRadius.defaultRadius,
-                ),
-              ),
-              child: Text(
-                equipo.label,
-                style: textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onPrimaryContainer,
-                ),
-              ),
-            ),
-          ),
-        );
-      }).toList(),
     );
   }
 }

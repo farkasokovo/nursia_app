@@ -337,27 +337,6 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: _calcular,
-                    style: ElevatedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
-                      minimumSize: const Size(double.infinity, 60),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: AppRadius.defaultRadius,
-                      ),
-                    ),
-                    child: Text(
-                      "Calcular",
-                      style: textTheme.titleSmall?.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
                   child: OutlinedButton(
                     onPressed: _limpiar,
                     style: OutlinedButton.styleFrom(
@@ -377,6 +356,27 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: colorScheme.primaryContainer,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _calcular,
+                    style: ElevatedButton.styleFrom(
+                      overlayColor: colorScheme.primaryContainer,
+                      minimumSize: const Size(double.infinity, 60),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadius.defaultRadius,
+                      ),
+                    ),
+                    child: Text(
+                      "Calcular",
+                      style: textTheme.titleSmall?.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onPrimaryContainer,
                       ),
                     ),
                   ),

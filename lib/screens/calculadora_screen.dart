@@ -83,15 +83,12 @@ class CalculadoraScreen extends StatelessWidget {
       // Puedes seguir agregando más aquí y se paginarán solas
     ];
 
-    // En esta pantalla el padding superior es 98 y el espacio superior
-    // estimado para el cálculo de alto de botón es 220 (distinto al default
-    // porque no lleva barra de búsqueda arriba).
+    // El padding superior de 98 deja libre la barra de pestañas que HomeScreen
+    // dibuja encima. Abajo no lleva padding: CategoryGrid mide el espacio que
+    // le queda y aparta él mismo la barra de navegación del sistema.
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 98, 16, 0),
-      child: CategoryGrid(
-        items: todasLasCalculadoras,
-        espacioSuperiorEstimado: 220,
-      ),
+      child: CategoryGrid(items: todasLasCalculadoras),
     );
   }
 }

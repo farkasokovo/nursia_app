@@ -67,6 +67,15 @@ double convertirDosis({
 
 // ================== RESULTADO DEL CÁLCULO ==================
 
+/// Volumen por debajo del cual el resultado se muestra como "0.0 ml".
+///
+/// El resultado se imprime con un decimal, así que todo lo menor a 0.05 ml
+/// redondea a 0.0. El corte coincide además con el límite práctico de medición:
+/// la graduación más fina de una jeringa de insulina es de 0.01 ml y la de una
+/// de 1 ml es de 0.02 ml, así que un volumen menor a 0.05 ml no es medible ni
+/// administrable.
+const double umbralDosisMuyPequena = 0.05;
+
 /// Resultado del cálculo de dosis. Es `sealed` a propósito: obliga a que todo
 /// `switch` cubra los tres casos (válido, inválido, demasiado grande) y que
 /// ninguno se olvide en la UI.
@@ -78,6 +87,17 @@ sealed class ResultadoDosis {
 class DosisCalculada extends ResultadoDosis {
   const DosisCalculada(this.ml);
   final double ml;
+
+  /// El resultado es correcto pero se muestra en pantalla como "0.0 ml".
+  ///
+  /// Pasa cuando la unidad seleccionada no es la que se tenía en mente (dosis
+  /// 10 mg con presentación de 50 g, por ejemplo): el número está bien, pero se
+  /// ve como cero y parece que la calculadora falló. La UI sigue mostrando el
+  /// resultado; solo agrega un aviso para revisar las unidades.
+  ///
+  /// El cero exacto queda fuera a propósito: ahí el usuario capturó una dosis
+  /// de 0 y el resultado que ve es el que corresponde.
+  bool get esMuyPequena => ml > 0 && ml < umbralDosisMuyPequena;
 }
 
 /// Faltan datos, algún campo no es un número, o la presentación es cero.
@@ -158,4 +178,30 @@ String formatearCantidad(double valor) {
     texto = texto.replaceFirst(RegExp(r'\.$'), '');
   }
   return texto;
+}
+
+/// Convierte el texto capturado en la pestaña "Conversor" y lo devuelve ya
+/// formateado, listo para pintarse junto a la etiqueta de la unidad destino.
+///
+/// Devuelve null cuando el texto todavía no representa un número: campo vacío o
+/// solo el punto decimal (el formatter del campo permite escribir "." suelto).
+/// La pantalla muestra su marcador de "sin valor" en ese caso, sin errores.
+///
+/// Vive aquí, y no en el State de la pantalla, para que los casos límite del
+/// conversor (punto al inicio o al final, cero, unidades extremas) se puedan
+/// probar sin montar la UI.
+String? convertirTexto({
+  required String texto,
+  required UnidadDosis origen,
+  required UnidadDosis destino,
+}) {
+  final valor = double.tryParse(texto.trim());
+  if (valor == null) return null;
+
+  final convertido = convertirDosis(
+    valor: valor,
+    origen: origen,
+    destino: destino,
+  );
+  return formatearCantidad(convertido);
 }

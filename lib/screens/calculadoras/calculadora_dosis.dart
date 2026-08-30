@@ -5,6 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../utils/calculo_dosis.dart';
 import '../../widgets/expandable_category_screen.dart';
+import '../../widgets/opcion_selector.dart';
 import '../../widgets/tabbed_content.dart';
 import '../../theme/app_theme.dart';
 
@@ -18,11 +19,13 @@ class CalculadoraDosis extends StatelessWidget {
       title: "Regla de tres",
       icon: PhosphorIconsFill.mathOperations,
       child: TabbedContent(
-        tabs: const [
-          Tab(text: "Cálculo"),
-          Tab(text: "Conversor"),
-          Tab(text: "Información"),
-        ],
+        // Tres pestañas y "Conversor" es la etiqueta más larga del módulo: con
+        // el aire de 20 px por lado, el texto de 20 px de la pestaña activa no
+        // cabía y se cortaba. Bajarlo a 8 le da lugar a la palabra completa sin
+        // mover ni el alto de la barra ni el subrayado, que siguen a la pestaña
+        // y no al padding.
+        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+        tabs: [_pestana("Cálculo"), _pestana("Conversor"), _pestana("Ver más")],
         tabViews: [
           const _CalculoDosisLayout(),
           const _ConversorLayout(),
@@ -32,6 +35,20 @@ class CalculadoraDosis extends StatelessWidget {
     );
   }
 }
+
+/// Pestaña cuyo texto se encoge en vez de cortarse.
+///
+/// Es una salvaguarda, no el arreglo: con el `labelPadding` de esta pantalla el
+/// texto ya cabe entero en un celular normal. El `FittedBox` entra solo cuando
+/// no cabe (pantalla muy angosta, o el tamaño de fuente del sistema en grande),
+/// y ahí encoge lo mínimo necesario. Sin él, `Tab` desvanece el texto por la
+/// orilla.
+///
+/// El `Text` va sin estilo a propósito: hereda el del `TabBar`, que es el que
+/// anima el crecimiento de la pestaña activa.
+Tab _pestana(String texto) => Tab(
+  child: FittedBox(fit: BoxFit.scaleDown, child: Text(texto)),
+);
 
 // El enum UnidadDosis y toda la lógica de conversión viven en
 // lib/utils/calculo_dosis.dart para poder probarse con pruebas unitarias y
@@ -108,7 +125,20 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
           ),
         );
       case DosisCalculada(:final ml):
+        // El resultado se muestra siempre: el número es correcto. El aviso
+        // solo orienta cuando sale tan chico que en pantalla se lee "0.0 ml".
         _resultado.value = ml;
+        if (resultado.esMuyPequena) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'El resultado es muy pequeño. Conviene verificar las unidades '
+                'de medida seleccionadas.',
+              ),
+              duration: Duration(seconds: 4),
+            ),
+          );
+        }
     }
   }
 
@@ -147,8 +177,10 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
               allowDecimal: true,
             ),
             const SizedBox(height: 10),
-            _UnitSelector(
-              selected: _unidadDosis,
+            OpcionSelector<UnidadDosis>(
+              opciones: UnidadDosis.values,
+              seleccionada: _unidadDosis,
+              etiqueta: (unidad) => unidad.label,
               onChanged: (unidad) {
                 setState(() {
                   _unidadDosis = unidad;
@@ -177,8 +209,10 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
               allowDecimal: true,
             ),
             const SizedBox(height: 10),
-            _UnitSelector(
-              selected: _unidadPresentacion,
+            OpcionSelector<UnidadDosis>(
+              opciones: UnidadDosis.values,
+              seleccionada: _unidadPresentacion,
+              etiqueta: (unidad) => unidad.label,
               onChanged: (unidad) {
                 setState(() {
                   _unidadPresentacion = unidad;
@@ -190,27 +224,6 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
             const SizedBox(height: 20),
             Row(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: _calcular,
-                    style: ElevatedButton.styleFrom(
-                      overlayColor: colorScheme.tertiaryContainer,
-                      minimumSize: const Size(double.infinity, 60),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: AppRadius.defaultRadius,
-                      ),
-                    ),
-                    child: Text(
-                      "Calcular",
-                      style: textTheme.titleSmall?.copyWith(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
                 Expanded(
                   child: OutlinedButton(
                     onPressed: _limpiar,
@@ -231,6 +244,27 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: colorScheme.primaryContainer,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _calcular,
+                    style: ElevatedButton.styleFrom(
+                      overlayColor: colorScheme.tertiaryContainer,
+                      minimumSize: const Size(double.infinity, 60),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: AppRadius.defaultRadius,
+                      ),
+                    ),
+                    child: Text(
+                      "Calcular",
+                      style: textTheme.titleSmall?.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onPrimaryContainer,
                       ),
                     ),
                   ),
@@ -269,8 +303,9 @@ class _ConversorLayoutState extends State<_ConversorLayout>
   final _valorController = TextEditingController();
   final _valorFocus = FocusNode();
 
-  /// Resultado ya convertido, en la unidad de destino. Null = sin valor válido.
-  final _resultado = ValueNotifier<double?>(null);
+  /// Resultado ya convertido y formateado, en la unidad de destino.
+  /// Null = el campo todavía no tiene un número válido.
+  final _resultado = ValueNotifier<String?>(null);
 
   UnidadDosis _origen = UnidadDosis.mg;
   UnidadDosis _destino = UnidadDosis.mcg;
@@ -297,13 +332,8 @@ class _ConversorLayoutState extends State<_ConversorLayout>
   }
 
   void _convertir() {
-    final valor = double.tryParse(_valorController.text.trim());
-    if (valor == null) {
-      _resultado.value = null;
-      return;
-    }
-    _resultado.value = convertirDosis(
-      valor: valor,
+    _resultado.value = convertirTexto(
+      texto: _valorController.text,
       origen: _origen,
       destino: _destino,
     );
@@ -333,17 +363,21 @@ class _ConversorLayoutState extends State<_ConversorLayout>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NumericInputField(
-              label: "Unidad a convertir",
+              label: "Unidad a convertir (${_origen.label})",
               textoAyuda: "Ingresa un valor",
               controller: _valorController,
               focusNode: _valorFocus,
-              maxLength: 7,
+              // 8 caracteres, no 7: el punto decimal ocupa un lugar del
+              // límite, así que con 7 no cabían 7 dígitos más el punto.
+              maxLength: 8,
               allowDecimal: true,
             ),
             const SizedBox(height: 20),
             _TituloSelector(texto: "Unidad original"),
-            _UnitSelector(
-              selected: _origen,
+            OpcionSelector<UnidadDosis>(
+              opciones: UnidadDosis.values,
+              seleccionada: _origen,
+              etiqueta: (unidad) => unidad.label,
               onChanged: (unidad) {
                 setState(() => _origen = unidad);
                 _convertir();
@@ -351,8 +385,10 @@ class _ConversorLayoutState extends State<_ConversorLayout>
             ),
             const SizedBox(height: 20),
             _TituloSelector(texto: "Convertir a:"),
-            _UnitSelector(
-              selected: _destino,
+            OpcionSelector<UnidadDosis>(
+              opciones: UnidadDosis.values,
+              seleccionada: _destino,
+              etiqueta: (unidad) => unidad.label,
               onChanged: (unidad) {
                 setState(() => _destino = unidad);
                 _convertir();
@@ -379,14 +415,12 @@ class _ConversorLayoutState extends State<_ConversorLayout>
               ),
             ),
             const SizedBox(height: 20),
-            ValueListenableBuilder<double?>(
+            ValueListenableBuilder<String?>(
               valueListenable: _resultado,
               builder: (_, valor, _) {
                 return _ResultadoContainer(
                   titulo: "Equivale a:",
-                  valor: valor == null
-                      ? "0 ${_destino.label}"
-                      : "${formatearCantidad(valor)} ${_destino.label}",
+                  valor: "${valor ?? "0"} ${_destino.label}",
                 );
               },
             ),
@@ -473,61 +507,6 @@ class _TituloSelector extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-    );
-  }
-}
-
-// ================== SELECTOR DE UNIDADES ==================
-class _UnitSelector extends StatelessWidget {
-  const _UnitSelector({required this.selected, required this.onChanged});
-
-  final UnidadDosis selected;
-  final ValueChanged<UnidadDosis> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return Row(
-      children: UnidadDosis.values.map((unidad) {
-        final isSelected = unidad == selected;
-        return Expanded(
-          child: Padding(
-            // Espacio entre botones
-            padding: EdgeInsets.only(
-              right: unidad != UnidadDosis.values.last ? 8.0 : 0,
-            ),
-            child: OutlinedButton(
-              onPressed: () => onChanged(unidad),
-              style: OutlinedButton.styleFrom(
-                backgroundColor: isSelected
-                    ? colorScheme.primaryContainer
-                    : colorScheme.primary,
-                foregroundColor: isSelected
-                    ? colorScheme.onPrimaryContainer
-                    : colorScheme.primaryContainer,
-                minimumSize: const Size(double.infinity, 44),
-                padding: EdgeInsets.zero,
-                side: BorderSide(color: colorScheme.primaryContainer),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: AppRadius.defaultRadius,
-                ),
-              ),
-              child: Text(
-                unidad.label,
-                style: textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-
-                  color: isSelected
-                      ? colorScheme.onPrimaryContainer
-                      : colorScheme.onPrimaryContainer,
-                ),
-              ),
-            ),
-          ),
-        );
-      }).toList(),
     );
   }
 }

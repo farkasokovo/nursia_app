@@ -590,4 +590,265 @@ void main() {
       }
     });
   });
+
+  // ================================================================
+  // ENTRADA DEL CONVERSOR: casos límite del campo de texto
+  // ================================================================
+  group('convertirTexto: lo que puede llegar del campo', () {
+    String? conv(
+      String texto, {
+      UnidadDosis origen = UnidadDosis.mg,
+      UnidadDosis destino = UnidadDosis.mcg,
+    }) => convertirTexto(texto: texto, origen: origen, destino: destino);
+
+    test('campo vacío no produce resultado', () {
+      expect(conv(''), isNull);
+      expect(conv('   '), isNull);
+    });
+
+    test('solo el punto decimal no produce resultado', () {
+      // El formatter del campo deja escribir "." como primer carácter.
+      expect(conv('.'), isNull);
+    });
+
+    test('punto al inicio se lee como cero entero', () {
+      // .5 mg = 500 mcg
+      expect(conv('.5'), '500');
+      // .25 g = 250 mg
+      expect(
+        conv('.25', origen: UnidadDosis.g, destino: UnidadDosis.mg),
+        '250',
+      );
+    });
+
+    test('punto al final no rompe la lectura', () {
+      // "5." mientras el usuario aún escribe: vale 5.
+      expect(conv('5.'), '5000');
+      expect(conv('0.'), '0');
+    });
+
+    test('ceros a la izquierda no cambian el valor', () {
+      expect(conv('0005'), '5000');
+      expect(conv('00.5'), '500');
+    });
+
+    test('el cero convierte a cero en cualquier par de unidades', () {
+      for (final origen in UnidadDosis.values) {
+        for (final destino in UnidadDosis.values) {
+          expect(
+            conv('0', origen: origen, destino: destino),
+            '0',
+            reason: '0 ${origen.label} -> ${destino.label}',
+          );
+        }
+      }
+    });
+
+    test('misma unidad de origen y destino devuelve el mismo número', () {
+      for (final unidad in UnidadDosis.values) {
+        expect(conv('7.5', origen: unidad, destino: unidad), '7.5');
+        expect(conv('1000', origen: unidad, destino: unidad), '1000');
+      }
+    });
+
+    test('el máximo que cabe en el campo no da notación científica', () {
+      // 8 caracteres es el tope del campo. El peor caso hacia arriba es
+      // g -> mcg: 99999999 g × 1000000 = 99999999000000 mcg.
+      expect(
+        conv('99999999', origen: UnidadDosis.g, destino: UnidadDosis.mcg),
+        '99999999000000',
+      );
+      // Y hacia abajo, mcg -> g: 0.000001 mcg ÷ 1000000 = 0.000000000001 g
+      expect(
+        conv('0.000001', origen: UnidadDosis.mcg, destino: UnidadDosis.g),
+        '0.000000000001',
+      );
+    });
+
+    test('ningún texto capturable produce "e", "Infinity" o "NaN"', () {
+      const entradas = [
+        '0',
+        '.5',
+        '5.',
+        '0.000001',
+        '99999999',
+        '9999999.9',
+        '1000000',
+        '0.0000001',
+      ];
+      for (final origen in UnidadDosis.values) {
+        for (final destino in UnidadDosis.values) {
+          for (final entrada in entradas) {
+            final texto = conv(entrada, origen: origen, destino: destino);
+            expect(texto, isNotNull, reason: entrada);
+            for (final basura in ['e', 'E', 'Infinity', 'NaN']) {
+              expect(
+                texto!.contains(basura),
+                isFalse,
+                reason:
+                    '$entrada ${origen.label} -> ${destino.label} '
+                    'dio "$texto"',
+              );
+            }
+          }
+        }
+      }
+    });
+
+    test('el resultado nunca es más largo de lo que cabe formateado', () {
+      // Cota del peor caso: 14 enteros (99999999000000) y 12 decimales
+      // (0.000000000001). Si alguna combinación se saliera de ahí, el
+      // FittedBox del contenedor tendría que encogerla demasiado.
+      for (final origen in UnidadDosis.values) {
+        for (final destino in UnidadDosis.values) {
+          for (final entrada in ['99999999', '0.000001', '9999999.9']) {
+            final texto = conv(entrada, origen: origen, destino: destino)!;
+            expect(texto.length, lessThanOrEqualTo(14), reason: texto);
+          }
+        }
+      }
+    });
+  });
+
+  // ================================================================
+  // AVISO DE RESULTADO QUE SE VE COMO CERO
+  // ================================================================
+  group('DosisCalculada.esMuyPequena', () {
+    DosisCalculada calculada(
+      String dosis,
+      String diluyente,
+      String presentacion, {
+      UnidadDosis unidadDosis = UnidadDosis.mg,
+      UnidadDosis unidadPresentacion = UnidadDosis.mg,
+    }) {
+      final resultado = calculo(
+        dosis,
+        diluyente,
+        presentacion,
+        unidadDosis: unidadDosis,
+        unidadPresentacion: unidadPresentacion,
+      );
+      expect(resultado, isA<DosisCalculada>());
+      return resultado as DosisCalculada;
+    }
+
+    test('el caso reportado: presentación en g cuando se quería mg', () {
+      // 50 g = 50000 mg. (10 × 2) / 50000 = 0.0004 ml -> en pantalla "0.0 ml"
+      final resultado = calculada(
+        '10',
+        '2',
+        '50',
+        unidadPresentacion: UnidadDosis.g,
+      );
+      expect(resultado.ml, closeTo(0.0004, 1e-12));
+      expect(resultado.ml.toStringAsFixed(1), '0.0');
+      expect(resultado.esMuyPequena, isTrue);
+    });
+
+    test('el resultado se sigue calculando: el aviso no lo reemplaza', () {
+      // El número correcto sigue disponible para la pantalla.
+      final resultado = calculada(
+        '10',
+        '2',
+        '50',
+        unidadPresentacion: UnidadDosis.g,
+      );
+      expect(resultado.ml, greaterThan(0));
+    });
+
+    test('un resultado normal no dispara el aviso', () {
+      // (500 × 10) / 1000 = 5 ml
+      expect(calculada('500', '10', '1000').esMuyPequena, isFalse);
+      // 50 mcg = 0.05 mg. (0.05 × 10) / 0.5 = 1 ml
+      expect(
+        calculada('50', '10', '0.5', unidadDosis: UnidadDosis.mcg).esMuyPequena,
+        isFalse,
+      );
+    });
+
+    test('un resultado chico pero medible no dispara el aviso', () {
+      // (1 × 1) / 10 = 0.1 ml: se puede medir en jeringa de 1 ml.
+      final decima = calculada('1', '1', '10');
+      expect(decima.ml, closeTo(0.1, 1e-12));
+      expect(decima.esMuyPequena, isFalse);
+      // 2000 mcg = 2 mg; 1 g = 1000 mg. (2 × 100) / 1000 = 0.2 ml
+      expect(
+        calculada(
+          '2000',
+          '100',
+          '1',
+          unidadDosis: UnidadDosis.mcg,
+          unidadPresentacion: UnidadDosis.g,
+        ).esMuyPequena,
+        isFalse,
+      );
+    });
+
+    test('el umbral está justo donde la pantalla deja de mostrar 0.0', () {
+      // (5 × 1) / 100 = 0.05 ml -> se muestra "0.1 ml": no avisa.
+      final enElUmbral = calculada('5', '1', '100');
+      expect(enElUmbral.ml, closeTo(umbralDosisMuyPequena, 1e-12));
+      expect(enElUmbral.ml.toStringAsFixed(1), '0.1');
+      expect(enElUmbral.esMuyPequena, isFalse);
+
+      // (4.9 × 1) / 100 = 0.049 ml -> se muestra "0.0 ml": avisa.
+      final debajo = calculada('4.9', '1', '100');
+      expect(debajo.ml, closeTo(0.049, 1e-12));
+      expect(debajo.ml.toStringAsFixed(1), '0.0');
+      expect(debajo.esMuyPequena, isTrue);
+    });
+
+    test('avisar equivale exactamente a que la pantalla muestre 0.0', () {
+      // La condición del aviso y el texto del resultado no pueden separarse:
+      // si un día cambian los decimales que se muestran, esto lo detecta.
+      const dosis = [
+        '0.1',
+        '1',
+        '4.9',
+        '5',
+        '10',
+        '50',
+        '100',
+        '500',
+        '2.5',
+        '0.5',
+      ];
+      for (final unidadDosis in UnidadDosis.values) {
+        for (final unidadPresentacion in UnidadDosis.values) {
+          for (final valor in dosis) {
+            final resultado = calculo(
+              valor,
+              '10',
+              '100',
+              unidadDosis: unidadDosis,
+              unidadPresentacion: unidadPresentacion,
+            );
+            if (resultado is! DosisCalculada) continue;
+            final seVeComoCero = resultado.ml.toStringAsFixed(1) == '0.0';
+            final positivo = resultado.ml > 0;
+            expect(
+              resultado.esMuyPequena,
+              seVeComoCero && positivo,
+              reason:
+                  '$valor ${unidadDosis.label} / 10 ml / '
+                  '100 ${unidadPresentacion.label} = ${resultado.ml}',
+            );
+          }
+        }
+      }
+    });
+
+    test('la dosis en cero no dispara el aviso', () {
+      // El resultado es 0 ml porque la dosis capturada es 0, no por la unidad.
+      final resultado = calculada('0', '10', '1000');
+      expect(resultado.ml, 0);
+      expect(resultado.esMuyPequena, isFalse);
+    });
+
+    test('el diluyente en cero tampoco dispara el aviso', () {
+      final resultado = calculada('500', '0', '1000');
+      expect(resultado.ml, 0);
+      expect(resultado.esMuyPequena, isFalse);
+    });
+  });
 }
