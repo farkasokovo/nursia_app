@@ -92,7 +92,16 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
     final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
+      // Aire inferior + el alto real de la barra del sistema, para que la
+      // tarjeta del contenido se vea cerrada y no cortada contra la barra.
+      // Esta pantalla tiene Scaffold propio, sin el SafeArea del molde de las
+      // calculadoras.
+      padding: EdgeInsets.fromLTRB(
+        20,
+        20,
+        20,
+        20 + MediaQuery.paddingOf(context).bottom,
+      ),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(

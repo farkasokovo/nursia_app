@@ -30,12 +30,50 @@ class InfoActualizacion {
   const InfoActualizacion({required this.urlDescarga, required this.notas});
 }
 
-/// Consulta el version.json remoto y compara con la versión instalada.
+/// Resultado detallado de una verificación de versión.
 ///
-/// Devuelve [InfoActualizacion] SOLO si la versión remota es estrictamente
-/// mayor que la instalada. En cualquier otro caso (sin red, timeout, JSON
-/// inválido, versión igual o menor) devuelve null. Nunca lanza excepciones.
-Future<InfoActualizacion?> buscarActualizacion() async {
+/// Existe porque hay dos situaciones que [buscarActualizacion] no puede
+/// distinguir: "estás al día" y "no se pudo verificar" devuelven las dos null.
+/// Al banner eso le da igual (en ambos casos no muestra nada), pero la
+/// pantalla de actualizaciones necesita separarlas: ahí el usuario pidió la
+/// verificación a mano y merece saber si falló.
+///
+/// Es `sealed` para que todo `switch` cubra los tres casos.
+sealed class ResultadoVerificacion {
+  const ResultadoVerificacion();
+}
+
+/// La versión remota es más nueva que la instalada.
+class HayActualizacion extends ResultadoVerificacion {
+  const HayActualizacion(this.info, this.versionRemota);
+
+  final InfoActualizacion info;
+  final String versionRemota;
+}
+
+/// La versión instalada es la más reciente publicada.
+class AlDia extends ResultadoVerificacion {
+  const AlDia(this.versionInstalada);
+
+  final String versionInstalada;
+}
+
+/// No se pudo verificar: sin red, timeout, respuesta rara o JSON inválido.
+///
+/// [motivo] es para el log, no para la pantalla: el mensaje que ve el usuario
+/// lo decide la UI, en su propio tono.
+class FalloVerificacion extends ResultadoVerificacion {
+  const FalloVerificacion(this.motivo);
+
+  final String motivo;
+}
+
+/// Consulta el version.json remoto y devuelve el resultado completo.
+///
+/// Nunca lanza excepciones: cualquier fallo se convierte en
+/// [FalloVerificacion]. La usa la pantalla de actualizaciones, donde la
+/// verificación es explícita y el error sí se muestra.
+Future<ResultadoVerificacion> verificarActualizacion() async {
   try {
     final info = await PackageInfo.fromPlatform();
     final versionInstalada = info.version;
@@ -45,10 +83,8 @@ Future<InfoActualizacion?> buscarActualizacion() async {
         .timeout(_timeout);
 
     if (respuesta.statusCode != 200) {
-      debugPrint(
-        'Verificador: respuesta ${respuesta.statusCode}, se ignora.',
-      );
-      return null;
+      debugPrint('Verificador: respuesta ${respuesta.statusCode}, se ignora.');
+      return FalloVerificacion('respuesta ${respuesta.statusCode}');
     }
 
     final data = json.decode(respuesta.body) as Map<String, dynamic>;
@@ -56,32 +92,52 @@ Future<InfoActualizacion?> buscarActualizacion() async {
     final urlDescarga = (data['urlDescarga'] as String?)?.trim();
     final notas = (data['notas'] as String?)?.trim() ?? '';
 
-    // Sin los campos mínimos no podemos hacer nada útil: silencio.
+    // Sin los campos mínimos no podemos hacer nada útil.
     if (ultimaVersion == null ||
         ultimaVersion.isEmpty ||
         urlDescarga == null ||
         urlDescarga.isEmpty) {
       debugPrint('Verificador: JSON sin campos requeridos, se ignora.');
-      return null;
+      return const FalloVerificacion('JSON sin campos requeridos');
     }
 
     if (_compararVersiones(ultimaVersion, versionInstalada) > 0) {
       debugPrint(
         'Verificador: hay actualización ($versionInstalada -> $ultimaVersion).',
       );
-      return InfoActualizacion(urlDescarga: urlDescarga, notas: notas);
+      return HayActualizacion(
+        InfoActualizacion(urlDescarga: urlDescarga, notas: notas),
+        ultimaVersion,
+      );
     }
 
     debugPrint(
       'Verificador: al día (instalada $versionInstalada, remota $ultimaVersion).',
     );
-    return null;
+    return AlDia(versionInstalada);
   } catch (e) {
     // Cualquier fallo (sin red, timeout, parseo) se traga aquí: la app sigue
-    // funcionando normal, sin banner y sin quejas.
+    // funcionando normal.
     debugPrint('Verificador: verificación omitida ($e).');
-    return null;
+    return FalloVerificacion('$e');
   }
+}
+
+/// Consulta el version.json remoto y compara con la versión instalada.
+///
+/// Devuelve [InfoActualizacion] SOLO si la versión remota es estrictamente
+/// mayor que la instalada. En cualquier otro caso (sin red, timeout, JSON
+/// inválido, versión igual o menor) devuelve null. Nunca lanza excepciones.
+///
+/// REGLA DE ORO intacta: es la que usa el banner del arranque, que no debe
+/// molestar nunca. Hoy es una cáscara de [verificarActualizacion], que hace el
+/// trabajo; el comportamiento y la firma son los mismos de siempre.
+Future<InfoActualizacion?> buscarActualizacion() async {
+  final resultado = await verificarActualizacion();
+  return switch (resultado) {
+    HayActualizacion(:final info) => info,
+    AlDia() || FalloVerificacion() => null,
+  };
 }
 
 /// Compara dos versiones "major.minor.patch" por segmentos NUMÉRICOS.
@@ -108,8 +164,5 @@ int _compararVersiones(String a, String b) {
 /// cualquier caracter no numérico dentro de un segmento (lo vuelve 0).
 List<int> _parsearSegmentos(String version) {
   final sinBuild = version.split('+').first;
-  return sinBuild
-      .split('.')
-      .map((s) => int.tryParse(s.trim()) ?? 0)
-      .toList();
+  return sinBuild.split('.').map((s) => int.tryParse(s.trim()) ?? 0).toList();
 }

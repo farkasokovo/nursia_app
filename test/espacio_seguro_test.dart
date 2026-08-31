@@ -15,6 +15,11 @@ import 'package:nursia_app/widgets/grid_botones_dashboard.dart';
 import 'package:nursia_app/widgets/home_nav_button.dart';
 import 'package:nursia_app/widgets/molde_escalas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
+import 'package:nursia_app/models/norma.dart';
+import 'package:nursia_app/models/ver_mas_screen.dart';
+import 'package:nursia_app/screens/ficha_normativa_screen.dart';
+import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
+import 'package:nursia_app/widgets/searchable_screen.dart';
 import 'package:nursia_app/widgets/tarjeta_desplegable.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -290,6 +295,331 @@ void main() {
       expect(
         tester.getSize(find.byType(HomeNavButton).first).height,
         closeTo(GridBotonesDashboard.altoFilaMinima, 0.01),
+      );
+    });
+  });
+
+  group('Resultados del buscador (NOMs, Escalas, Farmacología)', () {
+    Future<void> buscar(WidgetTester tester, double inset) async {
+      await montar(
+        tester,
+        Scaffold(
+          body: SearchableScreen<String>(
+            // Suficientes resultados para que la lista se desborde y la última
+            // tarjeta llegue de verdad hasta abajo: con pocos items el bug no
+            // se manifiesta.
+            items: List.generate(20, (i) => 'Escala número $i'),
+            searchableFields: (item) => [item],
+            hintText: 'Buscar escala...',
+            onItemTap: (_) {},
+            itemTitle: (item) => item,
+            emptyWidget: const Text('Sin resultados'),
+            categoriesBuilder: (context) => const Text('CATEGORIAS'),
+          ),
+        ),
+        inset: inset,
+      );
+      // Con el buscador vacío se ven las categorías; hay que escribir para que
+      // aparezca la lista de resultados.
+      await tester.enterText(find.byType(TextField), 'Escala');
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('la lista reserva la barra del sistema más el aire mínimo', (
+      tester,
+    ) async {
+      await buscar(tester, insetBotones);
+
+      final lista = tester.widget<ListView>(find.byType(ListView));
+      expect(
+        lista.padding,
+        const EdgeInsets.only(bottom: 16 + insetBotones),
+        reason: 'La última tarjeta quedaría debajo de la barra del sistema',
+      );
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('con gestos reserva menos, pero conserva el aire', (
+      tester,
+    ) async {
+      await buscar(tester, insetGestos);
+
+      final lista = tester.widget<ListView>(find.byType(ListView));
+      expect(lista.padding, const EdgeInsets.only(bottom: 16 + insetGestos));
+    });
+
+    testWidgets('sin barra del sistema queda solo el aire mínimo', (
+      tester,
+    ) async {
+      await buscar(tester, 0);
+
+      final lista = tester.widget<ListView>(find.byType(ListView));
+      expect(lista.padding, const EdgeInsets.only(bottom: 16));
+    });
+
+    testWidgets('la última tarjeta queda con aire sobre la barra', (
+      tester,
+    ) async {
+      await buscar(tester, insetBotones);
+
+      // Hasta el tope del scroll, que es donde se veía el problema. Con
+      // jumpTo en vez de fling la posición es exacta y no depende del rebote.
+      final posicion = tester
+          .state<ScrollableState>(
+            find.descendant(
+              of: find.byType(ListView),
+              matching: find.byType(Scrollable),
+            ),
+          )
+          .position;
+      posicion.jumpTo(posicion.maxScrollExtent);
+      await tester.pumpAndSettle();
+
+      // El buscador ordena por relevancia, así que no se asume cuál item
+      // quedó al final: se mide la tarjeta que llegue más abajo.
+      final bordeMasBajo = tester
+          .widgetList<Card>(find.byType(Card))
+          .map((tarjeta) => tester.getRect(find.byWidget(tarjeta)).bottom)
+          .reduce((a, b) => a > b ? a : b);
+
+      // Se exige el aire, no solo que no invada: un ListView sin `padding`
+      // propio ya reservaba el inset por su cuenta (Flutter lo aplica solo
+      // cuando el padding es null), pero dejaba la tarjeta pegada a la barra.
+      expect(
+        bordeMasBajo,
+        lessThanOrEqualTo(pantalla.height - insetBotones - 16),
+        reason: 'La última tarjeta queda pegada a la barra del sistema',
+      );
+      expect(tester.takeException(), isNull);
+    });
+  });
+
+  // Las pantallas de contenido de NOMs, Farmacología y las escalas tienen
+  // Scaffold propio y NO heredan el SafeArea del molde de las calculadoras, que
+  // es lo que hace que la pestaña "Ver más" de una calculadora se vea bien. Sin
+  // reservar la barra, la tarjeta que envuelve el texto se corta contra ella en
+  // vez de verse cerrada.
+  group('Contenido de las fichas', () {
+    /// Desplaza hasta el tope y devuelve el borde inferior de la tarjeta que
+    /// envuelve el contenido.
+    Future<double> fondoDeLaTarjeta(WidgetTester tester) async {
+      final posicion = tester
+          .state<ScrollableState>(find.byType(Scrollable).first)
+          .position;
+      posicion.jumpTo(posicion.maxScrollExtent);
+      await tester.pumpAndSettle();
+
+      return tester
+          .getRect(
+            find
+                .descendant(
+                  of: find.byType(SingleChildScrollView),
+                  matching: find.byType(Container),
+                )
+                .first,
+          )
+          .bottom;
+    }
+
+    testWidgets('la ficha de una NOM cierra su tarjeta sobre la barra', (
+      tester,
+    ) async {
+      final norma = Norma(
+        codigo: 'NOM-004',
+        titulo: 'Del expediente clínico',
+        tituloCorto: 'Expediente',
+        areaSalud: 'general',
+        resumen: 'Resumen de la norma. ' * 20,
+        palabrasClave: 'expediente',
+        puntosClave: List.generate(
+          8,
+          (i) => const PuntoClave(icono: 'check', texto: 'Punto clave. '),
+        ),
+        dofReferencia: 'DOF 15/10/2012',
+      );
+
+      // Superficie ancha a propósito: la fuente de las pruebas es mucho más
+      // ancha que Poppins y desborda el renglón del DOF a 360 px, lo que
+      // ensuciaría la medición vertical, que es lo que interesa aquí.
+      const alto = 900.0;
+      tester.view.physicalSize = const Size(800 * 3, alto * 3);
+      tester.view.devicePixelRatio = 3.0;
+      addTearDown(tester.view.reset);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme(),
+          home: MediaQuery(
+            data: const MediaQueryData(
+              size: Size(800, alto),
+              padding: EdgeInsets.only(top: 24, bottom: insetBotones),
+              viewPadding: EdgeInsets.only(top: 24, bottom: insetBotones),
+            ),
+            child: FichaNormativaScreen(norma: norma),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // 20 px de aire, los mismos que deja info_tab en las calculadoras.
+      expect(
+        await fondoDeLaTarjeta(tester),
+        lessThanOrEqualTo(alto - insetBotones - 20),
+      );
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('el "Ver más" de las escalas también', (tester) async {
+      final info = VerMasScreen(
+        name: 'Downton',
+        description: 'Descripción de la escala. ' * 10,
+        whenToUse: ['Uno.', 'Dos.'],
+        components: ['Tres.', 'Cuatro.'],
+        interpretation: ['Cinco.'],
+        limitations: ['Seis.'],
+        clinicalNotes: ['Siete.'],
+        references: const [
+          {'text': 'Referencia de ejemplo.', 'url': ''},
+        ],
+      );
+
+      await montar(
+        tester,
+        Scaffold(body: EstructuraVerMasScreen(info: info)),
+        inset: insetBotones,
+      );
+
+      final posicion = tester
+          .state<ScrollableState>(find.byType(Scrollable).first)
+          .position;
+      posicion.jumpTo(posicion.maxScrollExtent);
+      await tester.pumpAndSettle();
+
+      // Aquí el aire propio de la pantalla es 16.
+      final ultimo = tester.getRect(find.byType(SingleChildScrollView));
+      final contenido = tester.getRect(
+        find
+            .descendant(
+              of: find.byType(SingleChildScrollView),
+              matching: find.byType(Column),
+            )
+            .first,
+      );
+      expect(
+        ultimo.bottom - contenido.bottom,
+        greaterThanOrEqualTo(16 + insetBotones),
+      );
+    });
+  });
+
+  // Pestaña "Escala": mientras la escala está incompleta no hay panel de
+  // resultado, así que el propio ScaleResultFooter reserva la barra del
+  // sistema. Las 15 escalas comparten esta estructura (lista desplazable
+  // dentro de un Expanded y el footer como último hijo de la columna).
+  group('Lista de parámetros de las escalas', () {
+    Widget escalaIncompleta({required bool conResultado}) {
+      return Scaffold(
+        body: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      // Suficientes para que la lista se desborde: con pocas
+                      // tarjetas la última nunca llega hasta abajo y el bug no
+                      // se manifiesta.
+                      for (var i = 0; i < 14; i++)
+                        Card(
+                          child: SizedBox(
+                            height: 90,
+                            width: double.infinity,
+                            child: Center(child: Text('Parámetro $i')),
+                          ),
+                        ),
+                      // Las 15 escalas cierran su lista con este aire.
+                      const SizedBox(height: 20),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            ScaleResultFooter(visible: conResultado, resultado: '12'),
+          ],
+        ),
+      );
+    }
+
+    testWidgets('sin resultado, el footer reserva la barra del sistema', (
+      tester,
+    ) async {
+      await montar(
+        tester,
+        escalaIncompleta(conResultado: false),
+        inset: insetBotones,
+      );
+
+      // Antes devolvía SizedBox.shrink() y la lista llegaba hasta el borde.
+      expect(
+        tester.getSize(find.byType(ScaleResultFooter)).height,
+        insetBotones,
+      );
+    });
+
+    testWidgets(
+      'la última tarjeta de parámetros queda con aire sobre la barra',
+      (tester) async {
+        await montar(
+          tester,
+          escalaIncompleta(conResultado: false),
+          inset: insetBotones,
+        );
+
+        final posicion = tester
+            .state<ScrollableState>(find.byType(Scrollable).first)
+            .position;
+        posicion.jumpTo(posicion.maxScrollExtent);
+        await tester.pumpAndSettle();
+
+        final bordeMasBajo = tester
+            .widgetList<Card>(find.byType(Card))
+            .map((tarjeta) => tester.getRect(find.byWidget(tarjeta)).bottom)
+            .reduce((a, b) => a > b ? a : b);
+
+        // Los 20 de la propia escala, encima de la barra.
+        expect(
+          bordeMasBajo,
+          lessThanOrEqualTo(pantalla.height - insetBotones - 20),
+        );
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets('sin barra del sistema no se cuela ningún hueco extra', (
+      tester,
+    ) async {
+      await montar(tester, escalaIncompleta(conResultado: false), inset: 0);
+
+      expect(tester.getSize(find.byType(ScaleResultFooter)).height, 0);
+    });
+
+    testWidgets('con resultado manda el panel, que ya aparta la barra', (
+      tester,
+    ) async {
+      await montar(
+        tester,
+        escalaIncompleta(conResultado: true),
+        inset: insetBotones,
+      );
+
+      // El panel llega hasta la orilla y sus botones quedan por encima.
+      final panel = tester.getRect(find.byType(ScaleResultFooter));
+      expect(panel.bottom, closeTo(pantalla.height, 0.01));
+      expect(
+        tester.getRect(find.text('Finalizar')).bottom,
+        lessThanOrEqualTo(pantalla.height - insetBotones),
       );
     });
   });

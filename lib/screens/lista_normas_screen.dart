@@ -72,7 +72,14 @@ class _ListaNormasFiltradaScreenState extends State<ListaNormasFiltradaScreen> {
     }
 
     return ListView.separated(
-      padding: const EdgeInsets.all(20),
+      // Declarar un padding propio apaga la reserva automática que Flutter
+      // hace del MediaQuery, así que el alto de la barra se suma aquí a mano.
+      padding: EdgeInsets.fromLTRB(
+        20,
+        20,
+        20,
+        20 + MediaQuery.paddingOf(context).bottom,
+      ),
       itemCount: _normasFiltradas.length,
       separatorBuilder: (context, index) => const SizedBox(height: 12),
       itemBuilder: (context, index) {

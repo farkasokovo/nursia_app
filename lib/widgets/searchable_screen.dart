@@ -67,6 +67,15 @@ class SearchableScreen<T> extends StatefulWidget {
 }
 
 class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
+  /// Aire entre la última tarjeta de resultados y la barra del sistema.
+  ///
+  /// Se suma al inset real de esa barra. Es un poco más que el margen mínimo de
+  /// 12 que usan los grids porque aquí el último elemento es tocable y cae
+  /// justo en el arco del pulgar; además nada más marca el final de la lista.
+  /// Con las tarjetas aportando 6 de su propio margen, el último resultado
+  /// queda a 22 px de la barra.
+  static const double _aireInferior = 16;
+
   final _searchController = TextEditingController();
   final _searchFocus = FocusNode();
 
@@ -247,6 +256,18 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
     if (_resultados.isEmpty) return widget.emptyWidget;
 
     return ListView.builder(
+      // Aire inferior para que la última tarjeta no quede debajo de la barra de
+      // navegación del sistema. El inset se consulta con `paddingOf`, que es lo
+      // mismo que lee el `SafeArea` de `category_grid.dart`: reporta la barra
+      // que todavía no ha apartado nadie, y se vuelve 0 cuando el teclado la
+      // tapa, así al escribir en el buscador no se desperdicia media pantalla.
+      //
+      // Va como padding de la lista y no como `SafeArea` alrededor: así el
+      // contenido sigue desplazándose por detrás de la barra (comportamiento
+      // normal de Android), y lo único que cambia es dónde termina el scroll.
+      padding: EdgeInsets.only(
+        bottom: _aireInferior + MediaQuery.paddingOf(context).bottom,
+      ),
       itemCount: _resultados.length,
       itemBuilder: (context, index) {
         final item = _resultados[index];

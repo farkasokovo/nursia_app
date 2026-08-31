@@ -16,6 +16,7 @@ dependencies:
   provider: ^6.1.2
   package_info_plus: ^10.2.0
   http: ^1.2.0     # única parte de la app que usa red: verificación opcional de versión
+  shared_preferences: ^2.3.0   # marcador de la bienvenida ya vista (almacenamiento nativo)
 
 dev_dependencies:
   flutter_test:
@@ -70,3 +71,4 @@ flutter:
   - assets/data/normas_data.json
   - assets/data/pendientes_data.json
   - assets/data/esenciales_data.json
+  - assets/data/changelog.json

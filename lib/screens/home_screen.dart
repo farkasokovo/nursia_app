@@ -4,7 +4,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../utils/url_launcher_helper.dart';
 import '../utils/verificador_actualizacion.dart';
+import '../utils/bienvenida_version.dart';
+import '../utils/changelog_local.dart';
+import '../utils/preferencias_app.dart';
 import 'acerca_de_screen.dart';
+import 'actualizaciones_screen.dart';
+import 'bienvenida_screen.dart';
 import 'home_dashboard.dart';
 import 'normativa_screen.dart';
 import 'calculadora_screen.dart';
@@ -46,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
   InfoActualizacion? _infoActualizacion;
   bool _bannerDescartado = false;
 
+  /// Mientras la bienvenida está abierta, el banner de actualización no se
+  /// construye. Ver la nota de prioridad en [_mostrarBienvenidaSiToca].
+  bool _bienvenidaAbierta = false;
+
   @override
   void initState() {
     super.initState();
@@ -55,8 +64,48 @@ class _HomeScreenState extends State<HomeScreen> {
     // retrasar el arranque ni la interacción. Es completamente opcional: si
     // falla o no hay red, buscarActualizacion() devuelve null y no pasa nada.
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // La bienvenida va primero: es local, instantánea y trata de la versión
+      // que el usuario ACABA de instalar. La verificación remota puede tardar
+      // o no llegar nunca.
+      _mostrarBienvenidaSiToca();
       _verificarActualizacion();
     });
+  }
+
+  /// Muestra una sola vez, después de actualizar, las novedades de la versión
+  /// instalada.
+  ///
+  /// PRIORIDAD FRENTE AL BANNER: la bienvenida gana. Se abre como una ruta
+  /// completa encima del inicio, así que el banner queda tapado por
+  /// construcción, y además no se dibuja mientras ella esté abierta. Al cerrar
+  /// con "Entendido", si la verificación remota encontró una versión todavía
+  /// más nueva, el banner aparece entonces. Nunca se encimen: van en secuencia.
+  ///
+  /// Como todo lo que toca disco en esta pantalla, cualquier fallo se traga:
+  /// en el peor caso no se muestra la bienvenida.
+  Future<void> _mostrarBienvenidaSiToca() async {
+    try {
+      final version = (await _packageInfoFuture).version;
+      final debeMostrar = await debeMostrarBienvenida(
+        versionInstalada: version,
+        almacen: AlmacenPersistente(),
+      );
+      if (!debeMostrar || !mounted) return;
+
+      final notas = await ChangelogLocal.notasDe(version);
+      if (notas == null || !mounted) return;
+
+      setState(() => _bienvenidaAbierta = true);
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => BienvenidaScreen(notas: notas),
+          fullscreenDialog: true,
+        ),
+      );
+      if (mounted) setState(() => _bienvenidaAbierta = false);
+    } catch (e) {
+      debugPrint('Bienvenida: omitida ($e).');
+    }
   }
 
   Future<void> _verificarActualizacion() async {
@@ -128,7 +177,9 @@ class _HomeScreenState extends State<HomeScreen> {
               // opaca (sin ocultar del todo) el resto de la pantalla. Solo se
               // construye si hay versión nueva y no fue descartado esta
               // sesión; si no, el Stack queda igual que antes.
-              if (_infoActualizacion != null && !_bannerDescartado) ...[
+              if (_infoActualizacion != null &&
+                  !_bannerDescartado &&
+                  !_bienvenidaAbierta) ...[
                 Positioned.fill(
                   child: GestureDetector(
                     // Absorbe los toques sobre el scrim: el contenido de
@@ -233,6 +284,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (_) => const SugerenciasScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  _buildDrawerItem(
+                    context: context,
+                    colorScheme: colorScheme,
+                    textTheme: textTheme,
+                    icon: PhosphorIconsBold.arrowsClockwise,
+                    title: 'Actualizaciones',
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ActualizacionesScreen(),
                         ),
                       );
                     },

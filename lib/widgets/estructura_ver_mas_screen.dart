@@ -32,7 +32,16 @@ class EstructuraVerMasScreen extends StatelessWidget {
     ].whereType<Widget>().toList();
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      // Aire inferior + el alto real de la barra del sistema. El molde de las
+      // escalas deja el borde inferior sin apartar a propósito (para que el
+      // footer de resultado llegue hasta la orilla), así que el "Ver más" se
+      // reserva su propio espacio.
+      padding: EdgeInsets.fromLTRB(
+        16,
+        16,
+        16,
+        16 + MediaQuery.paddingOf(context).bottom,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

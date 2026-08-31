@@ -1,0 +1,28 @@
+[
+  {
+    "version": "1.2.1",
+    "fecha": "2026-08-30",
+    "cambios": [
+      "Nueva pantalla de actualizaciones en el menú, con verificación manual y las novedades de la versión instalada.",
+      "La calculadora de regla de tres acepta mcg, mg y g también en la presentación del fármaco, y suma una pestaña de conversor entre esas unidades.",
+      "Los campos numéricos de las calculadoras muestran una indicación que ya no desaparece al escribir.",
+      "Los botones de categoría, el tablero de inicio y los resultados de las escalas dejan de quedar debajo de la barra de navegación del sistema.",
+      "El botón atrás minimiza la app al primer intento y ya no deja la pantalla en negro.",
+      "Corrección en la farmacodinamia de ondansetrón: describe el mecanismo de acción sin atarlo a quimioterapia ni radioterapia."
+    ]
+  },
+  {
+    "version": "1.2.0",
+    "fecha": "2026-08-29",
+    "cambios": [
+      "Cinco medicamentos nuevos: omeprazol, pantoprazol, metoclopramida, ondansetrón y salbutamol.",
+      "La calculadora de dosis incluye un conversor de unidades y permite elegir mcg, mg o g en ambos campos.",
+      "El goteo IV acepta minutos además de horas.",
+      "Aviso cuando el resultado de una dosis es sospechosamente pequeño, para revisar las unidades seleccionadas.",
+      "Nuevo diseño en las fichas de medicamentos, escalas y calculadoras, con íconos por sección.",
+      "Campos numéricos más compactos y con etiqueta flotante.",
+      "Corregido el desbordamiento de los botones sobre la barra de navegación del sistema.",
+      "Corregido el comportamiento del botón atrás, que dejaba la app en pantalla negra."
+    ]
+  }
+]

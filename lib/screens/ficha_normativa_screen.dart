@@ -34,7 +34,17 @@ class FichaNormativaScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        // El aire de abajo suma el alto real de la barra de navegación del
+        // sistema. Sin eso, la tarjeta que envuelve el contenido se corta
+        // contra la barra en vez de verse cerrada. Es lo mismo que consigue
+        // `info_tab.dart` gracias al SafeArea de ExpandableCategoryScreen;
+        // esta pantalla tiene Scaffold propio y no lo hereda.
+        padding: EdgeInsets.fromLTRB(
+          20,
+          20,
+          20,
+          20 + MediaQuery.paddingOf(context).bottom,
+        ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(

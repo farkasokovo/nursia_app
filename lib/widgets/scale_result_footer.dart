@@ -20,7 +20,18 @@ class ScaleResultFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!visible) return const SizedBox.shrink();
+    if (!visible) {
+      // Todavía no hay resultado, pero este widget sigue siendo el piso de la
+      // pantalla de la escala: reserva el alto real de la barra de navegación
+      // del sistema para que la última tarjeta de parámetros no termine debajo
+      // de ella. El aire ya lo ponen las escalas, que cierran su lista con un
+      // SizedBox de 20, igual que las fichas y que info_tab.
+      //
+      // Está aquí y no en las 15 pantallas de escala porque en todas el footer
+      // es el último hijo de la columna. Cuando el resultado aparece, este
+      // hueco lo ocupa el panel, que aparta la barra por su cuenta.
+      return SizedBox(height: MediaQuery.paddingOf(context).bottom);
+    }
 
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
