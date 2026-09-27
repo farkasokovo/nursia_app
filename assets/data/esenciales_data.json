@@ -328,8 +328,8 @@
     "contenido": [
       {
         "tipo": "texto",
-        "titulo": "Glosario",
-        "subtitulo": "FiO2\n(Fracción inspirada de oxígeno)",
+        "titulo": "FiO2",
+        "subtitulo": "Fracción inspirada de oxígeno",
         "valor": "Proporción de oxígeno que contiene el gas inspirado, expresada en porcentaje. El aire ambiente tiene una FiO2 de 21%; la oxigenoterapia consiste en elevarla por encima de ese valor."
       },
       {
@@ -1127,7 +1127,7 @@
       }
     ],
     "fuente": "Revista CONAMED (2021); GPC ISSSTE-680-13 (2013); Guía clínica española del acceso vascular GEMAV (2017)",
-    "orden": 4
+    "orden": 3
   },
   {
     "titulo": "Precauciones de aislamiento por mecanismo de transmisión",
@@ -1379,18 +1379,20 @@
     "contenido": [
       {
         "tipo": "texto",
-        "titulo": "Glosario",
-        "subtitulo": "Volumen tidal\n(VT)",
+        "titulo": "Volumen tidal",
+        "subtitulo": "VT",
         "valor": "Volumen de gas que entra y sale del pulmón en una respiración. En los modos controlados por volumen se programa; en los controlados por presión no se impone y resulta de la presión aplicada y de la mecánica pulmonar del paciente."
       },
       {
         "tipo": "texto",
-        "subtitulo": "PEEP\n(Positive End-Expiratory Pressure)",
+        "titulo": "PEEP",
+        "subtitulo": "Positive End-Expiratory Pressure",
         "valor": "Presión que queda en la vía aérea al terminar la espiración, por encima de la presión ambiente. Sostenerla por encima de cero mantiene un mínimo de presión alveolar y evita el colapso del alveolo al final de cada espiración."
       },
       {
         "tipo": "texto",
-        "subtitulo": "Trigger\n(disparo)",
+        "titulo": "Trigger",
+        "subtitulo": "disparo",
         "valor": "Función que detecta el esfuerzo inspiratorio del paciente para que el ventilador inicie una respiración. El trigger por flujo reconoce el cambio de flujo dentro del circuito y se ajusta en L/min; el trigger por presión reconoce la caída de presión y se ajusta en cmH2O. Mientras más sensible el umbral, menos esfuerzo necesita el paciente y mayor es el riesgo de que el ventilador se dispare solo."
       },
       {
@@ -1488,5 +1490,219 @@
     ],
     "fuente": "Dräger, Savina y Evita XL: instrucciones de uso; ISO/DIS 19223; GE Healthcare, Engström Carestation: manual de referencia del usuario",
     "orden": 3
+  },
+  {
+    "titulo": "Ventiladores mecánicos: especificaciones",
+    "titulo_corto": "Ventiladores",
+    "categoria": "equipo",
+    "icono": "plugCharging",
+    "resumen": "Población, volumen tidal, PEEP, frecuencia y modos de cinco ventiladores de cuidados críticos, más los parámetros del VAFO.",
+    "palabras_clave": "ventilador, ventiladores, ventilacion mecanica, ventilación mecánica, VAFO, alta frecuencia, oscilatoria, oscilatorio, UCI, terapia intensiva, volumen tidal, VT, PEEP, FiO2, frecuencia respiratoria, trigger, disparo, modos, Vela, Avea, Vyaire, CareFusion, VIASYS, Engstrom, Engström, Carestation, GE, GE Healthcare, Evita, Evita XL, Drager, Dräger, Savina, SensorMedics, 3100A, 3100B, neonatal, pediatrico, pediátrico, traslado, intubado",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "valor": "Las especificaciones cambian entre modelos de una misma familia, así que un rango tomado de otro equipo de la misma marca no es equivalente. Cada sección de esta ficha nombra el modelo exacto y la versión de software o la revisión de manual de la que salen sus datos."
+      },
+      {
+        "tipo": "nota",
+        "valor": "Los cinco ventiladores convencionales de esta ficha entregan una FiO2 de 21% a 100%."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Población y volumen tidal",
+        "encabezados": [
+          "Ventilador",
+          "Población",
+          "Volumen tidal"
+        ],
+        "filas": [
+          [
+            "Vela",
+            "Adulto y pediátrico",
+            "50 a 2000 mL"
+          ],
+          [
+            "Avea",
+            "Neonatal a adulto",
+            "2 a 2500 mL"
+          ],
+          [
+            "Engström",
+            "Neonatal a adulto",
+            "20 a 2000 mL"
+          ],
+          [
+            "Evita XL",
+            "Neonatal a adulto",
+            "3 a 2000 mL"
+          ],
+          [
+            "Savina",
+            "Adulto y pediátrico",
+            "50 a 2000 mL"
+          ]
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "PEEP y frecuencia",
+        "encabezados": [
+          "Ventilador",
+          "PEEP",
+          "Frecuencia"
+        ],
+        "filas": [
+          [
+            "Vela",
+            "0 a 35 cmH2O",
+            "2 a 80 bpm"
+          ],
+          [
+            "Avea",
+            "0 a 50 cmH2O",
+            "1 a 150 bpm"
+          ],
+          [
+            "Engström",
+            "1 a 50 cmH2O",
+            "3 a 120 bpm"
+          ],
+          [
+            "Evita XL",
+            "0 a 50 cmH2O",
+            "0 a 150 bpm"
+          ],
+          [
+            "Savina",
+            "0 a 35 cmH2O",
+            "2 a 80 bpm"
+          ]
+        ]
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Vela",
+        "subtitulo": "Vyaire, serie Diamond, manual L3264 Rev. M",
+        "valor": "Modos: Volume A/C, Pressure A/C, Volume SIMV, Pressure SIMV, CPAP/PSV, PRVC A/C, PRVC SIMV y APRV/Biphasic, más los tres no invasivos NPPV A/C, NPPV/SIMV y NPPV/CPAP PSV.\n\nEsa lista corresponde al modelo Comprehensive; los modelos Vela y Vela+ traen un subconjunto. Dispara solo por flujo, con sensibilidad de 1 a 20 L/min. La presión soporte va de 1 a 60 cmH2O y la presión inspiratoria de 1 a 100 cmH2O. Sirve para el traslado dentro del hospital, pero el fabricante lo excluye como ventilador de transporte de emergencia y para uso domiciliario."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Avea",
+        "subtitulo": "Vyaire, manual L2786 Rev. D",
+        "valor": "Modos: Volume A/C, Pressure A/C, Volume SIMV, Pressure SIMV, CPAP/PSV, PRVC A/C, PRVC SIMV y APRV/BIPHASIC.\n\nCon el tamaño neonatal seleccionado se agregan TCPL A/C, TCPL SIMV y CPAP nasal, este último de 2 a 10 cmH2O con flujo máximo de 15 L/min. Dispara por flujo de 0.1 a 20.0 L/min y ofrece además disparo por presión entre los ajustes avanzados. El tamaño de paciente se elige en el equipo y restringe los parámetros que quedan disponibles. Se usa dentro del hospital; no está previsto como ventilador de traslado."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Engström Carestation",
+        "subtitulo": "GE Healthcare, manual M1055480",
+        "valor": "Modos: VCV, PCV, PCV-VG, SIMV-VC, SIMV-PC, BiLevel y CPAP/PSV, más SIMV-PCVG y BiLevel-VG como opciones.\n\nEs el único de los cinco que publica rango para los dos tipos de disparo: por flujo de 1 a 9 L/min y por presión de -10 a -1 cmH2O, con una ventana de disparo ajustable de 0% a 80%. Atiende de lactante a adulto desde 5 kg, y desde 0.5 kg con la opción neonatal instalada. Su entorno es la UCI, incluido el traslado dentro de la institución."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Evita XL / Evita XL Neo",
+        "subtitulo": "Dräger, software 7.0n",
+        "valor": "Modos: CMV, SIMV, PCV+, PCV+ Assist, CPAP, PSupp, SB e ILV, con las funciones CPPV, PLV, AutoFlow e IRV.\n\nEl paquete XL Ventilation Plus agrega APRV y MMV, y la opción NIV habilita la ventilación no invasiva con mascarilla. Dispara por flujo, de 0.3 a 15 L/min. El Evita XL cubre adultos, niños y neonatos desde 3 kg, y prematuros desde 0.5 kg solo con la opción NeoFlow; el Evita XL Neo cubre niños, neonatos y prematuros desde 0.5 kg, y adultos solo con la opción Adult. Se usa en UCI o sala de recuperación y durante el traslado de pacientes ventilados dentro del hospital."
+      },
+      {
+        "tipo": "nota",
+        "valor": "El rótulo del modo controlado por volumen cambia dentro de la misma marca: el Evita XL lo llama CMV y el Savina lo llama IPPV."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Savina",
+        "subtitulo": "Dräger, software 1.n",
+        "valor": "Modos: IPPV, IPPV Assist, SIMV, SIMV/ASB, CPAP y CPAP/ASB, con BIPAP y BIPAP/ASB como opción. Formas especiales: CPPV, IRV, PLV, AutoFlow como opción y ventilación en apnea. Dispara por flujo, de 1 a 15 L/min. La presión soporte por encima del PEEP va de 0 a 35 cmH2O y la presión inspiratoria de 0 a 99 cmH2O. Admite pacientes con volumen tidal mayor de 50 mL, con juego de tubuladuras para adulto o pediátrico, y no tiene modo neonatal. Es el único de los cinco que el fabricante aprueba también para traslado entre hospitales y traslado aéreo."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "VAFO",
+        "subtitulo": "Ventilación de alta frecuencia oscilatoria",
+        "valor": "No es una marca sino una modalidad. El equipo sostiene una presión media constante en la vía aérea y le superpone oscilaciones rápidas que mueven volúmenes menores que el espacio muerto anatómico. Sus parámetros no equivalen a los de un ventilador convencional: no se programa volumen tidal ni frecuencia en respiraciones por minuto, sino frecuencia en hertz, presión media y amplitud. Los equipos de referencia son el SensorMedics 3100A y el 3100B, de SensorMedics, después Viasys y CareFusion, hoy Vyaire."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Parámetros del VAFO",
+        "encabezados": [
+          "Parámetro",
+          "3100A",
+          "3100B"
+        ],
+        "filas": [
+          [
+            "Frecuencia",
+            "3 a 15 Hz",
+            "3 a 15 Hz"
+          ],
+          [
+            "Tiempo inspiratorio",
+            "30 a 50% del ciclo",
+            "30 a 50% del ciclo"
+          ],
+          [
+            "Presión media",
+            "3 a 45 cmH2O",
+            "3 a 55 cmH2O"
+          ],
+          [
+            "Bias flow",
+            "0 a 40 L/min",
+            "0 a 60 L/min"
+          ],
+          [
+            "Amplitud a potencia máxima",
+            "Más de 90 cmH2O",
+            "Más de 90 cmH2O"
+          ]
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "A quién se aplica cada modelo",
+        "estilo": "vinetas",
+        "items": [
+          "3100A: insuficiencia respiratoria y barotrauma en el neonato, en concreto síndrome de dificultad respiratoria, enfisema intersticial pulmonar y fuga aérea. También pacientes pediátricos seleccionados que fracasan con ventilación convencional.",
+          "3100B: pacientes de 35 kg o más con insuficiencia respiratoria aguda."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Vyaire Medical. Vela ventilator Diamond Series: operator's manual (L3264 Rev. M). Tablas 1.2 y 3.1.",
+            "url": "https://documents.cdn.ifixit.com/pJTEDjUaRCTQxZdq.pdf"
+          },
+          {
+            "texto": "CareFusion. AVEA ventilator systems: operator's manual (L2786 Rev. D). Tablas 3.1, 3.2 y 3.3, y capítulo 5.",
+            "url": "https://documents.cdn.ifixit.com/yTE6Q2oFFJiqlR5R.pdf"
+          },
+          {
+            "texto": "GE Healthcare. Engström Carestation: manual de referencia del usuario (M1055480). Capítulo 11, Configuración de la ventilación, p. 11-5.",
+            "url": "http://www.frankshospitalworkshop.com/equipment/documents/ecg/user_manuals/Engstr%C3%B6m%20Carestation%20-%20User%20manual%20(esp).pdf"
+          },
+          {
+            "texto": "GE Healthcare. Engström Carestation: technical reference manual (1505-1018-000). Capítulos 1 y 4.",
+            "url": "http://www.frankshospitalworkshop.com/equipment/documents/ventilators/service_manuals/Engstr%C3%B6m_Carestation_-_Service_manual.pdf"
+          },
+          {
+            "texto": "Dräger Medical AG & Co. KG. Evita XL / Evita XL Neo: ventilador de cuidados intensivos. Instrucciones de uso, software 7.0n. Modos de ventilación y datos técnicos, pp. 16-18 y 210-211.",
+            "url": "http://www.frankshospitalworkshop.com/equipment/documents/anaesthesia/user_manuals/Drager%20Evita%20XL,%20XL%20Neo%20-%20User%20manual.pdf"
+          },
+          {
+            "texto": "Dräger Medizintechnik GmbH. (2000). Savina: ventilador de cuidados intensivos. Instrucciones de uso, software 1.n (2a ed.). Características técnicas, pp. 107-108.",
+            "url": "http://www.frankshospitalworkshop.com/equipment/documents/ventilators/user_manuals/Dr%C3%A4ger%20Savina%20-%20User%20manual%20(es).pdf"
+          },
+          {
+            "texto": "SensorMedics. 3100A high frequency oscillatory ventilator: operator's manual (767124-101). Apéndice B, Especificaciones.",
+            "url": "https://documents.cdn.ifixit.com/MNibDr4xbBxuZJrE.pdf"
+          },
+          {
+            "texto": "SensorMedics. (2002). 3100B high frequency oscillatory ventilator: operator's manual (767164-101 Rev. L). Capítulo 3, Especificaciones.",
+            "url": "https://media.supplychain.nhs.uk/media/documents/N0858524/Manual/30659_N0858524_Operators%20Manual.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "Manuales del operador e instrucciones de uso de Vyaire (Vela, Avea, SensorMedics 3100A y 3100B), GE Healthcare (Engström Carestation) y Dräger (Evita XL, Savina)",
+    "orden": 4
   }
 ]

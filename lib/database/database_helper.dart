@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 23, // Aumentamos la versión a 23
+      version: 24, // Aumentamos la versión a 24
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -236,6 +236,18 @@ class DatabaseHelper {
         // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo en
         // el próximo arranque. NO afecta datos del usuario (turno activo).
         if (oldVersion < 23) {
+          await db.delete('esenciales');
+        }
+        // Se agregó la ficha de ventiladores mecánicos (Vela, Avea, Engström
+        // Carestation, Evita XL, Savina y el VAFO del SensorMedics 3100A y
+        // 3100B), los glosarios de las fichas de oxígeno y de modos
+        // ventilatorios pasaron a la convención de título + subtítulo, y se
+        // renumeró el orden de la categoría "paciente", que tenía un hueco.
+        // Como el cambio es de CONTENIDO y no de esquema, la única forma de
+        // que llegue a un dispositivo ya instalado es vaciar la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo en
+        // el próximo arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 24) {
           await db.delete('esenciales');
         }
       },
