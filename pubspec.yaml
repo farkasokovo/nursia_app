@@ -1,7 +1,7 @@
 name: nursia_app
 description: "Herramienta de referencia clínica offline para profesionales y estudiantes de enfermería."
 publish_to: 'none'
-version: 1.4.0+7
+version: 1.4.0+8
 
 environment:
   sdk: ^3.11.1
@@ -71,4 +71,5 @@ flutter:
   - assets/data/normas_data.json
   - assets/data/pendientes_data.json
   - assets/data/esenciales_data.json
+  - assets/data/glosario_data.json
   - assets/data/changelog.json

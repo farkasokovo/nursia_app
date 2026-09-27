@@ -191,6 +191,28 @@ class BloqueReferencias extends BloqueContenido {
   };
 }
 
+/// Cita términos del glosario central por su id.
+///
+/// El bloque NO guarda las definiciones: viven una sola vez en
+/// `assets/data/glosario_data.json` y la pantalla las resuelve contra el
+/// GlosarioRepository. Así una misma definición sirve a todas las fichas que
+/// la necesiten sin repetirla en el contenido de cada una.
+class BloqueGlosario extends BloqueContenido {
+  /// Ids en el orden en que se van a pintar. Ese orden lo decide quien
+  /// escribe la ficha y suele ser pedagógico, no alfabético.
+  final List<String> terminos;
+
+  const BloqueGlosario({super.titulo, super.subtitulo, required this.terminos});
+
+  @override
+  Map<String, dynamic> toJson() => {
+    'tipo': 'glosario',
+    if (titulo != null) 'titulo': titulo,
+    if (subtitulo != null) 'subtitulo': subtitulo,
+    'terminos': terminos,
+  };
+}
+
 // ── Parseo defensivo ────────────────────────────────────────────────────
 //
 // El JSON semilla se edita a mano, así que un bloque con el "tipo" mal
@@ -325,6 +347,18 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
         return null;
       }
       return BloqueColores(titulo: titulo, subtitulo: subtitulo, items: items);
+
+    case 'glosario':
+      final terminos = _listaDeTextos(json['terminos']);
+      if (terminos.isEmpty) {
+        debugPrint('Esenciales: bloque "glosario" sin "terminos", se omite.');
+        return null;
+      }
+      return BloqueGlosario(
+        titulo: titulo,
+        subtitulo: subtitulo,
+        terminos: terminos,
+      );
 
     case 'referencias':
       final itemsCrudos = json['items'];

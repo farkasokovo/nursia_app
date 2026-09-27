@@ -1,0 +1,188 @@
+[
+  {
+    "id": "fio2",
+    "termino": "FiO2",
+    "desglose": "Fracción inspirada de oxígeno",
+    "definicion": "Proporción de oxígeno que contiene el gas inspirado, expresada en porcentaje. El aire ambiente tiene una FiO2 de 21%; la oxigenoterapia consiste en elevarla por encima de ese valor.",
+    "referencias": [
+      {
+        "texto": "Jarillo Quijada, A. Oxigenoterapia. Guías clínicas del Hospital Infantil de México Federico Gómez.",
+        "url": "http://himfg.com.mx/descargas/documentos/planeacion/guiasclinicasHIM/oxigenotrepia.pdf"
+      }
+    ]
+  },
+  {
+    "id": "volumen-tidal",
+    "termino": "Volumen tidal",
+    "desglose": "VT",
+    "definicion": "Volumen de gas que entra y sale del pulmón en una respiración. En los modos controlados por volumen se programa; en los controlados por presión no se impone y resulta de la presión aplicada y de la mecánica pulmonar del paciente.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.7.1.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "volumen-minuto",
+    "termino": "Volumen minuto",
+    "desglose": "VM",
+    "definicion": "Volumen de gas que entra o sale del pulmón en un minuto. Resulta del volumen tidal multiplicado por la frecuencia respiratoria, así que cambia al modificar cualquiera de los dos.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.7.6.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "peep",
+    "termino": "PEEP",
+    "desglose": "Positive End-Expiratory Pressure",
+    "definicion": "Presión que queda en la vía aérea al terminar la espiración, por encima de la presión ambiente. Sostenerla por encima de cero mantiene un mínimo de presión alveolar y evita el colapso del alveolo al final de cada espiración.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.11.2.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "trigger",
+    "termino": "Trigger",
+    "desglose": "disparo",
+    "definicion": "Función que detecta el esfuerzo inspiratorio del paciente para que el ventilador inicie una respiración. El trigger por flujo reconoce el cambio de flujo dentro del circuito y se ajusta en L/min; el trigger por presión reconoce la caída de presión y se ajusta en cmH2O. Mientras más sensible el umbral, menos esfuerzo necesita el paciente y mayor es el riesgo de que el ventilador se dispare solo.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.10.2 a 4.10.4.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      },
+      {
+        "texto": "GE Healthcare. Engström Carestation: manual de referencia del usuario (M1055480). Capítulo 11, Configuración de la ventilación, p. 11-5.",
+        "url": "http://www.frankshospitalworkshop.com/equipment/documents/ecg/user_manuals/Engstr%C3%B6m%20Carestation%20-%20User%20manual%20(esp).pdf"
+      }
+    ]
+  },
+  {
+    "id": "ventilacion-mandatoria",
+    "termino": "Ventilación mandatoria",
+    "definicion": "Ventilación en la que el ventilador entrega las respiraciones a intervalos fijados por la frecuencia programada, sin depender del esfuerzo del paciente. Se contrapone a la respiración espontánea, que el paciente inicia y termina.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.8.5.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "tiempo-inspiratorio",
+    "termino": "Tiempo inspiratorio",
+    "desglose": "Tinsp",
+    "definicion": "Duración de la fase inspiratoria dentro de cada ciclo respiratorio. Junto con la frecuencia determina cuánto tiempo queda para la espiración, y con ello la relación I:E.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.3.10.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "relacion-ie",
+    "termino": "Relación I:E",
+    "definicion": "Proporción entre el tiempo inspiratorio y el tiempo espiratorio de un mismo ciclo respiratorio. Se escribe con dos puntos: en 1:2 la espiración dura el doble que la inspiración.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.3.21.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "presion-soporte",
+    "termino": "Presión de soporte",
+    "desglose": "ASB, Pressure Support, PS",
+    "definicion": "Presión que el ventilador agrega por encima del PEEP cuando el paciente inicia una respiración espontánea, para asumir parte del trabajo inspiratorio sin quitarle el control del ciclo. Dräger la rotula ASB; otras marcas la llaman Pressure Support o PS.",
+    "referencias": [
+      {
+        "texto": "Dräger Medizintechnik GmbH. (2000). Savina: ventilador de cuidados intensivos. Instrucciones de uso, software 1.n (2a ed.). Descripción de ASB, p. 95.",
+        "url": "http://www.frankshospitalworkshop.com/equipment/documents/ventilators/user_manuals/Dr%C3%A4ger%20Savina%20-%20User%20manual%20(es).pdf"
+      }
+    ]
+  },
+  {
+    "id": "bias-flow",
+    "termino": "Bias flow",
+    "desglose": "flujo basal",
+    "definicion": "Flujo continuo que recorre el circuito del ventilador hacia la salida espiratoria y que no está destinado a ventilar al paciente. Es lo que vigila el trigger por flujo para detectar el esfuerzo inspiratorio.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.6.8.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "complianza",
+    "termino": "Complianza",
+    "desglose": "distensibilidad pulmonar",
+    "definicion": "Cambio de volumen pulmonar que produce un cambio determinado de presión. Un pulmón poco complaciente necesita más presión para el mismo volumen, así que en los modos controlados por presión el volumen tidal cae cuando la complianza empeora.",
+    "referencias": [
+      {
+        "texto": "Montes de Oca Sandoval, M. A., Rodríguez Reyes, J., Villalobos Silva, J. A., y Franco Granillo, J. (2008). Modalidades de destete: ventilación con presión soporte, presión positiva bifásica y liberación de presión de la vía aérea. Revista de la Asociación Mexicana de Medicina Crítica y Terapia Intensiva, 22(4), 260-270.",
+        "url": "https://www.medigraphic.com/pdfs/medcri/ti-2008/ti084j.pdf"
+      },
+      {
+        "texto": "Dräger Medizintechnik GmbH. (2000). Savina: ventilador de cuidados intensivos. Instrucciones de uso, software 1.n (2a ed.). Descripción de BIPAP, p. 96.",
+        "url": "http://www.frankshospitalworkshop.com/equipment/documents/ventilators/user_manuals/Dr%C3%A4ger%20Savina%20-%20User%20manual%20(es).pdf"
+      }
+    ]
+  },
+  {
+    "id": "destete",
+    "termino": "Destete",
+    "desglose": "retiro de la ventilación mecánica",
+    "definicion": "Disminución progresiva del apoyo del ventilador hasta que el paciente sostiene por sí solo su ventilación. Se trabaja en dos etapas: identificar al paciente que reúne criterios para intentarlo y aplicarle después las pruebas de respiración espontánea.",
+    "referencias": [
+      {
+        "texto": "Montes de Oca Sandoval, M. A., Rodríguez Reyes, J., Villalobos Silva, J. A., y Franco Granillo, J. (2008). Modalidades de destete: ventilación con presión soporte, presión positiva bifásica y liberación de presión de la vía aérea. Revista de la Asociación Mexicana de Medicina Crítica y Terapia Intensiva, 22(4), 260-270.",
+        "url": "https://www.medigraphic.com/pdfs/medcri/ti-2008/ti084j.pdf"
+      }
+    ]
+  },
+  {
+    "id": "prvc",
+    "termino": "PRVC",
+    "desglose": "Pressure Regulated Volume Control",
+    "definicion": "Respiración controlada por presión en la que el ventilador ajusta de forma automática el nivel de presión hasta alcanzar el volumen tidal programado. Entrega primero una respiración de prueba y a partir de ella fija la presión objetivo.",
+    "referencias": [
+      {
+        "texto": "Vyaire Medical. Vela ventilator Diamond Series: operator's manual (L3264 Rev. M). Pressure Regulated Volume Control.",
+        "url": "https://documents.cdn.ifixit.com/pJTEDjUaRCTQxZdq.pdf"
+      }
+    ]
+  },
+  {
+    "id": "aprv",
+    "termino": "APRV",
+    "desglose": "Airway Pressure Release Ventilation",
+    "definicion": "Modo de dos niveles de presión en el que el paciente respira de forma espontánea durante una fase prolongada a presión alta, y la presión se libera por un tiempo breve a un nivel bajo para permitir la exhalación.",
+    "referencias": [
+      {
+        "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartado 4.8.12.",
+        "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+      }
+    ]
+  },
+  {
+    "id": "presion-media-via-aerea",
+    "termino": "Presión media de la vía aérea",
+    "desglose": "Paw",
+    "definicion": "Promedio de la presión en la vía aérea a lo largo del ciclo respiratorio. En ventilación de alta frecuencia oscilatoria es el parámetro con el que se maneja la oxigenación: al subirla aumentan el volumen pulmonar y la superficie alveolar disponible.",
+    "referencias": [
+      {
+        "texto": "SensorMedics. (2002). 3100B high frequency oscillatory ventilator: operator's manual (767164-101 Rev. L). Airway pressure monitor y estrategias de tratamiento.",
+        "url": "https://media.supplychain.nhs.uk/media/documents/N0858524/Manual/30659_N0858524_Operators%20Manual.pdf"
+      }
+    ]
+  }
+]

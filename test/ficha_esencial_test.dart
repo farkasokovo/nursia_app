@@ -150,7 +150,7 @@ void main() {
       }
     });
 
-    test('cubre las 4 categorías y los 6 tipos de bloque', () {
+    test('cubre las 4 categorías y los 7 tipos de bloque', () {
       expect(fichas.map((f) => f.categoria).toSet(), {
         'insumos',
         'paciente',
@@ -171,6 +171,7 @@ void main() {
         'tabla',
         'colores',
         'referencias',
+        'glosario',
       });
     });
 
@@ -307,7 +308,7 @@ void main() {
     });
 
     test('el switch exhaustivo de la sealed class compila', () {
-      // Si algún día se agrega un sexto tipo de bloque, este switch deja de
+      // Si algún día se agrega un tipo de bloque más, este switch deja de
       // compilar y avisa que la UI también tiene que manejarlo.
       for (final f in fichas) {
         for (final b in f.contenido) {
@@ -318,6 +319,7 @@ void main() {
             BloqueTabla() => 'tabla',
             BloqueColores() => 'colores',
             BloqueReferencias() => 'referencias',
+            BloqueGlosario() => 'glosario',
           };
           expect(etiqueta, isNotEmpty);
         }
@@ -459,6 +461,10 @@ List<String> _textoDelCuerpo(FichaEsencial ficha) {
           if (descripcion != null) textos.add(descripcion);
         }
       case BloqueReferencias():
+        break;
+      case BloqueGlosario():
+        // El bloque solo cita ids: el texto de cada término vive en
+        // glosario_data.json y lo revisa test/glosario_test.dart.
         break;
     }
   }

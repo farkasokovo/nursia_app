@@ -3,7 +3,11 @@ import 'dart:math'; // EXPERIMENTAL: solo lo usa _anchosProporcionales
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import 'package:provider/provider.dart';
+
 import '../../models/ficha_esencial.dart';
+import '../../models/termino_glosario.dart';
+import '../../repositories/glosario_repository.dart';
 import '../../utils/esencial_icon_mapper.dart';
 import '../../utils/url_launcher_helper.dart';
 
@@ -15,18 +19,37 @@ import '../../utils/url_launcher_helper.dart';
 /// A diferencia de `ficha_medicamento.dart` (que pinta secciones fijas), aquí
 /// el contenido es un arreglo ordenado de bloques y la pantalla solo recorre
 /// `ficha.contenido` despachando cada uno según su tipo.
-class FichaEsencialScreen extends StatelessWidget {
+class FichaEsencialScreen extends StatefulWidget {
   final FichaEsencial ficha;
 
+  const FichaEsencialScreen({super.key, required this.ficha});
+
+  @override
+  State<FichaEsencialScreen> createState() => _FichaEsencialScreenState();
+}
+
+class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
   /// Tamaño del subtítulo de un bloque. El título de bloque (titleMedium) mide
   /// 25; este es el único número que no sale del tema, porque no hay un estilo
   /// intermedio entre titleMedium y bodySmall al cual colgarse.
   static const double _tamanoSubtitulo = 17;
 
-  const FichaEsencialScreen({super.key, required this.ficha});
+  /// Términos del glosario indexados por id, resueltos UNA sola vez al abrir
+  /// la ficha: no por bloque ni por término. Una ficha sin bloques "glosario"
+  /// ni siquiera consulta la base.
+  late final Future<Map<String, TerminoGlosario>>? _glosario;
+
+  @override
+  void initState() {
+    super.initState();
+    _glosario = widget.ficha.contenido.whereType<BloqueGlosario>().isEmpty
+        ? null
+        : context.read<GlosarioRepository>().obtenerPorId();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final ficha = widget.ficha;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -62,36 +85,56 @@ class FichaEsencialScreen extends StatelessWidget {
         ),
         backgroundColor: colorScheme.primaryContainer,
       ),
-      body: SingleChildScrollView(
+      // Mientras el glosario no llegue, la ficha se pinta completa salvo sus
+      // bloques "glosario": es una lectura local de una tabla chica, así que
+      // dura un frame o dos y no hay pantalla en blanco ni spinner de por
+      // medio. El null distingue "todavía no cargó" de "cargó y está vacío",
+      // que es lo que decide si se avisa por debugPrint.
+      body: FutureBuilder<Map<String, TerminoGlosario>>(
+        future: _glosario,
+        builder: (context, snapshot) =>
+            _buildCuerpo(context, snapshot.data, colorScheme, textTheme),
+      ),
+    );
+  }
+
+  Widget _buildCuerpo(
+    BuildContext context,
+    Map<String, TerminoGlosario>? glosario,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    final ficha = widget.ficha;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: colorScheme.secondary,
+          borderRadius: BorderRadius.circular(20),
+        ),
         padding: const EdgeInsets.all(20),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: colorScheme.secondary,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(ficha.titulo, style: textTheme.titleMedium),
-              if (ficha.resumen.isNotEmpty) ...[
-                const SizedBox(height: 6),
-                Text(
-                  ficha.resumen,
-                  style: textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSecondaryContainer,
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(ficha.titulo, style: textTheme.titleMedium),
+            if (ficha.resumen.isNotEmpty) ...[
+              const SizedBox(height: 6),
+              Text(
+                ficha.resumen,
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSecondaryContainer,
                 ),
-              ],
-              const SizedBox(height: 20),
-              for (final bloque in ficha.contenido) ...[
-                _buildBloque(context, bloque, colorScheme, textTheme),
-                const SizedBox(height: 16),
-              ],
-              _buildFuente(colorScheme, textTheme),
+              ),
             ],
-          ),
+            const SizedBox(height: 20),
+            for (final bloque in ficha.contenido) ...[
+              _buildBloque(context, bloque, glosario, colorScheme, textTheme),
+              const SizedBox(height: 16),
+            ],
+            _buildFuente(colorScheme, textTheme),
+          ],
         ),
       ),
     );
@@ -105,6 +148,7 @@ class FichaEsencialScreen extends StatelessWidget {
   Widget _buildBloque(
     BuildContext context,
     BloqueContenido bloque,
+    Map<String, TerminoGlosario>? glosario,
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
@@ -129,7 +173,18 @@ class FichaEsencialScreen extends StatelessWidget {
         colorScheme,
         textTheme,
       ),
+      BloqueGlosario() => _buildGlosario(
+        context,
+        bloque,
+        glosario,
+        colorScheme,
+        textTheme,
+      ),
     };
+
+    // El glosario trae su propio encabezado dentro del desplegable, así que no
+    // pasa por el envoltorio de título y subtítulo de los demás bloques.
+    if (bloque is BloqueGlosario) return cuerpo;
 
     // El bloque de referencias es el único con encabezado por defecto: una
     // lista de citas sin título se lee como texto suelto al final de la ficha.
@@ -168,6 +223,99 @@ class FichaEsencialScreen extends StatelessWidget {
   }
 
   // ── Bloques ───────────────────────────────────────────────────────────
+
+  /// Sección plegable, cerrada por defecto, con las definiciones que la ficha
+  /// cita por id.
+  ///
+  /// Los términos se pintan en el orden del arreglo del bloque, no en orden
+  /// alfabético: ese orden lo decide quien escribe la ficha y suele ser
+  /// pedagógico.
+  Widget _buildGlosario(
+    BuildContext context,
+    BloqueGlosario bloque,
+    Map<String, TerminoGlosario>? glosario,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    // Todavía no llega de la base: se deja el hueco sin avisar, porque no es
+    // un error de contenido sino un frame de más.
+    if (glosario == null) return const SizedBox.shrink();
+
+    final resueltos = <TerminoGlosario>[];
+    final vistos = <String>{};
+    for (final id in bloque.terminos) {
+      // Un id repetido dentro del mismo bloque se pinta una sola vez.
+      if (!vistos.add(id)) continue;
+      final termino = glosario[id];
+      if (termino == null) {
+        debugPrint(
+          'Esenciales: el glosario no tiene el término "$id" que cita la '
+          'ficha, se omite.',
+        );
+        continue;
+      }
+      resueltos.add(termino);
+    }
+
+    // Si ningún id resolvió, no tiene caso dibujar un desplegable vacío.
+    if (resueltos.isEmpty) {
+      debugPrint(
+        'Esenciales: ningún término del bloque "glosario" existe '
+        '(${bloque.terminos.join(", ")}), se omite el bloque.',
+      );
+      return const SizedBox.shrink();
+    }
+
+    return Theme(
+      // ExpansionTile dibuja una línea arriba y otra abajo al desplegarse.
+      // Aquí estorban: el bloque ya vive dentro de la tarjeta de la ficha.
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        title: Text(bloque.titulo ?? 'Glosario', style: textTheme.titleMedium),
+        initiallyExpanded: false,
+        tilePadding: EdgeInsets.zero,
+        childrenPadding: const EdgeInsets.only(bottom: 4),
+        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+        iconColor: colorScheme.primaryContainer,
+        collapsedIconColor: colorScheme.primaryContainer,
+        children: [
+          for (final termino in resueltos)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Misma jerarquía visual que el título y el subtítulo de
+                  // cualquier otro bloque de la ficha.
+                  Text(termino.termino, style: textTheme.titleMedium),
+                  if (termino.desglose != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      termino.desglose!,
+                      style: textTheme.titleMedium?.copyWith(
+                        fontSize: _tamanoSubtitulo,
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 6),
+                  Text(termino.definicion, style: textTheme.bodySmall),
+                  if (termino.referencias.isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    _buildReferencias(
+                      context,
+                      termino.referencias,
+                      colorScheme,
+                      textTheme,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildNota(
     String valor,
@@ -360,7 +508,7 @@ class FichaEsencialScreen extends StatelessWidget {
   }
 
   Widget _buildFuente(ColorScheme colorScheme, TextTheme textTheme) {
-    if (ficha.fuente.isEmpty) return const SizedBox();
+    if (widget.ficha.fuente.isEmpty) return const SizedBox();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -370,7 +518,7 @@ class FichaEsencialScreen extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Fuente: ${ficha.fuente}',
+          'Fuente: ${widget.ficha.fuente}',
           style: textTheme.bodySmall?.copyWith(
             fontSize: 11,
             color: colorScheme.onSecondaryContainer.withValues(alpha: 0.75),

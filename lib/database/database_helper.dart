@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 24, // Aumentamos la versión a 24
+      version: 25, // Aumentamos la versión a 25
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -250,6 +250,26 @@ class DatabaseHelper {
         if (oldVersion < 24) {
           await db.delete('esenciales');
         }
+        // Glosario central de Esenciales: las definiciones que vivían dentro
+        // del contenido de las fichas respiratorias se movieron a su propia
+        // tabla, y las fichas ahora las citan por id desde un bloque nuevo de
+        // tipo "glosario". Hacen falta las dos cosas: crear la tabla, porque
+        // en un dispositivo ya instalado _createDB no se vuelve a ejecutar y
+        // nunca existiría, y vaciar "esenciales" para que
+        // cargarSemillaSiHaceFalta() resiembre las fichas migradas en el
+        // próximo arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 25) {
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS glosario (
+              id           TEXT PRIMARY KEY,
+              termino      TEXT NOT NULL,
+              desglose     TEXT,
+              definicion   TEXT NOT NULL,
+              referencias  TEXT
+            )
+          ''');
+          await db.delete('esenciales');
+        }
       },
     );
   }
@@ -369,6 +389,19 @@ class DatabaseHelper {
         contenido      TEXT NOT NULL,
         fuente         TEXT NOT NULL,
         orden          INTEGER NOT NULL DEFAULT 0
+      )
+    ''');
+
+    // 9. Tabla del Glosario de Esenciales (definiciones citadas por las
+    // fichas). "id" es TEXT y clave primaria a propósito: lo escribe el autor
+    // del contenido en el JSON semilla, no lo genera la base.
+    await db.execute('''
+      CREATE TABLE glosario (
+        id           TEXT PRIMARY KEY,
+        termino      TEXT NOT NULL,
+        desglose     TEXT,
+        definicion   TEXT NOT NULL,
+        referencias  TEXT
       )
     ''');
   }

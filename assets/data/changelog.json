@@ -5,7 +5,8 @@
     "cambios": [
       "Nueva ficha en Esenciales: ventiladores mecánicos, con población, volumen tidal, PEEP, frecuencia y modos del Vela, el Avea, el Engström Carestation, el Evita XL y el Savina.",
       "La misma ficha incluye una sección de ventilación de alta frecuencia oscilatoria con los parámetros del SensorMedics 3100A y 3100B.",
-      "Los términos de glosario de las fichas de oxígeno y de modos ventilatorios se presentan como los demás encabezados, con el término arriba y su nombre completo debajo."
+      "Los términos de glosario de las fichas de oxígeno y de modos ventilatorios se presentan como los demás encabezados, con el término arriba y su nombre completo debajo.",
+      "Las fichas de oxígeno, modos ventilatorios y ventiladores abren con un glosario plegable: se toca para desplegar las definiciones de los términos que usa la ficha, con su fuente."
     ]
   },
   {

@@ -327,10 +327,11 @@
     "palabras_clave": "oxigeno, oxígeno, oxigenoterapia, FiO2, fracción inspirada de oxígeno, mascarilla, puntas nasales, cánula nasal, catéter nasal, reservorio, bolsa, no reinhalación, venturi, bajo flujo, alto flujo, cánula nasal de alto flujo, CNAF, PNAF, Airvo, Airvo 2, humidificación, litros, saturación, SpO2, hipoxemia, flujómetro",
     "contenido": [
       {
-        "tipo": "texto",
-        "titulo": "FiO2",
-        "subtitulo": "Fracción inspirada de oxígeno",
-        "valor": "Proporción de oxígeno que contiene el gas inspirado, expresada en porcentaje. El aire ambiente tiene una FiO2 de 21%; la oxigenoterapia consiste en elevarla por encima de ese valor."
+        "tipo": "glosario",
+        "titulo": "Glosario",
+        "terminos": [
+          "fio2"
+        ]
       },
       {
         "tipo": "nota",
@@ -1378,22 +1379,16 @@
     "palabras_clave": "ventilacion, ventilación, ventilación mecánica, ventilador, modos ventilatorios, modalidades, IPPV, IPPV Assist, SIMV, BIPAP, PC-BIPAP, BiPAP, CPAP, ASB, presion soporte, presión de soporte, pressure support, PS, PEEP, Pinsp, volumen tidal, VT, trigger, disparo, trigger por flujo, trigger por presión, CMV, Evita XL, destete, deshabituación, Drager, Dräger, Evita, Savina, intubado",
     "contenido": [
       {
-        "tipo": "texto",
-        "titulo": "Volumen tidal",
-        "subtitulo": "VT",
-        "valor": "Volumen de gas que entra y sale del pulmón en una respiración. En los modos controlados por volumen se programa; en los controlados por presión no se impone y resulta de la presión aplicada y de la mecánica pulmonar del paciente."
-      },
-      {
-        "tipo": "texto",
-        "titulo": "PEEP",
-        "subtitulo": "Positive End-Expiratory Pressure",
-        "valor": "Presión que queda en la vía aérea al terminar la espiración, por encima de la presión ambiente. Sostenerla por encima de cero mantiene un mínimo de presión alveolar y evita el colapso del alveolo al final de cada espiración."
-      },
-      {
-        "tipo": "texto",
-        "titulo": "Trigger",
-        "subtitulo": "disparo",
-        "valor": "Función que detecta el esfuerzo inspiratorio del paciente para que el ventilador inicie una respiración. El trigger por flujo reconoce el cambio de flujo dentro del circuito y se ajusta en L/min; el trigger por presión reconoce la caída de presión y se ajusta en cmH2O. Mientras más sensible el umbral, menos esfuerzo necesita el paciente y mayor es el riesgo de que el ventilador se dispare solo."
+        "tipo": "glosario",
+        "titulo": "Glosario",
+        "terminos": [
+          "volumen-tidal",
+          "volumen-minuto",
+          "peep",
+          "trigger",
+          "ventilacion-mandatoria",
+          "destete"
+        ]
       },
       {
         "tipo": "texto",
@@ -1502,6 +1497,24 @@
       {
         "tipo": "texto",
         "valor": "Las especificaciones cambian entre modelos de una misma familia, así que un rango tomado de otro equipo de la misma marca no es equivalente. Cada sección de esta ficha nombra el modelo exacto y la versión de software o la revisión de manual de la que salen sus datos."
+      },
+      {
+        "tipo": "glosario",
+        "titulo": "Glosario",
+        "terminos": [
+          "fio2",
+          "volumen-tidal",
+          "peep",
+          "presion-soporte",
+          "tiempo-inspiratorio",
+          "relacion-ie",
+          "trigger",
+          "bias-flow",
+          "complianza",
+          "prvc",
+          "aprv",
+          "presion-media-via-aerea"
+        ]
       },
       {
         "tipo": "nota",
