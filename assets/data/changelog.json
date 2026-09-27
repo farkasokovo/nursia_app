@@ -1,5 +1,17 @@
 [
   {
+    "version": "1.3.0",
+    "fecha": "2026-09-27",
+    "cambios": [
+      "Nueva ficha en Esenciales: modos ventilatorios básicos, con IPPV, SIMV, CPAP con ASB y BIPAP en la nomenclatura que traen los ventiladores Dräger.",
+      "La ficha de dispositivos de oxígeno ahora abre con la definición de FiO2 y la regla de 4% por litro en puntas nasales.",
+      "Las tablas de oxígeno quedan solo con el flujo en litros por minuto, y la ficha se divide en bajo y alto flujo.",
+      "Flujos corregidos: puntas nasales 1 a 5 L/min, mascarilla simple 5 a 10 L/min y mascarilla con reservorio 10 a 15 L/min.",
+      "El apartado de alto flujo describe el sistema Airvo 2 con sus rangos reales de flujo, FiO2 y temperatura.",
+      "La FiO2 se expresa en porcentaje en toda la app, ya no en decimales."
+    ]
+  },
+  {
     "version": "1.2.1",
     "fecha": "2026-08-30",
     "cambios": [

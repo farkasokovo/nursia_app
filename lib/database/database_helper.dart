@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 21, // Aumentamos la versión a 21
+      version: 22, // Aumentamos la versión a 22
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -213,6 +213,17 @@ class DatabaseHelper {
         // nuevo. NO afecta datos del usuario (turno activo).
         if (oldVersion < 21) {
           await db.delete('medicamentos');
+        }
+        // Se reescribió la ficha de dispositivos de oxígeno (se retiró la
+        // columna de FiO2 de la tabla, se ajustaron los flujos y se sustituyó
+        // el bloque de puntas nasales de alto flujo por el del sistema Airvo 2)
+        // y se agregó la ficha de modos ventilatorios básicos. Como el cambio
+        // es de CONTENIDO y no de esquema, la única forma de que llegue a un
+        // dispositivo ya instalado es vaciar la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo en
+        // el próximo arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 22) {
+          await db.delete('esenciales');
         }
       },
     );

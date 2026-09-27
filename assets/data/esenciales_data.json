@@ -319,36 +319,41 @@
     "orden": 1
   },
   {
-    "titulo": "Dispositivos de oxígeno: flujo y FiO2",
+    "titulo": "Dispositivos de oxígeno: bajo y alto flujo",
     "titulo_corto": "Dispositivos de O2",
     "categoria": "equipo",
     "icono": "gauge",
-    "resumen": "Flujo en litros por minuto y FiO2 aproximada de cada dispositivo.",
-    "palabras_clave": "oxigeno, oxígeno, oxigenoterapia, FiO2, mascarilla, puntas nasales, cánula nasal, catéter nasal, reservorio, bolsa, no reinhalación, venturi, alto flujo, PNAF, litros, saturación, SpO2, hipoxemia, flujómetro",
+    "resumen": "Flujo en litros por minuto de cada dispositivo, separados en sistemas de bajo y de alto flujo.",
+    "palabras_clave": "oxigeno, oxígeno, oxigenoterapia, FiO2, fracción inspirada de oxígeno, mascarilla, puntas nasales, cánula nasal, catéter nasal, reservorio, bolsa, no reinhalación, venturi, bajo flujo, alto flujo, cánula nasal de alto flujo, CNAF, PNAF, Airvo, Airvo 2, humidificación, litros, saturación, SpO2, hipoxemia, flujómetro",
     "contenido": [
       {
+        "tipo": "texto",
+        "titulo": "FiO2",
+        "valor": "La fracción inspirada de oxígeno es la proporción de oxígeno que contiene el gas inspirado, expresada en porcentaje. El aire ambiente tiene una FiO2 de 21%; la oxigenoterapia consiste en elevarla por encima de ese valor."
+      },
+      {
+        "tipo": "nota",
+        "valor": "Por puntas nasales, cada litro por minuto de oxígeno suplementario eleva la FiO2 alrededor de 4% sobre el 21% del aire ambiente: FiO2 aproximada = 21 + (4 x flujo en L/min). A 3 L/min corresponde una FiO2 cercana a 33%. La equivalencia sirve solo para puntas nasales; la FiO2 de las mascarillas no se calcula así."
+      },
+      {
         "tipo": "tabla",
-        "titulo": "Dispositivos de bajo flujo",
+        "titulo": "Bajo flujo",
         "encabezados": [
           "Dispositivo",
-          "Flujo (L/min)",
-          "FiO2"
+          "Flujo (L/min)"
         ],
         "filas": [
           [
             "Puntas nasales",
-            "1 a 6",
-            "0.24 a 0.44"
+            "1 a 5"
           ],
           [
             "Mascarilla simple",
-            "5 a 8",
-            "0.40 a 0.60"
+            "5 a 10"
           ],
           [
             "Mascarilla con reservorio",
-            "10 a 15",
-            "0.60 a 0.95"
+            "10 a 15"
           ]
         ]
       },
@@ -358,17 +363,17 @@
       },
       {
         "tipo": "nota",
-        "valor": "En los dispositivos de bajo flujo la FiO2 es estimada, no exacta: cambia con el patrón respiratorio del paciente. Los valores de la tabla suponen un patrón respiratorio normal."
+        "valor": "En los dispositivos de bajo flujo la FiO2 es estimada, no exacta: parte del volumen inspirado se toma del aire ambiente, así que el mismo flujo entrega distinta concentración según el patrón respiratorio del paciente."
       },
       {
         "tipo": "texto",
-        "titulo": "Mascarilla Venturi",
-        "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Si el paciente necesita más de 8 L/min para mantener una saturación de 90 a 94%, se cambia a Venturi."
+        "titulo": "Alto flujo:\nMascarilla Venturi",
+        "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Se elige cuando se requiere una FiO2 precisa y estable, no a partir de cierto flujo. Es el dispositivo indicado en el paciente con EPOC e hipercapnia crónica, en quien una concentración alta de oxígeno puede deprimir el estímulo respiratorio."
       },
       {
         "tipo": "texto",
-        "titulo": "Puntas nasales de alto flujo",
-        "valor": "Administran de 30 a 60 L/min de una mezcla de aire y oxígeno, calentada y humidificada, con FiO2 regulable de 0.21 a 1.0. Requieren equipo específico; no equivalen a aumentar el flujo de unas puntas nasales comunes."
+        "titulo": "Alto flujo:\nSistema Airvo 2",
+        "valor": "El Airvo 2 (Fisher & Paykel) es un equipo de cánula nasal de alto flujo con humidificación activa: genera el flujo, lo calienta y lo humidifica, y lo entrega por una cánula nasal de diámetro amplio.\nEl flujo se programa de 10 a 60 L/min en el modo predeterminado y de 2 a 25 L/min en modo Junior.\nLa temperatura objetivo se elige entre 37, 34 y 31 °C. El oxígeno se conecta por la entrada posterior del equipo, hasta 60 L/min, y la FiO2 resultante se muestra en pantalla entre 21% y 100%.\nNo equivale a subir el flujo de unas puntas nasales comunes."
       },
       {
         "tipo": "referencias",
@@ -388,11 +393,27 @@
           {
             "texto": "Grupo de trabajo mexicano COVID-19, Colegio Mexicano de Medicina Crítica. (2020). Guía COVID-19 para la atención del paciente crítico con infección por SARS-CoV-2. Medicina Crítica, 34(1).",
             "url": "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-89092020000100007"
+          },
+          {
+            "texto": "Jarillo Quijada, A. Oxigenoterapia. Guías clínicas del Hospital Infantil de México Federico Gómez.",
+            "url": "http://himfg.com.mx/descargas/documentos/planeacion/guiasclinicasHIM/oxigenotrepia.pdf"
+          },
+          {
+            "texto": "Segoviano Gómez, E., Vejar Sánchez, J. A., Arvizu Velasco, D., y Barrios López, M. A. (2016). ¿El uso de alto flujo de oxígeno disminuye la necesidad de intubación comparado con el empleo de ventilación mecánica no invasiva en el paciente con síndrome de insuficiencia respiratoria aguda (SIRA) leve? Medicina Crítica, 30(5), 329-333. Cuadro I.",
+            "url": "https://www.scielo.org.mx/pdf/mccmmc/v30n5/2448-8909-mccmmc-30-05-329.pdf"
+          },
+          {
+            "texto": "Fisher & Paykel Healthcare. (2019). AIRVO 2: manual del usuario (185045495). Especificaciones del producto.",
+            "url": "https://www.wkm-medizintechnik.de/media/8331/airvo-2_185045495_082019.pdf"
+          },
+          {
+            "texto": "American Heart Association. (2012). Libro del proveedor de SVCA/ACLS: material complementario. Apartado 1, Mascarilla tipo Venturi.",
+            "url": "https://apiperiodico.jalisco.gob.mx/api/sites/periodicooficial.jalisco.gob.mx/files/libro_del_proveedor_de_svcaacls_material_complementario-_american_heart_association_-.pdf"
           }
         ]
       }
     ],
-    "fuente": "OMS, Clinical care for severe acute respiratory infection: toolkit (2020); Revista Latinoamericana de Infectología Pediátrica",
+    "fuente": "OMS, Clinical care for severe acute respiratory infection: toolkit (2020); Guías clínicas del Hospital Infantil de México Federico Gómez; Medicina Crítica; documentación técnica de Fisher & Paykel Healthcare",
     "orden": 1
   },
   {
@@ -1342,6 +1363,94 @@
       }
     ],
     "fuente": "IMSS, Cuadro Básico y Catálogo de Medicamentos, Grupo Nº 21; NOM-022-SSA3-2012",
+    "orden": 3
+  },
+  {
+    "titulo": "Modos ventilatorios básicos",
+    "titulo_corto": "Modos ventilatorios",
+    "categoria": "equipo",
+    "icono": "pulse",
+    "resumen": "IPPV, SIMV, CPAP con ASB y BIPAP en la nomenclatura Dräger, la que aparece en los ventiladores Evita y Savina.",
+    "palabras_clave": "ventilacion, ventilación, ventilación mecánica, ventilador, modos ventilatorios, modalidades, IPPV, IPPV Assist, SIMV, BIPAP, PC-BIPAP, BiPAP, CPAP, ASB, presion soporte, presión de soporte, pressure support, PS, PEEP, Pinsp, volumen tidal, destete, deshabituación, Drager, Dräger, Evita, Savina, intubado",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "valor": "Los nombres de los modos ventilatorios cambian entre fabricantes: un mismo modo aparece con distinta denominación según la marca del ventilador. La nomenclatura de esta ficha es la de Dräger, presente en los equipos Evita y Savina."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "IPPV\n(Intermittent Positive Pressure Ventilation)",
+        "valor": "Ventilación controlada por volumen: el ventilador entrega todas las respiraciones con volumen tidal, frecuencia y tiempo inspiratorio preestablecidos, de modo que el volumen minuto queda fijo. Corresponde al paciente sin respiración espontánea. En la variante IPPV Assist el trigger por flujo queda activo, así que el paciente dispara el ciclo con su esfuerzo inspiratorio y el ventilador entrega de todas formas el volumen programado."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "SIMV\n(Synchronized Intermittent Mandatory Ventilation)",
+        "valor": "Forma mixta de ventilación mandatoria y respiración espontánea. El ventilador asegura una ventilación mínima con emboladas mandatorias fijas, resultado del volumen tidal por la frecuencia programados. Dentro de una ventana de trigger, cada embolada se sincroniza con la inspiración espontánea para no encimarse a ella. Entre embolada y embolada el paciente respira por su cuenta, con apoyo de ASB cuando se programa. En el destete paulatino se reduce la frecuencia mandatoria para que la respiración espontánea cubra una porción creciente del volumen minuto."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "CPAP y ASB\n(Continuous Positive Airway Pressure y Assisted Spontaneous Breathing)",
+        "valor": "CPAP mantiene una presión positiva continua en la vía aérea y no entrega emboladas mandatorias: toda la ventilación depende del esfuerzo del paciente. ASB es la denominación Dräger de la presión de soporte, que otras marcas rotulan Pressure Support o PS. Cuando el flujo inspiratorio espontáneo alcanza el valor de trigger, o cuando el volumen inspirado pasa de 25 mL, el ventilador eleva la presión hasta el valor programado por encima del PEEP y la sostiene hasta que el flujo inspiratorio cae al 25% de su valor máximo. CPAP con ASB requiere impulso respiratorio íntegro y es la combinación habitual durante el destete."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "BIPAP\n(Biphasic Positive Airway Pressure)",
+        "valor": "Ventilación controlada por presión y por tiempo que alterna dos niveles: la presión inspiratoria Pinsp durante el tiempo inspiratorio y el PEEP durante el resto del ciclo. Su rasgo distintivo es que el paciente puede respirar espontáneamente en cualquier fase, por eso suele describirse como una alternancia controlada por tiempo entre dos niveles de CPAP. Ambos cambios de nivel se sincronizan con el esfuerzo del paciente. El volumen tidal no se impone: resulta de la diferencia entre PEEP y Pinsp y de la complianza pulmonar, por lo que varía y obliga a vigilar los límites de alarma del volumen minuto. Reduciendo de forma paulatina Pinsp y la frecuencia se pasa de la ventilación controlada a la respiración espontánea completa sin cambiar de modo. En BIPAP/ASB las respiraciones espontáneas del nivel de presión inferior reciben además presión de soporte. En los ventiladores Dräger de generación nueva el modo aparece rotulado como PC-BIPAP."
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Comparación",
+        "encabezados": [
+          "Modo",
+          "Esfuerzo respiratorio del paciente",
+          "Uso"
+        ],
+        "filas": [
+          [
+            "IPPV",
+            "No se requiere",
+            "Paciente sin respiración espontánea"
+          ],
+          [
+            "SIMV",
+            "Parcial, entre emboladas",
+            "Apoyo parcial y destete"
+          ],
+          [
+            "CPAP/ASB",
+            "Indispensable",
+            "Destete y respiración espontánea asistida"
+          ],
+          [
+            "BIPAP",
+            "Posible en ambos niveles",
+            "De control a destete sin cambiar de modo"
+          ]
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Dräger Medizintechnik GmbH. (2000). Savina: ventilador de cuidados intensivos. Instrucciones de uso, software 1.n (2a ed.). Descripción de los modos de ventilación, pp. 89-98.",
+            "url": "http://www.frankshospitalworkshop.com/equipment/documents/ventilators/user_manuals/Dr%C3%A4ger%20Savina%20-%20User%20manual%20(es).pdf"
+          },
+          {
+            "texto": "Hamilton Medical. (2017). Mode comparison card: nomenclatura de modos ventilatorios por marca.",
+            "url": "https://www.med.upenn.edu/uphscovid19education/assets/user-content/documents/curricula/hamilton-mode-comparison.pdf"
+          },
+          {
+            "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartados 4.9.5 y 4.9.6.",
+            "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
+          },
+          {
+            "texto": "Puga Torres, M. S., Parellada Blanco, J., Hernández Pedroso, W., Pérez Pérez, F., Quiñones Zamora, A., y Ruiz Suárez, L. O. (2014). Propuesta de algoritmos para la ventilación mecánica en las áreas intensivas municipales y los centros de diagnóstico integral. Revista Cubana de Medicina Intensiva y Emergencias, 13(1), 70-86.",
+            "url": "https://www.medigraphic.com/pdfs/revcubmedinteme/cie-2014/cie141h.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "Dräger, Savina: instrucciones de uso; ISO/DIS 19223; Hamilton Medical, comparativo de modos por marca",
     "orden": 3
   }
 ]
