@@ -184,5 +184,28 @@
         "url": "https://media.supplychain.nhs.uk/media/documents/N0858524/Manual/30659_N0858524_Operators%20Manual.pdf"
       }
     ]
+  },
+  {
+    "id": "barotrauma",
+    "termino": "Barotrauma",
+    "definicion": "Lesión pulmonar producida por presiones transpulmonares altas, que deja aire fuera del alveolo. Es una complicación de la ventilación mecánica invasiva y se manifiesta como enfisema subcutáneo, neumomediastino, neumopericardio o neumoperitoneo.",
+    "referencias": [
+      {
+        "texto": "Bolívar Rodríguez, M. A., Martínez Nava, J. C., Pamanes Lozano, A., Cázarez Aguilar, M. A., Quiroga Arias, V. E., y Bolívar Corona, A. (2021). Barotrauma y ventilación mecánica en pacientes críticos COVID-19. Neumología y Cirugía de Tórax, 80(1), 62-67.",
+        "url": "https://www.medigraphic.com/pdfs/neumo/nt-2021/nt211l.pdf"
+      }
+    ]
+  },
+  {
+    "id": "espacio-muerto",
+    "termino": "Espacio muerto",
+    "desglose": "VD",
+    "definicion": "Parte del volumen tidal que no participa en el intercambio de gases. Cuando aumenta, hace falta más volumen minuto para mantener el mismo CO2, y con ello sube la carga de los músculos respiratorios.",
+    "referencias": [
+      {
+        "texto": "Magaña Macías, C., Salinas Martínez, C., Santiago Toledo, J., Olvera Guzmán, C., Aguirre Sánchez, J., y Franco Granillo, J. (2011). Evaluación del espacio muerto ajustado al volumen corriente en pacientes con ventilación mecánica. Revista de la Asociación Mexicana de Medicina Crítica y Terapia Intensiva, 25(3), 131-141.",
+        "url": "https://www.medigraphic.com/pdfs/medcri/ti-2011/ti113c.pdf"
+      }
+    ]
   }
 ]

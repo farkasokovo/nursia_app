@@ -35,6 +35,7 @@ class _DolorLayout extends StatelessWidget {
               title: "EVNA",
               subtitle: "Escala numérica (0-10)",
               icon: PhosphorIconsRegular.ruler,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const EvnaScreen()),
@@ -45,6 +46,7 @@ class _DolorLayout extends StatelessWidget {
               title: "PAINAD",
               subtitle: "Dolor en demencia avanzada",
               icon: PhosphorIconsRegular.brain,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const PainadScreen()),
@@ -55,6 +57,7 @@ class _DolorLayout extends StatelessWidget {
               title: "DN4",
               subtitle: "Dolor neuropático",
               icon: PhosphorIconsRegular.lightning,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const Dn4Screen()),

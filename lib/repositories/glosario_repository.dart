@@ -44,8 +44,6 @@ class GlosarioRepository {
     }
   }
 
-  Future<List<TerminoGlosario>> obtenerTodos() => _dao.obtenerTodos();
-
   /// Los términos indexados por su id.
   ///
   /// Es lo que necesita la pantalla de ficha para resolver los ids que cita

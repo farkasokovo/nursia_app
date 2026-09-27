@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 25, // Aumentamos la versión a 25
+      version: 27, // Aumentamos la versión a 27
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -269,6 +269,25 @@ class DatabaseHelper {
             )
           ''');
           await db.delete('esenciales');
+        }
+        // Se agregaron al glosario los términos "barotrauma" y
+        // "espacio-muerto", y la ficha de ventiladores los cita. Se vacían las
+        // dos tablas porque cargarSemillaSiHaceFalta() solo siembra cuando la
+        // suya está vacía: sin esto, un dispositivo que ya arrancó con la
+        // versión 25 se quedaría con el glosario viejo y con la ficha citando
+        // ids que no existen. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 26) {
+          await db.delete('glosario');
+          await db.delete('esenciales');
+        }
+        // Se agregó la escala de signos vitales pediátricos a
+        // escalas_lista.json y a scales_data.json. La tabla "escalas" solo se
+        // siembra cuando está vacía, y además el sembrado une los dos archivos
+        // por id y salta la escala que falte en alguno, así que sin vaciarla la
+        // escala nueva nunca aparecería en el buscador. NO afecta datos del
+        // usuario (turno activo).
+        if (oldVersion < 27) {
+          await db.delete('escalas');
         }
       },
     );

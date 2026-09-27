@@ -9,6 +9,7 @@ import '../../models/ficha_esencial.dart';
 import '../../models/termino_glosario.dart';
 import '../../repositories/glosario_repository.dart';
 import '../../utils/esencial_icon_mapper.dart';
+import '../../utils/secciones_ficha.dart';
 import '../../utils/url_launcher_helper.dart';
 
 /// Pantalla de una ficha de Esenciales.
@@ -33,6 +34,28 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
   /// 25; este es el único número que no sale del tema, porque no hay un estilo
   /// intermedio entre titleMedium y bodySmall al cual colgarse.
   static const double _tamanoSubtitulo = 17;
+
+  /// Peso visual del contenedor del glosario. Es el mismo nivel con el que se
+  /// pinta "Efectos secundarios" en la ficha de medicamento: el color de fondo
+  /// y su opacidad se LEEN de aquí, nunca se copian, para que el glosario siga
+  /// cualquier ajuste de ese tinte.
+  static const NivelSeguridad _nivelGlosario = NivelSeguridad.leve;
+
+  /// Cuánto se le resta a los tamaños del tema DENTRO del glosario: encabezado,
+  /// término, desglose y definición.
+  ///
+  /// Es un delta y no un tamaño fijo, igual que `NivelSeguridad.reduccionTitulo`,
+  /// para que siga al tema si los estilos base cambian. El glosario es contenido
+  /// de apoyo y el contenedor teñido ya lo distingue, así que no necesita el
+  /// tamaño pleno del cuerpo de la ficha.
+  static const double _reduccionGlosario = 2;
+
+  /// Aplica [_reduccionGlosario] sobre un estilo del tema. [tamanoPorDefecto]
+  /// es el respaldo por si el estilo llegara sin fontSize.
+  TextStyle? _reducido(TextStyle? base, double tamanoPorDefecto) =>
+      base?.copyWith(
+        fontSize: (base.fontSize ?? tamanoPorDefecto) - _reduccionGlosario,
+      );
 
   /// Términos del glosario indexados por id, resueltos UNA sola vez al abrir
   /// la ficha: no por bloque ni por término. Una ficha sin bloques "glosario"
@@ -266,12 +289,16 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
       return const SizedBox.shrink();
     }
 
-    return Theme(
+    final estiloTermino = _reducido(textTheme.titleMedium, 25);
+
+    final desplegable = Theme(
       // ExpansionTile dibuja una línea arriba y otra abajo al desplegarse.
-      // Aquí estorban: el bloque ya vive dentro de la tarjeta de la ficha.
+      // Aquí estorban: el bloque ya vive dentro de su propio contenedor.
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
-        title: Text(bloque.titulo ?? 'Glosario', style: textTheme.titleMedium),
+        // Tocar el encabezado, y no solo el caret, alterna abierto y cerrado:
+        // es el comportamiento que ExpansionTile trae de fábrica.
+        title: Text(bloque.titulo ?? 'Glosario', style: estiloTermino),
         initiallyExpanded: false,
         tilePadding: EdgeInsets.zero,
         childrenPadding: const EdgeInsets.only(bottom: 4),
@@ -286,34 +313,46 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Misma jerarquía visual que el título y el subtítulo de
-                  // cualquier otro bloque de la ficha.
-                  Text(termino.termino, style: textTheme.titleMedium),
+                  // cualquier otro bloque de la ficha, un punto más chica.
+                  Text(termino.termino, style: estiloTermino),
                   if (termino.desglose != null) ...[
                     const SizedBox(height: 2),
                     Text(
                       termino.desglose!,
                       style: textTheme.titleMedium?.copyWith(
-                        fontSize: _tamanoSubtitulo,
+                        fontSize: _tamanoSubtitulo - _reduccionGlosario,
                         color: colorScheme.primary,
                       ),
                     ),
                   ],
                   const SizedBox(height: 6),
-                  Text(termino.definicion, style: textTheme.bodySmall),
-                  if (termino.referencias.isNotEmpty) ...[
-                    const SizedBox(height: 6),
-                    _buildReferencias(
-                      context,
-                      termino.referencias,
-                      colorScheme,
-                      textTheme,
-                    ),
-                  ],
+                  // Las referencias del término NO se pintan: el campo existe
+                  // como registro de dónde salió cada definición, no como
+                  // contenido de la app. Ver TerminoGlosario.referencias.
+                  Text(
+                    termino.definicion,
+                    style: _reducido(textTheme.bodySmall, 15),
+                  ),
                 ],
               ),
             ),
         ],
       ),
+    );
+
+    // El glosario va COMPLETO dentro del contenedor, encabezado incluido, para
+    // que se lea como una zona aparte del contenido de la ficha.
+    final acento = _nivelGlosario.colorAcento;
+    if (acento == null) return desplegable;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: acento.withValues(alpha: _nivelGlosario.opacidadFondo),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: desplegable,
     );
   }
 

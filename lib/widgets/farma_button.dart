@@ -6,12 +6,30 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../theme/app_theme.dart';
 import 'alto_riesgo_badge.dart';
 
+/// Alto de los botones en las pantallas de categoría de Escalas.
+///
+/// El doble del alto por omisión. Vive aquí, y no como un 140 suelto en cada
+/// pantalla, para que las seis pantallas de Escalas que lo usan no se
+/// desincronicen entre sí. Farmacología NO lo usa: sus botones se quedan en el
+/// alto por omisión de [FarmaButton].
+const double altoFarmaButtonEscalas = 140.0;
+
 class FarmaButton extends StatelessWidget {
   final String title;
   final String? subtitle; // 1. Marcado como nullable con '?'
   final IconData icon;
   final VoidCallback onPressed;
   final bool altoRiesgo;
+
+  /// Alto mínimo del botón.
+  ///
+  /// Por omisión 70, que es con el que se pintan los botones de Farmacología:
+  /// al tener valor por omisión, esas diez pantallas quedan idénticas sin
+  /// tocarlas. Las de Escalas pasan [altoFarmaButtonEscalas].
+  ///
+  /// Alimenta los DOS lugares donde se fija el alto (el ConstrainedBox y el
+  /// minimumSize del ElevatedButton) para que no se desincronicen.
+  final double altoMinimo;
 
   const FarmaButton({
     super.key,
@@ -20,6 +38,7 @@ class FarmaButton extends StatelessWidget {
     required this.onPressed,
     this.subtitle, // Ahora es opcional y puede ser null
     this.altoRiesgo = false,
+    this.altoMinimo = 70,
   });
 
   @override
@@ -31,14 +50,14 @@ class FarmaButton extends StatelessWidget {
     // Antes era una altura fija de 70. El chip de alto riesgo es más alto que
     // la línea de texto que reemplazó, así que en pantallas angostas (donde un
     // nombre largo como "Warfarina Sódica" cae a dos renglones) 70 se quedaba
-    // corto y salía el overflow rayado. Con minHeight el botón conserva los 70
-    // de siempre y solo crece cuando de verdad hace falta.
+    // corto y salía el overflow rayado. Con minHeight el botón conserva su
+    // alto normal y solo crece cuando de verdad hace falta.
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 70),
+      constraints: BoxConstraints(minHeight: altoMinimo),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          minimumSize: const Size(double.infinity, 70),
+          minimumSize: Size(double.infinity, altoMinimo),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           shape: const RoundedRectangleBorder(
             borderRadius: AppRadius.defaultRadius,

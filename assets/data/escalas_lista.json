@@ -89,6 +89,12 @@
       "nombre": "Escala FLACC",
       "categoria": "pediatricas",
       "ruta": "flacc_screen"
+    },
+    {
+      "id": "signos_vitales_pediatricos",
+      "nombre": "Signos vitales pediátricos",
+      "categoria": "signos_vitales",
+      "ruta": "signos_vitales_pediatricos_screen"
     }
   ]
 }

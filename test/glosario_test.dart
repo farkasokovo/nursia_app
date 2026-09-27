@@ -83,6 +83,83 @@ void main() {
       }
     });
 
+    test('las definiciones cumplen las reglas de redacción', () {
+      // Lo mismo que vigila ficha_esencial_test.dart sobre el cuerpo de las
+      // fichas. Se revisan término, desglose y definición, no las referencias:
+      // el título de una publicación se transcribe tal como está publicado.
+      const segundaPersona = [
+        ' tú ',
+        'debes ',
+        'recuerda ',
+        'asegúrate',
+        'ten en cuenta',
+        'tienes que',
+        'si vas a ',
+      ];
+      const muletillas = [
+        'es importante destacar',
+        'es importante señalar',
+        'es importante mencionar',
+        'cabe destacar',
+        'cabe mencionar',
+        'cabe señalar',
+        'vale la pena mencionar',
+        'juega un papel',
+        'de vital importancia',
+        'permite garantizar',
+        'a la hora de',
+        'en el ámbito de',
+      ];
+      // En México se usa "solución Hartmann" y "solución fisiológica 0.9%".
+      const terminologia = [
+        'ringer',
+        'suero fisiológico',
+        'suero glucosado',
+        'lactato de ringer',
+      ];
+
+      for (final t in terminos) {
+        for (final texto in [t.termino, t.desglose ?? '', t.definicion]) {
+          expect(
+            texto.contains('—') || texto.contains('–'),
+            isFalse,
+            reason:
+                'El término "${t.id}" usa raya larga. Reescribe con coma, '
+                'punto y coma, dos puntos o paréntesis:\n$texto',
+          );
+
+          final minusculas = ' ${texto.toLowerCase()} ';
+          for (final frase in segundaPersona) {
+            expect(
+              minusculas.contains(frase),
+              isFalse,
+              reason:
+                  'El término "${t.id}" se dirige al lector con "$frase". Las '
+                  'definiciones van en tercera persona o impersonal:\n$texto',
+            );
+          }
+          for (final frase in muletillas) {
+            expect(
+              minusculas.contains(frase),
+              isFalse,
+              reason:
+                  'El término "${t.id}" usa la muletilla "$frase". Si el dato '
+                  'importa, estar en el glosario ya lo comunica:\n$texto',
+            );
+          }
+          for (final frase in terminologia) {
+            expect(
+              minusculas.contains(frase),
+              isFalse,
+              reason:
+                  'El término "${t.id}" usa "$frase", que no es la '
+                  'terminología mexicana:\n$texto',
+            );
+          }
+        }
+      }
+    });
+
     test('el término y el bloque sobreviven el viaje por toJson', () {
       // toMap serializa las referencias a JSON dentro de una columna TEXT y
       // fromMap las vuelve a leer. Si algo se pierde ahí, el término se ve

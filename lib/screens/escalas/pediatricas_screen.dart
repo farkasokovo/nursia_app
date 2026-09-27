@@ -35,6 +35,7 @@ class _PediatricasLayout extends StatelessWidget {
               title: "Escala de APGAR",
               subtitle: "Vitalidad del recién nacido",
               icon: PhosphorIconsRegular.baby,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const ApgarScreen()),
@@ -45,6 +46,7 @@ class _PediatricasLayout extends StatelessWidget {
               title: "Silverman-Anderson",
               subtitle: "Dificultad respiratoria neonatal",
               icon: PhosphorIconsRegular.wind,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -57,6 +59,7 @@ class _PediatricasLayout extends StatelessWidget {
               title: "Escala FLACC",
               subtitle: "Dolor en no verbales",
               icon: PhosphorIconsRegular.smiley,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const FlaccScreen()),

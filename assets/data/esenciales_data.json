@@ -1513,7 +1513,9 @@
           "complianza",
           "prvc",
           "aprv",
-          "presion-media-via-aerea"
+          "presion-media-via-aerea",
+          "espacio-muerto",
+          "barotrauma"
         ]
       },
       {

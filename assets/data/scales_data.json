@@ -15,13 +15,13 @@
       "Respuesta motora (1 a 6 puntos): Evalúa la integridad funcional del sistema nervioso central y es el predictor más potente del pronóstico clínico."
     ],
     "interpretation": [
-    "La puntuación total oscila entre un mínimo de 3 puntos (coma profundo) y un máximo de 15 puntos (paciente despierto y orientado).\n",
-    "Apertura ocular: Espontánea (4), a la orden verbal (3), al dolor (2), ninguna (1).\n",
-    "Respuesta verbal: Orientado (5), desorientado (4), palabras inapropiadas (3), sonidos incomprensibles (2), ninguna (1).\n",
-    "Respuesta motora: Obedece órdenes (6), localiza el dolor (5), flexión normal/retirada (4), flexión anormal/decorticación (3), extensión/descerebración (2), ninguna (1).\n",
-    "Deterioro neurológico leve: 14 a 15 puntos.\n",
-    "Deterioro neurológico moderado: 9 a 13 puntos.\n",
-    "Deterioro neurológico grave / severo: 3 a 8 puntos (puntaje ≤ 8 suele indicar necesidad de intubación endotraqueal).\n"
+      "La puntuación total oscila entre un mínimo de 3 puntos (coma profundo) y un máximo de 15 puntos (paciente despierto y orientado).\n",
+      "Apertura ocular: Espontánea (4), a la orden verbal (3), al dolor (2), ninguna (1).\n",
+      "Respuesta verbal: Orientado (5), desorientado (4), palabras inapropiadas (3), sonidos incomprensibles (2), ninguna (1).\n",
+      "Respuesta motora: Obedece órdenes (6), localiza el dolor (5), flexión normal/retirada (4), flexión anormal/decorticación (3), extensión/descerebración (2), ninguna (1).\n",
+      "Deterioro neurológico leve: 14 a 15 puntos.\n",
+      "Deterioro neurológico moderado: 9 a 13 puntos.\n",
+      "Deterioro neurológico grave / severo: 3 a 8 puntos (puntaje ≤ 8 suele indicar necesidad de intubación endotraqueal).\n"
     ],
     "limitations": [
       "No puede evaluarse la respuesta verbal en pacientes intubados, con traqueostomía, afasia o barreras severas del lenguaje.",
@@ -44,7 +44,6 @@
       }
     ]
   },
-  
   "ramsay": {
     "name": "Escala de Sedación de Ramsay",
     "description": "La Escala de Ramsay es una herramienta subjetiva de evaluación clínica diseñada en 1974 por el médico Michael Ramsay.\nSu propósito principal es cuantificar el nivel de sedación y el grado de conciencia en los pacientes para evitar tanto la sobre como la infrasedación.\nLa escala evalúa la tranquilidad y la respuesta a los estímulos mediante seis niveles discretos que van desde la agitación despierta hasta el coma o sueño profundo sin respuesta, basándose únicamente en la observación directa a la cabecera del paciente.",
@@ -109,16 +108,16 @@
       "Estímulo Físico: Si el paciente no reacciona al llamado, se aplica un estímulo táctil (frotar el esternón o sacudir suavemente el hombro)."
     ],
     "interpretation": [
-       "Puntuación +4: Combativo; francamente violento, representa un peligro inmediato para el personal.\n",
-  "Puntuación +3: Muy agitado; intenta arrancarse tubos, catéteres o sondas, comportamiento agresivo.\n",
-  "Puntuación +2: Agitado; movimientos frecuentes sin propósito, lucha contra el ventilador mecánico.\n",
-  "Puntuación +1: Inquieto; ansioso o aprensivo, movimientos no agresivos ni vigorosos.\n",
-  "Puntuación 0: Alerta y tranquilo; despierto y calmado con su entorno.\n",
-  "Puntuación -1: Somnoliento; no plenamente alerta, pero mantiene contacto visual a la voz por más de 10 segundos.\n",
-  "Puntuación -2: Sedación leve; despierta brevemente con contacto visual a la voz por menos de 10 segundos.\n",
-  "Puntuación -3: Sedación moderada; movimiento o apertura ocular a la voz, sin contacto visual.\n",
-  "Puntuación -4: Sedación profunda; no responde a la voz, pero presenta movimiento o apertura ocular al estímulo físico.\n",
-  "Puntuación -5: Sin respuesta; ninguna respuesta a la voz ni al estímulo físico.\n"
+      "Puntuación +4: Combativo; francamente violento, representa un peligro inmediato para el personal.\n",
+      "Puntuación +3: Muy agitado; intenta arrancarse tubos, catéteres o sondas, comportamiento agresivo.\n",
+      "Puntuación +2: Agitado; movimientos frecuentes sin propósito, lucha contra el ventilador mecánico.\n",
+      "Puntuación +1: Inquieto; ansioso o aprensivo, movimientos no agresivos ni vigorosos.\n",
+      "Puntuación 0: Alerta y tranquilo; despierto y calmado con su entorno.\n",
+      "Puntuación -1: Somnoliento; no plenamente alerta, pero mantiene contacto visual a la voz por más de 10 segundos.\n",
+      "Puntuación -2: Sedación leve; despierta brevemente con contacto visual a la voz por menos de 10 segundos.\n",
+      "Puntuación -3: Sedación moderada; movimiento o apertura ocular a la voz, sin contacto visual.\n",
+      "Puntuación -4: Sedación profunda; no responde a la voz, pero presenta movimiento o apertura ocular al estímulo físico.\n",
+      "Puntuación -5: Sin respuesta; ninguna respuesta a la voz ni al estímulo físico.\n"
     ],
     "limitations": [
       "No es evaluable de manera directa en pacientes bajo el efecto de bloqueadores neuromusculares (paralizados).",
@@ -161,8 +160,8 @@
       "Deambulación: Clasificación del tipo de marcha del paciente (Insegura con o sin ayuda / Imposible: 1 punto; Normal / Segura con ayuda: 0 puntos)."
     ],
     "interpretation": [
-       "Riesgo bajo: 0 a 2 puntos.\n",
-  "Riesgo alto: 3 o más puntos (activa automáticamente los protocolos institucionales de prevención de caídas).\n"
+      "Riesgo bajo: 0 a 2 puntos.\n",
+      "Riesgo alto: 3 o más puntos (activa automáticamente los protocolos institucionales de prevención de caídas).\n"
     ],
     "limitations": [
       "Al simplificar las categorías de medicamentos, no logra profundizar en la polifarmacia ni en las dosis que toma el paciente.",
@@ -203,12 +202,12 @@
       "Exudado: Presencia de material purulento (pus) en el punto de inserción."
     ],
     "interpretation": [
-        "Grado 0: Sitio de inserción con aspecto saludable; sin dolor ni signos inflamatorios.\n",
-  "Grado 1: Dolor en el sitio de inserción o ligero eritema (observar el catéter).\n",
-  "Grado 2: Dolor en el sitio de inserción con eritema y/o edema (retirar el catéter).\n",
-  "Grado 3: Dolor con eritema, edema y cordón venoso palpable (retirar el catéter).\n",
-  "Grado 4: Dolor con eritema, edema, cordón venoso palpable > 6 cm y/o drenaje purulento (retirar el catéter e iniciar tratamiento).\n",
-  "Grado 5: Tromboflebitis franca con todos los signos anteriores de forma severa (emergencia clínica; retirar catéter de inmediato).\n"
+      "Grado 0: Sitio de inserción con aspecto saludable; sin dolor ni signos inflamatorios.\n",
+      "Grado 1: Dolor en el sitio de inserción o ligero eritema (observar el catéter).\n",
+      "Grado 2: Dolor en el sitio de inserción con eritema y/o edema (retirar el catéter).\n",
+      "Grado 3: Dolor con eritema, edema y cordón venoso palpable (retirar el catéter).\n",
+      "Grado 4: Dolor con eritema, edema, cordón venoso palpable > 6 cm y/o drenaje purulento (retirar el catéter e iniciar tratamiento).\n",
+      "Grado 5: Tromboflebitis franca con todos los signos anteriores de forma severa (emergencia clínica; retirar catéter de inmediato).\n"
     ],
     "limitations": [
       "La percepción del dolor es subjetiva y puede variar según el umbral de cada paciente.",
@@ -232,7 +231,7 @@
         "url": "http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S0864-03192021000100008"
       }
     ]
-  }, 
+  },
   "braden": {
     "name": "Escala de Braden",
     "description": "La Escala de Braden es una herramienta clínica validada científicamente, diseñada en 1987 por las enfermeras Barbara Braden y Nancy Bergstrom, con el objetivo de evaluar y predecir el riesgo que tiene un paciente de desarrollar úlceras por presión (UPP) o lesiones por presión.\nSu modelo conceptual analiza de manera integral tanto los factores determinantes de la intensidad y duración de la presión sobre los tejidos, como aquellos que afectan la tolerancia de la piel a dicha presión.\nAl sumar sus componentes, proporciona un puntaje numérico inversamente proporcional al riesgo, convirtiéndose en la guía fundamental para los planes de prevención de enfermería.",
@@ -252,11 +251,11 @@
       "Fricción y cizallamiento: Valora la fuerza mecánica ejercida sobre la piel durante los movimientos, transferencias o deslizamientos en la cama o silla (Puntaje de 1 a 3)."
     ],
     "interpretation": [
-        "La puntuación global oscila entre 6 (máximo riesgo) y 23 (sin riesgo).\n",
-  "Riesgo alto / muy alto: 12 puntos o menos.\n",
-  "Riesgo moderado: 13 a 14 puntos.\n",
-  "Riesgo bajo / leve: 15 a 18 puntos.\n",
-  "Sin riesgo: 19 a 23 puntos.\n"
+      "La puntuación global oscila entre 6 (máximo riesgo) y 23 (sin riesgo).\n",
+      "Riesgo alto / muy alto: 12 puntos o menos.\n",
+      "Riesgo moderado: 13 a 14 puntos.\n",
+      "Riesgo bajo / leve: 15 a 18 puntos.\n",
+      "Sin riesgo: 19 a 23 puntos.\n"
     ],
     "limitations": [
       "El apartado de nutrición es meramente estimativo y subjetivo; no sustituye a una valoración nutricional exhaustiva basada en biomarcadores.",
@@ -683,6 +682,61 @@
       {
         "text": "Crellin, D. J., Harrison, D., Santamaria, N., & Babl, F. E. (2015). Systematic review of the Face, Legs, Activity, Cry and Consolability scale for assessing pain in infants and children: is it reliable, valid, and feasible for use? Pain, 156(11), 2132-2151.",
         "url": "https://pubmed.ncbi.nlm.nih.gov/26035256/"
+      }
+    ]
+  },
+  "signos_vitales_pediatricos": {
+    "name": "Signos vitales pediátricos",
+    "description": "Intérprete de signos vitales en el paciente pediátrico. Se captura la edad y uno o varios signos vitales, y cada uno se compara por separado contra el rango que le corresponde a esa edad. Las tablas de frecuencia cardiaca, frecuencia respiratoria, presión arterial y saturación provienen del material del EVAT (Escala de Valoración de Alerta Temprana). No es el EVAT: aquella es una escala de puntaje que suma categorías, y aquí no se suma nada ni se obtiene una calificación global.",
+    "when_to_use": [
+      "Al tomar signos vitales en el paciente pediátrico hospitalizado, para saber si una cifra cae dentro de lo esperado para su edad.",
+      "Cuando el rango normal cambia con la edad y no se tiene la tabla a la mano.",
+      "Como apoyo para decidir si un valor amerita repetir la toma o comunicarlo al equipo.",
+      "En la enseñanza de los rangos pediátricos, donde la diferencia entre grupos de edad es la dificultad principal."
+    ],
+    "components": [
+      "Edad del paciente, capturada en años o en meses. Es lo que determina el renglón de referencia y sin ella no se pueden interpretar la frecuencia cardiaca, la frecuencia respiratoria ni la presión arterial.",
+      "Frecuencia cardiaca en latidos por minuto, con trece grupos de edad.",
+      "Frecuencia respiratoria en respiraciones por minuto, con los mismos trece grupos de edad.",
+      "Presión arterial sistólica y diastólica en mmHg, con veinte grupos de edad propios, distintos de los anteriores.",
+      "Temperatura axilar en grados centígrados, que no depende de la edad.",
+      "Saturación de oxígeno en porcentaje, que tampoco depende de la edad."
+    ],
+    "interpretation": [
+      "Frecuencia cardiaca: bradicardia, normal, taquicardia leve, moderada o grave.",
+      "Frecuencia respiratoria: bradipnea, normal, taquipnea leve, moderada o grave.",
+      "Presión arterial: cada componente se reporta por separado. La sistólica puede salir como hipotensión, por debajo de lo normal, normal o hipertensión; la diastólica, como por debajo de lo normal, normal o hipertensión.",
+      "Temperatura axilar: por debajo del rango normal, normal de 36.0 a 37.5 grados, febrícula de 37.6 a 37.9 y fiebre a partir de 38.0.",
+      "Saturación de oxígeno: normal de 95% a 100%, desaturación leve de 90% a 94%, moderada de 85% a 89% y severa en 84% o menos.",
+      "El color de cada resultado sigue la gravedad, de verde en lo normal a los tonos rojos conforme aumenta."
+    ],
+    "limitations": [
+      "No entrega un puntaje ni una calificación global: cada signo se interpreta solo, sin sumarse con los demás.",
+      "Las tablas de frecuencia cardiaca y respiratoria llegan hasta los 18 años; la de presión arterial solo hasta los 17 años cumplidos. Un paciente de 18 años obtiene interpretación de frecuencias pero no de presión arterial.",
+      "La tabla de presión arterial deja una zona sin clasificar entre la hipotensión y el inicio del rango normal. Un valor que caiga ahí se reporta como por debajo de lo normal, sin llamarlo hipotensión.",
+      "La tabla no define un criterio de hipotensión diastólica, así que una diastólica baja se reporta como por debajo de lo normal.",
+      "Los cortes de temperatura corresponden a la vía axilar y no distinguen grupos de edad.",
+      "No se incluye un criterio de hipotermia: no se localizó un corte axilar pediátrico general en fuente verificable, así que un valor bajo se reporta como por debajo del rango normal.",
+      "No aplica el criterio de fiebre en neutropenia, que pertenece a otro contexto clínico."
+    ],
+    "clinical_notes": [
+      "La edad se convierte internamente a meses, que es la unidad en la que están construidas las tres tablas que dependen de ella.",
+      "La hipertensión arterial de la tabla viene expresada como un par sistólica sobre diastólica. Aquí se trata como dos umbrales independientes, de modo que cada componente se reporta por su cuenta.",
+      "Se corrigieron dos errores de transcripción de la hoja original, ambos en frecuencia respiratoria: el rango de taquipnea moderada de 15 a 18 años, que aparecía descendente y encimado con la grave, y el límite entre bradipnea y normal en el menor de 3 meses, donde el mismo valor figuraba en las dos categorías.",
+      "La temperatura no forma parte del material del EVAT y se incorporó a partir de fuentes independientes."
+    ],
+    "references": [
+      {
+        "text": "St. Jude Global. Sistemas de Alerta Temprana Pediátrica (PEWS) / Proyecto EVAT.",
+        "url": "https://global.stjude.org/es-us/pews-evat-report.html"
+      },
+      {
+        "text": "Instituto Mexicano del Seguro Social. Diagnóstico y tratamiento de la fiebre sin signos de focalización en los niños de 3 meses hasta los 5 años de edad. Guía de Evidencias y Recomendaciones 350, apartado 3.3.",
+        "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/350GER.pdf"
+      },
+      {
+        "text": "Ruiz Arcos, R., y cols. (2010). Fiebre en pediatría. Pediatría de México, 77(Supl. 1), S3-S8.",
+        "url": "https://www.medigraphic.com/pdfs/pediat/sp-2010/sps101b.pdf"
       }
     ]
   }

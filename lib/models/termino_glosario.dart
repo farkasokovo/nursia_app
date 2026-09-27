@@ -27,6 +27,13 @@ class TerminoGlosario {
 
   final String definicion;
 
+  /// De dónde salió la definición.
+  ///
+  /// NO ES CÓDIGO MUERTO aunque la app no lo pinte: la pantalla dejó de
+  /// mostrar las citas de los términos a propósito, y el campo se conserva
+  /// como registro de la fuente de cada definición, para quien revise el repo
+  /// o tenga que actualizar un dato. Se siembra, se guarda y se lee completo.
+  ///
   /// Opcional: un término de conocimiento general no necesita fuente; uno con
   /// un dato específico sí.
   final List<ItemReferencia> referencias;

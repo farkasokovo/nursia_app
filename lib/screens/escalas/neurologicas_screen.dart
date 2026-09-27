@@ -35,6 +35,7 @@ class _NeurologicasLayout extends StatelessWidget {
               title: "Escala de Glasgow",
               subtitle: "Nivel de Conciencia",
               icon: PhosphorIconsRegular.brain,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const GlasgowScreen()),
@@ -45,6 +46,7 @@ class _NeurologicasLayout extends StatelessWidget {
               title: "Escala de Ramsay",
               subtitle: "Agitación y Sedación",
               icon: PhosphorIconsRegular.moon,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const RamsayScreen()),
@@ -55,6 +57,7 @@ class _NeurologicasLayout extends StatelessWidget {
               title: "Escala RASS",
               subtitle: "Nivel de Sedación",
               icon: PhosphorIconsRegular.gauge,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const RassScreen()),

@@ -35,6 +35,7 @@ class _EmergenciasLayout extends StatelessWidget {
               title: "MEWS",
               subtitle: "Alerta temprana",
               icon: PhosphorIconsRegular.warning,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const MewsScreen()),
@@ -45,6 +46,7 @@ class _EmergenciasLayout extends StatelessWidget {
               title: "qSOFA",
               subtitle: "Tamizaje de sepsis",
               icon: PhosphorIconsRegular.virus,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const QsofaScreen()),
@@ -55,6 +57,7 @@ class _EmergenciasLayout extends StatelessWidget {
               title: "Índice de Shock",
               subtitle: "FC ÷ PAS",
               icon: PhosphorIconsRegular.heartbeat,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const IndiceShockScreen()),

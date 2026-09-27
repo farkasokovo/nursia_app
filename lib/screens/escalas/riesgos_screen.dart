@@ -35,6 +35,7 @@ class _RiesgosLayout extends StatelessWidget {
               title: "Escala de Downton",
               subtitle: "Riesgo de Caídas",
               icon: PhosphorIconsRegular.boot,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const DowntonScreen()),
@@ -45,6 +46,7 @@ class _RiesgosLayout extends StatelessWidget {
               title: "Escala de Braden",
               subtitle: "Riesgo de UPP",
               icon: PhosphorIconsRegular.selectionBackground,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const BradenScreen()),
@@ -55,6 +57,7 @@ class _RiesgosLayout extends StatelessWidget {
               title: "Escala de Maddox",
               subtitle: "Riesgo de flebitis",
               icon: PhosphorIconsRegular.hand,
+              altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const MaddoxScreen()),
