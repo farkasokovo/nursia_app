@@ -407,6 +407,28 @@ void main() {
       expect(ficha.contenido, isEmpty);
     });
   });
+
+  test('el subtítulo de un bloque sobrevive el parseo y el toJson', () {
+    // subtitulo vive en la sealed class, no en cada subtipo: si alguien lo
+    // agrega a un constructor pero se olvida del toJson, la ficha se ve bien
+    // la primera corrida (viene del JSON) y pierde el subtítulo en la segunda
+    // (viene de SQLite).
+    final ficha = FichaEsencial.fromJson({
+      'titulo': 'Con subtítulo',
+      'contenido': [
+        {
+          'tipo': 'texto',
+          'titulo': 'PEEP',
+          'subtitulo': 'Positive End-Expiratory Pressure',
+          'valor': 'x',
+        },
+      ],
+    });
+
+    final bloque = ficha.contenido.single;
+    expect(bloque.subtitulo, 'Positive End-Expiratory Pressure');
+    expect(bloque.toJson()['subtitulo'], 'Positive End-Expiratory Pressure');
+  });
 }
 
 /// Todo el texto visible de una ficha EXCEPTO el bloque de referencias.
@@ -420,6 +442,8 @@ List<String> _textoDelCuerpo(FichaEsencial ficha) {
     if (b is BloqueReferencias) continue;
     final titulo = b.titulo;
     if (titulo != null) textos.add(titulo);
+    final subtitulo = b.subtitulo;
+    if (subtitulo != null) textos.add(subtitulo);
     switch (b) {
       case BloqueTexto(:final valor) || BloqueNota(:final valor):
         textos.add(valor);

@@ -8,7 +8,10 @@
       "Las tablas de oxígeno quedan solo con el flujo en litros por minuto, y la ficha se divide en bajo y alto flujo.",
       "Flujos corregidos: puntas nasales 1 a 5 L/min, mascarilla simple 5 a 10 L/min y mascarilla con reservorio 10 a 15 L/min.",
       "El apartado de alto flujo describe el sistema Airvo 2 con sus rangos reales de flujo, FiO2 y temperatura.",
-      "La FiO2 se expresa en porcentaje en toda la app, ya no en decimales."
+      "La FiO2 se expresa en porcentaje en toda la app, ya no en decimales.",
+      "Las fichas de modos ventilatorios y de dispositivos de oxígeno abren con un glosario propio: volumen tidal, PEEP y trigger en una, FiO2 en la otra.",
+      "Las siglas de los modos ventilatorios muestran su nombre completo debajo, en letra más chica.",
+      "La ficha de modos ventilatorios aclara que la nomenclatura documentada es la del Savina, y avisa que el Evita XL llama CMV al mismo modo."
     ]
   },
   {

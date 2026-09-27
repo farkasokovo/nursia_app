@@ -50,10 +50,18 @@ class ItemColor {
 ///
 /// [titulo] es opcional y funciona como subtítulo dentro de la ficha — es lo
 /// que distingue, por ejemplo, dos tablas seguidas en la misma ficha.
+///
+/// [subtitulo] se pinta debajo del título, con la misma tipografía en menor
+/// tamaño y en café claro: sirve para el desglose de unas siglas, un sinónimo
+/// o el término de una entrada de glosario. Vive aquí, en la clase base, para
+/// que los seis subtipos lo hereden sin tocar el switch exhaustivo de la
+/// pantalla. Puede ir sin [titulo]: entonces el bloque se lee como una entrada
+/// colgada del encabezado del bloque anterior.
 sealed class BloqueContenido {
   final String? titulo;
+  final String? subtitulo;
 
-  const BloqueContenido({this.titulo});
+  const BloqueContenido({this.titulo, this.subtitulo});
 
   Map<String, dynamic> toJson();
 }
@@ -62,12 +70,13 @@ sealed class BloqueContenido {
 class BloqueTexto extends BloqueContenido {
   final String valor;
 
-  const BloqueTexto({super.titulo, required this.valor});
+  const BloqueTexto({super.titulo, super.subtitulo, required this.valor});
 
   @override
   Map<String, dynamic> toJson() => {
     'tipo': 'texto',
     if (titulo != null) 'titulo': titulo,
+    if (subtitulo != null) 'subtitulo': subtitulo,
     'valor': valor,
   };
 }
@@ -77,12 +86,13 @@ class BloqueTexto extends BloqueContenido {
 class BloqueNota extends BloqueContenido {
   final String valor;
 
-  const BloqueNota({super.titulo, required this.valor});
+  const BloqueNota({super.titulo, super.subtitulo, required this.valor});
 
   @override
   Map<String, dynamic> toJson() => {
     'tipo': 'nota',
     if (titulo != null) 'titulo': titulo,
+    if (subtitulo != null) 'subtitulo': subtitulo,
     'valor': valor,
   };
 }
@@ -94,6 +104,7 @@ class BloqueLista extends BloqueContenido {
 
   const BloqueLista({
     super.titulo,
+    super.subtitulo,
     this.estilo = EstiloLista.vinetas,
     required this.items,
   });
@@ -102,6 +113,7 @@ class BloqueLista extends BloqueContenido {
   Map<String, dynamic> toJson() => {
     'tipo': 'lista',
     if (titulo != null) 'titulo': titulo,
+    if (subtitulo != null) 'subtitulo': subtitulo,
     // El nombre del enum coincide a propósito con el valor del JSON.
     'estilo': estilo.name,
     'items': items,
@@ -116,6 +128,7 @@ class BloqueTabla extends BloqueContenido {
 
   const BloqueTabla({
     super.titulo,
+    super.subtitulo,
     required this.encabezados,
     required this.filas,
   });
@@ -124,6 +137,7 @@ class BloqueTabla extends BloqueContenido {
   Map<String, dynamic> toJson() => {
     'tipo': 'tabla',
     if (titulo != null) 'titulo': titulo,
+    if (subtitulo != null) 'subtitulo': subtitulo,
     'encabezados': encabezados,
     'filas': filas,
   };
@@ -133,12 +147,13 @@ class BloqueTabla extends BloqueContenido {
 class BloqueColores extends BloqueContenido {
   final List<ItemColor> items;
 
-  const BloqueColores({super.titulo, required this.items});
+  const BloqueColores({super.titulo, super.subtitulo, required this.items});
 
   @override
   Map<String, dynamic> toJson() => {
     'tipo': 'colores',
     if (titulo != null) 'titulo': titulo,
+    if (subtitulo != null) 'subtitulo': subtitulo,
     'items': items.map((i) => i.toJson()).toList(),
   };
 }
@@ -165,12 +180,13 @@ class ItemReferencia {
 class BloqueReferencias extends BloqueContenido {
   final List<ItemReferencia> items;
 
-  const BloqueReferencias({super.titulo, required this.items});
+  const BloqueReferencias({super.titulo, super.subtitulo, required this.items});
 
   @override
   Map<String, dynamic> toJson() => {
     'tipo': 'referencias',
     if (titulo != null) 'titulo': titulo,
+    if (subtitulo != null) 'subtitulo': subtitulo,
     'items': items.map((i) => i.toJson()).toList(),
   };
 }
@@ -210,6 +226,9 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
   }
   final json = crudo.cast<String, dynamic>();
   final titulo = _textoRequerido(json['titulo']);
+  // Opcional como el título: si falta, viene vacío o no es String, queda null
+  // y el bloque se pinta sin subtítulo.
+  final subtitulo = _textoRequerido(json['subtitulo']);
   final tipo = json['tipo'];
 
   switch (tipo) {
@@ -221,8 +240,8 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
         return null;
       }
       return tipo == 'texto'
-          ? BloqueTexto(titulo: titulo, valor: valor)
-          : BloqueNota(titulo: titulo, valor: valor);
+          ? BloqueTexto(titulo: titulo, subtitulo: subtitulo, valor: valor)
+          : BloqueNota(titulo: titulo, subtitulo: subtitulo, valor: valor);
 
     case 'lista':
       final items = _listaDeTextos(json['items']);
@@ -232,6 +251,7 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
       }
       return BloqueLista(
         titulo: titulo,
+        subtitulo: subtitulo,
         estilo: _estiloDesdeJson(json['estilo']),
         items: items,
       );
@@ -265,6 +285,7 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
       }
       return BloqueTabla(
         titulo: titulo,
+        subtitulo: subtitulo,
         encabezados: encabezados,
         filas: filas,
       );
@@ -303,7 +324,7 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
         debugPrint('Esenciales: bloque "colores" sin items válidos, se omite.');
         return null;
       }
-      return BloqueColores(titulo: titulo, items: items);
+      return BloqueColores(titulo: titulo, subtitulo: subtitulo, items: items);
 
     case 'referencias':
       final itemsCrudos = json['items'];
@@ -331,7 +352,11 @@ BloqueContenido? _bloqueDesdeJson(dynamic crudo) {
         );
         return null;
       }
-      return BloqueReferencias(titulo: titulo, items: items);
+      return BloqueReferencias(
+        titulo: titulo,
+        subtitulo: subtitulo,
+        items: items,
+      );
 
     default:
       debugPrint('Esenciales: tipo de bloque desconocido "$tipo", se omite.');

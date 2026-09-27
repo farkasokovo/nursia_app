@@ -18,6 +18,11 @@ import '../../utils/url_launcher_helper.dart';
 class FichaEsencialScreen extends StatelessWidget {
   final FichaEsencial ficha;
 
+  /// Tamaño del subtítulo de un bloque. El título de bloque (titleMedium) mide
+  /// 25; este es el único número que no sale del tema, porque no hay un estilo
+  /// intermedio entre titleMedium y bodySmall al cual colgarse.
+  static const double _tamanoSubtitulo = 17;
+
   const FichaEsencialScreen({super.key, required this.ficha});
 
   @override
@@ -132,12 +137,30 @@ class FichaEsencialScreen extends StatelessWidget {
         bloque.titulo ??
         (bloque is BloqueReferencias ? 'Material de apoyo' : null);
 
-    if (titulo == null) return cuerpo;
+    // El subtítulo se pinta con o sin título. Un bloque con subtítulo solo es
+    // una entrada que cuelga del bloque anterior: así el glosario lleva un
+    // único encabezado "Glosario" y cada término debajo con su propio
+    // subtítulo, sin repetir el encabezado en cada entrada.
+    final subtitulo = bloque.subtitulo;
+    if (titulo == null && subtitulo == null) return cuerpo;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(titulo, style: textTheme.titleMedium),
+        if (titulo != null) Text(titulo, style: textTheme.titleMedium),
+        if (subtitulo != null) ...[
+          if (titulo != null) const SizedBox(height: 2),
+          // La MISMA tipografía del título (familia y peso salen de
+          // titleMedium), solo que más chica y en el café claro del tema. Así
+          // se lee como dependiente del título y no como un encabezado propio.
+          Text(
+            subtitulo,
+            style: textTheme.titleMedium?.copyWith(
+              fontSize: _tamanoSubtitulo,
+              color: colorScheme.primary,
+            ),
+          ),
+        ],
         const SizedBox(height: 6),
         cuerpo,
       ],

@@ -328,8 +328,9 @@
     "contenido": [
       {
         "tipo": "texto",
-        "titulo": "FiO2",
-        "valor": "La fracción inspirada de oxígeno es la proporción de oxígeno que contiene el gas inspirado, expresada en porcentaje. El aire ambiente tiene una FiO2 de 21%; la oxigenoterapia consiste en elevarla por encima de ese valor."
+        "titulo": "Glosario",
+        "subtitulo": "FiO2\n(Fracción inspirada de oxígeno)",
+        "valor": "Proporción de oxígeno que contiene el gas inspirado, expresada en porcentaje. El aire ambiente tiene una FiO2 de 21%; la oxigenoterapia consiste en elevarla por encima de ese valor."
       },
       {
         "tipo": "nota",
@@ -367,12 +368,14 @@
       },
       {
         "tipo": "texto",
-        "titulo": "Alto flujo:\nMascarilla Venturi",
+        "titulo": "Mascarilla Venturi",
+        "subtitulo": "Alto flujo",
         "valor": "Es un dispositivo de alto flujo: entrega una FiO2 fija que no depende del patrón respiratorio del paciente. La FiO2 la determina el adaptador que se coloca, y el flujo de oxígeno que requiere viene impreso en el propio adaptador. Se elige cuando se requiere una FiO2 precisa y estable, no a partir de cierto flujo. Es el dispositivo indicado en el paciente con EPOC e hipercapnia crónica, en quien una concentración alta de oxígeno puede deprimir el estímulo respiratorio."
       },
       {
         "tipo": "texto",
-        "titulo": "Alto flujo:\nSistema Airvo 2",
+        "titulo": "Sistema Airvo 2",
+        "subtitulo": "Alto flujo",
         "valor": "El Airvo 2 (Fisher & Paykel) es un equipo de cánula nasal de alto flujo con humidificación activa: genera el flujo, lo calienta y lo humidifica, y lo entrega por una cánula nasal de diámetro amplio.\nEl flujo se programa de 10 a 60 L/min en el modo predeterminado y de 2 a 25 L/min en modo Junior.\nLa temperatura objetivo se elige entre 37, 34 y 31 °C. El oxígeno se conecta por la entrada posterior del equipo, hasta 60 L/min, y la FiO2 resultante se muestra en pantalla entre 21% y 100%.\nNo equivale a subir el flujo de unas puntas nasales comunes."
       },
       {
@@ -867,7 +870,7 @@
       },
       {
         "tipo": "lista",
-        "titulo": "Qué implica cada una en la práctica",
+        "subtitulo": "Qué implica cada una en la práctica",
         "estilo": "numerada",
         "items": [
           "Identificar con al menos dos datos: nombre completo y fecha de nacimiento. Nunca el número de cama.",
@@ -990,7 +993,7 @@
       },
       {
         "tipo": "nota",
-        "titulo": "No es lo mismo una FAV en maduración que una en uso",
+        "subtitulo": "No es lo mismo una FAV en maduración que una en uso",
         "valor": "Una FAV recién creada todavía no se punciona: necesita tiempo para madurar. Una FAV ya funcional se punciona en cada sesión de hemodiálisis. Las contraindicaciones del brazo y la valoración de frémito y soplo aplican a las dos por igual; los cuidados locales de la herida y de la piel son distintos."
       },
       {
@@ -1036,7 +1039,7 @@
       },
       {
         "tipo": "nota",
-        "titulo": "No se punciona sin comprobar antes",
+        "subtitulo": "No se punciona sin comprobar antes",
         "valor": "No se debe puncionar una FAV sin verificar primero su funcionamiento mediante observación directa, palpación y auscultación. Si hay zonas enrojecidas con supuración, hematoma, piel alterada, aneurisma o pseudoaneurisma, no se punciona."
       },
       {
@@ -1052,7 +1055,7 @@
       },
       {
         "tipo": "texto",
-        "titulo": "¿Por qué?",
+        "subtitulo": "¿Por qué?",
         "valor": "Las punciones y la compresión dañan la vena arterializada y favorecen la estenosis y la trombosis, que son las causas principales de que una fístula deje de funcionar; la estenosis se produce en general por punciones repetidas sobre la misma zona.\nEn el paciente renal también hay que preservar el capital venoso: cada vena que se pierde es una opción menos para un acceso vascular futuro. La indicación de mantener libres de punciones las venas superficiales de ambos brazos empieza desde antes de que la fístula exista, y las muestras de sangre se toman de preferencia de las venas del dorso de la mano."
       },
       {
@@ -1070,7 +1073,8 @@
       },
       {
         "tipo": "lista",
-        "titulo": "FAV recién creada, en maduración",
+        "titulo": "Cuidados según la etapa",
+        "subtitulo": "FAV recién creada, en maduración",
         "estilo": "vinetas",
         "items": [
           "Comprobar que haya soplo y frémito, para detectar falla y trombosis temprana.",
@@ -1083,7 +1087,7 @@
       },
       {
         "tipo": "lista",
-        "titulo": "FAV ya en uso",
+        "subtitulo": "FAV ya en uso",
         "estilo": "vinetas",
         "items": [
           "Comprobar el funcionamiento antes de cada punción.",
@@ -1370,31 +1374,55 @@
     "titulo_corto": "Modos ventilatorios",
     "categoria": "equipo",
     "icono": "pulse",
-    "resumen": "IPPV, SIMV, CPAP con ASB y BIPAP en la nomenclatura Dräger, la que aparece en los ventiladores Evita y Savina.",
-    "palabras_clave": "ventilacion, ventilación, ventilación mecánica, ventilador, modos ventilatorios, modalidades, IPPV, IPPV Assist, SIMV, BIPAP, PC-BIPAP, BiPAP, CPAP, ASB, presion soporte, presión de soporte, pressure support, PS, PEEP, Pinsp, volumen tidal, destete, deshabituación, Drager, Dräger, Evita, Savina, intubado",
+    "resumen": "IPPV, SIMV, CPAP con ASB y BIPAP con la nomenclatura del ventilador Savina de Dräger.",
+    "palabras_clave": "ventilacion, ventilación, ventilación mecánica, ventilador, modos ventilatorios, modalidades, IPPV, IPPV Assist, SIMV, BIPAP, PC-BIPAP, BiPAP, CPAP, ASB, presion soporte, presión de soporte, pressure support, PS, PEEP, Pinsp, volumen tidal, VT, trigger, disparo, trigger por flujo, trigger por presión, CMV, Evita XL, destete, deshabituación, Drager, Dräger, Evita, Savina, intubado",
     "contenido": [
       {
         "tipo": "texto",
-        "valor": "Los nombres de los modos ventilatorios cambian entre fabricantes: un mismo modo aparece con distinta denominación según la marca del ventilador. La nomenclatura de esta ficha es la de Dräger, presente en los equipos Evita y Savina."
+        "titulo": "Glosario",
+        "subtitulo": "Volumen tidal\n(VT)",
+        "valor": "Volumen de gas que entra y sale del pulmón en una respiración. En los modos controlados por volumen se programa; en los controlados por presión no se impone y resulta de la presión aplicada y de la mecánica pulmonar del paciente."
       },
       {
         "tipo": "texto",
-        "titulo": "IPPV\n(Intermittent Positive Pressure Ventilation)",
+        "subtitulo": "PEEP\n(Positive End-Expiratory Pressure)",
+        "valor": "Presión que queda en la vía aérea al terminar la espiración, por encima de la presión ambiente. Sostenerla por encima de cero mantiene un mínimo de presión alveolar y evita el colapso del alveolo al final de cada espiración."
+      },
+      {
+        "tipo": "texto",
+        "subtitulo": "Trigger\n(disparo)",
+        "valor": "Función que detecta el esfuerzo inspiratorio del paciente para que el ventilador inicie una respiración. El trigger por flujo reconoce el cambio de flujo dentro del circuito y se ajusta en L/min; el trigger por presión reconoce la caída de presión y se ajusta en cmH2O. Mientras más sensible el umbral, menos esfuerzo necesita el paciente y mayor es el riesgo de que el ventilador se dispare solo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Los nombres de los modos ventilatorios son propiedad de cada fabricante y no se traducen de una marca a otra: un mismo modo aparece con distinta denominación según el ventilador. La nomenclatura de esta ficha es la del Savina de Dräger."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "IPPV",
+        "subtitulo": "Intermittent Positive Pressure Ventilation",
         "valor": "Ventilación controlada por volumen: el ventilador entrega todas las respiraciones con volumen tidal, frecuencia y tiempo inspiratorio preestablecidos, de modo que el volumen minuto queda fijo. Corresponde al paciente sin respiración espontánea. En la variante IPPV Assist el trigger por flujo queda activo, así que el paciente dispara el ciclo con su esfuerzo inspiratorio y el ventilador entrega de todas formas el volumen programado."
       },
       {
-        "tipo": "texto",
-        "titulo": "SIMV\n(Synchronized Intermittent Mandatory Ventilation)",
-        "valor": "Forma mixta de ventilación mandatoria y respiración espontánea. El ventilador asegura una ventilación mínima con emboladas mandatorias fijas, resultado del volumen tidal por la frecuencia programados. Dentro de una ventana de trigger, cada embolada se sincroniza con la inspiración espontánea para no encimarse a ella. Entre embolada y embolada el paciente respira por su cuenta, con apoyo de ASB cuando se programa. En el destete paulatino se reduce la frecuencia mandatoria para que la respiración espontánea cubra una porción creciente del volumen minuto."
+        "tipo": "nota",
+        "valor": "El rótulo del modo controlado por volumen cambia entre modelos de la misma marca: el Savina lo llama IPPV y el Evita XL lo llama CMV (Continuous Mandatory Ventilation). Los parámetros que se programan son los mismos."
       },
       {
         "tipo": "texto",
-        "titulo": "CPAP y ASB\n(Continuous Positive Airway Pressure y Assisted Spontaneous Breathing)",
-        "valor": "CPAP mantiene una presión positiva continua en la vía aérea y no entrega emboladas mandatorias: toda la ventilación depende del esfuerzo del paciente. ASB es la denominación Dräger de la presión de soporte, que otras marcas rotulan Pressure Support o PS. Cuando el flujo inspiratorio espontáneo alcanza el valor de trigger, o cuando el volumen inspirado pasa de 25 mL, el ventilador eleva la presión hasta el valor programado por encima del PEEP y la sostiene hasta que el flujo inspiratorio cae al 25% de su valor máximo. CPAP con ASB requiere impulso respiratorio íntegro y es la combinación habitual durante el destete."
+        "titulo": "SIMV",
+        "subtitulo": "Synchronized Intermittent Mandatory Ventilation",
+        "valor": "Forma mixta de ventilación mandatoria y respiración espontánea. El ventilador asegura una ventilación mínima con un número fijo de respiraciones mandatorias, resultado del volumen tidal por la frecuencia programados. Dentro de una ventana de trigger, cada respiración mandatoria se sincroniza con la inspiración espontánea para no encimarse a ella. Entre una y otra el paciente respira por su cuenta, con apoyo de ASB cuando se programa. En el destete paulatino se reduce la frecuencia mandatoria para que la respiración espontánea cubra una porción creciente del volumen minuto."
       },
       {
         "tipo": "texto",
-        "titulo": "BIPAP\n(Biphasic Positive Airway Pressure)",
+        "titulo": "CPAP y ASB",
+        "subtitulo": "Continuous Positive Airway Pressure y Assisted Spontaneous Breathing",
+        "valor": "CPAP mantiene una presión positiva continua en la vía aérea y no entrega respiraciones mandatorias: toda la ventilación depende del esfuerzo del paciente. ASB es la denominación Dräger de la presión de soporte, que otras marcas rotulan Pressure Support o PS. Cuando el flujo inspiratorio espontáneo alcanza el valor de trigger, o cuando el volumen inspirado pasa de 25 mL, el ventilador eleva la presión hasta el valor programado por encima del PEEP y la sostiene hasta que el flujo inspiratorio cae al 25% de su valor máximo. CPAP con ASB requiere impulso respiratorio íntegro y es la combinación habitual durante el destete."
+      },
+      {
+        "tipo": "texto",
+        "titulo": "BIPAP",
+        "subtitulo": "Biphasic Positive Airway Pressure",
         "valor": "Ventilación controlada por presión y por tiempo que alterna dos niveles: la presión inspiratoria Pinsp durante el tiempo inspiratorio y el PEEP durante el resto del ciclo. Su rasgo distintivo es que el paciente puede respirar espontáneamente en cualquier fase, por eso suele describirse como una alternancia controlada por tiempo entre dos niveles de CPAP. Ambos cambios de nivel se sincronizan con el esfuerzo del paciente. El volumen tidal no se impone: resulta de la diferencia entre PEEP y Pinsp y de la complianza pulmonar, por lo que varía y obliga a vigilar los límites de alarma del volumen minuto. Reduciendo de forma paulatina Pinsp y la frecuencia se pasa de la ventilación controlada a la respiración espontánea completa sin cambiar de modo. En BIPAP/ASB las respiraciones espontáneas del nivel de presión inferior reciben además presión de soporte. En los ventiladores Dräger de generación nueva el modo aparece rotulado como PC-BIPAP."
       },
       {
@@ -1413,7 +1441,7 @@
           ],
           [
             "SIMV",
-            "Parcial, entre emboladas",
+            "Parcial, entre los ciclos mandatorios",
             "Apoyo parcial y destete"
           ],
           [
@@ -1436,11 +1464,19 @@
             "url": "http://www.frankshospitalworkshop.com/equipment/documents/ventilators/user_manuals/Dr%C3%A4ger%20Savina%20-%20User%20manual%20(es).pdf"
           },
           {
+            "texto": "Dräger Medical AG & Co. KG. Evita XL / Evita XL Neo: ventilador de cuidados intensivos. Instrucciones de uso, software 7.0n. Modos de ventilación y datos técnicos, pp. 16-17 y 210-211.",
+            "url": "http://www.frankshospitalworkshop.com/equipment/documents/anaesthesia/user_manuals/Drager%20Evita%20XL,%20XL%20Neo%20-%20User%20manual.pdf"
+          },
+          {
+            "texto": "GE Healthcare. Engström Carestation: manual de referencia del usuario (M1055480). Capítulo 11, Configuración de la ventilación, p. 11-5.",
+            "url": "http://www.frankshospitalworkshop.com/equipment/documents/ecg/user_manuals/Engstr%C3%B6m%20Carestation%20-%20User%20manual%20(esp).pdf"
+          },
+          {
             "texto": "Hamilton Medical. (2017). Mode comparison card: nomenclatura de modos ventilatorios por marca.",
             "url": "https://www.med.upenn.edu/uphscovid19education/assets/user-content/documents/curricula/hamilton-mode-comparison.pdf"
           },
           {
-            "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartados 4.9.5 y 4.9.6.",
+            "texto": "International Organization for Standardization. (2016). ISO/DIS 19223: Lung ventilators and related equipment. Vocabulary and semantics. Apartados 4.7.1, 4.9.5, 4.9.6, 4.10.2 a 4.10.4 y 4.11.2.",
             "url": "https://sfai.se/wp-content/uploads/2015/01/ISO-Terminologi-f%C3%B6r-respiratorbehandling.pdf"
           },
           {
@@ -1450,7 +1486,7 @@
         ]
       }
     ],
-    "fuente": "Dräger, Savina: instrucciones de uso; ISO/DIS 19223; Hamilton Medical, comparativo de modos por marca",
+    "fuente": "Dräger, Savina y Evita XL: instrucciones de uso; ISO/DIS 19223; GE Healthcare, Engström Carestation: manual de referencia del usuario",
     "orden": 3
   }
 ]

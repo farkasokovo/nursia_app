@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 22, // Aumentamos la versión a 22
+      version: 23, // Aumentamos la versión a 23
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -223,6 +223,19 @@ class DatabaseHelper {
         // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo en
         // el próximo arranque. NO afecta datos del usuario (turno activo).
         if (oldVersion < 22) {
+          await db.delete('esenciales');
+        }
+        // Los bloques de Esenciales ganaron el campo "subtitulo": los títulos
+        // que antes metían el desglose de unas siglas con un salto de línea se
+        // partieron en título + subtítulo. Además la ficha de modos
+        // ventilatorios estrena glosario (volumen tidal, PEEP y trigger),
+        // cambia "embolada" por el término de uso común y precisa de qué
+        // modelo es la nomenclatura que documenta. Como el cambio es de
+        // CONTENIDO y no de esquema, la única forma de que llegue a un
+        // dispositivo ya instalado es vaciar la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con el JSON nuevo en
+        // el próximo arranque. NO afecta datos del usuario (turno activo).
+        if (oldVersion < 23) {
           await db.delete('esenciales');
         }
       },

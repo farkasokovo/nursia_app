@@ -46,6 +46,13 @@ const List<CategoriaEsencial> categoriasEsenciales = [
     tabIndex: 0,
   ),
   CategoriaEsencial(
+    clave: 'codigos',
+    etiqueta: 'Códigos',
+    icono: PhosphorIconsFill.firstAid,
+    descripcion: 'colores, claves y señalización.',
+    tabIndex: 4,
+  ),
+  CategoriaEsencial(
     clave: 'paciente',
     etiqueta: 'Paciente',
     icono: PhosphorIconsFill.person,
@@ -58,13 +65,6 @@ const List<CategoriaEsencial> categoriasEsenciales = [
     icono: PhosphorIconsFill.pulse,
     descripcion: 'manejo y parámetros del equipo de la unidad.',
     tabIndex: 3,
-  ),
-  CategoriaEsencial(
-    clave: 'codigos',
-    etiqueta: 'Códigos',
-    icono: PhosphorIconsFill.firstAid,
-    descripcion: 'colores, claves y señalización.',
-    tabIndex: 4,
   ),
 ];
 
