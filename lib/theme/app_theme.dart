@@ -43,13 +43,26 @@ class AppColors {
 
 class AppColorsDark {
   // Superficies y texto
-  static const Color ground = Color(0xff1C1610);
+  static const Color ground = Color(0xff14100B);
   static const Color paper = Color(0xff271F18);
+
+  /// Color de borde. Ya no lo consume ningun tema; queda como referencia
+  /// del cafe medio de la paleta.
   static const Color rule = Color(0xff3B2F25);
+
+  /// Superficie de enfasis: AppBar, TabBar y las tarjetas grandes del
+  /// inicio. Es `primaryContainer` del tema oscuro.
+  static const Color enfasis = Color(0xff51402F);
+
+  /// Fondo de los botones de categoria y de las pantallas de ficha. Es
+  /// `secondaryContainer` del tema oscuro.
+  static const Color botonCat = Color(0xff2B241D);
   static const Color ruleSoft = Color(0xff332822);
   static const Color ink = Color(0xffEFE9E4);
   static const Color ink2 = Color(0xffDFD3C9);
-  static const Color ink3 = Color(0xffA38F7C);
+  // Tinta apagada, para texto atenuado sobre [enfasis]. Subio de #A38F7C
+  // cuando `enfasis` aclaro: sobre el cafe nuevo aquel caia a 3.19:1.
+  static const Color ink3 = Color(0xffB5A08B);
   static const Color accent = Color(0xffCBA786);
   static const Color accentOn = Color(0xff241B14);
 
@@ -373,11 +386,11 @@ class AppTheme {
       brightness: Brightness.dark,
       primary: AppColorsDark.accent,
       onPrimary: AppColorsDark.accentOn,
-      primaryContainer: AppColorsDark.rule,
+      primaryContainer: AppColorsDark.enfasis,
       onPrimaryContainer: AppColorsDark.ink,
       secondary: AppColorsDark.paper,
       onSecondary: AppColorsDark.ink2,
-      secondaryContainer: AppColorsDark.ruleSoft,
+      secondaryContainer: AppColorsDark.botonCat,
       onSecondaryContainer: AppColorsDark.ink2,
       tertiary: AppColorsDark.ink,
       onTertiary: AppColorsDark.accentOn,

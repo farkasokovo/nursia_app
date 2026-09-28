@@ -236,7 +236,7 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
                   ),
                 ),
                 filled: true,
-                fillColor: colorScheme.onPrimaryContainer,
+                fillColor: ThemeColors.campoBusqueda(context),
               ),
             ),
             const SizedBox(height: 16),

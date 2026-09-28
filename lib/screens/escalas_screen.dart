@@ -120,7 +120,7 @@ class _EscalasScreenState extends State<EscalasScreen> {
           Icon(
             PhosphorIconsThin.clipboardText,
             size: 130,
-            color: colorScheme.onTertiary,
+            color: colorScheme.onSurface,
           ),
           const SizedBox(height: 32),
         ],

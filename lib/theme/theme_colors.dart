@@ -13,6 +13,19 @@ class ThemeColors {
   static bool _esOscuro(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark;
 
+  /// Primitivo del que salen todos los demás: elige entre dos colores según
+  /// el brillo del tema.
+  ///
+  /// Los helpers con nombre de abajo son preferibles en las pantallas: el
+  /// nombre dice PARA QUÉ es el color, y el valor claro queda escrito una
+  /// sola vez en lugar de repetirse en cada punto de uso. Este se usa
+  /// directo solo cuando el caso es único y no vale la pena bautizarlo.
+  static Color segunTema(
+    BuildContext context, {
+    required Color claro,
+    required Color oscuro,
+  }) => _esOscuro(context) ? oscuro : claro;
+
   /// Color de una sombra proyectada.
   ///
   /// Sobre fondo claro una sombra negra al 12% basta para despegar una
@@ -20,45 +33,51 @@ class ThemeColors {
   /// (negro sobre casi negro), así que las tarjetas pierden profundidad y
   /// todo se ve plano. En oscuro se sube la opacidad.
   ///
-  /// Las dos opacidades se declaran en cada punto de uso en vez de deducir
-  /// una de la otra: los valores de hoy no siguen una sola escala, y una
-  /// regla automática cambiaría alguno sin querer.
   /// [claro] es el color literal que el sitio ya usaba, para que el modo
   /// claro quede idéntico sin depender de redondeos: `Colors.black12` es
-  /// alpha 0.1216, no 0.12.
+  /// alpha 0.1216, no 0.12. Las dos opacidades se declaran en cada punto de
+  /// uso en vez de deducir una de la otra: los valores de hoy no siguen una
+  /// sola escala, y una regla automática cambiaría alguno sin querer.
   static Color sombra(
     BuildContext context, {
     required Color claro,
     required double oscuro,
-  }) => _esOscuro(context) ? Colors.black.withValues(alpha: oscuro) : claro;
+  }) => segunTema(
+    context,
+    claro: claro,
+    oscuro: Colors.black.withValues(alpha: oscuro),
+  );
 
   /// Contenido secundario (subtítulos, chevrons) sobre `colorScheme.primary`.
   ///
-  /// En claro `primary` es el café medio y encima va blanco translúcido: se
-  /// conserva el literal exacto que la app usa hoy. En oscuro `primary` es el
-  /// acento CLARO (#CBA786), así que un blanco encima desaparece; ahí se usa
-  /// `onPrimary`, que en ese tema sí es oscuro.
   /// Recibe el blanco translúcido literal de hoy ([enClaro]) y lo devuelve
-  /// tal cual en modo claro. En oscuro conserva su misma transparencia pero
-  /// sobre `onPrimary`.
-  static Color sobrePrimary(BuildContext context, Color enClaro) =>
-      _esOscuro(context)
-      ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: enClaro.a)
-      : enClaro;
+  /// tal cual en modo claro. En oscuro `primary` es el acento CLARO
+  /// (#CBA786), así que un blanco encima desaparece: ahí se usa `onPrimary`,
+  /// que en ese tema sí es oscuro, conservando la misma transparencia.
+  static Color sobrePrimary(BuildContext context, Color enClaro) => segunTema(
+    context,
+    claro: enClaro,
+    oscuro: Theme.of(
+      context,
+    ).colorScheme.onPrimary.withValues(alpha: enClaro.a),
+  );
 
-  /// Etiqueta de la pestaña NO seleccionada de un `TabBar`.
+  /// Texto atenuado sobre la superficie de énfasis (la barra café oscura:
+  /// AppBar, TabBar, encabezado del menú lateral).
   ///
-  /// Va atenuada a propósito, para que la pestaña activa destaque. En claro
-  /// eso lo daba `colorScheme.tertiaryContainer` (#D6C9BE): claro sobre la
-  /// barra café, 5.14:1. En oscuro esa misma ranura es una SUPERFICIE oscura
-  /// (#453729) sobre una barra casi igual de oscura, y cae a 1.13:1.
+  /// Va apagado a propósito, para que lo que sí está activo destaque. En
+  /// claro eso lo daban ranuras `*Container`, que ahí resultan CLARAS sobre
+  /// la barra café. En oscuro esas mismas ranuras son superficies oscuras
+  /// sobre una barra casi igual de oscura, y caen a ~1.1:1.
   ///
-  /// `ink3` es la tinta apagada del tema oscuro: 4.19:1 sobre la barra, lo
-  /// bastante para leerse sin competir con la pestaña activa, que va en
-  /// `onPrimaryContainer`.
-  static Color pestanaInactiva(BuildContext context) => _esOscuro(context)
-      ? AppColorsDark.ink3
-      : Theme.of(context).colorScheme.tertiaryContainer;
+  /// [claro] es la ranura exacta que el sitio ya usaba, así que el modo claro
+  /// no se mueve. `ink3` es la tinta apagada del tema oscuro: 3.94:1 sobre la
+  /// barra, suficiente para leerse sin competir con el contenido activo, que
+  /// va en 8.21:1.
+  static Color tenueSobreEnfasis(
+    BuildContext context, {
+    required Color claro,
+  }) => segunTema(context, claro: claro, oscuro: AppColorsDark.ink3);
 
   /// Título de un botón o tarjeta que va sobre `colorScheme.primary`.
   ///
@@ -69,9 +88,27 @@ class ThemeColors {
   ///
   /// El valor claro es el MISMO `#F6F3F0` que ya tiene `titleSmall`, no el
   /// `#EFE9E4` de `onPrimary`: así el modo claro no se mueve ni un tono.
-  static Color tituloSobrePrimary(BuildContext context) => _esOscuro(context)
-      ? AppColorsDark.accentOn
-      : AppColors.lightSecondaryColor;
+  static Color tituloSobrePrimary(BuildContext context) => segunTema(
+    context,
+    claro: AppColors.lightSecondaryColor,
+    oscuro: AppColorsDark.accentOn,
+  );
+
+  /// Relleno del campo de búsqueda.
+  ///
+  /// Antes se pedía a `colorScheme.onPrimaryContainer`, que es un color de
+  /// CONTENIDO, no una superficie: en oscuro pintaba el campo de #EFE9E4,
+  /// casi blanco. El contorno, los íconos y el texto de ayuda ya usan
+  /// ranuras `on...` que en oscuro son claras, así que funcionan sobre este
+  /// relleno oscuro sin tocarlos.
+  static Color campoBusqueda(BuildContext context) {
+    final esquema = Theme.of(context).colorScheme;
+    return segunTema(
+      context,
+      claro: esquema.onPrimaryContainer,
+      oscuro: esquema.surface,
+    );
+  }
 
   /// Fondo de las filas de datos de una tabla.
   ///
@@ -79,16 +116,21 @@ class ThemeColors {
   /// CONTENIDO, no una superficie: en oscuro pintaba las filas de #EFE9E4,
   /// casi blanco. El encabezado sí es una superficie de verdad y sigue en
   /// `primaryContainer`.
-  static Color filaTabla(BuildContext context) => _esOscuro(context)
-      ? AppColorsDark.ruleSoft
-      : AppColors.lightSecondaryColor;
+  static Color filaTabla(BuildContext context) => segunTema(
+    context,
+    claro: AppColors.lightSecondaryColor,
+    oscuro: AppColorsDark.ruleSoft,
+  );
 
   /// Texto de celda sobre [filaTabla].
   ///
   /// En oscuro el café medio de `bodySmall` sobre la fila queda en 3.98:1,
   /// debajo del mínimo para texto normal; con la tinta clara sube a 11.89:1.
-  static Color sobreFilaTabla(BuildContext context) =>
-      _esOscuro(context) ? AppColorsDark.ink : AppColors.semiDarkPrimaryColor;
+  static Color sobreFilaTabla(BuildContext context) => segunTema(
+    context,
+    claro: AppColors.semiDarkPrimaryColor,
+    oscuro: AppColorsDark.ink,
+  );
 
   /// Acento cálido de la app (#CBA786).
   ///
@@ -97,6 +139,9 @@ class ThemeColors {
   /// en el ColorScheme claro (ahí `primary` es otro café), pero SÍ es
   /// `colorScheme.primary` del tema oscuro, así que vive aquí para que
   /// ninguna pantalla tenga que nombrar la paleta directamente.
-  static Color acento(BuildContext context) =>
-      _esOscuro(context) ? AppColorsDark.accent : AppColors.accentDarkColor;
+  static Color acento(BuildContext context) => segunTema(
+    context,
+    claro: AppColors.accentDarkColor,
+    oscuro: AppColorsDark.accent,
+  );
 }

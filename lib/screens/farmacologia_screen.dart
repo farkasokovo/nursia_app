@@ -111,11 +111,7 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
-          Icon(
-            PhosphorIconsThin.pill,
-            size: 130,
-            color: colorScheme.onTertiary,
-          ),
+          Icon(PhosphorIconsThin.pill, size: 130, color: colorScheme.onSurface),
           const SizedBox(height: 32),
         ],
       ),

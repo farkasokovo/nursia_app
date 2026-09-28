@@ -10,6 +10,7 @@
 
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../theme/theme_colors.dart';
 
 class OpcionSelector<T> extends StatelessWidget {
   const OpcionSelector({
@@ -65,6 +66,7 @@ class OpcionSelector<T> extends StatelessWidget {
                 right: i == opciones.length - 1 ? 0 : _separacion,
               ),
               child: _boton(
+                context: context,
                 opcion: opciones[i],
                 seleccionado: opciones[i] == seleccionada,
                 colorScheme: colorScheme,
@@ -78,6 +80,7 @@ class OpcionSelector<T> extends StatelessWidget {
   }
 
   Widget _boton({
+    required BuildContext context,
     required T opcion,
     required bool seleccionado,
     required ColorScheme colorScheme,
@@ -109,7 +112,13 @@ class OpcionSelector<T> extends StatelessWidget {
           curve: Curves.easeOut,
           style: estiloBase.copyWith(
             fontWeight: FontWeight.bold,
-            color: colorScheme.onPrimaryContainer,
+            // Este color gana sobre el `foregroundColor` del botón, así que
+            // tiene que seguir a `seleccionado` igual que él. Siendo una
+            // constante, el botón SIN seleccionar pintaba crema sobre
+            // `primary`, que en oscuro es el acento CLARO: 1.85:1.
+            color: seleccionado
+                ? colorScheme.onPrimaryContainer
+                : ThemeColors.tituloSobrePrimary(context),
             fontSize: seleccionado
                 ? tamanoBase + _crecimientoSeleccion
                 : tamanoBase,

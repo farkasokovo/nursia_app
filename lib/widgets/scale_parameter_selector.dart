@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../theme/app_theme.dart';
+import '../theme/theme_colors.dart';
 
 class ScaleOption {
   final String label;
@@ -68,6 +69,60 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
               final option = entry.value;
               final isSelected = selectedIndex == index;
 
+              // El chip y su contenido se invierten entre sí. En claro el
+              // seleccionado es el OSCURO; en oscuro es el CLARO.
+              //
+              // No es un descuido: en claro seleccionado y sin seleccionar se
+              // separan por 7.54 de contraste y la selección se ve de un
+              // vistazo. Si en oscuro los dos fueran oscuros se separarían por
+              // 1.10 y solo los distinguiría el borde. Son escalas clínicas
+              // que se leen con prisa, así que la separación pesa más que
+              // conservar cuál de los dos es el oscuro.
+              //
+              // `onSecondaryContainer` no aparece aquí porque en oscuro YA es
+              // ink2, que es justo el valor que le toca al texto del chip sin
+              // seleccionar.
+              final fondoChip = isSelected
+                  ? ThemeColors.segunTema(
+                      context,
+                      claro: colorScheme.primaryContainer,
+                      oscuro: AppColorsDark.ink2,
+                    )
+                  : ThemeColors.segunTema(
+                      context,
+                      claro: colorScheme.onPrimaryContainer,
+                      oscuro: AppColorsDark.ruleSoft,
+                    );
+              final sobreChip = isSelected
+                  ? ThemeColors.segunTema(
+                      context,
+                      claro: colorScheme.onPrimaryContainer,
+                      oscuro: AppColorsDark.accentOn,
+                    )
+                  : colorScheme.onSecondaryContainer;
+              final fondoInsignia = isSelected
+                  ? ThemeColors.segunTema(
+                      context,
+                      claro: colorScheme.onPrimaryContainer,
+                      oscuro: AppColorsDark.accentOn,
+                    )
+                  : ThemeColors.segunTema(
+                      context,
+                      claro: colorScheme.primaryContainer,
+                      oscuro: AppColorsDark.ink2,
+                    );
+              final sobreInsignia = isSelected
+                  ? ThemeColors.segunTema(
+                      context,
+                      claro: colorScheme.onSurface,
+                      oscuro: AppColorsDark.ink2,
+                    )
+                  : ThemeColors.segunTema(
+                      context,
+                      claro: colorScheme.onPrimaryContainer,
+                      oscuro: AppColorsDark.accentOn,
+                    );
+
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: InkWell(
@@ -85,9 +140,7 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                       vertical: 12,
                     ),
                     decoration: BoxDecoration(
-                      color: isSelected
-                          ? colorScheme.primaryContainer
-                          : colorScheme.onPrimaryContainer,
+                      color: fondoChip,
                       borderRadius: AppRadius.defaultRadius,
                       border: Border.all(
                         color: colorScheme.onSurface,
@@ -112,18 +165,14 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: isSelected
-                                    ? colorScheme.onPrimaryContainer
-                                    : colorScheme.primaryContainer,
+                                color: fondoInsignia,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
                                 "${option.score ?? "NV"}",
                                 textAlign: TextAlign.center,
                                 style: textTheme.titleMedium?.copyWith(
-                                  color: isSelected
-                                      ? colorScheme.onSurface
-                                      : colorScheme.onPrimaryContainer,
+                                  color: sobreInsignia,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   height: 1.1,
@@ -137,12 +186,12 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                                 softWrap: true,
                                 style: isSelected
                                     ? textTheme.bodyLarge?.copyWith(
-                                        color: colorScheme.onPrimaryContainer,
+                                        color: sobreChip,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       )
                                     : textTheme.bodyMedium?.copyWith(
-                                        color: colorScheme.onSecondaryContainer,
+                                        color: sobreChip,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -167,17 +216,11 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                             padding: const EdgeInsets.only(left: 50),
                             child: Text(
                               option.description!,
-                              style: isSelected
-                                  ? textTheme.bodySmall?.copyWith(
-                                      color: colorScheme.onPrimaryContainer,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                    )
-                                  : textTheme.bodySmall?.copyWith(
-                                      color: colorScheme.onSecondaryContainer,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                              style: textTheme.bodySmall?.copyWith(
+                                color: sobreChip,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ],

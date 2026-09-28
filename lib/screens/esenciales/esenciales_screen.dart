@@ -190,7 +190,10 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
         dividerColor: Colors.transparent,
         indicatorColor: colorScheme.onPrimaryContainer,
         labelColor: colorScheme.onPrimaryContainer,
-        unselectedLabelColor: ThemeColors.pestanaInactiva(context),
+        unselectedLabelColor: ThemeColors.tenueSobreEnfasis(
+          context,
+          claro: colorScheme.tertiaryContainer,
+        ),
         labelStyle: textTheme.titleMedium?.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -258,7 +261,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             borderSide: BorderSide(color: colorScheme.onSurface, width: 2),
           ),
           filled: true,
-          fillColor: colorScheme.onPrimaryContainer,
+          fillColor: ThemeColors.campoBusqueda(context),
         ),
       ),
     );

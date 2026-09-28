@@ -104,7 +104,7 @@ class _NormativaScreenState extends State<NormativaScreen> {
           Icon(
             PhosphorIconsThin.books,
             size: 130,
-            color: colorScheme.onTertiary,
+            color: colorScheme.onSurface,
           ),
           const SizedBox(height: 32),
         ],
@@ -142,7 +142,9 @@ class _NormativaScreenState extends State<NormativaScreen> {
               heroTag: "n4",
               title: "Terapia de Infusión",
               icon: PhosphorIconsRegular.drop,
-              child: ListaNormasFiltradaScreen(categoria: "Terapia de infusión"),
+              child: ListaNormasFiltradaScreen(
+                categoria: "Terapia de infusión",
+              ),
             ),
           ),
           _buildButton(

@@ -83,7 +83,10 @@ class MoldeEscalasScreen extends StatelessWidget {
                 dividerColor: Colors.transparent,
                 indicatorColor: colorScheme.onPrimaryContainer,
                 labelColor: colorScheme.onPrimaryContainer,
-                unselectedLabelColor: ThemeColors.pestanaInactiva(context),
+                unselectedLabelColor: ThemeColors.tenueSobreEnfasis(
+                  context,
+                  claro: colorScheme.tertiaryContainer,
+                ),
                 labelStyle: textTheme.titleMedium?.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

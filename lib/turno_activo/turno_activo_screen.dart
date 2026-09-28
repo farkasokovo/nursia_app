@@ -178,7 +178,10 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                 dividerColor: Colors.transparent,
                 indicatorColor: colorScheme.onPrimaryContainer,
                 labelColor: colorScheme.onPrimaryContainer,
-                unselectedLabelColor: ThemeColors.pestanaInactiva(context),
+                unselectedLabelColor: ThemeColors.tenueSobreEnfasis(
+                  context,
+                  claro: colorScheme.tertiaryContainer,
+                ),
                 labelPadding: const EdgeInsets.symmetric(horizontal: 20),
                 labelStyle: textTheme.titleMedium?.copyWith(
                   fontSize: 20,

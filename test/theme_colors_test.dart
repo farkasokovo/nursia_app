@@ -108,8 +108,21 @@ void main() {
         ThemeColors.tituloSobrePrimary(context),
         AppTextStyles.titleWhiteText.color,
       );
-      // La pestaña inactiva usaba tertiaryContainer.
-      expect(ThemeColors.pestanaInactiva(context), esquema.tertiaryContainer);
+      // El texto tenue devuelve tal cual la ranura que le pasa cada sitio:
+      // tertiaryContainer en las 5 TabBar, secondaryContainer en la versión
+      // del menú lateral.
+      for (final ranura in [
+        esquema.tertiaryContainer,
+        esquema.secondaryContainer,
+      ]) {
+        expect(
+          ThemeColors.tenueSobreEnfasis(context, claro: ranura),
+          ranura,
+          reason: 'tenueSobreEnfasis movió el claro de $ranura',
+        );
+      }
+      // El relleno del buscador usaba onPrimaryContainer.
+      expect(ThemeColors.campoBusqueda(context), esquema.onPrimaryContainer);
     });
 
     testWidgets('en oscuro contrastan contra su propio fondo', (tester) async {
@@ -135,27 +148,45 @@ void main() {
         greaterThanOrEqualTo(4.5),
         reason: 'El título no se lee sobre colorScheme.primary',
       );
-      // La pestaña inactiva va sobre la barra, que es primaryContainer. Va
-      // atenuada a propósito, así que le basta el mínimo de texto grande.
-      expect(
-        contraste(
-          ThemeColors.pestanaInactiva(context),
-          esquema.primaryContainer,
-        ),
-        greaterThanOrEqualTo(3.0),
-        reason: 'La pestaña inactiva no se lee sobre la barra',
+      // El texto tenue va sobre la barra, que es primaryContainer. Está
+      // atenuado a propósito, así que le basta el mínimo de texto grande.
+      // El resultado en oscuro ya no depende de la ranura que se le pase.
+      final tenue = ThemeColors.tenueSobreEnfasis(
+        context,
+        claro: esquema.tertiaryContainer,
       );
-      // Pero sigue siendo MENOS visible que la activa: si no, la barra
-      // pierde la señal de en qué pestaña está el usuario.
       expect(
-        contraste(
-          ThemeColors.pestanaInactiva(context),
-          esquema.primaryContainer,
+        tenue,
+        ThemeColors.tenueSobreEnfasis(
+          context,
+          claro: esquema.secondaryContainer,
         ),
+        reason: 'En oscuro el texto tenue debe ser uno solo',
+      );
+      expect(
+        contraste(tenue, esquema.primaryContainer),
+        greaterThanOrEqualTo(3.0),
+        reason: 'El texto tenue no se lee sobre la barra',
+      );
+      // Pero sigue siendo MENOS visible que el contenido activo: si no, la
+      // barra pierde la señal de en qué pestaña está el usuario.
+      expect(
+        contraste(tenue, esquema.primaryContainer),
         lessThan(
           contraste(esquema.onPrimaryContainer, esquema.primaryContainer),
         ),
-        reason: 'La pestaña inactiva resalta tanto como la activa',
+        reason: 'El texto tenue resalta tanto como el activo',
+      );
+      // El texto que escribe el usuario tiene que leerse sobre el relleno
+      // nuevo del buscador. Queda justo en el límite (4.51:1), así que esta
+      // prueba avisa si alguien mueve el relleno o `bodyLarge`.
+      expect(
+        contraste(
+          AppTextStylesDark.bodyDarkBrownText.color!,
+          ThemeColors.campoBusqueda(context),
+        ),
+        greaterThanOrEqualTo(4.5),
+        reason: 'Lo que se escribe en el buscador no se lee',
       );
     });
   });

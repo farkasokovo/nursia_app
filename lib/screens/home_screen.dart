@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nursia_app/theme/alert_colors.dart';
+import 'package:nursia_app/theme/app_theme.dart';
 import 'package:nursia_app/theme/theme_colors.dart';
 import 'package:nursia_app/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -384,7 +385,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Text(
                       version == null ? 'Versión: ...' : 'Versión: $version',
                       style: textTheme.bodySmall?.copyWith(
-                        color: colorScheme.secondaryContainer,
+                        // Atenuado sobre el encabezado café, igual que las
+                        // pestañas inactivas. En oscuro secondaryContainer
+                        // es superficie y caía a 1.10:1.
+                        color: ThemeColors.tenueSobreEnfasis(
+                          context,
+                          claro: colorScheme.secondaryContainer,
+                        ),
                       ),
                     );
                   },
@@ -430,11 +437,6 @@ class _HomeScreenState extends State<HomeScreen> {
           showSelectedIcon: false,
           segments: const [
             ButtonSegment(
-              value: ThemeMode.system,
-              icon: PhosphorIcon(PhosphorIconsBold.circleHalf),
-              tooltip: 'Sistema',
-            ),
-            ButtonSegment(
               value: ThemeMode.light,
               icon: PhosphorIcon(PhosphorIconsBold.sun),
               tooltip: 'Claro',
@@ -445,15 +447,39 @@ class _HomeScreenState extends State<HomeScreen> {
               tooltip: 'Oscuro',
             ),
           ],
-          selected: {themeProvider.themeMode},
+          // Se marca según el brillo EFECTIVO, no según el modo guardado.
+          //
+          // El provider sigue arrancando en `ThemeMode.system` y la app sigue
+          // siguiendo al celular mientras nadie elija; lo que se quitó es el
+          // tercer segmento, no el comportamiento. Leer el brillo real es lo
+          // que permite que, en modo sistema, el resaltado muestre lo que el
+          // usuario está viendo en vez de dejar los dos botones apagados.
+          selected: {
+            Theme.of(context).brightness == Brightness.dark
+                ? ThemeMode.dark
+                : ThemeMode.light,
+          },
           onSelectionChanged: (seleccion) {
+            // A partir del primer toque el modo queda explícito y la app deja
+            // de seguir al sistema, que es lo que el usuario acaba de pedir.
             themeProvider.cambiar(seleccion.first);
           },
           style: SegmentedButton.styleFrom(
             backgroundColor: colorScheme.secondaryContainer,
             foregroundColor: colorScheme.onSecondaryContainer,
-            selectedBackgroundColor: colorScheme.primaryContainer,
-            selectedForegroundColor: colorScheme.onPrimaryContainer,
+            // En oscuro el seleccionado es el CLARO, igual que en los chips
+            // de las escalas: `primaryContainer` y `secondaryContainer` son
+            // los dos oscuros ahí y solo se separaban por 1.10.
+            selectedBackgroundColor: ThemeColors.segunTema(
+              context,
+              claro: colorScheme.primaryContainer,
+              oscuro: AppColorsDark.ink2,
+            ),
+            selectedForegroundColor: ThemeColors.segunTema(
+              context,
+              claro: colorScheme.onPrimaryContainer,
+              oscuro: AppColorsDark.accentOn,
+            ),
             side: BorderSide(color: colorScheme.onSecondaryContainer),
           ),
         ),
@@ -611,7 +637,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () => abrirUrl(context, info.urlDescarga),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: colorScheme.onPrimaryContainer,
-                  foregroundColor: colorScheme.onSurface,
+                  // La pastilla es clara en AMBOS temas, así que el primer
+                  // plano tiene que ser oscuro en ambos. `onSurface` es
+                  // tinta oscura en claro pero CLARA en oscuro, y ahí dejaba
+                  // el destello del toque invisible sobre el relleno crema.
+                  foregroundColor: ThemeColors.segunTema(
+                    context,
+                    claro: colorScheme.onSurface,
+                    oscuro: AppColorsDark.accentOn,
+                  ),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 10,
@@ -693,7 +727,10 @@ class _HomeScreenState extends State<HomeScreen> {
         dividerColor: Colors.transparent,
         indicatorColor: colorScheme.onPrimaryContainer,
         labelColor: colorScheme.onPrimaryContainer,
-        unselectedLabelColor: ThemeColors.pestanaInactiva(context),
+        unselectedLabelColor: ThemeColors.tenueSobreEnfasis(
+          context,
+          claro: colorScheme.tertiaryContainer,
+        ),
         labelStyle: textTheme.titleMedium?.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.w600,
