@@ -6,6 +6,37 @@ import '../theme/app_theme.dart';
 // Regex estático compartido — se compila una sola vez para toda la app
 final _decimalRegex = RegExp(r'^\d*\.?\d*');
 
+/// Convierte la coma en punto ANTES de que actúe el filtro decimal.
+///
+/// En un teclado numérico en español la tecla decimal puede ser coma. Sin esta
+/// normalización el filtro de abajo conserva solo el prefijo válido y descarta
+/// la coma junto con todo lo que venga después: "37,5" quedaba en "37" y
+/// "2,5" en "2", sin marca de error y con un número que sigue siendo válido.
+/// En la escala de signos vitales eso da una interpretación equivocada; en la
+/// calculadora de dosis es un error de dosificación silencioso.
+///
+/// Solo se aplica cuando el campo acepta decimales. Con `allowDecimal: false`
+/// la coma se sigue descartando, que es lo correcto: ahí no hay separador
+/// decimal que valga.
+class _ComaAPunto extends TextInputFormatter {
+  const _ComaAPunto();
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue anterior,
+    TextEditingValue nuevo,
+  ) {
+    if (!nuevo.text.contains(',')) return nuevo;
+    // replaceAll no cambia el largo del texto, así que la posición del cursor
+    // que trae `nuevo` sigue siendo válida.
+    return TextEditingValue(
+      text: nuevo.text.replaceAll(',', '.'),
+      selection: nuevo.selection,
+      composing: TextRange.empty,
+    );
+  }
+}
+
 class NumericInputField extends StatelessWidget {
   /// Título grande arriba del campo: dice QUÉ dato se pide.
   final String label;
@@ -73,6 +104,8 @@ class NumericInputField extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           inputFormatters: [
+            // El orden importa: la coma se normaliza antes de filtrar.
+            if (allowDecimal) const _ComaAPunto(),
             allowDecimal
                 ? FilteringTextInputFormatter.allow(_decimalRegex)
                 : FilteringTextInputFormatter.digitsOnly,
@@ -83,10 +116,10 @@ class NumericInputField extends StatelessWidget {
             labelText: textoAyuda ?? "Ingresa un valor",
             // Estilo del label cuando está en reposo (dentro del campo, como el
             // hint de antes).
-            labelStyle: textTheme.bodyMedium?.copyWith(
+            labelStyle: textTheme.bodySmall?.copyWith(
               color: colorScheme.onSecondaryContainer.withValues(alpha: 0.40),
               fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w400,
             ),
             // Estilo al flotar. Flutter lo encoge a 75% (18 -> 13.5), y aquí se
             // sube el contraste porque queda sobre el borde, no sobre el relleno.
@@ -98,7 +131,6 @@ class NumericInputField extends StatelessWidget {
 
             // El label flota al centro del borde superior. Con el radio de 30
             // del tema, al inicio caería encima de la curva de la esquina.
-            floatingLabelAlignment: FloatingLabelAlignment.center,
             filled: true,
             fillColor: colorScheme.secondary,
             // 1. Borde por defecto (cuando no tiene focus)

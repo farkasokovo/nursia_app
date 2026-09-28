@@ -337,4 +337,80 @@ void main() {
     expect(controller.text, '05');
     expect(tester.takeException(), isNull);
   });
+
+  // ── Separador decimal ─────────────────────────────────────────────────
+  //
+  // En un teclado numérico en español la tecla decimal puede ser coma. Antes
+  // el filtro conservaba solo el prefijo válido y descartaba la coma junto con
+  // todo lo que venía después: "2,5" quedaba en "2", un número válido y con un
+  // resultado plausible en pantalla. En la calculadora de dosis eso es un
+  // error de dosificación silencioso.
+  group('separador decimal', () {
+    late TextEditingController controller;
+    late FocusNode focusNode;
+
+    setUp(() {
+      controller = TextEditingController();
+      focusNode = FocusNode();
+    });
+
+    tearDown(() {
+      controller.dispose();
+      focusNode.dispose();
+    });
+
+    Future<void> montar(WidgetTester tester, {bool allowDecimal = true}) {
+      return montarCampo(
+        tester,
+        label: 'Dosis indicada (mg)',
+        controller: controller,
+        focusNode: focusNode,
+        allowDecimal: allowDecimal,
+      );
+    }
+
+    testWidgets('la coma se convierte en punto', (tester) async {
+      await montar(tester);
+      await tester.enterText(find.byType(TextField), '37,5');
+      expect(controller.text, '37.5');
+    });
+
+    testWidgets('una dosis con coma conserva su decimal', (tester) async {
+      await montar(tester);
+      await tester.enterText(find.byType(TextField), '2,5');
+      expect(
+        controller.text,
+        '2.5',
+        reason: 'si quedara en "2" sería un error de dosificación silencioso',
+      );
+    });
+
+    testWidgets('el punto sigue funcionando igual que antes', (tester) async {
+      await montar(tester);
+      await tester.enterText(find.byType(TextField), '37.5');
+      expect(controller.text, '37.5');
+    });
+
+    testWidgets('no se admite más de un separador decimal', (tester) async {
+      await montar(tester);
+      await tester.enterText(find.byType(TextField), '37.5.2');
+      expect(controller.text, '37.5');
+
+      await tester.enterText(find.byType(TextField), '37,5,2');
+      expect(controller.text, '37.5');
+
+      await tester.enterText(find.byType(TextField), '37,5.2');
+      expect(controller.text, '37.5');
+    });
+
+    testWidgets('sin decimales la coma se sigue descartando', (tester) async {
+      await montar(tester, allowDecimal: false);
+      await tester.enterText(find.byType(TextField), '37,5');
+      expect(
+        controller.text,
+        '375',
+        reason: 'digitsOnly quita la coma y conserva los dígitos',
+      );
+    });
+  });
 }

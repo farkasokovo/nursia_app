@@ -24,7 +24,10 @@ class SignosVitalesPediatricosScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ExpandableCategoryScreen(
       heroTag: "signos_vitales_pediatricos",
-      title: "Signos vitales pediátricos",
+      // Partido en dos renglones: la barra de ExpandableCategoryScreen no
+      // recorta ni envuelve su Text, así que un título largo se desborda. Es
+      // el mismo recurso que usa "Escalas Pediátricas\ny Neonatales".
+      title: "Signos vitales\npediátricos",
       icon: PhosphorIconsFill.heartbeat,
       child: TabbedContent(
         tabs: [
@@ -49,14 +52,6 @@ Color _colorNivel(NivelSigno nivel) => switch (nivel) {
   // Sin color de alerta: no hay nada que valorar todavía.
   NivelSigno.noValorable => AppColors.semiDarkPrimaryColor,
 };
-
-/// Un panel ya resuelto, listo para pintarse.
-class _Panel {
-  final String titulo;
-  final ResultadoSigno resultado;
-
-  const _Panel(this.titulo, this.resultado);
-}
 
 // ================== PESTAÑA DE INTERPRETACIÓN ==================
 class _InterpretacionLayout extends StatefulWidget {
@@ -86,8 +81,22 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
 
   UnidadEdad _unidad = UnidadEdad.anios;
 
-  /// Vacía hasta que se presiona "Interpretar".
-  List<_Panel> _paneles = const [];
+  // Un resultado por signo, null hasta que se presiona "Interpretar". La
+  // pastilla de cada uno se pinta debajo de su propio campo, así que el
+  // resultado se guarda por separado y no como una lista de paneles.
+  ResultadoSigno? _resultadoFc;
+  ResultadoSigno? _resultadoFr;
+  ResultadoSigno? _resultadoPresion;
+  ResultadoSigno? _resultadoTemperatura;
+  ResultadoSigno? _resultadoSaturacion;
+
+  void _borrarResultados() {
+    _resultadoFc = null;
+    _resultadoFr = null;
+    _resultadoPresion = null;
+    _resultadoTemperatura = null;
+    _resultadoSaturacion = null;
+  }
 
   @override
   bool get wantKeepAlive => true;
@@ -157,7 +166,7 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
           ? edadMaximaAnios
           : edadMaximaMeses;
       if (valor == null || valor < 0 || valor > maximo) {
-        setState(() => _paneles = const []);
+        setState(_borrarResultados);
         _avisar(
           'Revisa la edad: se acepta de 0 a $maximo '
           '${_unidad == UnidadEdad.anios ? "años" : "meses"}.',
@@ -231,43 +240,35 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
       presionValida = false;
     }
 
-    // ── Paneles, en el orden de los campos ──
-    final paneles = <_Panel>[];
-    if (fc != null) {
-      paneles.add(
-        _Panel('Frecuencia cardiaca', interpretarFrecuenciaCardiaca(fc, meses)),
-      );
-    }
-    if (fr != null) {
-      paneles.add(
-        _Panel(
-          'Frecuencia respiratoria',
-          interpretarFrecuenciaRespiratoria(fr, meses),
-        ),
-      );
-    }
-    if (presionValida && (sistolica != null || diastolica != null)) {
-      paneles.add(
-        _Panel(
-          'Presión arterial',
-          interpretarPresionArterial(
-            sistolica: sistolica,
-            diastolica: diastolica,
-            meses: meses,
-          ),
-        ),
-      );
-    }
-    if (temperatura != null) {
-      paneles.add(_Panel('Temperatura', interpretarTemperatura(temperatura)));
-    }
-    if (saturacion != null) {
-      paneles.add(
-        _Panel('Saturación de oxígeno', interpretarSaturacion(saturacion)),
-      );
-    }
-
-    setState(() => _paneles = paneles);
+    // ── Resultados, cada uno debajo de su campo ──
+    var hayAlguno = false;
+    setState(() {
+      _borrarResultados();
+      if (fc != null) {
+        _resultadoFc = interpretarFrecuenciaCardiaca(fc, meses);
+        hayAlguno = true;
+      }
+      if (fr != null) {
+        _resultadoFr = interpretarFrecuenciaRespiratoria(fr, meses);
+        hayAlguno = true;
+      }
+      if (presionValida && (sistolica != null || diastolica != null)) {
+        _resultadoPresion = interpretarPresionArterial(
+          sistolica: sistolica,
+          diastolica: diastolica,
+          meses: meses,
+        );
+        hayAlguno = true;
+      }
+      if (temperatura != null) {
+        _resultadoTemperatura = interpretarTemperatura(temperatura);
+        hayAlguno = true;
+      }
+      if (saturacion != null) {
+        _resultadoSaturacion = interpretarSaturacion(saturacion);
+        hayAlguno = true;
+      }
+    });
 
     // Los avisos van después de dibujar: el resto de los signos sí se
     // interpretó y conviene que el usuario los vea junto con el aviso.
@@ -275,7 +276,7 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
       _avisar('Revisa estos valores: ${fueraDeRango.join(", ")}.');
     } else if (!presionValida) {
       _avisar('La presión diastólica debe ser menor que la sistólica.');
-    } else if (paneles.isEmpty) {
+    } else if (!hayAlguno) {
       _avisar('Captura al menos un signo vital para interpretar.');
     }
   }
@@ -292,7 +293,7 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
     ]) {
       c.clear();
     }
-    setState(() => _paneles = const []);
+    setState(_borrarResultados);
   }
 
   @override
@@ -310,66 +311,187 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
           children: [
             _buildEdad(colorScheme, textTheme),
             const SizedBox(height: 20),
-            NumericInputField(
-              label: "Frecuencia cardiaca (lpm)",
-              textoAyuda: "Latidos por minuto",
-              controller: _fcController,
-              focusNode: _fcFocus,
-              maxLength: 3,
+            // Los seis campos van en tres renglones de dos: son números de dos
+            // o tres cifras y el ancho completo estaba desperdiciado. La
+            // etiqueta de arriba lleva la abreviatura y el nombre completo se
+            // conserva en el texto de ayuda del campo, que sigue visible
+            // mientras se escribe.
+            _buildRenglon(
+              izquierda: _buildCampo(
+                campo: NumericInputField(
+                  label: "FC (lpm)",
+                  textoAyuda: "lpm",
+                  controller: _fcController,
+                  focusNode: _fcFocus,
+                  maxLength: 3,
+                ),
+                resultado: _resultadoFc,
+                colorScheme: colorScheme,
+                textTheme: textTheme,
+              ),
+              derecha: _buildCampo(
+                campo: NumericInputField(
+                  label: "FR (rpm)",
+                  textoAyuda: "rpm",
+                  controller: _frController,
+                  focusNode: _frFocus,
+                  maxLength: 2,
+                ),
+                resultado: _resultadoFr,
+                colorScheme: colorScheme,
+                textTheme: textTheme,
+              ),
             ),
             const SizedBox(height: 20),
-            NumericInputField(
-              label: "Frecuencia respiratoria (rpm)",
-              textoAyuda: "Respiraciones por minuto",
-              controller: _frController,
-              focusNode: _frFocus,
-              maxLength: 2,
+            // La presión es UN signo vital con DOS campos y UNA interpretación
+            // conjunta, así que los dos campos y su pastilla comparten tarjeta,
+            // y la pastilla abarca el renglón completo.
+            _buildTarjeta(
+              colorScheme,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildRenglon(
+                    izquierda: NumericInputField(
+                      label: "Sistólica",
+                      textoAyuda: "mmHg",
+                      controller: _sistolicaController,
+                      focusNode: _sistolicaFocus,
+                      maxLength: 3,
+                    ),
+                    derecha: NumericInputField(
+                      label: "Diastólica",
+                      textoAyuda: "mmHg",
+                      controller: _diastolicaController,
+                      focusNode: _diastolicaFocus,
+                      maxLength: 3,
+                    ),
+                  ),
+                  if (_resultadoPresion != null)
+                    _buildPastilla(_resultadoPresion!, colorScheme, textTheme),
+                ],
+              ),
             ),
             const SizedBox(height: 20),
-            NumericInputField(
-              label: "Presión sistólica (mmHg)",
-              textoAyuda: "Cifra sistólica",
-              controller: _sistolicaController,
-              focusNode: _sistolicaFocus,
-              maxLength: 3,
-            ),
-            const SizedBox(height: 20),
-            NumericInputField(
-              label: "Presión diastólica (mmHg)",
-              textoAyuda: "Cifra diastólica",
-              controller: _diastolicaController,
-              focusNode: _diastolicaFocus,
-              maxLength: 3,
-            ),
-            const SizedBox(height: 20),
-            NumericInputField(
-              label: "Temperatura (°C)",
-              textoAyuda: "Axilar",
-              controller: _temperaturaController,
-              focusNode: _temperaturaFocus,
-              maxLength: 4,
-              allowDecimal: true,
-            ),
-            const SizedBox(height: 20),
-            NumericInputField(
-              label: "Saturación de oxígeno (%)",
-              textoAyuda: "SpO2",
-              controller: _saturacionController,
-              focusNode: _saturacionFocus,
-              maxLength: 3,
+            _buildRenglon(
+              izquierda: _buildCampo(
+                campo: NumericInputField(
+                  label: "Temp (°C)",
+                  textoAyuda: "Axilar",
+                  controller: _temperaturaController,
+                  focusNode: _temperaturaFocus,
+                  maxLength: 4,
+                  allowDecimal: true,
+                ),
+                resultado: _resultadoTemperatura,
+                colorScheme: colorScheme,
+                textTheme: textTheme,
+              ),
+              derecha: _buildCampo(
+                campo: NumericInputField(
+                  label: "SpO2 (%)",
+                  textoAyuda: "%",
+                  controller: _saturacionController,
+                  focusNode: _saturacionFocus,
+                  maxLength: 3,
+                ),
+                resultado: _resultadoSaturacion,
+                colorScheme: colorScheme,
+                textTheme: textTheme,
+              ),
             ),
             const SizedBox(height: 20),
             _buildBotones(colorScheme, textTheme),
-            for (final panel in _paneles) ...[
-              const SizedBox(height: 20),
-              _buildPanel(panel, colorScheme, textTheme),
-            ],
             // Reserva el alto real de la barra de navegación del sistema, de
-            // gestos o de botones, más el aire de siempre. Sin esto el último
-            // panel termina debajo de la barra. Es el mismo patrón que usa
-            // scale_result_footer cuando todavía no hay resultado.
+            // gestos o de botones, más el aire de siempre. Se queda aunque la
+            // pantalla quepa sin scroll: con el teclado abierto o con la fuente
+            // del sistema aumentada el scroll vuelve, y es lo que evita que el
+            // último elemento termine debajo de la barra.
             SizedBox(height: MediaQuery.paddingOf(context).bottom + 20),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// Dos campos lado a lado. Se alinean por arriba porque uno puede llevar
+  /// pastilla y el otro no, y entonces tienen distinto alto.
+  Widget _buildRenglon({required Widget izquierda, required Widget derecha}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: izquierda),
+        const SizedBox(width: 12),
+        Expanded(child: derecha),
+      ],
+    );
+  }
+
+  /// Tarjeta de un signo vital.
+  ///
+  /// Agrupa el campo (o los dos, en la presión) con su pastilla, para que se
+  /// lea dónde termina un signo y empieza el siguiente. El color es el más
+  /// claro del tema, de modo que queda una escala de tres tonos: el fondo de
+  /// la pestaña es el más oscuro, la tarjeta el más claro y el campo, que tiene
+  /// su propio relleno y su borde, queda en medio. El bloque de edad NO usa
+  /// esta tarjeta: va teñido, y así sigue distinguiéndose de los signos.
+  Widget _buildTarjeta(ColorScheme colorScheme, Widget hijo) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+      decoration: BoxDecoration(
+        color: colorScheme.secondary,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: hijo,
+    );
+  }
+
+  /// Un campo con su interpretación debajo, dentro de su tarjeta. La pastilla
+  /// aparece donde el usuario ya estaba mirando, en vez de en un bloque al
+  /// final de la pantalla.
+  Widget _buildCampo({
+    required Widget campo,
+    required ResultadoSigno? resultado,
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+  }) {
+    return _buildTarjeta(
+      colorScheme,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          campo,
+          if (resultado != null)
+            _buildPastilla(resultado, colorScheme, textTheme),
+        ],
+      ),
+    );
+  }
+
+  /// La pastilla de interpretación: compacta, de un renglón cuando el texto
+  /// alcanza. Conserva el color por gravedad de la calculadora de PAM.
+  Widget _buildPastilla(
+    ResultadoSigno resultado,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        decoration: BoxDecoration(
+          color: _colorNivel(resultado.nivel),
+          borderRadius: BorderRadius.circular(40),
+        ),
+        child: Text(
+          resultado.etiqueta,
+          textAlign: TextAlign.center,
+          style: textTheme.bodySmall?.copyWith(
+            color: colorScheme.onPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
@@ -378,35 +500,37 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
   /// La edad va dentro de un contenedor teñido para que no se lea como un
   /// signo vital más. El tinte se LEE de `NivelSeguridad.leve`, el mismo que
   /// usa `SeccionFichaView` para marcar una sección, en vez de copiar un color.
+  ///
+  /// El campo y el selector de unidad van lado a lado: apilados gastaban un
+  /// renglón entero de una pantalla que ya pedía mucho scroll.
   Widget _buildEdad(ColorScheme colorScheme, TextTheme textTheme) {
     const nivel = NivelSeguridad.leve;
     final acento = nivel.colorAcento;
 
-    final contenido = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    final contenido = Row(
+      // Por abajo: el campo trae su etiqueta encima y el selector no, así que
+      // alinearlos por arriba los dejaría desfasados.
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          "Datos del paciente",
-          style: textTheme.titleMedium?.copyWith(
-            color: colorScheme.primaryContainer,
-            fontSize: 20 - nivel.reduccionTitulo,
-            fontWeight: FontWeight.bold,
+        Expanded(
+          flex: 2,
+          child: NumericInputField(
+            label: "Edad",
+            textoAyuda: _unidad == UnidadEdad.anios ? "Años" : "Meses",
+            controller: _edadController,
+            focusNode: _edadFocus,
+            maxLength: 3,
           ),
         ),
-        const SizedBox(height: 10),
-        NumericInputField(
-          label: "Edad",
-          textoAyuda: _unidad == UnidadEdad.anios ? "En años" : "En meses",
-          controller: _edadController,
-          focusNode: _edadFocus,
-          maxLength: 3,
-        ),
-        const SizedBox(height: 10),
-        OpcionSelector<UnidadEdad>(
-          opciones: UnidadEdad.values,
-          seleccionada: _unidad,
-          etiqueta: (u) => u == UnidadEdad.anios ? "Años" : "Meses",
-          onChanged: (u) => setState(() => _unidad = u),
+        const SizedBox(width: 12),
+        Expanded(
+          flex: 3,
+          child: OpcionSelector<UnidadEdad>(
+            opciones: UnidadEdad.values,
+            seleccionada: _unidad,
+            etiqueta: (u) => u == UnidadEdad.anios ? "Años" : "Meses",
+            onChanged: (u) => setState(() => _unidad = u),
+          ),
         ),
       ],
     );
@@ -417,8 +541,8 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: acento.withValues(alpha: nivel.opacidadFondo),
-        borderRadius: BorderRadius.circular(10),
+        color: colorScheme.secondary,
+        borderRadius: BorderRadius.circular(30),
       ),
       child: contenido,
     );
@@ -474,52 +598,6 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
       ],
     );
   }
-
-  /// Panel de resultado. Es el de la calculadora de PAM sin el número grande y
-  /// sin alto mínimo: con cinco apilados, cada uno tiene que ser compacto.
-  Widget _buildPanel(
-    _Panel panel,
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-  ) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: colorScheme.secondary,
-        borderRadius: AppRadius.defaultRadius,
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Text(
-            "${panel.titulo}:",
-            style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primaryContainer,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            decoration: BoxDecoration(
-              color: _colorNivel(panel.resultado.nivel),
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: Text(
-              panel.resultado.etiqueta,
-              textAlign: TextAlign.center,
-              style: textTheme.titleMedium?.copyWith(
-                color: colorScheme.onPrimary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 // ================== PESTAÑA DE INFORMACIÓN ==================
@@ -537,8 +615,7 @@ class _InformacionPlaceholder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Las tablas de referencia por grupo de edad llegan en una "
-            "actualización futura.",
+            "soon nigga",
             textAlign: TextAlign.center,
             style: textTheme.bodyLarge,
           ),
