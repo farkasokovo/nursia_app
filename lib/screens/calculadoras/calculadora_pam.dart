@@ -6,6 +6,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../widgets/expandable_category_screen.dart';
 import '../../widgets/tabbed_content.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/alert_colors.dart';
 
 class CalculadoraPam extends StatelessWidget {
   const CalculadoraPam({super.key});
@@ -61,11 +62,11 @@ String _pamDetalle(int pam) {
       "correlaciona con el estado clínico.";
 }
 
-Color _pamColor(int pam) {
-  if (pam < 65) return AppColors.redAlertv3;
-  if (pam < 70) return AppColors.withoutAlert;
-  if (pam <= 100) return AppColors.greenAlert;
-  return AppColors.redAlertv1;
+NivelAlerta _pamNivel(int pam) {
+  if (pam < 65) return NivelAlerta.rojo3;
+  if (pam < 70) return NivelAlerta.sinAlerta;
+  if (pam <= 100) return NivelAlerta.verde;
+  return NivelAlerta.rojo1;
 }
 
 // ================== PESTAÑA DE CÁLCULO ==================
@@ -272,14 +273,26 @@ class _CalculoPamLayoutState extends State<_CalculoPamLayout>
                             horizontal: 16,
                           ),
                           decoration: BoxDecoration(
-                            color: _pamColor(valor.pam),
+                            color: AlertColors.fill(
+                              context,
+                              _pamNivel(valor.pam),
+                            ),
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: Text(
                             _pamEtiqueta(valor.pam),
                             textAlign: TextAlign.center,
                             style: textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onPrimary,
+                              // Crema en los dos temas. En claro `onPrimary`
+                              // YA es crema y se conserva tal cual; en oscuro
+                              // ese token es casi negro y sobre el relleno
+                              // oscuro no se leería. Mismo criterio que la
+                              // pastilla de signos vitales pediátricos.
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? AppColorsDark.ink
+                                  : colorScheme.onPrimary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

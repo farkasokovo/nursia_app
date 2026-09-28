@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -88,7 +88,8 @@ class _QsofaLayoutState extends State<_QsofaLayout>
                       ScaleOption(
                         score: 1,
                         label: "Sí",
-                        description: "Taquipnea de 22 respiraciones por minuto o más.",
+                        description:
+                            "Taquipnea de 22 respiraciones por minuto o más.",
                       ),
                       ScaleOption(
                         score: 0,
@@ -114,7 +115,8 @@ class _QsofaLayoutState extends State<_QsofaLayout>
                       ScaleOption(
                         score: 0,
                         label: "No",
-                        description: "Paciente alerta y orientado (Glasgow 15).",
+                        description:
+                            "Paciente alerta y orientado (Glasgow 15).",
                       ),
                     ],
                   ),
@@ -135,7 +137,8 @@ class _QsofaLayoutState extends State<_QsofaLayout>
                       ScaleOption(
                         score: 0,
                         label: "No",
-                        description: "Presión arterial sistólica mayor de 100 mmHg.",
+                        description:
+                            "Presión arterial sistólica mayor de 100 mmHg.",
                       ),
                     ],
                   ),
@@ -207,7 +210,7 @@ String _qsofaEtiqueta(int puntajeTotal) {
 }
 
 // Colores específicos de la escala qSOFA
-Color _qsofaColor(int puntajeTotal) {
-  if (puntajeTotal >= 2) return AppColors.redAlertv3; // Alto riesgo
-  return AppColors.withoutAlert; // Bajo riesgo
+NivelAlerta _qsofaColor(int puntajeTotal) {
+  if (puntajeTotal >= 2) return NivelAlerta.rojo3; // Alto riesgo
+  return NivelAlerta.sinAlerta; // Bajo riesgo
 }

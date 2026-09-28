@@ -2,6 +2,7 @@
 // Widget reutilizable para botones de fármacos — idéntico en estructura a
 // _ScaleButton de neurologicas_screen pero público y compartido
 import 'package:flutter/material.dart';
+import '../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../theme/app_theme.dart';
 import 'alto_riesgo_badge.dart';
@@ -82,7 +83,10 @@ class FarmaButton extends StatelessWidget {
                       subtitle!, // Usamos '!' porque ya comprobamos que no es nulo
                       style: textTheme.titleSmall?.copyWith(
                         fontSize: 13,
-                        color: Colors.white70,
+                        color: ThemeColors.sobrePrimary(
+                          context,
+                          Colors.white70,
+                        ),
                       ),
                     ),
 
@@ -96,9 +100,9 @@ class FarmaButton extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(
+            Icon(
               PhosphorIconsBold.caretRight,
-              color: Colors.white54,
+              color: ThemeColors.sobrePrimary(context, Colors.white54),
               size: 30,
             ),
           ],

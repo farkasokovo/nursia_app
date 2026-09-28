@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import '../theme/app_theme.dart';
+import '../theme/alert_colors.dart';
 
 /// Peso clínico de una sección de la ficha de medicamento.
 ///
@@ -24,14 +24,30 @@ enum NivelSeguridad {
   /// Puede contraindicar o dañar. Es lo que se busca primero en un turno.
   alto;
 
+  /// Gravedad de este nivel en el vocabulario compartido de alertas. Null en
+  /// las secciones sin acento.
+  ///
+  /// Se expone aparte de [colorAcento] para que un punto de uso que ya tenga
+  /// que decidir entre relleno y texto pueda llamar a [AlertColors] por su
+  /// cuenta, sin pasar por el color ya resuelto.
+  NivelAlerta? get nivelAlerta => switch (this) {
+    NivelSeguridad.ninguno => null,
+    NivelSeguridad.leve => NivelAlerta.sinAlerta,
+    NivelSeguridad.medio => NivelAlerta.rojo1,
+    NivelSeguridad.alto => NivelAlerta.rojo2,
+  };
+
   /// Color del ícono del encabezado y del tinte de fondo. Null en las secciones
   /// sin acento, que usan el color normal del texto y no llevan fondo.
-  Color? get colorAcento => switch (this) {
-    NivelSeguridad.ninguno => null,
-    NivelSeguridad.leve => AppColors.withoutAlert,
-    NivelSeguridad.medio => AppColors.redAlertv1,
-    NivelSeguridad.alto => AppColors.redAlertv2,
-  };
+  ///
+  /// Es un método y ya no un getter porque el color depende del tema: pide
+  /// `context`. Devuelve siempre la variante `onSurface`, porque sus dos usos
+  /// (teñir el ícono y teñir el fondo de la caja con alpha muy bajo) van
+  /// directo sobre la superficie de la tarjeta, no sobre un relleno sólido.
+  Color? colorAcento(BuildContext context) {
+    final nivel = nivelAlerta;
+    return nivel == null ? null : AlertColors.onSurface(context, nivel);
+  }
 
   /// Tinte de fondo sobre la tarjeta.
   ///
@@ -44,12 +60,19 @@ enum NivelSeguridad {
   /// quedan en #E8E0D9 (leve), #E6DAD6 (medio) y #E0D3CF (alto): un lavado
   /// cálido que se nota de reojo sin competir con `AltoRiesgoBadge`, que sí es
   /// un bloque sólido.
-  double get opacidadFondo => switch (this) {
-    NivelSeguridad.ninguno => 0,
-    NivelSeguridad.leve => 0.08,
-    NivelSeguridad.medio => 0.11,
-    NivelSeguridad.alto => 0.15,
-  };
+  /// En oscuro los valores son MENORES a propósito. Un acento claro sobre
+  /// fondo oscuro tiñe mucho más que uno oscuro sobre fondo claro, así que
+  /// repetir las mismas opacidades convertiría el tinte en un bloque. Estos
+  /// están calculados para que el lavado se note igual que en claro.
+  double opacidadFondo(BuildContext context) {
+    final oscuro = Theme.of(context).brightness == Brightness.dark;
+    return switch (this) {
+      NivelSeguridad.ninguno => 0,
+      NivelSeguridad.leve => oscuro ? 0.050 : 0.08,
+      NivelSeguridad.medio => oscuro ? 0.090 : 0.11,
+      NivelSeguridad.alto => oscuro ? 0.115 : 0.15,
+    };
+  }
 
   /// Cuánto se le resta al tamaño normal de `titleMedium` en el encabezado.
   ///

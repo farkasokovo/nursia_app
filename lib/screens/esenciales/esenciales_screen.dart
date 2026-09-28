@@ -1,5 +1,6 @@
 // lib/screens/esenciales/esenciales_screen.dart
 import 'package:flutter/material.dart';
+import '../../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -379,8 +380,15 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             decoration: BoxDecoration(
               color: colorScheme.primary,
               borderRadius: BorderRadius.circular(30),
-              boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 6),
+              boxShadow: [
+                BoxShadow(
+                  color: ThemeColors.sombra(
+                    context,
+                    claro: Colors.black12,
+                    oscuro: 0.35,
+                  ),
+                  blurRadius: 6,
+                ),
               ],
             ),
             child: ListTile(
@@ -411,7 +419,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
                   : resumen,
               trailing: Icon(
                 PhosphorIconsBold.caretRight,
-                color: Colors.white54,
+                color: ThemeColors.sobrePrimary(context, Colors.white54),
                 size: 30,
               ),
             ),
@@ -660,6 +668,6 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
     );
   }
 
-  /// greenAlert no vive dentro del ColorScheme, por eso se llama directo desde
-  /// AppColors.
+  /// Los colores de alerta no viven en el ColorScheme: se piden a
+  /// `AlertColors`, que los resuelve segun el tema.
 }

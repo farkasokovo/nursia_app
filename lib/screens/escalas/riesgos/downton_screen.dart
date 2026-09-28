@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -290,8 +290,8 @@ String _downtonEtiqueta(int puntajeTotal) {
 }
 
 // Colores específicos de la escala de Downton
-Color _downtonColor(int puntajeTotal) {
-  if (puntajeTotal >= 3) return AppColors.redAlertv3; // Riesgo alto
-  if (puntajeTotal >= 0) return AppColors.withoutAlert; // Riesgo bajo
-  return AppColors.withoutAlert;
+NivelAlerta _downtonColor(int puntajeTotal) {
+  if (puntajeTotal >= 3) return NivelAlerta.rojo3; // Riesgo alto
+  if (puntajeTotal >= 0) return NivelAlerta.sinAlerta; // Riesgo bajo
+  return NivelAlerta.sinAlerta;
 }

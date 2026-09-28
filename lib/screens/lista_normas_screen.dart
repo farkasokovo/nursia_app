@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/theme_colors.dart';
 import 'package:nursia_app/models/norma.dart';
 import 'package:nursia_app/repositories/norma_repository.dart';
 import 'package:nursia_app/screens/ficha_normativa_screen.dart';
@@ -119,15 +120,18 @@ class _ListaNormasFiltradaScreenState extends State<ListaNormasFiltradaScreen> {
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontSize: 13,
-                          color: Colors.white70,
+                          color: ThemeColors.sobrePrimary(
+                            context,
+                            Colors.white70,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Icon(
+                Icon(
                   PhosphorIconsRegular.caretRight,
-                  color: Colors.white54,
+                  color: ThemeColors.sobrePrimary(context, Colors.white54),
                   size: 30,
                 ),
               ],

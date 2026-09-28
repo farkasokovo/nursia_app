@@ -5,6 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../models/nota_version.dart';
 import '../theme/app_theme.dart';
+import '../theme/alert_colors.dart';
 import '../utils/changelog_local.dart';
 import '../utils/url_launcher_helper.dart';
 import '../utils/verificador_actualizacion.dart';
@@ -233,7 +234,7 @@ class _ActualizacionesScreenState extends State<ActualizacionesScreen> {
       case _EstadoVerificacion.alDia:
         return _mensaje(
           icono: PhosphorIconsFill.checkCircle,
-          color: AppColors.greenAlert,
+          color: AlertColors.onSurface(context, NivelAlerta.verde),
           texto: 'Nurska está al día.',
           colorScheme: colorScheme,
           textTheme: textTheme,
@@ -258,7 +259,7 @@ class _ActualizacionesScreenState extends State<ActualizacionesScreen> {
           children: [
             _mensaje(
               icono: PhosphorIconsFill.arrowCircleUp,
-              color: AppColors.greenAlert,
+              color: AlertColors.onSurface(context, NivelAlerta.verde),
               texto: 'Versión ${_versionRemota ?? "nueva"} disponible.',
               colorScheme: colorScheme,
               textTheme: textTheme,
@@ -278,7 +279,7 @@ class _ActualizacionesScreenState extends State<ActualizacionesScreen> {
               child: ElevatedButton(
                 onPressed: () => abrirUrl(context, _info!.urlDescarga),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.greenAlert,
+                  backgroundColor: AlertColors.fill(context, NivelAlerta.verde),
                   foregroundColor: colorScheme.onPrimaryContainer,
                   minimumSize: const Size(double.infinity, 52),
                   shape: const RoundedRectangleBorder(

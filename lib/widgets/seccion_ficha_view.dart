@@ -43,7 +43,7 @@ class SeccionFichaView extends StatelessWidget {
 
     // Las secciones informativas se devuelven tal cual, sin contenedor, para no
     // agregar cajas donde no aportan.
-    final acento = seccion.nivel.colorAcento;
+    final acento = seccion.nivel.colorAcento(context);
     if (acento == null) return contenido;
 
     // Sin borde lateral de color: el peso clínico lo cargan el tinte de fondo
@@ -58,7 +58,7 @@ class SeccionFichaView extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: acento.withValues(alpha: seccion.nivel.opacidadFondo),
+        color: acento.withValues(alpha: seccion.nivel.opacidadFondo(context)),
         borderRadius: BorderRadius.circular(10),
       ),
       child: contenido,
@@ -72,7 +72,8 @@ class SeccionFichaView extends StatelessWidget {
   /// renderizan solo con el título.
   Widget _buildEncabezado(BuildContext context) {
     final theme = Theme.of(context);
-    final acento = seccion.nivel.colorAcento ?? theme.colorScheme.onSecondary;
+    final acento =
+        seccion.nivel.colorAcento(context) ?? theme.colorScheme.onSecondary;
 
     final estiloBase = theme.textTheme.titleMedium;
     final estilo = estiloBase?.copyWith(

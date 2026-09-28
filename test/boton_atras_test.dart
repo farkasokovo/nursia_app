@@ -15,6 +15,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nursia_app/screens/home_screen.dart';
 import 'package:nursia_app/theme/app_theme.dart';
+import 'package:nursia_app/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:nursia_app/widgets/searchable_screen.dart';
 
 /// Registro de las llamadas al canal de plataforma durante una prueba.
@@ -209,7 +211,13 @@ void main() {
               size: const Size(360, 1100),
               viewInsets: EdgeInsets.only(bottom: teclado ? 300 : 0),
             ),
-            child: const HomeScreen(),
+            // El selector de tema del menu lee ThemeProvider, asi que la
+            // pantalla necesita uno arriba igual que en la app real. Se
+            // construye sin cargar() : basta con el valor por defecto.
+            child: ChangeNotifierProvider<ThemeProvider>(
+              create: (_) => ThemeProvider(),
+              child: const HomeScreen(),
+            ),
           ),
         ),
       );

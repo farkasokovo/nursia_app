@@ -5,6 +5,7 @@ import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
 import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -319,8 +320,8 @@ String _apgarEtiqueta(int puntajeTotal) {
 }
 
 // Colores específicos de la escala APGAR (puntaje alto = mejor)
-Color _apgarColor(int puntajeTotal) {
-  if (puntajeTotal >= 7) return AppColors.greenAlert; // Buen estado
-  if (puntajeTotal >= 4) return AppColors.redAlertv1; // Depresión moderada
-  return AppColors.redAlertv3; // Depresión severa
+NivelAlerta _apgarColor(int puntajeTotal) {
+  if (puntajeTotal >= 7) return NivelAlerta.verde; // Buen estado
+  if (puntajeTotal >= 4) return NivelAlerta.rojo1; // Depresión moderada
+  return NivelAlerta.rojo3; // Depresión severa
 }

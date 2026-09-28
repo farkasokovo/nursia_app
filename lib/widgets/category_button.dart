@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 /// Botón placeholder "Próximamente" para rellenar el hueco cuando un bloque
@@ -99,15 +100,26 @@ class CategoryButton extends StatelessWidget {
             decoration: BoxDecoration(
               color: colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 6),
+              boxShadow: [
+                BoxShadow(
+                  color: ThemeColors.sombra(
+                    context,
+                    claro: Colors.black12,
+                    oscuro: 0.35,
+                  ),
+                  blurRadius: 6,
+                ),
               ],
             ),
             height: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PhosphorIcon(icon, size: 40, color: colorScheme.primaryContainer),
+                PhosphorIcon(
+                  icon,
+                  size: 40,
+                  color: colorScheme.primaryContainer,
+                ),
                 const SizedBox(height: 10),
                 Text(
                   title,

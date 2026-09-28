@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -272,14 +272,14 @@ String _glasgowEtiqueta(String resultado) {
 }
 
 // Colores específicos de la escala (no dependen del tema)
-Color _glasgowColor(String resultado) {
+NivelAlerta _glasgowColor(String resultado) {
   final match = RegExp(r'^\d+').firstMatch(resultado);
   if (match == null) {
-    return AppColors.withoutAlert;
+    return NivelAlerta.sinAlerta;
   }
   final score = int.parse(match.group(0)!);
-  if (score == 15) return AppColors.greenAlert;
-  if (score >= 13) return AppColors.withoutAlert;
-  if (score >= 9) return AppColors.redAlertv1;
-  return AppColors.redAlertv3;
+  if (score == 15) return NivelAlerta.verde;
+  if (score >= 13) return NivelAlerta.sinAlerta;
+  if (score >= 9) return NivelAlerta.rojo1;
+  return NivelAlerta.rojo3;
 }

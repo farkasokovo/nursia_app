@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../theme/alert_colors.dart';
+
 class ScaleResultFooter extends StatelessWidget {
   final bool visible;
   final String resultado;
-  final Color Function(String resultado)? colorResolver;
+
+  /// Gravedad clinica del resultado, sin color. El nivel se traduce a dos
+  /// colores distintos aqui abajo (relleno y texto), que en modo oscuro NO
+  /// pueden ser el mismo. Ver [AlertColors].
+  final NivelAlerta Function(String resultado)? colorResolver;
   // Gemela de colorResolver: mapea el resultado a una etiqueta clínica corta
   // (ej. "Riesgo alto", "Dolor moderado"). Cada escala usa su propio
   // vocabulario clínico.
@@ -38,7 +44,17 @@ class ScaleResultFooter extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     final esNumero = RegExp(r'^-?\d+').hasMatch(resultado);
-    final colorResultado = colorResolver?.call(resultado);
+    final nivelAlerta = colorResolver?.call(resultado);
+    // El MISMO nivel se resuelve a dos colores opuestos: la pastilla es un
+    // relleno solido con texto crema encima, y la etiqueta de abajo es texto
+    // suelto sobre la superficie del panel. En claro ambos coinciden; en
+    // oscuro tienen que ir en direcciones contrarias para poder leerse.
+    final colorRelleno = nivelAlerta == null
+        ? Colors.transparent
+        : AlertColors.fill(context, nivelAlerta);
+    final colorEtiqueta = nivelAlerta == null
+        ? colorScheme.primaryContainer
+        : AlertColors.onSurface(context, nivelAlerta);
     // La etiqueta clínica corta solo tiene sentido cuando el resultado es un
     // número limpio. Si algún parámetro se marcó como "No valorable"
     // (Glasgow/Downton), el resultado deja de ser numérico: en ese caso se
@@ -93,7 +109,7 @@ class ScaleResultFooter extends StatelessWidget {
                   horizontal: 16,
                 ),
                 decoration: BoxDecoration(
-                  color: colorResultado ?? Colors.transparent,
+                  color: colorRelleno,
                   borderRadius: BorderRadius.circular(40),
                 ),
                 child: Text(
@@ -120,7 +136,7 @@ class ScaleResultFooter extends StatelessWidget {
                   etiqueta,
                   textAlign: TextAlign.center,
                   style: textTheme.titleLarge?.copyWith(
-                    color: colorResultado ?? colorScheme.primaryContainer,
+                    color: colorEtiqueta,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),

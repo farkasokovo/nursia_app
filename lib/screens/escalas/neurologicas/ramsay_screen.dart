@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -192,24 +192,24 @@ String _ramsayEtiqueta(String resultado) {
 }
 
 // Colores específicos de la escala Ramsay
-Color _ramsayColor(String resultado) {
+NivelAlerta _ramsayColor(String resultado) {
   final match = RegExp(r'^\d+').firstMatch(resultado);
-  if (match == null) return AppColors.withoutAlert;
+  if (match == null) return NivelAlerta.sinAlerta;
   final score = int.parse(match.group(0)!);
   switch (score) {
     case 1:
-      return AppColors.redAlertv1;
+      return NivelAlerta.rojo1;
     case 2:
-      return AppColors.greenAlert;
+      return NivelAlerta.verde;
     case 3:
-      return AppColors.withoutAlert;
+      return NivelAlerta.sinAlerta;
     case 4:
-      return AppColors.redAlertv2;
+      return NivelAlerta.rojo2;
     case 5:
-      return AppColors.redAlertv3;
+      return NivelAlerta.rojo3;
     case 6:
-      return AppColors.redAlertv4;
+      return NivelAlerta.rojo4;
     default:
-      return AppColors.withoutAlert;
+      return NivelAlerta.sinAlerta;
   }
 }

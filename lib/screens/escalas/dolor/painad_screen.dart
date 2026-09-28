@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -157,7 +157,8 @@ class _PainadLayoutState extends State<_PainadLayout>
                       ScaleOption(
                         score: 1,
                         label: "Triste / ceño fruncido",
-                        description: "Triste, atemorizada o con el ceño fruncido.",
+                        description:
+                            "Triste, atemorizada o con el ceño fruncido.",
                       ),
                       ScaleOption(
                         score: 2,
@@ -182,7 +183,8 @@ class _PainadLayoutState extends State<_PainadLayout>
                       ScaleOption(
                         score: 1,
                         label: "Tenso",
-                        description: "Tenso, movimientos nerviosos, no para quieto.",
+                        description:
+                            "Tenso, movimientos nerviosos, no para quieto.",
                       ),
                       ScaleOption(
                         score: 2,
@@ -208,7 +210,8 @@ class _PainadLayoutState extends State<_PainadLayout>
                       ScaleOption(
                         score: 1,
                         label: "Se tranquiliza",
-                        description: "Se distrae o tranquiliza con la voz o el tacto.",
+                        description:
+                            "Se distrae o tranquiliza con la voz o el tacto.",
                       ),
                       ScaleOption(
                         score: 2,
@@ -288,9 +291,9 @@ String _painadEtiqueta(int puntajeTotal) {
 }
 
 // Colores específicos de la escala PAINAD
-Color _painadColor(int puntajeTotal) {
-  if (puntajeTotal >= 7) return AppColors.redAlertv3; // Dolor intenso
-  if (puntajeTotal >= 4) return AppColors.redAlertv1; // Dolor moderado
-  if (puntajeTotal >= 1) return AppColors.withoutAlert; // Dolor leve
-  return AppColors.greenAlert; // Sin dolor
+NivelAlerta _painadColor(int puntajeTotal) {
+  if (puntajeTotal >= 7) return NivelAlerta.rojo3; // Dolor intenso
+  if (puntajeTotal >= 4) return NivelAlerta.rojo1; // Dolor moderado
+  if (puntajeTotal >= 1) return NivelAlerta.sinAlerta; // Dolor leve
+  return NivelAlerta.verde; // Sin dolor
 }

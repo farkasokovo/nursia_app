@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -261,31 +261,31 @@ String _maddoxEtiqueta(int puntajeTotal) {
 }
 
 // Colores específicos de la escala de Maddox
-Color _maddoxColor(int puntajeTotal) {
+NivelAlerta _maddoxColor(int puntajeTotal) {
   switch (puntajeTotal) {
     case 0:
       {
-        return AppColors.greenAlert;
+        return NivelAlerta.verde;
       }
     case 1:
       {
-        return AppColors.withoutAlert;
+        return NivelAlerta.sinAlerta;
       }
     case 2:
       {
-        return AppColors.redAlertv1;
+        return NivelAlerta.rojo1;
       }
     case 3:
       {
-        return AppColors.redAlertv2;
+        return NivelAlerta.rojo2;
       }
     case 4:
       {
-        return AppColors.redAlertv3;
+        return NivelAlerta.rojo3;
       }
     default:
       {
-        return AppColors.redAlertv4;
+        return NivelAlerta.rojo4;
       }
   }
 }

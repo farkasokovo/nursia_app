@@ -1,5 +1,6 @@
 // lib/screens/bienvenida_screen.dart
 import 'package:flutter/material.dart';
+import '../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../models/nota_version.dart';
@@ -40,7 +41,7 @@ class BienvenidaScreen extends StatelessWidget {
           bottom: false,
           child: Column(
             children: [
-              _buildEncabezado(colorScheme, textTheme),
+              _buildEncabezado(context, colorScheme, textTheme),
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -66,7 +67,7 @@ class BienvenidaScreen extends StatelessWidget {
                         ListaCambios(
                           cambios: notas.cambios,
                           colorTexto: colorScheme.primaryContainer,
-                          colorVinieta: AppColors.accentDarkColor,
+                          colorVinieta: ThemeColors.acento(context),
                         ),
                       ],
                     ),
@@ -81,7 +82,11 @@ class BienvenidaScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEncabezado(ColorScheme colorScheme, TextTheme textTheme) {
+  Widget _buildEncabezado(
+    BuildContext context,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
       child: Column(
@@ -89,7 +94,7 @@ class BienvenidaScreen extends StatelessWidget {
           PhosphorIcon(
             PhosphorIconsFill.cloudCheck,
             size: 56,
-            color: AppColors.accentDarkColor,
+            color: ThemeColors.acento(context),
           ),
           const SizedBox(height: 16),
           Text(
@@ -105,13 +110,13 @@ class BienvenidaScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
             decoration: BoxDecoration(
-              color: AppColors.accentDarkColor,
+              color: ThemeColors.acento(context),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               'Versión ${notas.version}',
               style: textTheme.bodySmall?.copyWith(
-                color: AppColors.darkPrimaryColor,
+                color: colorScheme.primaryContainer,
                 fontWeight: FontWeight.bold,
                 fontSize: 13,
               ),

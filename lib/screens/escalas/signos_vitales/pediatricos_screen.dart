@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../../theme/alert_colors.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/secciones_ficha.dart';
 import '../../../utils/signos_vitales_pediatricos.dart';
@@ -40,18 +41,29 @@ class SignosVitalesPediatricosScreen extends StatelessWidget {
   }
 }
 
-/// Color de la pastilla según el peso clínico del resultado. Sigue la misma
-/// gradación que la calculadora de PAM: verde para lo normal y la escala de
-/// rojos conforme sube la gravedad.
-Color _colorNivel(NivelSigno nivel) => switch (nivel) {
-  NivelSigno.normal => AppColors.greenAlert,
-  NivelSigno.bajo => AppColors.withoutAlert,
-  NivelSigno.leve => AppColors.redAlertv1,
-  NivelSigno.moderada => AppColors.redAlertv2,
-  NivelSigno.grave => AppColors.redAlertv3,
-  // Sin color de alerta: no hay nada que valorar todavía.
-  NivelSigno.noValorable => AppColors.semiDarkPrimaryColor,
+/// Gravedad clínica del resultado, en el vocabulario compartido de alertas.
+/// Sigue la misma gradación que la calculadora de PAM: verde para lo normal y
+/// la escala de rojos conforme sube la gravedad.
+///
+/// Devuelve null en `noValorable`, que NO es un nivel de alerta: no hay nada
+/// que valorar todavía, así que no le toca ningún color de la escala clínica
+/// sino el neutro de [_colorNivel].
+NivelAlerta? _nivelAlerta(NivelSigno nivel) => switch (nivel) {
+  NivelSigno.normal => NivelAlerta.verde,
+  NivelSigno.bajo => NivelAlerta.sinAlerta,
+  NivelSigno.leve => NivelAlerta.rojo1,
+  NivelSigno.moderada => NivelAlerta.rojo2,
+  NivelSigno.grave => NivelAlerta.rojo3,
+  NivelSigno.noValorable => null,
 };
+
+/// Color de la pastilla. Es un relleno sólido con texto encima, así que le
+/// toca la variante `fill`.
+Color _colorNivel(BuildContext context, NivelSigno nivel) {
+  final alerta = _nivelAlerta(nivel);
+  if (alerta != null) return AlertColors.fill(context, alerta);
+  return AlertColors.neutro(context);
+}
 
 // ================== PESTAÑA DE INTERPRETACIÓN ==================
 class _InterpretacionLayout extends StatefulWidget {
@@ -482,14 +494,19 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
-          color: _colorNivel(resultado.nivel),
+          color: _colorNivel(context, resultado.nivel),
           borderRadius: BorderRadius.circular(40),
         ),
         child: Text(
           resultado.etiqueta,
           textAlign: TextAlign.center,
           style: textTheme.bodySmall?.copyWith(
-            color: colorScheme.onPrimary,
+            // Crema en los dos temas. En claro `onPrimary` YA es crema y se
+            // conserva tal cual; en oscuro ese mismo token es casi negro
+            // (#241B14) y sobre el relleno oscuro caería a 1.92:1.
+            color: Theme.of(context).brightness == Brightness.dark
+                ? AppColorsDark.ink
+                : colorScheme.onPrimary,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -505,7 +522,7 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
   /// renglón entero de una pantalla que ya pedía mucho scroll.
   Widget _buildEdad(ColorScheme colorScheme, TextTheme textTheme) {
     const nivel = NivelSeguridad.leve;
-    final acento = nivel.colorAcento;
+    final acento = nivel.colorAcento(context);
 
     final contenido = Row(
       // Por abajo: el campo trae su etiqueta encima y el selector no, así que

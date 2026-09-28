@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // ============================================================
 // COLORES (valores estáticos, solo para referencia)
@@ -26,6 +27,52 @@ class AppColors {
 
   static const Color semiDarkPrimaryColor = Color(0xff7E6754);
   static const Color darkestColor = Color(0xff2F2318);
+}
+
+// ============================================================
+// COLORES EN MODO OSCURO
+// ============================================================
+//
+// Paleta paralela a [AppColors]. No reemplaza ni modifica nada de la clara:
+// el modo claro sigue leyendo AppColors tal cual, y el oscuro lee esta.
+//
+// Las alertas vienen en dos variantes porque un mismo color no puede servir
+// para ambos usos sobre fondo oscuro: `...OnSurface` es para TEXTO o iconos
+// (mas claro, contrasta contra el fondo cafe oscuro) y `...Fill` es para
+// RELLENO solido de una pastilla o tarjeta, con texto crema encima.
+
+class AppColorsDark {
+  // Superficies y texto
+  static const Color ground = Color(0xff1C1610);
+  static const Color paper = Color(0xff271F18);
+  static const Color rule = Color(0xff3B2F25);
+  static const Color ruleSoft = Color(0xff332822);
+  static const Color ink = Color(0xffEFE9E4);
+  static const Color ink2 = Color(0xffDFD3C9);
+  static const Color ink3 = Color(0xffA38F7C);
+  static const Color accent = Color(0xffCBA786);
+  static const Color accentOn = Color(0xff241B14);
+
+  // Neutros derivados
+  static const Color primaryColor = Color(0xffAB937C);
+  static const Color semiDarkPrimaryColor = Color(0xff9D826C);
+  static const Color accentLightColor = Color(0xff453729);
+
+  // Alertas, variante para TEXTO sobre fondo oscuro
+  static const Color withoutAlertOnSurface = Color(0xffC59F81);
+  static const Color greenAlertOnSurface = Color(0xffBDB679);
+  static const Color redAlertv1OnSurface = Color(0xffC58187);
+  static const Color redAlertv2OnSurface = Color(0xffC9787E);
+  static const Color redAlertv3OnSurface = Color(0xffCF6E75);
+  static const Color redAlertv4OnSurface = Color(0xffD5626B);
+
+  // Alertas, variante para RELLENO solido con texto crema encima
+  static const Color withoutAlertFill = Color(0xff987152);
+  static const Color greenAlertFill = Color(0xff8A8551);
+  static const Color redAlertv1Fill = Color(0xff985258);
+  static const Color redAlertv2Fill = Color(0xff894349);
+  static const Color redAlertv3Fill = Color(0xff78363B);
+  static const Color redAlertv4Fill = Color(0xff66292D);
 }
 
 // ============================================================
@@ -107,6 +154,88 @@ class AppTextStyles {
 }
 
 // ============================================================
+// ESTILOS DE TEXTO EN MODO OSCURO
+// ============================================================
+//
+// Espejo exacto de [AppTextStyles]: mismos nombres, tamanos, pesos y fuente.
+// Lo unico que cambia es el color, remapeado a la paleta oscura. Se duplica en
+// vez de parametrizar para que el modo claro quede intacto, byte por byte.
+
+class AppTextStylesDark {
+  static const String fontFamily = AppTextStyles.fontFamily;
+
+  static const TextStyle appBarTitle = TextStyle(
+    color: AppColorsDark.ink,
+    fontSize: 22,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle titleWhiteText = TextStyle(
+    color: AppColorsDark.ink,
+    fontSize: 20,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle bodyLightWhiteText = TextStyle(
+    color: AppColorsDark.ink,
+    fontSize: 18,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle titleBrownTextv0 = TextStyle(
+    color: AppColorsDark.ink,
+    fontSize: 20,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle titleBrownText = TextStyle(
+    color: AppColorsDark.ink,
+    fontSize: 25,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle titleBrownTextv2 = TextStyle(
+    color: AppColorsDark.ink,
+    fontSize: 30,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle titleBrownTextv3 = TextStyle(
+    color: AppColorsDark.ink,
+    fontSize: 60,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle bodyDarkBrownText = TextStyle(
+    color: AppColorsDark.semiDarkPrimaryColor,
+    fontSize: 18,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle verMasBodyText = TextStyle(
+    color: AppColorsDark.semiDarkPrimaryColor,
+    fontSize: 15,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle bodyBrownText = TextStyle(
+    color: AppColorsDark.withoutAlertOnSurface,
+    fontSize: 16,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w600,
+  );
+}
+
+// ============================================================
 // RADIOS COMUNES
 // ============================================================
 
@@ -181,6 +310,15 @@ class AppTheme {
         elevation: 0,
         centerTitle: false,
         titleTextStyle: AppTextStyles.appBarTitle,
+        // Barras del sistema. Se fijan explicitamente porque Android no las
+        // deduce bien: la AppBar es cafe oscura en ambos temas, asi que los
+        // iconos de la barra de estado van claros en los dos. La barra de
+        // navegacion, en cambio, se pinta del color del Scaffold, que si
+        // cambia entre temas, y sus iconos siguen ese contraste.
+        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+          systemNavigationBarColor: colorScheme.surface,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
       ),
 
       // ===== TARJETAS =====
@@ -211,6 +349,109 @@ class AppTheme {
         bodyLarge: AppTextStyles.bodyDarkBrownText,
         bodyMedium: AppTextStyles.bodyBrownText,
         bodySmall: AppTextStyles.verMasBodyText,
+      ),
+    );
+  }
+
+  /// Tema oscuro. Espeja la estructura de [lightTheme] ranura por ranura:
+  /// mismos sub-temas, mismos radios, misma fuente. Solo cambian los colores.
+  static ThemeData darkTheme() {
+    const ColorScheme colorScheme = ColorScheme(
+      brightness: Brightness.dark,
+      primary: AppColorsDark.accent,
+      onPrimary: AppColorsDark.accentOn,
+      primaryContainer: AppColorsDark.rule,
+      onPrimaryContainer: AppColorsDark.ink,
+      secondary: AppColorsDark.paper,
+      onSecondary: AppColorsDark.ink2,
+      secondaryContainer: AppColorsDark.ruleSoft,
+      onSecondaryContainer: AppColorsDark.ink2,
+      tertiary: AppColorsDark.ink,
+      onTertiary: AppColorsDark.accentOn,
+      tertiaryContainer: AppColorsDark.accentLightColor,
+      onTertiaryContainer: AppColorsDark.ink2,
+      error: AppColorsDark.redAlertv1OnSurface,
+      onError: AppColorsDark.accentOn,
+      errorContainer: AppColorsDark.redAlertv4Fill,
+      onErrorContainer: AppColorsDark.ink,
+      surface: AppColorsDark.paper,
+      onSurface: AppColorsDark.ink,
+    );
+
+    return ThemeData(
+      useMaterial3: true,
+      fontFamily: AppTextStylesDark.fontFamily,
+      // A diferencia del claro, el fondo NO es colorScheme.surface: en oscuro
+      // conviene que el lienzo (ground) sea mas profundo que las tarjetas
+      // (paper), para que estas se despeguen sin depender de la sombra, que
+      // casi no se ve sobre fondo oscuro.
+      scaffoldBackgroundColor: AppColorsDark.ground,
+      colorScheme: colorScheme,
+
+      // ===== BOTONES =====
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          shape: RoundedRectangleBorder(borderRadius: AppRadius.defaultRadius),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        ),
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primary, width: 2),
+          shape: RoundedRectangleBorder(borderRadius: AppRadius.defaultRadius),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        ),
+      ),
+
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: colorScheme.primary),
+      ),
+
+      // ===== APPBAR =====
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.primaryContainer,
+        foregroundColor: colorScheme.onPrimaryContainer,
+        elevation: 0,
+        centerTitle: false,
+        titleTextStyle: AppTextStylesDark.appBarTitle,
+        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+          systemNavigationBarColor: AppColorsDark.ground,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      ),
+
+      // ===== TARJETAS =====
+      cardTheme: CardThemeData(
+        elevation: 4,
+        color: AppColorsDark.paper,
+        shape: RoundedRectangleBorder(borderRadius: AppRadius.defaultRadius),
+      ),
+
+      // ===== INPUTS =====
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: colorScheme.surface,
+        border: OutlineInputBorder(
+          borderRadius: AppRadius.defaultRadius,
+          borderSide: BorderSide.none,
+        ),
+      ),
+
+      // ===== TEXTOS =====
+      textTheme: const TextTheme(
+        displayLarge: AppTextStylesDark.titleBrownTextv3,
+        headlineLarge: AppTextStylesDark.titleBrownTextv2,
+        headlineMedium: AppTextStylesDark.titleBrownText,
+        titleLarge: AppTextStylesDark.appBarTitle,
+        titleMedium: AppTextStylesDark.titleBrownText,
+        titleSmall: AppTextStylesDark.titleWhiteText,
+        bodyLarge: AppTextStylesDark.bodyDarkBrownText,
+        bodyMedium: AppTextStylesDark.bodyBrownText,
+        bodySmall: AppTextStylesDark.verMasBodyText,
       ),
     );
   }

@@ -16,7 +16,7 @@
 //     la leyenda dan 6.98:1 sobre ese rojo.
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import '../theme/app_theme.dart';
+import '../theme/alert_colors.dart';
 
 class AltoRiesgoBadge extends StatelessWidget {
   /// true para el chip que va dentro de un `FarmaButton`; false para el banner
@@ -27,22 +27,25 @@ class AltoRiesgoBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return compact ? _buildChip() : _buildBanner();
+    return compact ? _buildChip(context) : _buildBanner(context);
   }
 
   /// Banner de ancho completo para la ficha. Es el elemento con más peso
   /// visual de la pantalla: habla del fármaco entero, no de una sección, así
   /// que debe ganarle a los acentos de las secciones de seguridad.
-  Widget _buildBanner() {
+  Widget _buildBanner(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
       decoration: BoxDecoration(
-        color: AppColors.redAlertv1,
+        color: AlertColors.fill(context, NivelAlerta.rojo1),
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: AppColors.redAlertv4.withValues(alpha: 0.35),
+            color: AlertColors.fill(
+              context,
+              NivelAlerta.rojo4,
+            ).withValues(alpha: 0.35),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -76,22 +79,22 @@ class AltoRiesgoBadge extends StatelessWidget {
   /// no cabe, el chip se encoge en bloque en vez de desbordarse o de recortar
   /// la leyenda con puntos suspensivos: "ALTO RIE..." sería inaceptable en una
   /// marca de seguridad.
-  Widget _buildChip() {
+  Widget _buildChip(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
       child: FittedBox(
         fit: BoxFit.scaleDown,
         alignment: Alignment.centerLeft,
-        child: _buildChipContent(),
+        child: _buildChipContent(context),
       ),
     );
   }
 
-  Widget _buildChipContent() {
+  Widget _buildChipContent(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: AppColors.redAlertv3,
+        color: AlertColors.fill(context, NivelAlerta.rojo3),
         borderRadius: BorderRadius.circular(8),
       ),
       child: const Row(

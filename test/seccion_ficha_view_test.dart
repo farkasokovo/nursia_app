@@ -51,6 +51,32 @@ BoxDecoration? decoracionDe(WidgetTester tester) {
 Color colorDelIcono(WidgetTester tester) =>
     tester.widget<Icon>(find.byType(Icon)).color!;
 
+/// Un BuildContext de la seccion ya montada. Hace falta porque `colorAcento`
+/// y `opacidadFondo` dejaron de ser getters: ahora resuelven por tema.
+BuildContext contextoDe(WidgetTester tester) =>
+    tester.element(find.byType(SeccionFichaView));
+
+/// Monta un arbol minimo con el tema pedido y devuelve un contexto suyo, para
+/// poder leer los valores que dependen del brillo sin montar una seccion.
+Future<BuildContext> contextoConTema(
+  WidgetTester tester,
+  ThemeData tema,
+) async {
+  late BuildContext capturado;
+  await tester.pumpWidget(
+    MaterialApp(
+      theme: tema,
+      home: Builder(
+        builder: (context) {
+          capturado = context;
+          return const SizedBox();
+        },
+      ),
+    ),
+  );
+  return capturado;
+}
+
 void main() {
   group('el nivel se nota en la caja', () {
     testWidgets('una sección informativa no lleva caja ni ícono teñido', (
@@ -112,34 +138,47 @@ void main() {
         await montarSeccion(tester, nivel);
         expect(
           colorDelIcono(tester),
-          nivel.colorAcento,
+          nivel.colorAcento(contextoDe(tester)),
           reason: 'El ícono de $nivel no lleva su color de alerta',
         );
       }
     });
 
-    test('el tinte sube con el nivel', () {
-      // La gradación la cargaba el grosor del borde; ahora la carga el fondo,
-      // así que los tres valores tienen que estar separados de verdad.
-      expect(NivelSeguridad.ninguno.opacidadFondo, 0);
-      expect(
-        NivelSeguridad.leve.opacidadFondo,
-        lessThan(NivelSeguridad.medio.opacidadFondo),
-      );
-      expect(
-        NivelSeguridad.medio.opacidadFondo,
-        lessThan(NivelSeguridad.alto.opacidadFondo),
-      );
-      // Cada escalón se tiene que poder ver: saltos de al menos 0.02.
-      expect(
-        NivelSeguridad.medio.opacidadFondo - NivelSeguridad.leve.opacidadFondo,
-        greaterThanOrEqualTo(0.02),
-      );
-      expect(
-        NivelSeguridad.alto.opacidadFondo - NivelSeguridad.medio.opacidadFondo,
-        greaterThanOrEqualTo(0.02),
-      );
-    });
+    // Se corre en los dos temas: la opacidad ahora depende del brillo, y en
+    // oscuro los valores son otros, así que la gradación hay que volver a
+    // exigirla ahí en vez de darla por heredada.
+    for (final (nombreTema, tema) in [
+      ('claro', AppTheme.lightTheme()),
+      ('oscuro', AppTheme.darkTheme()),
+    ]) {
+      testWidgets('el tinte sube con el nivel ($nombreTema)', (tester) async {
+        final context = await contextoConTema(tester, tema);
+
+        // La gradación la cargaba el grosor del borde; ahora la carga el
+        // fondo, así que los tres valores tienen que estar separados de
+        // verdad.
+        expect(NivelSeguridad.ninguno.opacidadFondo(context), 0);
+        expect(
+          NivelSeguridad.leve.opacidadFondo(context),
+          lessThan(NivelSeguridad.medio.opacidadFondo(context)),
+        );
+        expect(
+          NivelSeguridad.medio.opacidadFondo(context),
+          lessThan(NivelSeguridad.alto.opacidadFondo(context)),
+        );
+        // Cada escalón se tiene que poder ver: saltos de al menos 0.02.
+        expect(
+          NivelSeguridad.medio.opacidadFondo(context) -
+              NivelSeguridad.leve.opacidadFondo(context),
+          greaterThanOrEqualTo(0.02),
+        );
+        expect(
+          NivelSeguridad.alto.opacidadFondo(context) -
+              NivelSeguridad.medio.opacidadFondo(context),
+          greaterThanOrEqualTo(0.02),
+        );
+      });
+    }
 
     testWidgets('una sección con peso clínico no se ve igual que una neutra', (
       tester,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nursia_app/theme/app_theme.dart';
+import 'package:nursia_app/theme/alert_colors.dart';
+import 'package:nursia_app/theme/theme_colors.dart';
+import 'package:nursia_app/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../utils/url_launcher_helper.dart';
@@ -272,6 +275,8 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
+                  _buildSelectorTema(context, colorScheme),
+                  const SizedBox(height: 12),
                   _buildDrawerItem(
                     context: context,
                     colorScheme: colorScheme,
@@ -342,7 +347,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.10),
+            color: ThemeColors.sombra(
+              context,
+              claro: Colors.black.withValues(alpha: 0.10),
+              oscuro: 0.35,
+            ),
             blurRadius: 16,
             offset: const Offset(0, 5),
           ),
@@ -388,6 +397,70 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /// Selector de tema del menu.
+  ///
+  /// No es un [_buildDrawerItem] porque esos navegan a otra pantalla y este
+  /// no: cambia un estado en el lugar. Reusa su envoltura visual (mismo
+  /// fondo, mismo radio, mismo padding) para que la fila no se vea ajena al
+  /// resto del menu.
+  Widget _buildSelectorTema(BuildContext context, ColorScheme colorScheme) {
+    // `watch`: el segmento marcado tiene que seguir al provider, no a un
+    // estado local, para quedar correcto tambien al reabrir el menu.
+    final themeProvider = context.watch<ThemeProvider>();
+
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: ThemeColors.sombra(
+              context,
+              claro: Colors.black12,
+              oscuro: 0.35,
+            ),
+            blurRadius: 6,
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      child: SizedBox(
+        width: double.infinity,
+        child: SegmentedButton<ThemeMode>(
+          showSelectedIcon: false,
+          segments: const [
+            ButtonSegment(
+              value: ThemeMode.system,
+              icon: PhosphorIcon(PhosphorIconsBold.circleHalf),
+              tooltip: 'Sistema',
+            ),
+            ButtonSegment(
+              value: ThemeMode.light,
+              icon: PhosphorIcon(PhosphorIconsBold.sun),
+              tooltip: 'Claro',
+            ),
+            ButtonSegment(
+              value: ThemeMode.dark,
+              icon: PhosphorIcon(PhosphorIconsBold.moon),
+              tooltip: 'Oscuro',
+            ),
+          ],
+          selected: {themeProvider.themeMode},
+          onSelectionChanged: (seleccion) {
+            themeProvider.cambiar(seleccion.first);
+          },
+          style: SegmentedButton.styleFrom(
+            backgroundColor: colorScheme.secondaryContainer,
+            foregroundColor: colorScheme.onSecondaryContainer,
+            selectedBackgroundColor: colorScheme.primaryContainer,
+            selectedForegroundColor: colorScheme.onPrimaryContainer,
+            side: BorderSide(color: colorScheme.onSecondaryContainer),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildDrawerItem({
     required BuildContext context,
     required ColorScheme colorScheme,
@@ -406,7 +479,16 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: BoxDecoration(
             color: colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(18),
-            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6)],
+            boxShadow: [
+              BoxShadow(
+                color: ThemeColors.sombra(
+                  context,
+                  claro: Colors.black12,
+                  oscuro: 0.35,
+                ),
+                blurRadius: 6,
+              ),
+            ],
           ),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           child: Row(
@@ -464,11 +546,15 @@ class _HomeScreenState extends State<HomeScreen> {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.greenAlert,
+        color: AlertColors.fill(context, NivelAlerta.verde),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.10),
+            color: ThemeColors.sombra(
+              context,
+              claro: Colors.black.withValues(alpha: 0.10),
+              oscuro: 0.35,
+            ),
             blurRadius: 16,
             offset: const Offset(0, 5),
           ),
@@ -534,7 +620,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text(
                   'Actualizar',
                   style: textTheme.bodySmall?.copyWith(
-                    color: AppColors.greenAlert,
+                    // Sobre el boton crema, asi que le toca el verde
+                    // oscuro: `fill`, no `onSurface`.
+                    color: AlertColors.fill(context, NivelAlerta.verde),
                   ),
                 ),
               ),
@@ -554,7 +642,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Ink(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
           decoration: BoxDecoration(
-            color: AppColors.greenAlert,
+            color: AlertColors.fill(context, NivelAlerta.verde),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -588,7 +676,11 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.10),
+            color: ThemeColors.sombra(
+              context,
+              claro: Colors.black.withValues(alpha: 0.10),
+              oscuro: 0.35,
+            ),
             blurRadius: 16,
             offset: const Offset(0, 5),
           ),

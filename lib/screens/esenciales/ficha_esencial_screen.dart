@@ -342,14 +342,14 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
 
     // El glosario va COMPLETO dentro del contenedor, encabezado incluido, para
     // que se lea como una zona aparte del contenido de la ficha.
-    final acento = _nivelGlosario.colorAcento;
+    final acento = _nivelGlosario.colorAcento(context);
     if (acento == null) return desplegable;
 
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: acento.withValues(alpha: _nivelGlosario.opacidadFondo),
+        color: acento.withValues(alpha: _nivelGlosario.opacidadFondo(context)),
         borderRadius: BorderRadius.circular(10),
       ),
       child: desplegable,
@@ -482,7 +482,13 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
                   decoration: BoxDecoration(
                     color: _hexAColor(item.color),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.black26),
+                    border: Border.all(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.26)
+                          : Colors.black26,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 14),

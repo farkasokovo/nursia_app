@@ -25,6 +25,7 @@ import 'package:nursia_app/repositories/pendiente_turno_repository.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
+import 'theme/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,12 @@ void main() async {
   // dispositivo raro), no dejamos que la app crashee con pantalla negra: la
   // capturamos y mostramos una pantalla de error legible.
   try {
+    // La preferencia de tema se lee ANTES de runApp para que la app
+    // arranque ya con el tema correcto, sin un frame en claro que
+    // parpadee a oscuro.
+    final themeProvider = ThemeProvider();
+    await themeProvider.cargar();
+
     final db = await DatabaseHelper.instance.database;
     final medicamentoRepo = MedicamentoRepository(MedicamentoDao(db));
     await medicamentoRepo.cargarSemillaSiHaceFalta();
@@ -67,6 +74,7 @@ void main() async {
     runApp(
       MultiProvider(
         providers: [
+          ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
           Provider<MedicamentoRepository>.value(value: medicamentoRepo),
           Provider<EscalaRepository>.value(value: escalaRepo),
           Provider<CalculadoraRepository>.value(value: calculadoraRepo),
@@ -94,9 +102,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // `watch` y no `read`: este widget tiene que reconstruirse cuando el
+    // usuario cambia el tema desde el menu.
+    final themeMode = context.watch<ThemeProvider>().themeMode;
+
     return MaterialApp(
       title: 'Nurska',
       theme: AppTheme.lightTheme(),
+      darkTheme: AppTheme.darkTheme(),
+      themeMode: themeMode,
       home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
@@ -136,7 +150,12 @@ class ErrorArranqueApp extends StatelessWidget {
                   Text(
                     detalle,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 11, color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
                   ),
                 ],
               ),

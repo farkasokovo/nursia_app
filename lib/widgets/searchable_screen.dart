@@ -1,5 +1,6 @@
 // lib/widgets/searchable_screen.dart
 import 'package:flutter/material.dart';
+import '../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../utils/search_utils.dart';
 
@@ -282,7 +283,7 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
                 : Padding(padding: const EdgeInsets.only(top: 5), child: badge),
             trailing: Icon(
               PhosphorIconsBold.caretRight,
-              color: Colors.white54,
+              color: ThemeColors.sobrePrimary(context, Colors.white54),
               size: 30,
             ),
             onTap: () {

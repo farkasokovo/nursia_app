@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -233,32 +233,32 @@ String _rassEtiqueta(String resultado) {
 }
 
 // Colores específicos de la escala RASS
-Color _rassColor(String resultado) {
+NivelAlerta _rassColor(String resultado) {
   final match = RegExp(r'-?\d+').firstMatch(resultado);
-  if (match == null) return AppColors.withoutAlert;
+  if (match == null) return NivelAlerta.sinAlerta;
   final score = int.parse(match.group(0)!);
   switch (score) {
     case 4:
-      return AppColors.redAlertv3; // +4 Combativo - muy grave
+      return NivelAlerta.rojo3; // +4 Combativo - muy grave
     case 3:
-      return AppColors.redAlertv2; // +3 Muy agitado - grave
+      return NivelAlerta.rojo2; // +3 Muy agitado - grave
     case 2:
-      return AppColors.redAlertv1; // +2 Agitado - moderado
+      return NivelAlerta.rojo1; // +2 Agitado - moderado
     case 1:
-      return AppColors.withoutAlert; // +1 Inquieto - leve
+      return NivelAlerta.sinAlerta; // +1 Inquieto - leve
     case 0:
-      return AppColors.greenAlert; // 0 Alerta y tranquilo - óptimo
+      return NivelAlerta.verde; // 0 Alerta y tranquilo - óptimo
     case -1:
-      return AppColors.withoutAlert; // -1 Somnoliento
+      return NivelAlerta.sinAlerta; // -1 Somnoliento
     case -2:
-      return AppColors.withoutAlert; // -2 Sedación leve
+      return NivelAlerta.sinAlerta; // -2 Sedación leve
     case -3:
-      return AppColors.redAlertv1; // -3 Sedación moderada
+      return NivelAlerta.rojo1; // -3 Sedación moderada
     case -4:
-      return AppColors.redAlertv2; // -4 Sedación profunda
+      return NivelAlerta.rojo2; // -4 Sedación profunda
     case -5:
-      return AppColors.redAlertv3; // -5 Sin respuesta - grave
+      return NivelAlerta.rojo3; // -5 Sin respuesta - grave
     default:
-      return AppColors.withoutAlert;
+      return NivelAlerta.sinAlerta;
   }
 }

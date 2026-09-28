@@ -4,6 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -74,7 +75,7 @@ class _EvnaLayoutState extends State<_EvnaLayout>
     final int? valor = intensidad?.score;
     final bool evaluado = valor != null;
     final Color colorValor = evaluado
-        ? _evnaColor(valor)
+        ? AlertColors.onSurface(context, _evnaColor(valor))
         : colorScheme.onSecondaryContainer.withValues(alpha: 0.4);
 
     return Column(
@@ -142,7 +143,9 @@ class _EvnaLayoutState extends State<_EvnaLayout>
                           child: Listener(
                             onPointerDown: (_) {
                               if (intensidad == null) {
-                                setState(() => intensidad = const ScaleValue(0));
+                                setState(
+                                  () => intensidad = const ScaleValue(0),
+                                );
                               }
                             },
                             child: Slider(
@@ -249,9 +252,9 @@ String _evnaEtiqueta(int puntajeTotal) {
 }
 
 // Colores específicos de la EVNA
-Color _evnaColor(int puntajeTotal) {
-  if (puntajeTotal >= 7) return AppColors.redAlertv3; // Intenso
-  if (puntajeTotal >= 4) return AppColors.redAlertv1; // Moderado
-  if (puntajeTotal >= 1) return AppColors.withoutAlert; // Leve
-  return AppColors.greenAlert; // Sin dolor
+NivelAlerta _evnaColor(int puntajeTotal) {
+  if (puntajeTotal >= 7) return NivelAlerta.rojo3; // Intenso
+  if (puntajeTotal >= 4) return NivelAlerta.rojo1; // Moderado
+  if (puntajeTotal >= 1) return NivelAlerta.sinAlerta; // Leve
+  return NivelAlerta.verde; // Sin dolor
 }

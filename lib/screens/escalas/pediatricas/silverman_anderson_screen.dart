@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/scale_parameter_selector.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 import '../../../utils/scale_result_formatter.dart';
@@ -288,9 +288,9 @@ String _silvermanEtiqueta(int puntajeTotal) {
 // Colores específicos de Silverman-Anderson.
 // ¡INVERSO al APGAR! Aquí el puntaje ALTO significa PEOR dificultad respiratoria,
 // por lo que se mapea a colores de alerta; el 0 (mejor estado) a verde.
-Color _silvermanColor(int puntajeTotal) {
-  if (puntajeTotal >= 7) return AppColors.redAlertv3; // Dificultad severa
-  if (puntajeTotal >= 4) return AppColors.redAlertv1; // Dificultad moderada
-  if (puntajeTotal >= 1) return AppColors.withoutAlert; // Dificultad leve
-  return AppColors.greenAlert; // Sin dificultad (mejor)
+NivelAlerta _silvermanColor(int puntajeTotal) {
+  if (puntajeTotal >= 7) return NivelAlerta.rojo3; // Dificultad severa
+  if (puntajeTotal >= 4) return NivelAlerta.rojo1; // Dificultad moderada
+  if (puntajeTotal >= 1) return NivelAlerta.sinAlerta; // Dificultad leve
+  return NivelAlerta.verde; // Sin dificultad (mejor)
 }

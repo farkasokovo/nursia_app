@@ -4,7 +4,7 @@ import 'package:nursia_app/widgets/estructura_ver_mas_screen.dart';
 import 'package:nursia_app/widgets/numeric_input_field.dart';
 import 'package:nursia_app/widgets/scale_result_footer.dart';
 import 'package:provider/provider.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/alert_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../widgets/molde_escalas_screen.dart';
 
@@ -221,10 +221,10 @@ String _shockEtiqueta(double indice) {
 }
 
 // Colores específicos del Índice de Shock (según el valor del cociente)
-Color _shockColor(double indice) {
-  if (indice >= 1.0) return AppColors.redAlertv3; // Shock establecido
-  if (indice >= 0.9) return AppColors.redAlertv2; // Alto
-  if (indice >= 0.7) return AppColors.redAlertv1; // Elevado
-  if (indice >= 0.5) return AppColors.greenAlert; // Normal
-  return AppColors.withoutAlert; // < 0.5
+NivelAlerta _shockColor(double indice) {
+  if (indice >= 1.0) return NivelAlerta.rojo3; // Shock establecido
+  if (indice >= 0.9) return NivelAlerta.rojo2; // Alto
+  if (indice >= 0.7) return NivelAlerta.rojo1; // Elevado
+  if (indice >= 0.5) return NivelAlerta.verde; // Normal
+  return NivelAlerta.sinAlerta; // < 0.5
 }
