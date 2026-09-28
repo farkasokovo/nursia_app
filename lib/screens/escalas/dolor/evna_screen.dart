@@ -102,7 +102,7 @@ class _EvnaLayoutState extends State<_EvnaLayout>
                           "Intensidad del dolor (0-10)",
                           textAlign: TextAlign.center,
                           style: textTheme.headlineMedium?.copyWith(
-                            color: colorScheme.primaryContainer,
+                            color: colorScheme.onSurface,
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
                           ),
@@ -132,13 +132,14 @@ class _EvnaLayoutState extends State<_EvnaLayout>
                         // (que el Slider no notificaría por no cambiar de valor).
                         SliderTheme(
                           data: SliderTheme.of(context).copyWith(
-                            activeTrackColor: colorScheme.primaryContainer,
-                            inactiveTrackColor: colorScheme.primaryContainer
+                            activeTrackColor: colorScheme.onSurface,
+                            inactiveTrackColor: colorScheme.onSurface
                                 .withValues(alpha: 0.3),
-                            thumbColor: colorScheme.primaryContainer,
-                            overlayColor: colorScheme.primaryContainer
-                                .withValues(alpha: 0.15),
-                            valueIndicatorColor: colorScheme.primaryContainer,
+                            thumbColor: colorScheme.onSurface,
+                            overlayColor: colorScheme.onSurface.withValues(
+                              alpha: 0.15,
+                            ),
+                            valueIndicatorColor: colorScheme.onSurface,
                           ),
                           child: Listener(
                             onPointerDown: (_) {

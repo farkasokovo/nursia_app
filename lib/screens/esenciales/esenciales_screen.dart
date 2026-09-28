@@ -234,37 +234,28 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
           ),
           prefixIcon: PhosphorIcon(
             PhosphorIconsBold.magnifyingGlass,
-            color: colorScheme.primaryContainer,
+            color: colorScheme.onSurface,
           ),
           suffixIcon: _busqueda.isNotEmpty
               ? IconButton(
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: colorScheme.primaryContainer,
-                  ),
+                  icon: Icon(Icons.close_rounded, color: colorScheme.onSurface),
                   onPressed: _limpiar,
                 )
               : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(
-              color: colorScheme.primaryContainer,
-              width: 1.5,
-            ),
+            borderSide: BorderSide(color: colorScheme.onSurface, width: 1.5),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide(
-              color: colorScheme.primaryContainer.withValues(alpha: 0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
               width: 1.5,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(
-              color: colorScheme.primaryContainer,
-              width: 2,
-            ),
+            borderSide: BorderSide(color: colorScheme.onSurface, width: 2),
           ),
           filled: true,
           fillColor: colorScheme.onPrimaryContainer,
@@ -401,7 +392,12 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
                 size: 32,
                 color: colorScheme.onPrimary,
               ),
-              title: Text(ficha.tituloCorto, style: textTheme.titleSmall),
+              title: Text(
+                ficha.tituloCorto,
+                style: textTheme.titleSmall?.copyWith(
+                  color: ThemeColors.tituloSobrePrimary(context),
+                ),
+              ),
               subtitle: mostrarCategoria
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -488,7 +484,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
               // mensaje como lo primero que se lee.
               style: textTheme.bodyLarge?.copyWith(
                 fontSize: 22,
-                color: colorScheme.primaryContainer,
+                color: colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 16),
@@ -497,7 +493,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             PhosphorIcon(
               icono,
               size: 130,
-              color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+              color: colorScheme.onSurface.withValues(alpha: 0.3),
             ),
             const SizedBox(height: 32),
           ],
@@ -570,7 +566,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
         child: InkWell(
           borderRadius: BorderRadius.circular(18),
           overlayColor: WidgetStateProperty.all(
-            colorScheme.onPrimary.withValues(alpha: 0.2),
+            colorScheme.onPrimaryContainer.withValues(alpha: 0.2),
           ),
           // El AppBar hace lo mismo. `Navigator.pop` no pasa por el PopScope
           // de arriba (ese solo intercepta el back del sistema), así que sale
@@ -587,7 +583,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
               children: [
                 Icon(
                   PhosphorIconsRegular.caretLeft,
-                  color: colorScheme.onPrimary,
+                  color: colorScheme.onPrimaryContainer,
                   size: 45,
                 ),
                 const SizedBox(width: 8),
@@ -596,7 +592,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
                   radius: 20,
                   child: Icon(
                     PhosphorIconsFill.house,
-                    color: colorScheme.onPrimary,
+                    color: colorScheme.onPrimaryContainer,
                     size: 30,
                   ),
                 ),
@@ -605,7 +601,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
                   'Menú principal',
                   style: textTheme.titleLarge?.copyWith(
                     fontSize: 20,
-                    color: colorScheme.onPrimary,
+                    color: colorScheme.onPrimaryContainer,
                   ),
                 ),
               ],
@@ -642,7 +638,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
             child: PhosphorIcon(
               categoria.icono,
               size: 16,
-              color: colorScheme.primaryContainer,
+              color: colorScheme.onSurface,
             ),
           ),
           const SizedBox(width: 8),
@@ -654,7 +650,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
                     text: '${categoria.etiqueta}: ',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: colorScheme.primaryContainer,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   TextSpan(text: categoria.descripcion),

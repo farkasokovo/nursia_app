@@ -1,6 +1,7 @@
 // lib/screens/esenciales/ficha_esencial_screen.dart
 import 'dart:math'; // EXPERIMENTAL: solo lo usa _anchosProporcionales
 import 'package:flutter/material.dart';
+import '../../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import 'package:provider/provider.dart';
@@ -303,8 +304,8 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
         tilePadding: EdgeInsets.zero,
         childrenPadding: const EdgeInsets.only(bottom: 4),
         expandedCrossAxisAlignment: CrossAxisAlignment.start,
-        iconColor: colorScheme.primaryContainer,
-        collapsedIconColor: colorScheme.primaryContainer,
+        iconColor: colorScheme.onSurface,
+        collapsedIconColor: colorScheme.onSurface,
         children: [
           for (final termino in resueltos)
             Padding(
@@ -367,9 +368,7 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
       decoration: BoxDecoration(
         color: colorScheme.tertiaryContainer,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.primaryContainer.withValues(alpha: 0.4),
-        ),
+        border: Border.all(color: colorScheme.onSurface.withValues(alpha: 0.4)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -377,7 +376,7 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
           PhosphorIcon(
             PhosphorIconsFill.warningCircle,
             size: 20,
-            color: colorScheme.primaryContainer,
+            color: colorScheme.onSurface,
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -447,10 +446,18 @@ class _FichaEsencialScreenState extends State<FichaEsencialScreen> {
           ),
           for (final fila in filas)
             TableRow(
-              decoration: BoxDecoration(color: colorScheme.onPrimaryContainer),
+              // El fondo de la fila es una SUPERFICIE, no un color "on...":
+              // pedirlo a onPrimaryContainer pintaba las filas de casi blanco
+              // en oscuro.
+              decoration: BoxDecoration(color: ThemeColors.filaTabla(context)),
               children: [
                 for (final celda in fila)
-                  _buildCelda(celda, textTheme.bodySmall),
+                  _buildCelda(
+                    celda,
+                    textTheme.bodySmall?.copyWith(
+                      color: ThemeColors.sobreFilaTabla(context),
+                    ),
+                  ),
               ],
             ),
         ],

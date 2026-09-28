@@ -65,6 +65,77 @@ void main() {
     });
   });
 
+  group('la premisa del cambio a onSurface', () {
+    // ~100 sitios usaban primaryContainer como TINTA y pasaron a onSurface.
+    // Eso solo es invisible en claro si las dos ranuras valen lo mismo ahí.
+    // Si alguien cambia una de las dos, esta prueba avisa antes de que el
+    // modo claro se mueva en cien lugares a la vez.
+    testWidgets('en claro, primaryContainer y onSurface son el mismo color', (
+      tester,
+    ) async {
+      final context = await contextoConTema(tester, AppTheme.lightTheme());
+      final esquema = Theme.of(context).colorScheme;
+      expect(esquema.onSurface, esquema.primaryContainer);
+    });
+
+    testWidgets('en oscuro son opuestos: uno tinta, otro superficie', (
+      tester,
+    ) async {
+      final context = await contextoConTema(tester, AppTheme.darkTheme());
+      final esquema = Theme.of(context).colorScheme;
+      expect(
+        esquema.onSurface.computeLuminance(),
+        greaterThan(esquema.primaryContainer.computeLuminance()),
+        reason: 'onSurface tiene que ser la tinta clara sobre la superficie',
+      );
+    });
+  });
+
+  group('tokens de tabla y de título', () {
+    testWidgets('en claro conservan el valor exacto de hoy', (tester) async {
+      final context = await contextoConTema(tester, AppTheme.lightTheme());
+      final esquema = Theme.of(context).colorScheme;
+
+      // La fila de datos usaba onPrimaryContainer como fondo.
+      expect(ThemeColors.filaTabla(context), esquema.onPrimaryContainer);
+      // El texto de celda usaba el color propio de bodySmall.
+      expect(
+        ThemeColors.sobreFilaTabla(context),
+        AppTextStyles.verMasBodyText.color,
+      );
+      // El título de botón usaba el color propio de titleSmall.
+      expect(
+        ThemeColors.tituloSobrePrimary(context),
+        AppTextStyles.titleWhiteText.color,
+      );
+    });
+
+    testWidgets('en oscuro contrastan contra su propio fondo', (tester) async {
+      final context = await contextoConTema(tester, AppTheme.darkTheme());
+      final esquema = Theme.of(context).colorScheme;
+
+      double contraste(Color a, Color b) {
+        final la = a.computeLuminance(), lb = b.computeLuminance();
+        final hi = la > lb ? la : lb, lo = la > lb ? lb : la;
+        return (hi + 0.05) / (lo + 0.05);
+      }
+
+      expect(
+        contraste(
+          ThemeColors.sobreFilaTabla(context),
+          ThemeColors.filaTabla(context),
+        ),
+        greaterThanOrEqualTo(4.5),
+        reason: 'El texto de celda no se lee sobre la fila',
+      );
+      expect(
+        contraste(ThemeColors.tituloSobrePrimary(context), esquema.primary),
+        greaterThanOrEqualTo(4.5),
+        reason: 'El título no se lee sobre colorScheme.primary',
+      );
+    });
+  });
+
   group('en modo oscuro los valores se separan', () {
     testWidgets('la sombra se opaca', (tester) async {
       final context = await contextoConTema(tester, AppTheme.darkTheme());

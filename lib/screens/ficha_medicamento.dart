@@ -315,7 +315,7 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
                 Text(
                   "• ${inter.medicamento}",
                   style: textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.primaryContainer,
+                    color: colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 2),

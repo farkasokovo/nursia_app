@@ -75,7 +75,12 @@ class FarmaButton extends StatelessWidget {
                 crossAxisAlignment:
                     CrossAxisAlignment.start, // Alinea el texto a la izquierda
                 children: [
-                  Text(title, style: textTheme.titleSmall),
+                  Text(
+                    title,
+                    style: textTheme.titleSmall?.copyWith(
+                      color: ThemeColors.tituloSobrePrimary(context),
+                    ),
+                  ),
 
                   // 2. Renderizado condicional: Solo se crea si subtitle no es nulo
                   if (subtitle != null)

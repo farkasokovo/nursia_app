@@ -55,7 +55,7 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
           Text(
             widget.title,
             style: textTheme.headlineMedium?.copyWith(
-              color: colorScheme.primaryContainer,
+              color: colorScheme.onSurface,
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
@@ -90,7 +90,7 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                           : colorScheme.onPrimaryContainer,
                       borderRadius: AppRadius.defaultRadius,
                       border: Border.all(
-                        color: colorScheme.primaryContainer,
+                        color: colorScheme.onSurface,
                         width: isSelected ? 2 : 1,
                       ),
                     ),
@@ -122,7 +122,7 @@ class _ScaleParameterSelectorState extends State<ScaleParameterSelector> {
                                 textAlign: TextAlign.center,
                                 style: textTheme.titleMedium?.copyWith(
                                   color: isSelected
-                                      ? colorScheme.primaryContainer
+                                      ? colorScheme.onSurface
                                       : colorScheme.onPrimaryContainer,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,

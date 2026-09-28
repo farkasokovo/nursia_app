@@ -113,7 +113,12 @@ class _ListaNormasFiltradaScreenState extends State<ListaNormasFiltradaScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(norma.codigo, style: theme.textTheme.titleSmall),
+                      Text(
+                        norma.codigo,
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          color: ThemeColors.tituloSobrePrimary(context),
+                        ),
+                      ),
                       Text(
                         norma.tituloCorto,
                         maxLines: 1,

@@ -25,7 +25,7 @@ class HomeNavButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.primary,
-        overlayColor: colorScheme.primaryContainer,
+        overlayColor: colorScheme.onSurface,
         minimumSize: const Size(150, 150),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),

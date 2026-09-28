@@ -146,7 +146,11 @@ class _BotonLargo extends StatelessWidget {
             CircleAvatar(
               backgroundColor: Colors.white24,
               radius: 20,
-              child: Icon(icono, color: colorScheme.onPrimary, size: 30),
+              child: Icon(
+                icono,
+                color: colorScheme.onPrimaryContainer,
+                size: 30,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -157,7 +161,7 @@ class _BotonLargo extends StatelessWidget {
                     titulo,
                     style: textTheme.titleLarge?.copyWith(
                       fontSize: 20,
-                      color: colorScheme.onPrimary,
+                      color: colorScheme.onPrimaryContainer,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -165,7 +169,7 @@ class _BotonLargo extends StatelessWidget {
                     subtitulo,
                     style: textTheme.bodySmall?.copyWith(
                       fontSize: 13,
-                      color: colorScheme.onPrimary,
+                      color: colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ],
@@ -274,7 +278,7 @@ class BotonTurnoActivo extends StatelessWidget {
               radius: 20,
               child: Icon(
                 PhosphorIconsFill.chartDonut,
-                color: colorScheme.onPrimary,
+                color: colorScheme.onPrimaryContainer,
                 size: 30,
               ),
             ),
@@ -287,7 +291,7 @@ class BotonTurnoActivo extends StatelessWidget {
                     "Turno Activo",
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontSize: 20,
-                      color: colorScheme.onPrimary,
+                      color: colorScheme.onPrimaryContainer,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -295,7 +299,7 @@ class BotonTurnoActivo extends StatelessWidget {
                     "Pacientes | Pendientes | Medicamentos",
                     style: textTheme.bodySmall?.copyWith(
                       fontSize: 13,
-                      color: colorScheme.onPrimary,
+                      color: colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ],
@@ -369,7 +373,7 @@ class _TipDelDiaState extends State<TipDelDia> {
                 ? PhosphorIconsBold.arrowClockwise
                 : PhosphorIconsRegular.caretDown,
             size: 20,
-            color: colorScheme.primaryContainer,
+            color: colorScheme.onSurface,
           ),
         ),
       ),

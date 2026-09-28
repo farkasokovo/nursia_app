@@ -178,7 +178,7 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
               child: Text(
                 "Tipo de equipo",
                 style: textTheme.titleMedium?.copyWith(
-                  color: colorScheme.primaryContainer,
+                  color: colorScheme.onSurface,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -203,12 +203,9 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
                   child: OutlinedButton(
                     onPressed: _limpiar,
                     style: OutlinedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.onSurface,
                       minimumSize: const Size(double.infinity, 60),
-                      side: BorderSide(
-                        color: colorScheme.primaryContainer,
-                        width: 2,
-                      ),
+                      side: BorderSide(color: colorScheme.onSurface, width: 2),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
                       ),
@@ -218,7 +215,7 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
                       style: textTheme.titleSmall?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.primaryContainer,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -264,7 +261,7 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
                       Text(
                         "Velocidad de infusión:",
                         style: textTheme.titleMedium?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -275,17 +272,14 @@ class _CalculoGoteoLayoutState extends State<_CalculoGoteoLayout>
                             ? "0 gotas/min"
                             : "${valor.gotasPorMinuto} gotas/min",
                         style: textTheme.displayLarge?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       if (valor != null) ...[
                         const SizedBox(height: 16),
-                        Divider(
-                          thickness: 3,
-                          color: colorScheme.primaryContainer,
-                        ),
+                        Divider(thickness: 3, color: colorScheme.onSurface),
                         const SizedBox(height: 8),
                         Text(
                           "${valor.equipo.nombreLargo} "

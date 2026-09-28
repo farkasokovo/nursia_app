@@ -397,7 +397,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                           borderRadius: BorderRadius.circular(4),
                         ),
                         side: BorderSide(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           width: 1.5,
                         ),
                       ),
@@ -406,7 +406,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                     Text(
                       "Agregar segunda solución\ndisponible",
                       style: textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.primaryContainer,
+                        color: colorScheme.onSurface,
                         fontWeight: _usarSegundaSolucion
                             ? FontWeight.bold
                             : FontWeight.normal,
@@ -442,12 +442,9 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                 Expanded(
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.onSurface,
                       minimumSize: const Size(double.infinity, 60),
-                      side: BorderSide(
-                        color: colorScheme.primaryContainer,
-                        width: 2,
-                      ),
+                      side: BorderSide(color: colorScheme.onSurface, width: 2),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
                       ),
@@ -458,7 +455,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                       style: textTheme.titleSmall?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.primaryContainer,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -467,7 +464,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.onSurface,
                       minimumSize: const Size(double.infinity, 60),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
@@ -503,7 +500,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                       Text(
                         "Preparación:",
                         style: textTheme.titleMedium?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -512,7 +509,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                       Text(
                         valor?.linea1 ?? "0 ml",
                         style: textTheme.headlineMedium?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -521,7 +518,7 @@ class _CalculoSolucionesLayoutState extends State<_CalculoSolucionesLayout>
                       Text(
                         valor?.linea2 ?? "0 ml",
                         style: textTheme.headlineMedium?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),

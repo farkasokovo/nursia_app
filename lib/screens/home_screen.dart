@@ -611,7 +611,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () => abrirUrl(context, info.urlDescarga),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: colorScheme.onPrimaryContainer,
-                  foregroundColor: colorScheme.primaryContainer,
+                  foregroundColor: colorScheme.onSurface,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 10,

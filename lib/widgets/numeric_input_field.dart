@@ -78,7 +78,7 @@ class NumericInputField extends StatelessWidget {
           child: Text(
             label,
             style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primaryContainer,
+              color: colorScheme.onSurface,
               //! TAMAÑO DE LOS TÍTULOS
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class NumericInputField extends StatelessWidget {
           textAlign: TextAlign.center,
           enableInteractiveSelection: false,
           style: textTheme.titleMedium?.copyWith(
-            color: colorScheme.primaryContainer,
+            color: colorScheme.onSurface,
             //! TAMAÑO DEL INPUT
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -124,7 +124,7 @@ class NumericInputField extends StatelessWidget {
             // Estilo al flotar. Flutter lo encoge a 75% (18 -> 13.5), y aquí se
             // sube el contraste porque queda sobre el borde, no sobre el relleno.
             floatingLabelStyle: textTheme.bodyMedium?.copyWith(
-              color: colorScheme.primaryContainer,
+              color: colorScheme.onSurface,
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
@@ -137,7 +137,7 @@ class NumericInputField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: AppRadius.defaultRadius,
               borderSide: BorderSide(
-                color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+                color: colorScheme.onSurface.withValues(alpha: 0.5),
                 width: 2,
               ),
             ),
@@ -146,7 +146,7 @@ class NumericInputField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: AppRadius.defaultRadius,
               borderSide: BorderSide(
-                color: colorScheme.primaryContainer, // Color más intenso
+                color: colorScheme.onSurface, // Color más intenso
                 width: 2.5, // Un poco más grueso para resaltar
               ),
             ),

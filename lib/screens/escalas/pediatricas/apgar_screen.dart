@@ -106,7 +106,7 @@ class _ApgarLayoutState extends State<_ApgarLayout>
                       children: [
                         PhosphorIcon(
                           PhosphorIconsFill.clock,
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           size: 24,
                         ),
                         const SizedBox(width: 12),
@@ -114,7 +114,7 @@ class _ApgarLayoutState extends State<_ApgarLayout>
                           child: Text(
                             "Recuerda: el APGAR se evalúa al minuto 1 y a los 5 minutos de vida. Realiza una captura por cada toma.",
                             style: textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.primaryContainer,
+                              color: colorScheme.onSurface,
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
                             ),

@@ -203,13 +203,13 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
                 ),
                 prefixIcon: PhosphorIcon(
                   PhosphorIconsBold.magnifyingGlass,
-                  color: colorScheme.primaryContainer,
+                  color: colorScheme.onSurface,
                 ),
                 suffixIcon: _busqueda.isNotEmpty
                     ? IconButton(
                         icon: Icon(
                           Icons.close_rounded,
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                         ),
                         onPressed: _limpiar,
                       )
@@ -217,21 +217,21 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: colorScheme.primaryContainer,
+                    color: colorScheme.onSurface,
                     width: 1.5,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: colorScheme.primaryContainer.withValues(alpha: 0.7),
+                    color: colorScheme.onSurface.withValues(alpha: 0.7),
                     width: 1.5,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: colorScheme.primaryContainer,
+                    color: colorScheme.onSurface,
                     width: 2,
                   ),
                 ),
@@ -277,7 +277,12 @@ class _SearchableScreenState<T> extends State<SearchableScreen<T>> {
           color: colorScheme.primary,
           margin: const EdgeInsets.symmetric(vertical: 6),
           child: ListTile(
-            title: Text(widget.itemTitle(item), style: textTheme.titleSmall),
+            title: Text(
+              widget.itemTitle(item),
+              style: textTheme.titleSmall?.copyWith(
+                color: ThemeColors.tituloSobrePrimary(context),
+              ),
+            ),
             subtitle: badge == null
                 ? null
                 : Padding(padding: const EdgeInsets.only(top: 5), child: badge),

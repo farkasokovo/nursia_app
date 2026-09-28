@@ -251,6 +251,12 @@ class AppRadius {
 
 class AppTheme {
   static ThemeData lightTheme() {
+    // OJO: en claro, primaryContainer y onSurface son la MISMA constante
+    // (darkPrimaryColor). En oscuro NO lo son: primaryContainer es superficie
+    // (#3B2F25) y onSurface es tinta (#EFE9E4). Para color de texto, ícono o
+    // borde usa SIEMPRE onSurface. Usar primaryContainer como tinta se ve bien
+    // en claro por coincidencia y queda invisible en oscuro.
+    //
     // Construimos el colorScheme usando los valores de AppColors
     const ColorScheme colorScheme = ColorScheme(
       brightness: Brightness.light,

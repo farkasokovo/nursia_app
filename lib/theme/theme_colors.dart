@@ -46,6 +46,36 @@ class ThemeColors {
       ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: enClaro.a)
       : enClaro;
 
+  /// Título de un botón o tarjeta que va sobre `colorScheme.primary`.
+  ///
+  /// Estos títulos usan `textTheme.titleSmall` sin color propio, y ese estilo
+  /// es crema. En claro funciona: `primary` es el café medio. En oscuro
+  /// `primary` es el acento CLARO (#CBA786) y el título queda en 1.85:1; con
+  /// la tinta oscura sube a 7.58:1.
+  ///
+  /// El valor claro es el MISMO `#F6F3F0` que ya tiene `titleSmall`, no el
+  /// `#EFE9E4` de `onPrimary`: así el modo claro no se mueve ni un tono.
+  static Color tituloSobrePrimary(BuildContext context) => _esOscuro(context)
+      ? AppColorsDark.accentOn
+      : AppColors.lightSecondaryColor;
+
+  /// Fondo de las filas de datos de una tabla.
+  ///
+  /// Antes se pedía a `colorScheme.onPrimaryContainer`, que es un color de
+  /// CONTENIDO, no una superficie: en oscuro pintaba las filas de #EFE9E4,
+  /// casi blanco. El encabezado sí es una superficie de verdad y sigue en
+  /// `primaryContainer`.
+  static Color filaTabla(BuildContext context) => _esOscuro(context)
+      ? AppColorsDark.ruleSoft
+      : AppColors.lightSecondaryColor;
+
+  /// Texto de celda sobre [filaTabla].
+  ///
+  /// En oscuro el café medio de `bodySmall` sobre la fila queda en 3.98:1,
+  /// debajo del mínimo para texto normal; con la tinta clara sube a 11.89:1.
+  static Color sobreFilaTabla(BuildContext context) =>
+      _esOscuro(context) ? AppColorsDark.ink : AppColors.semiDarkPrimaryColor;
+
   /// Acento cálido de la app (#CBA786).
   ///
   /// Es el mismo valor en los dos temas: es un tono medio que se lee tanto

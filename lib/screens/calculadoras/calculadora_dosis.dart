@@ -228,12 +228,9 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
                   child: OutlinedButton(
                     onPressed: _limpiar,
                     style: OutlinedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.onSurface,
                       minimumSize: const Size(double.infinity, 60),
-                      side: BorderSide(
-                        color: colorScheme.primaryContainer,
-                        width: 2,
-                      ),
+                      side: BorderSide(color: colorScheme.onSurface, width: 2),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
                       ),
@@ -243,7 +240,7 @@ class _CalculoDosisLayoutState extends State<_CalculoDosisLayout>
                       style: textTheme.titleSmall?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.primaryContainer,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -398,9 +395,9 @@ class _ConversorLayoutState extends State<_ConversorLayout>
             OutlinedButton(
               onPressed: _limpiar,
               style: OutlinedButton.styleFrom(
-                overlayColor: colorScheme.primaryContainer,
+                overlayColor: colorScheme.onSurface,
                 minimumSize: const Size(double.infinity, 60),
-                side: BorderSide(color: colorScheme.primaryContainer, width: 2),
+                side: BorderSide(color: colorScheme.onSurface, width: 2),
                 shape: const RoundedRectangleBorder(
                   borderRadius: AppRadius.defaultRadius,
                 ),
@@ -410,7 +407,7 @@ class _ConversorLayoutState extends State<_ConversorLayout>
                 style: textTheme.titleSmall?.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: colorScheme.primaryContainer,
+                  color: colorScheme.onSurface,
                 ),
               ),
             ),
@@ -458,7 +455,7 @@ class _ResultadoContainer extends StatelessWidget {
           Text(
             titulo,
             style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primaryContainer,
+              color: colorScheme.onSurface,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -473,7 +470,7 @@ class _ResultadoContainer extends StatelessWidget {
               child: Text(
                 valor,
                 style: textTheme.displayLarge?.copyWith(
-                  color: colorScheme.primaryContainer,
+                  color: colorScheme.onSurface,
                   fontSize: 60,
                   fontWeight: FontWeight.bold,
                 ),
@@ -502,7 +499,7 @@ class _TituloSelector extends StatelessWidget {
       child: Text(
         texto,
         style: theme.textTheme.titleMedium?.copyWith(
-          color: theme.colorScheme.primaryContainer,
+          color: theme.colorScheme.onSurface,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),

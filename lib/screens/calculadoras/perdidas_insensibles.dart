@@ -340,12 +340,9 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
                   child: OutlinedButton(
                     onPressed: _limpiar,
                     style: OutlinedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.onSurface,
                       minimumSize: const Size(double.infinity, 60),
-                      side: BorderSide(
-                        color: colorScheme.primaryContainer,
-                        width: 2,
-                      ),
+                      side: BorderSide(color: colorScheme.onSurface, width: 2),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
                       ),
@@ -355,7 +352,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
                       style: textTheme.titleSmall?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.primaryContainer,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -365,7 +362,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
                   child: ElevatedButton(
                     onPressed: _calcular,
                     style: ElevatedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.onSurface,
                       minimumSize: const Size(double.infinity, 60),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
@@ -403,7 +400,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
                       Text(
                         "Pérdidas insensibles totales:",
                         style: textTheme.titleMedium?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -414,7 +411,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
                             ? "0 ml"
                             : "${valor.toStringAsFixed(1)} ml",
                         style: textTheme.displayLarge?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                         ),
@@ -423,9 +420,7 @@ class _PerdidadInsensiblesLayoutState extends State<_PerdidadInsensiblesLayout>
                         const SizedBox(height: 16),
                         Divider(
                           thickness: 3,
-                          color: colorScheme.primaryContainer.withValues(
-                            alpha: 1,
-                          ),
+                          color: colorScheme.onSurface.withValues(alpha: 1),
                         ),
                         const SizedBox(height: 8),
                         Text(

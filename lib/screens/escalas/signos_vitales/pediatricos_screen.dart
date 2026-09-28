@@ -573,9 +573,9 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
           child: OutlinedButton(
             onPressed: _limpiar,
             style: OutlinedButton.styleFrom(
-              overlayColor: colorScheme.primaryContainer,
+              overlayColor: colorScheme.onSurface,
               minimumSize: const Size(double.infinity, 60),
-              side: BorderSide(color: colorScheme.primaryContainer, width: 2),
+              side: BorderSide(color: colorScheme.onSurface, width: 2),
               shape: const RoundedRectangleBorder(
                 borderRadius: AppRadius.defaultRadius,
               ),
@@ -585,7 +585,7 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
               style: textTheme.titleSmall?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: colorScheme.primaryContainer,
+                color: colorScheme.onSurface,
               ),
             ),
           ),

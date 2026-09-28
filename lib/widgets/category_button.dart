@@ -44,14 +44,14 @@ class ComingSoonButton extends StatelessWidget {
               PhosphorIcon(
                 PhosphorIconsRegular.dotsThreeCircle,
                 size: 40,
-                color: colorScheme.primaryContainer.withValues(alpha: 0.55),
+                color: colorScheme.onSurface.withValues(alpha: 0.55),
               ),
               const SizedBox(height: 10),
               Text(
                 'Próximamente',
                 textAlign: TextAlign.center,
                 style: textTheme.titleMedium?.copyWith(
-                  color: colorScheme.primaryContainer.withValues(alpha: 0.55),
+                  color: colorScheme.onSurface.withValues(alpha: 0.55),
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
@@ -115,17 +115,13 @@ class CategoryButton extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PhosphorIcon(
-                  icon,
-                  size: 40,
-                  color: colorScheme.primaryContainer,
-                ),
+                PhosphorIcon(icon, size: 40, color: colorScheme.onSurface),
                 const SizedBox(height: 10),
                 Text(
                   title,
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
-                    color: colorScheme.primaryContainer,
+                    color: colorScheme.onSurface,
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
                   ),

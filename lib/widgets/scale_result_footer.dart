@@ -53,7 +53,7 @@ class ScaleResultFooter extends StatelessWidget {
         ? Colors.transparent
         : AlertColors.fill(context, nivelAlerta);
     final colorEtiqueta = nivelAlerta == null
-        ? colorScheme.primaryContainer
+        ? colorScheme.onSurface
         : AlertColors.onSurface(context, nivelAlerta);
     // La etiqueta clínica corta solo tiene sentido cuando el resultado es un
     // número limpio. Si algún parámetro se marcó como "No valorable"
@@ -95,7 +95,7 @@ class ScaleResultFooter extends StatelessWidget {
                 "Resultado:",
                 textAlign: TextAlign.center,
                 style: textTheme.headlineLarge?.copyWith(
-                  color: colorScheme.primaryContainer,
+                  color: colorScheme.onSurface,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),

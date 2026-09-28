@@ -137,7 +137,7 @@ class MedicamentosTab extends StatelessWidget {
               border: Border.all(
                 color: estaSeleccionado
                     ? colorScheme.error
-                    : colorScheme.primaryContainer,
+                    : colorScheme.onSurface,
                 width: estaSeleccionado ? 2 : 1,
               ),
             ),

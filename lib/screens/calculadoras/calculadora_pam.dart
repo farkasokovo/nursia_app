@@ -188,12 +188,9 @@ class _CalculoPamLayoutState extends State<_CalculoPamLayout>
                   child: OutlinedButton(
                     onPressed: _limpiar,
                     style: OutlinedButton.styleFrom(
-                      overlayColor: colorScheme.primaryContainer,
+                      overlayColor: colorScheme.onSurface,
                       minimumSize: const Size(double.infinity, 60),
-                      side: BorderSide(
-                        color: colorScheme.primaryContainer,
-                        width: 2,
-                      ),
+                      side: BorderSide(color: colorScheme.onSurface, width: 2),
                       shape: const RoundedRectangleBorder(
                         borderRadius: AppRadius.defaultRadius,
                       ),
@@ -203,7 +200,7 @@ class _CalculoPamLayoutState extends State<_CalculoPamLayout>
                       style: textTheme.titleSmall?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.primaryContainer,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -249,7 +246,7 @@ class _CalculoPamLayoutState extends State<_CalculoPamLayout>
                       Text(
                         "Presión arterial media:",
                         style: textTheme.titleMedium?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -258,7 +255,7 @@ class _CalculoPamLayoutState extends State<_CalculoPamLayout>
                       Text(
                         valor == null ? "0 mmHg" : "${valor.pam} mmHg",
                         style: textTheme.displayLarge?.copyWith(
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
                         ),

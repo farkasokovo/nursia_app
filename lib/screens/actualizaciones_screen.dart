@@ -164,7 +164,7 @@ class _ActualizacionesScreenState extends State<ActualizacionesScreen> {
           Text(
             _cargando ? '...' : (_versionInstalada ?? 'No disponible'),
             style: textTheme.headlineMedium?.copyWith(
-              color: colorScheme.primaryContainer,
+              color: colorScheme.onSurface,
               fontSize: 28,
             ),
           ),
@@ -218,14 +218,14 @@ class _ActualizacionesScreenState extends State<ActualizacionesScreen> {
               height: 18,
               child: CircularProgressIndicator(
                 strokeWidth: 2.5,
-                color: colorScheme.primaryContainer,
+                color: colorScheme.onSurface,
               ),
             ),
             const SizedBox(width: 12),
             Text(
               'Verificando...',
               style: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.primaryContainer,
+                color: colorScheme.onSurface,
               ),
             ),
           ],
@@ -312,9 +312,7 @@ class _ActualizacionesScreenState extends State<ActualizacionesScreen> {
         Expanded(
           child: Text(
             texto,
-            style: textTheme.bodyMedium?.copyWith(
-              color: colorScheme.primaryContainer,
-            ),
+            style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
           ),
         ),
       ],
@@ -357,7 +355,7 @@ class _ActualizacionesScreenState extends State<ActualizacionesScreen> {
                   ],
                   ListaCambios(
                     cambios: notas.cambios,
-                    colorTexto: colorScheme.primaryContainer,
+                    colorTexto: colorScheme.onSurface,
                     colorVinieta: colorScheme.primary,
                   ),
                 ],

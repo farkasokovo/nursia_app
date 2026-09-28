@@ -92,10 +92,10 @@ class OpcionSelector<T> extends StatelessWidget {
             : colorScheme.primary,
         foregroundColor: seleccionado
             ? colorScheme.onPrimaryContainer
-            : colorScheme.primaryContainer,
+            : colorScheme.onSurface,
         minimumSize: const Size(double.infinity, _alto),
         padding: EdgeInsets.zero,
-        side: BorderSide(color: colorScheme.primaryContainer),
+        side: BorderSide(color: colorScheme.onSurface),
         shape: const RoundedRectangleBorder(
           borderRadius: AppRadius.defaultRadius,
         ),

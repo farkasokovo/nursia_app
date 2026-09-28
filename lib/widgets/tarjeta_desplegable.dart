@@ -91,7 +91,7 @@ class _TarjetaDesplegableState extends State<TarjetaDesplegable> {
               colorScheme.secondaryContainer.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+            color: colorScheme.onSurface.withValues(alpha: 0.5),
           ),
         ),
         child: Column(
@@ -104,11 +104,7 @@ class _TarjetaDesplegableState extends State<TarjetaDesplegable> {
               borderRadius: BorderRadius.circular(12),
               child: Row(
                 children: [
-                  Icon(
-                    widget.icono,
-                    size: 28,
-                    color: colorScheme.primaryContainer,
-                  ),
+                  Icon(widget.icono, size: 28, color: colorScheme.onSurface),
                   const SizedBox(width: 8),
                   // Expanded en vez de Text + Spacer: el layout se ve igual
                   // (título a la izquierda, acción hasta la derecha), pero un
@@ -133,7 +129,7 @@ class _TarjetaDesplegableState extends State<TarjetaDesplegable> {
                               ? PhosphorIconsRegular.caretUp
                               : PhosphorIconsRegular.caretDown,
                           size: 20,
-                          color: colorScheme.primaryContainer,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                 ],

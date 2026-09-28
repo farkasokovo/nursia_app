@@ -59,14 +59,14 @@ class BienvenidaScreen extends StatelessWidget {
                         Text(
                           'Novedades',
                           style: textTheme.titleMedium?.copyWith(
-                            color: colorScheme.primaryContainer,
+                            color: colorScheme.onSurface,
                             fontSize: 22,
                           ),
                         ),
                         const SizedBox(height: 16),
                         ListaCambios(
                           cambios: notas.cambios,
-                          colorTexto: colorScheme.primaryContainer,
+                          colorTexto: colorScheme.onSurface,
                           colorVinieta: ThemeColors.acento(context),
                         ),
                       ],
@@ -116,7 +116,7 @@ class BienvenidaScreen extends StatelessWidget {
             child: Text(
               'Versión ${notas.version}',
               style: textTheme.bodySmall?.copyWith(
-                color: colorScheme.primaryContainer,
+                color: colorScheme.onSurface,
                 fontWeight: FontWeight.bold,
                 fontSize: 13,
               ),
