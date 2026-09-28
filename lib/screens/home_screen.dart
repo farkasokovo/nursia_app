@@ -693,7 +693,7 @@ class _HomeScreenState extends State<HomeScreen> {
         dividerColor: Colors.transparent,
         indicatorColor: colorScheme.onPrimaryContainer,
         labelColor: colorScheme.onPrimaryContainer,
-        unselectedLabelColor: colorScheme.tertiaryContainer,
+        unselectedLabelColor: ThemeColors.pestanaInactiva(context),
         labelStyle: textTheme.titleMedium?.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.w600,

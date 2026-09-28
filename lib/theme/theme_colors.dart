@@ -46,6 +46,20 @@ class ThemeColors {
       ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: enClaro.a)
       : enClaro;
 
+  /// Etiqueta de la pestaña NO seleccionada de un `TabBar`.
+  ///
+  /// Va atenuada a propósito, para que la pestaña activa destaque. En claro
+  /// eso lo daba `colorScheme.tertiaryContainer` (#D6C9BE): claro sobre la
+  /// barra café, 5.14:1. En oscuro esa misma ranura es una SUPERFICIE oscura
+  /// (#453729) sobre una barra casi igual de oscura, y cae a 1.13:1.
+  ///
+  /// `ink3` es la tinta apagada del tema oscuro: 4.19:1 sobre la barra, lo
+  /// bastante para leerse sin competir con la pestaña activa, que va en
+  /// `onPrimaryContainer`.
+  static Color pestanaInactiva(BuildContext context) => _esOscuro(context)
+      ? AppColorsDark.ink3
+      : Theme.of(context).colorScheme.tertiaryContainer;
+
   /// Título de un botón o tarjeta que va sobre `colorScheme.primary`.
   ///
   /// Estos títulos usan `textTheme.titleSmall` sin color propio, y ese estilo

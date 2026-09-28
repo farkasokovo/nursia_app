@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:nursia_app/repositories/medicamento_turno_repository.dart';
@@ -177,7 +178,7 @@ class _TurnoActivoScreenState extends State<TurnoActivoScreen>
                 dividerColor: Colors.transparent,
                 indicatorColor: colorScheme.onPrimaryContainer,
                 labelColor: colorScheme.onPrimaryContainer,
-                unselectedLabelColor: colorScheme.tertiaryContainer,
+                unselectedLabelColor: ThemeColors.pestanaInactiva(context),
                 labelPadding: const EdgeInsets.symmetric(horizontal: 20),
                 labelStyle: textTheme.titleMedium?.copyWith(
                   fontSize: 20,

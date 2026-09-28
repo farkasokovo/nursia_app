@@ -108,6 +108,8 @@ void main() {
         ThemeColors.tituloSobrePrimary(context),
         AppTextStyles.titleWhiteText.color,
       );
+      // La pestaña inactiva usaba tertiaryContainer.
+      expect(ThemeColors.pestanaInactiva(context), esquema.tertiaryContainer);
     });
 
     testWidgets('en oscuro contrastan contra su propio fondo', (tester) async {
@@ -132,6 +134,28 @@ void main() {
         contraste(ThemeColors.tituloSobrePrimary(context), esquema.primary),
         greaterThanOrEqualTo(4.5),
         reason: 'El título no se lee sobre colorScheme.primary',
+      );
+      // La pestaña inactiva va sobre la barra, que es primaryContainer. Va
+      // atenuada a propósito, así que le basta el mínimo de texto grande.
+      expect(
+        contraste(
+          ThemeColors.pestanaInactiva(context),
+          esquema.primaryContainer,
+        ),
+        greaterThanOrEqualTo(3.0),
+        reason: 'La pestaña inactiva no se lee sobre la barra',
+      );
+      // Pero sigue siendo MENOS visible que la activa: si no, la barra
+      // pierde la señal de en qué pestaña está el usuario.
+      expect(
+        contraste(
+          ThemeColors.pestanaInactiva(context),
+          esquema.primaryContainer,
+        ),
+        lessThan(
+          contraste(esquema.onPrimaryContainer, esquema.primaryContainer),
+        ),
+        reason: 'La pestaña inactiva resalta tanto como la activa',
       );
     });
   });

@@ -190,7 +190,7 @@ class _EsencialesScreenState extends State<EsencialesScreen> {
         dividerColor: Colors.transparent,
         indicatorColor: colorScheme.onPrimaryContainer,
         labelColor: colorScheme.onPrimaryContainer,
-        unselectedLabelColor: colorScheme.tertiaryContainer,
+        unselectedLabelColor: ThemeColors.pestanaInactiva(context),
         labelStyle: textTheme.titleMedium?.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.w600,

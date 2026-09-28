@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/theme_colors.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class MoldeEscalasScreen extends StatelessWidget {
@@ -82,7 +83,7 @@ class MoldeEscalasScreen extends StatelessWidget {
                 dividerColor: Colors.transparent,
                 indicatorColor: colorScheme.onPrimaryContainer,
                 labelColor: colorScheme.onPrimaryContainer,
-                unselectedLabelColor: colorScheme.tertiaryContainer,
+                unselectedLabelColor: ThemeColors.pestanaInactiva(context),
                 labelStyle: textTheme.titleMedium?.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

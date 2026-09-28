@@ -257,6 +257,13 @@ class AppTheme {
     // borde usa SIEMPRE onSurface. Usar primaryContainer como tinta se ve bien
     // en claro por coincidencia y queda invisible en oscuro.
     //
+    // Esto vale para CUALQUIER ranura *Container usada como color de texto,
+    // ícono o borde: en claro salen claras sobre fondos oscuros y funcionan;
+    // en oscuro son superficies y desaparecen. Ya pasó con primaryContainer
+    // (~100 sitios) y con tertiaryContainer (5 TabBar). Antes de usar una
+    // ranura *Container como tinta, para y usa la ranura "on..." o un helper
+    // de ThemeColors.
+    //
     // Construimos el colorScheme usando los valores de AppColors
     const ColorScheme colorScheme = ColorScheme(
       brightness: Brightness.light,
