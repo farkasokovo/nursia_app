@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 27, // Aumentamos la versión a 27
+      version: 28, // Aumentamos la versión a 28
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -288,6 +288,13 @@ class DatabaseHelper {
         // usuario (turno activo).
         if (oldVersion < 27) {
           await db.delete('escalas');
+        }
+        // Se agregaron 2 fichas nuevas a la categoría "insumos": catéter venoso
+        // central y PICC. Se vacía la tabla para que cargarSemillaSiHaceFalta()
+        // la vuelva a sembrar con el JSON nuevo en el próximo arranque.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 28) {
+          await db.delete('esenciales');
         }
       },
     );

@@ -1719,5 +1719,312 @@
     ],
     "fuente": "Manuales del operador e instrucciones de uso de Vyaire (Vela, Avea, SensorMedics 3100A y 3100B), GE Healthcare (Engström Carestation) y Dräger (Evita XL, Savina)",
     "orden": 4
+  },
+  {
+    "titulo": "Catéter venoso central",
+    "titulo_corto": "Catéter venoso central",
+    "categoria": "insumos",
+    "icono": "needle",
+    "resumen": "Tipos, lúmenes, sitios de inserción y cuidados de la vía central.",
+    "palabras_clave": "catéter venoso central, CVC, vía central, lumen, lúmenes, distal, medial, proximal, trilumen, bilumen, subclavia, yugular, femoral, vena cava superior, punta, PVC, presión venosa central, tunelizado, no tunelizado, Hickman, Mahurkar, puerto, reservorio, curación, apósito, heparinizar, sellado, NPT, nutrición parenteral, osmolaridad, bacteriemia, CLABSI, terapia de infusión, NOM-022",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "titulo": "Qué es",
+        "valor": "Tubo delgado y flexible de material biocompatible, habitualmente silicón o poliuretano, que se introduce en los grandes vasos venosos del tórax. La punta se aloja en la vena cava superior, la vena cava inferior o una zona de la anatomía cardiaca, según el abordaje."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Cuándo se requiere acceso central",
+        "subtitulo": "Criterios de la NOM-022-SSA3-2012",
+        "estilo": "vinetas",
+        "items": [
+          "Soluciones con osmolaridad mayor a 600 mOsm/L.",
+          "Soluciones y medicamentos con pH menor a 5 o mayor a 9.",
+          "Solución glucosada al 10% y al 50%.",
+          "Nutrición parenteral total y soluciones con proteínas.",
+          "Medicamentos irritantes o vesicantes, y quimioterapia.",
+          "Red venosa periférica agotada o comprometida.",
+          "Monitorización hemodinámica y transfusiones frecuentes."
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Cómo se clasifican",
+        "encabezados": [
+          "Criterio",
+          "Categorías"
+        ],
+        "filas": [
+          [
+            "Situación anatómica",
+            "Torácica, yugular, inguinal, abdominal, acceso periférico"
+          ],
+          [
+            "Duración",
+            "Corta, mediana, larga"
+          ],
+          [
+            "Número de lúmenes",
+            "De unilumen a cinco lúmenes"
+          ],
+          [
+            "Técnica de implantación",
+            "No tunelizados, tunelizados"
+          ],
+          [
+            "Abordaje",
+            "Externos, internos"
+          ]
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Los lúmenes",
+        "encabezados": [
+          "Lumen",
+          "Dónde sale",
+          "Calibre"
+        ],
+        "filas": [
+          [
+            "Distal",
+            "En la punta del catéter",
+            "El mayor de los tres"
+          ],
+          [
+            "Medial",
+            "Entre los otros dos",
+            "El menor de los tres"
+          ],
+          [
+            "Proximal",
+            "El más cercano a la piel",
+            "Intermedio"
+          ]
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Qué va por cada lumen",
+        "subtitulo": "La asignación se deriva del calibre y de la posición de cada salida",
+        "estilo": "vinetas",
+        "items": [
+          "Distal: infusiones de alto flujo y alta densidad, coloides, hemoderivados y medición de presión venosa central, por ser el de mayor calibre y salir en la punta.",
+          "Proximal: sedoanalgesia, aminas y toma de muestras sanguíneas.",
+          "Medial: la asignación del lumen medial y el lumen destinado a nutrición parenteral varía entre instituciones y no está estandarizada; se sigue el protocolo de la unidad."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Sitios de inserción",
+        "estilo": "vinetas",
+        "items": [
+          "Venas centrales de abordaje: subclavia, yugular interna y femoral.",
+          "Se prefiere el abordaje torácico sobre el femoral: el sitio femoral se asocia a mayor colonización, trombosis e infección.",
+          "La instalación femoral se evita siempre que exista otra opción."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Instalación",
+        "estilo": "vinetas",
+        "items": [
+          "Se emplean precauciones de barrera máxima: gorro, cubrebocas, bata y guantes estériles, y campo estéril amplio.",
+          "Antiséptico de elección: gluconato de clorhexidina alcoholada. Las soluciones yodadas se evitan en neonatos.",
+          "Higiene de manos antes y después de palpar el sitio, y antes y después de la inserción, reinstalación, acceso, reparación o cobertura del catéter.",
+          "Se instala el catéter con el mínimo número de lúmenes que requiera el manejo del paciente."
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Cambio de apósito",
+        "encabezados": [
+          "Apósito",
+          "Intervalo"
+        ],
+        "filas": [
+          [
+            "Gasa estéril",
+            "Cada 2 días"
+          ],
+          [
+            "Semipermeable transparente",
+            "Cada 7 días"
+          ],
+          [
+            "Tunelizado o implantable",
+            "Una vez por semana"
+          ],
+          [
+            "Con sangrado o drenaje",
+            "Cada 48 horas"
+          ]
+        ]
+      },
+      {
+        "tipo": "tabla",
+        "titulo": "Cambio de equipos de infusión",
+        "encabezados": [
+          "Infusión",
+          "Intervalo máximo"
+        ],
+        "filas": [
+          [
+            "Soluciones sin lípidos ni hemoderivados",
+            "96 horas"
+          ],
+          [
+            "Nutrición parenteral y emulsiones lipídicas",
+            "24 horas"
+          ],
+          [
+            "Hemoderivados",
+            "24 horas"
+          ],
+          [
+            "Conectores",
+            "72 horas"
+          ]
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Permeabilidad",
+        "estilo": "vinetas",
+        "items": [
+          "El lumen que se utiliza para toma de muestras se mantiene heparinizado.",
+          "El lumen que no se utiliza y permanece cerrado se hepariniza cada 24 horas.",
+          "La concentración y el volumen del sellado varían según el catéter y el protocolo de la unidad."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Datos de infección y retiro",
+        "estilo": "vinetas",
+        "items": [
+          "Eritema, induración, dolor a la palpación o exudado purulento en los 2 cm alrededor del sitio de inserción.",
+          "Fiebre de 38 °C o más sin otra fuente identificada.",
+          "Hipotensión con sistólica menor a 90 mmHg y oliguria menor a 20 mL/h.",
+          "Se retira el catéter ante signos o síntomas de infección, sospecha de bacteriemia asociada a línea o deterioro clínico."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Secretaría de Salud, Comisión Permanente de Enfermería. (2011). Protocolo para el manejo estandarizado del paciente con catéter periférico, central y permanente (1a ed.). México.",
+            "url": "https://ssj.jalisco.gob.mx/sites/ssj.jalisco.gob.mx/files/protocolo_para_el_manejo_estandarizado_del_paciente_con_cateter_periferico_central_y_permanente.pdf"
+          },
+          {
+            "texto": "Secretaría de Salud. (2012). NORMA Oficial Mexicana NOM-022-SSA3-2012, Que instituye las condiciones para la administración de la terapia de infusión en los Estados Unidos Mexicanos. Diario Oficial de la Federación, 18 de septiembre de 2012.",
+            "url": "https://www.dof.gob.mx/nota_detalle.php?codigo=5268977&fecha=18/09/2012"
+          },
+          {
+            "texto": "CENETEC. Guía de Práctica Clínica: Prevención, diagnóstico y tratamiento de las infecciones asociadas a catéter venoso central. Guía de Referencia Rápida. México: Secretaría de Salud.",
+            "url": "https://www.pediatria.gob.mx/archivos/burbuja/4.2_CENETEC_Guia_prevencion_de_infecciones_asociadas_a_CVC.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "Protocolo para el manejo estandarizado del paciente con catéter periférico, central y permanente (Secretaría de Salud, 2011), NOM-022-SSA3-2012 y GPC CENETEC de prevención de infecciones asociadas a catéter venoso central",
+    "orden": 4
+  },
+  {
+    "titulo": "Catéter central de inserción periférica (PICC)",
+    "titulo_corto": "PICC",
+    "categoria": "insumos",
+    "icono": "needle",
+    "resumen": "Venas de inserción, indicaciones, cuidados y complicaciones del PICC.",
+    "palabras_clave": "PICC, catéter central de inserción periférica, basílica, cefálica, braquial, mediana del codo, unión cavoatrial, cavoauricular, punta, poliuretano, silicona, lavado, push stop push, presión positiva, apósito, trombosis, oclusión, vaina de fibrina, flebitis, osmolaridad, acceso venoso difícil, DIVA",
+    "contenido": [
+      {
+        "tipo": "texto",
+        "titulo": "Qué es",
+        "valor": "Catéter venoso central que se inserta a través de una vena periférica del miembro superior y avanza hasta la circulación central. Se considera un catéter externo. El material se elige según la duración prevista: poliuretano para estancia media y silicona para larga duración."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Venas de inserción",
+        "subtitulo": "En orden de preferencia por trayecto y calibre",
+        "estilo": "numerada",
+        "items": [
+          "Basílica.",
+          "Braquiales.",
+          "Cefálica."
+        ]
+      },
+      {
+        "tipo": "texto",
+        "titulo": "Posición de la punta",
+        "valor": "Unión cavoatrial. La verificación puede realizarse por método electrocardiográfico durante la inserción."
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Indicaciones",
+        "estilo": "vinetas",
+        "items": [
+          "Terapia intravenosa con duración prevista mayor a 30 días.",
+          "Soluciones con osmolaridad mayor a 600 mOsm/L, pH menor a 5 o mayor a 9.",
+          "Soporte nutricional con osmolaridad mayor a 800 mOsm/L.",
+          "Tratamientos irritantes o vesicantes.",
+          "Acceso venoso periférico difícil.",
+          "Necesidad de accesos frecuentes, extracción de sangre y administración de hemoderivados."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Dónde no se inserta",
+        "estilo": "vinetas",
+        "items": [
+          "Zonas de flexión.",
+          "Venas trombosadas o varicosas.",
+          "Extremidad con vaciamiento ganglionar.",
+          "Trayectos con arteria braquial adyacente."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Cuidados",
+        "estilo": "vinetas",
+        "items": [
+          "Cambio de apósito cada 7 a 10 días, o antes si se encuentra sucio, despegado o con sangre.",
+          "Lavado con 10 mL de solución fisiológica 0.9% tras cada administración.",
+          "Lavado con 20 mL de solución fisiológica 0.9% después de extracción sanguínea o transfusión.",
+          "Técnica de lavado pulsátil con presión positiva."
+        ]
+      },
+      {
+        "tipo": "lista",
+        "titulo": "Complicaciones",
+        "estilo": "vinetas",
+        "items": [
+          "Infección del sitio de inserción y bacteriemia asociada a línea.",
+          "Oclusión del lumen.",
+          "Trombosis venosa de la extremidad.",
+          "Lesión cutánea asociada al apósito.",
+          "Vaina de fibrina alrededor del catéter."
+        ]
+      },
+      {
+        "tipo": "referencias",
+        "items": [
+          {
+            "texto": "Secretaría de Salud, Comisión Permanente de Enfermería. (2011). Protocolo para el manejo estandarizado del paciente con catéter periférico, central y permanente (1a ed.). México.",
+            "url": "https://ssj.jalisco.gob.mx/sites/ssj.jalisco.gob.mx/files/protocolo_para_el_manejo_estandarizado_del_paciente_con_cateter_periferico_central_y_permanente.pdf"
+          },
+          {
+            "texto": "Secretaría de Salud. (2012). NORMA Oficial Mexicana NOM-022-SSA3-2012, Que instituye las condiciones para la administración de la terapia de infusión en los Estados Unidos Mexicanos. Diario Oficial de la Federación, 18 de septiembre de 2012.",
+            "url": "https://www.dof.gob.mx/nota_detalle.php?codigo=5268977&fecha=18/09/2012"
+          },
+          {
+            "texto": "Instituto Nacional de Pediatría. (2025). Clínica de líneas intravasculares y terapia de infusión. México.",
+            "url": "https://www.pediatria.gob.mx/archivos/normateca/normateca_itclt.pdf"
+          }
+        ]
+      }
+    ],
+    "fuente": "Protocolo para el manejo estandarizado del paciente con catéter periférico, central y permanente (Secretaría de Salud, 2011), NOM-022-SSA3-2012 y manual de Clínica de líneas intravasculares del Instituto Nacional de Pediatría (2025)",
+    "orden": 5
   }
 ]

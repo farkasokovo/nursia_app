@@ -42,6 +42,7 @@ class EsencialIconMapper {
     'shieldCheck': PhosphorIconsFill.shieldCheck,
     'fireExtinguisher': PhosphorIconsFill.fireExtinguisher,
     'listChecks': PhosphorIconsFill.listChecks,
+    'needle': PhosphorIconsFill.needle,
   };
 
   /// Ícono por defecto cuando el nombre no existe en el mapa.
