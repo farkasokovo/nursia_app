@@ -98,7 +98,7 @@ class CategoryButton extends StatelessWidget {
           },
           child: Ink(
             decoration: BoxDecoration(
-              color: colorScheme.secondaryContainer,
+              color: ThemeColors.fondoBotonCategoria(context),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(

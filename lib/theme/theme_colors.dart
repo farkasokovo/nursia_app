@@ -110,6 +110,20 @@ class ThemeColors {
     );
   }
 
+  /// Fondo de los 4 botones de categoría del menú principal.
+  ///
+  /// En claro es `secondaryContainer`, igual que los renglones del menú
+  /// lateral. En oscuro los dos usos se separan: el botón va sobre el lienzo
+  /// de la pantalla y tiene que aclararse para despegarse, mientras que el
+  /// renglón del menú va sobre la superficie de énfasis, que es clara, y
+  /// tiene que hacer lo contrario. Subir la ranura compartida arreglaba uno
+  /// y hundía el otro.
+  static Color fondoBotonCategoria(BuildContext context) => segunTema(
+    context,
+    claro: Theme.of(context).colorScheme.secondaryContainer,
+    oscuro: AppColorsDark.botonCategoria,
+  );
+
   /// Fondo de las filas de datos de una tabla.
   ///
   /// Antes se pedía a `colorScheme.onPrimaryContainer`, que es un color de

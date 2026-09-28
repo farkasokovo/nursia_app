@@ -54,9 +54,19 @@ class AppColorsDark {
   /// inicio. Es `primaryContainer` del tema oscuro.
   static const Color enfasis = Color(0xff51402F);
 
-  /// Fondo de los botones de categoria y de las pantallas de ficha. Es
-  /// `secondaryContainer` del tema oscuro.
+  /// Fondo de los renglones del menu lateral y de las pantallas de ficha.
+  /// Es `secondaryContainer` del tema oscuro. Va oscuro porque el menu se
+  /// dibuja sobre [enfasis], que es claro.
   static const Color botonCat = Color(0xff2B241D);
+
+  /// Fondo de los 4 botones de categoria del menu principal.
+  ///
+  /// Separado de [botonCat] porque los dos usos viven sobre fondos opuestos:
+  /// los botones van sobre el lienzo oscuro de la pantalla y necesitan
+  /// ACLARARSE para despegarse; los renglones del menu van sobre [enfasis],
+  /// que es claro, y necesitan lo contrario. Una sola ranura no puede servir
+  /// a los dos.
+  static const Color botonCategoria = Color(0xff453A2F);
   static const Color ruleSoft = Color(0xff332822);
   static const Color ink = Color(0xffEFE9E4);
   static const Color ink2 = Color(0xffDFD3C9);
