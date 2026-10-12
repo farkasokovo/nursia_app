@@ -49,3 +49,6 @@ android/key.properties
 *.jks
 *.keystore
 CLAUDE.md
+
+# Notas y planes locales de trabajo (no se publican)
+docs/

@@ -91,6 +91,20 @@ const int saturacionMax = 100;
 int aMeses(int valor, UnidadEdad unidad) =>
     unidad == UnidadEdad.anios ? valor * 12 : valor;
 
+/// Etiqueta legible de un rango de edad de las tablas, por ejemplo "4 a 5
+/// años" o "12 a 17 meses". Se expresa en años solo cuando el rango cae justo
+/// en años cumplidos; si no, en meses.
+String etiquetaEdad(int mesesMin, int mesesMax) {
+  if (mesesMin == 0 && mesesMax == 0) return 'Menor de 1 mes';
+  if (mesesMin % 12 == 0 && (mesesMax + 1) % 12 == 0) {
+    final min = mesesMin ~/ 12;
+    final max = (mesesMax + 1) ~/ 12 - 1;
+    if (min == max) return min == 1 ? '1 año' : '$min años';
+    return '$min - $max años';
+  }
+  return '$mesesMin - $mesesMax meses';
+}
+
 // ── Frecuencia cardiaca y respiratoria ──────────────────────────────────
 
 /// Un renglón de la tabla de frecuencia cardiaca o respiratoria.
@@ -377,16 +391,21 @@ ResultadoSigno interpretarPresionArterial({
 
 // ── Saturación de oxígeno ───────────────────────────────────────────────
 //
-// No depende de la edad.
+// No depende de la edad. Los cortes son constantes para que la tabla de la
+// pestaña "Información" lea los mismos números que la función.
+
+const int saturacionNormalMin = 95;
+const int saturacionLeveMin = 90;
+const int saturacionModeradaMin = 85;
 
 ResultadoSigno interpretarSaturacion(int porcentaje) {
-  if (porcentaje >= 95) {
+  if (porcentaje >= saturacionNormalMin) {
     return const ResultadoSigno('Normal', NivelSigno.normal);
   }
-  if (porcentaje >= 90) {
+  if (porcentaje >= saturacionLeveMin) {
     return const ResultadoSigno('Desaturación leve', NivelSigno.leve);
   }
-  if (porcentaje >= 85) {
+  if (porcentaje >= saturacionModeradaMin) {
     return const ResultadoSigno('Desaturación moderada', NivelSigno.moderada);
   }
   return const ResultadoSigno('Desaturación severa', NivelSigno.grave);

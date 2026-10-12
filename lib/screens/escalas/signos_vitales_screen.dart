@@ -45,7 +45,7 @@ class _SignosVitalesLayout extends StatelessWidget {
             const SizedBox(height: 20),
             FarmaButton(
               title: "Adulto",
-              subtitle: "Valores de referencia",
+              subtitle: "Signos vitales y laboratorios",
               icon: PhosphorIconsRegular.person,
               altoMinimo: altoFarmaButtonEscalas,
               onPressed: () => Navigator.push(

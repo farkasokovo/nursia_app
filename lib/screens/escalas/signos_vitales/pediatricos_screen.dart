@@ -9,14 +9,14 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../../../theme/alert_colors.dart';
-import '../../../theme/app_theme.dart';
-import '../../../utils/secciones_ficha.dart';
+import '../../../theme/theme_colors.dart';
 import '../../../utils/signos_vitales_pediatricos.dart';
 import '../../../widgets/expandable_category_screen.dart';
 import '../../../widgets/numeric_input_field.dart';
+import '../../../widgets/signos_vitales_comunes.dart';
 import '../../../widgets/opcion_selector.dart';
 import '../../../widgets/tabbed_content.dart';
+import '../../../widgets/tabla_referencia.dart';
 
 class SignosVitalesPediatricosScreen extends StatelessWidget {
   const SignosVitalesPediatricosScreen({super.key});
@@ -35,34 +35,10 @@ class SignosVitalesPediatricosScreen extends StatelessWidget {
           Tab(text: "Interpretación"),
           Tab(text: "Información"),
         ],
-        tabViews: [_InterpretacionLayout(), _InformacionPlaceholder()],
+        tabViews: [_InterpretacionLayout(), _InformacionLayout()],
       ),
     );
   }
-}
-
-/// Gravedad clínica del resultado, en el vocabulario compartido de alertas.
-/// Sigue la misma gradación que la calculadora de PAM: verde para lo normal y
-/// la escala de rojos conforme sube la gravedad.
-///
-/// Devuelve null en `noValorable`, que NO es un nivel de alerta: no hay nada
-/// que valorar todavía, así que no le toca ningún color de la escala clínica
-/// sino el neutro de [_colorNivel].
-NivelAlerta? _nivelAlerta(NivelSigno nivel) => switch (nivel) {
-  NivelSigno.normal => NivelAlerta.verde,
-  NivelSigno.bajo => NivelAlerta.sinAlerta,
-  NivelSigno.leve => NivelAlerta.rojo1,
-  NivelSigno.moderada => NivelAlerta.rojo2,
-  NivelSigno.grave => NivelAlerta.rojo3,
-  NivelSigno.noValorable => null,
-};
-
-/// Color de la pastilla. Es un relleno sólido con texto encima, así que le
-/// toca la variante `fill`.
-Color _colorNivel(BuildContext context, NivelSigno nivel) {
-  final alerta = _nivelAlerta(nivel);
-  if (alerta != null) return AlertColors.fill(context, alerta);
-  return AlertColors.neutro(context);
 }
 
 // ================== PESTAÑA DE INTERPRETACIÓN ==================
@@ -328,8 +304,8 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
             // etiqueta de arriba lleva la abreviatura y el nombre completo se
             // conserva en el texto de ayuda del campo, que sigue visible
             // mientras se escribe.
-            _buildRenglon(
-              izquierda: _buildCampo(
+            RenglonSignos(
+              izquierda: CampoSigno(
                 campo: NumericInputField(
                   label: "FC (lpm)",
                   textoAyuda: "lpm",
@@ -338,10 +314,8 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
                   maxLength: 3,
                 ),
                 resultado: _resultadoFc,
-                colorScheme: colorScheme,
-                textTheme: textTheme,
               ),
-              derecha: _buildCampo(
+              derecha: CampoSigno(
                 campo: NumericInputField(
                   label: "FR (rpm)",
                   textoAyuda: "rpm",
@@ -350,20 +324,17 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
                   maxLength: 2,
                 ),
                 resultado: _resultadoFr,
-                colorScheme: colorScheme,
-                textTheme: textTheme,
               ),
             ),
             const SizedBox(height: 20),
             // La presión es UN signo vital con DOS campos y UNA interpretación
             // conjunta, así que los dos campos y su pastilla comparten tarjeta,
             // y la pastilla abarca el renglón completo.
-            _buildTarjeta(
-              colorScheme,
-              Column(
+            TarjetaSigno(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildRenglon(
+                  RenglonSignos(
                     izquierda: NumericInputField(
                       label: "Sistólica",
                       textoAyuda: "mmHg",
@@ -380,13 +351,13 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
                     ),
                   ),
                   if (_resultadoPresion != null)
-                    _buildPastilla(_resultadoPresion!, colorScheme, textTheme),
+                    PastillaSigno(_resultadoPresion!),
                 ],
               ),
             ),
             const SizedBox(height: 20),
-            _buildRenglon(
-              izquierda: _buildCampo(
+            RenglonSignos(
+              izquierda: CampoSigno(
                 campo: NumericInputField(
                   label: "Temp (°C)",
                   textoAyuda: "Axilar",
@@ -396,10 +367,8 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
                   allowDecimal: true,
                 ),
                 resultado: _resultadoTemperatura,
-                colorScheme: colorScheme,
-                textTheme: textTheme,
               ),
-              derecha: _buildCampo(
+              derecha: CampoSigno(
                 campo: NumericInputField(
                   label: "SpO2 (%)",
                   textoAyuda: "%",
@@ -408,12 +377,10 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
                   maxLength: 3,
                 ),
                 resultado: _resultadoSaturacion,
-                colorScheme: colorScheme,
-                textTheme: textTheme,
               ),
             ),
             const SizedBox(height: 20),
-            _buildBotones(colorScheme, textTheme),
+            BotonesSignos(onLimpiar: _limpiar, onInterpretar: _interpretar),
             // Reserva el alto real de la barra de navegación del sistema, de
             // gestos o de botones, más el aire de siempre. Se queda aunque la
             // pantalla quepa sin scroll: con el teclado abierto o con la fuente
@@ -426,104 +393,12 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
     );
   }
 
-  /// Dos campos lado a lado. Se alinean por arriba porque uno puede llevar
-  /// pastilla y el otro no, y entonces tienen distinto alto.
-  Widget _buildRenglon({required Widget izquierda, required Widget derecha}) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(child: izquierda),
-        const SizedBox(width: 12),
-        Expanded(child: derecha),
-      ],
-    );
-  }
-
-  /// Tarjeta de un signo vital.
-  ///
-  /// Agrupa el campo (o los dos, en la presión) con su pastilla, para que se
-  /// lea dónde termina un signo y empieza el siguiente. El color es el más
-  /// claro del tema, de modo que queda una escala de tres tonos: el fondo de
-  /// la pestaña es el más oscuro, la tarjeta el más claro y el campo, que tiene
-  /// su propio relleno y su borde, queda en medio. El bloque de edad NO usa
-  /// esta tarjeta: va teñido, y así sigue distinguiéndose de los signos.
-  Widget _buildTarjeta(ColorScheme colorScheme, Widget hijo) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-      decoration: BoxDecoration(
-        color: colorScheme.secondary,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: hijo,
-    );
-  }
-
-  /// Un campo con su interpretación debajo, dentro de su tarjeta. La pastilla
-  /// aparece donde el usuario ya estaba mirando, en vez de en un bloque al
-  /// final de la pantalla.
-  Widget _buildCampo({
-    required Widget campo,
-    required ResultadoSigno? resultado,
-    required ColorScheme colorScheme,
-    required TextTheme textTheme,
-  }) {
-    return _buildTarjeta(
-      colorScheme,
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          campo,
-          if (resultado != null)
-            _buildPastilla(resultado, colorScheme, textTheme),
-        ],
-      ),
-    );
-  }
-
-  /// La pastilla de interpretación: compacta, de un renglón cuando el texto
-  /// alcanza. Conserva el color por gravedad de la calculadora de PAM.
-  Widget _buildPastilla(
-    ResultadoSigno resultado,
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        decoration: BoxDecoration(
-          color: _colorNivel(context, resultado.nivel),
-          borderRadius: BorderRadius.circular(40),
-        ),
-        child: Text(
-          resultado.etiqueta,
-          textAlign: TextAlign.center,
-          style: textTheme.bodySmall?.copyWith(
-            // Crema en los dos temas. En claro `onPrimary` YA es crema y se
-            // conserva tal cual; en oscuro ese mismo token es casi negro
-            // (#241B14) y sobre el relleno oscuro caería a 1.92:1.
-            color: Theme.of(context).brightness == Brightness.dark
-                ? AppColorsDark.ink
-                : colorScheme.onPrimary,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// La edad va dentro de un contenedor teñido para que no se lea como un
-  /// signo vital más. El tinte se LEE de `NivelSeguridad.leve`, el mismo que
-  /// usa `SeccionFichaView` para marcar una sección, en vez de copiar un color.
+  /// La edad va en su propio contenedor, con el mismo fondo que las tarjetas
+  /// de los signos, para que no se lea como un campo suelto.
   ///
   /// El campo y el selector de unidad van lado a lado: apilados gastaban un
   /// renglón entero de una pantalla que ya pedía mucho scroll.
   Widget _buildEdad(ColorScheme colorScheme, TextTheme textTheme) {
-    const nivel = NivelSeguridad.leve;
-    final acento = nivel.colorAcento(context);
-
     final contenido = Row(
       // Por abajo: el campo trae su etiqueta encima y el selector no, así que
       // alinearlos por arriba los dejaría desfasados.
@@ -552,92 +427,170 @@ class _InterpretacionLayoutState extends State<_InterpretacionLayout>
       ],
     );
 
-    if (acento == null) return contenido;
-
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: colorScheme.secondary,
+        color: ThemeColors.tarjetaSobreFondo(context),
         borderRadius: BorderRadius.circular(30),
       ),
       child: contenido,
     );
   }
-
-  Widget _buildBotones(ColorScheme colorScheme, TextTheme textTheme) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 2,
-          child: OutlinedButton(
-            onPressed: _limpiar,
-            style: OutlinedButton.styleFrom(
-              overlayColor: colorScheme.onSurface,
-              minimumSize: const Size(double.infinity, 60),
-              side: BorderSide(color: colorScheme.onSurface, width: 2),
-              shape: const RoundedRectangleBorder(
-                borderRadius: AppRadius.defaultRadius,
-              ),
-            ),
-            child: Text(
-              "Limpiar",
-              style: textTheme.titleSmall?.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 20),
-        Expanded(
-          flex: 3,
-          child: ElevatedButton(
-            onPressed: _interpretar,
-            style: ElevatedButton.styleFrom(
-              overlayColor: colorScheme.tertiaryContainer,
-              minimumSize: const Size(double.infinity, 60),
-              shape: const RoundedRectangleBorder(
-                borderRadius: AppRadius.defaultRadius,
-              ),
-            ),
-            child: Text(
-              "Interpretar",
-              style: textTheme.titleSmall?.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onPrimaryContainer,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }
 
 // ================== PESTAÑA DE INFORMACIÓN ==================
-/// Placeholder: las tablas de referencia se agregan en otra tarea.
-class _InformacionPlaceholder extends StatelessWidget {
-  const _InformacionPlaceholder();
+/// Tablas de referencia y la información de la escala.
+///
+/// Ninguna cifra de las tablas está escrita aquí: todas se generan de las
+/// constantes de `signos_vitales_pediatricos.dart`, las mismas que usa la
+/// interpretación. Si se corrige una constante, la tabla se actualiza sola.
+class _InformacionLayout extends StatelessWidget {
+  const _InformacionLayout();
 
   @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+  Widget build(BuildContext context) => InformacionSignosVitales(
+    idEscala: "signos_vitales_pediatricos",
+    tablas: _buildTablas(context),
+  );
 
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "soon nigga",
-            textAlign: TextAlign.center,
-            style: textTheme.bodyLarge,
-          ),
+  List<Widget> _buildTablas(BuildContext context) {
+    // El encabezado de cada categoría lleva el mismo relleno que la pastilla
+    // de ese resultado en la pestaña de interpretación.
+    Color color(NivelSigno nivel) => colorNivelSigno(context, nivel);
+
+    final coloresFrecuencia = [
+      null,
+      color(NivelSigno.bajo),
+      color(NivelSigno.normal),
+      color(NivelSigno.leve),
+      color(NivelSigno.moderada),
+      color(NivelSigno.grave),
+    ];
+
+    List<List<String>> filasFrecuencia(List<RangoFrecuencia> tabla) => [
+      for (final r in tabla)
+        [
+          etiquetaEdad(r.mesesMin, r.mesesMax),
+          '${r.bajoMax}',
+          '${r.bajoMax + 1} - ${r.normalMax}',
+          '${r.normalMax + 1} - ${r.leveMax}',
+          '${r.leveMax + 1} - ${r.moderadaMax}',
+          '${r.moderadaMax + 1}',
         ],
+    ];
+
+    // La temperatura se captura con un decimal, así que la febrícula ocupa
+    // de una décima arriba de lo normal a una décima abajo de la fiebre.
+    String grados(double valor) => valor.toStringAsFixed(1);
+
+    Widget seccion(String titulo, Widget tabla) =>
+        SeccionTablaSigno(titulo: titulo, tabla: tabla);
+
+    return [
+      seccion(
+        "Frecuencia cardiaca (lpm)",
+        TablaReferencia(
+          ajustarAlAncho: false,
+          encabezados: const [
+            "Edad",
+            "Bradicardia (≤)",
+            "Normal",
+            "Leve",
+            "Moderada",
+            "Grave (≥)",
+          ],
+          coloresEncabezado: coloresFrecuencia,
+          filas: filasFrecuencia(tablaFrecuenciaCardiaca),
+        ),
       ),
-    );
+      seccion(
+        "Frecuencia respiratoria (rpm)",
+        TablaReferencia(
+          ajustarAlAncho: false,
+          encabezados: const [
+            "Edad",
+            "Bradipnea (≤)",
+            "Normal",
+            "Leve",
+            "Moderada",
+            "Grave (≥)",
+          ],
+          coloresEncabezado: coloresFrecuencia,
+          filas: filasFrecuencia(tablaFrecuenciaRespiratoria),
+        ),
+      ),
+      seccion(
+        "Presión arterial (mmHg)",
+        TablaReferencia(
+          ajustarAlAncho: false,
+          encabezados: const [
+            "Edad",
+            "Hipotensión sist. (≤)",
+            "Sistólica normal",
+            "Diastólica normal",
+            "HTA (≥)",
+          ],
+          coloresEncabezado: [
+            null,
+            color(NivelSigno.grave),
+            color(NivelSigno.normal),
+            color(NivelSigno.normal),
+            color(NivelSigno.moderada),
+          ],
+          filas: [
+            for (final r in tablaPresionArterial)
+              [
+                etiquetaEdad(r.mesesMin, r.mesesMax),
+                '${r.hipotensionSistolicaMax}',
+                '${r.sistolicaNormalMin} - ${r.sistolicaNormalMax}',
+                '${r.diastolicaNormalMin} - ${r.diastolicaNormalMax}',
+                '${r.hipertensionSistolica}/${r.hipertensionDiastolica}',
+              ],
+          ],
+        ),
+      ),
+      seccion(
+        "Temperatura axilar (°C)",
+        TablaReferencia(
+          encabezados: const ["Resultado", "°C"],
+          filas: [
+            [
+              "Por debajo del rango normal",
+              "< ${grados(temperaturaNormalMin)}",
+            ],
+            [
+              "Normal",
+              "${grados(temperaturaNormalMin)} - "
+                  "${grados(temperaturaNormalMax)}",
+            ],
+            [
+              "Febrícula",
+              "${grados(temperaturaNormalMax + 0.1)} - "
+                  "${grados(temperaturaFiebreMin - 0.1)}",
+            ],
+            ["Fiebre", "≥ ${grados(temperaturaFiebreMin)}"],
+          ],
+        ),
+      ),
+      seccion(
+        "Saturación de oxígeno (%)",
+        TablaReferencia(
+          encabezados: const ["Resultado", "SpO2"],
+          filas: [
+            ["Normal", "≥ $saturacionNormalMin"],
+            [
+              "Desaturación leve",
+              "$saturacionLeveMin - ${saturacionNormalMin - 1}",
+            ],
+            [
+              "Desaturación moderada",
+              "$saturacionModeradaMin - ${saturacionLeveMin - 1}",
+            ],
+            ["Desaturación severa", "≤ ${saturacionModeradaMin - 1}"],
+          ],
+        ),
+      ),
+    ];
   }
 }

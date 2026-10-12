@@ -687,7 +687,7 @@
   },
   "signos_vitales_pediatricos": {
     "name": "Signos vitales pediátricos",
-    "description": "Intérprete de signos vitales en el paciente pediátrico. Se captura la edad y uno o varios signos vitales, y cada uno se compara por separado contra el rango que le corresponde a esa edad. Las tablas de frecuencia cardiaca, frecuencia respiratoria, presión arterial y saturación provienen del material del EVAT (Escala de Valoración de Alerta Temprana). No es el EVAT: aquella es una escala de puntaje que suma categorías, y aquí no se suma nada ni se obtiene una calificación global.",
+    "description": "Intérprete de signos vitales en el paciente pediátrico. Se captura la edad y uno o varios signos vitales, y cada uno se compara por separado contra el rango que le corresponde a esa edad. No se suma ningún puntaje ni se obtiene una calificación global.",
     "when_to_use": [
       "Al tomar signos vitales en el paciente pediátrico hospitalizado, para saber si una cifra cae dentro de lo esperado para su edad.",
       "Cuando el rango normal cambia con la edad y no se tiene la tabla a la mano.",
@@ -703,11 +703,12 @@
       "Saturación de oxígeno en porcentaje, que tampoco depende de la edad."
     ],
     "interpretation": [
-      "Frecuencia cardiaca: bradicardia, normal, taquicardia leve, moderada o grave.",
-      "Frecuencia respiratoria: bradipnea, normal, taquipnea leve, moderada o grave.",
+      "Frecuencia cardiaca: bradicardia, normal, taquicardia leve, moderada o grave, según el grupo de edad.",
+      "Frecuencia respiratoria: bradipnea, normal, taquipnea leve, moderada o grave, según el grupo de edad.",
       "Presión arterial: cada componente se reporta por separado. La sistólica puede salir como hipotensión, por debajo de lo normal, normal o hipertensión; la diastólica, como por debajo de lo normal, normal o hipertensión.",
-      "Temperatura axilar: por debajo del rango normal, normal de 36.0 a 37.5 grados, febrícula de 37.6 a 37.9 y fiebre a partir de 38.0.",
-      "Saturación de oxígeno: normal de 95% a 100%, desaturación leve de 90% a 94%, moderada de 85% a 89% y severa en 84% o menos.",
+      "Temperatura axilar: por debajo del rango normal, normal, febrícula o fiebre.",
+      "Saturación de oxígeno: normal, o desaturación leve, moderada o severa.",
+      "Los cortes exactos de cada categoría están en las tablas de arriba.",
       "El color de cada resultado sigue la gravedad, de verde en lo normal a los tonos rojos conforme aumenta."
     ],
     "limitations": [
@@ -719,24 +720,122 @@
       "No se incluye un criterio de hipotermia: no se localizó un corte axilar pediátrico general en fuente verificable, así que un valor bajo se reporta como por debajo del rango normal.",
       "No aplica el criterio de fiebre en neutropenia, que pertenece a otro contexto clínico."
     ],
-    "clinical_notes": [
-      "La edad se convierte internamente a meses, que es la unidad en la que están construidas las tres tablas que dependen de ella.",
-      "La hipertensión arterial de la tabla viene expresada como un par sistólica sobre diastólica. Aquí se trata como dos umbrales independientes, de modo que cada componente se reporta por su cuenta.",
-      "Se corrigieron dos errores de transcripción de la hoja original, ambos en frecuencia respiratoria: el rango de taquipnea moderada de 15 a 18 años, que aparecía descendente y encimado con la grave, y el límite entre bradipnea y normal en el menor de 3 meses, donde el mismo valor figuraba en las dos categorías.",
-      "La temperatura no forma parte del material del EVAT y se incorporó a partir de fuentes independientes."
-    ],
+    "clinical_notes": [],
     "references": [
       {
         "text": "St. Jude Global. Sistemas de Alerta Temprana Pediátrica (PEWS) / Proyecto EVAT.",
         "url": "https://global.stjude.org/es-us/pews-evat-report.html"
       },
       {
+        "text": "Agulnik, A., Méndez Aceituno, A., Mora Robles, L. N., y cols. (2017). Validation of a pediatric early warning system for hospitalized pediatric oncology patients in a resource-limited setting. Cancer, 123(24), 4903-4913.",
+        "url": "https://doi.org/10.1002/cncr.30951"
+      },
+      {
         "text": "Instituto Mexicano del Seguro Social. Diagnóstico y tratamiento de la fiebre sin signos de focalización en los niños de 3 meses hasta los 5 años de edad. Guía de Evidencias y Recomendaciones 350, apartado 3.3.",
         "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/350GER.pdf"
       },
       {
-        "text": "Ruiz Arcos, R., y cols. (2010). Fiebre en pediatría. Pediatría de México, 77(Supl. 1), S3-S8.",
+        "text": "Ruiz Arcos, R., y cols. (2010). Fiebre en pediatría. Revista Mexicana de Pediatría, 77(Supl. 1), S3-S8.",
         "url": "https://www.medigraphic.com/pdfs/pediat/sp-2010/sps101b.pdf"
+      }
+    ]
+  },
+  "signos_vitales_adulto": {
+    "name": "Signos vitales y parámetros del adulto",
+    "description": "Intérprete de signos vitales en el paciente adulto. Se capturan uno o varios signos y cada uno se compara por separado contra su rango de referencia; a diferencia de la versión pediátrica, no se pide la edad, porque en el adulto los cortes no cambian por grupo de edad. La presión arterial se clasifica con la Norma Oficial Mexicana NOM-030-SSA2-2009, que es la que rige en México. Debajo de los campos hay fichas de consulta con el rango normal de algunos valores de laboratorio de uso frecuente en enfermería; esas fichas no interpretan nada, solo muestran el rango y una nota al tocarlas.",
+    "when_to_use": [
+      "Al tomar signos vitales en el paciente adulto hospitalizado, para saber si una cifra cae dentro de lo esperado y qué tan lejos está.",
+      "Para clasificar una toma de presión arterial según la NOM-030-SSA2-2009.",
+      "En el paciente con EPOC o retención de CO2 conocida, donde la meta de saturación es distinta a la del resto.",
+      "Como consulta rápida del rango normal de los laboratorios más comunes al revisar resultados."
+    ],
+    "components": [
+      "Frecuencia cardiaca en latidos por minuto.",
+      "Frecuencia respiratoria en respiraciones por minuto.",
+      "Presión arterial sistólica y diastólica en mmHg.",
+      "Temperatura axilar en grados centígrados.",
+      "Saturación de oxígeno en porcentaje, con un interruptor para paciente con EPOC y, solo en ese caso, otro para indicar si recibe oxígeno suplementario.",
+      "Fichas de laboratorio: glucosa en ayuno, sodio, potasio, albúmina, hemoglobina, leucocitos, plaquetas y gasometría arterial."
+    ],
+    "interpretation": [
+      "Frecuencia cardiaca: bradicardia leve o grave, normal, o taquicardia leve, moderada o grave.",
+      "Frecuencia respiratoria: bradipnea leve o grave, normal, o taquipnea moderada o grave.",
+      "Presión arterial: hipotensión, o una de las categorías de la NOM-030: óptima, normal, fronteriza, hipertensión etapa 1, 2 o 3, o hipertensión sistólica aislada. Cuando la sistólica y la diastólica caen en categorías distintas se clasifica con la más alta, como indica la norma.",
+      "Temperatura axilar: hipotermia, por debajo del rango normal, normal, febrícula o fiebre.",
+      "Saturación de oxígeno: normal o desaturación leve, moderada o severa. En el paciente con EPOC la meta es más baja y, si recibe oxígeno, una saturación por arriba de la meta también se señala.",
+      "Los cortes exactos de cada categoría están en las tablas de arriba.",
+      "El color de cada resultado sigue la gravedad, de verde en lo normal a los tonos rojos conforme aumenta."
+    ],
+    "limitations": [
+      "No entrega un puntaje ni una calificación global: cada signo se interpreta solo, sin sumarse con los demás. No sustituye a una escala de alerta temprana.",
+      "La NOM-030 no define hipotensión. El corte que se usa aquí viene de NEWS2, la escala de alerta temprana del Royal College of Physicians.",
+      "El rango normal de frecuencia cardiaca es de 50 a 100. La gradación de leve a grave fuera de ese rango toma sus cortes de NEWS2.",
+      "La meta de saturación para EPOC aplica a pacientes con retención de CO2 confirmada, no a todo paciente con enfermedad pulmonar. En caso de duda, la meta la indica el médico tratante.",
+      "Los cortes de temperatura son axilares; las vías central, rectal u oral leen más alto.",
+      "Una sola toma de presión arterial no diagnostica hipertensión: la NOM-030 pide confirmar con mediciones repetidas y técnica correcta.",
+      "Los rangos de laboratorio varían entre laboratorios y métodos. Ante una diferencia, manda el rango impreso en el resultado del paciente.",
+      "Los valores de gasometría son a nivel del mar; en altitud, la PaO2 y la PaCO2 normales son más bajas."
+    ],
+    "clinical_notes": [
+      "Hipertensión sistólica aislada: sistólica en rango de hipertensión con diastólica normal. Es frecuente en el adulto mayor por rigidez arterial; para afirmarla hacen falta las dos cifras.",
+      "La hipotensión se señala antes que cualquier otra categoría: una sistólica baja con diastólica alta no se reporta como hipertensión.",
+      "En el paciente con EPOC y oxígeno suplementario, una saturación por arriba de la meta no es un buen dato: el exceso de oxígeno puede aumentar la retención de CO2. Se señala para valorar ajustar el flujo según la indicación médica."
+    ],
+    "references": [
+      {
+        "text": "Secretaría de Salud. NOM-030-SSA2-2009, Para la prevención, detección, diagnóstico, tratamiento y control de la hipertensión arterial sistémica. Diario Oficial de la Federación, apartado 6.1.",
+        "url": "https://dof.gob.mx/normasOficiales/4062/salud/salud.htm"
+      },
+      {
+        "text": "Royal College of Physicians. (2017). National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS. Londres: RCP.",
+        "url": "https://www.rcp.ac.uk/media/ctulqqbn/news2-executive-summary_0.pdf"
+      },
+      {
+        "text": "Kusumoto, F. M., y cols. (2019). 2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay. Journal of the American College of Cardiology, 74(7), e51-e156."
+      },
+      {
+        "text": "Bayro Jablonski, N. E., y cols. (2025). Trazo electrocardiográfico con taquicardia: propuesta para su interpretación sistemática a través de un algoritmo diagnóstico. Medicina Interna de México, 41(1), 40-47.",
+        "url": "https://medigraphic.com/pdfs/medintmex/mim-2025/mim251f.pdf"
+      },
+      {
+        "text": "Instituto Mexicano del Seguro Social. Diagnóstico y tratamiento de la fiebre sin signos de focalización en los niños de 3 meses hasta los 5 años de edad. Guía de Evidencias y Recomendaciones 350, apartado 3.3.",
+        "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/350GER.pdf"
+      },
+      {
+        "text": "Ruiz Arcos, R., y cols. (2010). Fiebre en pediatría. Revista Mexicana de Pediatría, 77(Supl. 1), S3-S8.",
+        "url": "https://www.medigraphic.com/pdfs/pediat/sp-2010/sps101b.pdf"
+      },
+      {
+        "text": "Secretaría de Salud. NOM-015-SSA2-2010, Para la prevención, tratamiento y control de la diabetes mellitus. Diario Oficial de la Federación.",
+        "url": "https://www.normasoficiales.mx/nom/nom-015-ssa2-2010"
+      },
+      {
+        "text": "American Diabetes Association Professional Practice Committee. (2026). 6. Glycemic Goals, Hypoglycemia, and Hyperglycemic Crises: Standards of Care in Diabetes—2026. Diabetes Care, 49(Supl. 1), S132.",
+        "url": "https://diabetesjournals.org/care/article/49/Supplement_1/S132/163927/6-Glycemic-Goals-Hypoglycemia-and-Hyperglycemic"
+      },
+      {
+        "text": "MedlinePlus. Examen de sodio en la sangre. Enciclopedia médica.",
+        "url": "https://medlineplus.gov/spanish/ency/article/003481.htm"
+      },
+      {
+        "text": "Medscape. Potassium: Reference Range, Interpretation, Collection and Panels.",
+        "url": "https://emedicine.medscape.com/article/2054364-overview"
+      },
+      {
+        "text": "Medscape. Albumin: Reference Range, Interpretation, Collection and Panels.",
+        "url": "https://emedicine.medscape.com/article/2054430-overview"
+      },
+      {
+        "text": "MedlinePlus. Conteo sanguíneo completo (CSC). Enciclopedia médica.",
+        "url": "https://medlineplus.gov/spanish/ency/article/003642.htm"
+      },
+      {
+        "text": "MedlinePlus. Conteo de plaquetas. Enciclopedia médica.",
+        "url": "https://medlineplus.gov/spanish/ency/article/003647.htm"
+      },
+      {
+        "text": "Michigan Medicine, Department of Pathology. Blood Gas Reference Ranges. Pathology Handbook.",
+        "url": "https://www.pathology.med.umich.edu/static/apps/handbook/Tables/BloodGasRefRange.pdf"
       }
     ]
   }

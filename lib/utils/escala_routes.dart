@@ -11,6 +11,7 @@ import 'package:nursia_app/screens/escalas/pediatricas/apgar_screen.dart';
 import 'package:nursia_app/screens/escalas/pediatricas/flacc_screen.dart';
 import 'package:nursia_app/screens/escalas/pediatricas/silverman_anderson_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos/downton_screen.dart';
+import 'package:nursia_app/screens/escalas/signos_vitales/adulto_screen.dart';
 import 'package:nursia_app/screens/escalas/signos_vitales/pediatricos_screen.dart';
 import 'package:nursia_app/screens/escalas/riesgos/maddox.dart';
 import 'package:nursia_app/screens/escalas/riesgos/braden.dart';
@@ -41,4 +42,6 @@ final Map<String, WidgetBuilder> escalaRoutes = {
   // Signos Vitales
   'signos_vitales_pediatricos_screen': (context) =>
       const SignosVitalesPediatricosScreen(),
+  'signos_vitales_adulto_screen': (context) =>
+      const SignosVitalesAdultoScreen(),
 };

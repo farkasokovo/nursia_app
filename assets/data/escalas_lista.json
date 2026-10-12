@@ -95,6 +95,12 @@
       "nombre": "Signos vitales pediátricos",
       "categoria": "signos_vitales",
       "ruta": "signos_vitales_pediatricos_screen"
+    },
+    {
+      "id": "signos_vitales_adulto",
+      "nombre": "Signos vitales y parámetros del adulto",
+      "categoria": "signos_vitales",
+      "ruta": "signos_vitales_adulto_screen"
     }
   ]
 }

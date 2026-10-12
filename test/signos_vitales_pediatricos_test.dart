@@ -429,4 +429,19 @@ void main() {
       );
     });
   });
+
+  test('etiquetaEdad: años solo cuando el rango cae en años cumplidos', () {
+    const casos = {
+      (0, 0): 'Menor de 1 mes',
+      (0, 2): '0 - 2 meses',
+      (12, 17): '12 - 17 meses',
+      (12, 23): '1 año',
+      (24, 35): '2 años',
+      (48, 71): '4 - 5 años',
+      (180, 227): '15 - 18 años',
+    };
+    for (final c in casos.entries) {
+      expect(etiquetaEdad(c.key.$1, c.key.$2), c.value, reason: '${c.key}');
+    }
+  });
 }

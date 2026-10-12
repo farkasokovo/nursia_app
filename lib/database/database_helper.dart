@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 28, // Aumentamos la versión a 28
+      version: 29, // Aumentamos la versión a 29
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -295,6 +295,14 @@ class DatabaseHelper {
         // NO afecta datos del usuario (turno activo).
         if (oldVersion < 28) {
           await db.delete('esenciales');
+        }
+        // Se agregó la escala de signos vitales y parámetros del adulto a
+        // escalas_lista.json y a scales_data.json, y se ajustó la información
+        // de signos vitales pediátricos. Se vacía la tabla para que
+        // cargarSemillaSiHaceFalta() la vuelva a sembrar con los JSON nuevos.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 29) {
+          await db.delete('escalas');
         }
       },
     );

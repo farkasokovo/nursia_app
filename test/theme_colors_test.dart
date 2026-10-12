@@ -225,4 +225,38 @@ void main() {
       }
     });
   });
+
+  group('tarjetaSobreFondo', () {
+    double contraste(Color a, Color b) {
+      final la = a.computeLuminance(), lb = b.computeLuminance();
+      final hi = la > lb ? la : lb, lo = la > lb ? lb : la;
+      return (hi + 0.05) / (lo + 0.05);
+    }
+
+    // Las tarjetas de signos vitales y las fichitas de laboratorio se
+    // fundían con el fondo de la pestaña (1.06:1 en oscuro, 1.07:1 la
+    // fichita en claro). Este piso es el que tienen hoy, redondeado abajo.
+    for (final tema in {
+      'claro': AppTheme.lightTheme(),
+      'oscuro': AppTheme.darkTheme(),
+    }.entries) {
+      testWidgets('se despega del fondo de la pestaña (${tema.key})', (
+        tester,
+      ) async {
+        final context = await contextoConTema(tester, tema.value);
+        final esquema = Theme.of(context).colorScheme;
+        final tarjeta = ThemeColors.tarjetaSobreFondo(context);
+
+        expect(
+          contraste(tarjeta, esquema.secondaryContainer),
+          greaterThanOrEqualTo(1.3),
+        );
+        // El texto de la tarjeta (onSurface) se sigue leyendo.
+        expect(
+          contraste(esquema.onSurface, tarjeta),
+          greaterThanOrEqualTo(4.5),
+        );
+      });
+    }
+  });
 }

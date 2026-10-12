@@ -146,6 +146,25 @@ class ThemeColors {
     oscuro: AppColorsDark.ink,
   );
 
+  /// Tarjeta que va directo sobre el fondo de una pestaña
+  /// (`secondaryContainer`): las de los signos vitales y las fichitas de
+  /// laboratorio.
+  ///
+  /// Antes usaban `secondary`. En oscuro eso es `paper` (#271F18), MÁS oscuro
+  /// que el fondo (#2B241D): 1.06:1, la tarjeta no se veía. `botonCategoria`
+  /// es justo el tono de "elemento sobre el lienzo oscuro que se aclara para
+  /// despegarse" (1.38:1), y el campo de captura, que sigue en `paper`, queda
+  /// como un hueco dentro de ella.
+  ///
+  /// Esta es una de las pocas veces que el modo claro SÍ cambió, a pedido de
+  /// Diego: de `secondary` (#EFE9E4, 1.22:1) al crema más claro de la paleta
+  /// (1.33:1).
+  static Color tarjetaSobreFondo(BuildContext context) => segunTema(
+    context,
+    claro: AppColors.lightSecondaryColor,
+    oscuro: AppColorsDark.botonCategoria,
+  );
+
   /// Acento cálido de la app (#CBA786).
   ///
   /// Es el mismo valor en los dos temas: es un tono medio que se lee tanto
