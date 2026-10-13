@@ -68,7 +68,7 @@ void main() {
     test('escala 1', () {
       final casos = {
         96: NivelSigno.normal,
-        95: NivelSigno.leve,
+        95: NivelSigno.normal,
         94: NivelSigno.leve,
         93: NivelSigno.moderada,
         92: NivelSigno.moderada,

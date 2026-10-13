@@ -42,6 +42,21 @@ class _BroncodilatadoresLayout extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(height: 20),
+            FarmaButton(
+              title: "Bromuro de Ipratropio",
+              icon: PhosphorIconsRegular.wind,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => FichaMedicamento(
+                      nombreMedicamento: "Bromuro de Ipratropio",
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

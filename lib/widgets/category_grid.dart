@@ -30,16 +30,28 @@ class CategoriaGridItem {
 /// de un `TabBarView`, que es como lo usan hoy las cuatro pantallas). No
 /// estima el espacio ni consulta el alto total de la pantalla: lo mide con un
 /// `LayoutBuilder` y descuenta él mismo la barra de navegación del sistema.
+///
+/// **Mismo tamaño en todas las pantallas:** el alto del botón sale SOLO del
+/// alto disponible y de `itemsPorPagina`, nunca de cuántos ítems hay. Así dos
+/// pantallas con el mismo hueco dan botones idénticos, y la última página,
+/// aunque tenga menos renglones, conserva el tamaño de las demás.
 class CategoryGrid extends StatefulWidget {
   final List<CategoriaGridItem> items;
   final int crossAxisCount;
   final int itemsPorPagina;
+
+  /// Widget de ancho completo que ocupa el primer renglón de la primera
+  /// página, con el mismo alto que un botón. Esa página lleva un renglón de
+  /// ítems menos. Así un botón destacado (Signos Vitales en Escalas) entra en
+  /// la retícula sin desacomodar el tamaño de los demás.
+  final Widget? cabecera;
 
   const CategoryGrid({
     super.key,
     required this.items,
     this.crossAxisCount = 2,
     this.itemsPorPagina = 8,
+    this.cabecera,
   });
 
   @override
@@ -50,9 +62,9 @@ class _CategoryGridState extends State<CategoryGrid> {
   static const double _spacing = 16.0;
 
   /// Aire al final de cada página, para que al deslizar se note el corte
-  /// entre un bloque y el siguiente. Solo se reserva cuando hay más de una
-  /// página: con un solo bloque no hay nada que separar y ese espacio le hace
-  /// falta a los botones.
+  /// entre un bloque y el siguiente. Se reserva aunque haya una sola página:
+  /// si dependiera del número de páginas, una pantalla de una página tendría
+  /// botones más altos que una de dos.
   static const double _espacioEntrePaginas = 16.0;
 
   /// Margen mínimo entre el último botón y la zona del sistema. Va sumado
@@ -71,6 +83,7 @@ class _CategoryGridState extends State<CategoryGrid> {
 
   Size? _ultimoEspacio;
   double _ratioDinamico = 1;
+  double _altoBoton = _altoBotonMinimo;
 
   @override
   void initState() {
@@ -82,7 +95,8 @@ class _CategoryGridState extends State<CategoryGrid> {
   void didUpdateWidget(covariant CategoryGrid oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.items.length != widget.items.length ||
-        oldWidget.itemsPorPagina != widget.itemsPorPagina) {
+        oldWidget.itemsPorPagina != widget.itemsPorPagina ||
+        (oldWidget.cabecera == null) != (widget.cabecera == null)) {
       _bloques = _chunkList(widget.items, widget.itemsPorPagina);
     }
     // El número de filas por página depende de itemsPorPagina y de las
@@ -98,20 +112,19 @@ class _CategoryGridState extends State<CategoryGrid> {
     int chunkSize,
   ) {
     final chunks = <List<CategoriaGridItem>>[];
-    for (var i = 0; i < list.length; i += chunkSize) {
-      chunks.add(
-        list.sublist(
-          i,
-          i + chunkSize > list.length ? list.length : i + chunkSize,
-        ),
-      );
+    // La cabecera ocupa el primer renglón, así que la primera página cede
+    // los ítems de ese renglón.
+    var tamano = widget.cabecera != null
+        ? chunkSize - widget.crossAxisCount
+        : chunkSize;
+    var i = 0;
+    while (i < list.length || (chunks.isEmpty && widget.cabecera != null)) {
+      chunks.add(list.sublist(i, math.min(i + tamano, list.length)));
+      i += tamano;
+      tamano = chunkSize;
     }
     return chunks;
   }
-
-  /// Espacio reservado al final de cada página. Ver [_espacioEntrePaginas].
-  double get _separacionPaginas =>
-      _bloques.length > 1 ? _espacioEntrePaginas : 0.0;
 
   // El aspect ratio solo depende del espacio que el padre le da al grid, así
   // que se cachea y se recalcula únicamente cuando ese espacio realmente
@@ -127,12 +140,12 @@ class _CategoryGridState extends State<CategoryGrid> {
         widget.crossAxisCount;
 
     final altoParaBotones =
-        espacio.height - _separacionPaginas - (filas - 1) * _spacing;
-    final altoBoton = math.max(altoParaBotones / filas, _altoBotonMinimo);
+        espacio.height - _espacioEntrePaginas - (filas - 1) * _spacing;
+    _altoBoton = math.max(altoParaBotones / filas, _altoBotonMinimo);
 
     // GridView exige un ratio positivo; el max evita que un espacio degenerado
     // (ancho casi cero) lo tire.
-    _ratioDinamico = math.max(anchoBoton, 1.0) / altoBoton;
+    _ratioDinamico = math.max(anchoBoton, 1.0) / _altoBoton;
     _ultimoEspacio = espacio;
   }
 
@@ -187,34 +200,51 @@ class _CategoryGridState extends State<CategoryGrid> {
                 }
                 final itemCount = bloque.length + (tieneHuerfano ? 1 : 0);
 
-                return Padding(
-                  padding: EdgeInsets.only(bottom: _separacionPaginas),
-                  child: GridView.builder(
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: widget.crossAxisCount,
-                      mainAxisSpacing: _spacing,
-                      crossAxisSpacing: _spacing,
-                      childAspectRatio: _ratioDinamico,
-                    ),
-                    itemCount: itemCount,
-                    itemBuilder: (context, i) {
-                      // La celda extra (índice fuera del bloque) es el
-                      // placeholder.
-                      if (i >= bloque.length) {
-                        return const ComingSoonButton();
-                      }
-                      final item = bloque[i];
-                      return CategoryButton(
-                        title: item.titulo,
-                        icon: item.icono,
-                        heroTag: item.heroTag,
-                        onTap: item.onTap,
-                      );
-                    },
+                final grid = GridView.builder(
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: widget.crossAxisCount,
+                    mainAxisSpacing: _spacing,
+                    crossAxisSpacing: _spacing,
+                    childAspectRatio: _ratioDinamico,
                   ),
+                  itemCount: itemCount,
+                  itemBuilder: (context, i) {
+                    // La celda extra (índice fuera del bloque) es el
+                    // placeholder.
+                    if (i >= bloque.length) {
+                      return const ComingSoonButton();
+                    }
+                    final item = bloque[i];
+                    return CategoryButton(
+                      title: item.titulo,
+                      icon: item.icono,
+                      heroTag: item.heroTag,
+                      onTap: item.onTap,
+                    );
+                  },
+                );
+
+                // ListView y no Column: si el alto se comprime por debajo del
+                // piso del botón (teclado abierto), la página se recorta en
+                // vez de desbordarse.
+                final contenido = index == 0 && widget.cabecera != null
+                    ? ListView(
+                        padding: EdgeInsets.zero,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          SizedBox(height: _altoBoton, child: widget.cabecera),
+                          const SizedBox(height: _spacing),
+                          grid,
+                        ],
+                      )
+                    : grid;
+
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: _espacioEntrePaginas),
+                  child: contenido,
                 );
               },
             );

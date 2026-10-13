@@ -604,7 +604,9 @@ class _InformacionLayout extends StatelessWidget {
             ["Normal", "≥ $spo2NormalMinAdulto"],
             [
               "Desaturación leve",
-              "$spo2LeveMinAdulto - ${spo2NormalMinAdulto - 1}",
+              spo2LeveMinAdulto == spo2NormalMinAdulto - 1
+                  ? "$spo2LeveMinAdulto"
+                  : "$spo2LeveMinAdulto - ${spo2NormalMinAdulto - 1}",
             ],
             [
               "Desaturación moderada",

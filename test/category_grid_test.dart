@@ -44,6 +44,7 @@ Future<void> montarGrid(
   int itemsPorPagina = 8,
   double alto = altoDisponible,
   String? titulo,
+  Widget? cabecera,
 }) async {
   // Superficie del tamaño de un celular chico. Sin esto, la ventana de prueba
   // (800x600) recorta el alto que se le pide al hueco y las medidas mienten.
@@ -71,6 +72,7 @@ Future<void> montarGrid(
                 items: itemsDePrueba(cantidadItems, titulo: titulo),
                 crossAxisCount: crossAxisCount,
                 itemsPorPagina: itemsPorPagina,
+                cabecera: cabecera,
               ),
             ),
           ),
@@ -89,6 +91,24 @@ double bordeInferiorDelUltimoBoton(WidgetTester tester) {
       .map((e) => tester.getRect(find.byWidget(e.widget)).bottom)
       .reduce((a, b) => a > b ? a : b);
 }
+
+/// Alto del botón cuyo título es [titulo].
+double altoDelBoton(WidgetTester tester, String titulo) => tester
+    .getSize(
+      find.ancestor(
+        of: find.text(titulo),
+        matching: find.byType(CategoryButton),
+      ),
+    )
+    .height;
+
+/// Botón ancho como el de Signos Vitales en Escalas.
+Widget cabeceraDePrueba() => CategoryButton(
+  title: 'Cabecera',
+  icon: PhosphorIconsRegular.heartbeat,
+  heroTag: 'hero_cabecera',
+  onTap: () {},
+);
 
 void main() {
   testWidgets('con navegación por botones ningún botón invade la barra', (
@@ -184,5 +204,75 @@ void main() {
 
     expect(find.text('Categoría 8'), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  group('mismo tamaño de botón en todas las pantallas', () {
+    testWidgets('Escalas (cabecera + 5) y Farmacología (13) coinciden', (
+      tester,
+    ) async {
+      await montarGrid(tester, insetInferior: 48, cantidadItems: 13);
+      final altoFarmacologia = altoDelBoton(tester, 'Categoría 0');
+
+      await montarGrid(
+        tester,
+        insetInferior: 48,
+        cantidadItems: 5,
+        cabecera: cabeceraDePrueba(),
+      );
+      expect(altoDelBoton(tester, 'Categoría 0'), altoFarmacologia);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('la cabecera mide lo mismo que un botón y abarca el ancho', (
+      tester,
+    ) async {
+      await montarGrid(
+        tester,
+        insetInferior: 48,
+        cantidadItems: 5,
+        cabecera: cabeceraDePrueba(),
+      );
+
+      expect(
+        altoDelBoton(tester, 'Cabecera'),
+        altoDelBoton(tester, 'Categoría 0'),
+      );
+      // 360 de pantalla menos 16 de padding a cada lado.
+      final anchoCabecera = tester
+          .getSize(
+            find.ancestor(
+              of: find.text('Cabecera'),
+              matching: find.byType(CategoryButton),
+            ),
+          )
+          .width;
+      expect(anchoCabecera, 328);
+      // Cabecera + 5 categorías + placeholder: los 4 renglones caben en una
+      // sola página.
+      expect(find.text('Categoría 4'), findsOneWidget);
+      expect(find.byType(ComingSoonButton), findsOneWidget);
+    });
+
+    testWidgets('una pantalla de una página mide igual que una de dos', (
+      tester,
+    ) async {
+      await montarGrid(tester, insetInferior: 48, cantidadItems: 13);
+      final altoDosPaginas = altoDelBoton(tester, 'Categoría 0');
+
+      await montarGrid(tester, insetInferior: 48, cantidadItems: 7);
+      expect(altoDelBoton(tester, 'Categoría 0'), altoDosPaginas);
+    });
+
+    testWidgets('la última página conserva el tamaño aunque tenga menos '
+        'renglones', (tester) async {
+      await montarGrid(tester, insetInferior: 48, cantidadItems: 13);
+      final altoPrimera = altoDelBoton(tester, 'Categoría 0');
+
+      await tester.fling(find.byType(PageView), const Offset(0, -300), 1000);
+      await tester.pumpAndSettle();
+
+      expect(altoDelBoton(tester, 'Categoría 8'), altoPrimera);
+      expect(tester.takeException(), isNull);
+    });
   });
 }

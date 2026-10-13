@@ -24,18 +24,6 @@ class EscalasScreen extends StatefulWidget {
 }
 
 class _EscalasScreenState extends State<EscalasScreen> {
-  /// Alto del botón de ancho completo que va arriba del grid.
-  ///
-  /// Arranca en el mismo piso que `CategoryGrid` usa para sus botones, así que
-  /// no queda más bajo que una celda del grid aunque este se comprima. Al
-  /// abarcar las dos columnas, su área es el doble que la de una celda.
-  static const double _altoBotonAncho = 96.0;
-
-  /// Separación entre el botón ancho y el grid. Coincide con el `_spacing`
-  /// interno de `CategoryGrid`, para que el hueco se lea como uno más de la
-  /// retícula y no como un salto aparte.
-  static const double _separacionBotonAncho = 16.0;
-
   List<EscalaMetadata> _todasEscalas = [];
   bool _cargando = true;
 
@@ -184,45 +172,20 @@ class _EscalasScreenState extends State<EscalasScreen> {
           // ),
         ];
 
-        // "Signos Vitales" NO va dentro del grid: CategoryGrid usa un
-        // childAspectRatio único para todas sus celdas, así que no admite una
-        // celda del doble de ancho sin reescribir su cálculo. En vez de eso
-        // sale del grid y ocupa su propia fila de ancho completo arriba.
-        //
-        // El Expanded es indispensable: CategoryGrid mide el alto que le da su
-        // padre y tiene un assert que exige que sea acotado. Al recibir menos,
-        // sus botones se reajustan solos, que es lo que ya hace.
-        return Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: _altoBotonAncho,
-              child: CategoryButton(
-                title: "Signos Vitales",
-                icon: PhosphorIconsRegular.heartbeat,
-                heroTag: "signos_vitales",
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const SignosVitalesScreen(),
-                  ),
-                ),
-              ),
+        // Signos Vitales va como cabecera de ancho completo: ocupa el primer
+        // renglón de la retícula de 4, así que los demás botones miden lo
+        // mismo que en Farmacología.
+        return CategoryGrid(
+          items: todasLasCategorias,
+          cabecera: CategoryButton(
+            title: "Signos Vitales",
+            icon: PhosphorIconsRegular.heartbeat,
+            heroTag: "signos_vitales",
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const SignosVitalesScreen()),
             ),
-            const SizedBox(height: _separacionBotonAncho),
-            Expanded(
-              child: CategoryGrid(
-                items: todasLasCategorias,
-                // 6 y no el valor por omisión de 8: CategoryGrid deriva el
-                // número de filas de itemsPorPagina, no de los ítems reales
-                // del bloque, así que con 8 reservaba alto para una cuarta
-                // fila que aquí nunca se dibuja (5 categorías más el
-                // placeholder son 6 celdas en 3 filas) y los títulos de dos
-                // renglones se cortaban por unos pocos píxeles.
-                itemsPorPagina: 6,
-              ),
-            ),
-          ],
+          ),
         );
       },
     );

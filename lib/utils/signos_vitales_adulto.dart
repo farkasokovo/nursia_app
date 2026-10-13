@@ -128,8 +128,10 @@ ResultadoSigno interpretarTemperaturaAdulto(double grados) {
 
 // ── Saturación de oxígeno (NEWS2, escalas 1 y 2) ────────────────────────
 
-// Escala 1 (general): límites INFERIORES, inclusivos.
-const int spo2NormalMinAdulto = 96;
+// Escala 1 (general): límites INFERIORES, inclusivos. Normal desde 95% y no
+// desde el 96% de NEWS2, por decisión de Diego: es el valor "de libro" y el
+// mismo que usa pediatría. 94% queda como desaturación leve.
+const int spo2NormalMinAdulto = 95;
 const int spo2LeveMinAdulto = 94;
 const int spo2ModeradaMinAdulto = 92;
 

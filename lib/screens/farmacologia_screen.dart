@@ -10,6 +10,9 @@ import '../widgets/searchable_screen.dart';
 import 'farmacologia/analgesicos_screen.dart';
 import 'farmacologia/anticoagulantes_screen.dart';
 import 'farmacologia/antibioticos_screen.dart';
+import 'farmacologia/antidepresivos_screen.dart';
+import 'farmacologia/electrolitos_screen.dart';
+import 'farmacologia/hemostaticos_screen.dart';
 import 'farmacologia/antiemeticos_screen.dart';
 import 'farmacologia/broncodilatadores_screen.dart';
 import 'farmacologia/cardiovascular_screen.dart';
@@ -176,6 +179,24 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
             PhosphorIconsRegular.wind,
             "broncodilatadores",
             const BroncodilatadoresScreen(),
+          ),
+          _buildButton(
+            "Electrolitos",
+            PhosphorIconsRegular.lightning,
+            "electrolitos",
+            const ElectrolitosScreen(),
+          ),
+          _buildButton(
+            "Anti-\ndepresivos",
+            PhosphorIconsRegular.brain,
+            "antidepresivos",
+            const AntidepresivosScreen(),
+          ),
+          _buildButton(
+            "Hemostáticos",
+            PhosphorIconsRegular.firstAidKit,
+            "hemostaticos",
+            const HemostaticosScreen(),
           ),
           // _buildButton(
           //   "Próximamente",

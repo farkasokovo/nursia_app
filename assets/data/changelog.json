@@ -1,30 +1,20 @@
 [
   {
     "version": "1.4.0",
-    "fecha": "2026-09-27",
+    "fecha": "2026-10-17",
     "cambios": [
-      "Nueva ficha en Esenciales: ventiladores mecánicos, con población, volumen tidal, PEEP, frecuencia y modos del Vela, el Avea, el Engström Carestation, el Evita XL y el Savina.",
-      "La misma ficha incluye una sección de ventilación de alta frecuencia oscilatoria con los parámetros del SensorMedics 3100A y 3100B.",
-      "Los términos de glosario de las fichas de oxígeno y de modos ventilatorios se presentan como los demás encabezados, con el término arriba y su nombre completo debajo.",
-      "Las fichas de oxígeno, modos ventilatorios y ventiladores abren con un glosario plegable: se toca para desplegar las definiciones de los términos que usa la ficha, con su fuente.",
-      "Nueva categoría en Escalas: Signos Vitales, con secciones de pediátricos y de adulto. El contenido de cada una llega en la próxima actualización.",
-      "La categoría Signos Vitales estrena su primera escala: interpretación de signos vitales pediátricos. Se captura la edad y los signos tomados, y cada uno se compara contra el rango que le toca a esa edad.",
-      "Corregido el separador decimal: escribir una coma en los campos con decimales borraba el decimal sin avisar, de modo que 2,5 quedaba en 2. Afectaba a las calculadoras de dosis y de pérdidas insensibles."
-    ]
-  },
-  {
-    "version": "1.3.0",
-    "fecha": "2026-09-27",
-    "cambios": [
-      "Nueva ficha en Esenciales: modos ventilatorios básicos, con IPPV, SIMV, CPAP con ASB y BIPAP en la nomenclatura que traen los ventiladores Dräger.",
-      "La ficha de dispositivos de oxígeno ahora abre con la definición de FiO2 y la regla de 4% por litro en puntas nasales.",
-      "Las tablas de oxígeno quedan solo con el flujo en litros por minuto, y la ficha se divide en bajo y alto flujo.",
-      "Flujos corregidos: puntas nasales 1 a 5 L/min, mascarilla simple 5 a 10 L/min y mascarilla con reservorio 10 a 15 L/min.",
-      "El apartado de alto flujo describe el sistema Airvo 2 con sus rangos reales de flujo, FiO2 y temperatura.",
-      "La FiO2 se expresa en porcentaje en toda la app, ya no en decimales.",
-      "Las fichas de modos ventilatorios y de dispositivos de oxígeno abren con un glosario propio: volumen tidal, PEEP y trigger en una, FiO2 en la otra.",
-      "Las siglas de los modos ventilatorios muestran su nombre completo debajo, en letra más chica.",
-      "La ficha de modos ventilatorios aclara que la nomenclatura documentada es la del Savina, y avisa que el Evita XL llama CMV al mismo modo."
+      "Modo oscuro: la app sigue el tema del teléfono, y en el menú se puede elegir claro u oscuro.",
+      "Farmacología pasa de 26 a 36 fármacos, con tres categorías nuevas: Electrolitos (cloruro de potasio, sulfato de magnesio y gluconato de calcio), Antidepresivos (escitalopram, fluoxetina y sertralina) y Hemostáticos (ácido tranexámico, fitomenadiona y protamina).",
+      "Bromuro de ipratropio se suma a Broncodilatadores.",
+      "Cada ficha muestra la vía de administración como una etiqueta, con la vía que se usa en el hospital.",
+      "Nueva escala de signos vitales del adulto, con la presión arterial clasificada según la NOM-030 y fichas de valores de laboratorio.",
+      "Los signos vitales pediátricos suman una pestaña de Información con las tablas de referencia por edad.",
+      "Cuatro fichas nuevas en Esenciales: modos ventilatorios básicos, ventiladores mecánicos, catéter venoso central y catéter PICC.",
+      "La ficha de dispositivos de oxígeno se divide en bajo y alto flujo, con flujos corregidos, el sistema Airvo 2 y la FiO2 en porcentaje.",
+      "Las fichas de oxígeno y ventilación abren con un glosario plegable.",
+      "Los botones de categoría miden igual en Escalas y Farmacología.",
+      "Corregido el código de la NOM-087-ECOL-SSA1-2002.",
+      "Corregido el separador decimal en las calculadoras: escribir una coma ya no borra el decimal."
     ]
   },
   {

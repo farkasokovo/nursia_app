@@ -4,13 +4,13 @@
     "icono": "shieldPlus",
     "categoria": "antibiotico",
     "farmacodinamia": "Es un antibiótico bactericida de amplio espectro. Pertenece al grupo de las aminopenicilinas (betalactámicos). Actúa inhibiendo la síntesis de la pared celular bacteriana al unirse a las proteínas fijadoras de penicilina (PBP), lo que produce la lisis y muerte celular.",
-    "farmacocinetica": "Absorción: Rápida y buena absorción por vía oral, alcanzando picos plasmáticos en 1 a 2 horas. La presencia de alimentos no interfiere significativamente.\nDistribución: Difunde bien a la mayoría de los tejidos y líquidos corporales; su unión a proteínas plasmáticas es baja (aproximadamente del 18%).\nMetabolismo: Se metaboliza mínimamente en el hígado.\nEliminación: Se excreta principalmente por vía renal (50% a 70%) en forma inalterada a través de la orina. Su semivida es de aproximadamente 1 hora.",
-    "indicaciones": "Infecciones de garganta, nariz y oídos (amigdalitis, otitis media, sinusitis).\nInfecciones del tracto respiratorio inferior (bronquitis aguda y crónica, neumonías bacterianas).\nInfecciones del tracto genitourinario sin complicaciones urológicas.\nInfecciones de la piel y tejidos blandos.\nErradicación de Helicobacter pylori (en terapia combinada).",
-    "viaAdministracion": "Oral, IV",
+    "farmacocinetica": "Absorción: estable en el ácido gástrico; se absorbe cerca del 90% por vía oral y los alimentos no la modifican.\nDistribución: amplia en líquidos, tejidos y secreciones; unión a proteínas plasmáticas baja (17 a 20%). Atraviesa la placenta y pasa a la leche; solo cruza la barrera hematoencefálica con meninges inflamadas.\nMetabolismo: mínimo.\nEliminación: cerca del 80% sin cambios por la orina, según la filtración glomerular. La semivida es de 60 a 90 minutos.",
+    "indicaciones": "Infecciones agudas y crónicas de vías respiratorias altas y bajas.\nInfecciones genitourinarias.\nInfecciones de piel y tejidos blandos.\nInfecciones gastrointestinales y biliares.\nErradicación de Helicobacter pylori, en combinación con otros fármacos.",
+    "viaAdministracion": "Oral",
     "contraindicaciones": {
       "absolutas": [
-        "Hipersensibilidad demostrada al principio activo o a otros antibióticos del grupo de las penicilinas.",
-        "Antecedentes de reacciones alérgicas graves inmediatas (como anafilaxia) a otros agentes betalactámicos (p. ej., cefalosporinas o carbapenémicos)."
+        "Hipersensibilidad a las penicilinas o a las cefalosporinas.",
+        "Infecciones por bacterias productoras de betalactamasas."
       ],
       "relativas": [
         "Mononucleosis infecciosa (alto riesgo de sufrir exantema eritematoso).",
@@ -47,15 +47,29 @@
       },
       {
         "medicamento": "Anticonceptivos orales",
-        "efecto": "Puede reducir la efectividad de estos, aunque la evidencia es debatida.",
+        "efecto": "Pueden perder eficacia, porque la amoxicilina interfiere con la circulación enterohepática de los estrógenos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Cimetidina",
+        "efecto": "Aumenta la absorción de amoxicilina.",
+        "severidad": "baja"
+      },
+      {
+        "medicamento": "Pruebas de glucosa en orina",
+        "efecto": "Falso positivo con reactivos de sulfato de cobre.",
         "severidad": "baja"
       }
     ],
     "observaciones": {
-      "administracion": "Oral: Puede tomarse con o sin alimentos. IV: Administrar en bolo lento (3-5 min) o en perfusión intermitente de 30-60 min.",
+      "administracion": "Se toma con o sin alimentos. El tratamiento continúa al menos 72 horas después de que desaparecen los síntomas y los cultivos son negativos.",
       "precauciones": "Interrogar sobre alergias a betalactámicos antes de administrar. Vigilar signos de reacción anafiláctica durante los primeros 30 min post-administración."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Amoxicilina cápsulas. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/amoxicilina-capsulas/10/101/64766/14"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2022). Ficha técnica Amoxicilina Normon 500 mg comprimidos EFG. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/64388/FichaTecnica_64388.htm"
@@ -71,20 +85,23 @@
     "icono": "shieldPlus",
     "categoria": "antibiotico",
     "farmacodinamia": "Es un agente antibacteriano sintético de amplio espectro perteneciente a las fluoroquinolonas. Su acción bactericida se debe a la inhibición de las enzimas topoisomerasa II (ADN-girasa) y topoisomerasa IV. Estas enzimas son necesarias para la replicación, transcripción, reparación y recombinación del ADN bacteriano.",
-    "farmacocinetica": "Absorción: Buena absorción en el tracto gastrointestinal. Su biodisponibilidad absoluta es del 70% al 80%.\nDistribución: Posee una gran distribución tisular; alcanza concentraciones elevadas en bilis, pulmones, riñones, próstata y huesos. Su unión a proteínas es baja (20% a 40%).\nMetabolismo: Se metaboliza parcialmente en el hígado dando lugar a metabolitos con menor actividad antimicrobiana.\nEliminación: Se excreta principalmente inalterado por la orina (40% a 50%) y en menor medida por las heces. Su semivida de eliminación es de 3 a 5 horas.",
+    "farmacocinetica": "Absorción: por vía oral es rápida y casi completa, con biodisponibilidad cercana al 70%.\nDistribución: amplia en tejidos y líquidos; en líquido cefalorraquídeo alcanza cerca del 10% de la concentración plasmática. Unión a proteínas del 20 al 40%. Atraviesa la placenta y pasa a la leche.\nMetabolismo: hepático parcial, con al menos 4 metabolitos activos.\nEliminación: principalmente renal; cerca de una tercera parte por vía extrarrenal (hepática y biliar). La semivida es de 3.5 a 4.5 horas y se prolonga en insuficiencia renal grave y en adultos mayores.",
     "indicaciones": "Infecciones de las vías respiratorias bajas causadas por bacterias Gram-negativas.\nInfecciones complicadas y no complicadas del tracto urinario (incluyendo pielonefritis).\nInfecciones del tracto genital (prostatitis bacteriana, uretritis gonocócica).\nInfecciones gastrointestinales (como la diarrea del viajero y fiebre tifoidea).\nInfecciones osteoarticulares y de la piel.\nProfilaxis y tratamiento del carbunco por inhalación.",
-    "viaAdministracion": "Oral, IV",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al ciprofloxacino o a otras quinolonas.",
-        "Administración concomitante con tizanidina (por riesgo de hipotensión grave y somnolencia)."
+        "Embarazo y lactancia.",
+        "Menores de 18 años, por riesgo de artropatía.",
+        "Administración concomitante con tizanidina, por riesgo de hipotensión grave y somnolencia."
       ],
       "relativas": [
-        "Pacientes con antecedentes de trastornos de los tendones relacionados con la administración de fluoroquinolonas.",
-        "Embarazo y lactancia.",
-        "Niños y adolescentes en fase de crecimiento (excepto en indicaciones muy específicas como fibrosis quística o infecciones urinarias complicadas).",
+        "Antecedente de trastornos de los tendones relacionados con fluoroquinolonas.",
         "Epilepsia o trastornos del sistema nervioso central que predispongan a convulsiones.",
-        "Miastenia gravis (puede exacerbar la debilidad muscular)."
+        "Miastenia gravis, porque puede empeorar la debilidad muscular.",
+        "Alteración de la función hepática.",
+        "Deficiencia de glucosa-6-fosfato deshidrogenasa.",
+        "Insuficiencia renal, que requiere ajuste de dosis."
       ]
     },
     "efectosSecundarios": [
@@ -109,7 +126,7 @@
       },
       {
         "medicamento": "Teofilina",
-        "efecto": "Ciprofloxacino eleva los niveles plasmáticos de teofilina, pudiendo causar toxicidad.",
+        "efecto": "Ciprofloxacino disminuye la eliminación de teofilina y cafeína, con riesgo de toxicidad.",
         "severidad": "alta"
       },
       {
@@ -119,8 +136,18 @@
       },
       {
         "medicamento": "AINEs",
-        "efecto": "La combinación de dosis muy altas de quinolonas con ciertos antiinflamatorios puede provocar convulsiones.",
+        "efecto": "Fenbufeno y naproxeno, al igual que la cloroquina, aumentan el riesgo de efectos sobre el sistema nervioso central, incluidas convulsiones.",
         "severidad": "media"
+      },
+      {
+        "medicamento": "Ciclosporina",
+        "efecto": "Se ha observado aumento de la creatinina sérica.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Probenecid",
+        "efecto": "Reduce la excreción urinaria del ciprofloxacino.",
+        "severidad": "baja"
       }
     ],
     "observaciones": {
@@ -128,6 +155,10 @@
       "precauciones": "Proteger la solución IV de la luz solar directa. Mantener hidratación adecuada para prevenir cristaluria. Vigilar signos de tendinitis (especialmente tendón de Aquiles) durante el tratamiento."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Ciprofloxacino tabletas. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/ciprofloxacino-tabletas/10/101/60158/210"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2022). Ficha técnica Ciprofloxacino Normon 500 mg comprimidos recubiertos con película EFG. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/62300/FichaTecnica_62300.html"
@@ -143,12 +174,12 @@
     "icono": "shieldPlus",
     "categoria": "antibiotico",
     "farmacodinamia": "Es una cefalosporina de tercera generación de amplio espectro y acción prolongada. Tiene una potente actividad bactericida. Actúa inhibiendo la síntesis de la pared celular bacteriana tras su unión a las proteínas fijadoras de penicilina (PBP), causando la lisis de la bacteria.",
-    "farmacocinetica": "Absorción: La biodisponibilidad tras una inyección intramuscular es del 100%.\nDistribución: Se distribuye de manera excelente en la mayoría de los órganos, tejidos y fluidos, incluyendo el líquido cefalorraquídeo. Se une de forma masiva y reversible a la albúmina plasmática (85% al 95%).\nMetabolismo: No sufre metabolización sistémica. Es convertida en metabolitos inactivos únicamente por la flora intestinal.\nEliminación: Entre el 50% y 60% se excreta de forma inalterada por la orina, y el resto por la bilis. Tiene una semivida prolongada de unas 8 horas.",
+    "farmacocinetica": "Absorción: por vía IV las concentraciones máximas se alcanzan de inmediato.\nDistribución: Se distribuye de manera excelente en la mayoría de los órganos, tejidos y fluidos, incluyendo el líquido cefalorraquídeo. Se une de forma masiva y reversible a la albúmina plasmática (85% al 95%).\nMetabolismo: No sufre metabolización sistémica. Es convertida en metabolitos inactivos únicamente por la flora intestinal.\nEliminación: Entre el 33 y el 67% se excreta activa por la orina y el resto por la bilis; si falla una vía, la otra compensa. No se elimina por hemodiálisis en cantidad apreciable. Tiene una semivida prolongada de unas 8 horas.",
     "indicaciones": "Sepsis y bacteriemia.\nMeningitis bacteriana.\nInfecciones abdominales (peritonitis, infecciones de las vías biliares).\nInfecciones de los huesos, articulaciones, piel y tejidos blandos.\nInfecciones respiratorias graves (neumonías).\nInfecciones del tracto urinario complicadas.\nInfecciones genitales (incluyendo gonorrea).\nProfilaxis perioperatoria de infecciones.",
-    "viaAdministracion": "IM, IV",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
-        "Hipersensibilidad a las cefalosporinas o antecedentes de hipersensibilidad grave a otros betalactámicos.",
+        "Hipersensibilidad a las cefalosporinas, o reacción inmediata moderada o grave a la penicilina.",
         "Neonatos prematuros hasta una edad postmenstrual de 41 semanas.",
         "Neonatos a término con ictericia o hiperbilirrubinemia (riesgo de encefalopatía por desplazamiento de bilirrubina).",
         "Tratamiento concomitante con soluciones que contengan calcio en neonatos (por riesgo de precipitación fatal en pulmones y riñones)."
@@ -184,15 +215,25 @@
       },
       {
         "medicamento": "Pruebas de laboratorio",
-        "efecto": "Puede dar falsos positivos en la prueba de Coombs y en pruebas de glucosuria mediante métodos reductores.",
+        "efecto": "Puede dar falso positivo en la prueba de Coombs y en las pruebas de glucosa en orina con sulfato de cobre (Clinitest).",
         "severidad": "baja"
+      },
+      {
+        "medicamento": "Aminoglucósidos",
+        "efecto": "Su administración simultánea puede causar nefrotoxicidad.",
+        "severidad": "media"
       }
     ],
     "observaciones": {
-      "administracion": "IV: Administrar en perfusión intermitente de 30 min. IM: Inyectar profundamente en músculo grande (glúteo mayor). Nunca mezclar ni administrar simultáneamente por la misma vía con soluciones que contengan calcio.",
-      "precauciones": "En neonatos, cualquier administración IV de calcio debe separarse al menos 48 h."
+      "preparacion": "Se reconstituye con el diluyente de la ampolleta para uso IV. Para infusión se disuelve en una solución sin calcio: solución fisiológica 0.9%, solución glucosada al 5% o al 10%. No se mezcla físicamente con otros medicamentos. El color amarillento de la solución es normal.",
+      "administracion": "IV en bolo lento de 2 a 4 minutos, o en infusión. La presentación IM, que contiene lidocaína, nunca se administra por vía IV. Nunca se mezcla ni se administra al mismo tiempo con soluciones que contengan calcio.",
+      "precauciones": "En neonatos, cualquier administración IV de calcio se separa al menos 48 horas. En tratamientos prolongados se vigilan biometría hemática y pruebas hepáticas. La diarrea durante el tratamiento obliga a descartar colitis por Clostridioides difficile."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Amcef (ceftriaxona) solución inyectable IV. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/amcef-solucion-inyectable-iv/10/101/60793/166"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Ceftriaxona Normon 1000 mg polvo y disolvente para solución inyectable y para perfusión EFG. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/62635/FichaTecnica_62635.html"
@@ -210,7 +251,7 @@
     "farmacodinamia": "Produce analgesia por la inhibición de la síntesis de prostaglandinas en el sistema nervioso central.\nEjerce su acción antipirética al actuar sobre el centro regulador de la temperatura en el hipotálamo.\nNo posee efectos antiinflamatorios periféricos significativos ni afecta a la agregación plaquetaria.",
     "farmacocinetica": "Absorción: Rápida y completa por vía oral, con una biodisponibilidad del 75% al 85%. Los picos plasmáticos se alcanzan entre los 30 y 90 minutos.\nDistribución: Se distribuye de manera uniforme en la mayoría de los fluidos corporales. Su unión a proteínas plasmáticas es baja (menor al 20%).\nMetabolismo: Se metaboliza extensamente en el hígado, principalmente por conjugación. Una pequeña fracción se metaboliza por el citocromo P-450 dando lugar a un metabolito intermedio reactivo (NAPQI), el cual se inactiva por el glutatión.\nEliminación: Se excreta por la orina en más del 95% en forma de metabolitos conjugados. Su semivida de eliminación es de aproximadamente 2 horas.",
     "indicaciones": "Tratamiento sintomático del dolor de intensidad leve o moderada.\nAlivio de estados febriles.",
-    "viaAdministracion": "Oral, Rectal, IV",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad conocida al paracetamol o al clorhidrato de propacetamol."
@@ -276,7 +317,7 @@
     "farmacodinamia": "Es un compuesto no esteroideo derivado del ácido propiónico con marcadas propiedades analgésicas, antipiréticas y antiinflamatorias.\nSu mecanismo de acción se basa en la inhibición de la síntesis de prostaglandinas mediante la inhibición no selectiva de las enzimas ciclooxigenasa-1 (COX-1) y ciclooxigenasa-2 (COX-2).",
     "farmacocinetica": "Absorción: Se absorbe rápidamente en el tracto gastrointestinal. Los niveles plasmáticos máximos se alcanzan en 1 a 2 horas tras la administración oral.\nDistribución: Se une fuertemente a las proteínas plasmáticas (aproximadamente un 99%).\nMetabolismo: Se metaboliza ampliamente en el hígado a través de procesos de oxidación.\nEliminación: Se excreta casi por completo a través de los riñones en forma de metabolitos inactivos. Su semivida de eliminación es de unas 2 horas.",
     "indicaciones": "Tratamiento de procesos inflamatorios (como artritis reumatoide o espondilitis anquilosante).\nAlivio del dolor de intensidad leve a moderada (cefaleas, dismenorrea, dolor dental).\nTratamiento sintomático de la fiebre.",
-    "viaAdministracion": "Oral, IV",
+    "viaAdministracion": "Oral",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al principio activo o a otros AINEs.",
@@ -345,23 +386,24 @@
     "icono": "bandaids",
     "categoria": "analgesico",
     "farmacodinamia": "Es un fármaco antiinflamatorio no esteroideo (AINE) con una potente actividad analgésica y una moderada actividad antiinflamatoria y antipirética.\nInhibe la síntesis de prostaglandinas mediante el bloqueo de las enzimas ciclooxigenasas (COX-1 y COX-2).",
-    "farmacocinetica": "Absorción: Rápida y completa tras la administración oral e intramuscular. Los picos plasmáticos se obtienen a los 30-45 minutos tras la vía oral y a los 45-50 minutos por vía intramuscular.\nDistribución: Presenta una elevada unión a proteínas plasmáticas (99%). Atraviesa mal la barrera hematoencefálica.\nMetabolismo: Se metaboliza principalmente en el hígado mediante hidroxilación y conjugación.\nEliminación: Más del 90% de la dosis se elimina por vía urinaria (como fármaco inalterado o metabolitos) y el resto en heces. Su semivida de eliminación oscila entre las 4 y 6 horas.",
-    "indicaciones": "Tratamiento a corto plazo del dolor moderado o severo en el postoperatorio.",
-    "viaAdministracion": "Oral, IV, IM",
+    "farmacocinetica": "Absorción: completa; concentración plasmática máxima entre 30 y 60 minutos. La analgesia dura cerca de 6 horas.\nDistribución: se une 99% a proteínas plasmáticas; penetra poco al líquido cefalorraquídeo. Atraviesa la placenta y pasa en poca cantidad a la leche.\nMetabolismo: hepático, por hidroxilación y conjugación.\nEliminación: cerca del 90% por la orina, sobre todo sin cambios. La semivida es de 4 a 6 horas; de 6 a 7 en adultos mayores y de 9 a 10 en insuficiencia renal.",
+    "indicaciones": "Tratamiento a corto plazo del dolor agudo moderado a grave.\nDolor perioperatorio, cuando se ha valorado la función plaquetaria.",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al ketorolaco u otros AINEs.",
-        "Antecedentes de alergia al ácido acetilsalicílico u otros inhibidores de la síntesis de prostaglandinas.",
-        "Úlcera péptica activa, perforación o hemorragia gastrointestinal.",
+        "Antecedente de asma bronquial, broncoespasmo, pólipos nasales o angioedema.",
+        "Sangrado gastrointestinal o úlcera péptica activa.",
         "Insuficiencia renal moderada o grave.",
-        "Pacientes con hemorragia cerebrovascular confirmada o sospechada, o con diátesis hemorrágica.",
-        "No debe utilizarse para analgesia profiláctica antes de la intervención quirúrgica o durante la misma debido al riesgo de hemorragia.",
-        "Embarazo, parto y lactancia."
+        "Hipovolemia o deshidratación.",
+        "Hemorragia cerebrovascular confirmada o sospechada, o diátesis hemorrágica.",
+        "Embarazo, parto y lactancia.",
+        "Menores de 16 años."
       ],
       "relativas": [
-        "Pacientes de edad avanzada (mayor riesgo de efectos adversos).",
-        "Antecedentes de enfermedad inflamatoria intestinal (colitis ulcerosa o enfermedad de Crohn).",
-        "Pacientes con hipovolemia o deshidratación."
+        "Edad avanzada, por mayor riesgo de efectos adversos.",
+        "Antecedente de enfermedad inflamatoria intestinal (colitis ulcerosa o enfermedad de Crohn).",
+        "Hipotensión, que aumenta el riesgo renal y se corrige antes de administrarlo."
       ]
     },
     "efectosSecundarios": [
@@ -396,13 +438,32 @@
         "medicamento": "Litio y metotrexato",
         "efecto": "Ketorolaco disminuye su aclaramiento, pudiendo provocar toxicidad de estos fármacos.",
         "severidad": "media"
+      },
+      {
+        "medicamento": "IECA y otros nefrotóxicos",
+        "efecto": "Aumentan el riesgo de daño renal, sobre todo con hipovolemia.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Probenecid",
+        "efecto": "Reduce la eliminación del ketorolaco y aumenta sus niveles.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Paracetamol en uso prolongado",
+        "efecto": "Aumenta el riesgo de daño renal.",
+        "severidad": "media"
       }
     ],
     "observaciones": {
-      "administracion": "IV: En bolo, administrar lentamente en al menos 15 segundos; en perfusión, infundir en 15-30 min. IM: Inyectar profundamente en músculo grande.",
-      "precauciones": "Monitorizar función renal, especialmente en pacientes deshidratados o de edad avanzada."
+      "administracion": "IV en al menos 15 segundos. Nunca por vía intratecal ni epidural. El tratamiento no excede 5 días; se cambia a otro analgésico en cuanto sea posible.",
+      "precauciones": "La primera dosis se aplica en un servicio preparado para atender anafilaxia. Se vigila la función renal, sobre todo en pacientes deshidratados o de edad avanzada. Puede enmascarar signos de infección."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Ketorolaco solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/ketorolaco-solucion-inyectable/10/101/44008/162"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Ketorolaco Trometamol premed 30 mg/ml solución inyectable. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/61821/FichaTecnica_61821.html"
@@ -420,7 +481,7 @@
     "farmacodinamia": "Betabloqueante cardioselectivo que actúa de manera preferente sobre los receptores beta-1 adrenérgicos localizados en el corazón.\nReduce la frecuencia cardiaca, el gasto cardiaco y la presión arterial elevada.\nCarece de actividad simpaticomimética intrínseca y de efecto estabilizador de membrana.",
     "farmacocinetica": "Absorción: Se absorbe casi por completo tras la vía oral, pero tiene una biodisponibilidad reducida del 40% al 50% por el metabolismo de primer paso hepático.\nDistribución: Su unión a proteínas plasmáticas es baja (aproximadamente del 12%) y atraviesa de forma activa la barrera hematoencefálica.\nMetabolismo: Se metaboliza intensamente en el hígado, principalmente a través de la vía enzimática del CYP2D6.\nEliminación: Se excreta de manera casi exclusiva por vía renal en forma de metabolitos inactivos, con una semivida de eliminación corta de 3 a 5 horas.",
     "indicaciones": "Hipertensión arterial sistémica.\nAngina de pecho crónica.\nArritmias cardiacas (especialmente taquicardias supraventriculares).\nTratamiento de mantenimiento después de un infarto agudo de miocardio.\nProfilaxis de la migraña.",
-    "viaAdministracion": "Oral, IV",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al metoprolol o a otros betabloqueantes.",
@@ -563,13 +624,13 @@
     "icono": "heartbeat",
     "categoria": "antihipertensivo",
     "farmacodinamia": "Es un antagonista sintético de los receptores de la angiotensina II (tipo AT1), englobado en el grupo de los ARA-II.\nBloquea de forma altamente selectiva la unión de la angiotensina II a los receptores AT1 celulares.\nReduce la vasoconstricción y la liberación de aldosterona sin inhibir la degradación de la bradicinina, por lo que rara vez causa tos.",
-    "farmacocinetica": "Absorción: Buena absorción oral, pero sufre un intenso metabolismo de primer paso que deja una biodisponibilidad del 33%.\nDistribución: Se une en un porcentaje mayor o igual al 99% a las proteínas plasmáticas (principalmente albúmina).\nMetabolismo: Se convierte en el hígado en un metabolito activo de ácido carboxílico que es de 10 a 40 veces más potente que el propio losartán.\nEliminación: Se excreta tanto por vía urinaria como por la bilis y las heces. Su semivida terminal es de unas 2 horas para el losartán y de 6 a 9 horas para su metabolito activo.",
+    "farmacocinetica": "Absorción: buena por vía oral, con intenso metabolismo de primer paso; biodisponibilidad cercana al 33%. Concentración máxima a la hora para el losartán y a las 3 a 4 horas para su metabolito activo.\nDistribución: losartán y metabolito se unen más del 98% a proteínas plasmáticas.\nMetabolismo: hepático, por CYP2C9 y CYP3A4, a E-3174, un metabolito activo más potente.\nEliminación: por orina y por bilis y heces. La semivida es de 1.5 a 2.5 horas para el losartán y de 3 a 9 horas para el metabolito activo.",
     "indicaciones": "Tratamiento de la hipertensión esencial.\nTratamiento de la enfermedad renal en pacientes hipertensos con diabetes tipo 2 y proteinuria significativa.\nTratamiento de la insuficiencia cardiaca crónica (cuando el tratamiento con IECAs no se considera adecuado por intolerancia).\nReducción del riesgo de accidente cerebrovascular en pacientes hipertensos con hipertrofia ventricular izquierda.",
     "viaAdministracion": "Oral",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al losartán o a cualquiera de sus componentes.",
-        "Segundo y tercer trimestres del embarazo.",
+        "Embarazo.",
         "Insuficiencia hepática grave.",
         "Uso concomitante con aliskiren en pacientes diabéticos o con insuficiencia renal de moderada a grave."
       ],
@@ -577,7 +638,8 @@
         "Antecedentes de angioedema.",
         "Estenosis bilateral de la arteria renal o estenosis en riñón único.",
         "Pacientes con hipovolemia extrema o depleción de sodio.",
-        "Primer trimestre de embarazo y periodo de lactancia."
+        "Lactancia.",
+        "Insuficiencia renal o hepática, y edad avanzada, que pueden requerir menor dosis."
       ]
     },
     "efectosSecundarios": [
@@ -616,9 +678,13 @@
     ],
     "observaciones": {
       "administracion": "Tomar con o sin alimentos, preferentemente a la misma hora del día.",
-      "precauciones": "Vigilar hipotensión en pacientes con depleción de volumen o sodio."
+      "precauciones": "Se corrige la depleción de volumen o de sodio antes de iniciar para evitar hipotensión. Se vigila el potasio, sobre todo en adultos mayores y en insuficiencia renal. Si ocurre un embarazo, se suspende lo antes posible."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Losartán comprimidos. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/losartan-comprimidos/10/101/64754/25"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2024). Ficha técnica Losartán Pensa 50 mg comprimidos recubiertos con película EFG. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/68156/FT_68156.html"
@@ -634,21 +700,23 @@
     "icono": "thermometer",
     "categoria": "antiinflamatorios",
     "farmacodinamia": "Fármaco analgésico, antipirético y espasmolítico del grupo de las pirazolonas.\nSu mecanismo es complejo y combina la inhibición de la síntesis de prostaglandinas a nivel central y periférico con interacciones en los sistemas cannabinoide y opioide.",
-    "farmacocinetica": "Absorción: Rápida y casi completa por vía oral. Es un profármaco que se hidroliza en el intestino a su metabolito activo principal, la 4-metilaminoantipirina (MAA).\nDistribución: La unión del metabolito MAA a las proteínas plasmáticas es de aproximadamente el 58%.\nMetabolismo: Se metaboliza de forma intensa en el hígado.\nEliminación: Se excreta mayoritariamente por la orina (en un 90%). Su semivida de eliminación en sangre oscila entre 2.5 y 4 horas.",
-    "indicaciones": "Dolor agudo intenso postoperatorio o postraumático.\nDolor de tipo cólico (por ejemplo, cólico renal).\nFiebre alta que no responde a otros antitérmicos.",
-    "viaAdministracion": "Oral, Rectal, IM, IV",
+    "farmacocinetica": "Absorción: por vía IV actúa de inmediato. Es un profármaco que se convierte en metabolitos activos.\nDistribución: se une cerca de 15% a proteínas plasmáticas y se distribuye a casi todos los tejidos.\nMetabolismo: hepático, por desmetilación y acetilación.\nEliminación: los metabolitos se eliminan por la orina. La semivida es de 7 a 9 horas.",
+    "indicaciones": "Dolor leve a intenso, agudo o crónico.\nDolor cólico de vías biliares, renales, urinarias o gastrointestinal.\nFiebre que no cede con medidas físicas.",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
-        "Hipersensibilidad al metamizol o a otras pirazolonas.",
-        "Antecedentes de agranulocitosis por medicamentos.",
-        "Deficiencia de glucosa-6-fosfato deshidrogenasa (riesgo de hemólisis).",
-        "Porfiria aguda intermitente.",
-        "Tercer trimestre del embarazo."
+        "Hipersensibilidad a las pirazolonas.",
+        "Deficiencia de glucosa-6-fosfato deshidrogenasa.",
+        "Insuficiencia hepática, hepatitis o porfiria hepática.",
+        "Agranulocitosis, discrasias sanguíneas o nefritis.",
+        "Embarazo y lactancia.",
+        "Infarto agudo de miocardio, estado de choque o politraumatismo.",
+        "Hipotensión arterial (sistólica menor de 100 mmHg)."
       ],
       "relativas": [
-        "Hipotensión arterial preexistente o inestabilidad hemodinámica.",
-        "Insuficiencia renal o hepática severa (se requiere reducir la dosis).",
-        "Asma por analgésicos."
+        "Antecedentes respiratorios de tipo alérgico o asma por analgésicos.",
+        "Tratamiento con citostáticos u otros fármacos que afectan la médula ósea.",
+        "Insuficiencia renal."
       ]
     },
     "efectosSecundarios": [
@@ -659,7 +727,9 @@
     "efectosAdversos": [
       "Agranulocitosis (efecto secundario muy raro pero grave y potencialmente mortal).",
       "Shock anafiláctico.",
-      "Reacciones cutáneas severas (como el Síndrome de Stevens-Johnson)."
+      "Reacciones cutáneas severas (como el Síndrome de Stevens-Johnson).",
+      "Hipotensión grave y choque con la inyección IV rápida.",
+      "Proteinuria, oliguria y nefritis intersticial."
     ],
     "interacciones": [
       {
@@ -676,13 +746,22 @@
         "medicamento": "Metotrexato",
         "efecto": "Aumenta el riesgo de toxicidad hematológica de este último.",
         "severidad": "alta"
+      },
+      {
+        "medicamento": "Otros medicamentos en la misma solución",
+        "efecto": "Incompatibilidad física; no se mezcla en la misma solución.",
+        "severidad": "baja"
       }
     ],
     "observaciones": {
-      "administracion": "IV: Administrar en perfusión lenta de 15-30 min; nunca en bolo rápido por riesgo de hipotensión grave. IM: Inyectar profundamente en músculo grande.",
-      "precauciones": "Mantener al paciente en decúbito y monitorizar la presión arterial durante la infusión IV."
+      "administracion": "IV diluido en solución fisiológica 0.9%, por venoclisis lenta, con el paciente en decúbito y vigilancia de la presión arterial. Nunca IV directa rápida.",
+      "precauciones": "El paciente debe estar hemodinámicamente estable antes de la infusión. Se interroga sobre alergias a analgésicos antes de administrarlo."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Metamizol sódico solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/metamizol-sodico-solucion-inyectable/10/101/52627/162"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2021). Ficha técnica Metamizol Normon 500 mg cápsulas duras. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/59345/FichaTecnica_59345.html"
@@ -700,19 +779,23 @@
     "farmacodinamia": "Corticoide sintético de acción prolongada.\nMuy potente efecto antiinflamatorio (unas 25 a 30 veces más potente que la hidrocortisona) e inmunosupresor.\nCasi nula actividad mineralocorticoide (no retiene tanto sodio).",
     "farmacocinetica": "Absorción: Buena absorción por vía oral, con una biodisponibilidad del 70% al 80%.\nDistribución: Se une principalmente a la albúmina plasmática. Atraviesa la barrera hematoencefálica y placentaria.\nMetabolismo: Metabolismo hepático a través del sistema CYP3A4.\nEliminación: Se elimina de forma mayoritaria por la orina. Su semivida biológica es larga, durando de 36 a 54 horas.",
     "indicaciones": "Tratamiento del edema cerebral secundario a tumores.\nProcesos inflamatorios y alérgicos graves (como estatus asmático).\nEnfermedades autoinmunes (p. ej., brotes de lupus eritematoso sistémico).\nPrevención y tratamiento de las náuseas inducidas por quimioterapia.\nTratamiento de COVID-19 grave en pacientes que requieren oxígeno suplementario.",
-    "viaAdministracion": "Oral, IV, IM, Tópica/Oftálmica",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad a la dexametasona.",
-        "Infecciones fúngicas sistémicas.",
-        "Administración de vacunas de virus vivos atenuados en pacientes con dosis inmunosupresoras."
+        "Micosis sistémicas.",
+        "Tuberculosis activa.",
+        "Hipertensión arterial grave.",
+        "Infecciones activas, incluidos procesos virales sistémicos graves.",
+        "Diabetes mellitus.",
+        "Administración de vacunas de virus vivos en pacientes con dosis inmunosupresoras."
       ],
       "relativas": [
         "Úlcera péptica activa.",
-        "Hipertensión arterial grave.",
-        "Diabetes mellitus descontrolada (por aumento de la glucemia).",
-        "Osteoporosis severa.",
-        "Tuberculosis activa."
+        "Osteoporosis grave.",
+        "Herpes simple ocular, por riesgo de perforación corneal.",
+        "Infarto agudo de miocardio reciente.",
+        "Embarazo y lactancia."
       ]
     },
     "efectosSecundarios": [
@@ -743,13 +826,32 @@
         "medicamento": "Inductores enzimáticos (como fenitoína o rifampicina)",
         "efecto": "Disminuyen los niveles y el efecto de la dexametasona.",
         "severidad": "media"
+      },
+      {
+        "medicamento": "Anticoagulantes cumarínicos",
+        "efecto": "La dexametasona puede alterar su respuesta.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Diuréticos y anfotericina B",
+        "efecto": "Suman pérdida de potasio.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Vacunas de virus vivos",
+        "efecto": "Riesgo de infección por la inmunosupresión.",
+        "severidad": "alta"
       }
     ],
     "observaciones": {
-      "administracion": "IV: Administrar en bolo lento o en perfusión intermitente. Oral: Tomar con alimentos para reducir la irritación gástrica; administrar preferentemente por la mañana para respetar el ritmo circadiano del cortisol. IM: Inyectar profundamente en músculo grande.",
+      "administracion": "IV en bolo lento o en infusión intermitente. La inyección IV puede causar ardor o parestesia perineal transitoria.",
       "precauciones": "No suspender bruscamente tras tratamientos prolongados; reducir la dosis de forma gradual para evitar insuficiencia suprarrenal aguda. Vigilar la glucemia, especialmente en pacientes diabéticos. Estar alerta a infecciones enmascaradas por el efecto inmunosupresor."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Dexametasona solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/dexametasona-solucion-inyectable/10/101/43792/162"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Dexametasona Qualigen 4 mg comprimidos EFG. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/81729/FichaTecnica_81729.html"
@@ -765,21 +867,22 @@
     "icono": "thermometer",
     "categoria": "antiinflamatorios",
     "farmacodinamia": "Fármaco antiinflamatorio no esteroideo (AINE) con propiedades analgésicas y antipiréticas derivadas del ácido propiónico.\nActúa mediante la inhibición no selectiva de las enzimas ciclooxigenasas COX-1 y COX-2, reduciendo la síntesis de prostaglandinas.",
-    "farmacocinetica": "Absorción: Rápida y completa tras la administración oral.\nDistribución: Se une intensamente a la albúmina plasmática (en más del 99%).\nMetabolismo: Metabolismo hepático hacia metabolitos inactivos.\nEliminación: Prácticamente toda la dosis se excreta en la orina. Presenta una semivida de eliminación prolongada de 12 a 17 horas.",
+    "farmacocinetica": "Absorción: rápida y completa; los alimentos retrasan pero no reducen la absorción. Los antiácidos con aluminio la disminuyen. Concentración máxima a las 2 a 4 horas.\nDistribución: se une cerca del 99% a proteínas plasmáticas, sobre todo albúmina. Atraviesa la placenta y pasa al líquido sinovial y en poca cantidad a la leche.\nMetabolismo: hepático; cerca del 30% por 6-desmetilación.\nEliminación: cerca del 95% por la orina. La semivida es de unas 14 horas.",
     "indicaciones": "Tratamiento del dolor leve a moderado.\nAlivio sintomático de la artritis reumatoide, osteoartritis y espondilitis anquilosante.\nTratamiento de ataques agudos de gota.\nAlivio de la dismenorrea primaria.",
-    "viaAdministracion": "Oral, Rectal",
+    "viaAdministracion": "Oral",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al naproxeno o reactividad cruzada con el ácido acetilsalicílico u otros AINEs.",
         "Úlcera péptica activa o antecedentes de hemorragia o perforación gastrointestinal asociada a AINEs.",
         "Insuficiencia cardiaca grave.",
         "Insuficiencia renal o hepática graves.",
-        "Tercer trimestre de embarazo."
+        "Embarazo y lactancia.",
+        "Menores de 12 años."
       ],
       "relativas": [
         "Hipertensión arterial o insuficiencia cardiaca leve a moderada.",
         "Enfermedad renal o hepática leve a moderada.",
-        "Primer y segundo trimestre de embarazo."
+        "Insuficiencia renal; no se usa con depuración de creatinina menor de 20 mL/min."
       ]
     },
     "efectosSecundarios": [
@@ -808,12 +911,36 @@
         "medicamento": "Diuréticos y antihipertensivos",
         "efecto": "Naproxeno puede disminuir su efecto terapéutico y potenciar el daño renal.",
         "severidad": "media"
+      },
+      {
+        "medicamento": "Metotrexato",
+        "efecto": "Reduce su secreción tubular y aumenta su toxicidad.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "IECA",
+        "efecto": "Aumentan el riesgo de insuficiencia renal.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Hidantoínas (fenitoína)",
+        "efecto": "Pueden requerir ajuste por la alta unión del naproxeno a proteínas.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Probenecid",
+        "efecto": "Prolonga la semivida del naproxeno.",
+        "severidad": "baja"
       }
     ],
     "observaciones": {
-      "precauciones": "Usar la dosis eficaz más baja durante el menor tiempo posible."
+      "precauciones": "Usar la dosis eficaz más baja durante el menor tiempo posible. Se suspende al menos 72 horas antes de pruebas de función suprarrenal."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Naproxeno tabletas. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/naproxeno-tabletas/10/101/64760/210"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Naproxeno Normon 500 mg comprimidos EFG. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/56230/FichaTecnica_56230.html"
@@ -829,21 +956,26 @@
     "icono": "drop",
     "categoria": "diureticos",
     "farmacodinamia": "Diurético de asa de gran potencia.\nBloquea el sistema de cotransporte de Na+/K+/2Cl- en la rama ascendente del asa de Henle, aumentando la excreción de sodio, potasio, calcio y magnesio.\nReduce la presión de llenado ventricular izquierdo antes de que se produzca el efecto diurético propiamente dicho.",
-    "farmacocinetica": "Absorción: Por vía oral su biodisponibilidad oscila entre el 50% y el 70%. La presencia de alimentos puede retrasar su absorción.\nDistribución: Se une intensamente a las proteínas plasmáticas (más del 95%), principalmente a la albúmina.\nMetabolismo: Se metaboliza mínimamente en el hígado a glucurónido de furosemida.\nEliminación: Se excreta de forma mayoritaria en la orina como fármaco inalterado. Su semivida de eliminación es de aproximadamente 1 a 1.5 horas.",
-    "indicaciones": "Tratamiento de edemas asociados a insuficiencia cardiaca congestiva, cirrosis hepática y enfermedad renal.\nEdema pulmonar agudo.\nCrisis hipertensivas (junto con otras medidas médicas).",
-    "viaAdministracion": "Oral, IV, IM",
+    "farmacocinetica": "Absorción: por vía IV el efecto inicia en unos 5 minutos y dura hasta 2 horas. La respuesta diurética es proporcional a la dosis.\nDistribución: se une cerca del 90% a la albúmina. Atraviesa la placenta y pasa a la leche.\nMetabolismo: hepático.\nEliminación: por la orina, sin cambios y como glucurónido; 6 a 8% por heces. La semivida se prolonga en neonatos y en insuficiencia renal, hepática o cardiaca.",
+    "indicaciones": "Edema por insuficiencia cardiaca aguda, hepatopatías y nefropatías.\nEdema pulmonar agudo.\nEdema cerebral, como coadyuvante, y edema por quemaduras.\nCrisis hipertensivas, junto con otras medidas.\nDiuresis forzada en intoxicaciones.",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad a la furosemida o a las sulfonamidas.",
-        "Hipovolemia o deshidratación severa.",
-        "Insuficiencia renal con anuria que no responde a la furosemida.",
-        "Hipopotasemia o hiponatremia graves.",
+        "Anuria.",
+        "Hipovolemia, con o sin hipotensión.",
+        "Hiponatremia.",
+        "Hipocalcemia.",
+        "Hipopotasemia grave.",
         "Estado comatoso o precomatoso asociado a encefalopatía hepática."
       ],
       "relativas": [
-        "Pacientes con hipotensión.",
-        "Diabetes mellitus (puede alterar el control de la glucosa).",
-        "Gota o hiperuricemia."
+        "Hipotensión.",
+        "Diabetes mellitus, porque puede alterar el control de la glucosa.",
+        "Gota o hiperuricemia.",
+        "Obstrucción del flujo urinario (hiperplasia prostática, estenosis uretral).",
+        "Adultos mayores, más sensibles a la hipotensión y a las alteraciones electrolíticas.",
+        "Lactancia."
       ]
     },
     "efectosSecundarios": [
@@ -861,7 +993,7 @@
     "interacciones": [
       {
         "medicamento": "Antibióticos aminoglucósidos",
-        "efecto": "Aumentan el riesgo de ototoxicidad y nefrotoxicidad.",
+        "efecto": "Aumentan el riesgo de ototoxicidad y nefrotoxicidad, igual que el cisplatino.",
         "severidad": "alta"
       },
       {
@@ -878,14 +1010,23 @@
         "medicamento": "Digoxina",
         "efecto": "La hipopotasemia provocada por la furosemida aumenta la toxicidad de los digitálicos.",
         "severidad": "alta"
+      },
+      {
+        "medicamento": "Cefalosporinas",
+        "efecto": "La furosemida aumenta su nefrotoxicidad.",
+        "severidad": "media"
       }
     ],
     "observaciones": {
-      "preparacion": "Evitar mezclar con soluciones ácidas (pH < 5.5) o con glucosa 5% por riesgo de precipitación.",
-      "administracion": "IV en bolo: No superar una velocidad de infusión de 4 mg/min (reducir a 1 mg/min en insuficiencia renal grave) para evitar ototoxicidad. En dosis altas, preferir perfusión continua. Oral: Administrar preferentemente por la mañana para evitar nicturia.",
+      "preparacion": "Evitar mezclar con soluciones ácidas (pH < 5.5) o con glucosa 5% por riesgo de precipitación. No se administra si la solución está amarilla.",
+      "administracion": "IV lenta, sin superar 4 mg/min (1 mg/min en insuficiencia renal grave) para evitar ototoxicidad. En dosis altas se prefiere la infusión continua.",
       "precauciones": "Vigilar signos de deshidratación y desequilibrio hidroelectrolítico."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Furosemida solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/furosemida-solucion-inyectable/10/101/60172/162"
+      },
       {
         "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2021). Ficha técnica Furosemida Teva 40 mg comprimidos. CIMA.",
         "url": "https://cima.aemps.es/cima/dochtml/ft/61756/FichaTecnica_61756.html"
@@ -1036,23 +1177,34 @@
     "icono": "drop",
     "categoria": "anticoagulante",
     "farmacodinamia": "Fármaco anticoagulante de acción rápida.\nSe une de forma reversible a la antitrombina III (ATIII), lo que provoca un cambio conformacional que acelera hasta 1000 veces la inactivación de los factores de coagulación activados.\nInactiva principalmente al Factor IIa (trombina) y al Factor Xa, impidiendo la conversión de fibrinógeno en fibrina.\nInhibe la activación de los factores IX, XI y XII, así como la agregación plaquetaria inducida por trombina.\nNo tiene actividad fibrinolítica intrínseca (no disuelve los coágulos ya formados, sino que evita su extensión).",
-    "farmacocinetica": "Absorción: No se absorbe por vía oral debido a su gran tamaño molecular y carga negativa; se destruye en el tracto gastrointestinal. Tras la inyección intravenosa el efecto es inmediato, mientras que por vía subcutánea se retrasa entre 20 y 60 minutos.\nDistribución: Se une extensamente a lipoproteínas, globulinas y fibrinógeno plasmáticos. No atraviesa la barrera placentaria ni se distribuye en la leche materna.\nMetabolismo: Se metaboliza de forma parcial en el hígado por la enzima heparinasa y también es capturada por el sistema reticuloendotelial.\nEliminación: Se excreta a través de la orina en forma de metabolitos y fármaco inalterado. Su semivida de eliminación plasmática es de 1 a 2 horas (dosis-dependiente) y se prolonga notablemente en pacientes con cirrosis o insuficiencia renal grave.",
-    "indicaciones": "Prevención y tratamiento de la trombosis venosa profunda (TVP) y de la tromboembolia pulmonar (TEP).\nManejo inicial del infarto agudo de miocardio (IAM) y la angina inestable.\nPrevención de la coagulación en la circulación extracorpórea durante la cirugía cardiovascular y procedimientos de hemodiálisis.\nTratamiento de la coagulación intravascular diseminada (CID).",
-    "viaAdministracion": "IV, SC",
+    "farmacocinetica": "Absorción: no se absorbe por vía oral. Por vía SC el efecto inicia en 20 a 60 minutos; por vía IV es inmediato.\nDistribución: se une sobre todo a lipoproteínas de baja densidad, y en menor medida a globulinas y fibrinógeno. No atraviesa la placenta ni pasa a la leche.\nMetabolismo: hepático y por el sistema reticuloendotelial.\nEliminación: renal, sobre todo como metabolitos; no se elimina por hemodiálisis. La semivida es de 1 a 6 horas y aumenta en insuficiencia renal o hepática y en obesidad.",
+    "indicaciones": "Profilaxis y tratamiento de la trombosis venosa profunda y la tromboembolia pulmonar.\nTromboembolia arterial y profilaxis del tromboembolismo arterial y cerebral.\nInfarto agudo de miocardio.\nCoagulación intravascular diseminada.\nCirculación extracorpórea y transfusiones.",
+    "viaAdministracion": "SC",
     "contraindicaciones": {
       "absolutas": [
-        "Hipersensibilidad documentada a la heparina.",
-        "Presencia o antecedentes de Trombocitopenia Inducida por Heparina (TIH) de tipo inmunológico (Tipo II).",
-        "Hemorragia activa clínicamente significativa (salvo si es por CID).",
-        "Trastornos de la coagulación preexistentes graves (como hemofilia o púrpura vascular).",
-        "Cirugía reciente (en los últimos días) del sistema nervioso central, columna vertebral u ojos, o traumatismo craneoencefálico grave.",
-        "Endocarditis bacteriana subaguda."
+        "Hipersensibilidad a la heparina.",
+        "Antecedente de trombocitopenia inducida por heparina.",
+        "Prematuros, recién nacidos y menores de 6 meses, porque contiene alcohol bencílico.",
+        "Amenaza de aborto.",
+        "Aneurisma cerebral o disección aórtica.",
+        "Hemorragia cerebrovascular.",
+        "Hemorragia activa incontrolable.",
+        "Hipertensión arterial grave no controlada."
       ],
       "relativas": [
-        "Insuficiencia hepática o renal severa.",
-        "Hipertensión arterial sistémica grave no controlada.",
-        "Úlcera péptica activa o lesiones gastrointestinales propensas a sangrar.",
-        "Antecedente reciente de punción lumbar o anestesia regional (espinal/epidural)."
+        "Anestesia regional o raquídea.",
+        "Discrasias sanguíneas (trombocitopenia, hemofilia).",
+        "Parto reciente.",
+        "Diabetes mellitus grave.",
+        "Endocarditis bacteriana subaguda.",
+        "Úlcera gastroduodenal.",
+        "Dispositivo intrauterino.",
+        "Neurocirugía reciente o próxima.",
+        "Pericarditis o derrame pericárdico.",
+        "Radioterapia.",
+        "Insuficiencia hepática o renal.",
+        "Trauma grave.",
+        "Uso de salicilatos u otros anticoagulantes."
       ]
     },
     "efectosSecundarios": [
@@ -1070,7 +1222,7 @@
     "interacciones": [
       {
         "medicamento": "Antiagregantes plaquetarios (ácido acetilsalicílico, clopidogrel), AINEs y otros anticoagulantes",
-        "efecto": "Incrementan de forma sinérgica el riesgo de hemorragias graves.",
+        "efecto": "Incrementan el riesgo de hemorragias graves, igual que dipiridamol, dextrán y algunas penicilinas y cefalosporinas de amplio espectro.",
         "severidad": "alta"
       },
       {
@@ -1085,10 +1237,14 @@
       }
     ],
     "observaciones": {
-      "administracion": "IV en infusión continua o bolo intermitente; SC profunda en el tejido adiposo abdominal.",
-      "precauciones": "Contraindicada de forma estricta la vía intramuscular, por el alto riesgo de hematomas masivos y dolorosos."
+      "administracion": "SC profunda (intragrasa) con aguja calibre 25 o 26, en profilaxis. La vía IV se usa en infusión cuando se necesita efecto inmediato. Nunca por vía IM.",
+      "precauciones": "Se vigilan TTPa y plaquetas. Puede elevar TGO y TGP sin daño hepático. El antídoto es el sulfato de protamina, IV lento."
     },
     "referencias": [
+      {
+        "text": "Laboratorios PiSA. Inhepar (heparina sódica) solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/inhepar-solucion-inyectable/134/101/60410/162"
+      },
       {
         "text": "Consejo de Salubridad General. (2023). Compendio Nacional de Insumos para la Salud: Clave 010.000.4101.00 Heparina Sódica. Ciudad de México, México: Gobierno de México.",
         "url": "https://www.gob.mx/csg"
@@ -1107,7 +1263,7 @@
     "farmacodinamia": "Anticoagulante derivado de la despolimerización de la heparina estándar.\nPresenta una alta afinidad por la antitrombina III (ATIII).\nSe caracteriza por tener una selectividad mucho mayor para inhibir al Factor Xa que al Factor IIa (trombina); su relación de actividad anti-Xa / anti-IIa es de aproximadamente 3:1 a 4:1.\nPosee un impacto mínimo sobre la agregación plaquetaria y sobre las pruebas globales de coagulación (como el TPTa) a dosis terapéuticas.",
     "farmacocinetica": "Absorción: Excelente y rápida biodisponibilidad por vía subcutánea, alcanzando entre el 92% y el 100%. La actividad máxima anti-Xa en el plasma se observa entre las 3 y 5 horas posteriores a la inyección.\nDistribución: El volumen de distribución de la enoxaparina es cercano al volumen sanguíneo global. No atraviesa la placenta durante el embarazo.\nMetabolismo: Se metaboliza principalmente en el hígado mediante procesos de desulfatación y despolimerización a fragmentos de menor peso molecular con menor actividad biológica.\nEliminación: Se elimina de forma mayoritaria por vía renal (excreción urinaria de los fragmentos y del fármaco activo). Su semivida de eliminación basada en la actividad anti-Xa es de 4.5 a 7 horas, prolongándose hasta el doble en pacientes con falla renal avanzada.",
     "indicaciones": "Profilaxis de la enfermedad tromboembólica venosa en pacientes sometidos a cirugía ortopédica, cirugía general o en pacientes no quirúrgicos inmovilizados por enfermedad médica aguda.\nTratamiento de la trombosis venosa profunda (TVP) establecida, acompañada o no de tromboembolia pulmonar (TEP).\nTratamiento del infarto agudo de miocardio sin elevación del segmento ST (IAMSEST), angina inestable e infarto agudo de miocardio con elevación del segmento ST (IAMCEST).\nPrevención de la formación de coágulos en el circuito de circulación extracorpórea durante las sesiones de hemodiálisis.",
-    "viaAdministracion": "SC, IV (bolo inicial en IAMCEST)",
+    "viaAdministracion": "SC",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al principio activo enoxaparina, a la heparina o a otras heparinas de bajo peso molecular.",
@@ -1237,7 +1393,7 @@
     "farmacodinamia": "Análogo de insulina humana de acción ultrarrápida obtenido por tecnología de ADN recombinante.\nDisminuye la glucemia al unirse a los receptores de insulina en el músculo esquelético y el tejido adiposo, facilitando la captación celular de glucosa.\nInhibe la producción hepática de glucosa al bloquear la gluconeogénesis y la glucogenólisis.\nEstimula la síntesis de proteínas, ácidos grasos y glucógeno, bloqueando la lipólisis y la proteólisis de forma paralela.",
     "farmacocinetica": "Inicio de acción: De 10 a 15 minutos posteriores a la inyección subcutánea.\nEfecto máximo (pico de acción): Entre los 30 y los 90 minutos de su administración.\nDuración total del efecto: De 3 a 5 horas.\nAbsorción: Sumamente veloz debido a la inversión de los aminoácidos prolina y lisina en las posiciones B28 y B29, lo que impide la formación espontánea de hexámeros estables en el tejido subcutáneo.\nMetabolismo: Se degrada de manera celular principalmente en el hígado, seguido por los riñones y los tejidos periféricos musculares.\nEliminación: Depuración final por vía renal.",
     "indicaciones": "Tratamiento de pacientes adultos, adolescentes y niños con diabetes mellitus que requieren control de la glucemia prandial (postprandial).\nEstabilización inicial de la diabetes mellitus descompensada.\nManejo intrahospitalario urgente de la cetoacidosis diabética o el estado hiperosmolar (vía intravenosa).",
-    "viaAdministracion": "SC, IV, IM",
+    "viaAdministracion": "SC",
     "contraindicaciones": {
       "absolutas": [
         "Episodios agudos de hipoglucemia activa.",
@@ -1297,14 +1453,14 @@
     "icono": "syringe",
     "categoria": "insulina",
     "farmacodinamia": "Insulina humana de acción intermedia cuya estructura nativa se encuentra cristalizada junto con protamina y zinc a un pH neutro.\nSe encarga de mantener un aporte basal de insulina para mediar la captación constante de glucosa celular periférica durante periodos prolongados.\nDisminuye significativamente la producción endógena de glucosa por parte del parénquima hepático.\nPromueve el almacenamiento tisular de nutrientes, deprimiendo los procesos catabólicos de proteólisis celular.",
-    "farmacocinetica": "Inicio de acción: De 1 a 2 horas posteriores a la inyección por vía subcutánea.\nEfecto máximo (pico de acción): Entre las 4 y las 12 horas posteriores a la inyección (periodo crítico de vigilancia por riesgo de hipoglucemia).\nDuración total del efecto: De 12 a 18 horas en promedio.\nAbsorción: Lenta y sostenida desde el depósito subcutáneo, debido a la adición intencional de protamina, la cual retrasa la disolución y el paso de los cristales de insulina hacia el torrente sanguíneo.\nMetabolismo: Degradación enzimática interna mediada por peptidasas celulares, principalmente en el riñón e hígado.\nEliminación: Excreción metabólica por vía urinaria.",
+    "farmacocinetica": "Inicio de acción: De 1 a 2 horas posteriores a la inyección por vía subcutánea.\nEfecto máximo (pico de acción): Entre las 6 y las 12 horas posteriores a la inyección (periodo crítico de vigilancia por riesgo de hipoglucemia).\nDuración total del efecto: De 18 a 24 horas.\nAbsorción: Lenta y sostenida desde el depósito subcutáneo, debido a la adición intencional de protamina, la cual retrasa la disolución y el paso de los cristales de insulina hacia el torrente sanguíneo.\nMetabolismo: Degradación enzimática interna mediada por peptidasas celulares, principalmente en el riñón e hígado.\nEliminación: Excreción metabólica por vía urinaria.",
     "indicaciones": "Tratamiento de la diabetes mellitus tipo 1 como pauta de insulinización basal.\nTratamiento de la diabetes mellitus tipo 2 que no logra metas de control glucémico mediante dosis óptimas de fármacos orales.\nManejo prioritario de la diabetes pregestacional y gestacional durante el embarazo por su alto perfil de seguridad clínica.",
     "viaAdministracion": "SC",
     "contraindicaciones": {
       "absolutas": [
         "Cuadros clínicos de hipoglucemia activa.",
         "Antecedentes de hipersensibilidad a la insulina de origen humano o específicamente a la protamina.",
-        "Administración errónea por vía intravenosa (riesgo de oclusión vascular o hipoglucemia fulminante por la naturaleza de la suspensión)."
+        "Administración por vía intravenosa."
       ],
       "relativas": [
         "Disfunción renal o hepática de moderada a grave (exige monitorización estrecha de glucemias capilares y ajustes a la baja).",
@@ -1329,20 +1485,29 @@
       },
       {
         "medicamento": "Glucocorticoides sistémicos, diuréticos de asa y tiazídicos, hormona tiroidea, epinefrina y simpaticomiméticos",
-        "efecto": "Atenúan el efecto hipoglucemiante.",
+        "efecto": "Atenúan el efecto hipoglucemiante y aumentan los requerimientos de insulina, igual que los anticonceptivos orales.",
         "severidad": "media"
       },
       {
         "medicamento": "Betabloqueadores",
         "efecto": "Eliminan las señales neurovegetativas típicas de alerta ante bajadas de glucosa (sudoración fría, temblores, inquietud).",
         "severidad": "alta"
+      },
+      {
+        "medicamento": "Hipoglucemiantes orales y sulfonamidas",
+        "efecto": "Potencian el efecto hipoglucemiante.",
+        "severidad": "media"
       }
     ],
     "observaciones": {
-      "administracion": "SC exclusiva. Agitar o rotar suavemente el frasco antes de extraer la dosis para resuspender los cristales. Contraindicada por cualquier otra vía.",
-      "precauciones": "Vigilar de cerca entre las 4 y 12 horas post-inyección (pico de acción) por riesgo de hipoglucemia, en especial si coincide con ayuno prolongado o ejercicio no planificado."
+      "administracion": "SC en brazos, muslos, glúteos o abdomen. Se rueda o agita suavemente el frasco antes de cada uso. Se rotan los sitios y no se repite el mismo en al menos un mes. Nunca IV.",
+      "precauciones": "Vigilar de cerca entre las 6 y 12 horas tras la inyección (pico de acción) por riesgo de hipoglucemia. Los requerimientos cambian con infecciones, estrés, cirugía, embarazo y cambios de dieta o actividad. Se conserva en refrigeración (2 a 8 °C), sin congelar."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Insulina isófana suspensión inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/insulina-isofana-suspension-inyectable/10/101/43973/201"
+      },
       {
         "text": "Secretaría de Salud. (2022). Catálogo de Medicamentos del Compendio Nacional de Insumos para la Salud: Clave 010.000.1050.00 Insulina Humana Isófana de Acción Intermedia NPH. Ciudad de México, México: Gobierno de México.",
         "url": "https://www.gob.mx/salud"
@@ -1421,20 +1586,22 @@
     "icono": "shield",
     "categoria": "protector_gastrico",
     "farmacodinamia": "Inhibidor de la bomba de protones. Es una base débil que se concentra y pasa a su forma activa en el medio ácido de los canalículos de la célula parietal gástrica, donde inhibe la enzima H+/K+-ATPasa.\nAl bloquear el paso final de la formación de ácido gástrico, reduce tanto la secreción basal como la estimulada, con independencia del estímulo que la desencadene.\nNo se ha observado taquifilaxia durante el tratamiento.",
-    "farmacocinetica": "Absorción: rápida, en el intestino delgado. La concentración plasmática máxima se alcanza entre 1 y 2 horas. La biodisponibilidad es cercana al 40% tras una dosis oral única y aumenta hasta cerca del 60% con la administración repetida. El alimento no modifica la biodisponibilidad.\nDistribución: volumen de distribución aparente cercano a 0.3 L/kg. La unión a proteínas plasmáticas es del 97%.\nMetabolismo: hepático y completo por el sistema citocromo P450, principalmente por CYP2C19 y en menor medida por CYP3A4. Los metabolizadores lentos de CYP2C19 alcanzan exposiciones varias veces mayores.\nEliminación: semivida plasmática habitualmente menor de una hora, sin acumulación entre dosis. Cerca del 80% se excreta como metabolitos en la orina y el resto en las heces, procedente de la secreción biliar.",
+    "farmacocinetica": "Absorción: rápida, en el intestino delgado. La concentración plasmática máxima se alcanza entre 1 y 2 horas. La biodisponibilidad es cercana al 40% tras una dosis oral única y aumenta hasta cerca del 60% con la administración repetida. El alimento no modifica la biodisponibilidad.\nDistribución: volumen de distribución aparente cercano a 0.3 L/kg. La unión a proteínas plasmáticas es del 97%.\nMetabolismo: hepático y completo por el sistema citocromo P450, principalmente por CYP2C19 y en menor medida por CYP3A4. Los metabolizadores lentos de CYP2C19 alcanzan exposiciones varias veces mayores.\nEliminación: semivida plasmática habitualmente menor de una hora, sin acumulación entre dosis. Se excreta 70 a 77% por la orina y 18 a 23% por las heces; no se elimina por diálisis. El efecto antisecretor dura 72 horas o más.",
     "indicaciones": "Úlcera péptica, gástrica y duodenal.\nPrevención de la recidiva de úlcera gástrica y duodenal.\nEsofagitis por reflujo y enfermedad por reflujo gastroesofágico.\nSíndrome de Zollinger-Ellison.\nErradicación de Helicobacter pylori, en combinación con antibióticos.\nTratamiento y prevención de la úlcera gástrica y duodenal asociada a AINE en pacientes de riesgo.",
-    "viaAdministracion": "Oral, IV",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al omeprazol, a los bencimidazoles sustituidos o a cualquier componente de la formulación.",
-        "Administración concomitante con nelfinavir."
+        "Administración concomitante con nelfinavir.",
+        "Insuficiencia renal o hepática, presente o previa.",
+        "Úlcera gástrica maligna.",
+        "Embarazo y lactancia."
       ],
       "relativas": [
         "Sospecha de úlcera gástrica o presencia de síntomas de alarma, porque el alivio sintomático puede enmascarar un proceso maligno y retrasar el diagnóstico.",
         "Uso concomitante con clopidogrel.",
         "Uso concomitante con atazanavir.",
-        "Tratamiento prolongado en pacientes con riesgo de hipomagnesemia o de déficit de vitamina B12.",
-        "Insuficiencia hepática grave."
+        "Tratamiento prolongado en pacientes con riesgo de hipomagnesemia o de déficit de vitamina B12."
       ]
     },
     "efectosSecundarios": [
@@ -1475,7 +1642,7 @@
       },
       {
         "medicamento": "Diazepam, fenitoína y warfarina",
-        "efecto": "La inhibición de CYP2C19 retrasa su eliminación y prolonga o intensifica su efecto.",
+        "efecto": "La inhibición de CYP2C19 retrasa su eliminación y prolonga su efecto; con fenitoína puede aparecer ataxia. Se han descrito aumentos similares con glipizida, gliburida, metoprolol, midazolam, nifedipino y teofilina.",
         "severidad": "media"
       },
       {
@@ -1487,14 +1654,23 @@
         "medicamento": "Metotrexato",
         "efecto": "Puede incrementar las concentraciones plasmáticas de metotrexato cuando este se emplea a dosis altas.",
         "severidad": "media"
+      },
+      {
+        "medicamento": "Procainamida",
+        "efecto": "Aumentan sus niveles por competencia en la secreción renal.",
+        "severidad": "baja"
       }
     ],
     "observaciones": {
-      "preparacion": "La presentación intravenosa se reconstituye con el diluyente que acompaña al frasco ámpula y se administra en inyección intravenosa lenta o en infusión.",
-      "administracion": "Las cápsulas y tabletas se degluten enteras, sin masticar ni triturar, porque el recubrimiento entérico protege al fármaco del ácido gástrico. Se administran por la mañana con agua. Ante dificultad para deglutir puede abrirse la cápsula e ingerirse los gránulos sin masticarlos, en agua o en un líquido ligeramente ácido.",
-      "precauciones": "El tratamiento prolongado se asocia a hipomagnesemia y a menor absorción de vitamina B12. La supresión ácida sostenida aumenta el riesgo de infección gastrointestinal por Salmonella, Campylobacter y Clostridioides difficile."
+      "preparacion": "Para bolo se reconstituye solo con los 10 mL del diluyente que trae el frasco y se usa en 4 horas. Para infusión se diluye en 100 mL de solución fisiológica 0.9% (usar en 12 horas) o de solución glucosada al 5% (usar en 6 horas). No se mezcla con otros medicamentos.",
+      "administracion": "IV en bolo lento de al menos 2.5 minutos, o en infusión de 20 a 30 minutos. La administración muy rápida causa hipotensión transitoria.",
+      "precauciones": "Se descarta malignidad antes de tratar una úlcera gástrica. El uso prolongado se asocia a hipomagnesemia, menor absorción de vitamina B12, candidiasis gastroesofágica e infecciones gastrointestinales."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Omeprazol solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/omeprazol-solucion-inyectable/10/101/52629/162"
+      },
       {
         "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
         "url": "https://www.csg.gob.mx/Comp26042025.pdf"
@@ -1515,9 +1691,9 @@
     "icono": "shield",
     "categoria": "protector_gastrico",
     "farmacodinamia": "Inhibidor de la bomba de protones. Se activa en el medio ácido de los canalículos de la célula parietal y bloquea de forma específica la enzima H+/K+-ATPasa, paso final de la secreción de ácido gástrico.\nLa unión al sistema enzimático es prolongada, de modo que la duración del efecto antisecretor excede con mucho a la permanencia del fármaco en plasma.\nSu afinidad por el citocromo P450 es menor que la de otros inhibidores de la bomba de protones, lo que se traduce en un perfil de interacciones más reducido.",
-    "farmacocinetica": "Absorción: rápida, con concentración sérica máxima cerca de 2.5 horas. La biodisponibilidad absoluta es cercana al 77% y no se modifica con el alimento. La cinética es lineal por vía oral e intravenosa.\nDistribución: unión a proteínas séricas cercana al 98%. Volumen de distribución aproximado de 0.15 L/kg.\nMetabolismo: casi exclusivamente hepático. La vía principal es la desmetilación por CYP2C19 seguida de conjugación con sulfato; una vía secundaria es la oxidación por CYP3A4.\nEliminación: semivida terminal cercana a 1 hora. Alrededor del 80% de los metabolitos se excreta por vía renal y el resto en las heces. No requiere ajuste en insuficiencia renal, incluida la diálisis.",
-    "indicaciones": "Úlcera péptica, gástrica y duodenal.\nEsofagitis por reflujo y enfermedad por reflujo gastroesofágico.\nSíndrome de Zollinger-Ellison y otros estados de hipersecreción patológica.\nErradicación de Helicobacter pylori, en combinación con antibióticos.\nPrevención de la úlcera gastroduodenal asociada a AINE en pacientes de riesgo.",
-    "viaAdministracion": "Oral, IV",
+    "farmacocinetica": "Absorción: por vía IV, la concentración aumenta en proporción a la dosis; no se acumula con dosis repetidas.\nDistribución: se une cerca del 98% a proteínas, sobre todo albúmina; se distribuye principalmente en el líquido extracelular.\nMetabolismo: hepático; la vía principal es la desmetilación por CYP2C19 seguida de sulfatación, y participa CYP3A4. Sus metabolitos no tienen actividad conocida.\nEliminación: cerca del 71% por la orina y 18% por las heces, sin excreción renal del fármaco sin cambios. La semivida es de cerca de 1 hora; de 3.5 a 10 horas en metabolizadores lentos de CYP2C19. No se elimina por hemodiálisis.",
+    "indicaciones": "Hipersecreción ácida cuando no puede usarse la vía oral.\nEnfermedad por reflujo gastroesofágico con esofagitis erosiva, a corto plazo.\nSíndrome de Zollinger-Ellison y otros estados de hipersecreción patológica.\nGastropatía por AINE y lesión de la mucosa gástrica por estrés en pacientes críticos sin vía oral.",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al pantoprazol, a los bencimidazoles sustituidos o a cualquier componente de la formulación."
@@ -1565,7 +1741,7 @@
       },
       {
         "medicamento": "Ketoconazol, itraconazol, posaconazol y erlotinib",
-        "efecto": "El aumento del pH gástrico reduce su absorción y pueden perder eficacia clínica.",
+        "efecto": "El aumento del pH gástrico reduce su absorción y pueden perder eficacia clínica, igual que los ésteres de ampicilina y las sales de hierro.",
         "severidad": "media"
       },
       {
@@ -1575,11 +1751,15 @@
       }
     ],
     "observaciones": {
-      "preparacion": "La presentación intravenosa se reconstituye con el diluyente que acompaña al frasco ámpula y se administra en inyección intravenosa lenta o en infusión. La vía intravenosa se reserva para cuando la vía oral no es viable.",
-      "administracion": "Los comprimidos se ingieren enteros con agua, sin masticar ni partir, una hora antes de un alimento principal.",
-      "precauciones": "A diferencia del omeprazol, el pantoprazol no muestra una interacción relevante con el clopidogrel, por lo que suele preferirse cuando se requiere gastroprotección en un paciente antiagregado."
+      "preparacion": "Se reconstituye con los 10 mL del diluyente incluido (usar en 3 horas) y se diluye en 100 mL de solución glucosada al 5%, solución fisiológica 0.9% o solución Hartmann; diluido se conserva 12 horas.",
+      "administracion": "IV en infusión de cerca de 15 minutos. Se cambia a la vía oral en cuanto sea posible.",
+      "precauciones": "Se descarta malignidad antes del tratamiento. Puede dar falso positivo de THC en orina. A diferencia del omeprazol, no muestra una interacción relevante con el clopidogrel, por lo que suele preferirse en pacientes antiagregados."
     },
     "referencias": [
+      {
+        "text": "Laboratorios PiSA. Supacid (pantoprazol) solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/supacid-solucion-inyectable/134/101/62425/162"
+      },
       {
         "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
         "url": "https://www.csg.gob.mx/Comp26042025.pdf"
@@ -1596,15 +1776,16 @@
     "icono": "pill",
     "categoria": "antiemetico",
     "farmacodinamia": "Benzamida sustituida con acción antiemética y procinética.\nEl efecto antiemético deriva del antagonismo de los receptores dopaminérgicos D2 de la zona gatillo quimiorreceptora y del centro del vómito, y del antagonismo de receptores serotoninérgicos 5-HT3 junto con agonismo de receptores 5-HT4.\nLa acción procinética resulta del bloqueo de receptores D2 periféricos y de una acción colinérgica indirecta que facilita la liberación de acetilcolina: aumenta el tono y la amplitud de las contracciones gástricas, relaja el bulbo duodenal y el esfínter pilórico, y acelera el vaciamiento gástrico y el tránsito intestinal, sin incrementar las secreciones gástrica, biliar ni pancreática.",
-    "farmacocinetica": "Absorción: las vías intramuscular e intravenosa evitan el metabolismo de primer paso hepático que sí ocurre por vía oral.\nDistribución: volumen de distribución cercano a 3.5 L/kg. Cruza con facilidad la barrera hematoencefálica y la placenta, y alcanza en leche materna concentraciones que pueden superar a las plasmáticas. La unión a proteínas plasmáticas es del 13% al 30%.\nMetabolismo: hepático, por conjugación con sulfato y con ácido glucurónico. Participa CYP2D6, y los metabolizadores deficientes eliminan el fármaco con mayor lentitud, lo que incrementa el riesgo de efectos extrapiramidales.\nEliminación: renal. Hasta 39% se excreta sin cambios en la orina. La semivida es de 5 a 6 horas y se prolonga en la insuficiencia renal y en la cirrosis hepática.",
-    "indicaciones": "Náusea y vómito.\nPrevención de náusea y vómito postoperatorios.\nPrevención de náusea y vómito inducidos por radioterapia.\nReflujo gastroesofágico.\nGastroparesia.",
-    "viaAdministracion": "Oral, IM, IV",
+    "farmacocinetica": "Absorción: por vía IV el efecto inicia en 1 a 3 minutos y dura de 1 a 2 horas.\nDistribución: volumen de distribución cercano a 3.5 L/kg; unión a proteínas del 13 al 22%. Cruza la barrera hematoencefálica y la placenta, y pasa a la leche.\nMetabolismo: hepático parcial, por conjugación; participa CYP2D6.\nEliminación: cerca del 85% por la orina (sin cambios y conjugada) y el resto por bilis. La semivida es de 4 a 6 horas y se prolonga en insuficiencia renal y hepática.",
+    "indicaciones": "Náusea y vómito por anestesia, quimioterapia o radioterapia, y de origen funcional, vestibular o metabólico.\nPrevención de náusea y vómito postoperatorios.\nPremedicación anestésica para prevenir la neumonía por aspiración, sobre todo en cirugía de urgencia.\nVaciamiento gástrico lento y gastroparesia.\nReflujo gastroesofágico.\nCoadyuvante en estudios radiológicos del tubo digestivo con bario.",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad a la metoclopramida o a cualquier componente de la formulación.",
-        "Hemorragia gastrointestinal, obstrucción mecánica o perforación intestinal, situaciones en las que estimular la motilidad constituye un riesgo.",
+        "Abdomen agudo, hemorragia gastrointestinal, obstrucción mecánica o perforación intestinal, situaciones en las que estimular la motilidad constituye un riesgo.",
         "Feocromocitoma confirmado o sospechado, por el riesgo de crisis hipertensiva.",
         "Antecedente de discinesia tardía inducida por neurolépticos o por metoclopramida.",
+        "Síndrome extrapiramidal.",
         "Epilepsia, por aumento de la frecuencia e intensidad de las crisis.",
         "Enfermedad de Parkinson.",
         "Tratamiento concomitante con levodopa o con agonistas dopaminérgicos.",
@@ -1655,7 +1836,7 @@
       },
       {
         "medicamento": "Depresores del sistema nervioso central y alcohol",
-        "efecto": "Potencian el efecto sedante de la metoclopramida.",
+        "efecto": "Potencian la sedación, igual que antidepresivos tricíclicos, barbitúricos, antihistamínicos e IMAO.",
         "severidad": "media"
       },
       {
@@ -1690,10 +1871,14 @@
       }
     ],
     "observaciones": {
-      "administracion": "La vía intravenosa se administra en bolo lento, durante al menos tres minutos, para reducir el riesgo de bradicardia, hipotensión y colapso circulatorio.",
+      "administracion": "IV en bolo lento, durante al menos tres minutos, para reducir el riesgo de bradicardia, hipotensión y colapso circulatorio. En infusión se diluye y se administra en al menos 15 minutos. La inyección rápida aumenta ansiedad, inquietud y somnolencia.",
       "precauciones": "El tratamiento no se prolonga más de tres meses por el riesgo de discinesia tardía. La aparición de síntomas extrapiramidales obliga a suspender el fármaco de inmediato; suelen ser reversibles tras la retirada, aunque pueden requerir tratamiento sintomático. La sospecha de síndrome neuroléptico maligno o de metahemoglobinemia obliga a la suspensión definitiva."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Metoclopramida solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/metoclopramida-solucion-inyectable/10/101/60181/162"
+      },
       {
         "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
         "url": "https://www.csg.gob.mx/Comp26042025.pdf"
@@ -1714,9 +1899,9 @@
     "icono": "pill",
     "categoria": "antiemetico",
     "farmacodinamia": "Antagonista potente y selectivo de los receptores serotoninérgicos 5-HT3.\nLa serotonina liberada en el tubo digestivo estimula los receptores 5-HT3 de las terminaciones aferentes vagales y desencadena el reflejo del vómito. Los receptores 5-HT3 del área postrema, en el piso del cuarto ventrículo, participan en esa misma respuesta por vía central. El ondansetrón los bloquea en los dos niveles, periférico y central, e interrumpe el reflejo emético.\nNo modifica las concentraciones plasmáticas de prolactina, no produce sedación y no interfiere con el funcionamiento psicomotor.",
-    "farmacocinetica": "Absorción: la biodisponibilidad oral es del 55% al 60%, con concentración plasmática máxima cerca de 1.5 horas. La exposición sistémica por vía intravenosa es comparable a la oral.\nDistribución: unión a proteínas plasmáticas del 70% al 76%. Volumen de distribución teórico de 2.5 L/kg.\nMetabolismo: hepático y extenso, por CYP3A4, CYP1A2 y CYP2D6. La multiplicidad de vías compensa la inhibición o el déficit de una sola enzima.\nEliminación: los metabolitos se excretan en heces y orina; menos del 5% se elimina sin cambios en la orina. La semivida terminal es cercana a 3 horas y se prolonga en la insuficiencia hepática.",
+    "farmacocinetica": "Absorción: por vía IV la concentración máxima aparece a los 15 minutos.\nDistribución: cerca del 70% se une a proteínas plasmáticas y 30% pasa a los eritrocitos.\nMetabolismo: hepático y extenso, por hidroxilación y conjugación; participan CYP3A4, CYP1A2 y CYP2D6.\nEliminación: principalmente renal, con menos del 5% sin cambios; cerca del 25% por heces. La semivida es de unas 3 horas; mayor en adultos mayores y de 2.4 horas en niños.",
     "indicaciones": "Náusea y vómito secundarios a quimioterapia antineoplásica.\nNáusea y vómito secundarios a radioterapia.\nPrevención y tratamiento de náusea y vómito postoperatorios.",
-    "viaAdministracion": "Oral, IV",
+    "viaAdministracion": "IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad al ondansetrón o a cualquier componente de la formulación.",
@@ -1729,7 +1914,9 @@
         "Insuficiencia hepática, que reduce su depuración.",
         "Signos de obstrucción intestinal subaguda, porque prolonga el tránsito en el intestino grueso.",
         "Hipersensibilidad conocida a otros antagonistas de los receptores 5-HT3.",
-        "Cirugía adenoamigdalina, porque el control del vómito puede enmascarar una hemorragia oculta."
+        "Cirugía adenoamigdalina, porque el control del vómito puede enmascarar una hemorragia oculta.",
+        "Embarazo y lactancia.",
+        "Íleo paralítico."
       ]
     },
     "efectosSecundarios": [
@@ -1781,17 +1968,21 @@
         "severidad": "media"
       },
       {
-        "medicamento": "Tramadol",
-        "efecto": "El ondansetrón puede reducir su efecto analgésico.",
+        "medicamento": "Dexametasona IV",
+        "efecto": "Aumenta la eficacia antiemética.",
         "severidad": "baja"
       }
     ],
     "observaciones": {
-      "preparacion": "La presentación inyectable se diluye en solución fisiológica 0.9% o en solución glucosada al 5% para su administración en infusión.",
-      "administracion": "La inyección intravenosa directa se aplica de forma lenta. La administración en infusión se realiza en no menos de 15 minutos. La velocidad rápida se asocia a mareo y a alteraciones visuales transitorias.",
+      "preparacion": "Para infusión se diluye en 50 a 100 mL de solución fisiológica 0.9%. No se mezcla con otros medicamentos. No se usa si la solución no es transparente o tiene partículas.",
+      "administracion": "IV lenta. En infusión se pasa en 15 a 30 minutos. Antes de quimioterapia, radioterapia o inducción anestésica se aplica 15 a 30 minutos antes. La velocidad rápida se asocia a mareo y visión borrosa transitorios.",
       "precauciones": "La hipopotasemia y la hipomagnesemia se corrigen antes de administrarlo. El ondansetrón prolonga el intervalo QT de forma dependiente de la dosis, por lo que la vigilancia electrocardiográfica es pertinente en pacientes con cardiopatía o con otros fármacos que prolongan el QT."
     },
     "referencias": [
+      {
+        "text": "Laboratorios PiSA. Antivon (ondansetrón) solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/antivon-solucion-inyectable/134/101/36760/162"
+      },
       {
         "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
         "url": "https://www.csg.gob.mx/Comp26042025.pdf"
@@ -1808,22 +1999,25 @@
     "icono": "wind",
     "categoria": "broncodilatador",
     "farmacodinamia": "Agonista selectivo de los receptores beta-2 adrenérgicos. A dosis terapéuticas actúa sobre los receptores del músculo liso bronquial y produce broncodilatación de acción corta, con inicio cercano a los 5 minutos y duración de 4 a 6 horas.\nTambién relaja el músculo liso vascular, uterino e intestinal.\nLa estimulación beta-2 favorece el desplazamiento de potasio hacia el interior de la célula, mecanismo que explica la hipopotasemia asociada a su uso.",
-    "farmacocinetica": "Absorción: tras la inhalación, cerca del 10% o menos del fármaco se deposita en la vía aérea y el resto se deglute y se absorbe en el tubo digestivo. Las concentraciones plasmáticas máximas aparecen entre 2 y 4 horas.\nDistribución: los niveles sistémicos son bajos tras la inhalación a dosis recomendadas, por la absorción gradual desde los bronquios.\nMetabolismo: el metabolismo presistémico es considerable y ocurre sobre todo en el tubo digestivo, con formación de un éster de sulfato inactivo. El resto se metaboliza en el hígado.\nEliminación: principalmente renal, como fármaco inalterado y como metabolito conjugado. La semivida de eliminación es de 3 a 7 horas.",
-    "indicaciones": "Asma bronquial.\nBronquitis.\nEnfisema.\nObstrucción aguda reversible de la vía aérea en asma y en enfermedad pulmonar obstructiva crónica.",
-    "viaAdministracion": "Inhalada, Nebulizada, Oral",
+    "farmacocinetica": "Absorción: del 10 al 20% de la dosis nebulizada llega a las vías respiratorias bajas; el resto se deposita en la orofaringe y se deglute. La broncodilatación inicia en 5 a 15 minutos y dura 3 a 6 horas.\nDistribución: se une cerca del 10% a proteínas plasmáticas.\nMetabolismo: primer paso hepático e intestinal a un sulfato fenólico inactivo; no se metaboliza en el pulmón.\nEliminación: principalmente renal y en menor medida fecal; la mayor parte en 72 horas. La semivida es de 4 a 6 horas.",
+    "indicaciones": "Crisis asmática grave y estado asmático.\nBroncoespasmo grave por bronquitis aguda.\nExacerbaciones de bronquitis crónica o bronquiectasias con broncoespasmo reversible.\nBroncoespasmo crónico que no responde al tratamiento habitual.",
+    "viaAdministracion": "Nebulizada",
     "contraindicaciones": {
       "absolutas": [
-        "Hipersensibilidad al salbutamol, a las aminas simpaticomiméticas o a cualquier componente de la formulación.",
-        "Arritmias cardiacas.",
-        "Insuficiencia coronaria."
+        "Hipersensibilidad al salbutamol o a cualquier componente.",
+        "Hipertensión con insuficiencia cardiaca.",
+        "Tirotoxicosis o hipertiroidismo.",
+        "Enfermedad de Parkinson.",
+        "Primeros dos trimestres del embarazo.",
+        "Uso con betabloqueadores no selectivos (propranolol) o con IMAO."
       ],
       "relativas": [
-        "Hipertiroidismo y tirotoxicosis.",
-        "Diabetes mellitus y cetoacidosis, por el riesgo de hiperglucemia.",
-        "Edad avanzada.",
-        "Hipopotasemia previa o tratamiento con fármacos que reducen el potasio sérico.",
-        "Predisposición al glaucoma de ángulo cerrado, en particular si se nebuliza junto con anticolinérgicos.",
-        "Asma persistente tratada únicamente con broncodilatador, sin tratamiento antiinflamatorio de mantenimiento."
+        "Arritmias, insuficiencia coronaria o insuficiencia miocárdica.",
+        "Sensibilidad a la prolongación del QT.",
+        "Hipertensión.",
+        "Diabetes mellitus, por el riesgo de hiperglucemia.",
+        "Hipopotasemia previa o tratamiento con fármacos que reducen el potasio.",
+        "Predisposición al glaucoma de ángulo cerrado, sobre todo si se nebuliza con anticolinérgicos."
       ]
     },
     "efectosSecundarios": [
@@ -1857,8 +2051,8 @@
       },
       {
         "medicamento": "Inhibidores de la monoaminooxidasa y antidepresivos tricíclicos",
-        "efecto": "Potencian la acción del salbutamol sobre el sistema vascular.",
-        "severidad": "media"
+        "efecto": "Con IMAO la asociación está contraindicada; los tricíclicos potencian su acción vascular.",
+        "severidad": "alta"
       },
       {
         "medicamento": "Otros adrenérgicos y broncodilatadores simpaticomiméticos",
@@ -1882,11 +2076,15 @@
       }
     ],
     "observaciones": {
-      "preparacion": "La solución para nebulizador se diluye en solución fisiológica 0.9% antes de administrarla.",
-      "administracion": "Durante la nebulización se evita que la solución o el aerosol alcancen los ojos. El efecto broncodilatador inicia alrededor de los 5 minutos. El uso de espaciador con el inhalador presurizado mejora el depósito pulmonar y reduce la fracción deglutida.",
-      "precauciones": "El aumento en la frecuencia de uso indica deterioro del control del asma y obliga a reevaluar el tratamiento. El broncodilatador no sustituye al tratamiento antiinflamatorio de mantenimiento. La falta de respuesta puede señalar una crisis grave. Las presentaciones inhaladas no se emplean para inhibir el trabajo de parto prematuro."
+      "preparacion": "Se diluye en solución fisiológica 0.9% antes de nebulizar.",
+      "administracion": "Solo por nebulización, con boquilla, mascarilla o cánula traqueal, con o sin ventilador. Se evita que el aerosol alcance los ojos. En menores de 18 meses puede causar hipoxemia transitoria, por lo que se mantiene oxígeno disponible.",
+      "precauciones": "El aumento en la frecuencia de uso indica deterioro del control del asma y obliga a reevaluar el tratamiento; el broncodilatador no es el tratamiento único en asma grave. Se vigilan potasio y glucosa con dosis altas."
     },
     "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Salbutamol solución para nebulizar. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/salbutamol-solucion-para-nebulizar/10/101/60202/183"
+      },
       {
         "text": "Consejo de Salubridad General. (2025). Compendio Nacional de Insumos para la Salud. Categoría I. Medicamentos. Diario Oficial de la Federación, 26 de abril de 2025.",
         "url": "https://www.csg.gob.mx/Comp26042025.pdf"
@@ -1901,5 +2099,865 @@
       }
     ],
     "altoRiesgo": false
+  },
+  {
+    "nombre": "Cloruro de Potasio",
+    "icono": "lightning",
+    "categoria": "electrolitos",
+    "altoRiesgo": true,
+    "farmacodinamia": "Electrolito de reposición. El potasio es el principal catión intracelular: dentro de la célula su concentración ronda los 150 mEq/L y en plasma se mantiene entre 3.5 y 5.0 mEq/L.\nEsa diferencia de concentración sostiene el potencial de membrana en reposo, del que dependen la conducción nerviosa y la contracción del músculo esquelético, liso y cardiaco.\nLa administración IV restituye el potasio plasmático. Una entrada rápida o excesiva altera la excitabilidad del miocardio y puede producir arritmias y paro cardiaco.",
+    "farmacocinetica": "Absorción: por vía IV pasa directamente al torrente sanguíneo.\nDistribución: se desplaza al espacio intracelular, donde se encuentra la mayor parte del potasio corporal.\nMetabolismo: no se metaboliza; sigue el manejo fisiológico del potasio.\nEliminación: cerca del 90% se excreta por vía renal y el resto en heces y sudor. En la depleción de potasio, la excreción renal baja a 10 a 50 mEq al día.",
+    "indicaciones": "Hipopotasemia, cuando la dieta o la vía oral no son suficientes o no son posibles.\nPérdidas de potasio por diuréticos, vómito o diarrea.\nArritmias por hipopotasemia, en especial en pacientes con digitálicos.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hiperpotasemia."
+      ],
+      "relativas": [
+        "Insuficiencia renal, por el riesgo de hiperpotasemia.",
+        "Insuficiencia suprarrenal (enfermedad de Addison).",
+        "Deshidratación aguda.",
+        "Bloqueo cardiaco grave o completo.",
+        "Insuficiencia cardiaca descompensada.",
+        "Tratamiento con digitálicos.",
+        "Uso de diuréticos ahorradores de potasio."
+      ]
+    },
+    "efectosSecundarios": [
+      "Dolor y ardor en el sitio de infusión.",
+      "Flebitis, sobre todo con concentraciones altas.",
+      "Náuseas."
+    ],
+    "efectosAdversos": [
+      "Hiperpotasemia: parestesias en extremidades, debilidad, parálisis flácida, confusión e hipotensión.",
+      "Arritmias, bloqueo cardiaco y paro cardiaco, en particular con la administración rápida o sin diluir.",
+      "Necrosis tisular por extravasación.",
+      "Trombosis venosa.",
+      "Acidosis e hipercloremia."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Diuréticos ahorradores de potasio (espironolactona, amilorida, eplerenona)",
+        "efecto": "Suman retención de potasio, con riesgo de hiperpotasemia grave.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "IECA (captopril, enalapril) y ARA II (losartán, telmisartán)",
+        "efecto": "Disminuyen la excreción renal de potasio y aumentan el riesgo de hiperpotasemia.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Digoxina",
+        "efecto": "En pacientes digitalizados, la hiperpotasemia aumenta el riesgo de bloqueo y arritmias.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "AINEs",
+        "efecto": "Aumentan el riesgo de hiperpotasemia.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Ciclosporina y tacrolimus",
+        "efecto": "Aumentan el riesgo de hiperpotasemia.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Diuréticos tiazídicos y corticoides",
+        "efecto": "Aumentan la pérdida de potasio y reducen el efecto de la reposición.",
+        "severidad": "baja"
+      },
+      {
+        "medicamento": "Resinas de intercambio iónico (poliestirenosulfonato de sodio)",
+        "efecto": "Disminuyen el potasio sérico.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "La ampolleta se diluye siempre antes de administrarse, en solución fisiológica 0.9% u otra solución compatible. El concentrado se agrega con la bolsa sin colgar y se mezcla invirtiéndola con suavidad varias veces antes de iniciar la infusión, para que el potasio no se acumule en un punto de la bolsa. Es incompatible con amikacina, anfotericina B, dobutamina, manitol al 20 a 25%, emulsiones lipídicas y penicilina G sódica.",
+      "administracion": "Nunca se administra IV directa ni en bolo: la inyección del concentrado sin diluir puede causar paro cardiaco inmediato. Se infunde lento y con bomba de infusión. Las concentraciones mayores requieren vena de gran calibre o acceso central y monitorización electrocardiográfica continua.",
+      "precauciones": "Durante la reposición se vigilan potasio sérico, gasto urinario, electrocardiograma y equilibrio ácido base. El sitio de infusión se vigila por el riesgo de flebitis y de necrosis por extravasación. Al inicio de la reposición se evitan las soluciones glucosadas, que pueden bajar aún más el potasio sérico."
+    },
+    "referencias": [
+      {
+        "text": "Secretaría de Salud de la Ciudad de México. (2018). Cuadro Básico y Catálogo Institucional. Grupo 21: Soluciones electrolíticas y substitutos del plasma.",
+        "url": "https://www.salud.cdmx.gob.mx/storage/app/media/2018-2024/medicamentos/FICHAS%20TECNICAS/Sol%20elec%20Ed.%202018.pdf"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2015). Ficha técnica Cloruro de potasio Meinsol 2 mEq/ml concentrado para solución para perfusión. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/61371/FT_61371.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Sulfato de Magnesio",
+    "icono": "lightning",
+    "categoria": "electrolitos",
+    "altoRiesgo": true,
+    "farmacodinamia": "Electrolito de reposición. El magnesio es cofactor de cientos de enzimas, entre ellas las que producen y usan ATP, e interviene en la función neuromuscular y cardiovascular.\nCompite con el calcio en la membrana celular y modula su entrada, lo que reduce la excitabilidad neuronal y la liberación de acetilcolina en la unión neuromuscular. En esto se basa su uso para prevenir y controlar las convulsiones de la preeclampsia y la eclampsia.\nEn el miocardio estabiliza la membrana, por lo que se emplea en la torsade de pointes.",
+    "farmacocinetica": "Absorción: por vía IV actúa de inmediato.\nDistribución: cerca del 99% del magnesio corporal es intracelular; alrededor del 60% está en el hueso. Atraviesa la placenta.\nMetabolismo: no se metaboliza.\nEliminación: renal. En insuficiencia renal se acumula y aumenta el riesgo de toxicidad.",
+    "indicaciones": "Prevención y control de convulsiones en preeclampsia grave y eclampsia.\nHipomagnesemia comprobada.\nPrevención de hipomagnesemia en nutrición parenteral total.\nTorsade de pointes.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al magnesio o a sus sales.",
+        "Hipermagnesemia.",
+        "Insuficiencia renal grave."
+      ],
+      "relativas": [
+        "Insuficiencia renal leve o moderada, por riesgo de acumulación.",
+        "Miastenia gravis, por riesgo de crisis miasténica.",
+        "Bloqueo cardiaco, sobre todo con calcio o betabloqueadores.",
+        "Uso de depresores del sistema nervioso central."
+      ]
+    },
+    "efectosSecundarios": [
+      "Rubor y sensación de calor.",
+      "Sudoración.",
+      "Sed.",
+      "Náuseas y vómito.",
+      "Irritación venosa en el sitio de infusión."
+    ],
+    "efectosAdversos": [
+      "Hipermagnesemia: pérdida de reflejos osteotendinosos, somnolencia, habla arrastrada, visión doble y debilidad muscular.",
+      "Depresión respiratoria y paro respiratorio.",
+      "Hipotensión y bradicardia, sobre todo con la administración rápida.",
+      "Arritmias, prolongación de PR, QRS y QT, y paro cardiaco.",
+      "Hipocalcemia materna y fetal con dosis altas.",
+      "Hipotonía y depresión respiratoria en el recién nacido cuando se usa cerca del parto.",
+      "Daño tisular por extravasación."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Bloqueadores neuromusculares (vecuronio) y aminoglucósidos",
+        "efecto": "Potencian el bloqueo neuromuscular.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Nifedipino y otros bloqueadores de canales de calcio",
+        "efecto": "Hipotensión profunda.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Depresores del sistema nervioso central (opioides, barbitúricos, anestésicos)",
+        "efecto": "Suman depresión respiratoria y del sistema nervioso central.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Digitálicos",
+        "efecto": "Alteraciones de la conducción cardiaca.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Sales de calcio",
+        "efecto": "Antagonizan el efecto del magnesio. El gluconato de calcio es su antídoto.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Diuréticos tiazídicos y furosemida",
+        "efecto": "Riesgo de eventos cardiopulmonares con magnesio IV.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Puede diluirse en solución fisiológica 0.9% o en solución glucosada al 5%. Se usa al abrir la ampolleta y se desecha el sobrante.",
+      "administracion": "Se administra lento; la administración rápida produce vasodilatación, hipotensión y bradicardia.",
+      "precauciones": "Durante la infusión se vigilan frecuencia respiratoria, diuresis horaria, reflejo patelar, presión arterial y magnesio y calcio séricos. La pérdida del reflejo patelar es el primer signo de toxicidad. El gluconato de calcio se mantiene disponible como antídoto. En la embarazada se vigila la frecuencia cardiaca fetal."
+    },
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2024). Ficha técnica Sulfato de Magnesio Basi 500 mg/ml solución inyectable y para perfusión. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/89749/FT_89749.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Gluconato de Calcio",
+    "icono": "lightning",
+    "categoria": "electrolitos",
+    "altoRiesgo": true,
+    "farmacodinamia": "Electrolito de reposición. El calcio es necesario para la conducción nerviosa, la contracción muscular y cardiaca y la coagulación.\nEn la hiperpotasemia reduce la excitabilidad del miocardio porque restablece el gradiente del potencial de membrana. Protege al corazón mientras actúan otras medidas, pero no baja el potasio sérico.\nAntagoniza al magnesio, por lo que es el antídoto de la intoxicación por sulfato de magnesio.",
+    "farmacocinetica": "Absorción: por vía IV pasa directamente al torrente sanguíneo.\nDistribución: se comporta como el calcio propio del cuerpo; cerca de la mitad circula ionizado y 40 a 50% unido a proteínas, sobre todo albúmina.\nMetabolismo: no se metaboliza.\nEliminación: renal, con reabsorción tubular importante.",
+    "indicaciones": "Tetania por hipocalcemia e hipocalcemia aguda sintomática.\nHipocalcemia por politransfusión.\nHiperpotasemia grave, como protección cardiaca mientras se inician las medidas que bajan el potasio.\nParo cardiaco por hiperpotasemia grave.\nIntoxicación por sulfato de magnesio.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipercalcemia e hipercalciuria.",
+        "Tratamiento con digitálicos o intoxicación digitálica.",
+        "Fibrilación ventricular durante la reanimación.",
+        "Recién nacidos de 28 días o menos que reciben ceftriaxona."
+      ],
+      "relativas": [
+        "Insuficiencia renal.",
+        "Hiperparatiroidismo.",
+        "Litiasis urinaria y nefrocalcinosis.",
+        "Sarcoidosis.",
+        "Cardiopatía."
+      ]
+    },
+    "efectosSecundarios": [
+      "Sensación de calor y rubor.",
+      "Hormigueo.",
+      "Sabor metálico.",
+      "Sudoración.",
+      "Náuseas y vómito."
+    ],
+    "efectosAdversos": [
+      "Bradicardia y arritmias, sobre todo con la administración rápida.",
+      "Hipotensión, vasodilatación y colapso circulatorio.",
+      "Hipercalcemia: anorexia, estreñimiento, poliuria, debilidad, confusión y coma.",
+      "Necrosis y calcinosis cutánea por extravasación.",
+      "Precipitados de calcio y ceftriaxona en recién nacidos, potencialmente mortales."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Digoxina",
+        "efecto": "El calcio potencia la toxicidad digitálica y puede desencadenar arritmias graves.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Ceftriaxona",
+        "efecto": "Forma precipitados. No se mezcla ni se administra al mismo tiempo, ni siquiera por vías distintas, en recién nacidos.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Bicarbonato de sodio y fosfatos",
+        "efecto": "Forman precipitados; no se mezclan ni se pasan por la misma línea.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Bloqueadores neuromusculares, tetraciclinas y cefalosporinas",
+        "efecto": "Incompatibles; no se mezclan con el gluconato de calcio.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Sulfato de magnesio",
+        "efecto": "Antagonismo mutuo.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Bloqueadores de canales de calcio",
+        "efecto": "El calcio puede reducir su efecto.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Diuréticos tiazídicos",
+        "efecto": "Riesgo de hipercalcemia.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Incompatible con bicarbonatos, fosfatos, sulfatos, carbonatos, citratos y ceftriaxona, entre otros. No se mezcla con otros medicamentos si no hay compatibilidad comprobada.",
+      "administracion": "Se administra IV lento, con el paciente acostado y con monitorización de frecuencia cardiaca o electrocardiograma. El sitio de punción se vigila para evitar extravasación.",
+      "precauciones": "El gluconato de calcio no equivale al cloruro de calcio: a igual volumen, el cloruro aporta cerca del triple de calcio, y confundirlos causa errores de dosis. Se vigila el calcio sérico durante el tratamiento."
+    },
+    "referencias": [
+      {
+        "text": "Secretaría de Salud de la Ciudad de México. (2018). Cuadro Básico y Catálogo Institucional. Grupo 21: Soluciones electrolíticas y substitutos del plasma.",
+        "url": "https://www.salud.cdmx.gob.mx/storage/app/media/2018-2024/medicamentos/FICHAS%20TECNICAS/Sol%20elec%20Ed.%202018.pdf"
+      },
+      {
+        "text": "B. Braun Medical Ltd. (2024). Calcium Gluconate 10% w/v Injection BP. Summary of Product Characteristics. electronic medicines compendium (emc).",
+        "url": "https://www.medicines.org.uk/emc/product/15226/smpc"
+      }
+    ]
+  },
+  {
+    "nombre": "Escitalopram",
+    "icono": "brain",
+    "categoria": "antidepresivo",
+    "altoRiesgo": false,
+    "farmacodinamia": "Inhibidor selectivo de la recaptación de serotonina (ISRS). Es el enantiómero S del citalopram, la mitad activa de la molécula.\nSe une con alta afinidad al transportador de serotonina y bloquea su recaptación en la neurona presináptica, con lo que aumenta la serotonina disponible en la sinapsis.\nTiene afinidad baja o nula por receptores dopaminérgicos, adrenérgicos, histaminérgicos y muscarínicos. El efecto antidepresivo aparece entre 2 y 4 semanas después de iniciar el tratamiento.",
+    "farmacocinetica": "Absorción: casi completa y no se modifica con los alimentos; la concentración máxima aparece en 3 a 4 horas. La biodisponibilidad es de alrededor del 80%.\nDistribución: amplia; se une menos del 80% a proteínas plasmáticas. El estado estable se alcanza en cerca de una semana.\nMetabolismo: hepático, principalmente por CYP2C19, con participación de CYP3A4 y CYP2D6.\nEliminación: hepática y renal, sobre todo como metabolitos en orina. La semivida es de 27 a 33 horas y se duplica en insuficiencia hepática.",
+    "indicaciones": "Trastorno depresivo mayor y prevención de recaídas.\nTrastorno de angustia con o sin agorafobia.\nTrastorno de ansiedad generalizada.\nTrastorno de ansiedad social.\nTrastorno obsesivo compulsivo.",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al escitalopram.",
+        "Uso con IMAO.",
+        "Embarazo y lactancia.",
+        "Insuficiencia hepática o renal grave.",
+        "Estados convulsivos.",
+        "Antecedente de abuso de drogas."
+      ],
+      "relativas": [
+        "Menores de 18 años.",
+        "Prolongación del QT, cardiopatía o uso de otros fármacos que prolongan el QT.",
+        "Antecedente de manía o hipomanía.",
+        "Predisposición al glaucoma de ángulo cerrado.",
+        "Adultos mayores.",
+        "Diabetes mellitus, por cambios en el control glucémico.",
+        "Trastornos hemorrágicos."
+      ]
+    },
+    "efectosSecundarios": [
+      "Cefalea y náuseas, sobre todo en las primeras dos semanas.",
+      "Insomnio o somnolencia.",
+      "Mareo.",
+      "Sudoración y boca seca.",
+      "Diarrea o estreñimiento.",
+      "Cambios en el apetito y en el peso.",
+      "Disfunción sexual."
+    ],
+    "efectosAdversos": [
+      "Ideación y conducta suicida, sobre todo en menores de 25 años y al inicio del tratamiento o tras cambios de dosis.",
+      "Síndrome serotoninérgico: agitación, temblor, mioclonías e hipertermia.",
+      "Prolongación del QT y torsade de pointes.",
+      "Hiponatremia por secreción inadecuada de hormona antidiurética, sobre todo en adultos mayores.",
+      "Sangrados y equimosis.",
+      "Síntomas en el recién nacido (dificultad respiratoria, irritabilidad, hipotonía) cuando se usa en el tercer trimestre.",
+      "Convulsiones.",
+      "Acatisia y manía.",
+      "Síndrome de retirada con la suspensión brusca: mareo, alteraciones sensitivas, insomnio e irritabilidad."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "IMAO (incluidos moclobemida y linezolid)",
+        "efecto": "Síndrome serotoninérgico grave. Contraindicado; tras un IMAO irreversible pasan 14 días antes de iniciar escitalopram, y 7 días al cambiar de escitalopram a un IMAO.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Tramadol, sumatriptán y otros serotoninérgicos",
+        "efecto": "Riesgo de síndrome serotoninérgico.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Fármacos que prolongan el QT",
+        "efecto": "Aumentan el riesgo de arritmias.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Litio y triptófano",
+        "efecto": "Potencian los efectos serotoninérgicos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Anticoagulantes, antiagregantes y AINEs",
+        "efecto": "Aumentan el riesgo de sangrado.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Omeprazol, cimetidina y otros inhibidores de CYP2C19",
+        "efecto": "Aumentan los niveles de escitalopram.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Metoprolol, antiarrítmicos, neurolépticos y otros sustratos de CYP2D6",
+        "efecto": "El escitalopram aumenta sus niveles; los de metoprolol se duplicaron.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Hierba de San Juan",
+        "efecto": "Aumenta las reacciones adversas.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "administracion": "Se toma una vez al día, con o sin alimentos. No se suspende de golpe: la retirada es gradual, en al menos una a dos semanas.",
+      "precauciones": "Se vigilan cambios de conducta e ideación suicida durante las primeras semanas, cuando el efecto todavía no aparece. Antes de iniciar se corrigen la hipopotasemia y la hipomagnesemia. Se evita el alcohol."
+    },
+    "referencias": [
+      {
+        "text": "Laboratorios PiSA. Lamobrigan (escitalopram) tabletas. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/lamobrigan-tabletas/134/101/51639/210"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2021). Ficha técnica Escitalopram Edigen comprimidos recubiertos con película. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/74429/FT_74429.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Fluoxetina",
+    "icono": "brain",
+    "categoria": "antidepresivo",
+    "altoRiesgo": false,
+    "farmacodinamia": "Inhibidor selectivo de la recaptación de serotonina (ISRS). Bloquea la recaptación de serotonina en la neurona presináptica y aumenta su disponibilidad en la sinapsis.\nPrácticamente no tiene afinidad por receptores adrenérgicos, dopaminérgicos, histaminérgicos, muscarínicos ni GABA.\nSu metabolito activo, la norfluoxetina, tiene una semivida muy larga, por lo que el efecto persiste semanas después de suspenderla.",
+    "farmacocinetica": "Absorción: buena por vía oral; los alimentos no modifican la cantidad absorbida. Cruza la barrera hematoencefálica.\nDistribución: se une cerca del 95% a proteínas plasmáticas.\nMetabolismo: hepático, sobre todo por CYP2D6, a norfluoxetina, que es activa.\nEliminación: principalmente renal y en menor medida biliar; no se elimina por diálisis. La semivida es de unas 50 horas para la fluoxetina y de 7 a 9 días para la norfluoxetina. El efecto máximo aparece entre 1 y 4 semanas.",
+    "indicaciones": "Estados depresivos.\nTrastornos de ansiedad.\nTrastorno obsesivo compulsivo.\nBulimia nerviosa.",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a la fluoxetina.",
+        "Crisis convulsivas o antecedente de crisis de ausencia.",
+        "Diabetes mellitus, por alteración del control glucémico.",
+        "Uso con IMAO.",
+        "Uso con metoprolol en insuficiencia cardiaca."
+      ],
+      "relativas": [
+        "Insuficiencia hepática.",
+        "Embarazo y lactancia.",
+        "Menores de 18 años.",
+        "Antecedente de manía.",
+        "Cardiopatía, alteraciones electrolíticas o uso de fármacos que prolongan el QT.",
+        "Glaucoma de ángulo estrecho.",
+        "Tratamiento con tamoxifeno."
+      ]
+    },
+    "efectosSecundarios": [
+      "Náuseas, vómito, dispepsia y diarrea.",
+      "Ansiedad y nerviosismo.",
+      "Insomnio o fatiga.",
+      "Cefalea y vértigo.",
+      "Disminución del apetito y pérdida de peso.",
+      "Disfunción sexual."
+    ],
+    "efectosAdversos": [
+      "Ideación y conducta suicida, sobre todo en niños, adolescentes y adultos jóvenes.",
+      "Síndrome serotoninérgico.",
+      "Convulsiones.",
+      "Hiponatremia por secreción inadecuada de hormona antidiurética.",
+      "Equimosis y alteración de la agregación plaquetaria, reversibles al suspenderla.",
+      "Prolongación del QT y arritmias ventriculares.",
+      "Reacciones cutáneas graves (Stevens-Johnson, necrólisis epidérmica tóxica)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "IMAO (incluidos linezolid y azul de metileno)",
+        "efecto": "Síndrome serotoninérgico grave. Tras suspender la fluoxetina pasan al menos 5 semanas antes de iniciar un IMAO.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Litio, triptófano, tramadol y triptanos",
+        "efecto": "Riesgo de síndrome serotoninérgico.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Tamoxifeno",
+        "efecto": "La fluoxetina inhibe CYP2D6 y reduce el metabolito activo del tamoxifeno. Se evita la combinación.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Sedantes y alcohol",
+        "efecto": "Potencian sus efectos; no se recomienda combinarlos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Sustratos de CYP2D6 (flecainida, propafenona, antidepresivos tricíclicos, risperidona)",
+        "efecto": "Aumentan sus niveles, incluso semanas después de suspender la fluoxetina.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Fenitoína, fenotiazinas y ácido acetilsalicílico",
+        "efecto": "Compiten por la unión a proteínas; la fenitoína puede llegar a niveles tóxicos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Anticoagulantes, antiagregantes y AINEs",
+        "efecto": "Aumentan el riesgo de sangrado.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Terapia electroconvulsiva",
+        "efecto": "Riesgo de convulsiones prolongadas; se omite la dosis previa.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "administracion": "Se toma por la mañana, con o sin alimentos. La retirada es gradual para evitar síntomas de supresión.",
+      "precauciones": "Se vigilan cambios de conducta e ideación suicida al inicio y tras cambios de dosis. En diabéticos se vigila la glucosa. Por su semivida larga, sus interacciones se mantienen semanas después de suspenderla."
+    },
+    "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Fluoxetina cápsulas. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/fluoxetina-capsulas/10/101/64801/14"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2025). Ficha técnica Fluoxetina STADA 20 mg cápsulas duras EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/62481/FT_62481.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Sertralina",
+    "icono": "brain",
+    "categoria": "antidepresivo",
+    "altoRiesgo": false,
+    "farmacodinamia": "Inhibidor selectivo de la recaptación de serotonina (ISRS) potente, con efecto muy débil sobre la recaptación de noradrenalina y dopamina.\nAl bloquear la recaptación aumenta la serotonina disponible en la sinapsis.\nNo tiene afinidad por receptores muscarínicos, histaminérgicos, adrenérgicos ni benzodiacepínicos, por lo que no es sedante.",
+    "farmacocinetica": "Absorción: la concentración máxima aparece entre 4.5 y 8.4 horas; los alimentos no modifican la biodisponibilidad.\nDistribución: se une cerca del 98% a proteínas plasmáticas.\nMetabolismo: hepático extenso, por CYP3A4, CYP2C19 y CYP2B6, a N-desmetilsertralina.\nEliminación: en orina y heces en proporciones similares. La semivida es de unas 24 horas; la del metabolito, de 62 a 104 horas.",
+    "indicaciones": "Episodio depresivo mayor y prevención de recaídas.\nTrastorno de angustia con o sin agorafobia.\nTrastorno obsesivo compulsivo, también en niños y adolescentes de 6 a 17 años.\nTrastorno de ansiedad social.\nTrastorno de estrés postraumático.",
+    "viaAdministracion": "Oral",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a la sertralina.",
+        "Embarazo y lactancia.",
+        "Uso como antidepresivo en menores de 18 años, o para trastorno obsesivo compulsivo en menores de 6 años.",
+        "Uso con IMAO.",
+        "Uso con pimozida."
+      ],
+      "relativas": [
+        "Epilepsia; se evita si no está controlada.",
+        "Antecedente de manía.",
+        "Insuficiencia hepática.",
+        "Cardiopatía, bradicardia o alteraciones electrolíticas, por riesgo de QT largo.",
+        "Glaucoma de ángulo cerrado.",
+        "Diabetes mellitus.",
+        "Trastornos hemorrágicos."
+      ]
+    },
+    "efectosSecundarios": [
+      "Náuseas, diarrea y boca seca.",
+      "Insomnio o somnolencia.",
+      "Mareo y cefalea.",
+      "Temblor y sudoración.",
+      "Dispepsia.",
+      "Disfunción sexual, incluida la eyaculación retardada."
+    ],
+    "efectosAdversos": [
+      "Ideación y conducta suicida, sobre todo en menores de 25 años.",
+      "Síndrome serotoninérgico y síndrome neuroléptico maligno.",
+      "Prolongación del QT y torsade de pointes.",
+      "Hiponatremia por secreción inadecuada de hormona antidiurética.",
+      "Sangrados.",
+      "Convulsiones.",
+      "Reacciones cutáneas graves y daño hepático.",
+      "Síndrome de retirada con la suspensión brusca."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "IMAO (incluidos linezolid, moclobemida y azul de metileno)",
+        "efecto": "Síndrome serotoninérgico grave. Contraindicado; se dejan 14 días entre uno y otro.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Pimozida",
+        "efecto": "La sertralina aumenta sus niveles y el riesgo de arritmias. Contraindicado.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Tramadol, fentanilo, sumatriptán y otros serotoninérgicos",
+        "efecto": "Riesgo de síndrome serotoninérgico; con sumatriptán se han descrito hiperreflexia y confusión.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Fármacos que prolongan el QT",
+        "efecto": "Aumentan el riesgo de arritmias.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Warfarina",
+        "efecto": "Puede aumentar el INR; se vigila el tiempo de protrombina al iniciar o suspender la sertralina.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Litio",
+        "efecto": "Aumenta el temblor; requiere vigilancia estrecha.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Fenitoína",
+        "efecto": "Se vigilan sus niveles.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Antiagregantes y AINEs",
+        "efecto": "Aumentan el riesgo de sangrado.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Alcohol",
+        "efecto": "No se recomienda la combinación.",
+        "severidad": "baja"
+      },
+      {
+        "medicamento": "Cimetidina",
+        "efecto": "Reduce la eliminación de sertralina.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "administracion": "Se toma una vez al día, en la mañana o en la noche, con alimentos, y se traga entera. La retirada es gradual, en al menos una a dos semanas.",
+      "precauciones": "Se vigilan cambios de conducta e ideación suicida al inicio y tras cambios de dosis. Puede dar falso positivo para benzodiacepinas en pruebas de orina, incluso días después de suspenderla."
+    },
+    "referencias": [
+      {
+        "text": "Antibióticos de México (AMSA). Sertralina tabletas. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/sertralina-tabletas/10/101/64788/210"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2025). Ficha técnica Sertralina Cinfa 50 mg y 100 mg comprimidos recubiertos con película EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/66058/FichaTecnica_66058.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Ácido Tranexámico",
+    "icono": "firstAidKit",
+    "categoria": "hemostatico",
+    "altoRiesgo": false,
+    "farmacodinamia": "Antifibrinolítico. Es un aminoácido sintético que se une a los sitios de fijación de lisina del plasminógeno.\nInhibe la activación del plasminógeno y, a concentraciones mayores, a la plasmina, con lo que impide que la fibrina del coágulo se degrade.\nNo forma coágulos nuevos: evita que se deshagan los existentes. No modifica las plaquetas ni las pruebas de coagulación habituales.",
+    "farmacocinetica": "Absorción: por vía IV la concentración máxima se alcanza de inmediato.\nDistribución: se une cerca del 3% a proteínas plasmáticas, solo al plasminógeno. Atraviesa la placenta y pasa al líquido articular; en líquido cefalorraquídeo alcanza una décima parte de la concentración en sangre.\nMetabolismo: mínimo.\nEliminación: renal, como fármaco sin cambios; cerca del 90% en 24 horas. La semivida es de unas 3 horas y aumenta en insuficiencia renal.",
+    "indicaciones": "Hemorragias por fibrinólisis general o local.\nMenorragia y metrorragia.\nHemorragia gastrointestinal.\nSangrado urinario después de cirugía de próstata o vías urinarias.\nCirugía de oído, nariz y garganta, y extracciones dentales.\nCirugía ginecológica, obstétrica, torácica, abdominal y cardiovascular.\nHemorragia por fármacos fibrinolíticos.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al ácido tranexámico.",
+        "Alteración adquirida de la visión de los colores.",
+        "Hemorragia subaracnoidea.",
+        "Coagulación intravascular activa.",
+        "Vía intratecal, epidural o intraventricular."
+      ],
+      "relativas": [
+        "Trombosis aguda o antecedente de enfermedad tromboembólica.",
+        "Antecedente de convulsiones.",
+        "Insuficiencia renal, por acumulación.",
+        "Hematuria de vías urinarias altas, por riesgo de obstrucción ureteral.",
+        "Uso de anticonceptivos hormonales.",
+        "Embarazo y lactancia."
+      ]
+    },
+    "efectosSecundarios": [
+      "Náuseas, vómito y diarrea.",
+      "Mareo.",
+      "Dermatitis alérgica."
+    ],
+    "efectosAdversos": [
+      "Hipotensión con o sin pérdida del estado de alerta, por inyección IV demasiado rápida.",
+      "Convulsiones, sobre todo con dosis altas o administración por vía incorrecta.",
+      "Trombosis arterial o venosa.",
+      "Alteraciones visuales, incluida la visión de colores.",
+      "Anafilaxia.",
+      "Reacciones graves y muertes por administración intratecal accidental: dolor intenso de espalda y piernas, mioclonías, convulsiones y arritmias."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Concentrados de complejo de factor IX y concentrados antiinhibidores",
+        "efecto": "Aumentan el riesgo de trombosis; se evita la combinación.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticonceptivos hormonales",
+        "efecto": "Aumentan el riesgo de trombosis.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes",
+        "efecto": "Se usan juntos solo con supervisión estricta.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Trombolíticos",
+        "efecto": "Antagonizan el efecto del ácido tranexámico.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Para infusión puede diluirse en soluciones de electrolitos, glucosadas, de aminoácidos o de dextrán; la mezcla se usa dentro de 4 horas. No se agrega a sangre para transfundir ni a soluciones con penicilina.",
+      "administracion": "Solo por vía IV, en inyección lenta o en infusión. Nunca por vía IM, intratecal ni epidural. Se rotula la jeringa para no confundirla con otros inyectables del mismo procedimiento, en especial con anestésicos espinales.",
+      "precauciones": "Se vigilan creatinina sérica y signos de trombosis. En tratamientos prolongados se hace revisión oftalmológica inicial y periódica, y se suspende si hay alteraciones visuales."
+    },
+    "referencias": [
+      {
+        "text": "Soluciones en Liderazgo Farmacéutico. Solidtrax (ácido tranexámico) solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/solidtrax-solucion-inyectable-intravenosa/2844/101/69961/377"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2026). Ficha técnica Amchafibrin 500 mg solución inyectable. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/53939/FichaTecnica_53939.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Fitomenadiona",
+    "icono": "firstAidKit",
+    "categoria": "hemostatico",
+    "altoRiesgo": false,
+    "farmacodinamia": "Vitamina K1. Es cofactor de la carboxilasa hepática que activa los factores de coagulación II, VII, IX y X, y las proteínas C y S.\nLos anticoagulantes cumarínicos (warfarina, acenocumarol) bloquean el reciclaje de la vitamina K; la fitomenadiona aporta vitamina K activa y revierte su efecto.\nNo neutraliza la heparina; el antídoto de la heparina es la protamina.",
+    "farmacocinetica": "Absorción: por vía IV el efecto inicia 1 a 3 horas después de la administración.\nDistribución: se acumula sobre todo en el hígado; se une cerca del 90% a proteínas plasmáticas.\nMetabolismo: hepático, a metabolitos más polares, entre ellos el 2,3-epóxido.\nEliminación: por bilis y orina como conjugados. La semivida es de unas 14 horas en el adulto y cerca de 70 horas en el recién nacido.",
+    "indicaciones": "Sangrado o riesgo de sangrado por sobredosis de anticoagulantes cumarínicos.\nDeficiencia de vitamina K por ictericia obstructiva, trastornos intestinales o hepáticos, o uso prolongado de antibióticos.\nPrevención y tratamiento de la enfermedad hemorrágica del recién nacido.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a la fitomenadiona o a sus excipientes.",
+        "Vía IM en pacientes anticoagulados, por riesgo de hematoma."
+      ],
+      "relativas": [
+        "Insuficiencia hepática grave, en la que el efecto es menor.",
+        "Prematuros de menos de 2.5 kg por vía parenteral, por riesgo de kernícterus."
+      ]
+    },
+    "efectosSecundarios": [
+      "Irritación venosa o flebitis.",
+      "Molestia local en el sitio de inyección."
+    ],
+    "efectosAdversos": [
+      "Reacciones anafilactoides con la vía IV, muy raras.",
+      "Hematoma por vía IM en pacientes anticoagulados."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Warfarina y acenocumarol",
+        "efecto": "La fitomenadiona antagoniza su efecto; reiniciar la anticoagulación puede tardar más en lograr el INR deseado.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticonvulsivantes",
+        "efecto": "Pueden alterar la actividad de la vitamina K.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "No se diluye ni se mezcla con otros medicamentos inyectables. Puede inyectarse en la parte baja del equipo de venoclisis mientras pasa solución fisiológica 0.9% o solución glucosada al 5%. La ampolleta debe verse transparente.",
+      "administracion": "La vía IV se administra lento. En pacientes anticoagulados no se usa la vía IM.",
+      "precauciones": "Se vigila el INR después de la administración, con más cuidado en insuficiencia hepática."
+    },
+    "referencias": [
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2015). Ficha técnica Konakion 10 mg/ml solución oral e inyectable. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/27262/FT_27262.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Protamina",
+    "icono": "firstAidKit",
+    "categoria": "hemostatico",
+    "altoRiesgo": false,
+    "farmacodinamia": "Antídoto de la heparina. Es una proteína básica de bajo peso molecular, obtenida del semen de salmón.\nSe une a la heparina, que es muy ácida, y forma casi de inmediato un complejo sin actividad anticoagulante.\nNeutraliza casi por completo la actividad anti-IIa de las heparinas de bajo peso molecular, pero solo en parte su actividad anti-Xa. Por sí sola tiene un efecto anticoagulante leve.",
+    "farmacocinetica": "Absorción: por vía IV el efecto inicia en 1 a 2 minutos y dura hasta 2 horas.\nDistribución: volumen de distribución cercano a 5.4 L.\nMetabolismo: se inactiva en el plasma.\nEliminación: principalmente renal y, en menor medida, hepática y biliar. La semivida es de unos 5 minutos.",
+    "indicaciones": "Hemorragia por sobredosis de heparina.\nNeutralización de la heparina en cirugía cardiovascular con circulación extracorpórea.\nNeutralización de la heparina en hemodiálisis.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a la protamina o a sus excipientes."
+      ],
+      "relativas": [
+        "Alergia al pescado.",
+        "Hombres vasectomizados o infértiles.",
+        "Diabéticos tratados con insulinas que contienen protamina (NPH).",
+        "Exposición previa a protamina."
+      ]
+    },
+    "efectosSecundarios": [
+      "Rubor y sensación de calor.",
+      "Sudoración.",
+      "Cefalea y cansancio.",
+      "Náuseas y vómito.",
+      "Dolor de espalda."
+    ],
+    "efectosAdversos": [
+      "Anafilaxia con broncoespasmo, colapso cardiovascular y paro cardiaco.",
+      "Hipotensión, disnea y bradicardia con la aplicación rápida.",
+      "Hipertensión pulmonar y edema pulmonar no cardiogénico.",
+      "Sangrado por efecto rebote de la heparina.",
+      "Sangrado por exceso de protamina.",
+      "Neutropenia y trombocitopenia transitorias."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Heparina y heparinas de bajo peso molecular",
+        "efecto": "La protamina forma un complejo inactivo con ellas; es su antídoto.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Penicilinas, cefalosporinas y otros betalactámicos",
+        "efecto": "Incompatibles; no se administran juntos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Medios de contraste (diatrizoato, ioxaglato)",
+        "efecto": "Incompatibles; no se administran juntos.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Puede administrarse directa o diluida en solución fisiológica 0.9% o solución glucosada al 5%. La dilución se usa de inmediato y se desecha el sobrante.",
+      "administracion": "IV lenta, para reducir hipotensión, bradicardia y reacciones anafilácticas. El equipo para atender anafilaxia se mantiene disponible.",
+      "precauciones": "No revierte anticoagulantes orales; para la warfarina se usa vitamina K. Se vigilan el tiempo de tromboplastina parcial y el tiempo de coagulación por el riesgo de rebote."
+    },
+    "referencias": [
+      {
+        "text": "Laboratorios Grossman. Protamina 1000 solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://medicamentosplm.com/Home/productos/protamina.1000.solucion.inyectable/187/101/9445/162"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2020). Ficha técnica Protamina Hospira 10 mg/ml solución inyectable. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/45777/FT_45777.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Bromuro de Ipratropio",
+    "icono": "wind",
+    "categoria": "broncodilatador",
+    "altoRiesgo": false,
+    "farmacodinamia": "Anticolinérgico. Antagonista no selectivo de los receptores muscarínicos M1, M2 y M3 del músculo liso bronquial; bloquea la broncoconstricción mediada por el nervio vago.\nComo los receptores M3 predominan en tráquea y vías aéreas mayores, la broncodilatación ocurre sobre todo ahí.\nJunto con salbutamol produce más broncodilatación que cada uno por separado, sin aumentar sus efectos adversos. Su acción es local y no reduce el aclaramiento mucociliar.",
+    "farmacocinetica": "Absorción: entre 10 y 30% de la dosis nebulizada llega al pulmón y el resto se deglute; la biodisponibilidad sistémica por inhalación es de 7 a 28%. El efecto inicia en 15 a 30 minutos, es máximo hacia 1 a 2 horas y dura 3 a 4 horas.\nDistribución: se une menos del 20% a proteínas plasmáticas; no atraviesa la barrera hematoencefálica.\nMetabolismo: una fracción pequeña se metaboliza a compuestos casi sin afinidad por los receptores muscarínicos.\nEliminación: sobre todo por heces; la excreción renal es baja. La semivida es de 1.6 horas. Junto con salbutamol no aumenta la absorción sistémica de ninguno.",
+    "indicaciones": "Broncoespasmo reversible de enfermedades obstructivas de la vía aérea (EPOC, bronquitis crónica, asma) en pacientes que requieren más de un broncodilatador, combinado con salbutamol.",
+    "viaAdministracion": "Nebulizada",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al ipratropio o a la atropina y sus derivados.",
+        "Miocardiopatía hipertrófica obstructiva o taquiarritmia, con la presentación combinada con salbutamol.",
+        "Monoterapia del broncoespasmo agudo que requiere respuesta rápida."
+      ],
+      "relativas": [
+        "Glaucoma o riesgo de glaucoma de ángulo cerrado.",
+        "Hiperplasia prostática u obstrucción del cuello vesical.",
+        "Diabetes mal controlada, infarto reciente, hipertiroidismo o feocromocitoma, con la presentación combinada.",
+        "Primer trimestre del embarazo.",
+        "Fibrosis quística, por alteraciones de la motilidad intestinal."
+      ]
+    },
+    "efectosSecundarios": [
+      "Boca seca.",
+      "Cefalea y mareo.",
+      "Tos e irritación faríngea.",
+      "Náuseas.",
+      "Estreñimiento, diarrea o vómito."
+    ],
+    "efectosAdversos": [
+      "Broncoespasmo paradójico, potencialmente mortal.",
+      "Glaucoma de ángulo cerrado agudo cuando el aerosol alcanza los ojos: dolor ocular, visión borrosa, halos, ojo rojo y midriasis.",
+      "Taquicardia, fibrilación auricular y palpitaciones.",
+      "Hipopotasemia, con la presentación combinada.",
+      "Retención urinaria.",
+      "Anafilaxia, angioedema y laringoespasmo."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Betabloqueadores",
+        "efecto": "Pueden reducir de forma importante el efecto broncodilatador de la combinación con salbutamol.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Otros anticolinérgicos",
+        "efecto": "No se recomienda su uso crónico conjunto; suman efectos anticolinérgicos.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Xantinas, glucocorticoides y diuréticos",
+        "efecto": "Suman hipopotasemia con la combinación, lo que aumenta el riesgo de arritmias con digoxina.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "IMAO y antidepresivos tricíclicos",
+        "efecto": "Pueden potenciar los efectos del salbutamol de la combinación.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Anestésicos halogenados",
+        "efecto": "Aumentan los efectos cardiovasculares del salbutamol de la combinación.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "No requiere dilución: el contenido de la ampolleta se coloca directo en el nebulizador. No se mezcla con otros medicamentos en el mismo nebulizador. No lleva conservador: se usa al abrir y se desecha el sobrante.",
+      "administracion": "Se nebuliza de preferencia con boquilla; si se usa mascarilla, debe quedar bien ajustada para que el aerosol no alcance los ojos.",
+      "precauciones": "Ante broncoespasmo paradójico se suspende de inmediato. En pacientes con riesgo de glaucoma se protegen los ojos; dolor ocular, visión borrosa, halos u ojo rojo obligan a valoración urgente. La disnea que empeora requiere atención médica inmediata."
+    },
+    "referencias": [
+      {
+        "text": "Boehringer Ingelheim. Combivent (bromuro de ipratropio y salbutamol) solución para nebulizar. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/Home/productos/combivent.solucion.para.nebulizar/28/101/7013/183"
+      },
+      {
+        "text": "Antibióticos de México (AMSA). Bromuro de ipratropio y salbutamol solución para nebulización. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/bromuro-de-ipratropio---salbutamol-solucion-para-nebulizacion/10/101/60199/991"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). (2026). Ficha técnica Bromuro de Ipratropio Aldo-Unión 500 microgramos solución para inhalación por nebulizador. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/70939/FichaTecnica_70939.html"
+      }
+    ]
   }
 ]

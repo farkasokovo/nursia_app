@@ -21,7 +21,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 29, // Aumentamos la versión a 29
+      version: 30, // Aumentamos la versión a 30
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -303,6 +303,15 @@ class DatabaseHelper {
         // NO afecta datos del usuario (turno activo).
         if (oldVersion < 29) {
           await db.delete('escalas');
+        }
+        // medicamentos.json se revisó completo (PiSA/AMSA, una sola vía por
+        // fármaco) y sumó 10 fármacos; normas_data.json corrigió el código de
+        // la NOM-087-ECOL-SSA1-2002. Se vacían ambas tablas para que
+        // cargarSemillaSiHaceFalta() las vuelva a sembrar.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 30) {
+          await db.delete('medicamentos');
+          await db.delete('normas');
         }
       },
     );

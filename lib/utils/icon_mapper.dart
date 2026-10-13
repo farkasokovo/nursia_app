@@ -32,6 +32,15 @@ class IconMapper {
       // Broncodilatadores
       case 'wind':
         return PhosphorIconsFill.wind;
+      // Electrolitos
+      case 'lightning':
+        return PhosphorIconsFill.lightning;
+      // Antidepresivos
+      case 'brain':
+        return PhosphorIconsFill.brain;
+      // Hemostáticos
+      case 'firstAidKit':
+        return PhosphorIconsFill.firstAidKit;
       // Escalas / otros
       default:
         return PhosphorIconsFill.syringe;

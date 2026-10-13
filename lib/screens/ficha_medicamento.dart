@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nursia_app/repositories/medicamento_repository.dart';
+import 'package:nursia_app/theme/theme_colors.dart';
 import 'package:nursia_app/utils/icon_mapper.dart';
 import 'package:nursia_app/utils/secciones_ficha.dart';
 import 'package:nursia_app/utils/url_launcher_helper.dart';
@@ -134,11 +135,7 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
               medicamento.indicaciones,
             ),
             const SizedBox(height: 16),
-            _buildSection(
-              textTheme,
-              seccionPorClave(seccionesFichaMedicamento, 'via_administracion'),
-              medicamento.viaAdministracion,
-            ),
+            _buildViaAdministracion(textTheme, medicamento.viaAdministracion),
             const SizedBox(height: 16),
             _buildContraindicaciones(textTheme, medicamento.contraindicaciones),
             const SizedBox(height: 16),
@@ -179,6 +176,36 @@ class _FichaMedicamentoState extends State<FichaMedicamento> {
         Text(
           contenido.isEmpty ? "No especificado" : contenido,
           style: textTheme.bodySmall,
+        ),
+      ],
+    );
+  }
+
+  // Misma pareja de colores que el FarmaButton: en oscuro `primary` es el
+  // acento claro y la tinta oscura de tituloSobrePrimary da 7.58:1.
+  Widget _buildViaAdministracion(TextTheme textTheme, String via) {
+    final seccion = seccionPorClave(
+      seccionesFichaMedicamento,
+      'via_administracion',
+    );
+    if (via.isEmpty) return _buildSection(textTheme, seccion, via);
+
+    return SeccionFichaView(
+      seccion: seccion,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            via,
+            style: textTheme.bodySmall?.copyWith(
+              color: ThemeColors.tituloSobrePrimary(context),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ],
     );
