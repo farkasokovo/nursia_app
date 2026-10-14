@@ -52,3 +52,11 @@ CLAUDE.md
 
 # Notas y planes locales de trabajo (no se publican)
 docs/
+
+# Archivos de Claude y configuración local: no van al repo
+.claude/
+CLAUDE.md.bak
+frame.md
+
+# Fuentes: se quedan en la máquina (licencia), no en el repo
+assets/fonts/
