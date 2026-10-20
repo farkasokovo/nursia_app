@@ -31,19 +31,6 @@ class _SignosVitalesLayout extends StatelessWidget {
         child: Column(
           children: [
             FarmaButton(
-              title: "Pediátricos",
-              subtitle: "Valores por grupo de edad",
-              icon: PhosphorIconsRegular.babyCarriage,
-              altoMinimo: altoFarmaButtonEscalas,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const SignosVitalesPediatricosScreen(),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            FarmaButton(
               title: "Adulto",
               subtitle: "Signos vitales y laboratorios",
               icon: PhosphorIconsRegular.person,
@@ -52,6 +39,19 @@ class _SignosVitalesLayout extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (_) => const SignosVitalesAdultoScreen(),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            FarmaButton(
+              title: "Pediátricos",
+              subtitle: "Valores por grupo de edad",
+              icon: PhosphorIconsRegular.babyCarriage,
+              altoMinimo: altoFarmaButtonEscalas,
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const SignosVitalesPediatricosScreen(),
                 ),
               ),
             ),
