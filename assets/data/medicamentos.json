@@ -2959,5 +2959,477 @@
         "url": "https://cima.aemps.es/cima/dochtml/ft/70939/FichaTecnica_70939.html"
       }
     ]
+  },
+  {
+    "nombre": "Lidocaína",
+    "icono": "needle",
+    "categoria": "anestesico",
+    "altoRiesgo": false,
+    "farmacodinamia": "Anestésico local de tipo amida y antiarrítmico de clase IB.\nEn su forma sin carga atraviesa la membrana del nervio; ya dentro, en su forma con carga, bloquea desde el interior los canales de sodio dependientes de voltaje. Sin entrada de sodio no se genera ni se propaga el potencial de acción, y el dolor no llega a la médula ni al cerebro.\nBloquea mejor los canales que se abren con frecuencia (bloqueo dependiente de uso). Las fibras delgadas del dolor y la temperatura se bloquean antes que las motoras.\nEn el tejido inflamado o ácido predomina la forma con carga, que no cruza la membrana, y por eso funciona peor.\nComo antiarrítmico, disminuye la automaticidad ventricular.",
+    "farmacocinetica": "Absorción: por infiltración, el efecto inicia en minutos; la absorción a la sangre depende de la vascularidad del sitio y se reduce si se combina con epinefrina. Por vía IV el efecto inicia en cerca de 1 minuto.\nDistribución: se une cerca del 66% a proteínas plasmáticas. Atraviesa la placenta y pasa en pequeñas cantidades a la leche materna.\nMetabolismo: hepático (cerca del 90%), a metabolitos activos (MEGX y GX).\nEliminación: renal, menos del 10% sin cambios. La semivida es de 1 a 2 horas tras un bolo IV y puede duplicarse en enfermedad hepática.",
+    "indicaciones": "Anestesia local por infiltración.\nBloqueo de nervios periféricos.\nBloqueo caudal y epidural.\nTratamiento agudo de arritmias ventriculares (solo la presentación sin epinefrina, por vía IV).",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a la lidocaína o a otros anestésicos locales tipo amida.",
+        "Bloqueo cardiaco completo o choque.",
+        "Por vía IV: síndrome de Stokes-Adams y bloqueos sinoauricular, auriculoventricular o intraventricular graves.",
+        "Infiltración en zonas inflamadas o infectadas."
+      ],
+      "relativas": [
+        "Insuficiencia hepática o flujo hepático reducido (se reduce la dosis).",
+        "Pacientes mayores de 70 años (se reduce la dosis).",
+        "Bradicardia, insuficiencia cardiaca o trastornos de la conducción.",
+        "Epilepsia.",
+        "Porfiria.",
+        "Hipovolemia."
+      ]
+    },
+    "efectosSecundarios": [
+      "Ardor o dolor durante la infiltración.",
+      "Mareo.",
+      "Náuseas y vómito.",
+      "Somnolencia."
+    ],
+    "efectosAdversos": [
+      "Toxicidad sistémica por niveles altos en sangre (dosis excesiva, absorción rápida o inyección intravascular accidental).",
+      "Neurológica: entumecimiento de lengua y labios, sabor metálico, zumbido de oídos, visión borrosa, temblor, convulsiones, pérdida del estado de alerta y paro respiratorio.",
+      "Cardiovascular: hipotensión, bradicardia, depresión miocárdica, arritmias y paro cardiaco.",
+      "Metahemoglobinemia.",
+      "Reacciones alérgicas: urticaria, angioedema y anafilaxia (raras)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Antiarrítmicos (amiodarona, mexiletina), betabloqueadores y calcioantagonistas",
+        "efecto": "Efecto aditivo sobre la conducción y la contractilidad cardiaca; se monitoriza con ECG.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Otros anestésicos locales",
+        "efecto": "Suman su toxicidad sistémica; se cuenta la dosis total.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Cimetidina, propranolol y fluvoxamina",
+        "efecto": "Disminuyen su eliminación y pueden elevar sus niveles hasta la toxicidad.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Relajantes musculares (suxametonio)",
+        "efecto": "Pueden intensificar y prolongar el bloqueo neuromuscular.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Fenitoína IV",
+        "efecto": "Aumenta el efecto depresor cardiaco.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Para infusión antiarrítmica, la información para prescribir de Pisacaína indica diluir 1 g en 1000 mL de solución glucosada al 5% (1 mg/mL). Las presentaciones con epinefrina nunca se usan por vía IV.",
+      "administracion": "Antes de infiltrar se aspira para descartar que la aguja esté dentro de un vaso. Se usa la menor dosis eficaz; en anestesia local, la dosis inicial del adulto no debe pasar de 6 mg/kg. Por vía IV solo como antiarrítmico, con ECG continuo y bomba de infusión.",
+      "precauciones": "Se vigilan signos tempranos de toxicidad (entumecimiento peribucal, sabor metálico, zumbido de oídos, mareo) y se tiene a la mano el equipo de reanimación. Se verifica la presentación antes de cargar: simple, con epinefrina o pesada no son intercambiables."
+    },
+    "referencias": [
+      {
+        "text": "Laboratorios PiSA. Pisacaína 1% / 2% / 2% con epinefrina / 5% pesada (lidocaína) solución inyectable. Información para prescribir. Actuamed.",
+        "url": "https://www.actuamed.com.mx/marca/18329"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). Ficha técnica Lidocaína Kabi 10 mg/ml y 20 mg/ml solución inyectable EFG. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/83934/FT_83934.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Bupivacaína",
+    "icono": "needle",
+    "categoria": "anestesico",
+    "altoRiesgo": true,
+    "farmacodinamia": "Anestésico local de tipo amida de acción prolongada.\nBloquea los canales de sodio de la membrana del nervio e impide que se genere y conduzca el impulso nervioso.\nEs cerca de cuatro veces más potente que la lidocaína; su efecto tarda más en iniciar, pero dura mucho más.\nEs más cardiotóxica que la lidocaína: si llega en exceso a la sangre puede deprimir el miocardio y causar arritmias graves.",
+    "farmacocinetica": "Absorción: depende del sitio y de la vascularidad. Al 0.5%, el efecto dura de 2 a 5 horas por vía epidural y más de 12 horas en bloqueo de nervio periférico.\nDistribución: se une cerca del 96% a proteínas plasmáticas, sobre todo a la alfa-1 glicoproteína ácida. Atraviesa la placenta con facilidad.\nMetabolismo: hepático.\nEliminación: renal, solo cerca del 6% sin cambios. La semivida es de unas 2.7 horas en el adulto y de hasta 8 horas en el recién nacido.",
+    "indicaciones": "Anestesia regional para cirugía y procedimientos obstétricos: bloqueo epidural, caudal y de troncos o plexos nerviosos.\nAnalgesia del trabajo de parto (concentraciones bajas).\nAnestesia raquídea (subaracnoidea) con la presentación pesada (hiperbárica).\nBloqueo retrobulbar (presentación al 0.75%).",
+    "viaAdministracion": "Epidural",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a la bupivacaína o a otros anestésicos locales tipo amida.",
+        "Anestesia regional intravenosa (bloqueo de Bier).",
+        "Bloqueo paracervical obstétrico.",
+        "Concentración al 0.75% en anestesia obstétrica, por reportes de paro cardiaco y muertes.",
+        "Para bloqueo epidural o raquídeo: choque, trastornos de la coagulación o tratamiento anticoagulante, e infección en el sitio de punción."
+      ],
+      "relativas": [
+        "Bloqueo cardiaco o trastornos de la conducción.",
+        "Enfermedad hepática avanzada.",
+        "Insuficiencia renal grave.",
+        "Adultos mayores o pacientes debilitados (se reduce la dosis).",
+        "Hipovolemia no corregida."
+      ]
+    },
+    "efectosSecundarios": [
+      "Hipotensión (el más frecuente en bloqueo epidural o raquídeo).",
+      "Náuseas y vómito.",
+      "Bradicardia.",
+      "Retención urinaria.",
+      "Parestesias y mareo."
+    ],
+    "efectosAdversos": [
+      "Toxicidad cardiaca por inyección intravascular o dosis alta: depresión miocárdica, bloqueo, arritmias ventriculares y paro cardiaco de reanimación difícil.",
+      "Toxicidad neurológica: entumecimiento de la lengua, zumbido de oídos, visión borrosa, temblor y convulsiones.",
+      "Bloqueo raquídeo alto o total con parálisis respiratoria, si el anestésico asciende.",
+      "Cefalea pospunción, dolor lumbar y daño neurológico (raro).",
+      "Reacciones alérgicas y anafilaxia (raras)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Otros anestésicos locales tipo amida",
+        "efecto": "Suman su toxicidad sistémica.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antiarrítmicos (amiodarona)",
+        "efecto": "Pueden sumar efectos cardiacos; se monitoriza con ECG.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Anticoagulantes, heparina y AINE",
+        "efecto": "Aumentan el riesgo de hematoma epidural o raquídeo.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Vasoconstrictores (epinefrina)",
+        "efecto": "Prolongan el bloqueo y disminuyen la absorción a la sangre.",
+        "severidad": "baja"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Viene lista para usarse. Se verifica la concentración y si es la presentación pesada (para raquia) antes de cargarla; no son intercambiables.",
+      "administracion": "La aplica personal capacitado en anestesia regional. Se aspira antes y durante la inyección, y la dosis se pasa lentamente y en fracciones, manteniendo contacto verbal con el paciente. Nunca por vía IV.",
+      "precauciones": "Se tienen listos el equipo de reanimación y una vía venosa permeable. Se vigilan presión arterial, frecuencia cardiaca, nivel del bloqueo y estado de alerta. Ante entumecimiento peribucal, zumbido de oídos, convulsiones o arritmias se suspende y se avisa de inmediato."
+    },
+    "referencias": [
+      {
+        "text": "Laboratorios PiSA. Buvacaína (bupivacaína) solución inyectable. Información para prescribir. Actuamed.",
+        "url": "https://www.actuamed.com.mx/marca/15706"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). Ficha técnica Bupivacaína Physan 5 mg/ml solución inyectable. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/57110/FT_57110.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Propofol",
+    "icono": "needle",
+    "categoria": "anestesico",
+    "altoRiesgo": true,
+    "farmacodinamia": "Anestésico general intravenoso de acción corta (sedante-hipnótico).\nPotencia la acción del GABA en su receptor GABA-A, el principal sistema inhibidor del cerebro, y deprime el sistema nervioso central de forma dependiente de la dosis: de sedación ligera hasta pérdida de la conciencia.\nNo tiene efecto analgésico, por lo que se combina con opioides cuando hay dolor.\nProduce vasodilatación y depresión respiratoria.",
+    "farmacocinetica": "Absorción: por vía IV la pérdida de la conciencia ocurre en 30 a 40 segundos; un bolo dura de 4 a 6 minutos y el despertar suele ser rápido y claro.\nDistribución: muy liposoluble; pasa rápido al cerebro y luego se redistribuye a otros tejidos. Se une cerca del 98% a proteínas plasmáticas.\nMetabolismo: hepático, a conjugados inactivos.\nEliminación: renal, como metabolitos inactivos. El aclaramiento es muy alto (1.5 a 2 L/min).",
+    "indicaciones": "Inducción y mantenimiento de la anestesia general.\nSedación de adultos intubados con ventilación mecánica en terapia intensiva.\nSedación consciente para procedimientos diagnósticos y quirúrgicos.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al propofol o a sus componentes (aceite de soya, fosfolípidos de huevo).",
+        "Alergia a la soya o al cacahuate.",
+        "Sedación en terapia intensiva en menores de 16 años."
+      ],
+      "relativas": [
+        "Hipovolemia, choque o inestabilidad hemodinámica.",
+        "Adultos mayores, pacientes debilitados o ASA III-IV (se reduce la dosis y se evitan bolos rápidos).",
+        "Trastornos del metabolismo de los lípidos.",
+        "Epilepsia.",
+        "Embarazo, cesárea y lactancia (uso no recomendado).",
+        "Sensibilidad a sulfitos en presentaciones con metabisulfito, sobre todo en asmáticos."
+      ]
+    },
+    "efectosSecundarios": [
+      "Dolor o ardor en el sitio de inyección (muy frecuente).",
+      "Hipotensión.",
+      "Bradicardia.",
+      "Apnea transitoria.",
+      "Náuseas, vómito y cefalea al despertar.",
+      "Orina de color verde (rara)."
+    ],
+    "efectosAdversos": [
+      "Depresión respiratoria y apnea dependientes de la dosis.",
+      "Hipotensión grave, sobre todo en pacientes hipovolémicos o adultos mayores.",
+      "Síndrome por infusión de propofol: acidosis metabólica, rabdomiólisis, hiperpotasemia, arritmias e insuficiencia cardiaca y renal, con dosis altas por tiempo prolongado.",
+      "Hipertrigliceridemia y pancreatitis en infusiones prolongadas.",
+      "Movimientos epileptiformes y convulsiones (raros).",
+      "Sepsis por contaminación de la emulsión.",
+      "Anafilaxia (muy rara)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Opioides (fentanilo)",
+        "efecto": "Aumentan la sedación y el riesgo de apnea; se reduce la dosis de propofol.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Benzodiacepinas (midazolam)",
+        "efecto": "Mayor sedación y depresión respiratoria; se necesita menos propofol.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Alcohol y otros depresores del sistema nervioso central",
+        "efecto": "Potencian la sedación.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Valproato",
+        "efecto": "Reduce la dosis de propofol necesaria.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Rifampicina",
+        "efecto": "Se ha reportado hipotensión profunda después de la inducción.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Suxametonio o neostigmina",
+        "efecto": "Puede presentarse bradicardia.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Emulsión lista para usarse: se agita y se revisa que no esté separada en fases. Si se diluye, solo con solución glucosada al 5% y a no menos de 2 mg/mL. Se carga con técnica aséptica estricta justo antes de usarse y se rotula la jeringa con fecha y hora.",
+      "administracion": "Solo por vía IV, por personal capacitado en anestesia o en cuidados críticos, con monitorización continua. Las infusiones van en bomba. El frasco abierto, la jeringa y el equipo se desechan a las 6 horas o al terminar el procedimiento, lo que ocurra primero. No se pasa por la misma vía que sangre o plasma.",
+      "precauciones": "Equipo de vía aérea, oxígeno y reanimación a la mano. Se vigilan saturación, presión arterial, frecuencia cardiaca y nivel de sedación. En infusiones prolongadas se vigilan triglicéridos y signos del síndrome por infusión (acidosis, orina oscura, arritmias); en lo posible no se superan los 4 mg/kg/h."
+    },
+    "referencias": [
+      {
+        "text": "Teva. Indufol (propofol) emulsión inyectable. Información para prescribir. Actuamed.",
+        "url": "https://www.actuamed.com.mx/marca/24788"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). Ficha técnica Propofol Lipoven Fresenius 20 mg/ml emulsión inyectable y para perfusión. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/77590/FT_77590.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Nitroglicerina",
+    "icono": "heart",
+    "categoria": "vasodilatador",
+    "altoRiesgo": false,
+    "farmacodinamia": "Nitrato orgánico (donador de óxido nítrico).\nDentro del músculo liso vascular libera óxido nítrico, que activa la guanilato ciclasa y aumenta el GMP cíclico; el resultado es la relajación del músculo liso.\nA dosis bajas dilata sobre todo las venas: llega menos sangre al corazón (baja la precarga), disminuye la tensión de la pared ventricular y el consumo de oxígeno del miocardio.\nA dosis mayores dilata también las arteriolas (baja la poscarga y la presión arterial) y abre las arterias coronarias, redistribuyendo el flujo hacia las zonas isquémicas.",
+    "farmacocinetica": "Absorción: por vía IV alcanza concentraciones altas de inmediato; el efecto inicia en 1 a 2 minutos y desaparece pocos minutos después de suspender la infusión.\nDistribución: amplia, con volumen de distribución alto; se une cerca del 60% a proteínas plasmáticas.\nMetabolismo: hepático (glutatión-nitrato orgánico reductasa) y en sangre y eritrocitos, a dinitratos y mononitratos mucho menos potentes.\nEliminación: renal, como metabolitos. La semivida es de 1 a 3 minutos.",
+    "indicaciones": "Angina inestable y angina vasoespástica.\nInfarto agudo de miocardio, incluido el que se acompaña de edema pulmonar o insuficiencia cardiaca.\nInsuficiencia ventricular izquierda aguda con congestión pulmonar.\nCrisis hipertensiva con descompensación cardiaca.\nControl de la presión arterial en cirugía cardiaca e hipotensión controlada.\nEspasmo coronario durante el cateterismo.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad a los nitratos.",
+        "Hipotensión grave (presión sistólica menor de 90 mmHg), choque o colapso circulatorio.",
+        "Choque cardiogénico sin control de la presión de llenado ventricular.",
+        "Hipertensión intracraneal, hemorragia cerebral o traumatismo craneoencefálico.",
+        "Uso de inhibidores de la fosfodiesterasa 5 (sildenafil, tadalafil) o de riociguat.",
+        "Hipovolemia no corregida."
+      ],
+      "relativas": [
+        "Miocardiopatía hipertrófica obstructiva, estenosis aórtica o mitral, pericarditis constrictiva y taponamiento.",
+        "Infarto del ventrículo derecho.",
+        "Glaucoma de ángulo cerrado.",
+        "Anemia grave.",
+        "Insuficiencia hepática o renal grave.",
+        "Embarazo y lactancia."
+      ]
+    },
+    "efectosSecundarios": [
+      "Cefalea pulsátil (muy frecuente al inicio; suele ceder con los días).",
+      "Rubor facial y sensación de calor.",
+      "Mareo y debilidad.",
+      "Taquicardia refleja.",
+      "Náuseas y vómito."
+    ],
+    "efectosAdversos": [
+      "Hipotensión grave, síncope y colapso.",
+      "Bradicardia paradójica y empeoramiento de la angina.",
+      "Hipoxemia transitoria durante la infusión.",
+      "Metahemoglobinemia con dosis altas.",
+      "Tolerancia con la infusión continua prolongada y angina de rebote si se suspende de golpe.",
+      "Dermatitis exfoliativa (rara)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Sildenafil, tadalafil, vardenafil y riociguat",
+        "efecto": "Hipotensión grave que puede ser mortal; la combinación está contraindicada.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Antihipertensivos, betabloqueadores, calcioantagonistas, diuréticos y otros vasodilatadores",
+        "efecto": "Suman su efecto hipotensor.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Heparina",
+        "efecto": "Puede disminuir su efecto anticoagulante; se vigila el TTPa al iniciar y al suspender la nitroglicerina.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Alcohol, antidepresivos tricíclicos y neurolépticos",
+        "efecto": "Potencian la hipotensión.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Se diluye en solución glucosada al 5% o fisiológica al 0.9%, de preferencia en frasco de vidrio. El PVC absorbe una parte importante del fármaco (hasta 40 a 80%), por lo que se usan contenedores y equipos de polietileno o libres de PVC. La solución diluida no se guarda más de 48 horas.",
+      "administracion": "Infusión IV continua en bomba, iniciando con dosis bajas en microgramos por minuto y ajustando cada pocos minutos según la presión arterial y el dolor, siempre por indicación médica. Se interrumpe de forma gradual, no de golpe.",
+      "precauciones": "Monitorización continua de presión arterial, frecuencia cardiaca y ECG; se avisa si la sistólica baja de 90 mmHg. Antes de iniciar se pregunta por el uso de sildenafil o tadalafil en las últimas 24 a 48 horas. La cefalea es esperada, pero se valora."
+    },
+    "referencias": [
+      {
+        "text": "G. Pohl-Boskamp. Angiopohl (nitroglicerina) solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/angiopohl-solucion-inyectable/134/101/10639/162"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). Ficha técnica Solinitrina 1 mg/ml y Solinitrina Fuerte 5 mg/ml solución inyectable. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/55332/FT_55332.html"
+      }
+    ]
+  },
+  {
+    "nombre": "Dinitrato de Isosorbida",
+    "icono": "heart",
+    "categoria": "vasodilatador",
+    "altoRiesgo": false,
+    "farmacodinamia": "Nitrato orgánico de acción más prolongada que la nitroglicerina.\nComo los demás nitratos, libera óxido nítrico en el músculo liso vascular y lo relaja.\nDisminuye sobre todo la precarga y, en menor grado, la poscarga, con lo que baja el consumo de oxígeno del corazón. Dilata las coronarias grandes y las colaterales y redistribuye el flujo hacia las zonas isquémicas.",
+    "farmacocinetica": "Absorción: por vía sublingual el efecto antianginoso inicia en 2 a 5 minutos y dura 1 a 2 horas; por vía oral inicia en 20 a 60 minutos y dura 4 a 6 horas. La vía oral tiene un primer paso hepático extenso.\nDistribución: se une menos del 1% a proteínas plasmáticas.\nMetabolismo: hepático, a 2-mononitrato y 5-mononitrato (activos), que se conjugan con ácido glucurónico.\nEliminación: casi toda renal. La semivida del fármaco es de 0.2 horas (sublingual) a 0.5 horas (oral); la de sus mononitratos, de 4 a 6 horas.",
+    "indicaciones": "Tratamiento de la crisis de angina (sublingual).\nPrevención de la angina antes de un esfuerzo o estrés emocional (sublingual).\nProfilaxis de la angina por insuficiencia coronaria (oral y liberación prolongada; no sirve para la crisis aguda).\nInsuficiencia cardiaca congestiva, aguda o crónica, como coadyuvante.",
+    "viaAdministracion": "Sublingual",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al dinitrato de isosorbida o a otros nitratos.",
+        "Uso de inhibidores de la fosfodiesterasa 5 (sildenafil, tadalafil).",
+        "Hipotensión grave o choque."
+      ],
+      "relativas": [
+        "Presión sistólica menor de 90 mmHg o hipovolemia por diuréticos.",
+        "Miocardiopatía hipertrófica.",
+        "Infarto agudo de miocardio en evolución (requiere vigilancia hemodinámica).",
+        "Embarazo y lactancia.",
+        "Menores de edad (seguridad no establecida)."
+      ]
+    },
+    "efectosSecundarios": [
+      "Cefalea vascular (frecuente; suele ceder en 1 a 2 semanas).",
+      "Rubor facial.",
+      "Mareo y debilidad al ponerse de pie.",
+      "Náuseas y vómito."
+    ],
+    "efectosAdversos": [
+      "Hipotensión ortostática grave y síncope.",
+      "Bradicardia refleja con empeoramiento de la angina.",
+      "Tolerancia con el uso continuo sin intervalo libre de nitrato.",
+      "Angina de rebote al suspenderlo de golpe.",
+      "Metahemoglobinemia en sobredosis.",
+      "Exantema y dermatitis exfoliativa (raras)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Sildenafil y otros inhibidores de la fosfodiesterasa 5",
+        "efecto": "Hipotensión grave y choque; la combinación está contraindicada.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Calcioantagonistas",
+        "efecto": "Pueden causar hipotensión ortostática marcada.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Antihipertensivos, betabloqueadores, fenotiazinas y antidepresivos tricíclicos",
+        "efecto": "Suman su efecto hipotensor.",
+        "severidad": "media"
+      },
+      {
+        "medicamento": "Alcohol",
+        "efecto": "Intensifica la hipotensión.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "administracion": "La tableta sublingual se coloca debajo de la lengua y se deja disolver (unos 20 segundos), sin masticarla ni tragarla. El paciente se sienta o se acuesta antes de tomarla. La tableta oral se toma de preferencia en ayuno.",
+      "precauciones": "Se toma la presión arterial antes y después de la dosis. En el uso crónico se respeta un intervalo libre de nitrato (de unas 12 horas) para evitar la tolerancia. Se pregunta por el uso de sildenafil o tadalafil. No se suspende de golpe."
+    },
+    "referencias": [
+      {
+        "text": "Isorbid (dinitrato de isosorbida) tabletas sublinguales. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/isorbid-tabletas-sublinguales/12/101/8183/224"
+      }
+    ]
+  },
+  {
+    "nombre": "Nitroprusiato de Sodio",
+    "icono": "heart",
+    "categoria": "vasodilatador",
+    "altoRiesgo": true,
+    "farmacodinamia": "Vasodilatador directo y potente, arterial y venoso (donador de óxido nítrico).\nAl liberar óxido nítrico en el músculo liso vascular disminuye la resistencia periférica (poscarga) y el retorno venoso (precarga), con una caída rápida de la presión arterial.\nEn insuficiencia cardiaca mejora el gasto cardiaco al reducir la poscarga.\nA diferencia de la nitroglicerina, puede desviar el flujo coronario lejos de las zonas isquémicas.",
+    "farmacocinetica": "Absorción: por vía IV el efecto inicia en menos de 2 minutos; la presión regresa a su valor previo de 1 a 10 minutos después de suspender la infusión.\nDistribución: en el espacio extracelular.\nMetabolismo: en eritrocitos y tejidos libera cianuro, que el hígado convierte en tiocianato.\nEliminación: renal, como tiocianato. La semivida del nitroprusiato es de unos 2 minutos; la del tiocianato, de 2.7 a 7 días, y se prolonga en insuficiencia renal.",
+    "indicaciones": "Crisis hipertensiva (emergencia hipertensiva) que requiere reducción inmediata de la presión arterial.\nInsuficiencia cardiaca congestiva aguda.\nHipotensión controlada durante cirugía, para disminuir el sangrado.",
+    "viaAdministracion": "IV",
+    "contraindicaciones": {
+      "absolutas": [
+        "Hipersensibilidad al nitroprusiato.",
+        "Hipertensión compensatoria (coartación de aorta, fístula arteriovenosa).",
+        "Hipertensión del embarazo y preeclampsia.",
+        "Anemia o hipovolemia no corregidas.",
+        "Circulación cerebral inadecuada.",
+        "Atrofia óptica de Leber, ambliopía tabáquica o deficiencia de vitamina B12.",
+        "Uso de riociguat."
+      ],
+      "relativas": [
+        "Insuficiencia renal o hepática (acumula tiocianato o cianuro).",
+        "Hipertensión intracraneal o encefalopatía.",
+        "Insuficiencia coronaria o cerebrovascular.",
+        "Hipotiroidismo.",
+        "Adultos mayores (más sensibles a la hipotensión)."
+      ]
+    },
+    "efectosSecundarios": [
+      "Náuseas y vómito.",
+      "Cefalea.",
+      "Mareo y sudoración.",
+      "Nerviosismo e inquietud.",
+      "Palpitaciones y dolor abdominal."
+    ],
+    "efectosAdversos": [
+      "Hipotensión excesiva que compromete la perfusión de órganos; depende más de la velocidad de infusión que de la dosis total.",
+      "Intoxicación por cianuro: acidosis metabólica, taquicardia, arritmias, respiración superficial, midriasis; puede ser mortal.",
+      "Intoxicación por tiocianato (infusiones largas o insuficiencia renal): visión borrosa, zumbido de oídos, confusión, delirio e hiperreflexia.",
+      "Metahemoglobinemia.",
+      "Hipertensión de rebote al suspenderlo de golpe.",
+      "Hipotiroidismo e hipertensión intracraneal (raros)."
+    ],
+    "interacciones": [
+      {
+        "medicamento": "Otros antihipertensivos y anestésicos",
+        "efecto": "Potencian la hipotensión; se necesitan dosis menores.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Sildenafil, tadalafil y riociguat",
+        "efecto": "Hipotensión grave; el riociguat está contraindicado.",
+        "severidad": "alta"
+      },
+      {
+        "medicamento": "Cualquier otro fármaco en la misma vía",
+        "efecto": "Es incompatible con otros medicamentos; se administra solo.",
+        "severidad": "media"
+      }
+    ],
+    "observaciones": {
+      "preparacion": "Se reconstituye y se diluye solo en solución glucosada al 5%. La solución se protege de la luz con el material opaco que trae el producto (no es necesario cubrir la cámara de goteo ni la línea) y se usa dentro de 24 horas. Se desecha si toma color marrón oscuro, naranja o azul.",
+      "administracion": "Solo en infusión IV continua con bomba volumétrica, nunca en bolo ni con otros fármacos en la misma vía. Las dosis se ajustan en microgramos por kilo por minuto según indicación médica, empezando bajo. Se retira gradualmente mientras se inicia un antihipertensivo oral.",
+      "precauciones": "Presión arterial continua (de preferencia invasiva) o cada 5 minutos al inicio. En infusiones de más de 3 días, dosis altas o insuficiencia renal o hepática se vigilan acidosis, tiocianato y signos de intoxicación por cianuro. Se suspende si a la dosis máxima no baja la presión en 10 minutos."
+    },
+    "referencias": [
+      {
+        "text": "Proartcar (nitroprusiato de sodio) solución inyectable. Información para prescribir. Diccionario de Especialidades Farmacéuticas PLM.",
+        "url": "https://www.medicamentosplm.com/home/productos/proartcar-solucion-inyectable/1018/101/62637/162"
+      },
+      {
+        "text": "Agencia Española de Medicamentos y Productos Sanitarios (AEMPS). Ficha técnica Nitroprussiat Fides 50 mg polvo y disolvente para solución inyectable. CIMA.",
+        "url": "https://cima.aemps.es/cima/dochtml/ft/54575/FT_54575.html"
+      }
+    ]
   }
 ]

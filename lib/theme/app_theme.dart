@@ -103,7 +103,7 @@ class AppColorsDark {
 // ============================================================
 
 class AppTextStyles {
-  static const String fontFamily = "Poppins";
+  static const String fontFamily = "Delight";
 
   static const TextStyle appBarTitle = TextStyle(
     color: AppColors.lightSecondaryColor,

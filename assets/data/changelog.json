@@ -4,7 +4,8 @@
     "fecha": "2026-10-17",
     "cambios": [
       "Modo oscuro: la app sigue el tema del teléfono, y en el menú se puede elegir claro u oscuro.",
-      "Farmacología pasa de 26 a 36 fármacos, con tres categorías nuevas: Electrolitos (cloruro de potasio, sulfato de magnesio y gluconato de calcio), Antidepresivos (escitalopram, fluoxetina y sertralina) y Hemostáticos (ácido tranexámico, fitomenadiona y protamina).",
+      "Farmacología pasa de 26 a 42 fármacos, con cinco categorías nuevas: Electrolitos (cloruro de potasio, sulfato de magnesio y gluconato de calcio), Antidepresivos (escitalopram, fluoxetina y sertralina), Hemostáticos (ácido tranexámico, fitomenadiona y protamina), Anestésicos (lidocaína, bupivacaína y propofol) y Vasodilatadores (nitroglicerina, dinitrato de isosorbida y nitroprusiato de sodio).",
+      "Las categorías de Farmacología aparecen en orden alfabético.",
       "Bromuro de ipratropio se suma a Broncodilatadores.",
       "Cada ficha muestra la vía de administración como una etiqueta, con la vía que se usa en el hospital.",
       "Nueva escala de signos vitales del adulto, con la presión arterial clasificada según la NOM-030 y fichas de valores de laboratorio.",

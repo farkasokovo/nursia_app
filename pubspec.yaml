@@ -54,13 +54,13 @@ flutter_native_splash:
 flutter:
   uses-material-design: true
   fonts:
-  - family: Poppins
+  - family: Delight
     fonts:
-      - asset: assets/fonts/Poppins-Regular.ttf
+      - asset: assets/fonts/delight-regular.otf
         weight: 400
-      - asset: assets/fonts/Poppins-SemiBold.ttf
+      - asset: assets/fonts/delight-semibold.otf
         weight: 600
-      - asset: assets/fonts/Poppins-Bold.ttf
+      - asset: assets/fonts/delight-bold.otf
         weight: 700
   assets:
   - assets/data/scales_data.json

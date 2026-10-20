@@ -38,7 +38,11 @@ const List<Widget> _tabViews = [
 ];
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.instalacionNueva});
+
+  /// Si la base de datos se creó en este arranque. Distingue una instalación
+  /// nueva de una actualización para la pantalla de bienvenida.
+  final bool instalacionNueva;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -93,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final debeMostrar = await debeMostrarBienvenida(
         versionInstalada: version,
         almacen: AlmacenPersistente(),
+        instalacionNueva: widget.instalacionNueva,
       );
       if (!debeMostrar || !mounted) return;
 

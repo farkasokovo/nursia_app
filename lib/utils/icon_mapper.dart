@@ -41,6 +41,12 @@ class IconMapper {
       // Hemostáticos
       case 'firstAidKit':
         return PhosphorIconsFill.firstAidKit;
+      // Anestésicos
+      case 'needle':
+        return PhosphorIconsFill.needle;
+      // Vasodilatadores
+      case 'heart':
+        return PhosphorIconsFill.heart;
       // Escalas / otros
       default:
         return PhosphorIconsFill.syringe;

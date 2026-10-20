@@ -216,7 +216,9 @@ void main() {
             // construye sin cargar() : basta con el valor por defecto.
             child: ChangeNotifierProvider<ThemeProvider>(
               create: (_) => ThemeProvider(),
-              child: const HomeScreen(),
+              // true: sin marcador guardado, la bienvenida no debe abrirse
+              // a media prueba.
+              child: const HomeScreen(instalacionNueva: true),
             ),
           ),
         ),

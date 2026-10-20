@@ -47,6 +47,7 @@ void main() {
       final mostrar = await debeMostrarBienvenida(
         versionInstalada: '1.2.0', // la misma que ya se vio
         almacen: almacen,
+        instalacionNueva: false,
         forzar: true,
       );
 
@@ -59,6 +60,7 @@ void main() {
       await debeMostrarBienvenida(
         versionInstalada: '1.2.0',
         almacen: almacen,
+        instalacionNueva: false,
         forzar: true,
       );
 
@@ -257,16 +259,32 @@ void main() {
         versionInstalada: '1.2.1',
         versionRecordada: null,
         hayNotas: true,
+        instalacionNueva: true,
       );
       expect(d.mostrar, isFalse);
       expect(d.recordar, isTrue);
     });
+
+    test(
+      'sin marcador pero con la base de antes: es actualización y se muestra',
+      () {
+        final d = decidirBienvenida(
+          versionInstalada: '1.4.0',
+          versionRecordada: null,
+          hayNotas: true,
+          instalacionNueva: false,
+        );
+        expect(d.mostrar, isTrue);
+        expect(d.recordar, isTrue);
+      },
+    );
 
     test('misma versión ya vista: ni se muestra ni hace falta guardar', () {
       final d = decidirBienvenida(
         versionInstalada: '1.2.1',
         versionRecordada: '1.2.1',
         hayNotas: true,
+        instalacionNueva: false,
       );
       expect(d.mostrar, isFalse);
       expect(d.recordar, isFalse);
@@ -277,6 +295,7 @@ void main() {
         versionInstalada: '1.2.1',
         versionRecordada: '1.2.0',
         hayNotas: true,
+        instalacionNueva: false,
       );
       expect(d.mostrar, isTrue);
       expect(d.recordar, isTrue);
@@ -289,6 +308,7 @@ void main() {
           versionInstalada: '1.3.0',
           versionRecordada: '1.2.0',
           hayNotas: false,
+          instalacionNueva: false,
         );
         expect(d.mostrar, isFalse);
         expect(d.recordar, isTrue);
@@ -302,6 +322,7 @@ void main() {
         versionInstalada: '1.1.0',
         versionRecordada: '1.2.0',
         hayNotas: true,
+        instalacionNueva: false,
       );
       expect(d.mostrar, isTrue);
     });
@@ -324,6 +345,7 @@ void main() {
       final primera = await debeMostrarBienvenida(
         versionInstalada: versionConNotas,
         almacen: almacen,
+        instalacionNueva: false,
         forzar: false,
       );
       expect(primera, isTrue);
@@ -333,6 +355,7 @@ void main() {
       final segunda = await debeMostrarBienvenida(
         versionInstalada: versionConNotas,
         almacen: almacen,
+        instalacionNueva: false,
         forzar: false,
       );
       expect(segunda, isFalse);
@@ -344,6 +367,7 @@ void main() {
       final mostrar = await debeMostrarBienvenida(
         versionInstalada: versionConNotas,
         almacen: almacen,
+        instalacionNueva: true,
         forzar: false,
       );
 
@@ -359,12 +383,68 @@ void main() {
         final mostrar = await debeMostrarBienvenida(
           versionInstalada: '9.9.9',
           almacen: almacen,
+          instalacionNueva: false,
         );
 
         expect(mostrar, isFalse);
         expect(almacen.datos[claveBienvenidaVista], '9.9.9');
       },
     );
+  });
+
+  // La 1.2.1 no guardaba el marcador, así que quien actualiza desde ahí
+  // llega sin versión recordada, igual que una instalación nueva. Lo que los
+  // separa es si la base de datos ya existía.
+  group('bienvenida al actualizar desde una versión sin marcador', () {
+    late String versionConNotas;
+
+    setUpAll(() async {
+      ChangelogLocal.limpiarCache();
+      versionConNotas = (await ChangelogLocal.cargar()).first.version;
+    });
+
+    test('instalación nueva: no se muestra', () async {
+      final almacen = AlmacenMemoria();
+      final mostrar = await debeMostrarBienvenida(
+        versionInstalada: versionConNotas,
+        almacen: almacen,
+        instalacionNueva: true,
+        forzar: false,
+      );
+      expect(mostrar, isFalse);
+    });
+
+    test('actualización desde la 1.2.1: se muestra', () async {
+      final almacen = AlmacenMemoria();
+      final mostrar = await debeMostrarBienvenida(
+        versionInstalada: versionConNotas,
+        almacen: almacen,
+        instalacionNueva: false,
+        forzar: false,
+      );
+      expect(mostrar, isTrue);
+      expect(almacen.datos[claveBienvenidaVista], versionConNotas);
+    });
+
+    test('al abrir de nuevo la misma versión ya no se repite', () async {
+      final almacen = AlmacenMemoria();
+      await debeMostrarBienvenida(
+        versionInstalada: versionConNotas,
+        almacen: almacen,
+        instalacionNueva: false,
+        forzar: false,
+      );
+
+      // Segundo arranque: la base ya existía otra vez, pero el marcador
+      // ahora sí está guardado.
+      final segunda = await debeMostrarBienvenida(
+        versionInstalada: versionConNotas,
+        almacen: almacen,
+        instalacionNueva: false,
+        forzar: false,
+      );
+      expect(segunda, isFalse);
+    });
   });
 
   group('AlmacenPersistente (shared_preferences)', () {
@@ -393,6 +473,7 @@ void main() {
       final mostrar = await debeMostrarBienvenida(
         versionInstalada: notas.first.version,
         almacen: almacen,
+        instalacionNueva: false,
         forzar: false,
       );
 

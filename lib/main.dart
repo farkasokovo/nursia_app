@@ -87,7 +87,9 @@ void main() async {
             value: medicamentoTurnoRepo,
           ),
         ],
-        child: const MyApp(),
+        child: MyApp(
+          instalacionNueva: DatabaseHelper.instance.seCreoEnEsteArranque,
+        ),
       ),
     );
   } catch (e, stack) {
@@ -98,7 +100,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.instalacionNueva});
+
+  final bool instalacionNueva;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +115,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme(),
       darkTheme: AppTheme.darkTheme(),
       themeMode: themeMode,
-      home: const HomeScreen(),
+      home: HomeScreen(instalacionNueva: instalacionNueva),
       debugShowCheckedModeBanner: false,
     );
   }

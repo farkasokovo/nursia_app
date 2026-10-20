@@ -50,10 +50,13 @@ class DecisionBienvenida {
 ///
 /// - Misma versión que la recordada: no se muestra (ya se vio) ni hace falta
 ///   volver a guardar.
-/// - Sin versión recordada (instalación nueva): NO se muestra. A quien abre la
-///   app por primera vez, "novedades" no le dice nada; lo primero que debe ver
-///   es la app. Se recuerda la versión para que la siguiente actualización sí
-///   la muestre.
+/// - Sin versión recordada e [instalacionNueva]: NO se muestra. A quien abre
+///   la app por primera vez, "novedades" no le dice nada; lo primero que debe
+///   ver es la app. Se recuerda la versión para que la siguiente actualización
+///   sí la muestre.
+/// - Sin versión recordada pero con la base de datos de antes: es alguien que
+///   actualiza desde una versión anterior al marcador (la 1.2.1 no lo
+///   guardaba). Se trata como cualquier actualización.
 /// - Versión distinta y sin notas en el changelog: no se muestra una pantalla
 ///   vacía, pero sí se recuerda, para no reintentarlo en cada arranque.
 /// - Versión distinta y con notas: se muestra y se recuerda.
@@ -61,11 +64,12 @@ DecisionBienvenida decidirBienvenida({
   required String versionInstalada,
   required String? versionRecordada,
   required bool hayNotas,
+  required bool instalacionNueva,
 }) {
   if (versionRecordada == versionInstalada) {
     return const DecisionBienvenida(mostrar: false, recordar: false);
   }
-  if (versionRecordada == null) {
+  if (versionRecordada == null && instalacionNueva) {
     return const DecisionBienvenida(mostrar: false, recordar: true);
   }
   if (!hayNotas) {
@@ -82,6 +86,7 @@ DecisionBienvenida decidirBienvenida({
 Future<bool> debeMostrarBienvenida({
   required String versionInstalada,
   required AlmacenPreferencias almacen,
+  required bool instalacionNueva,
   // Por defecto toma la constante; el parámetro existe para que las pruebas
   // puedan ejercitar el camino forzado sin dejar el interruptor encendido.
   bool forzar = forzarBienvenida,
@@ -103,9 +108,11 @@ Future<bool> debeMostrarBienvenida({
     versionInstalada: versionInstalada,
     versionRecordada: recordada,
     hayNotas: notas != null,
+    instalacionNueva: instalacionNueva,
   );
   debugPrint(
-    'Bienvenida: instalada $versionInstalada, recordada $recordada -> $decision',
+    'Bienvenida: instalada $versionInstalada, recordada $recordada, '
+    'instalación nueva $instalacionNueva -> $decision',
   );
 
   if (decision.recordar) {

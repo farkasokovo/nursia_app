@@ -7,7 +7,7 @@
 //
 // Estas pruebas montan TabbedContent con la MISMA configuración que usa
 // lib/screens/calculadoras/calculadora_dosis.dart (mismas etiquetas, mismo
-// labelPadding, mismo FittedBox) y cargan la fuente Poppins real, porque con la
+// labelPadding, mismo FittedBox) y cargan la fuente Delight real, porque con la
 // fuente de prueba por defecto los anchos no son los del celular.
 
 import 'dart:io';
@@ -67,8 +67,8 @@ Future<double> altoEnReposo(WidgetTester tester, String etiqueta) async {
 void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    final loader = FontLoader('Poppins');
-    for (final archivo in ['Poppins-SemiBold.ttf', 'Poppins-Regular.ttf']) {
+    final loader = FontLoader('Delight');
+    for (final archivo in ['delight-semibold.otf', 'delight-regular.otf']) {
       loader.addFont(
         File(
           'assets/fonts/$archivo',
@@ -187,7 +187,7 @@ void main() {
       text: const TextSpan(
         text: 'Conversor',
         style: TextStyle(
-          fontFamily: 'Poppins',
+          fontFamily: 'Delight',
           fontWeight: FontWeight.w600,
           fontSize: 20,
         ),

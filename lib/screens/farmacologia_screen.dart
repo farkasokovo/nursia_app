@@ -13,6 +13,8 @@ import 'farmacologia/antibioticos_screen.dart';
 import 'farmacologia/antidepresivos_screen.dart';
 import 'farmacologia/electrolitos_screen.dart';
 import 'farmacologia/hemostaticos_screen.dart';
+import 'farmacologia/anestesicos_screen.dart';
+import 'farmacologia/vasodilatadores_screen.dart';
 import 'farmacologia/antiemeticos_screen.dart';
 import 'farmacologia/broncodilatadores_screen.dart';
 import 'farmacologia/cardiovascular_screen.dart';
@@ -127,10 +129,34 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
             const AnalgesicosScreen(),
           ),
           _buildButton(
+            "Anestésicos",
+            PhosphorIconsRegular.needle,
+            "anestesicos",
+            const AnestesicosScreen(),
+          ),
+          _buildButton(
             "Antibióticos",
             PhosphorIconsRegular.shieldPlus,
             "antibioticos",
             const AntibioticosScreen(),
+          ),
+          _buildButton(
+            "Anti-\ncoagulantes",
+            PhosphorIconsRegular.drop,
+            "anticoagulantes",
+            const AnticoagulantesScreen(),
+          ),
+          _buildButton(
+            "Anti-\ndepresivos",
+            PhosphorIconsRegular.brain,
+            "antidepresivos",
+            const AntidepresivosScreen(),
+          ),
+          _buildButton(
+            "Antieméticos",
+            PhosphorIconsRegular.pill,
+            "antiemeticos",
+            const AntiemeticosScreen(),
           ),
           _buildButton(
             "Anti-\nhipertensivos",
@@ -145,16 +171,28 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
             const AntiinflamatoriosScreen(),
           ),
           _buildButton(
+            "Bronco-\ndilatadores",
+            PhosphorIconsRegular.wind,
+            "broncodilatadores",
+            const BroncodilatadoresScreen(),
+          ),
+          _buildButton(
             "Diuréticos",
             PhosphorIconsRegular.drop,
             "diureticos",
             const DiureticosScreen(),
           ),
           _buildButton(
-            "Anti-\ncoagulantes",
-            PhosphorIconsRegular.drop,
-            "anticoagulantes",
-            const AnticoagulantesScreen(),
+            "Electrolitos",
+            PhosphorIconsRegular.lightning,
+            "electrolitos",
+            const ElectrolitosScreen(),
+          ),
+          _buildButton(
+            "Hemostáticos",
+            PhosphorIconsRegular.firstAidKit,
+            "hemostaticos",
+            const HemostaticosScreen(),
           ),
           _buildButton(
             "Insulinas",
@@ -169,34 +207,10 @@ class _FarmacologiaScreenState extends State<FarmacologiaScreen> {
             const ProtectoresGastricosScreen(),
           ),
           _buildButton(
-            "Antieméticos",
-            PhosphorIconsRegular.pill,
-            "antiemeticos",
-            const AntiemeticosScreen(),
-          ),
-          _buildButton(
-            "Bronco-\ndilatadores",
-            PhosphorIconsRegular.wind,
-            "broncodilatadores",
-            const BroncodilatadoresScreen(),
-          ),
-          _buildButton(
-            "Electrolitos",
-            PhosphorIconsRegular.lightning,
-            "electrolitos",
-            const ElectrolitosScreen(),
-          ),
-          _buildButton(
-            "Anti-\ndepresivos",
-            PhosphorIconsRegular.brain,
-            "antidepresivos",
-            const AntidepresivosScreen(),
-          ),
-          _buildButton(
-            "Hemostáticos",
-            PhosphorIconsRegular.firstAidKit,
-            "hemostaticos",
-            const HemostaticosScreen(),
+            "Vaso-\ndilatadores",
+            PhosphorIconsRegular.heart,
+            "vasodilatadores",
+            const VasodilatadoresScreen(),
           ),
           // _buildButton(
           //   "Próximamente",

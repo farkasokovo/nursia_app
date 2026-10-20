@@ -8,6 +8,11 @@ class DatabaseHelper {
 
   DatabaseHelper._init();
 
+  /// true si la base no existía y se creó al abrirla en este arranque: es una
+  /// instalación nueva. Si ya existía, la app viene de una versión anterior.
+  bool get seCreoEnEsteArranque => _seCreoEnEsteArranque;
+  bool _seCreoEnEsteArranque = false;
+
   Future<Database> get database async {
     if (_database != null) return _database!;
 
@@ -21,7 +26,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 30, // Aumentamos la versión a 30
+      version: 31, // 31: categorías Anestésicos y Vasodilatadores (42 fármacos)
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -313,11 +318,15 @@ class DatabaseHelper {
           await db.delete('medicamentos');
           await db.delete('normas');
         }
+        if (oldVersion < 31) {
+          await db.delete('medicamentos');
+        }
       },
     );
   }
 
   Future _createDB(Database db, int version) async {
+    _seCreoEnEsteArranque = true;
     // 1. Tabla de Medicamentos
     await db.execute('''
       CREATE TABLE medicamentos (
