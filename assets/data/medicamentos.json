@@ -2968,7 +2968,7 @@
     "farmacodinamia": "Anestésico local de tipo amida y antiarrítmico de clase IB.\nEn su forma sin carga atraviesa la membrana del nervio; ya dentro, en su forma con carga, bloquea desde el interior los canales de sodio dependientes de voltaje. Sin entrada de sodio no se genera ni se propaga el potencial de acción, y el dolor no llega a la médula ni al cerebro.\nBloquea mejor los canales que se abren con frecuencia (bloqueo dependiente de uso). Las fibras delgadas del dolor y la temperatura se bloquean antes que las motoras.\nEn el tejido inflamado o ácido predomina la forma con carga, que no cruza la membrana, y por eso funciona peor.\nComo antiarrítmico, disminuye la automaticidad ventricular.",
     "farmacocinetica": "Absorción: por infiltración, el efecto inicia en minutos; la absorción a la sangre depende de la vascularidad del sitio y se reduce si se combina con epinefrina. Por vía IV el efecto inicia en cerca de 1 minuto.\nDistribución: se une cerca del 66% a proteínas plasmáticas. Atraviesa la placenta y pasa en pequeñas cantidades a la leche materna.\nMetabolismo: hepático (cerca del 90%), a metabolitos activos (MEGX y GX).\nEliminación: renal, menos del 10% sin cambios. La semivida es de 1 a 2 horas tras un bolo IV y puede duplicarse en enfermedad hepática.",
     "indicaciones": "Anestesia local por infiltración.\nBloqueo de nervios periféricos.\nBloqueo caudal y epidural.\nTratamiento agudo de arritmias ventriculares (solo la presentación sin epinefrina, por vía IV).",
-    "viaAdministracion": "IV",
+    "viaAdministracion": "Infiltración, IV",
     "contraindicaciones": {
       "absolutas": [
         "Hipersensibilidad a la lidocaína o a otros anestésicos locales tipo amida.",

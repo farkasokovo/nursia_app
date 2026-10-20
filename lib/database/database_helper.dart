@@ -26,7 +26,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 31, // 31: categorías Anestésicos y Vasodilatadores (42 fármacos)
+      version: 32, // 32: resiembra de medicamentos (vía de lidocaína, sin nombres comerciales)
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -319,6 +319,9 @@ class DatabaseHelper {
           await db.delete('normas');
         }
         if (oldVersion < 31) {
+          await db.delete('medicamentos');
+        }
+        if (oldVersion < 32) {
           await db.delete('medicamentos');
         }
       },
