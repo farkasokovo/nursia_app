@@ -26,7 +26,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 32, // 32: resiembra de medicamentos (vía de lidocaína, sin nombres comerciales)
+      version: 33, // 33: resiembra de medicamentos (bupivacaína, propofol y nitroprusiato sin etiqueta de alto riesgo)
       onCreate: _createDB,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -322,6 +322,13 @@ class DatabaseHelper {
           await db.delete('medicamentos');
         }
         if (oldVersion < 32) {
+          await db.delete('medicamentos');
+        }
+        // Bupivacaína, propofol y nitroprusiato de sodio dejaron de marcarse
+        // como alto riesgo en medicamentos.json. Se vacía la tabla para que
+        // cargarSemillaSiHaceFalta() la resiembre.
+        // NO afecta datos del usuario (turno activo).
+        if (oldVersion < 33) {
           await db.delete('medicamentos');
         }
       },

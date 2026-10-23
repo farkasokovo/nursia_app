@@ -46,7 +46,6 @@ class _AnestesicosLayout extends StatelessWidget {
             FarmaButton(
               title: "Bupivacaína",
               icon: PhosphorIconsRegular.needle,
-              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -61,7 +60,6 @@ class _AnestesicosLayout extends StatelessWidget {
             FarmaButton(
               title: "Propofol",
               icon: PhosphorIconsRegular.needle,
-              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,

@@ -60,7 +60,6 @@ class _VasodilatadoresLayout extends StatelessWidget {
             FarmaButton(
               title: "Nitroprusiato de Sodio",
               icon: PhosphorIconsRegular.heart,
-              altoRiesgo: true,
               onPressed: () {
                 Navigator.push(
                   context,
